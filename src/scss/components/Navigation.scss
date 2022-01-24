@@ -1,0 +1,13 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-inline: 3.625rem;
+  font-size: var(--text-xl);
+  background-color: var(--surface-1);
+}
+
+.nav__item {
+  padding-block: 1.5rem;
+  padding-inline: 0.375rem;
+}

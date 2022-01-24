@@ -1,3 +1,4 @@
+body,
 blockquote,
 dl,
 dd,
@@ -40,4 +41,8 @@ button {
 ::after {
   border-width: 0;
   border-style: solid;
+}
+
+:root {
+  font-size: 16px;
 }
