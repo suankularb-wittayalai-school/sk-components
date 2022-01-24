@@ -40,3 +40,13 @@
     box-shadow: none;
   }
 }
+
+// Outlined button
+.btn--outlined {
+  @extend .btn;
+}
+
+// Text button
+.btn--text {
+  @extend .btn;
+}

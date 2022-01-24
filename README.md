@@ -3,7 +3,7 @@
 
 # Suankularb Components
 
-This repositary is aimed at creating a consistent designs system and experience across all Suankularb features and applications.
+This repository is aimed at creating a consistent designs system and experience across all Suankularb features and applications.
 
 # ระบบ UI สวนกุหลาบ
 
