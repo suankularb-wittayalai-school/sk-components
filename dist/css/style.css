@@ -1,0 +1,64 @@
+:root {
+  --primary: #0060a9;
+  --on-primary: #ffffff;
+  --primary-container: #d1e4ff;
+  --on-primary-container: #001c38;
+  --primary-blended-08: #146db0;
+  --primary-blended-12: #7965af;
+  --primary-translucent-08: #6750a408;
+  --primary-translucent-12: #6750a40c;
+  --shadow-1: 0px 1px 2px rgba(0, 0, 0, 0.3),
+    0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --shadow-2: 0px 1px 2px rgba(0, 0, 0, 0.3),
+    0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --shadow-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-4: 0px 6px 10px 4px rgba(0, 0, 0, 0.15),
+    0px 2px 3px rgba(0, 0, 0, 0.3);
+  --shadow-5: 0px 8px 12px 6px rgba(0, 0, 0, 0.15),
+    0px 4px 4px rgba(0, 0, 0, 0.3);
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-speed: 150ms;
+}
+
+.btn, .btn--filled {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: 1.5rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all var(--animation-speed) var(--animation-timing);
+  cursor: pointer;
+}
+
+.btn:hover, .btn--filled:hover {
+  transition: box-shadow var(--animation-speed) var(--animation-timing);
+}
+
+.btn:active, .btn--filled:active {
+  transition: none;
+}
+
+.btn--filled {
+  color: var(--on-primary);
+  background-color: var(--primary);
+}
+
+.btn--filled:hover {
+  background-color: var(--primary-blended-08);
+  box-shadow: var(--shadow-1);
+}
+
+.btn--filled:focus {
+  background-color: var(--primary-blended-08);
+}
+
+.btn--filled:active {
+  background-color: var(--primary-blended-12);
+  box-shadow: none;
+}
+
+/*# sourceMappingURL=style.css.map */

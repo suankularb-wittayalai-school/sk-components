@@ -1,0 +1,42 @@
+// Base
+.btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: 1.5rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all var(--animation-speed) var(--animation-timing);
+  cursor: pointer;
+
+  &:hover {
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+  }
+
+  &:active {
+    transition: none;
+  }
+}
+
+// Filled button
+.btn--filled {
+  @extend .btn;
+  color: var(--on-primary);
+  background-color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary-blended-08);
+    box-shadow: var(--shadow-1);
+  }
+
+  &:focus {
+    background-color: var(--primary-blended-08);
+  }
+
+  &:active {
+    background-color: var(--primary-blended-12);
+    box-shadow: none;
+  }
+}
