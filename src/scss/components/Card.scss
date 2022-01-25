@@ -1,0 +1,23 @@
+.card {
+  border-radius: 0.75rem;
+}
+
+.card--elevated {
+  @extend .card;
+
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.card--outlined {
+  @extend .card;
+
+  background-color: var(--surface);
+  outline: 2px solid var(--outline);
+}
+
+.card--tonal {
+  @extend .card;
+
+  background-color: var(--surface-variant);
+}
