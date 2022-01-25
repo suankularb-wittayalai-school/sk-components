@@ -4,12 +4,11 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-  padding-block: 0.5rem;
-  padding-inline: 1.5rem;
+  padding: 0.5rem 1.5rem;
   font-weight: 500;
   border-radius: 9999px;
-  transition: all var(--animation-speed) var(--animation-timing);
-  cursor: pointer;
+  transition: background-color var(--animation-speed) var(--animation-timing),
+    box-shadow var(--animation-speed) var(--animation-timing);
 
   &:hover {
     transition: box-shadow var(--animation-speed) var(--animation-timing);
@@ -52,7 +51,8 @@
     background-color: var(--primary-translucent-08);
   }
 
-  &:focus, &:active {
+  &:focus,
+  &:active {
     background-color: var(--primary-translucent-12);
     border-color: var(--primary);
   }
@@ -68,7 +68,13 @@
     background-color: var(--primary-translucent-08);
   }
 
-  &:focus, &:active {
+  &:focus,
+  &:active {
     background-color: var(--primary-translucent-12);
   }
+}
+
+// Icon button
+.btn--icon {
+  padding: 0;
 }

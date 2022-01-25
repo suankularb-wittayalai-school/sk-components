@@ -46,8 +46,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    Liberation Mono, Courier New, monospace;
+  font-family: ui-monospace, monospace;
   font-size: 1em;
 }
 
@@ -100,6 +99,7 @@ select {
 [type="submit"],
 button {
   -webkit-appearance: button;
+  border: none;
   background-color: transparent;
   background-image: none;
 }
