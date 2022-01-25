@@ -11,6 +11,7 @@
   position: relative;
   padding-block: 1.5rem;
   padding-inline: 0.75rem;
+  font-family: var(--font-display);
   transition: all var(--animation-speed) var(--animation-timing);
 
   &:hover,

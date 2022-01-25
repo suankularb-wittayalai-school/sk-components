@@ -15,8 +15,8 @@
   --text-9xl: 4rem;
 
   // Font types
-  --font-sans: Inter, Sarabun;
-  --font-display: Inter, "Noto Sans Thai";
+  --font-sans: Inter, Sarabun, ui-sans-serif, system-ui;
+  --font-display: Inter, "Noto Sans Thai", ui-sans-serif, system-ui;
 
   // Font weight
   --font-regular: 400;
