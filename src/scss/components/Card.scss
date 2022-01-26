@@ -75,13 +75,13 @@
   }
 
   &:hover {
-    background-color: var(--surface-2);
+    background-color: var(--primary-translucent-08);
     transition: none;
   }
 
   &:focus,
   &:focus-within {
-    background-color: var(--surface-4);
+    background-color: var(--primary-translucent-12);
     transition: background-color var(--animation-speed) var(--animation-timing);
   }
 
