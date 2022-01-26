@@ -13,19 +13,25 @@
   overflow: auto;
 
   &__search {
-    padding: 2rem 1rem 0.25rem 2rem;
+    padding: 1rem 1rem 0.5rem;
   }
 
   &__list {
-    padding: 0 0.5rem;
+    padding: 0.5rem 1rem 1rem;
   }
 }
 
 @include b.breakpoint("sm") {
-  .page-layout--list__list__list {
-    display: flex;
-    flex-direction: column;
-    padding: 0.25rem 1rem 1rem 2rem;
+  .page-layout--list__list {
+    &__search {
+      padding: 2rem 1rem 0.25rem 2rem;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      padding: 0.25rem 1rem 1rem 2rem;
+    }
   }
 }
 
