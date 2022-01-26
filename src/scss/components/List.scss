@@ -1,0 +1,43 @@
+@use "Card";
+
+.select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.select-list__header {
+  padding-block: 1rem;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  font-family: var(--font-display);
+}
+
+.select-list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  width: 100%;
+  font-family: var(--font-sans);
+  border-radius: var(--rounded-lg);
+
+  &--inactive {
+    @extend .select-list__item;
+    background-color: var(--surface-1);
+    &:hover,
+    &:focus {
+      background-color: var(--surface-2)
+    }
+  }
+
+  &--active {
+    @extend .select-list__item;
+    background-color: var(--secondary-container);
+    box-shadow: var(--shadow-1);
+    &:hover,
+    &:focus {
+      box-shadow: var(--shadow-2);
+    }
+  }
+}

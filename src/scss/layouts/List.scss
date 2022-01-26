@@ -1,0 +1,22 @@
+@use "../abstracts/breakpoints" as b;
+@use "Page";
+
+@include b.breakpoint("sm") {
+  .page-layout--list {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+.page-layout--list__main {
+  display: hidden;
+}
+
+@include b.breakpoint("sm") {
+  .page-layout--list__main {
+    display: block;
+    padding: 2rem 1rem 0 1rem;
+    height: calc(100vh - 14.75rem);
+    overflow: auto;
+  }
+}

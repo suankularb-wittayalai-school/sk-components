@@ -1,0 +1,10 @@
+.page-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-layout__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
