@@ -11,10 +11,14 @@
 .page-layout--list__list {
   height: calc(100vh - 12rem);
   overflow: auto;
-}
 
-.page-layout--list__list__list {
-  padding: 0 0.5rem;
+  &__search {
+    padding: 1.5rem 0.75rem 0.25rem;
+  }
+
+  &__list {
+    padding: 0 0.5rem;
+  }
 }
 
 @include b.breakpoint("sm") {
