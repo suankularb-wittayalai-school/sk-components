@@ -23,6 +23,7 @@
 
   &--inactive {
     @extend .select-list__item;
+    color: var(--on-surface);
     background-color: var(--surface-1);
     transition: background-color var(--animation-speed) var(--animation-timing);
 
@@ -35,6 +36,7 @@
 
   &--active {
     @extend .select-list__item;
+    color: var(--on-secondary-container);
     background-color: var(--secondary-container);
     box-shadow: var(--shadow-1);
     transition: box-shadow var(--animation-speed) var(--animation-timing);
@@ -44,8 +46,4 @@
       box-shadow: var(--shadow-2);
     }
   }
-
-  // &:hover {
-  //   transition: background-color var(--animation-speed) var(--animation-timing);
-  // }
 }

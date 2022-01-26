@@ -1,6 +1,11 @@
 @use "../abstracts/breakpoints" as b;
 @use "Page";
 
+.page-layout--list {  
+  color: var(--on-background);
+  background-color: var(--background);
+}
+
 @include b.breakpoint("sm") {
   .page-layout--list {
     display: grid;
