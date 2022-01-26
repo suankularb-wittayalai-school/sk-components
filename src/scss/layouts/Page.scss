@@ -1,10 +1,11 @@
 .page-layout {
   display: flex;
   flex-direction: column;
-}
-
-.page-layout__content {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 1rem;
+  background-color: var(--background);
+
+  > * {
+    width: 60%;
+  }
 }
