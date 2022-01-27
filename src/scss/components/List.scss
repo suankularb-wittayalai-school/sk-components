@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  &--no-group {
+    @extend .select-list__items;
+  }
 }
 
 .select-list__group {

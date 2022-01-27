@@ -1,5 +1,5 @@
 | [Read in English](#suankularb-components) | [อ่านในภาษาไทย](#ระบบ-ui-สวนกุหลาบ) |
-| ---- | ---- |
+| ----------------------------------------- | ----------------------------------- |
 
 # Suankularb Components
 
@@ -125,17 +125,25 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
 ### Select List
 
+Select List Items are organized into groups. If your list is not organized into groups, use `select-list--no-group` instead oof `select-list`.
+
 ```html
 <ul class="select-list">
-  <!-- Items can be organized into groups, this is one of the groups’ header -->
-  <h3 class="select-list__header">Header 1</h3>
+  <!-- List Group -->
+  <li class="select-list__group">
+    <!-- Group Header -->
+    <h3 class="select-list__header">Header 1</h3>
 
-  <!-- This item is active, and its content is shown in the Active Item section -->
-  <li><button class="select-list__item--active">Item 1</button></li>
+    <!-- Group Items -->
+    <ul class="select-list__items">
+      <!-- This item is active, and its content is shown in the Active Item section -->
+      <li><button class="select-list__item--active">Item 1</button></li>
 
-  <!-- These items are not active -->
-  <li><button class="select-list__item--inactive">Item 2</button></li>
-  <li><button class="select-list__item--inactive">Item 3</button></li>
+      <!-- These items are not active -->
+      <li><button class="select-list__item--inactive">Item 2</button></li>
+      <li><button class="select-list__item--inactive">Item 3</button></li>
+    </ul>
+  </li>
 </ul>
 ```
 
@@ -173,10 +181,14 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
     <!-- Select List (see Select List component) -->
     <ul class="select-list content-layout--list__list__list">
-      <h3 class="select-list__header">Header 1</h3>
-      <li><button class="select-list__item--active">Item 1</button></li>
-      <li><button class="select-list__item--inactive">Item 2</button></li>
-      <li><button class="select-list__item--inactive">Item 3</button></li>
+      <li class="select-list__group">
+        <h3 class="select-list__header">Header 1</h3>
+        <ul class="select-list__items">
+          <li><button class="select-list__item--active">Item 1</button></li>
+          <li><button class="select-list__item--inactive">Item 2</button></li>
+          <li><button class="select-list__item--inactive">Item 3</button></li>
+        </ul>
+      </li>
     </ul>
   </section>
 
