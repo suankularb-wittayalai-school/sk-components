@@ -13,17 +13,24 @@
     &::placeholder {
       opacity: 0;
     }
-  
-    &:focus, &:not(:placeholder-shown) {
+
+    &:focus,
+    &:not(:placeholder-shown) {
       padding: 1rem 0.5rem 0.25rem;
-      border-bottom: 2px solid var(--primary);
+
+      ~ .input__placeholder {
+        position: absolute;
+        top: 0.25rem;
+        font-size: var(--text-xs);
+      }
     }
 
-    &:focus ~.input__placeholder, &:not(:placeholder-shown) ~ .input__placeholder {
-      position: absolute;
-      top: 0.25rem;
-      color: var(--primary);
-      font-size: var(--text-xs);
+    &:focus {
+      border-bottom: 2px solid var(--primary);
+
+      ~ .input__placeholder {
+        color: var(--primary);
+      }
     }
   }
 }
