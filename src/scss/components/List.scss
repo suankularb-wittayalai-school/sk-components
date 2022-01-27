@@ -1,8 +1,18 @@
 @use "Card";
 
 .select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.select-list__group {
+  @extend .select-list;
+}
+
+.select-list__items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 0.5rem;
 }
 
