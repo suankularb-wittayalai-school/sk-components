@@ -1,0 +1,54 @@
+@use "../abstracts/breakpoints" as b;
+@use "Page";
+
+.page-layout--list {  
+  color: var(--on-background);
+  background-color: var(--background);
+}
+
+@include b.breakpoint("sm") {
+  .page-layout--list {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+.page-layout--list__list {
+  height: calc(100vh - 12rem);
+  overflow: auto;
+
+  &__search {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  &__list {
+    padding: 0.5rem 1rem 1rem;
+  }
+}
+
+@include b.breakpoint("sm") {
+  .page-layout--list__list {
+    &__search {
+      padding: 2rem 1rem 0.25rem 2rem;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      padding: 0.25rem 1rem 1rem 2rem;
+    }
+  }
+}
+
+.page-layout--list__main {
+  display: none;
+}
+
+@include b.breakpoint("sm") {
+  .page-layout--list__main {
+    display: block;
+    padding: 2rem 2rem 2rem 1rem;
+    height: calc(100vh - 16rem);
+    overflow: auto;
+  }
+}

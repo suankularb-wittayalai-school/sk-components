@@ -1,6 +1,6 @@
 // Base
 .card {
-  border-radius: 0.75rem;
+  border-radius: var(--rounded-lg);
 }
 
 // Card modifiers
