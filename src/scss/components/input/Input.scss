@@ -1,0 +1,38 @@
+.input {
+  position: relative;
+
+  input {
+    padding: 0.625rem 0.5rem;
+    font-size: var(--text-base);
+    background-color: var(--inverse-on-surface);
+    border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
+    border-bottom: 2px solid var(--inverse-surface);
+    outline: none;
+    transition: padding var(--animation-speed) var(--animation-timing);
+
+    &::placeholder {
+      opacity: 0;
+    }
+  
+    &:focus, &:not(:placeholder-shown) {
+      padding: 1rem 0.5rem 0.25rem;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    &:focus ~.input__placeholder, &:not(:placeholder-shown) ~ .input__placeholder {
+      position: absolute;
+      top: 0.25rem;
+      color: var(--primary);
+      font-size: var(--text-xs);
+    }
+  }
+}
+
+.input__placeholder {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.5rem;
+  font-size: var(--text-base);
+  font-family: var(--font-display);
+  transition: all var(--animation-speed) var(--animation-timing);
+}
