@@ -1,34 +1,23 @@
-.input--file {
+.input--persistent {
   position: relative;
   font-size: var(--text-base);
   padding: 1rem 0.5rem 0.25rem;
+  accent-color: var(--primary);
   background-color: var(--inverse-on-surface);
   border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
   border-bottom: 2px solid var(--inverse-surface);
 
-  label {
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-  }
-
-  [type="file"] {
-    display: none;
+  input {
+    height: 1.3125rem;
+    background-color: transparent;
+    outline: none;
   }
 }
 
-.input--file__text {
-  padding: 1rem 0.5rem 0.25rem;
-}
-
-.input--file__label {
+.input--persistent__label {
   position: absolute;
   top: 0.25rem;
   left: 0.5rem;
   font-size: var(--text-xs);
   font-family: var(--font-display);
-}
-
-.input--file__icon {
-  font-size: var(--text-xl) !important;
 }
