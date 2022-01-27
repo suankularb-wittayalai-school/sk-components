@@ -106,6 +106,37 @@ Although the Page Header comes with a default colour, it is intended to be paire
 </div>
 ```
 
+### Table
+
+- Table has 2 styles: `outlined` and `elevated`.
+- Table’s content is a normal HTML table.
+
+```html
+<div class="table__wrapper--outlined">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Header 1</th>
+        <th>Header 1</th>
+        <th>Header 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Table Cell 1</td>
+        <td>Table Cell 2</td>
+        <td>Table Cell 3</td>
+      </tr>
+      <tr>
+        <td>Table Cell 4</td>
+        <td>Table Cell 5</td>
+        <td>Table Cell 6</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
 ### Search
 
 - Buttons can be put in front and/or after the input.
@@ -304,6 +335,38 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
   </ul>
 </div>
 ```
+
+### Table
+
+- Table มี 2 ประเภท: `outlined` และ `elevated`
+- เนื้อหาของ Table เป็นตาราง HTML
+
+```html
+<div class="table__wrapper--outlined">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>หัวตาราง 1</th>
+        <th>หัวตาราง 1</th>
+        <th>หัวตาราง 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>เซลล์ 1</td>
+        <td>เซลล์ 2</td>
+        <td>เซลล์ 3</td>
+      </tr>
+      <tr>
+        <td>เซลล์ 4</td>
+        <td>เซลล์ 5</td>
+        <td>เซลล์ 6</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
 
 ### Search
 
