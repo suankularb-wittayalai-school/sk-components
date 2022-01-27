@@ -1,5 +1,5 @@
 | [Read in English](#suankularb-components) | [อ่านในภาษาไทย](#ระบบ-ui-สวนกุหลาบ) |
-| ---- | ---- |
+| ----------------------------------------- | ----------------------------------- |
 
 # Suankularb Components
 
@@ -125,28 +125,36 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
 ### Select List
 
+Select List Items are organized into groups. If your list is not organized into groups, use `select-list--no-group` instead oof `select-list`.
+
 ```html
 <ul class="select-list">
-  <!-- Items can be organized into groups, this is one of the groups’ header -->
-  <h3 class="select-list__header">Header 1</h3>
+  <!-- List Group -->
+  <li class="select-list__group">
+    <!-- Group Header -->
+    <h3 class="select-list__header">Header 1</h3>
 
-  <!-- This item is active, and its content is shown in the Active Item section -->
-  <li><button class="select-list__item--active">Item 1</button></li>
+    <!-- Group Items -->
+    <ul class="select-list__items">
+      <!-- This item is active, and its content is shown in the Active Item section -->
+      <li><button class="select-list__item--active">Item 1</button></li>
 
-  <!-- These items are not active -->
-  <li><button class="select-list__item--inactive">Item 2</button></li>
-  <li><button class="select-list__item--inactive">Item 3</button></li>
+      <!-- These items are not active -->
+      <li><button class="select-list__item--inactive">Item 2</button></li>
+      <li><button class="select-list__item--inactive">Item 3</button></li>
+    </ul>
+  </li>
 </ul>
 ```
 
-## Layouts
+## Content Layouts
 
 ### Regular Layout
 
 > Components mentioned: [Card](#card)
 
 ```html
-<main class="page-layout">
+<main class="content-layout">
   <!-- Cards (see Card component) -->
   <section class="card--outlined">Card 1</section>
   <section class="card--outlined">Card 2</section>
@@ -158,11 +166,11 @@ Although the Page Header comes with a default colour, it is intended to be paire
 > Components mentioned: [Search](#search), [Select List](#select-list), [Card](#card)
 
 ```html
-<main class="page-layout--list">
+<main class="content-layout--list">
   <!-- List section -->
-  <section class="page-layout--list__list">
+  <section class="content-layout--list__list">
     <!-- Search (see Search component) -->
-    <div class="page-layout--list__list__search">
+    <div class="content-layout--list__list__search">
       <div class="search">
         <button class="search__button">
           <i class="icon search__icon" translate="no">search</i>
@@ -172,16 +180,20 @@ Although the Page Header comes with a default colour, it is intended to be paire
     </div>
 
     <!-- Select List (see Select List component) -->
-    <ul class="select-list page-layout--list__list__list">
-      <h3 class="select-list__header">Header 1</h3>
-      <li><button class="select-list__item--active">Item 1</button></li>
-      <li><button class="select-list__item--inactive">Item 2</button></li>
-      <li><button class="select-list__item--inactive">Item 3</button></li>
+    <ul class="select-list content-layout--list__list__list">
+      <li class="select-list__group">
+        <h3 class="select-list__header">Header 1</h3>
+        <ul class="select-list__items">
+          <li><button class="select-list__item--active">Item 1</button></li>
+          <li><button class="select-list__item--inactive">Item 2</button></li>
+          <li><button class="select-list__item--inactive">Item 3</button></li>
+        </ul>
+      </li>
     </ul>
   </section>
 
   <!-- Active Item section (see Card component) -->
-  <section class="page-layout--list__main">
+  <section class="content-layout--list__main">
     <section class="card--outlined">Card 1</section>
     <section class="card--outlined">Card 2</section>
   </section>
@@ -333,7 +345,7 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 > code กล่าวถึง: [Card](#card)
 
 ```html
-<main class="page-layout">
+<main class="content-layout">
   <!-- Cards (see Card component) -->
   <section class="card--outlined">Card 1</section>
   <section class="card--outlined">Card 2</section>
@@ -345,11 +357,11 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 > code กล่าวถึง: [Search](#search), [Select List](#select-list), [Card](#card)
 
 ```html
-<main class="page-layout--list">
+<main class="content-layout--list">
   <!-- List section -->
-  <section class="page-layout--list__list">
+  <section class="content-layout--list__list">
     <!-- Search (ดู Search) -->
-    <div class="page-layout--list__list__search">
+    <div class="content-layout--list__list__search">
       <div class="search">
         <button class="search__button">
           <i class="icon search__icon" translate="no">search</i>
@@ -359,7 +371,7 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
     </div>
 
     <!-- Select List (ดู Select List) -->
-    <ul class="select-list page-layout--list__list__list">
+    <ul class="select-list content-layout--list__list__list">
       <h3 class="select-list__header">Header 1</h3>
       <li><button class="select-list__item--active">Item 1</button></li>
       <li><button class="select-list__item--inactive">Item 2</button></li>
@@ -368,7 +380,7 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
   </section>
 
   <!-- Active Item section (ดู Card) -->
-  <section class="page-layout--list__main">
+  <section class="content-layout--list__main">
     <section class="card--outlined">Card 1</section>
     <section class="card--outlined">Card 2</section>
   </section>

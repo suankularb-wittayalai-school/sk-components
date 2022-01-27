@@ -1,12 +1,29 @@
 @use "Card";
 
 .select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &--no-group {
+    @extend .select-list__items;
+  }
+}
+
+.select-list__group {
+  @extend .select-list;
+}
+
+.select-list__items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 0.5rem;
 }
 
 .select-list__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: var(--text-2xl);
   font-weight: var(--font-bold);
   font-family: var(--font-display);

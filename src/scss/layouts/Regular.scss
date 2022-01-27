@@ -1,0 +1,24 @@
+@use "../abstracts/breakpoints" as b;
+
+.content-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  color: var(--on-background);
+  background-color: var(--background);
+
+  > * {
+    width: 100%;
+  }
+}
+
+@include b.breakpoint("sm") {
+  .content-layout {
+    padding: 2rem;
+    > * {
+      width: clamp(40rem, 60vw, 80rem);
+    }
+  }
+}
