@@ -9,7 +9,6 @@
 
 .table__header {
   font-family: var(--font-display);
-  background-color: var(--surface-2);
 }
 
 .table__wrapper {
@@ -25,6 +24,7 @@
 
       thead {
         @extend .table__header;
+        background-color: var(--primary-container);
       }
 
       th,
@@ -55,6 +55,7 @@
 
       thead {
         @extend .table__header;
+        background-color: var(--surface-2);
       }
 
       th,
