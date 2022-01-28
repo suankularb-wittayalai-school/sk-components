@@ -1,0 +1,48 @@
+@use "Blank" as ci;
+
+.input {
+  position: relative;
+
+  input {
+    @include ci.input--blank;
+    padding: 0.625rem 0.5rem;
+    outline: none;
+    transition: padding var(--animation-speed) var(--animation-timing);
+
+    &::placeholder {
+      opacity: 0;
+    }
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      padding: 1rem 0.5rem 0.25rem;
+
+      ~ .input__placeholder {
+        position: absolute;
+        top: 0.25rem;
+        font-size: var(--text-xs);
+      }
+    }
+
+    &:focus {
+      border-bottom: 2px solid var(--primary);
+
+      ~ .input__placeholder {
+        color: var(--primary);
+      }
+    }
+  }
+}
+
+.input__placeholder {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.5rem;
+  color: var(--outline);
+  font-size: var(--text-base);
+  font-family: var(--font-display);
+  transition: all var(--animation-speed) var(--animation-timing);
+  user-select: none;
+  pointer-events: none;
+  cursor: text;
+}

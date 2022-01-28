@@ -1,0 +1,33 @@
+@use "Blank" as ci;
+
+.input--file {
+  position: relative;
+  @include ci.input--blank();
+  padding: 1rem 0.5rem 0.25rem;
+
+  label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  [type="file"] {
+    display: none;
+  }
+}
+
+.input--file__text {
+  padding: 1rem 0.5rem 0.25rem;
+}
+
+.input--file__label {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.5rem;
+  font-size: var(--text-xs);
+  font-family: var(--font-display);
+}
+
+.input--file__icon {
+  font-size: var(--text-xl) !important;
+}

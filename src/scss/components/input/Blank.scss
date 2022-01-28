@@ -1,0 +1,11 @@
+.input--blank {
+  font-size: var(--text-base);
+  color: var(--inverse-surface);
+  background-color: var(--inverse-on-surface);
+  border-radius: var(--rounded-sm) var(--rounded-sm) 0 0;
+  border-bottom: 2px solid var(--inverse-surface);
+}
+
+@mixin input--blank() {
+  @extend .input--blank;
+}
