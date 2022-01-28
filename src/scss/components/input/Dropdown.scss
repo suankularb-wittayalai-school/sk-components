@@ -4,7 +4,7 @@
 .dropdown {
   @include ci.input--blank();
   @extend .input--persistent;
-  padding: 1rem 0.25rem 0.25rem;
+  padding: 1rem 0.5rem 0.25rem 0.25rem;
 
   &:focus-within {
     border-bottom: 2px solid var(--primary);
