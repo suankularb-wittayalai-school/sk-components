@@ -33,6 +33,7 @@
   --surface: #fbfcff;
   --on-surface: #191c1e;
   --surface-variant: #dde3ea;
+  --on-surface-variant: #41484d;
   --inverse-on-surface: #f0f1f4;
   --inverse-surface: #2e3133;
   --surface-1: #eef4f9;
@@ -66,8 +67,13 @@
     0px 2px 6px rgba(0, 0, 0, 0.15);
 
   // Rounded Corners
+  --rounded-xs: 0.03125rem;
+  --rounded-sm: 0.25rem;
   --rounded: 0.5rem;
   --rounded-lg: 0.75rem;
+  --rounded-xl: 0.9375rem;
+  --rounded-2xl: 1.75rem;
+  --rounded-3xl: 2.90625rem;
 
   // Animation
   --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
