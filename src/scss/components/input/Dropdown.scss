@@ -9,6 +9,7 @@
     width: 100%;
     text-align: left;
     outline: none;
+    cursor: default;
   }
 
   &:focus-within {
@@ -77,9 +78,22 @@
     padding: 0.25rem 0.5rem;
     text-align: left;
     font-size: var(--text-base);
+    transition: background-color var(--animation-speed) var(--animation-timing);
+    cursor: default;
 
     &:hover {
+      transition: none;
       background-color: var(--primary-translucent-08);
+    }
+
+    &.selected {
+      color: var(--on-secondary);
+      background-color: var(--secondary);
+
+      &:hover {
+        // background-color: var(--secondary-blended-08);
+        background-color: red;
+      }
     }
   }
 }

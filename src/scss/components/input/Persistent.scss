@@ -5,7 +5,7 @@
   position: relative;
   padding: 1rem 0.5rem 0.25rem;
   height: fit-content;
-  accent-color: var(--primary);
+  accent-color: var(--secondary);
   transition: border var(--animation-speed) var(--animation-timing);
 
   &:focus-within {
