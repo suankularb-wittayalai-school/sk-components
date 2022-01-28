@@ -16,6 +16,15 @@
   background-color: var(--surface-3);
   border-radius: var(--rounded-2xl);
   padding: 0;
+  opacity: 0;
+  transform: scale(80%);
+  transition: opacity var(--animation-speed) var(--animation-timing),
+    transform var(--animation-speed) var(--animation-timing);
+
+  &.show {
+    opacity: 1;
+    transform: scale(100%);
+  }
 }
 
 .dialog__header {
