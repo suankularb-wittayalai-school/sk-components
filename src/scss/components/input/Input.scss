@@ -3,7 +3,7 @@
 .input {
   position: relative;
 
-  input {
+  input, textarea {
     @include ci.input--blank();
     padding: 0.625rem 0.5rem;
     outline: none;

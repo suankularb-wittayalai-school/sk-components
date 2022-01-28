@@ -4,6 +4,7 @@
   @include ci.input--blank();
   position: relative;
   padding: 1rem 0.5rem 0.25rem;
+  height: fit-content;
   accent-color: var(--primary);
   transition: border var(--animation-speed) var(--animation-timing);
 
