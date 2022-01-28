@@ -1,5 +1,5 @@
 | [Read in English](#suankularb-components) | [อ่านในภาษาไทย](#ระบบ-ui-สวนกุหลาบ) |
-| ----------------------------------------- | ----------------------------------- |
+| ---- | ---- |
 
 # Suankularb Components
 
@@ -137,7 +137,82 @@ Although the Page Header comes with a default colour, it is intended to be paire
 </div>
 ```
 
-### Search
+### Input
+
+#### Keyboard Input
+
+- Supports these inputs: `email`, `number`, `password`, `tel`, `text`, and `url`
+
+```html
+<div class="input">
+  <input type="text" placeholder="Label" />
+  <div class="input__placeholder">Label</div>
+</div>
+```
+
+#### Native Input
+
+- Supports these inputs: `color`, `date`, `datetime-local`, `month`, and `time`
+
+```html
+<div class="input--persistent">
+  <input type="date" />
+  <div class="input--persistent__label">Label</div>
+</div>
+```
+
+#### Select
+
+- Native
+
+```html
+<div class="dropdown--native">
+  <select>
+    <option>Item 1</option>
+    <option>Item 2</option>
+    <option>Item 3</option>
+    <option>Item 4</option>
+  </select>
+  <div class="dropdown__label">Label</div>
+</div>
+```
+
+- With JavaScript
+  Apply the class `show` to `dropdown` to show the options.
+
+  ```html
+  <div class="dropdown show">
+    <!-- Dropdown Button toggles the Options -->
+    <button class="dropdown__button" aria-haspopup="listbox" role="combobox">
+      <span>Selected Item</span>
+      <i class="icon dropdown__icon">expand_more</i>
+    </button>
+
+    <!-- Dropdown Options -->
+    <div class="dropdown__options" role="listbox">
+      <button aria-selected="false" role="option">Item 1</button>
+      <button aria-selected="true" role="option" class="selected">
+        Selected Item
+      </button>
+      <button aria-selected="false" role="option">Item 3</button>
+      <button aria-selected="false" role="option">Item 4</button>
+    </div>
+
+    <div class="dropdown__label">Label</div>
+  </div>
+  ```
+
+- Without JavaScript\*
+
+  \*While this type doesn’t require JavaScript to show and hide options, it does not handle display of the selected item.
+
+  ```html
+  <div class="dropdown dropdown--pure-css">
+    <!-- Same as With JavaScript -->
+  </div>
+  ```
+
+#### Search
 
 - Buttons can be put in front and/or after the input.
 - Buttons are meant to be used with an icon as their child.
@@ -156,7 +231,7 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
 ### Select List
 
-Select List Items are organized into groups. If your list is not organized into groups, use `select-list--no-group` instead oof `select-list`.
+Select List Items are organized into groups. If your list is not organized into groups, use `select-list--no-group` instead of `select-list`.
 
 ```html
 <ul class="select-list">
@@ -367,8 +442,82 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 </div>
 ```
 
+### Input
 
-### Search
+#### ใช้แป้นพิมพ์เท่านั้น
+
+- ใช้ `input` `type` ได้ดังนี้: `email` `number` `password` `tel` `text` และ `url`
+
+```html
+<div class="input">
+  <input type="text" placeholder="Label" />
+  <div class="input__placeholder">Label</div>
+</div>
+```
+
+#### ใช้ UI ที่เบราเซอร์ให้มา
+
+- ใช้ `input` `type` ได้ดังนี้: `color` `date` `datetime-local` `month` และ `time`
+
+```html
+<div class="input--persistent">
+  <input type="date" />
+  <div class="input--persistent__label">Label</div>
+</div>
+```
+
+#### Select
+
+- Native (ใช้ตามที่เบราเซอร์ให้มา)
+
+```html
+<div class="dropdown--native">
+  <select>
+    <option>Item 1</option>
+    <option>Item 2</option>
+    <option>Item 3</option>
+    <option>Item 4</option>
+  </select>
+  <div class="dropdown__label">Label</div>
+</div>
+```
+
+- ใช้กับ JavaScript
+  การเพิ่ม class `show` ให้ `dropdown` จะแสดง Options
+
+  ```html
+  <div class="dropdown show">
+    <!-- Dropdown Button toggles the Options -->
+    <button class="dropdown__button" aria-haspopup="listbox" role="combobox">
+      <span>Selected Item</span>
+      <i class="icon dropdown__icon">expand_more</i>
+    </button>
+
+    <!-- Dropdown Options -->
+    <div class="dropdown__options" role="listbox">
+      <button aria-selected="false" role="option">Item 1</button>
+      <button aria-selected="true" role="option" class="selected">
+        Selected Item
+      </button>
+      <button aria-selected="false" role="option">Item 3</button>
+      <button aria-selected="false" role="option">Item 4</button>
+    </div>
+
+    <div class="dropdown__label">Label</div>
+  </div>
+  ```
+
+- ไม่ใช้ JavaScript\*
+
+  \*ไม่ใช้ JavaScript ในการควบคุมการแสดง Options แต่ยังต้องใช้ในการแสดง Selected Item
+
+  ```html
+  <div class="dropdown dropdown--pure-css">
+    <!-- เนื้อหาเหมือนกับแบบที่ใช้ JavaScript -->
+  </div>
+  ```
+
+#### Search
 
 - วาง button ไว้ข้างหน้าและ/หรือข้างหลัง input
 - button ควรมี icon เป็นเนื้อหา

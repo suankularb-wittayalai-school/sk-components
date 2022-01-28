@@ -1,10 +1,20 @@
 @use "Blank" as ci;
 
 .input--persistent {
-  @include ci.input--blank;
+  @include ci.input--blank();
   position: relative;
   padding: 1rem 0.5rem 0.25rem;
-  accent-color: var(--primary);
+  height: fit-content;
+  accent-color: var(--secondary);
+  transition: border var(--animation-speed) var(--animation-timing);
+
+  &:focus-within {
+    border-bottom: 2px solid var(--primary);
+
+    .input--persistent__label {
+      color: var(--primary);
+    }
+  }
 
   input {
     width: 100%;
@@ -20,4 +30,5 @@
   left: 0.5rem;
   font-size: var(--text-xs);
   font-family: var(--font-display);
+  transition: color var(--animation-speed) var(--animation-timing);
 }

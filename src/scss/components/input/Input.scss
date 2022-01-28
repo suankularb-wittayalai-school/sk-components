@@ -3,8 +3,8 @@
 .input {
   position: relative;
 
-  input {
-    @include ci.input--blank;
+  input, textarea {
+    @include ci.input--blank();
     padding: 0.625rem 0.5rem;
     outline: none;
     transition: padding var(--animation-speed) var(--animation-timing);
