@@ -1,8 +1,48 @@
 @use "Blank" as ci;
 @use "Persistent" as cp;
 
+// Dropdown
 .dropdown {
-  @include ci.input--blank();
+  position: relative;
+  .dropdown__button {
+    @extend .input--persistent;
+    width: 100%;
+    text-align: left;
+    outline: none;
+  }
+
+  &:focus-within {
+    .dropdown__button {
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .dropdown__label {
+      color: var(--primary);
+    }
+  }
+
+  &.show {
+    .dropdown__options {
+      @extend .dropdown__options;
+    }
+  }
+}
+
+// CSS-only Dropdown
+.dropdown--pure-css {
+  @extend .dropdown;
+
+  .dropdown__options {
+    display: none;
+  }
+
+  &:focus-within > .dropdown__options {
+    @extend .dropdown__options;
+  }
+}
+
+// Native Dropdown
+.dropdown--native {
   @extend .input--persistent;
   padding: 1rem 0.5rem 0.25rem 0.25rem;
 
@@ -22,6 +62,28 @@
   }
 }
 
+.dropdown__options {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--surface);
+  box-shadow: var(--shadow-1);
+  border-radius: 0 0 var(--rounded-sm) var(--rounded-sm);
+  padding: 0.25rem 0;
+
+  a,
+  button {
+    padding: 0.25rem 0.5rem;
+    text-align: left;
+    font-size: var(--text-base);
+
+    &:hover {
+      background-color: var(--primary-translucent-08);
+    }
+  }
+}
+
 .dropdown__label {
   position: absolute;
   top: 0.25rem;
@@ -29,4 +91,5 @@
   font-size: var(--text-xs);
   font-family: var(--font-display);
   transition: color var(--animation-speed) var(--animation-timing);
+  z-index: 1;
 }
