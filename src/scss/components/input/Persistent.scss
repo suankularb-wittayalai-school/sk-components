@@ -1,11 +1,10 @@
+@use "Blank" as ci;
+
 .input--persistent {
+  @include ci.input--blank;
   position: relative;
-  font-size: var(--text-base);
   padding: 1rem 0.5rem 0.25rem;
   accent-color: var(--primary);
-  background-color: var(--inverse-on-surface);
-  border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
-  border-bottom: 2px solid var(--inverse-surface);
 
   input {
     width: 100%;

@@ -1,12 +1,11 @@
+@use "Blank" as ci;
+
 .input {
   position: relative;
 
   input {
+    @include ci.input--blank;
     padding: 0.625rem 0.5rem;
-    font-size: var(--text-base);
-    background-color: var(--inverse-on-surface);
-    border-radius: var(--rounded-lg) var(--rounded-lg) 0 0;
-    border-bottom: 2px solid var(--inverse-surface);
     outline: none;
     transition: padding var(--animation-speed) var(--animation-timing);
 
