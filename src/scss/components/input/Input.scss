@@ -42,4 +42,7 @@
   font-size: var(--text-base);
   font-family: var(--font-display);
   transition: all var(--animation-speed) var(--animation-timing);
+  user-select: none;
+  pointer-events: none;
+  cursor: text;
 }
