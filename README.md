@@ -137,7 +137,45 @@ Although the Page Header comes with a default colour, it is intended to be paire
 </div>
 ```
 
-### Search
+### Input
+
+#### Keyboard Input
+
+* Supports these inputs: `email`, `number`, `password`, `tel`, `text`, and `url`
+
+```html
+<div class="input">
+  <input type="text" placeholder="Label" />
+  <div class="input__placeholder">Label</div>
+</div>
+```
+
+#### Native Input
+
+* Supports these inputs: `color`, `date`, `datetime-local`, `month`, and `time`
+
+```html
+<div class="input--persistent">
+  <input type="date" />
+  <div class="input--persistent__label">Label</div>
+</div>
+```
+
+#### Native Select
+
+```html
+<div class="dropdown">
+  <select>
+    <option>Item 1</option>
+    <option>Item 2</option>
+    <option>Item 3</option>
+    <option>Item 4</option>
+  </select>
+  <div class="dropdown__label">Label</div>
+</div>
+```
+
+#### Search
 
 - Buttons can be put in front and/or after the input.
 - Buttons are meant to be used with an icon as their child.
@@ -156,7 +194,7 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
 ### Select List
 
-Select List Items are organized into groups. If your list is not organized into groups, use `select-list--no-group` instead oof `select-list`.
+Select List Items are organized into groups. If your list is not organized into groups, use `select-list--no-group` instead of `select-list`.
 
 ```html
 <ul class="select-list">
@@ -366,7 +404,6 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
   </table>
 </div>
 ```
-
 
 ### Search
 
