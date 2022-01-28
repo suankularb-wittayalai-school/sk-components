@@ -141,7 +141,7 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
 #### Keyboard Input
 
-* Supports these inputs: `email`, `number`, `password`, `tel`, `text`, and `url`
+- Supports these inputs: `email`, `number`, `password`, `tel`, `text`, and `url`
 
 ```html
 <div class="input">
@@ -152,7 +152,7 @@ Although the Page Header comes with a default colour, it is intended to be paire
 
 #### Native Input
 
-* Supports these inputs: `color`, `date`, `datetime-local`, `month`, and `time`
+- Supports these inputs: `color`, `date`, `datetime-local`, `month`, and `time`
 
 ```html
 <div class="input--persistent">
@@ -405,7 +405,45 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 </div>
 ```
 
-### Search
+### Input
+
+#### Keyboard Input
+
+- ใช้ `input` `type` ได้ดังนี้: `email`, `number`, `password`, `tel`, `text`, and `url`
+
+```html
+<div class="input">
+  <input type="text" placeholder="Label" />
+  <div class="input__placeholder">Label</div>
+</div>
+```
+
+#### Native Input
+
+- ใช้ `input` `type` ได้ดังนี้: `color`, `date`, `datetime-local`, `month`, and `time`
+
+```html
+<div class="input--persistent">
+  <input type="date" />
+  <div class="input--persistent__label">Label</div>
+</div>
+```
+
+#### Native Select
+
+```html
+<div class="dropdown">
+  <select>
+    <option>Item 1</option>
+    <option>Item 2</option>
+    <option>Item 3</option>
+    <option>Item 4</option>
+  </select>
+  <div class="dropdown__label">Label</div>
+</div>
+```
+
+#### Search
 
 - วาง button ไว้ข้างหน้าและ/หรือข้างหลัง input
 - button ควรมี icon เป็นเนื้อหา
