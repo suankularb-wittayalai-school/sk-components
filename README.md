@@ -1,5 +1,5 @@
 | [Read in English](#suankularb-components) | [อ่านในภาษาไทย](#ระบบ-ui-สวนกุหลาบ) |
-| ----------------------------------------- | ----------------------------------- |
+| ---- | ---- |
 
 # Suankularb Components
 
@@ -161,10 +161,12 @@ Although the Page Header comes with a default colour, it is intended to be paire
 </div>
 ```
 
-#### Native Select
+#### Select
+
+- Native
 
 ```html
-<div class="dropdown">
+<div class="dropdown--native">
   <select>
     <option>Item 1</option>
     <option>Item 2</option>
@@ -174,6 +176,41 @@ Although the Page Header comes with a default colour, it is intended to be paire
   <div class="dropdown__label">Label</div>
 </div>
 ```
+
+- With JavaScript
+  Apply the class `show` to `dropdown` to show the options.
+
+  ```html
+  <div class="dropdown show">
+    <!-- Dropdown Button toggles the Options -->
+    <button class="dropdown__button" aria-haspopup="listbox" role="combobox">
+      <span>Selected Item</span>
+      <i class="icon dropdown__icon">expand_more</i>
+    </button>
+
+    <!-- Dropdown Options -->
+    <div class="dropdown__options" role="listbox">
+      <button aria-selected="false" role="option">Item 1</button>
+      <button aria-selected="true" role="option" class="selected">
+        Selected Item
+      </button>
+      <button aria-selected="false" role="option">Item 3</button>
+      <button aria-selected="false" role="option">Item 4</button>
+    </div>
+
+    <div class="dropdown__label">Label</div>
+  </div>
+  ```
+
+- Without JavaScript\*
+
+  \*While this type doesn’t require JavaScript to show and hide options, it does not handle display of the selected item.
+
+  ```html
+  <div class="dropdown dropdown--pure-css">
+    <!-- Same as With JavaScript -->
+  </div>
+  ```
 
 #### Search
 
@@ -407,9 +444,9 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 
 ### Input
 
-#### Keyboard Input
+#### ใช้แป้นพิมพ์เท่านั้น
 
-- ใช้ `input` `type` ได้ดังนี้: `email`, `number`, `password`, `tel`, `text`, and `url`
+- ใช้ `input` `type` ได้ดังนี้: `email` `number` `password` `tel` `text` และ `url`
 
 ```html
 <div class="input">
@@ -418,9 +455,9 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 </div>
 ```
 
-#### Native Input
+#### ใช้ UI ที่เบราเซอร์ให้มา
 
-- ใช้ `input` `type` ได้ดังนี้: `color`, `date`, `datetime-local`, `month`, and `time`
+- ใช้ `input` `type` ได้ดังนี้: `color` `date` `datetime-local` `month` และ `time`
 
 ```html
 <div class="input--persistent">
@@ -429,10 +466,12 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
 </div>
 ```
 
-#### Native Select
+#### Select
+
+- Native (ใช้ตามที่เบราเซอร์ให้มา)
 
 ```html
-<div class="dropdown">
+<div class="dropdown--native">
   <select>
     <option>Item 1</option>
     <option>Item 2</option>
@@ -442,6 +481,41 @@ Page Header ควรใช้คู่กับพื้นหลังแบ�
   <div class="dropdown__label">Label</div>
 </div>
 ```
+
+- ใช้กับ JavaScript
+  การเพิ่ม class `show` ให้ `dropdown` จะแสดง Options
+
+  ```html
+  <div class="dropdown show">
+    <!-- Dropdown Button toggles the Options -->
+    <button class="dropdown__button" aria-haspopup="listbox" role="combobox">
+      <span>Selected Item</span>
+      <i class="icon dropdown__icon">expand_more</i>
+    </button>
+
+    <!-- Dropdown Options -->
+    <div class="dropdown__options" role="listbox">
+      <button aria-selected="false" role="option">Item 1</button>
+      <button aria-selected="true" role="option" class="selected">
+        Selected Item
+      </button>
+      <button aria-selected="false" role="option">Item 3</button>
+      <button aria-selected="false" role="option">Item 4</button>
+    </div>
+
+    <div class="dropdown__label">Label</div>
+  </div>
+  ```
+
+- ไม่ใช้ JavaScript\*
+
+  \*ไม่ใช้ JavaScript ในการควบคุมการแสดง Options แต่ยังต้องใช้ในการแสดง Selected Item
+
+  ```html
+  <div class="dropdown dropdown--pure-css">
+    <!-- เนื้อหาเหมือนกับแบบที่ใช้ JavaScript -->
+  </div>
+  ```
 
 #### Search
 
