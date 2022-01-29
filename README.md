@@ -1,5 +1,5 @@
 | [Read in English](#suankularb-components) | [อ่านในภาษาไทย](#ระบบ-ui-สวนกุหลาบ) |
-| ---- | ---- |
+| ----------------------------------------- | ----------------------------------- |
 
 # Suankularb Components
 
@@ -22,14 +22,21 @@ This repository is aimed at creating a consistent designs system and experience 
 
 ### Navigation
 
-`--active` indicates that the Navigation Item is the current page.
+`active` class indicates that the Navigation Item is the current page.
 
 ```html
-<nav class="nav">
-  <a class="nav__item--active" href="#">Active Item</a>
-  <a class="nav__item" href="#">Item 2</a>
-  <a class="nav__item" href="#">Item 3</a>
-</nav>
+<a class="nav__item" href="">
+  <i class="icon nav__item__icon">circle</i>
+  <span>Item 1</span>
+</a>
+<a class="nav__item active" href="">
+  <i class="icon nav__item__icon">circle</i>
+  <span>Active Item</span>
+</a>
+<a class="nav__item" href="">
+  <i class="icon nav__item__icon">circle</i>
+  <span>Item 3</span>
+</a>
 ```
 
 ### Page Header
@@ -327,14 +334,21 @@ Repository นี้มีไว้เพื่อเป็นเครื่อ
 
 ### Navigation
 
-`--active` แสดงว่า Navigation Item นั้นเป็นหน้าปัจจุบัน
+class `active` แสดงว่า Navigation Item นั้นเป็นหน้าปัจจุบัน
 
 ```html
-<nav class="nav">
-  <a class="nav__item--active" href="#">Active Item</a>
-  <a class="nav__item" href="#">Item 2</a>
-  <a class="nav__item" href="#">Item 3</a>
-</nav>
+<a class="nav__item" href="">
+  <i class="icon nav__item__icon">circle</i>
+  <span>Item 1</span>
+</a>
+<a class="nav__item active" href="">
+  <i class="icon nav__item__icon">circle</i>
+  <span>Active Item</span>
+</a>
+<a class="nav__item" href="">
+  <i class="icon nav__item__icon">circle</i>
+  <span>Item 3</span>
+</a>
 ```
 
 ### Page Header
