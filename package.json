@@ -1,0 +1,21 @@
+{
+  "name": "suankularb-components",
+  "version": "1.0.0",
+  "description": "A design system for all Suankularb applications",
+  "main": "src\\scss\\core.scss",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
+  },
+  "keywords": [
+    "css"
+  ],
+  "author": "Suankularb Wittayalai School",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
+  },
+  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
+  "devDependencies": {}
+}
