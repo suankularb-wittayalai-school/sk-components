@@ -28,8 +28,10 @@
   transform: scale(80%);
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
+}
 
-  &.show, & {
+.overlay.show {
+  .dialog {
     opacity: 1;
     transform: scale(100%);
   }
