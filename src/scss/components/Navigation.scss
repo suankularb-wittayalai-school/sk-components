@@ -18,6 +18,7 @@
   width: 100%;
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
+  font-family: var(--font-display);
 
   &:hover,
   &:focus {
@@ -58,7 +59,6 @@
     padding: 1.5rem 0.75rem;
     width: fit-content;
     font-size: var(--text-lg);
-    font-family: var(--font-display);
     transition: background-color var(--animation-speed) var(--animation-timing);
 
     &.active {
