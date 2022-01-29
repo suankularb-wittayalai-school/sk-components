@@ -7,13 +7,13 @@ export default {
     plugins: [
         terser(),
         scss({
-            output: 'dist/suankularb-components.min.css',
+            output: 'dist/css/suankularb-components.min.css',
             outputStyle: "compressed"
         }),
     ],
     output: [
         {
-            name: 'listree',
+            name: 'suankularb-components',
             file: pkg.browser,
             format: 'umd',
         },

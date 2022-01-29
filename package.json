@@ -2,10 +2,13 @@
   "name": "suankularb-components",
   "version": "1.0.0",
   "description": "A design system for all Suankularb applications",
-  "main": "src\\scss\\core.scss",
-  "browser": "dist\\css\\suankularb-components.min.css",
+  "module": "dist\\js\\suankularb-components.esm.js",
+  "browser": "dist\\js\\suankularb-components.umd.min.js",
+  "main": "dist\\js\\suankularb-components.esm.min.js",
   "scripts": {
-    "build": "sass src/scss/core.scss dist/css/style.css"
+    "dev": "sass --watch src/scss/core.scss dist/css/style.css",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
   },
   "repository": {
     "type": "git",
