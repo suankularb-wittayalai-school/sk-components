@@ -1,71 +1,24 @@
 @use "../abstracts/breakpoints.scss" as b;
 
 .nav {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: flex;
   flex-direction: row;
   width: 100%;
   background-color: var(--surface-1);
-
-  .nav__item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0.75rem 0 1rem;
-    width: 100%;
-    font-size: var(--text-sm);
-    font-weight: var(--font-medium);
-
-    .nav__item__icon {
-      padding: 0.5rem 1.5rem;
-      border-radius: 9999px;
-    }
-
-    &.active {
-      .nav__item__icon {
-        background-color: var(--primary-container);
-      }
-    }
-  }
-}
-
-@include b.breakpoint("sm") {
-  .nav {
-    justify-content: flex-end;
-    padding: 0 3.625rem;
-    font-size: var(--text-lg);
-    background-color: var(--surface-1);
-
-    .nav__item {
-      position: relative;
-      padding: 1.5rem 0.75rem;
-      font-family: var(--font-display);
-      transition: background-color var(--animation-speed)
-        var(--animation-timing);
-
-      &.active {
-        color: var(--primary);
-        font-weight: var(--font-bold);
-        background-color: var(--surface-2);
-
-        &::before {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          height: 0.25rem;
-          background-color: var(--primary);
-          border-radius: 9999px 9999px 0 0;
-        }
-      }
-    }
-  }
 }
 
 .nav__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 0 1rem;
+  width: 100%;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+
   &:hover,
   &:focus {
     transition: none;
@@ -75,5 +28,56 @@
   &:active {
     transition: none;
     background-color: var(--primary-translucent-12);
+  }
+
+  &.active {
+    .nav__item__icon {
+      background-color: var(--primary-container);
+    }
+  }
+}
+
+.nav__item__icon {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+}
+
+@include b.breakpoint("sm") {
+  .nav {
+    position: static;
+    height: fit-content;
+    justify-content: flex-end;
+    padding: 0 3.625rem;
+    background-color: var(--surface-1);
+  }
+
+  .nav__item {
+    position: relative;
+    padding: 1.5rem 0.75rem;
+    width: fit-content;
+    font-size: var(--text-lg);
+    font-family: var(--font-display);
+    transition: background-color var(--animation-speed) var(--animation-timing);
+
+    &.active {
+      color: var(--primary);
+      font-weight: var(--font-bold);
+      background-color: var(--surface-2);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.25rem;
+        background-color: var(--primary);
+        border-radius: 9999px 9999px 0 0;
+      }
+    }
+  }
+
+  .nav__item__icon {
+    display: none;
   }
 }
