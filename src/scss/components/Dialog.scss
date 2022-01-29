@@ -3,6 +3,7 @@
   top: 0;
   display: grid;
   place-items: center;
+  padding: 1rem;
   width: 100vw;
   height: 100vh;
   background-color: #00000050;
@@ -19,15 +20,22 @@
 .dialog {
   display: flex;
   flex-direction: column;
+  padding: 0;
   width: clamp(17.5rem, 20vw, 35rem);
+  max-height: calc(100vh - 2rem);
   font-size: var(--text-base);
   background-color: var(--surface-3);
   border-radius: var(--rounded-2xl);
-  padding: 0;
   opacity: 0;
   transform: scale(80%);
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 .overlay.show {
