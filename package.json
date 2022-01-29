@@ -1,5 +1,5 @@
 {
-  "name": "sk-components",
+  "name": "suankularb-components",
   "version": "1.0.0",
   "description": "A design system for all Suankularb applications",
   "main": "src\\scss\\core.scss",
