@@ -45,17 +45,6 @@
       transition: background-color var(--animation-speed)
         var(--animation-timing);
 
-      &:hover,
-      &:focus {
-        transition: none;
-        background-color: var(--primary-translucent-08);
-      }
-
-      &:active {
-        transition: none;
-        background-color: var(--primary-translucent-12);
-      }
-
       &.active {
         color: var(--primary);
         font-weight: var(--font-bold);
@@ -73,5 +62,18 @@
         }
       }
     }
+  }
+}
+
+.nav__item {
+  &:hover,
+  &:focus {
+    transition: none;
+    background-color: var(--primary-translucent-08);
+  }
+
+  &:active {
+    transition: none;
+    background-color: var(--primary-translucent-12);
   }
 }
