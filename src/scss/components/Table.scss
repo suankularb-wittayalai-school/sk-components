@@ -16,6 +16,11 @@
   border-radius: var(--rounded-xl);
   overflow-x: auto;
 
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
   &--outlined {
     @extend .table__wrapper;
     border: 2px solid var(--outline);
