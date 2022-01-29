@@ -7,7 +7,7 @@ export default {
     plugins: [
         terser(),
         scss({
-            output: 'dist/css/suankularb-components.min.css',
+            output: pkg.style,
             outputStyle: "compressed"
         }),
     ],
