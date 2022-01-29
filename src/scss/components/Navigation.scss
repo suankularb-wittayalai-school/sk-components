@@ -53,6 +53,8 @@
 
   .nav__item {
     position: relative;
+    flex-direction: row;
+    gap: 0.5rem;
     padding: 1.5rem 0.75rem;
     width: fit-content;
     font-size: var(--text-lg);
@@ -63,6 +65,10 @@
       color: var(--primary);
       font-weight: var(--font-bold);
       background-color: var(--surface-2);
+
+      .nav__item__icon {
+        background-color: transparent;
+      }
 
       &::before {
         content: "";
@@ -78,6 +84,7 @@
   }
 
   .nav__item__icon {
-    display: none;
+    padding: 0;
+    color: var(--secondary);
   }
 }
