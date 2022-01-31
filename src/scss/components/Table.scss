@@ -28,9 +28,14 @@
     .table {
       @extend .table;
 
-      thead {
+      thead,
+      tfoot {
         @extend .table__header;
         background-color: var(--primary-container);
+      }
+
+      tbody {
+        background-color: var(--surface);
       }
 
       th,

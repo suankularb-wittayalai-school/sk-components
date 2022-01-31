@@ -1,22 +1,32 @@
 @use "../abstracts/breakpoints" as b;
+@use "../components/Navigation" as cn;
 
 .content-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem 6.375rem;
+  height: fit-content;
+  min-height: 100%;
   color: var(--on-background);
   background-color: var(--background);
 
   > * {
     width: 100%;
+    max-width: 40rem;
   }
+}
+
+.content-layout__wrapper {
+  height: 100%;
+  overflow: auto;
 }
 
 @include b.breakpoint("sm") {
   .content-layout {
     padding: 2rem;
+
     > * {
       width: clamp(40rem, 60vw, 80rem);
     }

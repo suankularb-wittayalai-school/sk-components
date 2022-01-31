@@ -1,15 +1,21 @@
 .icon {
-  font-family: "Material Icons";
-  font-weight: normal;
+  display: inline-block;
+  width: 1em;
   font-style: normal;
+  font-weight: normal;
+  font-family: var(--font-icon);
   font-size: var(--text-3xl);
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
   user-select: none;
-  display: inline-block;
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+
+  &--outlined {
+    @extend .icon;
+    font-family: var(--font-icon-outlined);
+  }
 }

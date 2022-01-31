@@ -39,6 +39,7 @@
 }
 
 .nav__item__icon {
+  display: flex;
   padding: 0.5rem 1.5rem;
   border-radius: 9999px;
 }
@@ -67,6 +68,7 @@
       background-color: var(--surface-2);
 
       .nav__item__icon {
+        color: inherit;
         background-color: transparent;
       }
 
