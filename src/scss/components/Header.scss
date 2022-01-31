@@ -35,6 +35,7 @@
 }
 
 .header__icons__back {
+  display: flex;
   color: var(--white);
   text-shadow: var(--text-shadow);
 }
