@@ -1,25 +1,25 @@
 import { terser } from "rollup-plugin-terser";
-import scss from 'rollup-plugin-scss'
-import pkg from './package.json';
+import scss from "rollup-plugin-scss";
+import pkg from "./package.json";
 
 export default {
-    input: 'src/js/index.js',
-    plugins: [
-        terser(),
-        scss({
-            output: pkg.style,
-            outputStyle: "compressed"
-        }),
-    ],
-    output: [
-        {
-            name: 'suankularb-components',
-            file: pkg.browser,
-            format: 'umd',
-        },
-        { 
-            file: pkg.module,
-            format: 'es' 
-        },         
-    ],
+  input: "src/js/index.js",
+  plugins: [
+    terser(),
+    scss({
+      output: pkg.style,
+      outputStyle: "compressed",
+    }),
+  ],
+  output: [
+    {
+      name: "suankularb-components",
+      file: pkg.browser,
+      format: "umd",
+    },
+    {
+      file: pkg.module,
+      format: "es",
+    },
+  ],
 };
