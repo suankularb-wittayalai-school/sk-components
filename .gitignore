@@ -129,5 +129,9 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-# /dist/**/*
+# compiled sass file
+style.css
+style.css.map
+
+# local testing directory
 /test/
