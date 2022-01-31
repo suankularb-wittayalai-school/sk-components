@@ -1,9 +1,17 @@
 {
   "name": "suankularb-components",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A design system for all Suankularb applications",
-  "main": "src\\scss\\core.scss",
-  "scripts": {},
+  "module": "dist\\js\\suankularb-components.esm.js",
+  "browser": "dist\\js\\suankularb-components.umd.min.js",
+  "main": "dist/js/suankularb-components.esm.min.js",
+  "style": "dist\\css\\suankularb-components.min.css",
+  "scss": "src\\scss\\core.scss",
+  "scripts": {
+    "dev": "sass --watch src/scss/core.scss dist/css/style.css",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
@@ -17,5 +25,12 @@
     "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
   },
   "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "rollup": "^2.66.1",
+    "rollup-plugin-scss": "^3.0.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "sass": "^1.49.0"
+  }
 }
