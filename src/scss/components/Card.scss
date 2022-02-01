@@ -24,6 +24,7 @@
 
 // Card elements
 .card__icon {
+  display: flex;
   font-size: var(--text-3xl);
   color: var(--primary);
 }

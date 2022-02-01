@@ -72,6 +72,7 @@
   text-align: center;
 
   .dialog__hero__icon {
+    display: flex;
     color: var(--secondary);
   }
 }
