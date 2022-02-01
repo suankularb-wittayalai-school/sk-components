@@ -4,6 +4,7 @@
 // Dropdown
 .dropdown {
   position: relative;
+
   .dropdown__button {
     @extend .input--persistent;
     display: flex;
@@ -24,6 +25,10 @@
     .dropdown__label {
       color: var(--primary);
     }
+  }
+
+  .dropdown__options {
+    display: none;
   }
 
   &.show {
