@@ -349,6 +349,31 @@ Select List Items are organized into groups. If your list is not organized into 
 
 Repository นี้มีไว้เพื่อเป็นเครื่องมือที่จะช่วยเราสร้างระบบ UI ที่เข้าใจง่ายและสม่ำเสมอ ตลอดภายในแอพพลิเคชั่นทั้งหมดจากโรงเรียนสวนกุหลาบวิทยาลัย
 
+## สารบัญ
+
+- [การติดตั้ง](#การติดตั้ง)
+- [Component ทั้งหมด](#component-ทั้งหมด)
+
+## การติดตั้ง
+
+### CSS
+
+คัดลอกส่วนของ CSS ที่ต้องการจากภายในส่วนนี้ไปยังตำแหน่งที่ต้องการ
+
+```css
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css" crossorigin="anonymous">
+```
+### NPM
+รันคำสั่งต่อไปนี้ใน root directory ของโปรเจค
+```powershell
+npm install -s @suankularb-components/css@latest
+```
+
+### Yarn
+รันคำสั่งต่อไปนี้ใน root directory ของโปรเจค
+```powershell
+yarn add @suankularb-components/css@latest
+```
 ## Component ทั้งหมด
 
 ### Button
