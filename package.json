@@ -1,6 +1,6 @@
 {
   "name": "@suankularb-components/css",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A design system for all Suankularb applications",
   "module": "dist\\js\\suankularb-components.esm.js",
   "browser": "dist\\js\\suankularb-components.umd.min.js",
@@ -17,7 +17,9 @@
     "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
   },
   "keywords": [
-    "css", "component", "suankularb"
+    "css",
+    "component",
+    "suankularb"
   ],
   "author": "Suankularb Wittayalai School",
   "license": "MIT",
