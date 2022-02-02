@@ -19,15 +19,23 @@ Copy and paste the following code into your project's `<head>` tag:
 ```css
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css" crossorigin="anonymous">
 ```
+
 ### NPM
+
+Run the following command in your project's root directory:
+
 ```powershell
 npm install --save @suankularb-components/css
 ```
 
 ### Yarn
+
+Run the following command in your project's root directory:
+
 ```powershell
 yarn add @suankularb-components/css
 ```
+
 ## Component List
 
 ### Buttons
