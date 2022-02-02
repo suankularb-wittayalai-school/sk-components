@@ -5,6 +5,29 @@
 
 This repository is aimed at creating a consistent design system and experience across all Suankularb features and applications.
 
+## Table of contents
+
+- [Installation](#installation)
+- [Component List](#component-list)
+
+## Installation
+
+### CSS
+
+Copy and paste the following code into your project's `<head>` tag:
+
+```css
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css" crossorigin="anonymous">
+```
+### NPM
+```powershell
+npm install --save @suankularb-components/css
+```
+
+### Yarn
+```powershell
+yarn add @suankularb-components/css
+```
 ## Component List
 
 ### Buttons
