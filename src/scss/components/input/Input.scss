@@ -8,7 +8,8 @@
     @include ci.input--blank();
     padding: 0.625rem 0.5rem;
     outline: none;
-    transition: padding var(--animation-speed) var(--animation-timing);
+    transition: padding var(--animation-speed) var(--animation-timing),
+      border var(--animation-speed) var(--animation-timing);
 
     &::placeholder {
       opacity: 0;
