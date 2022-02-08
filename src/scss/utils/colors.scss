@@ -1,0 +1,201 @@
+// Background
+
+// Primary
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-primary-blended-08 {
+  background-color: var(--primary-blended-08);
+}
+
+.bg-primary-blended-12 {
+  background-color: var(--primary-blended-12);
+}
+
+.bg-primary-translucent-08 {
+  background-color: var(--primary-translucent-08);
+}
+
+.bg-primary-translucent-12 {
+  background-color: var(--primary-translucent-12);
+}
+
+// Secondary
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-secondary-blended-08 {
+  background-color: var(--secondary-blended-08);
+}
+
+.bg-secondary-blended-12 {
+  background-color: var(--secondary-blended-12);
+}
+
+.bg-secondary-translucent-08 {
+  background-color: var(--secondary-translucent-08);
+}
+
+.bg-secondary-translucent-12 {
+  background-color: var(--secondary-translucent-12);
+}
+
+// Tertiary
+.bg-tertiary {
+  background-color: var(--tertiary);
+}
+
+.bg-tertiary-blended-08 {
+  background-color: var(--tertiary-blended-08);
+}
+
+.bg-tertiary-blended-12 {
+  background-color: var(--tertiary-blended-12);
+}
+
+.bg-tertiary-translucent-08 {
+  background-color: var(--tertiary-translucent-08);
+}
+
+.bg-tertiary-translucent-12 {
+  background-color: var(--tertiary-translucent-12);
+}
+
+// Surface
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-surface-variant {
+  background-color: var(--surface-variant);
+}
+
+.bg-inverse-surface {
+  background-color: var(--inverse-surface);
+}
+
+.bg-surface-1 {
+  background-color: var(--surface-1);
+}
+
+.bg-surface-2 {
+  background-color: var(--surface-2);
+}
+
+.bg-surface-3 {
+  background-color: var(--surface-3);
+}
+
+.bg-surface-4 {
+  background-color: var(--surface-4);
+}
+
+.bg-surface-5 {
+  background-color: var(--surface-5);
+}
+
+.bg-background {
+  background-color: var(--background);
+}
+
+// Text color
+.text-on-primary {
+  color: var(--on-primary);
+}
+
+.text-on-secondary {
+  color: var(--on-secondary);
+}
+
+.text-on-tertiary {
+  color: var(--on-tertiary);
+}
+
+.text-on-surface {
+  color: var(--on-surface);
+}
+
+.text-on-surface-variant {
+  color: var(--on-surface-variant);
+}
+
+.text-inverse-on-surface {
+  color: var(--inverse-on-surface);
+}
+
+.text-on-background {
+  color: var(--on-background);
+}
+
+// Accent
+.primary {
+  color: var(--on-primary);
+  background-color: var(--primary);
+}
+
+.secondary {
+  color: var(--on-secondary);
+  background-color: var(--secondary);
+}
+
+.tertiary {
+  color: var(--on-tertiary);
+  background-color: var(--tertiary);
+}
+
+.surface {
+  color: var(--on-surface);
+  background-color: var(--surface);
+}
+
+.surface-variant {
+  color: var(--on-surface-variant);
+  background-color: var(--surface-variant);
+}
+
+.inverse-surface {
+  color: var(--inverse-on-surface);
+  background-color: var(--inverse-surface);
+}
+
+// Container
+.container-primary {
+  color: var(--on-primary-container);
+  background-color: var(--primary-container);
+}
+
+.container-secondary {
+  color: var(--on-secondary-container);
+  background-color: var(--secondary-container);
+}
+
+.container-tertiary {
+  color: var(--on-tertiary-container);
+  background-color: var(--tertiary-container);
+}
+
+.container-surface {
+  color: var(--on-surface);
+  background-color: var(--surface);
+}
+
+.container-surface-variant {
+  color: var(--on-surface-variant);
+  background-color: var(--surface-variant);
+}
+
+.container-inverse-surface {
+  color: var(--inverse-on-surface);
+  background-color: var(--inverse-surface);
+}
+
+// Outline
+.border-outline {
+  border: 2px solid var(--outline);
+}
+
+.outline-outline {
+  outline: 2px solid var(--outline);
+}

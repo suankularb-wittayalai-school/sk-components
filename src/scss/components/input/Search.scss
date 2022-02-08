@@ -2,10 +2,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  box-shadow: var(--shadow-1);
+  background-color: var(--surface);
   border-radius: 9999px;
   overflow: hidden;
-  transition: box-shadow var(--animation-speed) var(--animation-timing);
 
   button {
     display: grid;
@@ -19,7 +18,8 @@
       background-color: var(--primary-translucent-08);
     }
 
-    &:focus-visible, &:active {
+    &:focus-visible,
+    &:active {
       transition: none;
       background-color: var(--primary-translucent-12);
     }
@@ -40,13 +40,33 @@
     font-family: var(--font-sans);
     border: none;
     outline: none;
+    color: var(--on-surface);
+    background-color: transparent;
 
     &::placeholder {
       font-family: var(--font-display);
     }
   }
+}
 
-  &:focus-within {
-    box-shadow: var(--shadow-2);
+@media (prefers-color-scheme: light) {
+  .search {
+    box-shadow: var(--shadow-1);
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+    &:focus-within {
+      box-shadow: var(--shadow-2);
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .search {
+    outline: 2px solid var(--outline);
+    transition: outline var(--animation-speed) var(--animation-timing);
+
+    &:focus-within {
+      outline: 2px solid var(--primary);
+    }
   }
 }

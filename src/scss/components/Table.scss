@@ -31,10 +31,12 @@
       thead,
       tfoot {
         @extend .table__header;
+        color: var(--on-primary-container);
         background-color: var(--primary-container);
       }
 
       tbody {
+        color: var(--on-surface);
         background-color: var(--surface);
       }
 

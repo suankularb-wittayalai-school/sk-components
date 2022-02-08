@@ -7,6 +7,7 @@
   flex-direction: row;
   width: 100%;
   background-color: var(--surface-1);
+  z-index: 80;
 }
 
 .nav__item {
@@ -19,6 +20,7 @@
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   font-family: var(--font-display);
+  color: var(--on-surface-variant);
 
   &:hover,
   &:focus {
