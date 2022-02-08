@@ -4,6 +4,7 @@
 // Dropdown
 .dropdown {
   position: relative;
+
   .dropdown__button {
     @extend .input--persistent;
     display: flex;
@@ -65,6 +66,10 @@
     background-color: transparent;
     outline: none;
   }
+
+  option {
+    background-color: var(--surface);
+  }
 }
 
 .dropdown__options {
@@ -109,6 +114,7 @@
   left: 0.5rem;
   font-size: var(--text-xs);
   font-family: var(--font-display);
+  color: var(--on-surface);
   transition: color var(--animation-speed) var(--animation-timing);
   pointer-events: none;
   z-index: 1;
