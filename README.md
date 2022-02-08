@@ -16,7 +16,7 @@ This repository is aimed at creating a consistent design system and experience a
 
 Copy and paste the following code into your project's `<head>` tag:
 
-```css
+```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css" crossorigin="anonymous">
 ```
 
@@ -360,7 +360,7 @@ Repository นี้มีไว้เพื่อเป็นเครื่อ
 
 คัดลอกส่วนของ CSS ที่ต้องการจากภายในส่วนนี้ไปยังตำแหน่งที่ต้องการ
 
-```css
+```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css" crossorigin="anonymous">
 ```
 ### NPM
