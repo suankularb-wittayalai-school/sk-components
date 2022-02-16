@@ -137,6 +137,22 @@
       }
     }
   }
+
+  &--error {
+    @extend .container-error;
+
+    &:hover {
+      &::before {
+        background-color: var(--error-translucent-08);
+      }
+    }
+
+    &:focus-visible {
+      &::before {
+        background-color: var(--error-translucent-12);
+      }
+    }
+  }
 }
 
 @include b.breakpoint("sm") {

@@ -176,6 +176,11 @@
   background-color: var(--tertiary-container);
 }
 
+.container-error {
+  color: var(--on-error-container);
+  background-color: var(--error-container);
+}
+
 .container-surface {
   color: var(--on-surface);
   background-color: var(--surface);
