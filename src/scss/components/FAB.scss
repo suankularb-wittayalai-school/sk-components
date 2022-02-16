@@ -57,9 +57,10 @@
   &--large {
     @extend .fab;
     font-size: var(--text-6xl);
+    border-radius: 1.75rem;
 
-    &__content {
-      padding: 1.75rem;
+    .fab__content {
+      padding: 1.875rem;
     }
   }
 
@@ -67,7 +68,7 @@
     @extend .fab;
     font-size: var(--text-base);
 
-    &__content {
+    .fab__content {
       padding: 1rem 1.25rem 1rem 1rem;
     }
   }

@@ -3,8 +3,8 @@
   width: 1em;
   font-style: normal;
   font-weight: normal;
-  font-family: var(--font-icon);
   font-size: var(--text-3xl);
+  font-family: var(--font-icon);
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -13,6 +13,10 @@
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+
+  &--custom-size {
+    font-size: inherit;
+  }
 
   &--outlined {
     @extend .icon;
