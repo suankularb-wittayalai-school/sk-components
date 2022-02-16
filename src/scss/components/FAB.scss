@@ -5,10 +5,13 @@
   position: fixed;
   bottom: 6.375rem;
   right: 1rem;
-  font-family: var(--text-3xl);
+  font-size: var(--text-3xl);
+  font-family: var(--font-display);
   border-radius: 1rem;
   box-shadow: var(--shadow-3);
   transition: box-shadow var(--animation-speed) var(--animation-timing);
+  overflow: hidden;
+  z-index: 30;
 
   &__content {
     padding: 1rem;
@@ -21,20 +24,39 @@
     left: 0;
     width: 100%;
     height: 100%;
+    transition: background-color var(--animation-speed) var(--animation-timing);
   }
 
+  // States
   &:hover {
     box-shadow: var(--shadow-4);
+
+    &::before {
+      transition: none;
+    }
   }
 
-  &:focus {
+  &:active {
+    transition: none;
     box-shadow: var(--shadow-3);
+
+    &::before {
+      transition: none;
+    }
+  }
+
+  &:focus-visible {
+    box-shadow: var(--shadow-3);
+
+    &::before {
+      transition: none;
+    }
   }
 
   // Types
   &--large {
     @extend .fab;
-    font-family: var(--text-6xl);
+    font-size: var(--text-6xl);
 
     &__content {
       padding: 1.75rem;
@@ -43,7 +65,7 @@
 
   &--extended {
     @extend .fab;
-    font-family: var(--text-base);
+    font-size: var(--text-base);
 
     &__content {
       padding: 1rem 1.25rem 1rem 1rem;
@@ -61,7 +83,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       &::before {
         background-color: var(--primary-translucent-12);
       }
@@ -77,7 +99,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       &::before {
         background-color: var(--primary-translucent-12);
       }
@@ -93,7 +115,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       &::before {
         background-color: var(--secondary-translucent-12);
       }
@@ -109,7 +131,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       &::before {
         background-color: var(--tertiary-translucent-12);
       }
