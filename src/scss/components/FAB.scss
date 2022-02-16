@@ -5,6 +5,7 @@
   position: fixed;
   bottom: 6.375rem;
   right: 1rem;
+  font-family: var(--text-3xl);
   border-radius: 1rem;
   box-shadow: var(--shadow-3);
   transition: box-shadow var(--animation-speed) var(--animation-timing);
@@ -24,17 +25,94 @@
 
   &:hover {
     box-shadow: var(--shadow-4);
-
-    &::before {
-      background-color: var(--primary-translucent-08);
-    }
   }
 
   &:focus {
     box-shadow: var(--shadow-3);
+  }
 
-    &::before {
-      background-color: var(--primary-translucent-12);
+  // Types
+  &--large {
+    @extend .fab;
+    font-family: var(--text-6xl);
+
+    &__content {
+      padding: 1.75rem;
+    }
+  }
+
+  &--extended {
+    @extend .fab;
+    font-family: var(--text-base);
+
+    &__content {
+      padding: 1rem 1.25rem 1rem 1rem;
+    }
+  }
+
+  // Colours
+  &--surface {
+    color: var(--primary);
+    background-color: var(--surface-3);
+
+    &:hover {
+      &::before {
+        background-color: var(--primary-translucent-08);
+      }
+    }
+
+    &:focus {
+      &::before {
+        background-color: var(--primary-translucent-12);
+      }
+    }
+  }
+
+  &--primary {
+    @extend .container-primary;
+
+    &:hover {
+      &::before {
+        background-color: var(--primary-translucent-08);
+      }
+    }
+
+    &:focus {
+      &::before {
+        background-color: var(--primary-translucent-12);
+      }
+    }
+  }
+
+  &--secondary {
+    @extend .container-secondary;
+
+    &:hover {
+      &::before {
+        background-color: var(--secondary-translucent-08);
+      }
+    }
+
+    &:focus {
+      &::before {
+        background-color: var(--secondary-translucent-12);
+      }
+    }
+  }
+
+  &--tertiary {
+    @extend .container-tertiary;
+
+    &:hover {
+      &::before {
+        background-color: var(--tertiary-translucent-08);
+      }
+    }
+
+    &:focus {
+      &::before {
+        background-color: var(--tertiary-translucent-12);
+      }
     }
   }
 }
@@ -42,23 +120,6 @@
 @include b.breakpoint("sm") {
   .fab {
     bottom: 1rem;
-  }
-}
-
-.fab--large {
-  @extend .fab;
-  font-size: 2.25rem;
-
-  &__content {
-    padding: 1.75rem;
-  }
-}
-
-.fab--extended {
-  @extend .fab;
-
-  &__content {
-    padding: 1rem 1.25rem 1rem 1rem;
   }
 }
 
