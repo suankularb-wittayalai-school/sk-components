@@ -53,6 +53,15 @@
   }
 
   // Types
+  &--small {
+    @extend .fab;
+    border-radius: 0.75rem;
+
+    .fab__content {
+      padding: 0.5rem;
+    }
+  }
+
   &--large {
     @extend .fab;
     font-size: var(--text-6xl);
@@ -182,12 +191,13 @@
   pointer-events: none;
 
   .fab,
+  .fab--small,
   .fab--large,
   .fab--extended {
     position: relative;
     top: 0;
     left: 0;
-    pointer-events:all;
+    pointer-events: all;
   }
 }
 
