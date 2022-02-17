@@ -29,6 +29,7 @@
 
     > * {
       width: clamp(40rem, 60vw, 80rem);
+      max-width: none;
     }
   }
 }
