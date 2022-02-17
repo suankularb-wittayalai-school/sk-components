@@ -6,7 +6,6 @@
   bottom: 6.375rem;
   right: 1rem;
   font-size: var(--text-3xl);
-  font-family: var(--font-display);
   border-radius: 1rem;
   box-shadow: var(--shadow-3);
   transition: box-shadow var(--animation-speed) var(--animation-timing);
@@ -67,6 +66,8 @@
   &--extended {
     @extend .fab;
     font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    font-family: var(--font-display);
 
     .fab__content {
       padding: 1rem 1.25rem 1rem 1rem;
