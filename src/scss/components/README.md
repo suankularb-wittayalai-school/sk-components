@@ -23,6 +23,38 @@
 <button class="btn--text">Text</button>
 ```
 
+### FABs
+
+```html
+<!-- Normal FAB -->
+<button class="fab fab--primary">
+  <div class="fab__content">
+    <div class="fab__icon">
+      <i class="icon" translate="no">circle</i>
+    </div>
+  </div>
+</button>
+
+<!-- Large FAB -->
+<button class="fab--large fab--primary">
+  <div class="fab__content">
+    <div class="fab__icon">
+      <i class="icon" translate="no">circle</i>
+    </div>
+  </div>
+</button>
+
+<!-- Extended FAB -->
+<button class="fab--extended fab--primary">
+  <div class="fab__content">
+    <div class="fab__icon">
+      <i class="icon" translate="no">circle</i>
+    </div>
+    <span>Label</span>
+  </div>
+</button>
+```
+
 ### Navigation
 
 `active` class indicates that the Navigation Item is the current page.
