@@ -62,6 +62,14 @@
     --tertiary-blended-12: #80701f;
     --tertiary-translucent-08: #6f5d0008;
     --tertiary-translucent-12: #6f5d000c;
+    
+    // Error
+    --error: #ba1b1b;
+    --on-error: #ffffff;
+    --error-container: #ffdfd4;
+    --on-error-container: #410001;
+    --error-translucent-08: #ba1b1b08;
+    --error-translucent-12: #ba1b1b0c;
 
     // Surface
     --surface: #fbfcff;
@@ -116,6 +124,14 @@
     --tertiary-blended-12: #d0b31d;
     --tertiary-translucent-08: #e4c52108;
     --tertiary-translucent-12: #e4c5210c;
+    
+    // Error
+    --error: #ffb4a9;
+    --on-error: #ffffff;
+    --error-container: #930006;
+    --on-error-container: #ffdad4;
+    --error-translucent-08: #ffb4a908;
+    --error-translucent-12: #ffb4a90c;
 
     // Surface
     --surface: #191c1e;

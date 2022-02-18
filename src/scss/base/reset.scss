@@ -241,3 +241,10 @@ video {
 [hidden] {
   display: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
