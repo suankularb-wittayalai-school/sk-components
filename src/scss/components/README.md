@@ -6,7 +6,7 @@
 ## Table of Contents
 
 - [General Components](#general-components)
-- [Input Components](input\README.md)
+- [Input Components](input/README.md)
 
 ## General Components
 
@@ -186,7 +186,7 @@ Although the Page Header comes with a default colour, it is intended to be paire
 ## สารบัญ
 
 - [Component ทั่วไป](#component-ทั่วไป)
-- [Component ที่รับข้อมูลจากผู้ใช้](input\README.md)
+- [Component ที่รับข้อมูลจากผู้ใช้](input/README.md)
 
 ## Component ทั่วไป
 

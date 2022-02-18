@@ -5,7 +5,7 @@
 
 ## Page Layout
 
-> Components mentioned: [Navigation](..\components\README.md#navigation), [Content Layout](#content-layouts)
+> Components mentioned: [Navigation](../components/README.md#navigation), [Content Layout](#content-layouts)
 
 ```html
 <body class="page-layout">
@@ -36,7 +36,7 @@
 
 ### Regular Layout
 
-> Components mentioned: [Card](..\components\README.md#card)
+> Components mentioned: [Card](../components/README.md#card)
 
 ```html
 <main class="content-layout">
@@ -48,7 +48,7 @@
 
 ### List Layout
 
-> Components mentioned: [Search](..\components\README.md#search), [Select List](..\components\input\README.md#select-list), [Card](..\components\README.md#card)
+> Components mentioned: [Search](../components/README.md#search), [Select List](../components/input/README.md#select-list), [Card](../components/README.md#card)
 
 ```html
 <main class="content-layout--list">
@@ -89,7 +89,7 @@
 
 ## Page Layout
 
-> code กล่าวถึง: [Navigation](..\components\README.md#navigation), [Content Layout](#content-layout)
+> code กล่าวถึง: [Navigation](../components/README.md#navigation), [Content Layout](#content-layout)
 
 ```html
 <body class="page-layout">
@@ -120,7 +120,7 @@
 
 ### Regular Layout
 
-> code กล่าวถึง: [Card](..\components\README.md#card)
+> code กล่าวถึง: [Card](../components/README.md#card)
 
 ```html
 <main class="content-layout">
@@ -132,7 +132,7 @@
 
 ### List Layout
 
-> code กล่าวถึง: [Search](..\components\README.md#search), [Select List](..\components\input\README.md#select-list), [Card](..\components\README.md#card)
+> code กล่าวถึง: [Search](../components/README.md#search), [Select List](../components/input/README.md#select-list), [Card](../components/README.md#card)
 
 ```html
 <main class="content-layout--list">
