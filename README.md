@@ -8,8 +8,8 @@ This repository is aimed at creating a consistent design system and experience a
 ## Table of contents
 
 - [Installation](#installation)
-- [Component List](src\scss\components\README.md)
-- [Layout List](src\scss\layouts\README.md)
+- [Component List](src/scss/components/README.md)
+- [Layout List](src/scss/layouts/README.md)
 
 ## Installation
 
@@ -44,8 +44,8 @@ Repository นี้มีไว้เพื่อเป็นเครื่อ
 ## สารบัญ
 
 - [การติดตั้ง](#การติดตั้ง)
-- [รายการ Component](src\scss\components\README.md)
-- [Layout List](src\scss\layouts\README.md)
+- [รายการ Component](src/scss/components/README.md)
+- [Layout List](src/scss/layouts/README.md)
 
 ## การติดตั้ง
 

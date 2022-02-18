@@ -12,10 +12,6 @@
   overflow: hidden;
   z-index: 80;
 
-  &__content {
-    padding: 1rem;
-  }
-
   &::before {
     content: "";
     position: absolute;
@@ -177,6 +173,11 @@
   flex-direction: row;
   align-items: center;
   gap: 0.75rem;
+  padding: 1rem;
+}
+
+.fab__icon {
+  display: flex;
 }
 
 .fab-group {
