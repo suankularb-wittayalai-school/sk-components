@@ -2,6 +2,11 @@
 @use "../components/Navigation" as cn;
 
 .content-layout {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.content-layout__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,19 +29,14 @@
   }
 }
 
-.content-layout__wrapper {
-  height: 100%;
-  overflow: auto;
-}
-
 @include b.breakpoint("sm") {
-  .content-layout {
+  .content-layout__content {
     padding: 2rem;
   }
 }
 
 @include b.breakpoint("md") {
-  .content-layout > * {
+  .content-layout__content > * {
     max-width: 70.5rem;
   }
 }
