@@ -11,10 +11,10 @@
   min-height: 100%;
   color: var(--on-background);
   background-color: var(--background);
+  padding: 1rem;
 
   > * {
     width: 100%;
-    max-width: 40rem;
   }
 }
 
@@ -26,10 +26,11 @@
 @include b.breakpoint("sm") {
   .content-layout {
     padding: 2rem;
+  }
+}
 
-    > * {
-      width: clamp(40rem, 60vw, 80rem);
-      max-width: none;
-    }
+@include b.breakpoint("md") {
+  .content-layout > * {
+    max-width: 70.5rem;
   }
 }

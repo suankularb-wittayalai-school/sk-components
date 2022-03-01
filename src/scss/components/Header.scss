@@ -43,6 +43,10 @@
   max-width: 70.5rem;
 }
 
+.header__text {
+  color: var(--on-primary-container);
+}
+
 @include b.breakpoint("sm") {
   .header {
     gap: 1rem;
