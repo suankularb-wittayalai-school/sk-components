@@ -1,3 +1,6 @@
+// Imports
+@use "../utils/max-lines.scss" as um;
+
 // Base
 .card {
   font-size: var(--text-base);
@@ -71,6 +74,10 @@
 
   .card__header__text {
     flex-grow: 1;
+
+    > * {
+      @extend .max-lines-1;
+    }
   }
 }
 

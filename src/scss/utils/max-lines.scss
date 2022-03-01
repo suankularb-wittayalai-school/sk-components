@@ -1,0 +1,22 @@
+.max-lines-base {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+.max-lines-1 {
+  @extend .max-lines-base;
+  -webkit-line-clamp: 1;
+}
+
+.max-lines-2 {
+  @extend .max-lines-base;
+  -webkit-line-clamp: 2;
+}
+
+.max-lines-5 {
+  @extend .max-lines-base;
+  -webkit-line-clamp: 5;
+}
