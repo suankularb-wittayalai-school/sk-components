@@ -95,11 +95,11 @@
   display: flex;
 
   &:hover {
-    background-color: var(--primary-blended-08);
+    background-color: var(--on-primary-translucent-08);
   }
 
   &:focus {
-    background-color: var(--primary-blended-12);
+    background-color: var(--on-primary-translucent-12);
   }
 }
 
