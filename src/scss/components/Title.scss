@@ -1,6 +1,6 @@
 @use "../abstracts/breakpoints" as b;
 
-.header {
+.title {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -11,15 +11,15 @@
   z-index: 1;
 
   &--custom-color {
-    @extend .header;
+    @extend .title;
     background-color: var(--primary);
 
-    .header__text {
+    .title__text {
       color: var(--white);
       text-shadow: var(--text-shadow);
     }
 
-    .header__icons__back {
+    .title__icons__back {
       color: var(--white);
       text-shadow: var(--text-shadow);
 
@@ -34,7 +34,7 @@
   }
 }
 
-.header__content {
+.title__content {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,12 +43,12 @@
   max-width: 70.5rem;
 }
 
-.header__text {
+.title__text {
   color: var(--on-primary-container);
 }
 
 @include b.breakpoint("sm") {
-  .header {
+  .title {
     gap: 1rem;
     padding: 1rem 2rem;
     line-height: 1.5;
@@ -57,19 +57,19 @@
 }
 
 @include b.breakpoint("sm") {
-  .header--custom-color {
-    .header__icons {
+  .title--custom-color {
+    .title__icons {
       color: var(--primary);
       background: var(--white);
     }
 
-    .header__icons__back {
+    .title__icons__back {
       color: var(--primary);
       text-shadow: none;
     }
   }
 
-  .header__icons {
+  .title__icons {
     display: flex;
     flex-direction: row;
     color: var(--on-primary);
@@ -91,7 +91,7 @@
   }
 }
 
-.header__icons__back {
+.title__icons__back {
   display: flex;
 
   &:hover {
@@ -104,23 +104,23 @@
 }
 
 @include b.breakpoint("sm") {
-  .header__icons__back {
+  .title__icons__back {
     color: inherit;
     text-shadow: none;
   }
 }
 
-.header__icons__page {
+.title__icons__page {
   display: none;
 }
 
 @include b.breakpoint("sm") {
-  .header__icons__page {
+  .title__icons__page {
     display: flex;
   }
 }
 
-.header__text {
+.title__text {
   font-size: var(--text-4xl);
   font-weight: var(--font-bold);
   font-family: var(--font-display);
@@ -132,7 +132,7 @@
 }
 
 @include b.breakpoint("sm") {
-  .header__text > p {
+  .title__text > p {
     display: block;
   }
 }
