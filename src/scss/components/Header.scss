@@ -3,13 +3,44 @@
 .header {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
   padding: 1rem;
   line-height: 1.25;
-  background-color: var(--primary);
   box-shadow: var(--shadow-1);
+  background-color: var(--primary-container);
   z-index: 1;
+
+  &--custom-color {
+    @extend .header;
+    background-color: var(--primary);
+
+    .header__text {
+      color: var(--white);
+      text-shadow: var(--text-shadow);
+    }
+
+    .header__icons__back {
+      color: var(--white);
+      text-shadow: var(--text-shadow);
+
+      &:hover {
+        background-color: var(--primary-translucent-08);
+      }
+
+      &:focus {
+        background-color: var(--primary-translucent-12);
+      }
+    }
+  }
+}
+
+.header__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 70.5rem;
 }
 
 @include b.breakpoint("sm") {
@@ -22,12 +53,25 @@
 }
 
 @include b.breakpoint("sm") {
+  .header--custom-color {
+    .header__icons {
+      color: var(--primary);
+      background: var(--white);
+    }
+
+    .header__icons__back {
+      color: var(--primary);
+      text-shadow: none;
+    }
+  }
+
   .header__icons {
     display: flex;
     flex-direction: row;
-    color: var(--primary);
-    background: var(--white);
+    color: var(--on-primary);
+    background-color: var(--primary);
     border-radius: 9999px;
+    overflow: hidden;
 
     > * {
       padding: 0.75rem;
@@ -45,15 +89,13 @@
 
 .header__icons__back {
   display: flex;
-  color: var(--white);
-  text-shadow: var(--text-shadow);
 
   &:hover {
-    background-color: var(--primary-translucent-08);
+    background-color: var(--primary-blended-08);
   }
 
   &:focus {
-    background-color: var(--primary-translucent-12);
+    background-color: var(--primary-blended-12);
   }
 }
 
@@ -75,11 +117,9 @@
 }
 
 .header__text {
-  color: var(--white);
   font-size: var(--text-4xl);
   font-weight: var(--font-bold);
   font-family: var(--font-display);
-  text-shadow: var(--text-shadow);
   height: fit-content;
 
   > p {
