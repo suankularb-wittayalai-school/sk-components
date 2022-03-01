@@ -1,5 +1,5 @@
-// Overlay
-.overlay {
+// Positioning Overlay and Dialog
+.dialog__wrapper {
   position: absolute;
   top: 0;
   display: grid;
@@ -7,7 +7,6 @@
   padding: 1rem;
   width: 100vw;
   height: 100vh;
-  background-color: #00000050;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--animation-speed) var(--animation-timing);
@@ -18,7 +17,20 @@
   }
 }
 
-.overlay.show {
+// Overlay
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000050;
+}
+
+.dialog__wrapper.show {
+  .overlay {
+    opacity: 1;
+  }
+
   .dialog {
     opacity: 1;
     transform: scale(100%);
@@ -33,6 +45,7 @@
   width: clamp(17.5rem, 20vw, 35rem);
   max-height: calc(100vh - 2rem);
   font-size: var(--text-base);
+  color: var(--on-surface-variant);
   background-color: var(--surface-3);
   border-radius: var(--rounded-2xl);
   opacity: 0;
@@ -61,6 +74,7 @@
   h6 {
     font-size: var(--text-2xl);
     font-family: var(--font-display);
+    color: var(--on-surface);
   }
 }
 
