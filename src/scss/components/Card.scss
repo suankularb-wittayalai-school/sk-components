@@ -26,6 +26,7 @@
 .card--has-action {
   position: relative;
   outline: none;
+  transition: box-shadow var(--animation-speed) var(--animation-timing);
 
   &::before {
     content: "";
@@ -37,11 +38,23 @@
     transition: background-color var(--animation-speed) var(--animation-timing);
   }
 
-  &:hover::before {
-    background-color: var(--primary-translucent-08);
+  &:hover {
+    box-shadow: var(--shadow-1);
+
+    &::before {
+      background-color: var(--primary-translucent-08);
+    }
   }
 
-  &:active::before,
+  &:active {
+    box-shadow: none;
+    transition: none;
+
+    &::before {
+      background-color: var(--primary-translucent-12);
+    }
+  }
+  
   &:focus::before {
     background-color: var(--primary-translucent-12);
   }
