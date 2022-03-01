@@ -23,6 +23,30 @@
   background-color: var(--surface-variant);
 }
 
+.card--has-action {
+  position: relative;
+  outline: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background-color var(--animation-speed) var(--animation-timing);
+  }
+
+  &:hover::before {
+    background-color: var(--primary-translucent-08);
+  }
+
+  &:active::before,
+  &:focus::before {
+    background-color: var(--primary-translucent-12);
+  }
+}
+
 // Elements in common
 .card__header {
   display: flex;

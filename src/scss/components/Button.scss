@@ -71,7 +71,7 @@
   &:hover {
     box-shadow: var(--shadow-1);
 
-    ::before {
+    &::before {
       background-color: var(--secondary-translucent-08);
     }
   }
