@@ -41,6 +41,13 @@
   }
 }
 
+// Tonal btton
+.btn--tonal {
+  @extend .btn;
+  color: var(--on-secondary-container);
+  background-color: var(--secondary-container);
+}
+
 // Outlined button
 .btn--outlined {
   @extend .btn;
