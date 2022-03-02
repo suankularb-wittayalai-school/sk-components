@@ -1,0 +1,13 @@
+@mixin scroll-w($width: 0) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+}
+
+.scroll-w-0::-webkit-scrollbar {
+  width: 0;
+}
+
+.scroll-w-1::-webkit-scrollbar {
+  width: 0.25rem;
+}

@@ -2,34 +2,41 @@
 @use "../components/Navigation" as cn;
 
 .content-layout {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.content-layout__content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem 1rem 6.375rem;
+  gap: 2rem;
+  padding: 2rem;
   height: fit-content;
   min-height: 100%;
   color: var(--on-background);
   background-color: var(--background);
+  padding: 1rem;
 
   > * {
     width: 100%;
-    max-width: 40rem;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }
 
-.content-layout__wrapper {
-  height: 100%;
-  overflow: auto;
+@include b.breakpoint("sm") {
+  .content-layout__content {
+    padding: 2rem;
+  }
 }
 
-@include b.breakpoint("sm") {
-  .content-layout {
-    padding: 2rem;
-
-    > * {
-      width: clamp(40rem, 60vw, 80rem);
-      max-width: none;
-    }
+@include b.breakpoint("md") {
+  .content-layout__content > * {
+    max-width: 70.5rem;
   }
 }

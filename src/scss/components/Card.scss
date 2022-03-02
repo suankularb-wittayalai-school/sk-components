@@ -1,7 +1,11 @@
+// Imports
+@use "../utils/max-lines.scss" as um;
+
 // Base
 .card {
   font-size: var(--text-base);
   border-radius: var(--rounded-lg);
+  overflow: hidden;
 }
 
 // Card modifiers
@@ -22,88 +26,102 @@
   background-color: var(--surface-variant);
 }
 
-// Card elements
-.card__icon {
-  font-size: var(--text-3xl);
-  color: var(--primary);
+.card--has-action {
+  position: relative;
+  outline: none;
+  transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background-color var(--animation-speed) var(--animation-timing);
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-1);
+
+    &::before {
+      background-color: var(--primary-translucent-08);
+    }
+  }
+
+  &:active {
+    box-shadow: none;
+    transition: none;
+
+    &::before {
+      background-color: var(--primary-translucent-12);
+    }
+  }
+  
+  &:focus::before {
+    background-color: var(--primary-translucent-12);
+  }
 }
 
+// Elements in common
 .card__header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1rem 0.5rem;
-  font-size: var(--text-3xl);
-
-  .card__header__icon {
-    @extend .card__icon;
-  }
+  gap: 1rem;
+  width: 100%;
+  padding: 0.75rem;
 
   .card__header__text {
-    font-weight: var(--font-bold);
-    font-family: var(--font-display);
+    flex-grow: 1;
+
+    > * {
+      @extend .max-lines-1;
+    }
   }
 }
 
-.card__body {
-  padding: 1rem 2rem;
+.card__icon {
+  display: flex;
+  color: var(--primary);
+  font-size: var(--text-3xl);
 }
 
-.card__list {
-  @extend .card__body;
+.card__media {
+  background-color: var(--surface-variant);
+}
+
+// Stacked Card
+.card--stacked {
+  @extend .card;
   display: flex;
   flex-direction: column;
+
+  .card__supporting-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .card__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
 }
 
-.card__list__item {
+// Horizontal Card
+.card--horizontal {
   @extend .card;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
-  font-family: var(--font-sans);
-  background-color: transparent;
-  transition: background-color var(--animation-speed) var(--animation-timing);
 
-  &:hover,
-  &:focus,
-  &:focus-within {
-    .card__item__actions {
-      visibility: visible;
-    }
-  }
-
-  &:hover {
-    background-color: var(--primary-translucent-08);
-    transition: none;
-  }
-
-  &:focus,
-  &:focus-within {
-    background-color: var(--primary-translucent-12);
-    transition: background-color var(--animation-speed) var(--animation-timing);
-  }
-
-  .card__item__content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .card__item__actions {
-    visibility: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.125rem;
-  }
-
-  .card__item__icon {
-    @extend .card__icon;
-    width: 1.5rem;
-    height: 1.5rem;
+  .card__media {
+    height: 5rem;
+    aspect-ratio: 1 / 1;
   }
 }

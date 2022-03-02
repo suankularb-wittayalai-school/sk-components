@@ -4,10 +4,17 @@
   position: fixed;
   bottom: 0;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   width: 100%;
   background-color: var(--surface-1);
   z-index: 80;
+}
+
+.nav__content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 70.5rem;
 }
 
 .nav__item {
@@ -50,9 +57,12 @@
   .nav {
     position: static;
     height: fit-content;
-    justify-content: flex-end;
-    padding: 0 3.625rem;
+    padding: 0 1rem;
     background-color: var(--surface-1);
+  }
+
+  .nav__content {
+    justify-content: flex-end;
   }
 
   .nav__item {
@@ -90,5 +100,11 @@
   .nav__item__icon {
     padding: 0;
     color: var(--secondary);
+  }
+}
+
+@include b.breakpoint("md") {
+  .nav {
+    padding: 0 2rem;
   }
 }
