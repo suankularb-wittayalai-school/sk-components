@@ -1,3 +1,6 @@
+@use "../abstracts/breakpoints.scss" as b;
+@use "../utils/scrollbar.scss" as us;
+
 // Positioning Overlay and Dialog
 .dialog__wrapper {
   position: absolute;
@@ -31,7 +34,8 @@
     opacity: 1;
   }
 
-  .dialog {
+  .dialog,
+  .dialog--large {
     opacity: 1;
     transform: scale(100%);
   }
@@ -73,9 +77,14 @@
   h5,
   h6 {
     font-size: var(--text-2xl);
+    font-weight: var(--font-medium);
     font-family: var(--font-display);
     color: var(--on-surface);
   }
+}
+
+.dialog__top-app-bar button {
+  display: none;
 }
 
 .dialog__hero {
@@ -87,6 +96,31 @@
 
   .dialog__hero__icon {
     color: var(--secondary);
+  }
+}
+
+.dialog__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1.5rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-medium);
+    font-family: var(--font-display);
+  }
+
+  .dialog__columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 1.5rem;
   }
 }
 
@@ -121,4 +155,98 @@
   justify-content: flex-end;
   gap: 0.5rem;
   padding: 1.5rem;
+}
+
+// Large Dialog
+// Turns into Fullscreen Dialog below the “sm” breakpoint
+
+// Fullscreen Dialog
+.dialog--large {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  border-radius: var(--rounded-3xl);
+  opacity: 0;
+  transform: scale(80%);
+  transition: opacity var(--animation-speed) var(--animation-timing),
+    border-radius var(--animation-speed) var(--animation-timing),
+    transform var(--animation-speed) var(--animation-timing);
+  background-color: var(--surface);
+  overflow: hidden auto;
+
+  .dialog__header,
+  .dialog__hero,
+  .dialog__section,
+  .dialog__list {
+    padding: 1rem;
+  }
+
+  // Remove the bottom actions
+  // There can only be one action in a Fullscreen Dialog,
+  // and it must be in the top app bar
+  .dialog__actions {
+    display: none;
+  }
+
+  .dialog__top-app-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .dialog__top-app-bar__close {
+      width: 2.5rem;
+      aspect-ratio: 1 / 1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      flex-grow: 1;
+    }
+  }
+}
+
+.show .dialog--large {
+  border-radius: 0;
+}
+
+// Above the “sm” breakpoint, a Fullscreen Dialog turns
+// into a Large Dialog
+@include b.breakpoint("sm") {
+  .dialog--large {
+    @include us.scroll-w(0);
+    width: 35rem;
+    height: fit-content;
+    max-height: calc(100vh - 2rem);
+    font-size: var(--text-base);
+    color: var(--on-surface-variant);
+    background-color: var(--surface-3);
+
+    // Resets changes made by the Fullscreen Dialog
+
+    .dialog__header,
+    .dialog__hero,
+    .dialog__section,
+    .dialog__list {
+      padding: 1.5rem;
+    }
+
+    .dialog__actions {
+      display: flex;
+    }
+
+    .dialog__top-app-bar button {
+      display: none;
+    }
+  }
+
+  .show .dialog--large {
+    border-radius: var(--rounded-2xl);
+  }
 }
