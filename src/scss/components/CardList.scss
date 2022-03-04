@@ -1,27 +1,44 @@
 @use "Card";
 
-.select-list {
+.card-list {
+  display: flex;
+  flex-direction: column;
+}
+
+// Search section
+.card-list__search {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 2.25rem 0.5rem 1rem;
+}
+
+// List section
+.card-list__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0.5rem 0.5rem;
 
   &--no-group {
-    @extend .select-list__items;
+    @extend .card-list__items;
   }
 }
 
-.select-list__group {
-  @extend .select-list;
+// List Group
+.card-list__group {
+  @extend .card-list__list;
+  padding: 0;
 }
 
-.select-list__items {
+.card-list__items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 0.5rem;
   font-size: var(--text-base);
 }
 
-.select-list__header {
+.card-list__header {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +47,7 @@
   font-family: var(--font-display);
 }
 
-.select-list__item {
+.card-list__item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -40,7 +57,7 @@
   border-radius: var(--rounded-lg);
 
   &--inactive {
-    @extend .select-list__item;
+    @extend .card-list__item;
     color: var(--on-surface);
     background-color: var(--surface-1);
     transition: background-color var(--animation-speed) var(--animation-timing);
@@ -53,7 +70,7 @@
   }
 
   &--active {
-    @extend .select-list__item;
+    @extend .card-list__item;
     color: var(--on-secondary-container);
     background-color: var(--secondary-container);
     box-shadow: var(--shadow-1);

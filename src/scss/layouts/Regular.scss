@@ -3,40 +3,39 @@
 
 .content-layout {
   flex-grow: 1;
-  overflow: auto;
-}
-
-.content-layout__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  height: fit-content;
-  min-height: 100%;
   color: var(--on-background);
   background-color: var(--background);
-  padding: 1rem;
+  overflow: auto;
 
-  > * {
-    width: 100%;
-  }
-
-  .section {
+  > &__content {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 2rem;
+    height: fit-content;
+    min-height: 100%;
+    padding: 1rem;
+
+    > * {
+      width: 100%;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
   }
 }
 
 @include b.breakpoint("sm") {
-  .content-layout__content {
+  .content-layout > .content-layout__content {
     padding: 2rem;
   }
 }
 
 @include b.breakpoint("md") {
-  .content-layout__content > * {
+  .content-layout > .content-layout__content > * {
     max-width: 70.5rem;
   }
 }
