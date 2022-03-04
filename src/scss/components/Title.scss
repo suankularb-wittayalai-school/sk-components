@@ -93,6 +93,7 @@
 
 .title__icons__back {
   display: flex;
+  outline: none;
 
   &:hover {
     background-color: var(--on-primary-translucent-08);
