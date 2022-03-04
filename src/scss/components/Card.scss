@@ -28,7 +28,6 @@
 
 .card--has-action {
   position: relative;
-  outline: none;
   transition: box-shadow var(--animation-speed) var(--animation-timing);
 
   &::before {
@@ -57,9 +56,13 @@
       background-color: var(--primary-translucent-12);
     }
   }
-  
-  &:focus::before {
-    background-color: var(--primary-translucent-12);
+
+  &:focus {
+    outline: none;
+    
+    &::before {
+      background-color: var(--primary-translucent-12);
+    }
   }
 }
 
