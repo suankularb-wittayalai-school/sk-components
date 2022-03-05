@@ -16,10 +16,14 @@
     gap: 2rem;
     height: fit-content;
     min-height: 100%;
-    padding: 1rem;
+    padding: 1rem 0;
 
     > * {
       width: 100%;
+
+      > * {
+        padding: 0 1rem;
+      }
     }
 
     .section {
@@ -38,8 +42,14 @@
 
 @include b.breakpoint("sm") {
   .content-layout {
+    padding: 0;
+
     > .content-layout__content {
       padding: 2rem;
+
+      > * > * {
+        padding: 0;
+      }
     }
 
     .layout-grid__wrapper {
