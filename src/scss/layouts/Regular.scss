@@ -1,11 +1,13 @@
 @use "../abstracts/breakpoints" as b;
 @use "../components/Navigation" as cn;
+@use "../utils/scrollbar.scss" as us;
 
 .content-layout {
   flex-grow: 1;
   color: var(--on-background);
   background-color: var(--background);
   overflow: auto;
+  padding: 0 0 5.375rem;
 
   > .content-layout__content {
     display: flex;
@@ -26,11 +28,23 @@
       gap: 0.75rem;
     }
   }
+
+  .layout-grid__wrapper {
+    @include us.scroll-w(0);
+    overflow-x: auto;
+    width: 100%;
+  }
 }
 
 @include b.breakpoint("sm") {
-  .content-layout > .content-layout__content {
-    padding: 2rem;
+  .content-layout {
+    > .content-layout__content {
+      padding: 2rem;
+    }
+
+    .layout-grid__wrapper {
+      overflow-x: initial;
+    }
   }
 }
 

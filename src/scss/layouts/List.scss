@@ -1,5 +1,6 @@
 @use "../abstracts/breakpoints" as b;
 @use "./Regular.scss" as lr;
+@use "../utils/scrollbar.scss" as us;
 
 .content-layout--list {
   display: flex;
@@ -10,28 +11,49 @@
   background-color: var(--background);
 
   > .content-layout__content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
     width: 100%;
-    max-width: 70.5rem;
+    max-width: 71.5rem;
     height: 100%;
   }
 }
 
-.content-layout__main {
-  height: calc(100vh - 9.5rem);
-  overflow: auto;
+.content-layout__main-section {
+  display: none;
+}
 
-  > .content-layout__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    height: fit-content;
-    padding: 2.25rem 0.5rem;
+.content-layout__list-section {
+  height: 100%;
+}
 
-    > * {
-      width: 100%;
+@include b.breakpoint("sm") {
+  .content-layout--list > .content-layout__content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .content-layout__main-section {
+    @include us.scroll-w(0);
+    display: block;
+    height: calc(100vh - 9.5rem);
+    overflow: auto;
+
+    > .content-layout__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      height: fit-content;
+      padding: 2.25rem 0.5rem 1rem;
+
+      > * {
+        width: 100%;
+      }
     }
+  }
+}
+
+@include b.breakpoint("sm") {
+  .content-layout--list {
+    padding: 0 1.5rem;
   }
 }
