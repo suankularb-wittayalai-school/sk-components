@@ -10,6 +10,7 @@
   font-family: var(--font-display);
   border-radius: 9999px;
   overflow: hidden;
+  outline: none;
   transition: box-shadow var(--animation-speed) var(--animation-timing);
 
   &::before {

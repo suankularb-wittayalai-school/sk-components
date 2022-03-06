@@ -1,0 +1,75 @@
+@mixin has-action($color: "primary") {
+  @if ($color == "primary") {
+    @extend .has-action--primary;
+  } @else if($color == "secondary") {
+    @extend .has-action--secondary;
+  } @else if($color == "tertiary") {
+    @extend .has-action--tertiary;
+  }
+}
+
+.has-action {
+  position: relative;
+  transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: background-color var(--animation-speed) var(--animation-timing);
+  }
+
+  &:hover::before {
+    background-color: var(--primary-translucent-08);
+  }
+
+  &:active {
+    transition: none;
+
+    &::before {
+      background-color: var(--primary-translucent-12);
+    }
+  }
+
+  &:focus {
+    outline: none;
+
+    &::before {
+      background-color: var(--primary-translucent-12);
+    }
+  }
+}
+
+.has-action--primary {
+  @extend .has-action;
+}
+
+.has-action--secondary {
+  @extend .has-action;
+
+  &:hover::before {
+    background-color: var(--secondary-translucent-08);
+  }
+
+  &:active::before,
+  &:focus::before {
+    background-color: var(--secondary-translucent-12);
+  }
+}
+
+.has-action--tertiary {
+  @extend .has-action;
+
+  &:hover::before {
+    background-color: var(--tertiary-translucent-08);
+  }
+
+  &:active::before,
+  &:focus::before {
+    background-color: var(--tertiary-translucent-12);
+  }
+}

@@ -1,0 +1,52 @@
+@use "../abstracts/breakpoints.scss" as b;
+
+.layout-grid-cols-3 {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.25rem 0;
+
+  > * {
+    width: 20rem
+  }
+
+  &--header {
+    @extend .layout-grid-cols-3;
+    flex-direction: column;
+    width: 100%;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
+
+@include b.breakpoint("sm") {
+  .layout-grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+
+    > * {
+      width: initial;
+    }
+
+    &--header {
+      grid-template-areas: "header search"
+    }
+  }
+}
+
+@include b.breakpoint("md") {
+  .layout-grid-cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    &--header {
+      grid-template-areas: "header header search"
+    }
+  }
+}

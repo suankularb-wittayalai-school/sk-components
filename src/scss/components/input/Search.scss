@@ -1,4 +1,7 @@
+@use "../../utils/has-action.scss" as uh;
+
 .search {
+  @include uh.has-action("primary");
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -6,27 +9,15 @@
   border-radius: 9999px;
   overflow: hidden;
 
-  &:focus-within {
-    background-color: var(--surface-2);
+  &:focus-within::before {
+    background-color: var(--primary-translucent-12);
   }
 
   button {
+    @include uh.has-action("primary");
     display: grid;
     place-items: center;
     height: 100%;
-    outline: none;
-    transition: background-color var(--animation-speed) var(--animation-timing);
-
-    &:hover {
-      transition: none;
-      background-color: var(--primary-translucent-08);
-    }
-
-    &:focus-visible,
-    &:active {
-      transition: none;
-      background-color: var(--primary-translucent-12);
-    }
 
     &:first-child {
       padding: 1rem 0.5rem 1rem 1rem;

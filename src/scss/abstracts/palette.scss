@@ -1,3 +1,4 @@
+// Miscellaneous configurations
 :root {
   // Static colours
   --white: #ffffff;
@@ -31,8 +32,10 @@
   --animation-speed: 150ms;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
+// Palette configurations
+@mixin palette($type: "light") {
+  // Light mode
+  @if ($type == "light") {
     // Primary
     --primary: #00658f;
     --primary-translucent-08: #00658f08;
@@ -62,7 +65,7 @@
     --on-tertiary-translucent-12: #ffffff0c;
     --tertiary-container: #ffe24c;
     --on-tertiary-container: #221b00;
-    
+
     // Error
     --error: #ba1b1b;
     --on-error: #ffffff;
@@ -91,10 +94,9 @@
     // Outline
     --outline: #73777f;
   }
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
+  // Dark mode
+  @else if ($type == "dark") {
     // Primary
     --primary: #80cfff;
     --primary-translucent-08: #80cfff08;
@@ -124,7 +126,7 @@
     --tertiary-blended-12: #d0b31d;
     --tertiary-translucent-08: #e4c52108;
     --tertiary-translucent-12: #e4c5210c;
-    
+
     // Error
     --error: #ffb4a9;
     --on-error: #680003;
@@ -153,4 +155,26 @@
     // Outline
     --outline: #8b9197;
   }
+}
+
+// Browser preferences support
+@media (prefers-color-scheme: light) {
+  :root {
+    @include palette("light");
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include palette("dark");
+  }
+}
+
+// Manual class support
+.light {
+  @include palette("light");
+}
+
+.dark {
+  @include palette("dark");
 }

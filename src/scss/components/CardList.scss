@@ -1,0 +1,85 @@
+@use "../abstracts/breakpoints.scss" as b;
+@use "./Card.scss" as cc;
+@use "../utils/scrollbar.scss" as us;
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 9.5625rem);
+}
+
+// Search section
+.card-list__search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1rem 0.5rem;
+}
+
+// List section
+.card-list__list {
+  @include us.scroll-w(0);
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.card-list__list-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0.5rem 0.5rem;
+
+  &--no-group {
+    @extend .card-list__items;
+  }
+}
+
+// List Group
+.card-list__group {
+  @extend .card-list__list-content;
+}
+
+.card-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: var(--text-base);
+}
+
+.card-list__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  font-family: var(--font-display);
+}
+
+.card-list__item {
+  @extend .card;
+  @extend .card--tonal;
+  color: var(--on-surface);
+  background-color: var(--surface-2);
+
+  &.active {
+    color: var(--on-secondary-container);
+    background-color: var(--secondary-container);
+    box-shadow: var(--shadow-1);
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+    &:hover,
+    &:focus {
+      box-shadow: var(--shadow-2);
+    }
+  }
+}
+
+@include b.breakpoint("sm") {
+  .card-list__search {
+    padding: 2.25rem 0.5rem 1rem;
+  }
+
+  .card-list__list-content {
+    padding: 0 0.5rem 0.5rem;
+  }
+}
