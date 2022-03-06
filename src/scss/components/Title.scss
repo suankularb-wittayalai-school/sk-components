@@ -1,5 +1,6 @@
 @use "../abstracts/breakpoints" as b;
 
+// Title default styling
 .title {
   display: flex;
   flex-direction: row;
@@ -7,9 +8,11 @@
   padding: 1rem;
   line-height: 1.25;
   box-shadow: var(--shadow-1);
-  background-color: var(--primary-container);
+  background-color: var(--surface-3);
   z-index: 1;
 
+  // Allows custom color on Title
+  // Basically makes the text pop on any background
   &--custom-color {
     @extend .title;
     background-color: var(--primary);
@@ -34,10 +37,6 @@
   }
 }
 
-.title__icons {
-  border-radius: 9999px;
-}
-
 .title__content {
   display: flex;
   flex-direction: row;
@@ -47,20 +46,44 @@
   max-width: 70.5rem;
 }
 
-.title__text,
-.title__icons__back {
+// Icons
+.title__icons {
+  border-radius: 9999px;
+}
+
+%title-icon {
   color: var(--on-primary-container);
 }
 
+.title__text {
+  @extend %title-icon;
+  font-size: var(--text-2xl);
+  font-weight: var(--font-medium);
+}
+
+.title__icons__back {
+  @extend %title-icon;
+  display: flex;
+  outline: none;
+
+  &:hover {
+    background-color: var(--on-primary-translucent-08);
+  }
+
+  &:focus {
+    background-color: var(--on-primary-translucent-12);
+  }
+}
+
+// Desktop
 @include b.breakpoint("sm") {
   .title {
     gap: 1rem;
     padding: 1rem 2rem;
     line-height: 1.5;
+    background-color: var(--primary-container);
   }
-}
 
-@include b.breakpoint("sm") {
   .title--custom-color {
     .title__icons {
       color: var(--primary);
@@ -92,22 +115,7 @@
       }
     }
   }
-}
 
-.title__icons__back {
-  display: flex;
-  outline: none;
-
-  &:hover {
-    background-color: var(--on-primary-translucent-08);
-  }
-
-  &:focus {
-    background-color: var(--on-primary-translucent-12);
-  }
-}
-
-@include b.breakpoint("sm") {
   .title__icons__back {
     color: inherit;
     text-shadow: none;
@@ -125,8 +133,6 @@
 }
 
 .title__text {
-  font-size: var(--text-4xl);
-  font-weight: var(--font-bold);
   font-family: var(--font-display);
   height: fit-content;
 
@@ -136,7 +142,12 @@
 }
 
 @include b.breakpoint("sm") {
-  .title__text > p {
-    display: block;
+  .title__text {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+
+    > p {
+      display: block;
+    }
   }
 }
