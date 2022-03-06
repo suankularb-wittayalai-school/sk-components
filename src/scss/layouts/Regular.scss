@@ -1,42 +1,65 @@
 @use "../abstracts/breakpoints" as b;
 @use "../components/Navigation" as cn;
+@use "../utils/scrollbar.scss" as us;
 
 .content-layout {
   flex-grow: 1;
-  overflow: auto;
-}
-
-.content-layout__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  height: fit-content;
-  min-height: 100%;
   color: var(--on-background);
   background-color: var(--background);
-  padding: 1rem;
+  overflow: auto;
+  padding: 0 0 5.375rem;
 
-  > * {
-    width: 100%;
-  }
-
-  .section {
+  > .content-layout__content {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 2rem;
+    height: fit-content;
+    min-height: 100%;
+    padding: 1rem 0;
+
+    > * {
+      width: 100%;
+
+      > * {
+        padding: 0 1rem;
+      }
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  .layout-grid__wrapper {
+    @include us.scroll-w(0);
+    overflow-x: auto;
+    width: 100%;
   }
 }
 
 @include b.breakpoint("sm") {
-  .content-layout__content {
-    padding: 2rem;
+  .content-layout {
+    padding: 0;
+
+    > .content-layout__content {
+      padding: 2rem;
+
+      > * > * {
+        padding: 0;
+      }
+    }
+
+    .layout-grid__wrapper {
+      overflow-x: initial;
+    }
   }
 }
 
 @include b.breakpoint("md") {
-  .content-layout__content > * {
+  .content-layout > .content-layout__content > * {
     max-width: 70.5rem;
   }
 }

@@ -1,64 +1,59 @@
 @use "../abstracts/breakpoints" as b;
+@use "./Regular.scss" as lr;
+@use "../utils/scrollbar.scss" as us;
 
 .content-layout--list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
   color: var(--on-background);
   background-color: var(--background);
-}
 
-@include b.breakpoint("sm") {
-  .content-layout--list {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    grid-template-areas: "list main";
+  > .content-layout__content {
+    width: 100%;
+    max-width: 71.5rem;
+    height: 100%;
   }
 }
 
-@include b.breakpoint("lg") {
-  .content-layout--list {
-    display: grid;
-    grid-template-columns: 1fr 2fr 3fr 1fr;
-    grid-template-areas: "padding-left list main padding-right";
-  }
-}
-
-.content-layout--list__list {
-  grid-area: list;
-  height: calc(100vh - 12rem);
-  overflow: auto;
-
-  &__search {
-    padding: 1rem 1rem 0.5rem;
-  }
-
-  &__list {
-    padding: 0.5rem 1rem 1rem;
-  }
-}
-
-@include b.breakpoint("sm") {
-  .content-layout--list__list {
-    &__search {
-      padding: 2rem 1rem 0.25rem 2rem;
-    }
-
-    &__list {
-      display: flex;
-      flex-direction: column;
-      padding: 0.25rem 1rem 1rem 2rem;
-    }
-  }
-}
-
-.content-layout--list__main {
+.content-layout__main-section {
   display: none;
 }
 
+.content-layout__list-section {
+  height: 100%;
+}
+
 @include b.breakpoint("sm") {
-  .content-layout--list__main {
-    grid-area: main;
+  .content-layout--list > .content-layout__content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .content-layout__main-section {
+    @include us.scroll-w(0);
     display: block;
-    padding: 2rem 2rem 2rem 1rem;
-    height: calc(100vh - 16rem);
+    height: calc(100vh - 9.5rem);
     overflow: auto;
+
+    > .content-layout__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      height: fit-content;
+      padding: 2.25rem 0.5rem 1rem;
+
+      > * {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include b.breakpoint("sm") {
+  .content-layout--list {
+    padding: 0 1.5rem;
   }
 }
