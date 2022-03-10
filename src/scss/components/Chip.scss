@@ -12,6 +12,7 @@
   border-radius: var(--rounded);
   outline: 2px solid var(--outline);
   outline-offset: -2px;
+  transition: outline-color var(--animation-speed) var(--animation-timing);
 
   // State layer
   &::before {
@@ -20,9 +21,10 @@
 
   // States
   &:focus {
-    outline: 2px solid var(--outline);
+    outline: 2px solid var(--on-surface-variant);
+    transition: outline-color var(--animation-speed) var(--animation-timing);
   }
-  
+
   &:hover::before {
     background-color: var(--on-surface-translucent-08);
   }
