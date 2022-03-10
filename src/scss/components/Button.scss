@@ -97,7 +97,8 @@
   @extend .btn;
   color: var(--primary);
   background-color: var(--surface);
-  border: 2px solid var(--outline);
+  outline: 2px solid var(--outline);
+  outline-offset: -2px;
   transition: border var(--animation-speed) var(--animation-timing);
 
   &:hover::before {
