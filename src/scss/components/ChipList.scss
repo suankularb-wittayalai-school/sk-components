@@ -7,6 +7,11 @@
   &--no-wrap {
     @extend .chip-list;
     flex-wrap: nowrap;
+    width: max-content;
+
+    .chip-list--radio {
+      @extend .chip-list--no-wrap;
+    }
   }
 }
 
