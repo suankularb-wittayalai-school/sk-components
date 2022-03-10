@@ -1,13 +1,11 @@
 // Base
 .btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
+  display: block;
   position: relative;
-  padding: 0.5rem 1.5rem;
+  padding: 0.625rem 1.5rem;
   font-weight: var(--font-medium);
   font-family: var(--font-display);
+  text-align: center;
   border-radius: 9999px;
   overflow: hidden;
   outline: none;
@@ -35,12 +33,21 @@
       transition: none;
     }
   }
+
+  &--has-icon {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem 0.625rem 1rem;
+  }
 }
 
 // Filled button
 .btn--filled {
   @extend .btn;
   color: var(--on-primary);
+  text-align: left;
   background-color: var(--primary);
 
   &:hover {
