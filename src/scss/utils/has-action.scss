@@ -24,6 +24,7 @@
   }
 
   &:hover::before {
+    transition: none;
     background-color: var(--primary-translucent-08);
   }
 

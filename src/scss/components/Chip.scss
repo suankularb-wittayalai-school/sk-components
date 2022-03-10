@@ -4,12 +4,19 @@
 .chip {
   @extend .container-surface;
   @include uh.has-action();
-  padding: 0.375rem 1rem;
+  padding: 0 1rem;
+  height: 2rem;
+  font-size: var(--text-base);
   font-weight: var(--font-medium);
   font-family: var(--font-display);
   border-radius: var(--rounded);
   outline: 2px solid var(--outline);
   outline-offset: -2px;
+
+  // State layer
+  &::before {
+    border-radius: var(--rounded);
+  }
 
   // States
   &:focus {
