@@ -44,22 +44,32 @@
     }
   }
 
-  &--has-icon {
+  &--has-icons {
     @extend .chip;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
-    padding-left: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  &--has-leading-icon {
+    @extend .chip--has-icons;
+    padding: 0 1rem 0 0.5rem;
+  }
+
+  &--has-trailing-icon {
+    @extend .chip--has-icons;
+    padding: 0 0.5rem 0 1rem;
   }
 
   &--has-avatar {
-    @extend .chip--has-icon;
+    @extend .chip--has-icons;
     padding: 0 0.75rem 0 0.25rem;
   }
 
   &--has-avatar-and-icon {
-    @extend .chip--has-icon;
+    @extend .chip--has-icons;
     padding: 0 0.5rem 0 0.25rem;
   }
 }
