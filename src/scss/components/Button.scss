@@ -106,7 +106,7 @@
   background-color: var(--surface);
   outline: 2px solid var(--outline);
   outline-offset: -2px;
-  transition: border var(--animation-speed) var(--animation-timing);
+  transition: outline-color var(--animation-speed) var(--animation-timing);
 
   &:hover::before {
     background-color: var(--primary-translucent-08);
@@ -114,7 +114,7 @@
 
   &:focus,
   &:active {
-    border-color: var(--primary);
+    outline-color: var(--primary);
 
     &::before {
       background-color: var(--primary-translucent-12);
