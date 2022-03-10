@@ -1,0 +1,35 @@
+.chip-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.75rem 0.375rem;
+
+  &--no-wrap {
+    @extend .chip-list;
+    flex-wrap: nowrap;
+  }
+}
+
+.chip-list--radio {
+  @extend .chip-list;
+
+  :first-child,
+  :first-child::before {
+    border-radius: var(--rounded) 0 0 var(--rounded);
+  }
+
+  :last-child,
+  :last-child::before {
+    border-radius: 0 var(--rounded) var(--rounded) 0;
+  }
+
+  :not(:first-child):not(:last-child),
+  :not(:first-child):not(:last-child)::before {
+    border-radius: 0;
+  }
+
+  :only-child,
+  :only-child::before {
+    border-radius: var(--rounded);
+  }
+}
