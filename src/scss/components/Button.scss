@@ -21,6 +21,7 @@
     width: 100%;
     height: 100%;
     transition: background-color var(--animation-speed) var(--animation-timing);
+    pointer-events: none;
   }
 
   &:hover {
@@ -119,12 +120,12 @@
   padding: 0 0.5rem;
   color: var(--primary);
 
-  &:hover {
+  &:hover::before {
     background-color: var(--primary-translucent-08);
   }
 
-  &:focus,
-  &:active {
+  &:focus::before,
+  &:active::before {
     background-color: var(--primary-translucent-12);
   }
 }
@@ -132,4 +133,15 @@
 // Icon button
 .btn--icon {
   padding: 0;
+  overflow: visible;
+
+  &::before {
+    top: 50%;
+    left: 50%;
+    width: 175%;
+    height: 175%;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+  }
 }
