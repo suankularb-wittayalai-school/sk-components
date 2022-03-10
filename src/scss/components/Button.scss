@@ -1,13 +1,11 @@
 // Base
 .btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
+  display: block;
   position: relative;
-  padding: 0.5rem 1.5rem;
+  padding: 0.625rem 1.5rem;
   font-weight: var(--font-medium);
   font-family: var(--font-display);
+  text-align: center;
   border-radius: 9999px;
   overflow: hidden;
   outline: none;
@@ -21,6 +19,7 @@
     width: 100%;
     height: 100%;
     transition: background-color var(--animation-speed) var(--animation-timing);
+    pointer-events: none;
   }
 
   &:hover {
@@ -34,12 +33,21 @@
       transition: none;
     }
   }
+
+  &--has-icon {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem 0.625rem 1rem;
+  }
 }
 
 // Filled button
 .btn--filled {
   @extend .btn;
   color: var(--on-primary);
+  text-align: left;
   background-color: var(--primary);
 
   &:hover {
@@ -96,8 +104,9 @@
   @extend .btn;
   color: var(--primary);
   background-color: var(--surface);
-  border: 2px solid var(--outline);
-  transition: border var(--animation-speed) var(--animation-timing);
+  outline: 2px solid var(--outline);
+  outline-offset: -2px;
+  transition: outline-color var(--animation-speed) var(--animation-timing);
 
   &:hover::before {
     background-color: var(--primary-translucent-08);
@@ -105,7 +114,7 @@
 
   &:focus,
   &:active {
-    border-color: var(--primary);
+    outline-color: var(--primary);
 
     &::before {
       background-color: var(--primary-translucent-12);
@@ -119,12 +128,12 @@
   padding: 0 0.5rem;
   color: var(--primary);
 
-  &:hover {
+  &:hover::before {
     background-color: var(--primary-translucent-08);
   }
 
-  &:focus,
-  &:active {
+  &:focus::before,
+  &:active::before {
     background-color: var(--primary-translucent-12);
   }
 }
@@ -132,4 +141,15 @@
 // Icon button
 .btn--icon {
   padding: 0;
+  overflow: visible;
+
+  &::before {
+    top: 50%;
+    left: 50%;
+    width: 175%;
+    height: 175%;
+    border-radius: 9999px;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+  }
 }

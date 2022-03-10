@@ -1,0 +1,112 @@
+@use "../utils/colors.scss" as uc;
+@use "../utils/has-action.scss" as uh;
+
+.chip {
+  @include uh.has-action();
+  padding: 0 1rem;
+  height: 2rem;
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  font-family: var(--font-display);
+  color: var(--on-surface-variant);
+  background-color: var(--surface);
+  border-radius: var(--rounded);
+  outline: 2px solid var(--outline);
+  outline-offset: -2px;
+  transition: outline-color var(--animation-speed) var(--animation-timing);
+
+  // State layer
+  &::before {
+    border-radius: var(--rounded);
+  }
+
+  // States
+  &:focus {
+    outline: 2px solid var(--on-surface-variant);
+    transition: outline-color var(--animation-speed) var(--animation-timing);
+  }
+
+  &:hover::before {
+    background-color: var(--on-surface-translucent-08);
+  }
+
+  &:focus::before,
+  &:active::before {
+    background-color: var(--on-surface-translucent-12);
+  }
+
+  &.selected {
+    @extend .container-secondary;
+    outline: none;
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+    &:hover {
+      box-shadow: var(--shadow-1);
+    }
+
+    &:active {
+      transition: none;
+      box-shadow: none;
+    }
+
+    .chip__icon {
+      color: var(--on-secondary-container);
+    }
+  }
+
+  &--has-icons {
+    @extend .chip;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  &--has-leading-icon {
+    @extend .chip--has-icons;
+    padding: 0 1rem 0 0.5rem;
+  }
+
+  &--has-trailing-icon {
+    @extend .chip--has-icons;
+    padding: 0 0.5rem 0 1rem;
+  }
+
+  &--has-avatar {
+    @extend .chip--has-icons;
+    padding: 0 0.75rem 0 0.25rem;
+  }
+
+  &--has-avatar-and-icon {
+    @extend .chip--has-icons;
+    padding: 0 0.5rem 0 0.25rem;
+  }
+}
+
+.chip--elevated {
+  @extend .chip;
+  outline: none;
+  box-shadow: var(--shadow-1);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.chip__avatar {
+  position: relative;
+  height: 1.5rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  overflow: hidden;
+
+  * {
+    width: 100%;
+  }
+}
+
+.chip__icon {
+  font-size: 1.125rem;
+  color: var(--on-surface);
+}
