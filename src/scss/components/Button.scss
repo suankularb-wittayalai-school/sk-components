@@ -37,7 +37,8 @@
   &--has-icon {
     display: flex;
     flex-direction: row;
-    place-content: center;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     padding: 0.625rem 1.5rem 0.625rem 1rem;
   }
