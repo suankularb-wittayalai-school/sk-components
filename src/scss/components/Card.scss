@@ -21,6 +21,7 @@
   @extend .card;
   background-color: var(--surface);
   outline: 2px solid var(--outline);
+  outline-offset: -2px;
 }
 
 .card--tonal {
