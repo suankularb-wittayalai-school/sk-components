@@ -43,6 +43,7 @@
 
 // Dialog
 .dialog {
+  @include us.scroll-w(0);
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -57,11 +58,6 @@
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
   overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
 }
 
 .dialog__header {
@@ -178,10 +174,33 @@
   overflow: hidden auto;
 
   .dialog__header,
-  .dialog__hero,
-  .dialog__section,
-  .dialog__list {
+  .dialog__section {
     padding: 1rem;
+  }
+
+  .dialog__hero {
+    @include us.scroll-w(0);
+    align-items: flex-start;
+    flex-grow: 1;
+    overflow-x: auto;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: left;
+      width: max-content;
+    }
+
+    .dialog__hero-icon {
+      display: none;
+    }
+  }
+
+  .dialog__list {
+    padding: 0;
   }
 
   // Remove the bottom actions
@@ -196,11 +215,6 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-
-    .dialog__top-app-bar__close {
-      width: 2.5rem;
-      aspect-ratio: 1 / 1;
-    }
 
     button {
       display: block;
@@ -236,10 +250,26 @@
     // Resets changes made by the Fullscreen Dialog
 
     .dialog__header,
-    .dialog__hero,
-    .dialog__section,
-    .dialog__list {
+    .dialog__section {
       padding: 1.5rem;
+    }
+
+    .dialog__hero {
+      align-items: center;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        text-align: center;
+      }
+
+      .dialog__hero-icon {
+        display: block;
+        color: var(--secondary);
+      }
     }
 
     .dialog__actions {

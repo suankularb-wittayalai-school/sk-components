@@ -6,6 +6,7 @@
   font-weight: var(--font-medium);
   font-family: var(--font-display);
   text-align: center;
+  white-space: nowrap;
   border-radius: 9999px;
   overflow: hidden;
   outline: none;
@@ -139,8 +140,18 @@
   }
 }
 
-// Icon button
-.btn--icon {
+// Icon Button
+.btn--filled.btn--icon,
+.btn--outlined.btn--icon,
+.btn--tonal.btn--icon {
+  display: grid;
+  place-content: center;
+  height: 2.75rem;
+  padding: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.btn--text.btn--icon {
   padding: 0;
   overflow: visible;
 
