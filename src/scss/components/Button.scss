@@ -200,8 +200,8 @@
 }
 
 .btn--tonal.btn--danger {
-  color: var(--error-container);
-  background-color: var(--on-error-container);
+  color: var(--on-error-container);
+  background-color: var(--error-container);
 
   &:hover::before {
     background-color: var(--error-translucent-08);
