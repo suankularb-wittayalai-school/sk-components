@@ -43,6 +43,7 @@
 
 // Dialog
 .dialog {
+  @include us.scroll-w(0);
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -57,11 +58,6 @@
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
   overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
 }
 
 .dialog__header {

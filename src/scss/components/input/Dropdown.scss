@@ -82,6 +82,7 @@
   box-shadow: var(--shadow-1);
   border-radius: 0 0 var(--rounded-sm) var(--rounded-sm);
   padding: 0.25rem 0;
+  z-index: 1;
 
   a,
   button {
