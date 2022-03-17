@@ -194,7 +194,7 @@
       width: max-content;
     }
 
-    .dialog__hero-icon {
+    .dialog__hero__icon {
       display: none;
     }
   }
@@ -266,7 +266,7 @@
         text-align: center;
       }
 
-      .dialog__hero-icon {
+      .dialog__hero__icon {
         display: block;
         color: var(--secondary);
       }
