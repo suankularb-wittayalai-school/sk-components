@@ -183,8 +183,10 @@
   }
 
   .dialog__hero {
+    @include us.scroll-w(0);
     align-items: flex-start;
     flex-grow: 1;
+    overflow-x: auto;
 
     h1,
     h2,
@@ -193,6 +195,7 @@
     h5,
     h6 {
       text-align: left;
+      width: max-content;
     }
 
     .dialog__hero-icon {
