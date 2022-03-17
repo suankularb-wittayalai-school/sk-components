@@ -71,6 +71,11 @@
       background-color: var(--on-primary-translucent-12);
     }
   }
+
+  &.btn--danger {
+    color: var(--on-error);
+    background-color: var(--error);
+  }
 }
 
 // Tonal btton
@@ -99,6 +104,11 @@
       background-color: var(--secondary-translucent-12);
     }
   }
+
+  &.btn--danger {
+    color: var(--on-error-container);
+    background-color: var(--error-container);
+  }
 }
 
 // Outlined button
@@ -122,6 +132,10 @@
       background-color: var(--primary-translucent-12);
     }
   }
+
+  &.btn--danger {
+    color: var(--error);
+  }
 }
 
 // Text button
@@ -137,6 +151,10 @@
   &:focus::before,
   &:active::before {
     background-color: var(--primary-translucent-12);
+  }
+
+  &.btn--danger {
+    color: var(--error);
   }
 }
 
