@@ -139,8 +139,17 @@
   }
 }
 
-// Icon button
-.btn--icon {
+// Icon Button
+.btn--filled.btn--icon,
+.btn--outlined.btn--icon,
+.btn--tonal.btn--icon {
+  display: grid;
+  place-content: center;
+  width: 2.5rem;
+  aspect-ratio: 1 / 1;
+}
+
+.btn--text.btn--icon {
   padding: 0;
   overflow: visible;
 
