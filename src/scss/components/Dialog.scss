@@ -179,9 +179,30 @@
 
   .dialog__header,
   .dialog__hero,
-  .dialog__section,
-  .dialog__list {
+  .dialog__section {
     padding: 1rem;
+  }
+
+  .dialog__hero {
+    align-items: flex-start;
+    flex-grow: 1;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: left;
+    }
+
+    .dialog__hero-icon {
+      display: none;
+    }
+  }
+
+  .dialog__list {
+    padding: 0;
   }
 
   // Remove the bottom actions
@@ -237,9 +258,25 @@
 
     .dialog__header,
     .dialog__hero,
-    .dialog__section,
-    .dialog__list {
+    .dialog__section {
       padding: 1.5rem;
+    }
+
+    .dialog__hero {
+      align-items: center;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        text-align: center;
+      }
+
+      .dialog__hero-icon {
+        display: block;
+      }
     }
 
     .dialog__actions {
