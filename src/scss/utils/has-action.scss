@@ -5,6 +5,8 @@
     @extend .has-action--secondary;
   } @else if($color == "tertiary") {
     @extend .has-action--tertiary;
+  } @else if($color == "error") {
+    @extend .has-action--error;
   }
 }
 
@@ -72,5 +74,18 @@
   &:active::before,
   &:focus::before {
     background-color: var(--tertiary-translucent-12);
+  }
+}
+
+.has-action--error {
+  @extend .has-action;
+
+  &:hover::before {
+    background-color: var(--error-translucent-08);
+  }
+
+  &:active::before,
+  &:focus::before {
+    background-color: var(--error-translucent-12);
   }
 }

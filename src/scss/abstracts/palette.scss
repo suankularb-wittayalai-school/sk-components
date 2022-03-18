@@ -68,14 +68,18 @@
 
     // Error
     --error: #ba1b1b;
-    --on-error: #ffffff;
-    --error-container: #ffdfd4;
-    --on-error-container: #410001;
     --error-translucent-08: #ba1b1b08;
     --error-translucent-12: #ba1b1b0c;
+    --on-error: #ffffff;
+    --on-error-translucent-08: #ffffff08;
+    --on-error-translucent-12: #ffffff0c;
+    --error-container: #ffdfd4;
+    --on-error-container: #410001;
 
     // Surface
     --surface: #fbfcff;
+    --surface-translucent-08: #fbfcff08;
+    --surface-translucent-12: #fbfcff0c;
     --on-surface: #191c1e;
     --on-surface-translucent-08: #191c1e08;
     --on-surface-translucent-12: #191c1e0c;
@@ -111,34 +115,40 @@
 
     // Secondary
     --secondary: #ffafd5;
+    --secondary-translucent-08: #ffafd508;
+    --secondary-translucent-12: #ffafd50c;
     --on-secondary: #62003e;
     --on-secondary-translucent-08: #62003e08;
     --on-secondary-translucent-12: #62003e0c;
     --secondary-container: #8b005a;
     --on-secondary-container: #ffd8e8;
-    --secondary-translucent-08: #ffafd508;
-    --secondary-translucent-12: #ffafd50c;
 
     // Tertiary
     --tertiary: #e4c521;
+    --tertiary-translucent-08: #e4c52108;
+    --tertiary-translucent-12: #e4c5210c;
     --on-tertiary: #3a3000;
     --tertiary-container: #544600;
+    --tertiary-container-translucent-08: #54460008;
+    --tertiary-container-translucent-12: #5446000c;
     --on-tertiary-container: #ffe24c;
     --tertiary-blended-08: #d6b91e;
     --tertiary-blended-12: #d0b31d;
-    --tertiary-translucent-08: #e4c52108;
-    --tertiary-translucent-12: #e4c5210c;
 
     // Error
     --error: #ffb4a9;
-    --on-error: #680003;
-    --error-container: #930006;
-    --on-error-container: #ffdad4;
     --error-translucent-08: #ffb4a908;
     --error-translucent-12: #ffb4a90c;
+    --on-error: #680003;
+    --on-error-translucent-08: #68000308;
+    --on-error-translucent-12: #6800030c;
+    --error-container: #930006;
+    --on-error-container: #ffdad4;
 
     // Surface
     --surface: #191c1e;
+    --surface-translucent-08: #191c1e08;
+    --surface-translucent-12: #191c1e0c;
     --on-surface: #e1e2e5;
     --on-surface-translucent-08: #e1e2e508;
     --on-surface-translucent-12: #e1e2e50c;

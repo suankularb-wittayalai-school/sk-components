@@ -129,11 +129,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    accent-color: var(--primary);
-    border-bottom: 2px solid var(--outline);
+    gap: 1rem;
     margin: 0 1.5rem;
     padding: 0.5rem 0;
-    gap: 1rem;
+    height: 3.625rem;
+    accent-color: var(--primary);
+    border-bottom: 2px solid var(--outline);
   }
 
   &__item__section {
@@ -194,7 +195,7 @@
       width: max-content;
     }
 
-    .dialog__hero-icon {
+    .dialog__hero__icon {
       display: none;
     }
   }
@@ -266,7 +267,7 @@
         text-align: center;
       }
 
-      .dialog__hero-icon {
+      .dialog__hero__icon {
         display: block;
         color: var(--secondary);
       }

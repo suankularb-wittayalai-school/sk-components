@@ -145,6 +145,11 @@
   background-color: var(--tertiary);
 }
 
+.error {
+  color: var(--on-error);
+  background-color: var(--error);
+}
+
 .surface {
   color: var(--on-surface);
   background-color: var(--surface);

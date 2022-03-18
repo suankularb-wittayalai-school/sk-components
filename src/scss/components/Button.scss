@@ -165,3 +165,50 @@
     pointer-events: auto;
   }
 }
+
+// Danger button
+.btn--filled.btn--danger {
+  color: var(--on-error);
+  background-color: var(--error);
+
+  &:hover::before {
+    background-color: var(--on-error-translucent-08);
+  }
+
+  &:focus::before,
+  &:active::before {
+    background-color: var(--on-error-translucent-12);
+  }
+}
+
+.btn--outlined.btn--danger,
+.btn--text.btn--danger {
+  color: var(--error);
+
+  &:hover::before {
+    background-color: var(--error-translucent-08);
+  }
+
+  &:focus::before,
+  &:active::before {
+    background-color: var(--error-translucent-12);
+  }
+}
+
+.btn--outlined.btn--danger:focus {
+  outline-color: var(--error);
+}
+
+.btn--tonal.btn--danger {
+  color: var(--on-error-container);
+  background-color: var(--error-container);
+
+  &:hover::before {
+    background-color: var(--error-translucent-08);
+  }
+
+  &:focus::before,
+  &:active::before {
+    background-color: var(--error-translucent-12);
+  }
+}
