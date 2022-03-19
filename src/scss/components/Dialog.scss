@@ -162,7 +162,7 @@
 .dialog--large {
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: 0 0 6.375rem;
   width: 100vw;
   height: 100vh;
   color: var(--on-surface);
@@ -244,6 +244,7 @@
     @include us.scroll-w(0);
     width: 35rem;
     height: fit-content;
+    padding: 0;
     max-height: calc(100vh - 2rem);
     font-size: var(--text-base);
     color: var(--on-surface-variant);
