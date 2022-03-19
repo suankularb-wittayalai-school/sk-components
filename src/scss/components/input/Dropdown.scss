@@ -82,7 +82,7 @@
   box-shadow: var(--shadow-1);
   border-radius: 0 0 var(--rounded-sm) var(--rounded-sm);
   padding: 0.25rem 0;
-  z-index: 1;
+  z-index: 10;
 
   a,
   button {
@@ -123,7 +123,7 @@
   color: var(--on-surface);
   transition: color var(--animation-speed) var(--animation-timing);
   pointer-events: none;
-  z-index: 1;
+  z-index: 10;
 }
 
 .dropdown__icon {

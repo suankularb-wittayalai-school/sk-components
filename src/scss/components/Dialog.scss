@@ -13,6 +13,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--animation-speed) var(--animation-timing);
+  z-index: 90;
 
   &.show {
     opacity: 1;
