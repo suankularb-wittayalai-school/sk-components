@@ -4,6 +4,7 @@
 
 // Base
 .card {
+  width: 100%;
   text-align: left;
   font-size: var(--text-base);
   border-radius: var(--rounded-lg);
@@ -15,6 +16,20 @@
   @extend .card;
   background-color: var(--surface);
   box-shadow: var(--shadow-1);
+
+  &.card--has-action {
+    @include uh.has-action("primary");
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+    &:hover {
+      box-shadow: var(--shadow-2);
+    }
+
+    &:active {
+      box-shadow: var(--shadow-1);
+      transition: none;
+    }
+  }
 }
 
 .card--outlined {
@@ -22,23 +37,32 @@
   background-color: var(--surface);
   outline: 2px solid var(--outline);
   outline-offset: -2px;
+
+  &.card--has-action {
+    @include uh.has-action("primary");
+
+    &:focus {
+      outline: 2px solid var(--primary);
+    }
+  }
 }
 
 .card--tonal {
   @extend .card;
   background-color: var(--surface-variant);
-}
 
-.card--has-action {
-  @include uh.has-action("primary");
+  &.card--has-action {
+    @include uh.has-action("primary");
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
 
-  &:hover {
-    box-shadow: var(--shadow-1);
-  }
+    &:hover {
+      box-shadow: var(--shadow-1);
+    }
 
-  &:active {
-    box-shadow: none;
-    transition: none;
+    &:active {
+      box-shadow: none;
+      transition: none;
+    }
   }
 }
 
