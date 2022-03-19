@@ -19,11 +19,12 @@
 
   &.card--has-action {
     @include uh.has-action("primary");
-  
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+
     &:hover {
       box-shadow: var(--shadow-2);
     }
-  
+
     &:active {
       box-shadow: var(--shadow-1);
       transition: none;
@@ -39,7 +40,7 @@
 
   &.card--has-action {
     @include uh.has-action("primary");
-  
+
     &:focus {
       outline: 2px solid var(--primary);
     }
@@ -52,11 +53,12 @@
 
   &.card--has-action {
     @include uh.has-action("primary");
-  
+    transition: box-shadow var(--animation-speed) var(--animation-timing);
+
     &:hover {
       box-shadow: var(--shadow-1);
     }
-  
+
     &:active {
       box-shadow: none;
       transition: none;
