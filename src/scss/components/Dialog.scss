@@ -19,6 +19,15 @@
     opacity: 1;
     pointer-events: auto;
   }
+
+  &--no-transition {
+    @extend .dialog__wrapper;
+    transition: none;
+
+    .dialog, .dialog--large {
+      transition: none;
+    }
+  }
 }
 
 // Overlay
