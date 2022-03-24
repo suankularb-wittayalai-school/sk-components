@@ -1,3 +1,5 @@
+@use "../utils/scrollbar" as us;
+
 .table {
   font-size: var(--text-base);
   width: 100%;
@@ -13,13 +15,9 @@
 }
 
 .table__wrapper {
+  @include us.scroll-w(0);
   border-radius: var(--rounded-xl);
   overflow-x: auto;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
 
   &--outlined {
     @extend .table__wrapper;
