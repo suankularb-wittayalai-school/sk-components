@@ -1,10 +1,15 @@
+// Mixin for internal use
+// prettier-ignore
 @mixin text-stroke($color, $width: 2px) {
   overflow: initial;
-  text-shadow: calc(-1 * $width) calc(-1 * $width) 0 $color,
-    $width calc(-1 * $width) 0 $color, calc(-1 * $width) $width 0 $color,
-    $width $width 0 $color;
+  text-shadow:
+    calc(-1 * $width) calc(-1 * $width) 0 $color,
+    $width            calc(-1 * $width) 0 $color,
+    calc(-1 * $width) $width            0 $color,
+    $width            $width            0 $color;
 }
 
+// Utils for external use
 .text-stroke {
   @include text-stroke(
     var(--skcom-text-stroke-color),
