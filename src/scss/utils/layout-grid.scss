@@ -1,52 +1,98 @@
 @use "../abstracts/breakpoints.scss" as b;
 
-.layout-grid-cols-3 {
+// Base
+%layout-grid-cols-base {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 0.5rem;
-  width: fit-content;
   padding: 0.25rem 0;
+}
 
-  > * {
-    width: 20rem
+@include b.breakpoint("sm") {
+  %layout-grid-cols-base {
+    display: grid;
+    gap: 0.5rem 1rem;
+    width: 100%;
   }
+}
+
+@include b.breakpoint("md") {
+  %layout-grid-cols-base {
+    display: grid;
+    gap: 0.5rem 1.5rem;
+  }
+}
+
+// 2 columns
+.layout-grid-cols-2 {
+  @extend %layout-grid-cols-base;
+}
+
+@include b.breakpoint("sm") {
+  .layout-grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// 3 columns
+.layout-grid-cols-3 {
+  @extend %layout-grid-cols-base;
 
   &--header {
     @extend .layout-grid-cols-3;
-    flex-direction: column;
-    width: 100%;
-
-    > * {
-      width: 100%;
-    }
   }
 }
 
 @include b.breakpoint("sm") {
   .layout-grid-cols-3 {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    width: 100%;
-
-    > * {
-      width: initial;
-    }
 
     &--header {
-      grid-template-areas: "header search"
+      grid-template-areas: "header search";
     }
   }
 }
 
 @include b.breakpoint("md") {
   .layout-grid-cols-3 {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
 
     &--header {
-      grid-template-areas: "header header search"
+      grid-template-areas: "header header search";
     }
+  }
+}
+
+// 4 columns
+.layout-grid-cols-4 {
+  @extend %layout-grid-cols-base;
+}
+
+@include b.breakpoint("sm") {
+  .layout-grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include b.breakpoint("md") {
+  .layout-grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// 6 columns
+.layout-grid-cols-6 {
+  @extend %layout-grid-cols-base;
+}
+
+@include b.breakpoint("sm") {
+  .layout-grid-cols-6 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@include b.breakpoint("md") {
+  .layout-grid-cols-6 {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
