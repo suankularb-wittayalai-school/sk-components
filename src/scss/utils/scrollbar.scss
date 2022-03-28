@@ -5,10 +5,10 @@
   }
 }
 
-.scroll-w-0::-webkit-scrollbar {
+.scroll-w-0 {
   @include scroll-w(0);
 }
 
-.scroll-w-1::-webkit-scrollbar {
+.scroll-w-1 {
   @include scroll-w(0.25rem);
 }
