@@ -1,24 +1,58 @@
 @use "../abstracts/breakpoints" as b;
-@use "./Regular.scss" as lr;
-@use "../utils/scrollbar.scss" as us;
+@use "./Regular" as lr;
+@use "../utils/scrollbar" as us;
 
 .content-layout--list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  display: block;
   flex-grow: 1;
   color: var(--on-background);
   background-color: var(--background);
+  width: 100vw;
+  overflow: hidden;
 
   > .content-layout__content {
     width: 100%;
     max-width: 71.5rem;
     height: 100%;
   }
+
+  &.show {
+    .content-layout__overlay {
+      opacity: 0.4;
+    }
+
+    .content-layout__main-section {
+      transform: translateX(-100%);
+      transition: transform var(--animation-speed-large) var(--animation-timing);
+    }
+  }
+}
+
+.content-layout__overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 9rem);
+  background-color: var(--black);
+  opacity: 0;
+  transition: opacity var(--animation-speed-large) var(--animation-timing);
+  z-index: 10;
+  pointer-events: none;
 }
 
 .content-layout__main-section {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 100vw;
+  padding: 1rem;
+  width: 100vw;
+  background-color: var(--background);
+  transform: translateX(0);
+  transition: transform var(--animation-speed-large) var(--animation-timing);
+  z-index: 10;
+  box-shadow: var(--shadow-3);
+  height: calc(100vh - 9rem);
 }
 
 .content-layout__list-section {
@@ -33,8 +67,11 @@
 
   .content-layout__main-section {
     @include us.scroll-w(0);
+    position: static;
     display: block;
     height: calc(100vh - 9.5rem);
+    padding: 0;
+    transform: translateX(0);
     overflow: auto;
 
     > .content-layout__content {
