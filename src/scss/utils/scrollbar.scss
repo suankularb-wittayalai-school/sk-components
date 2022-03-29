@@ -1,8 +1,22 @@
+@use "../abstracts/breakpoints" as b;
+
 @mixin scroll-w($width: 0) {
   &::-webkit-scrollbar {
     width: $width;
     height: $width;
   }
+}
+
+@mixin scroll-desktop($width: 0) {
+  @include scroll-w(0);
+
+  @include b.breakpoint("sm") {
+    @include scroll-w($width);
+  }
+}
+
+.scroll-desktop {
+  @include scroll-w(0);
 }
 
 .scroll-w-0 {
@@ -11,4 +25,38 @@
 
 .scroll-w-1 {
   @include scroll-w(0.25rem);
+}
+
+.scroll-w-2 {
+  @include scroll-w(0.5rem);
+}
+
+.scroll-w-3 {
+  @include scroll-w(0.75rem);
+}
+
+.scroll-w-4 {
+  @include scroll-w(1rem);
+}
+
+@include b.breakpoint("sm") {
+  .scroll-desktop {
+    @include scroll-w(initial);
+  }
+
+  .scroll-desktop.scroll-w-1 {
+    @include scroll-w(0.25rem);
+  }
+
+  .scroll-desktop.scroll-w-2 {
+    @include scroll-w(0.5rem);
+  }
+
+  .scroll-desktop.scroll-w-3 {
+    @include scroll-w(0.75rem);
+  }
+
+  .scroll-desktop.scroll-w-4 {
+    @include scroll-w(1rem);
+  }
 }
