@@ -1,6 +1,6 @@
 {
   "name": "@suankularb-components/css",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A design system for all Suankularb applications",
   "module": "dist\\js\\suankularb-components.esm.js",
   "browser": "dist\\js\\suankularb-components.umd.min.js",

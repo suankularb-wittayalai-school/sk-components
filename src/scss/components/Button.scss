@@ -5,6 +5,7 @@
   padding: 0.625rem 1.5rem;
   font-weight: var(--font-medium);
   font-family: var(--font-display);
+  font-size: var(--text-base);
   text-align: center;
   white-space: nowrap;
   border-radius: 9999px;
@@ -42,6 +43,10 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.625rem 1.5rem 0.625rem 1rem;
+
+    .btn__icon {
+      font-size: var(--text-2xl);
+    }
   }
 }
 
