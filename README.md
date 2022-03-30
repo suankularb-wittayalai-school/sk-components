@@ -79,7 +79,7 @@ Repository นี้มีไว้เพื่อเป็นเครื่อ
 
 ### NPM
 
-ใช้คำสั่งต่อไปนี้ใน root directory ของโปรเจกค์
+ใช้คำสั่งต่อไปนี้ใน root directory ของโปรเจกต์
 
 ```bat
 npm install -s @suankularb-components/css@latest
