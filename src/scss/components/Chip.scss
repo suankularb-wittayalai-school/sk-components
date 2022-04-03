@@ -185,8 +185,8 @@
   color: var(--on-surface);
 }
 
-// Delete Button
-.chip__delete {
+// Icon Button
+.chip__icon--btn {
   @extend .btn--text, .btn--icon;
   font-size: 1.125rem;
   color: var(--on-surface);
