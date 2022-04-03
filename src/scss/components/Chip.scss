@@ -121,10 +121,12 @@
   outline: none;
   transition: box-shadow var(--animation-speed) var(--animation-timing);
 
+  // State layer
   &::before {
     border-radius: var(--rounded);
   }
 
+  // States
   &:hover {
     box-shadow: var(--shadow-1);
   }
@@ -134,8 +136,30 @@
     box-shadow: none;
   }
 
+  // Components inside
   .chip__icon {
     color: var(--on-secondary-container);
+  }
+
+  // Modifiers
+  &--filled {
+    @extend .btn-chip;
+    background-color: var(--primary);
+
+    // State
+    &:hover::before {
+      background-color: var(--on-primary-translucent-08);
+    }
+    
+    &:focus::before,
+    &:active::before {
+      background-color: var(--on-primary-translucent-12);
+    }
+
+    // Components inside
+    .chip__icon {
+      color: var(--on-primary);
+    }
   }
 }
 
