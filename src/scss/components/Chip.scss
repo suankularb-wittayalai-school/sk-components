@@ -1,8 +1,14 @@
-@use "../utils/colors.scss" as uc;
-@use "../utils/has-action.scss" as uh;
+@use "./Button" as cb;
+@use "../utils/colors" as uc;
+@use "../utils/has-action" as uh;
 
+// Chip
 .chip {
   @include uh.has-action();
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0 1rem;
   height: 2rem;
   font-size: var(--text-base);
@@ -56,10 +62,6 @@
 
   &--has-icons {
     @extend .chip;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
     padding: 0 0.5rem;
   }
 
@@ -94,6 +96,52 @@
   }
 }
 
+// Input Chip
+.input-chip {
+  @extend .chip;
+
+  &:focus-within {
+    outline: 2px solid var(--on-surface);
+    transition: outline-color var(--animation-speed) var(--animation-timing);
+
+    &::before {
+      background-color: var(--on-surface-translucent-12);
+    }
+  }
+}
+
+// Button Chip
+.btn-chip {
+  @include uh.has-action("secondary");
+  @extend .container-secondary;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.4375rem;
+  border-radius: var(--rounded);
+  outline: none;
+  transition: box-shadow var(--animation-speed) var(--animation-timing);
+
+  &::before {
+    border-radius: var(--rounded);
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    transition: none;
+    box-shadow: none;
+  }
+
+  .chip__icon {
+    color: var(--on-secondary-container);
+  }
+}
+
+// Components inside Chip
+
+// Avatar
 .chip__avatar {
   position: relative;
   height: 1.5rem;
@@ -106,8 +154,25 @@
   }
 }
 
+// Icon (leading/trailing)
 .chip__icon {
   display: flex;
   font-size: 1.125rem;
   color: var(--on-surface);
+}
+
+// Delete Button
+.chip__delete {
+  @extend .btn--text, .btn--icon;
+  font-size: 1.125rem;
+  color: var(--on-surface);
+
+  &:hover::before {
+    background-color: var(--on-surface-translucent-08);
+  }
+
+  &:focus::before,
+  &:active::before {
+    background-color: var(--on-surface-translucent-12);
+  }
 }
