@@ -185,8 +185,8 @@
   color: var(--on-surface);
 }
 
-// Icon Button
-.chip__icon--btn {
+// Chip Button
+.btn--chip {
   @extend .btn--text, .btn--icon;
   font-size: 1.125rem;
   color: var(--on-surface);
