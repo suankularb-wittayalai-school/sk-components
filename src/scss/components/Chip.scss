@@ -185,8 +185,8 @@
   color: var(--on-surface);
 }
 
-// Chip Button
-.btn--chip {
+// Icon Button (inside Input Chip)
+.chip__icon--btn {
   @extend .btn--text, .btn--icon;
   font-size: 1.125rem;
   color: var(--on-surface);
