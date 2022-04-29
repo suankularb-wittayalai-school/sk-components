@@ -80,7 +80,6 @@
   .title {
     gap: 1rem;
     padding: 1rem 2rem;
-    line-height: 1.5;
     background-color: var(--primary-container);
   }
 
@@ -148,6 +147,7 @@
 
     > p {
       display: block;
+      font-weight: var(--font-light);
     }
   }
 }
