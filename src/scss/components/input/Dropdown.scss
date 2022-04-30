@@ -1,5 +1,6 @@
 @use "Blank" as ci;
 @use "Persistent" as cp;
+@use "../../utils/max-lines" as um;
 
 // Dropdown
 .dropdown {
@@ -16,6 +17,10 @@
     text-align: left;
     outline: none;
     cursor: default;
+  }
+
+  span {
+    @include um.max-lines(1);
   }
 
   &:focus-within {
