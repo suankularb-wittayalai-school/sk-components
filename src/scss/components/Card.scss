@@ -37,6 +37,7 @@
   background-color: var(--surface);
   outline: 2px solid var(--outline);
   outline-offset: -2px;
+  padding: 2px;
 
   &.card--has-action {
     @include uh.has-action("primary");

@@ -2,10 +2,11 @@
 
 .input {
   position: relative;
+  font-family: var(--font-sans);
 
   input,
   textarea {
-    @include ci.input--blank();
+    @include ci.input();
     padding: 0.625rem 0.5rem;
     width: 100%;
     outline: none;
@@ -28,10 +29,22 @@
     }
 
     &:focus {
-      border-bottom: 2px solid var(--primary);
+      border-color: var(--primary);
 
       ~ .input__placeholder {
         color: var(--primary);
+      }
+    }
+
+    &:invalid {
+      border-color: var(--error);
+
+      &::before {
+        background-color: var(--error-translucent-12);
+      }
+
+      ~ .input__placeholder {
+        color: var(--error);
       }
     }
   }
@@ -48,4 +61,18 @@
   user-select: none;
   pointer-events: none;
   cursor: text;
+}
+
+
+.input__helper {
+  position: absolute;
+  top: 2.6875rem;
+  left: 0.5rem;
+  color: var(--outline);
+  font-size: 0.75rem;
+}
+
+.input__error {
+  @extend .input__helper;
+  color: var(--error);
 }

@@ -1,25 +1,33 @@
 @use "Blank" as ci;
 
 .input--persistent {
-  @include ci.input--blank();
   position: relative;
-  padding: 1rem 0.5rem 0.25rem;
+  color: var(--inverse-surface);
   accent-color: var(--secondary);
+  font-family: var(--font-sans);
   transition: border var(--animation-speed) var(--animation-timing);
 
-  &:focus-within {
-    border-bottom: 2px solid var(--primary);
-
-    .input--persistent__label {
-      color: var(--primary);
-    }
-  }
-
   input {
+    @include ci.input();
     width: 100%;
-    height: 1.3125rem;
-    background-color: transparent;
+    padding: 1rem 0.5rem 0.25rem;
     outline: none;
+
+    &:focus {
+      border-color: var(--primary);
+
+      ~ .input--persistent__label {
+        color: var(--primary);
+      }
+    }
+
+    &:invalid {
+      border-color: var(--error);
+
+      ~ .input--persistent__label {
+        color: var(--error);
+      }
+    }
   }
 }
 
