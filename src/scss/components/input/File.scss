@@ -4,6 +4,7 @@
   @include ci.input();
   position: relative;
   padding: 1rem 0.5rem 0.25rem;
+  font-family: var(--font-sans);
 
   label {
     display: flex;

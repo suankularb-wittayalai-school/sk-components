@@ -5,6 +5,7 @@
 // Dropdown
 .dropdown {
   position: relative;
+  font-family: var(--font-sans);
 
   .dropdown__button {
     @include ci.input();

@@ -4,6 +4,7 @@
   position: relative;
   color: var(--inverse-surface);
   accent-color: var(--secondary);
+  font-family: var(--font-sans);
   transition: border var(--animation-speed) var(--animation-timing);
 
   input {
