@@ -143,6 +143,10 @@
       color: var(--primary);
       background-color: var(--surface-2);
 
+      &::before {
+        display: block;
+      }
+
       .nav__item__icon {
         color: inherit;
         background-color: transparent;
