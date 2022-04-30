@@ -1,8 +1,8 @@
 @use "Blank" as ci;
 
 .input--file {
+  @include ci.input();
   position: relative;
-  @include ci.input--blank();
   padding: 1rem 0.5rem 0.25rem;
 
   label {

@@ -6,7 +6,8 @@
   position: relative;
 
   .dropdown__button {
-    @extend .input--persistent;
+    @include ci.input();
+    padding: 1rem 0.5rem 0.25rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -49,7 +50,8 @@
 
 // Native Dropdown
 .dropdown--native {
-  @extend .input--persistent;
+  @include ci.input();
+  position: relative;
   padding: 1rem 0.5rem 0.25rem 0.25rem;
 
   &:focus-within {

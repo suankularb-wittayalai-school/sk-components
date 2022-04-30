@@ -1,4 +1,4 @@
-.input--blank {
+.input {
   font-size: var(--text-base);
   color: var(--inverse-surface);
   background-color: var(--surface-2);
@@ -7,6 +7,6 @@
   height: 2.6875rem;
 }
 
-@mixin input--blank() {
-  @extend .input--blank;
+@mixin input() {
+  @extend .input;
 }

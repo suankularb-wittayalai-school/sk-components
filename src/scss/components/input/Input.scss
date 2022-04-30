@@ -5,7 +5,7 @@
 
   input,
   textarea {
-    @include ci.input--blank();
+    @include ci.input();
     padding: 0.625rem 0.5rem;
     width: 100%;
     outline: none;
@@ -28,10 +28,18 @@
     }
 
     &:focus {
-      border-bottom: 2px solid var(--primary);
+      border-color: var(--primary);
 
       ~ .input__placeholder {
         color: var(--primary);
+      }
+    }
+
+    &:invalid {
+      border-color: var(--error);
+
+      ~ .input__placeholder {
+        color: var(--error);
       }
     }
   }
