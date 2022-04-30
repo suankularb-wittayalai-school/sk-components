@@ -38,6 +38,10 @@
     &:invalid {
       border-color: var(--error);
 
+      &::before {
+        background-color: var(--error-translucent-12);
+      }
+
       ~ .input__placeholder {
         color: var(--error);
       }
@@ -56,4 +60,12 @@
   user-select: none;
   pointer-events: none;
   cursor: text;
+}
+
+.input__error-msg {
+  position: absolute;
+  top: 2.6875rem;
+  left: 0.5rem;
+  color: var(--error);
+  font-size: 0.75rem;
 }
