@@ -219,11 +219,25 @@
 }
 
 // Disabled button
-.btn--filled.btn--disabled {
-  background-color: var(--surface);
+.btn--filled.btn--disabled, .btn--tonal.btn--disabled {
   color: var(--on-surface-translucent-38);
+  background-color: var(--surface);
+
+  &:hover {
+    box-shadow: none;
+  }
 
   &::before {
     background-color: var(--on-surface-translucent-12);
+  }
+}
+
+.btn--outlined.btn--disabled {
+  color: var(--on-surface-translucent-38);
+  background-color: var(--surface);
+  outline-color: var(--on-surface-translucent-12);
+
+  &:hover::before {
+    background-color: transparent;
   }
 }
