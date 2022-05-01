@@ -1,31 +1,31 @@
-@mixin max-lines($max-lines: 1) {
+@mixin max-lines($max-lines: 1, $word-wrap: break-word) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: $max-lines;
   overflow: hidden;
-  word-wrap: break-word;
+  word-break: $word-wrap;
   text-overflow: ellipsis;
 }
 
-.max-lines-base {
+%max-lines-base {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  word-wrap: break-word;
+  word-break: break-word;
   text-overflow: ellipsis;
 }
 
 .max-lines-1 {
-  @extend .max-lines-base;
+  @extend %max-lines-base;
   -webkit-line-clamp: 1;
 }
 
 .max-lines-2 {
-  @extend .max-lines-base;
+  @extend %max-lines-base;
   -webkit-line-clamp: 2;
 }
 
 .max-lines-5 {
-  @extend .max-lines-base;
+  @extend %max-lines-base;
   -webkit-line-clamp: 5;
 }

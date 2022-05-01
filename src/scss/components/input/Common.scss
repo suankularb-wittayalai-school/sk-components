@@ -1,3 +1,5 @@
+@use "../../utils/max-lines" as um;
+
 .input {
   font-size: var(--text-base);
   color: var(--inverse-surface);
@@ -5,10 +7,11 @@
   border-radius: var(--rounded-sm) var(--rounded-sm) 0 0;
   border-bottom: 2px solid var(--inverse-surface);
   height: 2.6875rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .input__helper {
+  @include um.max-lines(1, break-all);
   position: absolute;
   top: 2.6875rem;
   left: 0.5rem;

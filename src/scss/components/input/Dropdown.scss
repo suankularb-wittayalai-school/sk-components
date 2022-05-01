@@ -18,10 +18,10 @@
     text-align: left;
     outline: none;
     cursor: default;
-  }
 
-  span {
-    @include um.max-lines(1);
+    span {
+      @include um.max-lines(1);
+    }
   }
 
   &:focus-within {
