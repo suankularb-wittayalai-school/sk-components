@@ -1,4 +1,4 @@
-@use "Blank" as ci;
+@use "Common" as ci;
 
 .input {
   position: relative;
@@ -46,6 +46,14 @@
       ~ .input__placeholder {
         color: var(--error);
       }
+
+      ~ .input__helper--auto {
+        display: none;
+      }
+
+      ~ .input__error--auto {
+        display: inline-block;
+      }
     }
   }
 }
@@ -63,16 +71,12 @@
   cursor: text;
 }
 
-
-.input__helper {
-  position: absolute;
-  top: 2.6875rem;
-  left: 0.5rem;
-  color: var(--outline);
-  font-size: 0.75rem;
+.input__helper--auto {
+  @extend .input__helper;
+  display: inline-block;
 }
 
-.input__error {
-  @extend .input__helper;
-  color: var(--error);
+.input__error--auto {
+  @extend .input__error;
+  display: none;
 }
