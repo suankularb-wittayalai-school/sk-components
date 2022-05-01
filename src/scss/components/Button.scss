@@ -217,3 +217,13 @@
     background-color: var(--error-translucent-12);
   }
 }
+
+// Disabled button
+.btn--filled.btn--disabled {
+  background-color: var(--surface);
+  color: var(--on-surface-translucent-38);
+
+  &::before {
+    background-color: var(--on-surface-translucent-12);
+  }
+}
