@@ -1,4 +1,4 @@
-@use "Blank" as ci;
+@use "Common" as ci;
 
 .input {
   position: relative;
@@ -61,18 +61,4 @@
   user-select: none;
   pointer-events: none;
   cursor: text;
-}
-
-
-.input__helper {
-  position: absolute;
-  top: 2.6875rem;
-  left: 0.5rem;
-  color: var(--outline);
-  font-size: 0.75rem;
-}
-
-.input__error {
-  @extend .input__helper;
-  color: var(--error);
 }

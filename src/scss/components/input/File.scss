@@ -1,4 +1,4 @@
-@use "Blank" as ci;
+@use "Common" as ci;
 
 .input--file {
   @include ci.input();

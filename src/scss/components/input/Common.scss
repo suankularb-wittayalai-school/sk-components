@@ -8,6 +8,19 @@
   margin-bottom: 0.5rem;
 }
 
+.input__helper {
+  position: absolute;
+  top: 2.6875rem;
+  left: 0.5rem;
+  color: var(--outline);
+  font-size: 0.75rem;
+}
+
+.input__error {
+  @extend .input__helper;
+  color: var(--error);
+}
+
 @mixin input() {
   @extend .input;
 }
