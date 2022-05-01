@@ -46,6 +46,14 @@
       ~ .input__placeholder {
         color: var(--error);
       }
+
+      ~ .input__helper--auto {
+        display: none;
+      }
+
+      ~ .input__error--auto {
+        display: inline-block;
+      }
     }
   }
 }
@@ -61,4 +69,14 @@
   user-select: none;
   pointer-events: none;
   cursor: text;
+}
+
+.input__helper--auto {
+  @extend .input__helper;
+  display: inline-block;
+}
+
+.input__error--auto {
+  @extend .input__error;
+  display: none;
 }
