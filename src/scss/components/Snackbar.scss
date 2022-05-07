@@ -3,8 +3,8 @@
 .snackbar {
   // Position
   position: absolute;
-  bottom: 0.75rem;
-  left: 0.75rem;
+  bottom: 0.5rem;
+  left: 0.5rem;
 
   // Layout
   display: flex;
@@ -16,11 +16,8 @@
   width: calc(100vw - 1.5rem);
 
   // Style
-  font-size: var(--text-base);
-  font-family: var(--font-sans);
-  color: var(--inverse-on-surface);
   background-color: var(--inverse-surface);
-  border-radius: var(--rounded);
+  border-radius: var(--rounded-sm);
 
   // Animation
   transition: opacity var(--animation-speed) var(--animation-timing),
@@ -34,6 +31,16 @@
     transform: scale(1) translateY(0);
     pointer-events: initial;
   }
+}
+
+.snackbar__label {
+  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  color: var(--inverse-on-surface);
+}
+
+.snackbar__action {
+  color: var(--inverse-primary);
 }
 
 @include b.breakpoint("sm") {
