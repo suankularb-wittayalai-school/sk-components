@@ -1,3 +1,5 @@
+@use "../abstracts/breakpoints.scss" as b;
+
 .snackbar {
   // Position
   position: absolute;
@@ -7,8 +9,11 @@
   // Layout
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
   padding: 0.75rem 1rem;
+  width: calc(100vw - 1.5rem);
 
   // Style
   font-size: var(--text-base);
@@ -21,12 +26,20 @@
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
   opacity: 0;
-  transform: scale(0.8) translateY(0.5rem);
+  transform: scale(0.8) translateY(1rem);
   pointer-events: none;
 
   &.show {
     opacity: 1;
     transform: scale(1) translateY(0);
     pointer-events: initial;
+  }
+}
+
+@include b.breakpoint("sm") {
+  .snackbar {
+    gap: 3rem;
+    justify-content: flex-start;
+    width: fit-content;
   }
 }
