@@ -17,18 +17,19 @@
 
   // Style
   background-color: var(--inverse-surface);
-  border-radius: var(--rounded-sm);
+  border-radius: var(--rounded);
+  box-shadow: var(--shadow-1);
 
   // Animation
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
   opacity: 0;
-  transform: scale(0.8) translateY(1rem);
+  transform: scale(0.8);
   pointer-events: none;
 
   &.show {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
     pointer-events: initial;
   }
 }
