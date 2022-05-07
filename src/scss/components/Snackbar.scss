@@ -1,0 +1,32 @@
+.snackbar {
+  // Position
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+
+  // Layout
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+
+  // Style
+  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  color: var(--inverse-on-surface);
+  background-color: var(--inverse-surface);
+  border-radius: var(--rounded);
+
+  // Animation
+  transition: opacity var(--animation-speed) var(--animation-timing),
+    transform var(--animation-speed) var(--animation-timing);
+  opacity: 0;
+  transform: scale(0.8) translateY(0.5rem);
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: initial;
+  }
+}
