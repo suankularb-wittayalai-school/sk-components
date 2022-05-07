@@ -24,12 +24,12 @@
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(0.9) translateY(0.75rem);
   pointer-events: none;
 
   &.show {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
     pointer-events: initial;
   }
 }
