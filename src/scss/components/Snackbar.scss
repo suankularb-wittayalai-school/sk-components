@@ -53,6 +53,10 @@
     @extend .snackbar;
     bottom: 10.875rem;
   }
+
+  &--no-transition {
+    transition: none;
+  }
 }
 
 .snackbar__label {
