@@ -1,0 +1,89 @@
+@use "../abstracts/breakpoints.scss" as b;
+
+.snackbar {
+  // Position
+  position: absolute;
+  bottom: 6.375rem;
+  left: 1rem;
+
+  // Layout
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  width: calc(100vw - 2rem);
+
+  // Style
+  background-color: var(--inverse-surface);
+  border-radius: var(--rounded);
+  box-shadow: var(--shadow-1);
+
+  // Animation
+  transition: opacity var(--animation-speed) var(--animation-timing),
+    transform var(--animation-speed) var(--animation-timing);
+  opacity: 0;
+  transform: scale(0.9) translateY(0.75rem);
+  pointer-events: none;
+
+  // State
+  &.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: initial;
+  }
+
+  // Modifiers
+  &--stacked {
+    @extend .snackbar;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .snackbar__label {
+      align-self: flex-start;
+    }
+
+    .snackbar__action {
+      align-self: flex-end;
+    }
+  }
+
+  &--above-fab {
+    @extend .snackbar;
+    bottom: 10.875rem;
+  }
+
+  &--no-transition {
+    @extend .snackbar;
+    transition: none;
+  }
+}
+
+.snackbar__label {
+  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  color: var(--inverse-on-surface);
+}
+
+.snackbar__action {
+  color: var(--inverse-primary);
+}
+
+@include b.breakpoint("sm") {
+  .snackbar {
+    bottom: 1rem;
+    justify-content: flex-start;
+    gap: 3rem;
+    width: fit-content;
+
+    &--stacked {
+      flex-direction: row;
+      gap: 3rem;
+    }
+
+    &--above-fab {
+      bottom: 1rem;
+    }
+  }
+}
