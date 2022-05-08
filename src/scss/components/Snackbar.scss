@@ -55,7 +55,7 @@
   }
 
   &--no-transition {
-    @extend .snackbar.show;
+    @extend .snackbar;
     transition: none;
   }
 }
