@@ -27,10 +27,26 @@
   transform: scale(0.9) translateY(0.75rem);
   pointer-events: none;
 
+  // State
   &.show {
     opacity: 1;
     transform: scale(1) translateY(0);
     pointer-events: initial;
+  }
+
+  // Modifiers
+  &--stacked {
+    @extend .snackbar;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .snackbar__label {
+      align-self: flex-start;
+    }
+
+    .snackbar__action {
+      align-self: flex-end;
+    }
   }
 
   &--above-fab {
@@ -52,9 +68,14 @@
 @include b.breakpoint("sm") {
   .snackbar {
     bottom: 1rem;
-    gap: 3rem;
     justify-content: flex-start;
+    gap: 3rem;
     width: fit-content;
+
+    &--stacked {
+      flex-direction: row;
+      gap: 3rem;
+    }
 
     &--above-fab {
       bottom: 1rem;
