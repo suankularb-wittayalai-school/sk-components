@@ -1,3 +1,5 @@
+@use "../../utils/max-lines" as um;
+
 .radio {
   display: flex;
   flex-direction: row;
@@ -14,6 +16,21 @@
     font-weight: var(--font-regular);
     font-family: var(--font-sans);
   }
+}
+
+.radio__label {
+  font-family: var(--font-display);
+}
+
+.radio__helper {
+  @include um.max-lines(1, break-all);
+  color: var(--outline);
+  font-size: 0.75rem;
+}
+
+.radio-group__error {
+  @extend .radio__helper;
+  color: var(--error);
 }
 
 // Increase the radio/checkbox size
