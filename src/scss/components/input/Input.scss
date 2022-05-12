@@ -13,10 +13,17 @@
     transition: padding var(--animation-speed) var(--animation-timing),
       border var(--animation-speed) var(--animation-timing);
 
+    // Asterisk marker for required field
+    &:required ~ .input__placeholder::after {
+      content: "*";
+    }
+
+    // Hide the real placeholder
     &::placeholder {
       opacity: 0;
     }
 
+    // Move the fake placeholder up to be the label on focus
     &:focus,
     &:not(:placeholder-shown) {
       padding: 1rem 0.5rem 0.25rem;
@@ -27,7 +34,6 @@
         font-size: var(--text-xs);
       }
     }
-
     &:focus {
       border-color: var(--primary);
 
@@ -36,13 +42,10 @@
       }
     }
 
+    // Error
     &.error,
-    &:invalid {
+    &:invalid:not(:placeholder-shown) {
       border-color: var(--error);
-
-      &::before {
-        background-color: var(--error-translucent-12);
-      }
 
       ~ .input__placeholder {
         color: var(--error);
