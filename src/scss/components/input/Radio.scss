@@ -1,4 +1,4 @@
-@use "../../utils/max-lines" as um;
+@use "../FormElement" as cf;
 
 .radio {
   display: flex;
@@ -55,28 +55,20 @@
   }
 }
 
-.radio__label {
-  font-weight: var(--font-medium);
-  font-family: var(--font-display);
-}
-
 .radio__helper {
-  @include um.max-lines(1, break-all);
-  color: var(--outline);
-  font-size: 0.75rem;
+  @extend .form-element__helper;
+
+  &--auto {
+    @extend .radio__helper;
+    display: inline-block;
+  }
 }
 
 .radio__error {
-  @extend .radio__helper;
-  color: var(--error);
-}
+  @extend .form-element__error;
 
-.radio__helper--auto {
-  @extend .radio__helper;
-  display: inline-block;
-}
-
-.radio__error--auto {
-  @extend .radio__error;
-  display: none;
+  &--auto {
+    @extend .radio__error;
+    display: none;
+  }
 }
