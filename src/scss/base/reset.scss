@@ -213,7 +213,10 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 button,
-[role="button"] {
+[role="button"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
   cursor: pointer;
 }
 

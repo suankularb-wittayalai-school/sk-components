@@ -1,4 +1,4 @@
-@use "input/all";
+@use "input/all" as input;
 
 @use "Button";
 @use "Card";
@@ -7,6 +7,7 @@
 @use "ChipList";
 @use "Dialog";
 @use "FAB";
+@use "FormElement";
 @use "Header";
 @use "Icon";
 @use "LayoutGridCols";

@@ -1,0 +1,12 @@
+@use "../FormElement" as cf;
+
+.range {
+  input[type="range"] {
+    width: 100%;
+  }
+
+  .range__amount {
+    @extend .form-element__helper;
+    text-align: end;
+  }
+}
