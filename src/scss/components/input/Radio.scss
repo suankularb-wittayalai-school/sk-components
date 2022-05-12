@@ -16,21 +16,20 @@
     font-weight: var(--font-regular);
     font-family: var(--font-sans);
   }
-}
 
-.radio__label {
-  font-family: var(--font-display);
-}
+  &.error {
+    accent-color: var(--error);
+    color: inherit;
+    background-color: initial;
 
-.radio__helper {
-  @include um.max-lines(1, break-all);
-  color: var(--outline);
-  font-size: 0.75rem;
-}
+    .radio__helper--auto {
+      display: none;
+    }
 
-.radio-group__error {
-  @extend .radio__helper;
-  color: var(--error);
+    .radio__error--auto {
+      display: inline-block;
+    }
+  }
 }
 
 // Increase the radio/checkbox size
@@ -54,4 +53,29 @@
       margin: 0.25rem 0;
     }
   }
+}
+
+.radio__label {
+  font-family: var(--font-display);
+}
+
+.radio__helper {
+  @include um.max-lines(1, break-all);
+  color: var(--outline);
+  font-size: 0.75rem;
+}
+
+.radio__error {
+  @extend .radio__helper;
+  color: var(--error);
+}
+
+.radio__helper--auto {
+  @extend .radio__helper;
+  display: inline-block;
+}
+
+.radio__error--auto {
+  @extend .radio__error;
+  display: none;
 }

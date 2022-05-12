@@ -36,6 +36,7 @@
       }
     }
 
+    &.error,
     &:invalid {
       border-color: var(--error);
 
