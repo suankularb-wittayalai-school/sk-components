@@ -1,0 +1,40 @@
+.radio {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0.25rem 0;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-regular);
+    font-family: var(--font-sans);
+  }
+}
+
+// Increase the radio/checkbox size
+// Transform scale pixelates the button, so the non-standard
+// zoom is used instead if supported
+
+@supports (zoom: 2) {
+  .radio {
+    input[type="radio"],
+    input[type="checkbox"] {
+      zoom: 1.25;
+      margin: 0.125rem 0;
+    }
+  }
+}
+@supports not (zoom: 2) {
+  .radio {
+    input[type="radio"],
+    input[type="checkbox"] {
+      transform: scale(1.25);
+      margin: 0.25rem 0;
+    }
+  }
+}
