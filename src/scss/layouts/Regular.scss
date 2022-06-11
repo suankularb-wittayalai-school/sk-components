@@ -3,9 +3,7 @@
 @use "../utils/scrollbar.scss" as us;
 
 .content-layout {
-  flex-grow: 1;
-  overflow: auto;
-  padding: 0 0 5.375rem;
+  padding-bottom: 5.375rem;
 
   > .content-layout__content {
     display: flex;
