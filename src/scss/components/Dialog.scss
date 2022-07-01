@@ -73,8 +73,12 @@
   overflow: auto;
 
   .chip.selected {
-    background-color: var(--secondary);
+    @extend .secondary;
     border-color: var(--secondary);
+
+    .chip__icon {
+      color: inherit;
+    }
   }
 
   .btn-chip {
