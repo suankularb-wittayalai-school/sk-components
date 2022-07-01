@@ -17,9 +17,8 @@
   color: var(--on-surface-variant);
   background-color: var(--surface);
   border-radius: var(--rounded);
-  outline: 2px solid var(--outline);
-  outline-offset: -2px;
-  transition: outline-color var(--animation-speed) var(--animation-timing);
+  border: 2px solid var(--outline);
+  transition: border-color var(--animation-speed) var(--animation-timing);
 
   // State layer
   &::before {
@@ -28,8 +27,8 @@
 
   // States
   &:focus {
-    outline: 2px solid var(--on-surface-variant);
-    transition: outline-color var(--animation-speed) var(--animation-timing);
+    border: 2px solid var(--on-surface-variant);
+    transition: border-color var(--animation-speed) var(--animation-timing);
   }
 
   &:hover::before {
@@ -43,7 +42,7 @@
 
   &.selected {
     @extend .container-secondary;
-    outline: none;
+    border: 2px solid var(--secondary-container);
     transition: box-shadow var(--animation-speed) var(--animation-timing);
 
     &:hover {
@@ -88,11 +87,11 @@
 
 .chip--elevated {
   @extend .chip;
-  outline: none;
+  border: none;
   box-shadow: var(--shadow-1);
 
   &:focus {
-    outline: none;
+    border: none;
   }
 }
 
@@ -101,8 +100,8 @@
   @extend .chip;
 
   &:focus-within {
-    outline: 2px solid var(--on-surface);
-    transition: outline-color var(--animation-speed) var(--animation-timing);
+    border: 2px solid var(--on-surface);
+    transition: border-color var(--animation-speed) var(--animation-timing);
 
     &::before {
       background-color: var(--on-surface-translucent-12);
@@ -118,7 +117,7 @@
   height: 2rem;
   padding: 0.4375rem;
   border-radius: var(--rounded);
-  outline: none;
+  border: none;
   transition: box-shadow var(--animation-speed) var(--animation-timing);
 
   // State layer

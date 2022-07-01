@@ -35,15 +35,14 @@
 .card--outlined {
   @extend .card;
   background-color: var(--surface);
-  outline: 2px solid var(--outline);
-  outline-offset: -2px;
+  border: 2px solid var(--outline);
   padding: 2px;
 
   &.card--has-action {
     @include uh.has-action("primary");
 
     &:focus {
-      outline: 2px solid var(--primary);
+      border: 2px solid var(--primary);
     }
   }
 }
