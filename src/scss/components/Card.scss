@@ -78,9 +78,21 @@
 
   .card__header__text {
     flex-grow: 1;
+    font-family: var(--font-display);
+    word-break: break-all;
 
     > * {
       @extend .max-lines-1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
     }
   }
 }

@@ -12,6 +12,7 @@
   overflow: hidden;
   outline: none;
   transition: box-shadow var(--animation-speed) var(--animation-timing);
+  cursor: pointer;
 
   &::before {
     content: "";
