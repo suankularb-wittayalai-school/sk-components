@@ -110,6 +110,7 @@
 .btn--outlined {
   @extend .btn;
   color: var(--primary);
+  padding: calc(0.625rem - 2px) calc(1.5rem - 2px);
   background-color: var(--surface);
   border: 2px solid var(--outline);
   transition: border-color var(--animation-speed) var(--animation-timing);
