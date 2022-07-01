@@ -5,6 +5,7 @@
   @include us.scroll-desktop(1rem);
   width: 100%;
   overflow-x: auto;
+  scroll-padding: 1rem;
 }
 
 .x-scroll-content__content {
@@ -17,6 +18,8 @@
 
   > li {
     width: 20rem;
+    scroll-snap-align: start;
+
     > * {
       height: 100%;
     }
@@ -24,7 +27,17 @@
 }
 
 @include b.breakpoint("sm") {
+  .x-scroll-content {
+    scroll-padding: 0;
+  }
+
   .x-scroll-content__content > li {
     width: 22.5rem;
+  }
+}
+
+@media (pointer: coarse) {
+  .x-scroll-content {
+    scroll-snap-type: x mandatory;
   }
 }
