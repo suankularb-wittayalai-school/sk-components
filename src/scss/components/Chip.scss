@@ -1,6 +1,6 @@
-@use "./Button" as cb;
-@use "../utils/colors" as uc;
-@use "../utils/has-action" as uh;
+@use "./Button.scss" as cb;
+@use "../utils/colors.scss" as uc;
+@use "../utils/has-action.scss" as uh;
 
 // Chip
 .chip {

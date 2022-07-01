@@ -1,9 +1,11 @@
 @use "../abstracts/breakpoints.scss" as b;
+@use "../utils/colors.scss" as uc;
+@use "../utils/has-action.scss" as uh;
 @use "../utils/scrollbar.scss" as us;
 
 // Positioning Overlay and Dialog
 .dialog__wrapper {
-  position: absolute;
+  position: fixed;
   top: 0;
   display: grid;
   place-items: center;
@@ -69,6 +71,19 @@
   transition: opacity var(--animation-speed) var(--animation-timing),
     transform var(--animation-speed) var(--animation-timing);
   overflow: auto;
+
+  .chip.selected {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+  }
+
+  .btn-chip {
+    @extend .primary;
+    @include uh.has-action("primary");
+    .chip__icon {
+      color: inherit;
+    }
+  }
 }
 
 .dialog__content {
