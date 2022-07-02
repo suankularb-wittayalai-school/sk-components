@@ -60,7 +60,7 @@
 
 @include b.breakpoint("sm") {
   .nav {
-    position: static;
+    top: 0;
     height: fit-content;
     padding: 0 1rem;
     background-color: var(--surface-1);

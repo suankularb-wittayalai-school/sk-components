@@ -7,6 +7,7 @@
   width: 100%;
   text-align: left;
   font-size: var(--text-base);
+  padding: 2px;
   border-radius: var(--rounded-lg);
   overflow: hidden;
 }
@@ -35,15 +36,14 @@
 .card--outlined {
   @extend .card;
   background-color: var(--surface);
-  outline: 2px solid var(--outline);
-  outline-offset: -2px;
-  padding: 2px;
+  border: 2px solid var(--outline);
+  padding: 0;
 
   &.card--has-action {
     @include uh.has-action("primary");
 
     &:focus {
-      outline: 2px solid var(--primary);
+      border: 2px solid var(--primary);
     }
   }
 }
@@ -78,9 +78,21 @@
 
   .card__header__text {
     flex-grow: 1;
+    font-family: var(--font-display);
+    word-break: break-all;
 
     > * {
       @extend .max-lines-1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
     }
   }
 }

@@ -12,6 +12,7 @@
   overflow: hidden;
   outline: none;
   transition: box-shadow var(--animation-speed) var(--animation-timing);
+  cursor: pointer;
 
   &::before {
     content: "";
@@ -110,10 +111,10 @@
 .btn--outlined {
   @extend .btn;
   color: var(--primary);
+  padding: calc(0.625rem - 2px) calc(1.5rem - 2px);
   background-color: var(--surface);
-  outline: 2px solid var(--outline);
-  outline-offset: -2px;
-  transition: outline-color var(--animation-speed) var(--animation-timing);
+  border: 2px solid var(--outline);
+  transition: border-color var(--animation-speed) var(--animation-timing);
 
   &:hover::before {
     background-color: var(--primary-translucent-08);
@@ -121,7 +122,7 @@
 
   &:focus,
   &:active {
-    outline-color: var(--primary);
+    border-color: var(--primary);
 
     &::before {
       background-color: var(--primary-translucent-12);
@@ -201,7 +202,7 @@
 }
 
 .btn--outlined.btn--danger:focus {
-  outline-color: var(--error);
+  border-color: var(--error);
 }
 
 .btn--tonal.btn--danger {
@@ -236,7 +237,7 @@
 .btn--outlined.btn--disabled {
   color: var(--on-surface-translucent-38);
   background-color: var(--surface);
-  outline-color: var(--on-surface-translucent-12);
+  border-color: var(--on-surface-translucent-12);
 
   &:hover::before {
     background-color: transparent;
