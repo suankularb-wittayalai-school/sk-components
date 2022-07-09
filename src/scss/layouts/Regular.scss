@@ -59,6 +59,14 @@
       > * > * {
         padding: 0;
       }
+
+      > .banner {
+        border-radius: var(--rounded);
+      }
+
+      .section > .noticebar {
+        border-radius: var(--rounded);
+      }
     }
 
     .layout-grid__wrapper {
