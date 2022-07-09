@@ -7,10 +7,6 @@
   font-family: var(--font-sans);
   color: var(--on-background);
   background-color: var(--background);
-
-  &--without-title {
-    @extend .page-layout;
-  }
 }
 
 @include b.breakpoint("sm") {

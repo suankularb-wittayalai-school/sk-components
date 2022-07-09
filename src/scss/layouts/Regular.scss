@@ -22,6 +22,14 @@
       }
     }
 
+    > .banner {
+      border-radius: 0;
+
+      > * {
+        padding: 0;
+      }
+    }
+
     .section {
       display: flex;
       flex-direction: column;

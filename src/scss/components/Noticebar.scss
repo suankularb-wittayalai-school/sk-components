@@ -1,5 +1,5 @@
 @use "../abstracts/breakpoints.scss" as b;
-@use "../components/Button.scss" as cb;
+@use "./Button.scss" as cb;
 @use "../utils/colors.scss" as uc;
 @use "../utils/has-action.scss" as uh;
 
