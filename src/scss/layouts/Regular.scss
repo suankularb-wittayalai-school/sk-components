@@ -27,11 +27,8 @@
         margin-top: -1rem;
       }
 
+      padding: 1rem 0;
       border-radius: 0;
-
-      > * {
-        padding: 0;
-      }
     }
 
     .section {
@@ -40,7 +37,7 @@
       gap: 0.75rem;
 
       > .noticebar {
-        padding: 0.75rem;
+        padding: 0.75rem 1rem;
         border-radius: 0;
       }
     }
@@ -69,10 +66,12 @@
           margin-top: 0;
         }
 
+        padding: 1rem;
         border-radius: var(--rounded);
       }
 
       .section > .noticebar {
+        padding: 0.75rem;
         border-radius: var(--rounded);
       }
     }
