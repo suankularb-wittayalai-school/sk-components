@@ -1,4 +1,4 @@
-@use "../utils/scrollbar" as us;
+@use "../utils/scrollbar.scss" as us;
 
 .table {
   font-size: var(--text-base);
@@ -15,7 +15,7 @@
 }
 
 .table__wrapper {
-  @include us.scroll-w(0);
+  @include us.scroll-desktop(initial);
   border-radius: var(--rounded-xl);
   overflow-x: auto;
 
