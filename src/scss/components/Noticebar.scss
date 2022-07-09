@@ -1,4 +1,5 @@
 @use "../abstracts/breakpoints.scss" as b;
+@use "./Actions.scss" as ca;
 @use "./Button.scss" as cb;
 @use "../utils/colors.scss" as uc;
 @use "../utils/has-action.scss" as uh;
@@ -60,11 +61,8 @@
 }
 
 .noticebar__actions {
-  // Layout
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  @extend .actions;
+  gap: 0;
 }
 
 @include b.breakpoint("sm") {

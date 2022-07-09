@@ -5,4 +5,13 @@
   justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
+
+  // Modifiers
+  &--left {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
 }
