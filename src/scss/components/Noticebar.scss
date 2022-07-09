@@ -19,6 +19,10 @@
   // Modifiers
   &--info {
     @extend .container-primary;
+
+    .icon {
+      color: var(--primary);
+    }
   }
 
   &--notice {
@@ -32,12 +36,20 @@
         color: var(--tertiary);
       }
     }
+
+    .icon {
+      color: var(--tertiary);
+    }
   }
 
   &--warning {
     @extend .container-error;
     .btn {
       @extend .btn--danger;
+    }
+
+    .icon {
+      color: var(--error);
     }
   }
 }
@@ -48,11 +60,6 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-
-  // Children
-  .icon {
-    color: var(--tertiary);
-  }
 }
 
 .noticebar__header {
