@@ -41,17 +41,20 @@
   }
 
   &.selected {
+    $selected-chip-outline: 0 0 0 1px var(--secondary-container);
+
     @extend .container-secondary;
-    border: 2px solid var(--secondary-container);
+    border: none;
+    box-shadow: $selected-chip-outline;
     transition: box-shadow var(--animation-speed) var(--animation-timing);
 
     &:hover {
-      box-shadow: var(--shadow-1);
+      box-shadow: var(--shadow-1), $selected-chip-outline;
     }
 
     &:active {
       transition: none;
-      box-shadow: none;
+      box-shadow: $selected-chip-outline;
     }
 
     .chip__icon {
