@@ -5,6 +5,8 @@
   font-size: var(--text-base);
   font-weight: var(--font-regular);
   font-family: var(--font-sans);
+  height: fit-content;
+  min-height: 100vh;
   color: var(--on-background);
   background-color: var(--background);
 }
