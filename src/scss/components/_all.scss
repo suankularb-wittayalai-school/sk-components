@@ -1,5 +1,6 @@
 @use "input/all" as input;
 
+@use "Banner";
 @use "Button";
 @use "Card";
 @use "CardList";
@@ -14,6 +15,7 @@
 @use "Markdown";
 @use "Monogram";
 @use "Navigation";
+@use "Noticebar";
 @use "Snackbar";
 @use "Table";
 @use "Title";

@@ -1,4 +1,5 @@
 // Imports
+@use "./Actions.scss" as ca;
 @use "../utils/has-action.scss" as uh;
 @use "../utils/max-lines.scss" as um;
 
@@ -7,7 +8,6 @@
   width: 100%;
   text-align: left;
   font-size: var(--text-base);
-  padding: 2px;
   border-radius: var(--rounded-lg);
   overflow: hidden;
 }
@@ -37,7 +37,6 @@
   @extend .card;
   background-color: var(--surface);
   border: 2px solid var(--outline);
-  padding: 0;
 
   &.card--has-action {
     @include uh.has-action("primary");
@@ -122,10 +121,7 @@
   }
 
   .card__actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 0.75rem;
+    @extend .actions;
     padding: 1rem;
   }
 }

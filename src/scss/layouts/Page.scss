@@ -7,18 +7,19 @@
   font-family: var(--font-sans);
   color: var(--on-background);
   background-color: var(--background);
-
-  &--without-title {
-    @extend .page-layout;
-  }
 }
 
 @include b.breakpoint("sm") {
   .page-layout {
-    padding-top: 10.875rem;
+    padding-top: 4.5rem;
 
-    &--without-title {
-      padding-top: 4.5rem;
+    &--fixed-title {
+      padding-top: 10.875rem;
+
+      .title {
+        position: fixed;
+        height: 6.375rem;
+      }
     }
   }
 }

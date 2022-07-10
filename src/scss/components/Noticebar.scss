@@ -1,0 +1,84 @@
+@use "../abstracts/breakpoints.scss" as b;
+@use "./Actions.scss" as ca;
+@use "./Button.scss" as cb;
+@use "../utils/colors.scss" as uc;
+@use "../utils/has-action.scss" as uh;
+
+.noticebar {
+  // Layout
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem;
+
+  // Style
+  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  border-radius: var(--rounded);
+
+  // Modifiers
+  &--info {
+    @extend .container-primary;
+
+    .icon {
+      color: var(--primary);
+    }
+  }
+
+  &--notice {
+    @extend .container-tertiary;
+    .btn {
+      @include uh.has-action("tertiary");
+      &.btn--filled {
+        @extend .tertiary;
+      }
+      &.btn--text {
+        color: var(--tertiary);
+      }
+    }
+
+    .icon {
+      color: var(--tertiary);
+    }
+  }
+
+  &--warning {
+    @extend .container-error;
+    .btn {
+      @extend .btn--danger;
+    }
+
+    .icon {
+      color: var(--error);
+    }
+  }
+}
+
+.noticebar__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.noticebar__header {
+  font-weight: var(--font-bold);
+  font-family: var(--font-display);
+}
+
+.noticebar__actions {
+  @extend .actions;
+  gap: 0;
+}
+
+@include b.breakpoint("md") {
+  .noticebar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .noticebar__actions {
+    justify-content: flex-start;
+  }
+}
