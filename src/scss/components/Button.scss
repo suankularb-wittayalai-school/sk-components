@@ -128,6 +128,11 @@
       background-color: var(--primary-translucent-12);
     }
   }
+
+  &.btn--has-icon {
+    padding: calc(0.625rem - 2px) calc(1.5rem - 2px) calc(0.625rem - 2px)
+      calc(1rem - 2px);
+  }
 }
 
 // Text button
@@ -143,6 +148,10 @@
   &:focus::before,
   &:active::before {
     background-color: var(--primary-translucent-12);
+  }
+
+  &.btn--has-icon {
+    padding: 0 0.5rem 0 0.25rem;
   }
 }
 
