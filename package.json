@@ -27,6 +27,10 @@
     "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
   },
   "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "devDependencies": {
     "prettier": "^2.6.2",
     "rollup": "^2.66.1",
