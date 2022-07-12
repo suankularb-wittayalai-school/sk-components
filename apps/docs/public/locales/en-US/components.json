@@ -1,0 +1,31 @@
+{
+  "title": "Components",
+  "main": {
+    "guidelines": {
+      "title": "Guidelines",
+      "checkMaterial": "<0>For more details,</0> check out Material Design 3’s {{ materialEquiv }}, which {{ componentName }} is based off of."
+    },
+    "implementation": {
+      "title": "Implementation",
+      "language": {
+        "html": "HTML",
+        "react": "React"
+      }
+    },
+    "properties": {
+      "title": "Properties",
+      "search": "Search properties",
+      "table": {
+        "name": "Properties",
+        "type": "Type",
+        "default": "Default",
+        "desc": "Description"
+      },
+      "requiredFootnote": "<0></0><1>means required.</1>"
+    },
+    "report": {
+      "text": "<0>Found an issue?</0>Check out our GitHub and create an issue, if you wish. Thank you for your contribution!",
+      "buttonAlt": "Go to GitHub"
+    }
+  }
+}
