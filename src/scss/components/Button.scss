@@ -149,6 +149,10 @@
   &:active::before {
     background-color: var(--primary-translucent-12);
   }
+
+  &.btn--has-icon {
+    padding: 0 0.5rem 0 0.25rem;
+  }
 }
 
 // Icon Button
