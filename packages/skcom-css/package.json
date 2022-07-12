@@ -8,10 +8,14 @@
     "style": "dist\\css\\suankularb-components.min.css",
     "scss": "src\\scss\\core.scss",
     "sideEffects": false,
+    "files": [
+        "dist/**"
+    ],
     "scripts": {
         "dev": "sass --watch src/scss/core.scss dist/css/style.css",
-        "build": "rollup -c",
-        "watch": "rollup -c -w"
+        "build": "rimraf dist && rollup -c",
+        "watch": "rollup -c -w",
+        "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
     },
     "repository": {
         "type": "git",
