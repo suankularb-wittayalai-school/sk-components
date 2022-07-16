@@ -11,7 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist && tsc && rollup -c",
-    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+    "dev": "rollup -c -w",
+    "clean": "rimraf .turbo && rimraf dist"
   },
   "repository": {
     "type": "git",
@@ -29,9 +30,9 @@
   },
   "homepage": "https://github.com/suankularb-wittayalai-school/react-sk-components#readme",
   "dependencies": {
-    "@suankularb-components/css": "*",
     "framer-motion": "^6.2.8",
-    "react-hotkeys-hook": "^3.4.4"
+    "react-hotkeys-hook": "^3.4.4",
+    "@suankularb-components/css": "*"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.3",

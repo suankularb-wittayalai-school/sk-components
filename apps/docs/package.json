@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rimraf .turbo && rimraf node_modules"
+    "clean": "rimraf .turbo"
   },
   "dependencies": {
     "@suankularb-components/css": "*",
