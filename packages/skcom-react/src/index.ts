@@ -1,5 +1,4 @@
-// packages\skcom-css\
-import "@suankularb-components/css/dist/css/suankularb-components.min.css";
+import "./css/suankularb-components.min.css";
 
 export {
   Actions,

@@ -10,8 +10,9 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist && tsc && rollup -c",
-    "dev": "rollup -c -w",
+    "syncStyles": "node syncStyles.js",
+    "build": "npm run syncStyles && rimraf dist && tsc && rollup -c",
+    "dev": "npm run syncStyles && rollup -c -w",
     "clean": "rimraf .turbo && rimraf dist"
   },
   "repository": {
