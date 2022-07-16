@@ -1,42 +1,24 @@
 {
-  "name": "@suankularb-components/css",
-  "version": "2.7.4",
-  "description": "A design system for all Suankularb applications",
-  "module": "dist\\js\\suankularb-components.esm.js",
-  "browser": "dist\\js\\suankularb-components.umd.min.js",
-  "main": "dist/js/suankularb-components.esm.min.js",
-  "style": "dist\\css\\suankularb-components.min.css",
-  "scss": "src\\scss\\core.scss",
-  "scripts": {
-    "dev": "sass --watch src/scss/core.scss dist/css/style.css",
-    "build": "rollup -c",
-    "watch": "rollup -c -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
-  },
-  "keywords": [
-    "css",
-    "component",
-    "suankularb"
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
   ],
-  "author": "Suankularb Wittayalai School",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --no-cache --parallel --continue",
+    "lint": "turbo run lint",
+    "clean": "rimraf node_modules && turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=docs^... && changeset publish"
   },
-  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
   "devDependencies": {
-    "prettier": "^2.6.2",
-    "rollup": "^2.66.1",
-    "rollup-plugin-scss": "^3.0.0",
-    "rollup-plugin-terser": "^7.0.2"
-  },
-  "dependencies": {
-    "sass": "^1.49.0"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@changesets/cli": "^2.22.0",
+    "eslint": "^8.15.0",
+    "eslint-config-acme": "*",
+    "prettier": "^2.5.1",
+    "turbo": "latest"
   }
 }

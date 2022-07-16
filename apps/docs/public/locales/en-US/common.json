@@ -1,0 +1,10 @@
+{
+  "brand": {
+    "name": "SK Components"
+  },
+  "navigation": {
+    "home": "Home",
+    "layouts": "Layouts",
+    "components": "Components"
+  }
+}
