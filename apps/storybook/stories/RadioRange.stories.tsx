@@ -20,7 +20,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   name: "satisfaction",
   steps: 5,
-  minMsg: "Very dissatisfied",
-  maxMsg: "Very satisfied",
+  minLabel: "Very dissatisfied",
+  maxLabel: "Very satisfied",
   onChange: (e: string) => console.log(e),
 };
