@@ -1,5 +1,7 @@
 // Modules
 import { ReactNode } from "react";
+
+// Helpers
 import { classNames } from "../../utils/helpers/elements";
 
 // Types
@@ -28,9 +30,18 @@ const FormElement = ({
   style,
 }: FormElementProps): JSX.Element => (
   <div className={classNames(["form-element", className])} style={style}>
+    {/* Label */}
     <div className="form-element__label">{label}</div>
-    {helperMsg && <div className="form-element__helper">{helperMsg}</div>}
+
+    {/* Helper message */}
+    {helperMsg && !errorMsg && (
+      <div className="form-element__helper">{helperMsg}</div>
+    )}
+
+    {/* Error message */}
     {errorMsg && <div className="form-element__error">{errorMsg}</div>}
+
+    {/* Input */}
     {children}
   </div>
 );
