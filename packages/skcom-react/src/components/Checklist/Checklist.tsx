@@ -14,6 +14,14 @@ export interface ChecklistProps
   onChange: (newValue: any[]) => void;
 }
 
+/**
+ * A list of checkboxes allows the user to select many options 
+ * @param name Used for ID
+ * @param options An array of checkbox options, each include `id`, `value`, `label`
+ * @param value Use as a controlled input
+ * @param defaultValue The value that already is in the `input` element
+ * @param onChange Triggered when the input value changes
+ */
 const Checklist = ({
   name,
   options,

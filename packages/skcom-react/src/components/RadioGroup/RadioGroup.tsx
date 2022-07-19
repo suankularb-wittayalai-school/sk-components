@@ -15,6 +15,14 @@ export interface RadioGroupProps extends SKComponent {
   onChange: (newValue: any) => void;
 }
 
+/**
+ * A list of radio buttons allows the user to select one option out of a list that is always visible
+ * @param name Used for ID
+ * @param options An array of checkbox options, each include `id`, `value`, `label`
+ * @param value Use as a controlled input
+ * @param defaultValue The value that already is in the `input` element
+ * @param onChange Triggered when the input value changes
+ */
 const RadioGroup = ({
   name,
   options,
