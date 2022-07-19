@@ -16,7 +16,7 @@ export interface FormElementProps extends SKComponent {
  * A wrapper for miscellaneous inputs
  * @param label A short description of the input, shows above the input
  * @param helperMsg A message displayed below the input, usually guides or provides an example of what to enter in
- * @param useAutoMsg Tells the user what’s wrong with the input
+ * @param errorMsg Tells the user what’s wrong with the input
  * @param children Checklist, Radio Group, and Range
  */
 const FormElement = ({
