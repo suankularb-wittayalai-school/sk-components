@@ -11,6 +11,7 @@ export {
   CardHeader,
   CardSupportingText,
   CardList,
+  Checklist,
   Chip,
   FilterChip,
   ChipList,

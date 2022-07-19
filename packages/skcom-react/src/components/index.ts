@@ -8,6 +8,7 @@ export {
   CardSupportingText,
 } from "./Card";
 export { default as CardList } from "./CardList";
+export { default as Checklist } from "./Checklist";
 export { default as Chip, ActionChip, FilterChip, InputChip } from "./Chip";
 export {
   default as ChipList,
