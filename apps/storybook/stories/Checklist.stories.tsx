@@ -6,7 +6,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
   component: FormElement,
-  parameters: {},
 } as ComponentMeta<typeof FormElement>;
 
 const Template: ComponentStory<typeof FormElement> = (args) => (

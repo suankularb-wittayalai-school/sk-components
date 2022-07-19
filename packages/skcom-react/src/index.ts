@@ -42,6 +42,7 @@ export {
   Noticebar,
   NoticebarManager,
   RadioGroup,
+  Range,
   Section,
   Snackbar,
   SnackbarManager,
