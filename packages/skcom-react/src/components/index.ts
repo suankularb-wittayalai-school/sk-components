@@ -41,6 +41,7 @@ export { default as LinkButton } from "./LinkButton";
 export { default as Navigation } from "./Navigation";
 export { default as Noticebar, NoticebarManager } from "./Noticebar";
 export { default as RadioGroup } from "./RadioGroup";
+export { default as RadioRange } from "./RadioRange";
 export { default as Range } from "./Range";
 export { default as Section } from "./Section";
 export { default as Snackbar, SnackbarManager } from "./Snackbar";
