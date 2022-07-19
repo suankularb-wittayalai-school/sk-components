@@ -33,8 +33,8 @@ export interface KeyboardInputProps extends SKComponent {
  *
  * @param label The display label/placeholder
  * @param helperMsg A message displayed below the input, usually guides or provides an example of what to enter in
- * @param useAutoMsg Tells the user what’s wrong with the input
- * @param autoError Automatically show helper or error message depending on browser error checking of the input
+ * @param errorMsg Tells the user what’s wrong with the input
+ * @param useAutoMsg Automatically show helper or error message depending on browser error checking of the input
  * @param onChange Triggered when the input value changes
  * @param defaultValue The value that already is in the `input` element
  */
