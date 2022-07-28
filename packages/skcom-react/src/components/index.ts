@@ -8,6 +8,7 @@ export {
   CardSupportingText,
 } from "./Card";
 export { default as CardList } from "./CardList";
+export { default as Checklist } from "./Checklist";
 export { default as Chip, ActionChip, FilterChip, InputChip } from "./Chip";
 export {
   default as ChipList,
@@ -24,6 +25,7 @@ export {
 } from "./Dialog";
 export { default as FAB, FABGroup, FABLink } from "./FAB";
 export { default as FormButton } from "./FormButton";
+export { default as FormElement } from "./FormElement";
 export { default as Header } from "./Header";
 export { default as MaterialIcon } from "./Icon";
 export {
@@ -38,6 +40,9 @@ export { default as LayoutGridCols } from "./LayoutGridCols";
 export { default as LinkButton } from "./LinkButton";
 export { default as Navigation } from "./Navigation";
 export { default as Noticebar, NoticebarManager } from "./Noticebar";
+export { default as RadioGroup } from "./RadioGroup";
+export { default as RadioRange } from "./RadioRange";
+export { default as Range } from "./Range";
 export { default as Section } from "./Section";
 export { default as Snackbar, SnackbarManager } from "./Snackbar";
 export { default as Table } from "./Table";
