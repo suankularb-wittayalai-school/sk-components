@@ -31,15 +31,17 @@
   },
   "homepage": "https://github.com/suankularb-wittayalai-school/react-sk-components#readme",
   "dependencies": {
+    "@suankularb-components/css": "*",
     "framer-motion": "^6.2.8",
     "react-hotkeys-hook": "^3.4.4",
-    "@suankularb-components/css": "*"
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@rollup/plugin-typescript": "^8.3.1",
     "@types/react": "^17.0.43",
+    "@types/react-table": "^7.7.12",
     "eslint-plugin-react-hooks": "^4.3.0",
     "postcss": "^8.4.12",
     "rimraf": "^3.0.2",

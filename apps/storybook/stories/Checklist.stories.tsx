@@ -8,7 +8,7 @@ export default {
   component: FormElement,
 } as ComponentMeta<typeof FormElement>;
 
-const Template: ComponentStory<typeof FormElement> = (args) => (
+const Template: ComponentStory<typeof Checklist> = (args) => (
   <FormElement label={args.label}>
     <Checklist {...args} />
   </FormElement>

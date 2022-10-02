@@ -8,6 +8,7 @@ export interface TableProps extends SKComponent {
   type?: "outlined" | "elevated";
   width?: number;
   children: ReactNode;
+  attr?: React.TableHTMLAttributes<HTMLTableElement>;
 }
 
 /**
@@ -21,6 +22,7 @@ const Table = ({
   className,
   style,
   children,
+  attr,
 }: TableProps): JSX.Element => (
   <div
     className={`${
@@ -29,6 +31,7 @@ const Table = ({
         : "table__wrapper--outlined"
     } ${className || ""}`}
     style={style}
+    {...attr}
   >
     <table className="table" style={{ minWidth: width }}>
       {children}

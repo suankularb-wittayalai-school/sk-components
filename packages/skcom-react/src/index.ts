@@ -18,6 +18,7 @@ export {
   ChipFilterList,
   ChipInputList,
   ChipRadioGroup,
+  DataTable,
   Dialog,
   DialogHeader,
   DialogSection,
