@@ -1,6 +1,6 @@
 // Modules
 import { useEffect } from "react";
-import { useTable, useGlobalFilter, Column } from "react-table";
+import { useTable, useGlobalFilter, Column, HeaderGroup } from "react-table";
 
 // Components
 import Table from "../Table/Table";
@@ -47,13 +47,21 @@ const DataTable = ({
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              <th
+                {...column.getHeaderProps({
+                  className: (
+                    column as HeaderGroup<object> & { className?: string }
+                  ).className,
+                })}
+              >
+                {column.render("Header")}
+              </th>
             ))}
           </tr>
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+        {rows.map((row) => {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
