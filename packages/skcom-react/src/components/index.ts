@@ -16,6 +16,7 @@ export {
   ChipInputList,
   ChipRadioGroup,
 } from "./ChipList";
+export { default as DataTable } from "./DataTable";
 export {
   default as Dialog,
   DialogHeader,
