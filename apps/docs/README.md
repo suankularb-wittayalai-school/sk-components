@@ -1,1 +1,0 @@
-# Suankularb NextJS Template

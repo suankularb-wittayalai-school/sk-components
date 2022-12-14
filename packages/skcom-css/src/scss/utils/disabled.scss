@@ -1,8 +1,0 @@
-.disabled {
-  color: var(--on-surface-translucent-38);
-  accent-color: var(--on-surface-translucent-38);
-}
-
-@mixin disabled() {
-  @extend .disabled;
-}
