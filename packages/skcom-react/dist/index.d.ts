@@ -8,4 +8,12 @@ declare namespace Button {
     var displayName: string;
 }
 
-export { Button, ButtonProps };
+interface ChipProps {
+    children: React.ReactNode;
+}
+declare function Chip(props: ChipProps): JSX.Element;
+declare namespace Chip {
+    var displayName: string;
+}
+
+export { Button, ButtonProps, Chip, ChipProps };

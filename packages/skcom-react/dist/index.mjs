@@ -6,6 +6,16 @@ function Button(props) {
   });
 }
 Button.displayName = "Button";
+
+// src/Chip/index.tsx
+import { jsx as jsx2 } from "react/jsx-runtime";
+function Chip(props) {
+  return /* @__PURE__ */ jsx2("button", {
+    children: props.children
+  });
+}
+Chip.displayName = "Chip";
 export {
-  Button
+  Button,
+  Chip
 };
