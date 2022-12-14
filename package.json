@@ -1,0 +1,27 @@
+{
+  "name": "sk-components",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "reskcom"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "react": "^18.2.0",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "npm@8.19.3"
+}
