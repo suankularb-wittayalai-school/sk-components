@@ -9,4 +9,3 @@ export function Chip(props: ChipProps) {
 }
 
 Chip.displayName = "Chip";
-

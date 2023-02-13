@@ -2,6 +2,7 @@
 import { jsx } from "react/jsx-runtime";
 function Button(props) {
   return /* @__PURE__ */ jsx("button", {
+    className: "button",
     children: props.children
   });
 }
