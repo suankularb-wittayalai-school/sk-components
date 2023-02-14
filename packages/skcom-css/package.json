@@ -9,8 +9,8 @@
     "sass": "1.57.1"
   },
   "scripts": {
-    "build": "sass src:dist/css",
-    "dev": "sass --watch src:dist/css"
+    "build": "sass src:dist/css --style compressed",
+    "dev": "sass --watch src:dist/css --style compressed"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,1 @@
-.button {
-  all: unset;
-  font-family: var(--font-display);
-  background-color: #00658f;
-  color: #ffffff;
-}
-
-/*# sourceMappingURL=button.css.map */
+.button{all:unset;font-family:var(--font-display);background-color:#00658f;color:#fff}/*# sourceMappingURL=button.css.map */

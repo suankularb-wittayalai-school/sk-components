@@ -22,7 +22,7 @@ function styleInject(css, { insertAt } = {}) {
 }
 
 // ../skcom-css/dist/css/components/button.css
-styleInject(".button {\n  all: unset;\n  font-family: var(--font-display);\n  background-color: #00658f;\n  color: #ffffff;\n}\n");
+styleInject(".button {\n  all: unset;\n  font-family: var(--font-display);\n  background-color: #00658f;\n  color: #fff;\n}\n");
 
 // src/Button/index.tsx
 import { jsx } from "react/jsx-runtime";
