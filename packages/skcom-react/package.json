@@ -25,7 +25,15 @@
     "type": "git",
     "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
   },
-  "author": "",
+  "contributors": [
+    {
+      "name": "Siravit Phokeed"
+    },
+    {
+      "name": "Smart Wattanapornmongkol",
+      "website": "https://smartwatt.me/"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
