@@ -11,10 +11,11 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\" && csscomb packages/skcom-css/src"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
+    "csscomb": "^3.1.8",
     "eslint-config-custom": "*",
     "prettier": "latest",
     "react": "^18.2.0",
