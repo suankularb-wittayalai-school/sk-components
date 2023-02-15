@@ -1,5 +1,5 @@
 // Miscellaneous configurations
-:root{
+:root {
   // Static colours
   --white: #ffffff;
   --black: #000000;
@@ -16,9 +16,9 @@
 }
 
 // Palette configurations
-@mixin palette($type: "light"){
+@mixin palette($type: "light") {
   // Light mode
-  @if ($type == "light"){
+  @if ($type == "light") {
     // Primary
     --primary: #00658f;
     --on-primary: #ffffff;
@@ -66,7 +66,7 @@
   }
 
   // Dark mode
-  @else if ($type == "dark"){
+  @else if ($type == "dark") {
     // Primary
     --primary: #80cfff;
     --on-primary: #00344c;
@@ -116,23 +116,23 @@
 }
 
 // Browser preferences support
-@media (prefers-color-scheme: light){
-  :root{
+@media (prefers-color-scheme: light) {
+  :root {
     @include palette("light");
   }
 }
 
-@media (prefers-color-scheme: dark){
-  :root{
+@media (prefers-color-scheme: dark) {
+  :root {
     @include palette("dark");
   }
 }
 
 // Manual class support
-.light{
+.light {
   @include palette("light");
 }
 
-.dark{
+.dark {
   @include palette("dark");
 }
