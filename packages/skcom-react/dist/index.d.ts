@@ -47,12 +47,28 @@ declare namespace Button {
     var displayName: string;
 }
 
-interface ChipProps {
-    children: React.ReactNode;
+interface MaterialIconProps extends SKComponent {
+    icon: string;
+    fill?: boolean;
+    weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700;
+    grade?: -25 | 0 | 200;
+    size?: 20 | 24 | 40 | 48;
 }
-declare function Chip(props: ChipProps): JSX.Element;
-declare namespace Chip {
+/**
+ * Icons are essential to any web design. They orient the users, help user navigate, save space.
+ * Material Icon uses the “Material Symbol” icon font from Google.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
+ *
+ * @param icon Material Icon uses the “Material Symbol” font, where each icon has its own corresponding text string. You can find the list of all icons at [Google Fonts](https://fonts.google.com/icons).
+ * @param fill If the icon is filled or not.
+ * @param weight How thick the strokes are.
+ * @param grade `grade` also adjusts the icon’s thickness, but more subtly.
+ * @param size How large/small the icon is.
+ */
+declare function MaterialIcon({ icon, fill, weight, grade, size, style, className, }: MaterialIconProps): JSX.Element;
+declare namespace MaterialIcon {
     var displayName: string;
 }
 
-export { Button, ButtonProps, Chip, ChipProps };
+export { Button, ButtonProps, MaterialIcon, MaterialIconProps };

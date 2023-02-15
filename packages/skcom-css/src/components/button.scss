@@ -1,6 +1,7 @@
 @use "../abstracts/animation.scss";
 @use "../abstracts/palette.scss";
 @use "../abstracts/typography.scss";
+@use "../components/icon.scss";
 
 // Base Button
 .skc-button {
@@ -28,6 +29,14 @@
     opacity: 0;
     border-radius: inherit;
   }
+
+  &:has(.skc-button__icon:first-child) {
+    padding-left: 1rem;
+  }
+}
+
+.skc-button__icon .skc-icon {
+  @extend .skc-icon--size-20;
 }
 
 .skc-button__label {
@@ -161,9 +170,10 @@
   }
 }
 
+// Text Button
 .skc-button.skc-button--text {
-  color: var(--primary);
   padding: 0.625rem 0.75rem;
+  color: var(--primary);
 
   // States
   &::before {
@@ -196,5 +206,10 @@
     &:focus {
       border-color: var(--error);
     }
+  }
+
+  // Special padding when has Icon
+  &:has(.skc-button__icon:first-child) {
+    padding-left: 0.75rem;
   }
 }

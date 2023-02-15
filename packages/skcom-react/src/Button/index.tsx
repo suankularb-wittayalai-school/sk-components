@@ -81,7 +81,10 @@ export function Button({
     (loading || disabled) && "skc-button--disabled",
   ]);
   const content = (
-    <>{children && <span className="skc-button__label">{children}</span>}</>
+    <>
+      {icon && <div className="skc-button__icon">{icon}</div>}
+      {children && <span className="skc-button__label">{children}</span>}
+    </>
   );
 
   return href && element ? (

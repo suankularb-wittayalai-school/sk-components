@@ -39,6 +39,7 @@
       "font-weight",
       "font-style",
       "font-variant",
+      "font-variation-settings",
       "font-size-adjust",
       "font-stretch",
       "font-effect",
@@ -46,6 +47,8 @@
       "font-emphasize-position",
       "font-emphasize-style",
       "font-smooth",
+      "-webkit-font-smoothing",
+      "src",
       "line-height",
       "position",
       "z-index",
@@ -131,6 +134,7 @@
       "text-align",
       "text-align-last",
       "vertical-align",
+      "direction",
       "white-space",
       "text-decoration",
       "text-emphasis",
@@ -153,7 +157,6 @@
       "hyphens",
       "pointer-events",
       "opacity",
-      "filter:progid:DXImageTransform.Microsoft.Alpha(Opacity",
       "color",
       "border",
       "border-width",
@@ -192,7 +195,6 @@
       "outline-color",
       "outline-offset",
       "background",
-      "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader",
       "background-color",
       "background-image",
       "background-repeat",
@@ -205,7 +207,6 @@
       "background-size",
       "box-decoration-break",
       "box-shadow",
-      "filter:progid:DXImageTransform.Microsoft.gradient",
       "text-shadow"
     ]
   ]
