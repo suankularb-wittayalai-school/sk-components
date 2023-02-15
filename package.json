@@ -11,7 +11,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\" && csscomb packages/skcom-css/src"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\" && csscomb packages && csscomb apps"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

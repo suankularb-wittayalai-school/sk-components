@@ -1,5 +1,5 @@
 {
-  "exclude": [".git/**", "node_modules/**", "bower_components/**"],
+  "exclude": [".git/**", "node_modules/**", "bower_components/**", "dist/**", "abstracts/**"],
   "always-semicolon": true,
   "block-indent": "  ",
   "color-case": "lower",
@@ -23,6 +23,8 @@
   "vendor-prefix-align": true,
   "verbose": true,
   "sort-order": [
+    ["$extend", "$include"],
+    ["all"],
     [
       "font",
       "font-family",
@@ -61,6 +63,7 @@
       "flex-shrink",
       "flex-wrap",
       "justify-content",
+      "gap",
       "order"
     ],
     [
