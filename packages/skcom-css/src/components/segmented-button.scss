@@ -1,0 +1,44 @@
+@use "../abstracts/palette.scss";
+
+.skc-segmented-button {
+  display: flex;
+  flex-direction: row;
+
+  // Adjust rounded corners depending on position
+  > .skc-button {
+    border-radius: 0;
+  }
+
+  > .skc-button:first-child {
+    border-radius: var(--rounded-full) 0 0 var(--rounded-full);
+  }
+
+  > .skc-button:last-child {
+    border-radius: 0 var(--rounded-full) var(--rounded-full) 0;
+  }
+
+  // Remove conflicting middle border
+  > .skc-button:not(:first-child) {
+    border-left-width: 0;
+  }
+}
+
+// Density
+.skc-button {
+  .skc-segmented-button.skc-segmented-button--density-0 > & {
+    padding-block: 0.625rem;
+  }
+  .skc-segmented-button.skc-segmented-button--density-\[-1\] > & {
+    padding-block: 0.5rem;
+  }
+  .skc-segmented-button.skc-segmented-button--density-\[-2\] > & {
+    padding-block: 0.375rem;
+  }
+  .skc-segmented-button.skc-segmented-button--density-\[-3\] > & {
+    padding-block: 0.25rem;
+  }
+}
+
+.skc-segmented-button.skc-segmented-button--full > .skc-button {
+  width: 100%;
+}

@@ -9,6 +9,7 @@ import "@suankularb-components/css/dist/css/components/button.css";
 
 // Utilities
 import { cn } from "../utils/className";
+import { MaterialIcon } from "../MaterialIcon";
 
 export interface ButtonProps extends SKComponent {
   children?: React.ReactNode;
@@ -64,37 +65,47 @@ export function Button({
   onClick,
   href,
   element,
+  style,
+  className,
 }: ButtonProps) {
-  const className = cn([
-    "skc-button",
-    appearance === "filled"
-      ? "skc-button--filled"
-      : appearance === "tonal"
-      ? "skc-button--tonal"
-      : appearance === "outlined"
-      ? "skc-button--outlined"
-      : appearance === "text"
-      ? "skc-button--text"
-      : undefined,
-    selected && "skc-button--selected",
-    dangerous && "skc-button--dangerous",
-    (loading || disabled) && "skc-button--disabled",
-  ]);
+  const props = {
+    style,
+    className: cn([
+      "skc-button",
+      appearance === "filled"
+        ? "skc-button--filled"
+        : appearance === "tonal"
+        ? "skc-button--tonal"
+        : appearance === "outlined"
+        ? "skc-button--outlined"
+        : appearance === "text"
+        ? "skc-button--text"
+        : undefined,
+      selected && "skc-button--selected",
+      dangerous && "skc-button--dangerous",
+      (loading || disabled) && "skc-button--disabled",
+      className,
+    ]),
+  };
   const content = (
     <>
-      {icon && <div className="skc-button__icon">{icon}</div>}
+      {(selected || icon) && (
+        <div className="skc-button__icon">
+          {selected ? <MaterialIcon icon="done" /> : icon}
+        </div>
+      )}
       {children && <span className="skc-button__label">{children}</span>}
     </>
   );
 
   return href && element ? (
-    element({ children: content, href, className })
+    element({ ...props, children: content, href })
   ) : href ? (
-    <a className={className} href={href}>
+    <a {...props} href={href}>
       {content}
     </a>
   ) : (
-    <button type="button" className={className} onClick={onClick}>
+    <button {...props} type="button" onClick={onClick}>
       {content}
     </button>
   );

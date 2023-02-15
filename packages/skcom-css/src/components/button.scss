@@ -153,7 +153,22 @@
   }
 
   &:focus {
+    z-index: 10;
     border-color: var(--primary);
+  }
+
+  // Selected
+  &.skc-button--selected {
+    color: var(--on-secondary-container);
+    background-color: var(--secondary-container);
+
+    &::before {
+      background-color: var(--on-secondary-container);
+    }
+
+    &:focus {
+      border-color: var(--secondary);
+    }
   }
 
   // Dangerous
