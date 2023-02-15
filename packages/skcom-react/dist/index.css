@@ -1,6 +1,7 @@
 /* ../skcom-css/dist/css/components/button.css */
 .button {
   font-family: var(--font-display);
-  background-color: #00658f;
+
   color: #ffffff;
+  background-color: #00658f;
 }

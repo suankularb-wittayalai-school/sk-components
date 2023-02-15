@@ -1,19 +1,127 @@
+@use "../abstracts/animation.scss";
 @use "../abstracts/palette.scss";
 @use "../abstracts/typography.scss";
 
 .skc-button {
+  all: unset;
+
   font-family: var(--font-display);
+
+  position: relative;
 
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
+  gap: 0.5rem;
 
   padding: 0.625rem 1.5rem;
+
+  cursor: pointer;
+
+  border-radius: var(--rounded-full);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    content: "";
+    transition: opacity var(--motion-short-4) var(--easing-standard);
+    pointer-events: none;
+
+    opacity: 0;
+    border-radius: inherit;
+  }
+}
+
+.skc-button__label {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25rem;
+}
+
+.skc-button.skc-button--filled {
+  transition: box-shadow var(--motion-short-4) var(--easing-standard);
 
   color: var(--on-primary);
   background-color: var(--primary);
 
-  all: unset;
-  gap: 0.5rem;
+  // States
+  &::before {
+    background-color: var(--on-primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--on-error);
+    background-color: var(--error);
+
+    &::before {
+      background-color: var(--on-error);
+    }
+  }
+}
+
+.skc-button.skc-button--outlined {
+  transition: border-color var(--motion-short-4) var(--easing-standard);
+
+  color: var(--primary);
+  border: 1px solid var(--outline);
+
+  // States
+  &::before {
+    background-color: var(--primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:focus {
+    border-color: var(--primary);
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--error);
+
+    &::before {
+      background-color: var(--error);
+    }
+
+    &:focus {
+      border-color: var(--error);
+    }
+  }
 }
