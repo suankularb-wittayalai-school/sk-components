@@ -1,15 +1,6 @@
-// A shorthand for absolute positioning
-@mixin position($top, $left, $bottom, $right) {
-  position: absolute;
-  top: $top;
-  right: $right;
-  bottom: $bottom;
-  left: $left;
-}
-
 // Truncate text content
 @mixin truncate($lines: 1, $word-wrap: break-word) {
-  @if $lines == 1 {
+  @if $lines ==1 {
     overflow: hidden;
 
     white-space: nowrap;
@@ -30,19 +21,19 @@
 
 // Responsive breakpoints
 @mixin breakpoint($breakpoint) {
-  @if $breakpoint == "sm" {
+  @if $breakpoint =="sm" {
     @media only screen and (min-width: 600px) {
       @content;
     }
   }
 
-  @if $breakpoint == "md" {
+  @if $breakpoint =="md" {
     @media only screen and (min-width: 905px) {
       @content;
     }
   }
 
-  @if $breakpoint == "lg" {
+  @if $breakpoint =="lg" {
     @media only screen and (min-width: 1440px) {
       @content;
     }
