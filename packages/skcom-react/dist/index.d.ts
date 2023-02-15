@@ -1,32 +1,28 @@
-import * as React from "react";
-import React__default from "react";
+import * as React from 'react';
+import React__default from 'react';
 
 interface SKComponent {
-  className?: string;
-  style?: React__default.CSSProperties;
+    className?: string;
+    style?: React__default.CSSProperties;
 }
 
 interface ButtonProps extends SKComponent {
-  children?: React.ReactNode;
-  appearance: "filled" | "tonal" | "outlined" | "text";
-  icon?: JSX.Element;
-  alt?: string;
-  tooltip?: string;
-  selected?: boolean;
-  dangerous?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  onClick?: () => any;
-  href?: string;
-  element?: ({
-    children,
-    href,
-    className,
-  }: {
-    children: React.ReactNode;
-    href: string;
-    className: string;
-  }) => any;
+    children?: React.ReactNode;
+    appearance: "filled" | "tonal" | "outlined" | "text";
+    icon?: JSX.Element;
+    alt?: string;
+    tooltip?: string;
+    selected?: boolean;
+    dangerous?: boolean;
+    loading?: boolean;
+    disabled?: boolean;
+    onClick?: () => any;
+    href?: string;
+    element?: ({ children, href, className, }: {
+        children: React.ReactNode;
+        href: string;
+        className: string;
+    }) => any;
 }
 /**
  * Button helps users take action, whether it’s logging in, liking a post, or going to a page.
@@ -46,30 +42,17 @@ interface ButtonProps extends SKComponent {
  * @param href The URL of the page this Button leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Button({
-  children,
-  appearance,
-  icon,
-  alt,
-  tooltip,
-  selected,
-  dangerous,
-  loading,
-  disabled,
-  onClick,
-  href,
-  element,
-}: ButtonProps): any;
+declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, onClick, href, element, }: ButtonProps): any;
 declare namespace Button {
-  var displayName: string;
+    var displayName: string;
 }
 
 interface ChipProps {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
 declare function Chip(props: ChipProps): JSX.Element;
 declare namespace Chip {
-  var displayName: string;
+    var displayName: string;
 }
 
 export { Button, ButtonProps, Chip, ChipProps };

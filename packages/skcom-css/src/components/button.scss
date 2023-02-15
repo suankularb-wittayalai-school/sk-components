@@ -79,6 +79,48 @@
   }
 }
 
+// Tonal Button
+.skc-button.skc-button--tonal {
+  transition: box-shadow var(--motion-short-4) var(--easing-standard);
+  color: var(--on-primary-container);
+  background-color: var(--primary-container);
+
+  // States
+  &::before {
+    background-color: var(--on-primary-container);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--on-error-container);
+    background-color: var(--error-container);
+
+    &::before {
+      background-color: var(--on-error-container);
+    }
+  }
+}
+
 // Outlined Button
 .skc-button.skc-button--outlined {
   transition: border-color var(--motion-short-4) var(--easing-standard);
