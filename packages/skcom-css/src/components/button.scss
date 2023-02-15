@@ -2,23 +2,18 @@
 @use "../abstracts/palette.scss";
 @use "../abstracts/typography.scss";
 
+// Base Button
 .skc-button {
   all: unset;
-
   font-family: var(--font-display);
-
   position: relative;
-
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
   gap: 0.5rem;
-
   padding: 0.625rem 1.5rem;
-
   cursor: pointer;
-
   border-radius: var(--rounded-full);
 
   &::before {
@@ -27,11 +22,9 @@
     right: 0;
     bottom: 0;
     left: 0;
-
     content: "";
     transition: opacity var(--motion-short-4) var(--easing-standard);
     pointer-events: none;
-
     opacity: 0;
     border-radius: inherit;
   }
@@ -44,9 +37,9 @@
   line-height: 1.25rem;
 }
 
+// Filled Button
 .skc-button.skc-button--filled {
   transition: box-shadow var(--motion-short-4) var(--easing-standard);
-
   color: var(--on-primary);
   background-color: var(--primary);
 
@@ -86,9 +79,9 @@
   }
 }
 
+// Outlined Button
 .skc-button.skc-button--outlined {
   transition: border-color var(--motion-short-4) var(--easing-standard);
-
   color: var(--primary);
   border: 1px solid var(--outline);
 
