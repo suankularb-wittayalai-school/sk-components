@@ -160,3 +160,41 @@
     }
   }
 }
+
+.skc-button.skc-button--text {
+  color: var(--primary);
+  padding: 0.625rem 0.75rem;
+
+  // States
+  &::before {
+    background-color: var(--primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:focus {
+    border-color: var(--primary);
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--error);
+
+    &::before {
+      background-color: var(--error);
+    }
+
+    &:focus {
+      border-color: var(--error);
+    }
+  }
+}
