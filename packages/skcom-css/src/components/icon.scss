@@ -1,3 +1,5 @@
+@use "../abstracts/mixins.scss" as mix;
+
 // Base Icon
 .skc-icon {
   font-family: "Material Symbols Outlined";
@@ -42,6 +44,12 @@
 @each $grade in 0, 200 {
   .skc-icon--grade-#{$grade} {
     font-variation-settings: "wght" $grade;
+  }
+}
+
+@include mix.scheme("dark") {
+  .skc-icon {
+    font-variation-settings: "GRAD" -25;
   }
 }
 

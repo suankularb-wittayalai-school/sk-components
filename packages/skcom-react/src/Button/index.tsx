@@ -69,6 +69,8 @@ export function Button({
   className,
 }: ButtonProps) {
   const props = {
+    "aria-label": alt,
+    title: tooltip,
     style,
     className: cn([
       "skc-button",
