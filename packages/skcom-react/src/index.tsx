@@ -1,3 +1,4 @@
+export { Actions, type ActionsProps } from "./components/Actions";
 export { Button, type ButtonProps } from "./components/Button";
 export {
   SegmentedButton,

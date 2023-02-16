@@ -1,0 +1,28 @@
+.skc-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skc-actions.skc-actions--left {
+  justify-content: flex-start;
+}
+
+.skc-actions.skc-actions--center {
+  justify-content: center;
+}
+
+.skc-actions.skc-actions--right {
+  justify-content: flex-end;
+}
+
+.skc-actions.skc-actions--full {
+  flex-wrap: nowrap;
+
+  > .skc-button {
+    width: 100%;
+  }
+}

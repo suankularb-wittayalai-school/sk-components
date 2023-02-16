@@ -7,6 +7,23 @@ interface SKComponent {
     style?: React__default.CSSProperties;
 }
 
+interface ActionsProps extends SKComponent {
+    children: React.ReactNode;
+    align?: "left" | "center" | "right" | "full";
+}
+/**
+ * A row of Buttons. Actions handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param children Actions contains Buttons; the recommended limit is 3.
+ * @param align How the Buttons should be positioned.
+ */
+declare function Actions({ children, align, style, className }: ActionsProps): JSX.Element;
+declare namespace Actions {
+    var displayName: string;
+}
+
 interface ButtonProps extends SKComponent {
     children?: React.ReactNode;
     appearance: "filled" | "tonal" | "outlined" | "text";
@@ -135,4 +152,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Button, ButtonProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, Button, ButtonProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps, useAnimationConfig };
