@@ -1,7 +1,7 @@
 @use "../abstracts/animation.scss";
 @use "../abstracts/palette.scss";
 @use "../abstracts/typography.scss";
-@use "../components/icon.scss";
+@use "../components/icon.scss" as ci;
 
 // Base Button
 .skc-button {
@@ -54,7 +54,9 @@
 
 // Icon
 .skc-button__icon .skc-icon {
-  @extend .skc-icon--size-20;
+  @include ci.icon(0, 400, 0, 20);
+  transition: font-variation-settings var(--motion-short-4)
+    var(--easing-standard);
 }
 
 // Label

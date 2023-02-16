@@ -4,7 +4,7 @@ import { BezierDefinition, Tween } from "framer-motion";
 /**
  * A hook with duration and easing definitions for use with Framer Motion.
  * The definitions can be used with {@link transition}.
- * 
+ *
  * @returns An object with durations in `duration` and easing definitions in `easing`.
  */
 export function useAnimationConfig() {
@@ -47,12 +47,12 @@ export function useAnimationConfig() {
 
 /**
  * Create a Framer Motion Tween object from a duration and an easing.
- * 
+ *
  * @see {@link https://www.framer.com/motion/transition/#tween Framer Motion documentation}
- * 
+ *
  * @param duration How long the transition takes. Use the `duration` key from {@link useAnimationConfig}.
  * @param easing The easing definition. Use the `easing` key from {@link useAnimationConfig}.
- * 
+ *
  * @returns A Framer Motion Tween object.
  */
 export function transition(

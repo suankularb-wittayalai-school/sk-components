@@ -6,7 +6,7 @@
   font-size: 24px;
   font-weight: normal;
   font-style: normal;
-  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   -webkit-font-smoothing: antialiased;
   line-height: 1;
   display: block;
@@ -29,34 +29,33 @@
   font-variation-settings: "FILL" 1;
 }
 
-// Weight
-@each $weight in 100, 200, 300, 400, 500, 600, 700 {
-  .skc-icon--weight-#{$weight} {
-    font-variation-settings: "wght" $weight;
-  }
+@mixin icon($fill, $weight, $grade, $size) {
+  font-size: #{$size}px;
+  font-variation-settings: "FILL" $fill, "wght" $weight, "GRAD" $grade,
+    "opsz" $size;
 }
 
-// Grade
-.skc-icon-grade-\[-25\] {
-  font-variation-settings: "GRAD" -25;
-}
+$fill-verbose: (
+  0: "outlined",
+  1: "filled",
+);
 
-@each $grade in 0, 200 {
-  .skc-icon--grade-#{$grade} {
-    font-variation-settings: "wght" $grade;
+$grade-formatted: (-25: "\\[-25\\]", 0: "0", 200: "200");
+
+@each $fill in 0, 1 {
+  @each $weight in 100, 200, 300, 400, 500, 600, 700 {
+    @each $grade in -25, 0, 200 {
+      @each $size in 20, 24, 40, 48 {
+        .skc-icon--#{map-get($fill-verbose, $fill)}-#{$weight}-#{map-get($grade-formatted, $grade)}-#{$size} {
+          @include icon($fill, $weight, $grade, $size);
+        }
+      }
+    }
   }
 }
 
 @include mix.scheme("dark") {
   .skc-icon {
-    font-variation-settings: "GRAD" -25;
-  }
-}
-
-// Size
-@each $size in 20, 24, 40, 48 {
-  .skc-icon--size-#{$size} {
-    font-size: #{$size}px;
-    font-variation-settings: "opsz" $size;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   }
 }
