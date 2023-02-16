@@ -1,5 +1,9 @@
 // External libraries
+import { motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { MaterialIcon } from "../MaterialIcon";
 
 // Types
 import { SKComponent } from "../types";
@@ -9,7 +13,6 @@ import "@suankularb-components/css/dist/css/components/button.css";
 
 // Utilities
 import { cn } from "../utils/className";
-import { MaterialIcon } from "../MaterialIcon";
 
 export interface ButtonProps extends SKComponent {
   children?: React.ReactNode;
@@ -68,7 +71,17 @@ export function Button({
   style,
   className,
 }: ButtonProps) {
+  const buttonRef = React.useRef(null);
+  const rippleControls = useAnimationControls();
+  const [diameter, setDiameter] = React.useState(0);
+  React.useEffect(() => {
+    const button = buttonRef.current as any;
+    setDiameter(Math.max(button.clientWidth, button.clientHeight));
+  }, []);
+  const [position, setPosition] = React.useState({ top: "0", left: "0" });
+
   const props = {
+    ref: buttonRef,
     "aria-label": alt,
     title: tooltip,
     style,
@@ -88,6 +101,21 @@ export function Button({
       (loading || disabled) && "skc-button--disabled",
       className,
     ]),
+    onClick: (event: React.MouseEvent) => {
+      if (onClick && !href) onClick();
+
+      const button = buttonRef.current as any;
+      setPosition({
+        top: `${event.clientY - (button.offsetTop + diameter / 2)}px`,
+        left: `${event.clientX - (button.offsetLeft + diameter / 2)}px`,
+      });
+      rippleControls.set({ scale: 0, opacity: 0.36 });
+      rippleControls.start({
+        scale: 4,
+        opacity: 0,
+        transition: { duration: 0.4 },
+      });
+    },
   };
   const content = (
     <>
@@ -107,8 +135,14 @@ export function Button({
       {content}
     </a>
   ) : (
-    <button {...props} type="button" onClick={onClick}>
+    <button {...props} type="button">
       {content}
+      <motion.span
+        initial={{ scale: 0, opacity: 0.36 }}
+        animate={rippleControls}
+        className="skc-button__ripple"
+        style={{ ...position, width: `${diameter}px`, height: `${diameter}px` }}
+      />
     </button>
   );
 }

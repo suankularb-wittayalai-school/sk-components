@@ -123,6 +123,7 @@
       "transition-property",
       "transform",
       "transform-origin",
+      "filter",
       "animation",
       "animation-name",
       "animation-duration",
@@ -207,7 +208,8 @@
       "background-size",
       "box-decoration-break",
       "box-shadow",
-      "text-shadow"
+      "text-shadow",
+      "-webkit-tap-highlight-color"
     ]
   ]
 }

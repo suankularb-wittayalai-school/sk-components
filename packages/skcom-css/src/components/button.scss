@@ -9,6 +9,7 @@
   font-family: var(--font-display);
   position: relative;
   display: flex;
+  overflow: hidden;
   align-items: center;
   flex-direction: row;
   justify-content: center;
@@ -16,7 +17,9 @@
   padding: 0.625rem 1.5rem;
   cursor: pointer;
   border-radius: var(--rounded-full);
+  -webkit-tap-highlight-color: transparent;
 
+  // State layer
   &::before {
     position: absolute;
     top: 0;
@@ -30,15 +33,31 @@
     border-radius: inherit;
   }
 
+  // With Icon padding
   &:has(.skc-button__icon:first-child) {
     padding-left: 1rem;
   }
 }
 
+// Ripple
+.skc-button__ripple {
+  position: absolute;
+  z-index: 90;
+  content: "";
+  transform: scale(0);
+  filter: blur(16px);
+  pointer-events: none;
+  opacity: 0.36;
+  border-radius: 50%;
+  background-color: var(--on-primary);
+}
+
+// Icon
 .skc-button__icon .skc-icon {
   @extend .skc-icon--size-20;
 }
 
+// Label
 .skc-button__label {
   font-family: var(--font-display);
   font-size: var(--text-base);
@@ -53,7 +72,8 @@
   background-color: var(--primary);
 
   // States
-  &::before {
+  &::before,
+  .skc-button__ripple {
     background-color: var(--on-primary);
   }
 
@@ -82,7 +102,8 @@
     color: var(--on-error);
     background-color: var(--error);
 
-    &::before {
+    &::before,
+    .skc-button__ripple {
       background-color: var(--on-error);
     }
   }
@@ -95,7 +116,8 @@
   background-color: var(--secondary-container);
 
   // States
-  &::before {
+  &::before,
+  .skc-button__ripple {
     background-color: var(--on-secondary-container);
   }
 
@@ -124,7 +146,8 @@
     color: var(--on-error-container);
     background-color: var(--error-container);
 
-    &::before {
+    &::before,
+    .skc-button__ripple {
       background-color: var(--on-error-container);
     }
   }
@@ -137,7 +160,8 @@
   border: 1px solid var(--outline);
 
   // States
-  &::before {
+  &::before,
+  .skc-button__ripple {
     background-color: var(--primary);
   }
 
@@ -162,7 +186,8 @@
     color: var(--on-secondary-container);
     background-color: var(--secondary-container);
 
-    &::before {
+    &::before,
+    .skc-button__ripple {
       background-color: var(--on-secondary-container);
     }
 
@@ -175,7 +200,8 @@
   &.skc-button--dangerous {
     color: var(--error);
 
-    &::before {
+    &::before,
+    .skc-button__ripple {
       background-color: var(--error);
     }
 
@@ -191,7 +217,8 @@
   color: var(--primary);
 
   // States
-  &::before {
+  &::before,
+  .skc-button__ripple {
     background-color: var(--primary);
   }
 
@@ -214,7 +241,8 @@
   &.skc-button--dangerous {
     color: var(--error);
 
-    &::before {
+    &::before,
+    .skc-button__ripple {
       background-color: var(--error);
     }
 
@@ -223,7 +251,7 @@
     }
   }
 
-  // Special padding when has Icon
+  // With Icon padding
   &:has(.skc-button__icon:first-child) {
     padding-left: 0.75rem;
   }
