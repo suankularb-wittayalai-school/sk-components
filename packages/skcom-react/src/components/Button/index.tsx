@@ -79,7 +79,9 @@ export function Button({
   const [diameter, setDiameter] = React.useState(0);
   React.useEffect(() => {
     const button = buttonRef.current as any;
-    setDiameter(Math.max(button.clientWidth, button.clientHeight));
+    setDiameter(
+      Math.min(Math.max(button.clientWidth, button.clientHeight), 160)
+    );
   }, []);
   const [position, setPosition] = React.useState({ top: "0", left: "0" });
 
