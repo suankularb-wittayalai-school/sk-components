@@ -55,7 +55,8 @@
 // Icon
 .skc-button__icon .skc-icon {
   @include ci.icon(0, 400, 0, 20);
-  transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
+  transition: font-variation-settings var(--motion-short-4)
+    var(--easing-standard);
 }
 
 // Label
@@ -89,8 +90,7 @@
     }
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     box-shadow: var(--shadow-1);
   }
 
@@ -133,8 +133,7 @@
     }
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     box-shadow: var(--shadow-1);
   }
 
