@@ -2,13 +2,13 @@
 import * as React from "react";
 
 // Types
-import { SKComponent } from "../types";
+import { SKComponent } from "../../types";
 
 // Styles
 import "@suankularb-components/css/dist/css/components/segmented-button.css";
 
 // Utilities
-import { cn } from "../utils/className";
+import { cn } from "../../utils/className";
 
 export interface SegmentedButtonProps extends SKComponent {
   children: React.ReactNode;

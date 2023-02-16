@@ -1,5 +1,6 @@
 import * as React from 'react';
 import React__default from 'react';
+import { BezierDefinition } from 'framer-motion';
 
 interface SKComponent {
     className?: string;
@@ -92,4 +93,46 @@ declare namespace MaterialIcon {
     var displayName: string;
 }
 
-export { Button, ButtonProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps };
+/**
+ * A hook with duration and easing definitions for use with Framer Motion.
+ * The definitions can be used with {@link transition}.
+ *
+ * @returns An object with durations in `duration` and easing definitions in `easing`.
+ */
+declare function useAnimationConfig(): {
+    /**
+     * Duration: how long the transition takes.
+     */
+    duration: {
+        short1: number;
+        short2: number;
+        short3: number;
+        short4: number;
+        medium1: number;
+        medium2: number;
+        medium3: number;
+        medium4: number;
+        long1: number;
+        long2: number;
+        long3: number;
+        long4: number;
+        extraLong1: number;
+        extraLong2: number;
+        extraLong3: number;
+        extraLong4: number;
+    };
+    /**
+     * Easing: the easing definition.
+     */
+    easing: {
+        linear: BezierDefinition;
+        standard: BezierDefinition;
+        standardAccelerate: BezierDefinition;
+        standardDecelerate: BezierDefinition;
+        emphasized: BezierDefinition;
+        emphasizedAccelerate: BezierDefinition;
+        emphasizedDecelerate: BezierDefinition;
+    };
+};
+
+export { Button, ButtonProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps, useAnimationConfig };

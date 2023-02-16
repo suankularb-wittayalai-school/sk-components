@@ -6,13 +6,14 @@ import * as React from "react";
 import { MaterialIcon } from "../MaterialIcon";
 
 // Types
-import { SKComponent } from "../types";
+import { SKComponent } from "../../types";
 
 // Styles
 import "@suankularb-components/css/dist/css/components/button.css";
 
 // Utilities
-import { cn } from "../utils/className";
+import { cn } from "../../utils/className";
+import { transition, useAnimationConfig } from "../../utils/animation";
 
 export interface ButtonProps extends SKComponent {
   children?: React.ReactNode;
@@ -71,6 +72,8 @@ export function Button({
   style,
   className,
 }: ButtonProps) {
+  const { duration, easing } = useAnimationConfig();
+
   const buttonRef = React.useRef(null);
   const rippleControls = useAnimationControls();
   const [diameter, setDiameter] = React.useState(0);
@@ -113,7 +116,7 @@ export function Button({
       rippleControls.start({
         scale: 4,
         opacity: 0,
-        transition: { duration: 0.4 },
+        transition: transition(duration.long4, easing.standard),
       });
     },
   };

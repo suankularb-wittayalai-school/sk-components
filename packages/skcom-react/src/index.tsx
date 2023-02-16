@@ -1,3 +1,11 @@
-export { Button, type ButtonProps } from "./Button";
-export { SegmentedButton, type SegmentedButtonProps } from "./SegmentedButton";
-export { MaterialIcon, type MaterialIconProps } from "./MaterialIcon";
+export { Button, type ButtonProps } from "./components/Button";
+export {
+  SegmentedButton,
+  type SegmentedButtonProps,
+} from "./components/SegmentedButton";
+export {
+  MaterialIcon,
+  type MaterialIconProps,
+} from "./components/MaterialIcon";
+
+export { useAnimationConfig } from "./utils/animation";
