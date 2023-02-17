@@ -85,6 +85,23 @@ export function Button({
   }, []);
   const [position, setPosition] = React.useState({ top: "0", left: "0" });
 
+  function calculatePosition(x: number, y: number) {
+    const button = buttonRef.current as any;
+    return {
+      top: `${y - (button.offsetTop + diameter / 2)}px`,
+      left: `${x - (button.offsetLeft + diameter / 2)}px`,
+    };
+  }
+
+  function animateRipple() {
+    rippleControls.set({ scale: 0, opacity: 0.36 });
+    rippleControls.start({
+      scale: 4,
+      opacity: 0,
+      transition: transition(duration.long4, easing.standard),
+    });
+  }
+
   const props = {
     ref: buttonRef,
     "aria-label": alt,
@@ -106,20 +123,37 @@ export function Button({
       (loading || disabled) && "skc-button--disabled",
       className,
     ]),
-    onClick: (event: React.MouseEvent) => {
-      if (onClick && !href) onClick();
+    // Actual click functionality passed in via `onClick`
+    onClick,
 
+    // Use the mouse position to calculate the ripple position and animate it
+    onMouseDown: (event: React.MouseEvent) => {
+      setPosition(calculatePosition(event.pageX, event.pageY));
+      animateRipple();
+    },
+    // Use the touch position to calculate the ripple position and animate it
+    onTouchStart: (event: React.TouchEvent) => {
+      // Ignore multi-touch
+      if (event.touches.length !== 1) return;
+
+      const touch = event.touches[0];
+      setPosition(calculatePosition(touch.pageX, touch.pageY));
+      animateRipple();
+    },
+    // On key down, put the ripple in the middle of the Button and animate it
+    onKeyDown: (event: React.KeyboardEvent) => {
+      // Only allow Enter and Space keys as only those can trigger `onClick`
+      if (!["Enter", " "].includes(event.key)) return;
+
+      // Set the ripple position to the middle of the Button
       const button = buttonRef.current as any;
       setPosition({
-        top: `${event.clientY - (button.offsetTop + diameter / 2)}px`,
-        left: `${event.clientX - (button.offsetLeft + diameter / 2)}px`,
+        top: `${button.clientHeight / 2 - diameter / 2}px`,
+        left: `${button.clientWidth / 2 - diameter / 2}px`,
       });
-      rippleControls.set({ scale: 0, opacity: 0.36 });
-      rippleControls.start({
-        scale: 4,
-        opacity: 0,
-        transition: transition(duration.long4, easing.standard),
-      });
+
+      // Animate ripple
+      animateRipple();
     },
   };
   const content = (

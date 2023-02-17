@@ -187,6 +187,21 @@ function Button({
     );
   }, []);
   const [position, setPosition] = React.useState({ top: "0", left: "0" });
+  function calculatePosition(x, y) {
+    const button = buttonRef.current;
+    return {
+      top: `${y - (button.offsetTop + diameter / 2)}px`,
+      left: `${x - (button.offsetLeft + diameter / 2)}px`
+    };
+  }
+  function animateRipple() {
+    rippleControls.set({ scale: 0, opacity: 0.36 });
+    rippleControls.start({
+      scale: 4,
+      opacity: 0,
+      transition: transition(duration.long4, easing.standard)
+    });
+  }
   const props = {
     ref: buttonRef,
     "aria-label": alt,
@@ -200,20 +215,27 @@ function Button({
       (loading || disabled) && "skc-button--disabled",
       className
     ]),
-    onClick: (event) => {
-      if (onClick && !href)
-        onClick();
+    onClick,
+    onMouseDown: (event) => {
+      setPosition(calculatePosition(event.pageX, event.pageY));
+      animateRipple();
+    },
+    onTouchStart: (event) => {
+      if (event.touches.length !== 1)
+        return;
+      const touch = event.touches[0];
+      setPosition(calculatePosition(touch.pageX, touch.pageY));
+      animateRipple();
+    },
+    onKeyDown: (event) => {
+      if (!["Enter", " "].includes(event.key))
+        return;
       const button = buttonRef.current;
       setPosition({
-        top: `${event.clientY - (button.offsetTop + diameter / 2)}px`,
-        left: `${event.clientX - (button.offsetLeft + diameter / 2)}px`
+        top: `${button.clientHeight / 2 - diameter / 2}px`,
+        left: `${button.clientWidth / 2 - diameter / 2}px`
       });
-      rippleControls.set({ scale: 0, opacity: 0.36 });
-      rippleControls.start({
-        scale: 4,
-        opacity: 0,
-        transition: transition(duration.long4, easing.standard)
-      });
+      animateRipple();
     }
   };
   const content = /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, {
