@@ -190,11 +190,51 @@ declare namespace SegmentedButton {
     var displayName: string;
 }
 
+/**
+ * Props for {@link MaterialIcon Material Icon}.
+ */
 interface MaterialIconProps extends SKComponent {
+    /**
+     * Material Icon uses the “Material Symbol” font, where each icon has its own
+     * corresponding text string. You can find the list of all icons at
+     * {@link https://fonts.google.com/icons Google Fonts}.
+     *
+     * - Always required.
+     */
     icon: string;
+    /**
+     * If the icon is filled or not.
+     *
+     * - An icon should be outlined by default, filling it should have a specific
+     *   meaning, like if a Navigation Bar Item is selected.
+     * - Uses the `FILL` font variation setting on the Material Symbol font.
+     * - Optional.
+     */
     fill?: boolean;
+    /**
+     * How thick the strokes are.
+     *
+     * - Keep the weight consistent throughout an application. Hovering/focusing
+     *   can affect the weight, however.
+     * - Uses the `wght` font variation setting on the Material Symbol font.
+     * - Optional.
+     */
     weight?: 100 | 200 | 300 | 400 | 500 | 600 | 700;
+    /**
+     * `grade` also adjusts the icon’s thickness, but more subtly.
+     *
+     * - A lower grade is used in light icons on a dark background. A higher
+     *   grade is used to emphasize an icon.
+     * - Uses the `GRAD` font variation setting on the Material Symbol font.
+     * - Optional.
+     */
     grade?: -25 | 0 | 200;
+    /**
+     * How large/small the icon is.
+     *
+     * - Uses the `opsz` font variation setting on the Material Symbol font.
+     * - Optional.
+     */
     size?: 20 | 24 | 40 | 48;
 }
 /**
@@ -203,7 +243,7 @@ interface MaterialIconProps extends SKComponent {
  *
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
  *
- * @param icon Material Icon uses the “Material Symbol” font, where each icon has its own corresponding text string. You can find the list of all icons at [Google Fonts](https://fonts.google.com/icons).
+ * @param icon Material Icon uses the “Material Symbol” font, where each icon has its own corresponding text string. You can find the list of all icons at {@link https://fonts.google.com/icons Google Fonts}.
  * @param fill If the icon is filled or not.
  * @param weight How thick the strokes are.
  * @param grade `grade` also adjusts the icon’s thickness, but more subtly.
