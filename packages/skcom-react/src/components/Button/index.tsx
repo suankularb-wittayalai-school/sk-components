@@ -13,7 +13,11 @@ import "@suankularb-components/css/dist/css/components/button.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { transition, useAnimationConfig } from "../../utils/animation";
+import {
+  transition,
+  useAnimationConfig,
+  useRipple,
+} from "../../utils/animation";
 
 export interface ButtonProps extends SKComponent {
   children?: React.ReactNode;
@@ -72,35 +76,8 @@ export function Button({
   style,
   className,
 }: ButtonProps) {
-  const { duration, easing } = useAnimationConfig();
-
   const buttonRef = React.useRef(null);
-  const rippleControls = useAnimationControls();
-  const [diameter, setDiameter] = React.useState(0);
-  React.useEffect(() => {
-    const button = buttonRef.current as any;
-    setDiameter(
-      Math.min(Math.max(button.clientWidth, button.clientHeight), 160)
-    );
-  }, []);
-  const [position, setPosition] = React.useState({ top: "0", left: "0" });
-
-  function calculatePosition(x: number, y: number) {
-    const button = buttonRef.current as any;
-    return {
-      top: `${y - (button.offsetTop + diameter / 2)}px`,
-      left: `${x - (button.offsetLeft + diameter / 2)}px`,
-    };
-  }
-
-  function animateRipple() {
-    rippleControls.set({ scale: 0, opacity: 0.36 });
-    rippleControls.start({
-      scale: 4,
-      opacity: 0,
-      transition: transition(duration.long4, easing.standard),
-    });
-  }
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
 
   const props = {
     ref: buttonRef,
@@ -123,38 +100,8 @@ export function Button({
       (loading || disabled) && "skc-button--disabled",
       className,
     ]),
-    // Actual click functionality passed in via `onClick`
     onClick,
-
-    // Use the mouse position to calculate the ripple position and animate it
-    onMouseDown: (event: React.MouseEvent) => {
-      setPosition(calculatePosition(event.pageX, event.pageY));
-      animateRipple();
-    },
-    // Use the touch position to calculate the ripple position and animate it
-    onTouchStart: (event: React.TouchEvent) => {
-      // Ignore multi-touch
-      if (event.touches.length !== 1) return;
-
-      const touch = event.touches[0];
-      setPosition(calculatePosition(touch.pageX, touch.pageY));
-      animateRipple();
-    },
-    // On key down, put the ripple in the middle of the Button and animate it
-    onKeyDown: (event: React.KeyboardEvent) => {
-      // Only allow Enter and Space keys as only those can trigger `onClick`
-      if (!["Enter", " "].includes(event.key)) return;
-
-      // Set the ripple position to the middle of the Button
-      const button = buttonRef.current as any;
-      setPosition({
-        top: `${button.clientHeight / 2 - diameter / 2}px`,
-        left: `${button.clientWidth / 2 - diameter / 2}px`,
-      });
-
-      // Animate ripple
-      animateRipple();
-    },
+    ...rippleListeners,
   };
   const content = (
     <>
@@ -180,7 +127,7 @@ export function Button({
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
         className="skc-button__ripple"
-        style={{ ...position, width: `${diameter}px`, height: `${diameter}px` }}
+        style={rippleStyle}
       />
     </button>
   );

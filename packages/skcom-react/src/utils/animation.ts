@@ -1,5 +1,13 @@
 // External libraries
-import { BezierDefinition, Tween } from "framer-motion";
+import {
+  AnimationControls,
+  BezierDefinition,
+  motion,
+  MotionStyle,
+  Tween,
+  useAnimationControls,
+} from "framer-motion";
+import React from "react";
 
 /**
  * A hook with duration and easing definitions for use with Framer Motion.
@@ -63,5 +71,117 @@ export function transition(
     type: "tween",
     duration,
     ease: easing,
+  };
+}
+
+/**
+ * A hook to control a ripple element within a parent element.
+ *
+ * Example:
+ * ```tsx
+ * const { rippleHandles, rippleControls, rippleStyle }
+ *   = useRipple(buttonRef);
+ *
+ * return (
+ *   <button {...rippleHandles}>
+ *     <span>Button</button>
+ *     <motion.span
+ *       initial={{ scale: 0, opacity: 0.36 }}
+ *       animate={rippleControls}
+ *       className="skc-button__ripple"
+ *       style={rippleStyle}
+ *     />
+ *   </button>
+ * );
+ * ```
+ *
+ * @param parentRef The React Reference Object pointing to the parent element of the ripple.
+ * @returns Event listeners, animation controls, and styles to put on the ripple `motion` element.
+ */
+export function useRipple(parentRef: React.MutableRefObject<any>): {
+  rippleListeners: {
+    onMouseDown: (event: React.MouseEvent) => void;
+    onTouchStart: (event: React.TouchEvent) => void;
+    onKeyDown: (event: React.KeyboardEvent) => void;
+  };
+  rippleControls: AnimationControls;
+  rippleStyle: MotionStyle;
+} {
+  const { duration, easing } = useAnimationConfig();
+
+  const rippleControls = useAnimationControls();
+  const [diameter, setDiameter] = React.useState(0);
+  React.useEffect(() => {
+    const button = parentRef.current as any;
+    setDiameter(
+      Math.min(Math.max(button.clientWidth, button.clientHeight), 160)
+    );
+  }, []);
+  const [position, setPosition] = React.useState({ top: "0", left: "0" });
+
+  function calculatePosition(x: number, y: number) {
+    const button = parentRef.current as any;
+    return {
+      top: `${y - (button.offsetTop + diameter / 2)}px`,
+      left: `${x - (button.offsetLeft + diameter / 2)}px`,
+    };
+  }
+
+  function animateRipple() {
+    rippleControls.set({ scale: 0, opacity: 0.36 });
+    rippleControls.start({
+      scale: 4,
+      opacity: 0,
+      transition: transition(duration.long4, easing.standard),
+    });
+  }
+
+  return {
+    /**
+     * Event listeners on the parent element.
+     */
+    rippleListeners: {
+      // Use the mouse position to calculate the ripple position and animate it
+      onMouseDown: (event: React.MouseEvent) => {
+        setPosition(calculatePosition(event.pageX, event.pageY));
+        animateRipple();
+      },
+      // Use the touch position to calculate the ripple position and animate it
+      onTouchStart: (event: React.TouchEvent) => {
+        // Ignore multi-touch
+        if (event.touches.length !== 1) return;
+
+        const touch = event.touches[0];
+        setPosition(calculatePosition(touch.pageX, touch.pageY));
+        animateRipple();
+      },
+      // On key down, put the ripple in the middle of the Button and animate it
+      onKeyDown: (event: React.KeyboardEvent) => {
+        // Only allow Enter and Space keys as only those can trigger `onClick`
+        if (!["Enter", " "].includes(event.key)) return;
+
+        // Set the ripple position to the middle of the Button
+        const button = parentRef.current as any;
+        setPosition({
+          top: `${button.clientHeight / 2 - diameter / 2}px`,
+          left: `${button.clientWidth / 2 - diameter / 2}px`,
+        });
+
+        // Animate ripple
+        animateRipple();
+      },
+    },
+    /**
+     * Framer Motion animation controls to put on the ripple.
+     */
+    rippleControls,
+    /**
+     * Styles to put on the ripple.
+     */
+    rippleStyle: {
+      ...position,
+      width: `${diameter}px`,
+      height: `${diameter}px`,
+    },
   };
 }
