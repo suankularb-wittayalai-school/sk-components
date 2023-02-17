@@ -2,8 +2,17 @@ import * as React from 'react';
 import React__default from 'react';
 import { BezierDefinition } from 'framer-motion';
 
+/**
+ * Global attributes for all SK Components.
+ */
 interface SKComponent {
+    /**
+     * `className` on the most relevant underlying attribute.
+     */
     className?: string;
+    /**
+     * `style` on the most relevant underlying attribute.
+     */
     style?: React__default.CSSProperties;
 }
 
