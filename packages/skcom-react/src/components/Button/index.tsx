@@ -217,6 +217,7 @@ export function Button({
    */
   const content = (
     <>
+      {/* TODO: `loading` should put a Progress here. */}
       {(selected || icon) && (
         <div className="skc-button__icon">
           {selected ? <MaterialIcon icon="done" /> : icon}
