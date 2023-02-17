@@ -7,10 +7,12 @@ import {
   Button,
   MaterialIcon,
   SegmentedButton,
+  ToggleButton,
 } from "@suankularb-components/react";
 
 export default function Home() {
   const [view, setView] = useState<"schedule" | "list">("schedule");
+  const [favorite, setFavorite] = useState<boolean>(false);
 
   return (
     <main className="p-4 flex flex-col gap-6">
@@ -74,6 +76,49 @@ export default function Home() {
         >
           Delete
         </Button>
+      </Actions>
+      <Actions align="left">
+        <ToggleButton
+          appearance="filled"
+          icon={<MaterialIcon icon="favorite" />}
+          alt="Favorite"
+          tooltip="Save to favorites"
+          value={favorite}
+          onChange={setFavorite}
+        />
+        <ToggleButton
+          appearance="filled"
+          icon={<MaterialIcon icon="favorite" />}
+          alt="Favorite"
+          tooltip="Save to favorites"
+          dangerous
+          value={favorite}
+          onChange={setFavorite}
+        />
+        <ToggleButton
+          appearance="tonal"
+          icon={<MaterialIcon icon="favorite" />}
+          alt="Favorite"
+          tooltip="Save to favorites"
+          value={favorite}
+          onChange={setFavorite}
+        />
+        <ToggleButton
+          appearance="outlined"
+          icon={<MaterialIcon icon="favorite" />}
+          alt="Favorite"
+          tooltip="Save to favorites"
+          value={favorite}
+          onChange={setFavorite}
+        />
+        <ToggleButton
+          appearance="standard"
+          icon={<MaterialIcon icon="favorite" />}
+          alt="Favorite"
+          tooltip="Save to favorites"
+          value={favorite}
+          onChange={setFavorite}
+        />
       </Actions>
     </main>
   );

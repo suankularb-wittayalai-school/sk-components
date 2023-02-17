@@ -16,7 +16,7 @@ import { cn } from "../../utils/className";
 export interface SegmentedButtonProps extends SKComponent {
   /**
    * 2-5 Buttons.
-   * 
+   *
    * - Always required.
    */
   children: React.ReactNode;
@@ -24,14 +24,14 @@ export interface SegmentedButtonProps extends SKComponent {
   /**
    * A description of the Segmented Button for screen readers, similar to `alt`
    * on `<img>`.
-   * 
+   *
    * - Always required
    */
   alt: string;
 
   /**
    * A lower number means a more dense interface. In this case, less height.
-   * 
+   *
    * - Must be an integer: 0, -1, -2, or -3.
    * - Optional.
    */
@@ -39,7 +39,7 @@ export interface SegmentedButtonProps extends SKComponent {
 
   /**
    * Each Button will be equal in width.
-   * 
+   *
    * - Optional.
    */
   full?: boolean;

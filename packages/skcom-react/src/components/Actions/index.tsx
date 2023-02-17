@@ -17,7 +17,7 @@ export interface ActionsProps extends SKComponent {
   /**
    * Actions contains Buttons. You can put as many Buttons inside Actions as
    * needed, but the recommended limit is 3.
-   * 
+   *
    * - Always required.
    */
   children: React.ReactNode;
@@ -25,7 +25,7 @@ export interface ActionsProps extends SKComponent {
   /**
    * How the Buttons should be positioned. It can be aligned to the left, the
    * center, the right (default), or fill the entire width.
-   * 
+   *
    * - Must be `left`, `center`, `right`, `full`.
    * - Optional.
    */

@@ -68,14 +68,11 @@
   pointer-events: none;
   opacity: 0.36;
   border-radius: 50%;
-  background-color: var(--on-primary);
 }
 
 // Icon
 .skc-button__icon .skc-icon {
   @include ci.icon(0, 400, 0, 20);
-  transition: font-variation-settings var(--motion-short-4)
-    var(--easing-standard);
 }
 
 // Label

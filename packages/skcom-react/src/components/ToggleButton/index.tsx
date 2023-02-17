@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -8,9 +9,10 @@ import { MaterialIcon } from "../MaterialIcon";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/segmented-button.css";
+import "@suankularb-components/css/dist/css/components/toggle-button.css";
 
 // Utilities
+import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -76,18 +78,18 @@ export interface ToggleButtonProps extends SKComponent {
   /**
    * Whether the Toggle Button is toggled on or off. This is useful if you want
    * a controlled input.
-   * 
+   *
    * - Optional.
-   * 
+   *
    * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
    */
   value?: boolean;
 
   /**
    * This function triggers when the user toggles the Toggle Button.
-   * 
+   *
    * - Optional.
-   * 
+   *
    * @param state Whether the Toggle Button is toggled on or off.
    */
   onChange?: (state: boolean) => void;
@@ -119,7 +121,41 @@ export function ToggleButton({
   style,
   className,
 }: ToggleButtonProps) {
-  return <button>TODO</button>;
+  // Ripple setup
+  const buttonRef = React.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
+
+  return (
+    <button
+      ref={buttonRef}
+      style={style}
+      className={cn([
+        "skc-toggle-button",
+        appearance === "filled"
+          ? "skc-toggle-button--filled"
+          : appearance === "tonal"
+          ? "skc-toggle-button--tonal"
+          : appearance === "outlined"
+          ? "skc-toggle-button--outlined"
+          : appearance === "standard"
+          ? "skc-toggle-button--standard"
+          : undefined,
+        value && "skc-toggle-button--selected",
+        dangerous && "skc-toggle-button--dangerous",
+        className,
+      ])}
+      onClick={() => onChange && onChange(!value)}
+      {...rippleListeners}
+    >
+      {icon}
+      <motion.span
+        initial={{ scale: 0, opacity: 0.36 }}
+        animate={rippleControls}
+        className="skc-toggle-button__ripple"
+        style={rippleStyle}
+      />
+    </button>
+  );
 }
 
 ToggleButton.displayName = "Toggle Button";

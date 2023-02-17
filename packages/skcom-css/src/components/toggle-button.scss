@@ -1,0 +1,88 @@
+@use "../abstracts/palette.scss";
+@use "../components/button.scss";
+@use "../components/icon.scss" as ci;
+
+.skc-toggle-button {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color,
+    color var(--motion-short-4) var(--easing-standard);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    transition: opacity var(--motion-short-4) var(--easing-standard);
+    pointer-events: none;
+    opacity: 0;
+    border-radius: inherit;
+  }
+}
+
+.skc-icon {
+  .skc-toggle-button & {
+    @include ci.icon(0, 400, 0, 24);
+    transition: font-variation-settings var(--motion-short-4)
+      var(--easing-standard);
+  }
+
+  .skc-toggle-button:hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  .skc-toggle-button:active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
+
+  .skc-toggle-button.skc-toggle-button--selected & {
+    @include ci.icon(1, 400, 0, 24);
+  }
+
+  .skc-toggle-button.skc-toggle-button--selected:hover & {
+    @include ci.icon(1, 600, 0, 24);
+  }
+
+  .skc-toggle-button.skc-toggle-button--selected:active & {
+    @include ci.icon(1, 300, 0, 24);
+  }
+}
+
+.skc-toggle-button__ripple {
+  @extend .skc-button__ripple;
+}
+
+.skc-toggle-button.skc-toggle-button--filled {
+  color: var(--primary);
+  background-color: var(--surface-variant);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    background-color: var(--primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &.skc-toggle-button--selected {
+    color: var(--on-primary);
+    background-color: var(--primary);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--on-primary);
+    }
+  }
+}
