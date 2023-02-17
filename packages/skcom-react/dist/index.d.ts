@@ -7,8 +7,24 @@ interface SKComponent {
     style?: React__default.CSSProperties;
 }
 
+/**
+ * Props for {@link Actions}.
+ */
 interface ActionsProps extends SKComponent {
+    /**
+     * Actions contains Buttons. You can put as many Buttons inside Actions as
+     * needed, but the recommended limit is 3.
+     *
+     * - Always required.
+     */
     children: React.ReactNode;
+    /**
+     * How the Buttons should be positioned. It can be aligned to the left, the
+     * center, the right (default), or fill the entire width.
+     *
+     * - Must be `left`, `center`, `right`, `full`.
+     * - Optional.
+     */
     align?: "left" | "center" | "right" | "full";
 }
 /**
@@ -24,6 +40,9 @@ declare namespace Actions {
     var displayName: string;
 }
 
+/**
+ * Props for {@link Button}.
+ */
 interface ButtonProps extends SKComponent {
     /**
      * The text displayed inside the Button.
