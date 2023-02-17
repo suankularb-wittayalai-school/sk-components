@@ -81,6 +81,7 @@ export function Button({
 
   const props = {
     ref: buttonRef,
+    "aria-disabled": disabled || loading,
     "aria-label": alt,
     title: tooltip,
     style,
@@ -97,10 +98,11 @@ export function Button({
         : undefined,
       selected && "skc-button--selected",
       dangerous && "skc-button--dangerous",
-      (loading || disabled) && "skc-button--disabled",
       className,
     ]),
-    onClick,
+    onClick: () => {
+      if (!(disabled || loading) && onClick && !href) onClick();
+    },
     ...rippleListeners,
   };
   const content = (
