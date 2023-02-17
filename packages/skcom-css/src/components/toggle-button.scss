@@ -7,7 +7,7 @@
   overflow: hidden;
   padding: 0.5rem;
   transition: background-color,
-  color var(--motion-short-4) var(--easing-standard);
+    color var(--motion-short-4) var(--easing-standard);
   border-radius: 50%;
 
   &::before {
@@ -38,7 +38,8 @@
 .skc-icon {
   .skc-toggle-button & {
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
+    transition: font-variation-settings var(--motion-short-4)
+      var(--easing-standard);
   }
 
   .skc-toggle-button:hover & {
@@ -142,6 +143,40 @@
       .skc-toggle-button__ripple {
         background-color: var(--on-error);
       }
+    }
+  }
+}
+
+.skc-toggle-button.skc-toggle-button--outlined {
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    background-color: var(--on-surface);
+  }
+
+  &.skc-toggle-button--selected {
+    color: var(--inverse-on-surface);
+    background-color: var(--inverse-surface);
+    border-color: var(--inverse-surface);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--inverse-on-surface);
+    }
+  }
+
+  &.skc-toggle-button--dangerous {
+    color: var(--error);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--error);
+    }
+
+    &.skc-toggle-button--selected {
+      color: var(--error-container);
     }
   }
 }
