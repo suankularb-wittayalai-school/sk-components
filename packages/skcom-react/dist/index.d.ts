@@ -169,10 +169,35 @@ declare namespace Button {
     var displayName: string;
 }
 
+/**
+ * Props for {@link SegmentedButton Segmented Button}.
+ */
 interface SegmentedButtonProps extends SKComponent {
+    /**
+     * 2-5 Buttons.
+     *
+     * - Always required.
+     */
     children: React.ReactNode;
+    /**
+     * A description of the Segmented Button for screen readers, similar to `alt`
+     * on `<img>`.
+     *
+     * - Always required
+     */
     alt: string;
+    /**
+     * A lower number means a more dense interface. In this case, less height.
+     *
+     * - Must be an integer: 0, -1, -2, or -3.
+     * - Optional.
+     */
     density?: 0 | -1 | -2 | -3;
+    /**
+     * Each Button will be equal in width.
+     *
+     * - Optional.
+     */
     full?: boolean;
 }
 /**
