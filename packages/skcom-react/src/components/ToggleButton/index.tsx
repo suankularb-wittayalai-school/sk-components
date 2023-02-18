@@ -149,7 +149,7 @@ export function ToggleButton({
         dangerous && "skc-toggle-button--dangerous",
         className,
       ])}
-      onClick={() => onChange && onChange(!value)}
+      onClick={() => onChange && !disabled && onChange(!value)}
       {...rippleListeners}
     >
       {icon}

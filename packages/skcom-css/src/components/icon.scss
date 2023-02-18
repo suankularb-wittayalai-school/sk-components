@@ -23,7 +23,8 @@
 
 @mixin icon($fill, $weight, $grade, $size) {
   font-size: #{$size}px;
-  font-variation-settings: "FILL" $fill, "wght" $weight, "GRAD" $grade, "opsz" $size;
+  font-variation-settings: "FILL" $fill, "wght" $weight, "GRAD" $grade,
+    "opsz" $size;
 }
 
 .skc-icon--outlined {

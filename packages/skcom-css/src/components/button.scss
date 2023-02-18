@@ -81,7 +81,8 @@
 
   .skc-button:not(:has(.skc-button__label)) & {
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
+    transition: font-variation-settings var(--motion-short-4)
+      var(--easing-standard);
   }
 
   // Hover: make icon bolder

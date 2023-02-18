@@ -16,9 +16,11 @@
   overflow: hidden;
   place-content: center;
   padding: 0.5rem;
-  transition: background-color var(--motion-short-4) var(--easing-standard), color var(--motion-short-4) var(--easing-standard);
+  transition: background-color var(--motion-short-4) var(--easing-standard),
+    color var(--motion-short-4) var(--easing-standard);
   border-radius: var(--rounded-full);
 
+  // State layer
   &::before {
     position: absolute;
     top: 0;
@@ -40,6 +42,22 @@
   &:active {
     &::before {
       opacity: 0.12;
+    }
+  }
+
+  &[aria-disabled="true"] {
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      &::before {
+        opacity: 0;
+      }
+
+      > .skc-button__ripple {
+        background-color: transparent;
+      }
     }
   }
 }
