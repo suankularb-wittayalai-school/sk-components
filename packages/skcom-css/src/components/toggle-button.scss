@@ -4,10 +4,12 @@
 
 .skc-toggle-button {
   position: relative;
+  display: grid;
+  place-content: center;
   overflow: hidden;
   padding: 0.5rem;
   transition: background-color, color var(--motion-short-4) var(--easing-standard);
-  border-radius: 50%;
+  border-radius: var(--rounded-full);
 
   &::before {
     position: absolute;
@@ -37,7 +39,8 @@
 .skc-icon {
   .skc-toggle-button & {
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
+    transition: font-variation-settings var(--motion-short-4)
+    var(--easing-standard);
   }
 
   .skc-toggle-button:hover & {
@@ -156,8 +159,8 @@
 
   &.skc-toggle-button--selected {
     color: var(--inverse-on-surface);
-    background-color: var(--inverse-surface);
     border-color: var(--inverse-surface);
+    background-color: var(--inverse-surface);
 
     &::before,
     .skc-toggle-button__ripple {
@@ -195,5 +198,4 @@
       color: var(--primary);
     }
   }
-
 }
