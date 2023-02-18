@@ -5,6 +5,7 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3rmzxf2aqo3r SKCom documentation
 ////
 
+@use "sass:math";
 @use "../abstracts/palette.scss";
 @use "../components/button.scss";
 @use "../components/icon.scss" as ci;
@@ -45,18 +46,21 @@
     }
   }
 
+  // Disabled
   &[aria-disabled="true"] {
     cursor: default;
 
     &:hover,
     &:focus,
     &:active {
+      // Block state layer effect
       &::before {
         opacity: 0;
       }
 
+      // Block ripple
       > .skc-button__ripple {
-        background-color: transparent;
+        background-color: transparent !important;
       }
     }
   }
@@ -71,12 +75,12 @@
   }
 
   // Hover: make icon bolder
-  .skc-toggle-button:hover & {
+  .skc-toggle-button:not([aria-disabled="true"]):hover & {
     @include ci.icon(0, 600, 0, 24);
   }
 
   // Active: make icon thinner
-  .skc-toggle-button:active & {
+  .skc-toggle-button:not([aria-disabled="true"]):active & {
     @include ci.icon(0, 300, 0, 24);
   }
 
@@ -86,12 +90,18 @@
   }
 
   // Selected hover: make icon bolder
-  .skc-toggle-button.skc-toggle-button--selected:hover & {
+  .skc-toggle-button.skc-toggle-button--selected:not(
+      [aria-disabled="true"]
+    ):hover
+    & {
     @include ci.icon(1, 600, 0, 24);
   }
 
   // Selected active: make icon thinner
-  .skc-toggle-button.skc-toggle-button--selected:active & {
+  .skc-toggle-button.skc-toggle-button--selected:not(
+      [aria-disabled="true"]
+    ):active
+    & {
     @include ci.icon(1, 300, 0, 24);
   }
 }
@@ -142,6 +152,18 @@
       }
     }
   }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      background-color: var(--on-surface);
+    }
+  }
 }
 
 // Tonal Toggle Button
@@ -185,6 +207,18 @@
       }
     }
   }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      background-color: var(--on-surface);
+    }
+  }
 }
 
 // Outlined Toggle Button
@@ -222,6 +256,29 @@
       color: var(--error-container);
     }
   }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    border-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      border: 1px solid var(--on-surface);
+      background-color: transparent;
+    }
+
+    // Disabled selected
+    &.skc-toggle-button--selected {
+      background-color: transparent;
+
+      &::before {
+        border-color: transparent;
+        background-color: var(--on-surface);
+      }
+    }
+  }
 }
 
 // Standard Toggle Button
@@ -242,5 +299,11 @@
     .skc-toggle-button__ripple {
       background-color: var(--primary);
     }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
   }
 }

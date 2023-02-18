@@ -37,15 +37,34 @@
   &[aria-disabled="true"] {
     cursor: default;
 
+    &:not(:has(.skc-button__label)) {
+      &:hover,
+      &:focus,
+      &:active {
+        > .skc-button__icon > .skc-icon {
+          @include ci.icon(0, 400, 0, 24);
+        }
+      }
+    }
+
     &:hover,
     &:focus,
     &:active {
+      // Block shadow effect
       box-shadow: none !important;
 
+      // Block state layer effect
       &::before {
         opacity: 0;
       }
 
+      // Block icon bolding effect
+      > .skc-button__icon > .skc-icon {
+        @include ci.icon(0, 400, 0, 20);
+        transition: none;
+      }
+
+      // Block ripple
       > .skc-button__ripple {
         background-color: transparent;
       }
