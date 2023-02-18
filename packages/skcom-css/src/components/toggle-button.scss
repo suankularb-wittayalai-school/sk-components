@@ -20,6 +20,7 @@
   transition: background-color var(--motion-short-4) var(--easing-standard),
     color var(--motion-short-4) var(--easing-standard);
   border-radius: var(--rounded-full);
+  -webkit-tap-highlight-color: transparent;
 
   // State layer
   &::before {

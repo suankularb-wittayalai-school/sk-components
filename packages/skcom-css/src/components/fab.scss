@@ -49,6 +49,10 @@
   }
 }
 
+.skc-fab__wrapper {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .skc-fab__icon .skc-icon {
   @include ci.icon(0, 400, 0, 24);
 }
