@@ -4,6 +4,96 @@
   --white: #ffffff;
   --black: #000000;
 
+  // Primary tones
+  --primary-100: #ffffff;
+  --primary-99: #fafcff;
+  --primary-95: #e4f3ff;
+  --primary-90: #c5e7ff;
+  --primary-80: #80cfff;
+  --primary-70: #20b6f9;
+  --primary-60: #009ad8;
+  --primary-50: #007fb3;
+  --primary-40: #00658f;
+  --primary-30: #004c6d;
+  --primary-20: #00344c;
+  --primary-10: #001e2e;
+  --primary-0: #000000;
+
+  // Secondary tones
+  --secondary-100: #ffffff;
+  --secondary-99: #fcfcfc;
+  --secondary-95: #ffecf3;
+  --secondary-90: #ffd8e8;
+  --secondary-80: #ffafd5;
+  --secondary-70: #ff80c3;
+  --secondary-60: #ff3fb4;
+  --secondary-50: #e20098;
+  --secondary-40: #b50077;
+  --secondary-30: #8b005a;
+  --secondary-20: #62003e;
+  --secondary-10: #3d0025;
+  --secondary-0: #000000;
+
+  // Tertiary tones
+  --tertiary-100: #ffffff;
+  --tertiary-99: #fffbf7;
+  --tertiary-95: #fff1b4;
+  --tertiary-90: #ffe24c;
+  --tertiary-80: #e4c521;
+  --tertiary-70: #c7aa00;
+  --tertiary-60: #a98f00;
+  --tertiary-50: #8c7600;
+  --tertiary-40: #6f5d00;
+  --tertiary-30: #544600;
+  --tertiary-20: #3a3000;
+  --tertiary-10: #221b00;
+  --tertiary-0: #000000;
+
+  // Neutral tones
+  --neutral-100: #ffffff;
+  --neutral-99: #fbfcff;
+  --neutral-95: #f0f1f4;
+  --neutral-90: #e1e2e5;
+  --neutral-80: #c5c6c9;
+  --neutral-70: #aaabad;
+  --neutral-60: #909194;
+  --neutral-50: #75777a;
+  --neutral-40: #5c5e61;
+  --neutral-30: #454749;
+  --neutral-20: #2e3133;
+  --neutral-10: #191c1e;
+  --neutral-0: #000000;
+
+  // Neutral variant tones
+  --neutral-variant-100: #ffffff;
+  --neutral-variant-99: #fafcff;
+  --neutral-variant-95: #ebf1f8;
+  --neutral-variant-90: #dde3ea;
+  --neutral-variant-80: #c1c7ce;
+  --neutral-variant-70: #a6acb2;
+  --neutral-variant-60: #8b9197;
+  --neutral-variant-50: #71787e;
+  --neutral-variant-40: #595f65;
+  --neutral-variant-30: #41484d;
+  --neutral-variant-20: #2b3136;
+  --neutral-variant-10: #161c21;
+  --neutral-variant-0: #000000;
+
+  // Error tones
+  --error-100: #ffffff;
+  --error-99: #fcfcfc;
+  --error-95: #ffede9;
+  --error-90: #ffdad4;
+  --error-80: #ffb4a9;
+  --error-70: #ff897a;
+  --error-60: #ff5449;
+  --error-50: #dd3730;
+  --error-40: #ba1b1b;
+  --error-30: #930006;
+  --error-20: #680003;
+  --error-10: #410001;
+  --error-0: #000000;
+
   // Text shadow
   --shadow-text: 0 1px 2px #0000004d, 0 2px 6px #00000026;
 
@@ -66,6 +156,7 @@
 
     // Outline
     --outline: #73777f;
+    --outline-variant: #c1c7ce;
 
     // Shadow
     --shadow-1: 0 1px 2px #0000004d, 0 1px 3px 1px #00000026;
@@ -121,6 +212,7 @@
 
     // Outline
     --outline: #8b9197;
+    --outline-variant: #41484d;
 
     // Shadow
     --shadow-1: 0 1px 3px 1px #00000026, 0 1px 2px #0000004d;
