@@ -130,7 +130,7 @@ const ToggleButtonsSection = () => {
 
 const Home: NextPage = () => {
   return (
-    <main className="p-4 flex flex-col gap-6">
+    <main className="flex flex-col gap-6 p-4">
       <ButtonsSection />
       <SegmentedButtonSection />
       <Actions align="full">
@@ -146,7 +146,7 @@ const Home: NextPage = () => {
         </Button>
       </Actions>
       <ToggleButtonsSection />
-      <div className="flex flex-row gap-2 items-start flex-wrap">
+      <div className="flex flex-row flex-wrap items-start gap-2">
         <FAB
           color="tertiary"
           icon={<MaterialIcon icon="shopping_cart" />}
@@ -178,21 +178,23 @@ const Home: NextPage = () => {
           tooltip="Go to checkout"
         />
       </div>
-      <div className="flex flex-row gap-2 items-start flex-wrap">
+      <div className="flex flex-row flex-wrap items-start gap-2">
         <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
           Turn on lights
         </AssistChip>
-        <AssistChip icon={<MaterialIcon icon="lightbulb" />} dangerous>
-          Turn on lights
+        <AssistChip icon={<MaterialIcon icon="block" />} dangerous>
+          Block number
         </AssistChip>
         <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
           Turn on lights
         </AssistChip>
+      </div>
+      <div className="flex flex-row flex-wrap place-content-center gap-2 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4">
         <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
           Turn on lights
         </AssistChip>
-        <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated dangerous>
-          Turn on lights
+        <AssistChip icon={<MaterialIcon icon="block" />} elevated dangerous>
+          Block number
         </AssistChip>
         <AssistChip
           icon={<MaterialIcon icon="lightbulb" />}
