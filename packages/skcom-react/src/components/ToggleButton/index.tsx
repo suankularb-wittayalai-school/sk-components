@@ -128,6 +128,7 @@ export function ToggleButton({
   return (
     <button
       ref={buttonRef}
+      title={tooltip}
       style={style}
       className={cn([
         "skc-toggle-button",

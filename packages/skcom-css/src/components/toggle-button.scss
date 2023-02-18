@@ -6,8 +6,7 @@
   position: relative;
   overflow: hidden;
   padding: 0.5rem;
-  transition: background-color,
-    color var(--motion-short-4) var(--easing-standard);
+  transition: background-color, color var(--motion-short-4) var(--easing-standard);
   border-radius: 50%;
 
   &::before {
@@ -38,8 +37,7 @@
 .skc-icon {
   .skc-toggle-button & {
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4)
-      var(--easing-standard);
+    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
   }
 
   .skc-toggle-button:hover & {
@@ -179,4 +177,23 @@
       color: var(--error-container);
     }
   }
+}
+
+.skc-toggle-button.skc-toggle-button--standard {
+  color: var(--on-surface);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    color: var(--on-surface);
+  }
+
+  &.skc-toggle-button--selected {
+    color: var(--primary);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      color: var(--primary);
+    }
+  }
+
 }
