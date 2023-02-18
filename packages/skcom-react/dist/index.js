@@ -404,6 +404,12 @@ function FAB({
       window.onscroll = null;
     };
   }, []);
+  const props = {
+    "aria-label": alt,
+    title: tooltip,
+    className: "skc-fab__wrapper",
+    ...rippleListeners
+  };
   const content = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion4.AnimatePresence, {
     children: !(stateOnScroll === "disappear" && !(scrollDir === "up")) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_framer_motion4.motion.div, {
       ref: fabRef,
@@ -434,18 +440,15 @@ function FAB({
   });
   return href && element ? element({
     children: content,
-    className: "skc-fab__wrapper",
     href,
-    ...rippleListeners
+    ...props
   }) : href ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
     href,
-    className: "skc-fab__wrapper",
-    ...rippleListeners,
+    ...props,
     children: content
   }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
     type: "button",
-    className: "skc-fab__wrapper",
-    ...rippleListeners,
+    ...props,
     children: content
   });
 }

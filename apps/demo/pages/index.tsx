@@ -146,24 +146,35 @@ const Home: NextPage = () => {
       </Actions>
       <ToggleButtonsSection />
       <div className="flex flex-row gap-2 items-start flex-wrap">
-        <FAB color="tertiary" icon={<MaterialIcon icon="shopping_cart" />}>
+        <FAB
+          color="tertiary"
+          icon={<MaterialIcon icon="shopping_cart" />}
+          tooltip="Go to checkout"
+        >
           Checkout
         </FAB>
         <FAB
           color="surface"
           size="small"
           icon={<MaterialIcon icon="shopping_cart" />}
+          tooltip="Go to checkout"
         />
         <FAB
           color="primary"
           size="small"
           icon={<MaterialIcon icon="shopping_cart" />}
+          tooltip="Go to checkout"
         />
-        <FAB color="secondary" icon={<MaterialIcon icon="shopping_cart" />} />
+        <FAB
+          color="secondary"
+          icon={<MaterialIcon icon="shopping_cart" />}
+          tooltip="Go to checkout"
+        />
         <FAB
           color="tertiary"
           size="large"
           icon={<MaterialIcon icon="shopping_cart" />}
+          tooltip="Go to checkout"
         />
       </div>
     </main>

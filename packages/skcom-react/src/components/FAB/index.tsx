@@ -171,6 +171,13 @@ export function FAB({
     };
   }, []);
 
+  const props = {
+    "aria-label": alt,
+    title: tooltip,
+    className: "skc-fab__wrapper",
+    ...rippleListeners,
+  };
+
   const content = (
     <AnimatePresence>
       {
@@ -221,18 +228,17 @@ export function FAB({
     href && element ? (
       element({
         children: content,
-        className: "skc-fab__wrapper",
         href,
-        ...rippleListeners,
+        ...props,
       })
     ) : // Render an `<a>` if link passed in
     href ? (
-      <a href={href} className="skc-fab__wrapper" {...rippleListeners}>
+      <a href={href} {...props}>
         {content}
       </a>
     ) : (
       // Otherwise, render a `<button>`
-      <button type="button" className="skc-fab__wrapper" {...rippleListeners}>
+      <button type="button" {...props}>
         {content}
       </button>
     )
