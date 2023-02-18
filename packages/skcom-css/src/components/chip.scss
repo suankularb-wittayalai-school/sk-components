@@ -1,3 +1,13 @@
+////
+/// Chips are pieces of content that are either dynamically generated or
+/// provided by the user.
+///
+/// Note:
+/// - There is no entry for Chip in the SKCom documentation.
+/// - This file is a compilation of 4 types of Chips. More details on each
+///   below.
+////
+
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/palette.scss";
@@ -5,10 +15,9 @@
 @use "../components/icon.scss" as ci;
 
 // ATTENTION:
-// ._skc-chip, ._skc-chip--elevated, ._skc-chip__label, ._skc-chip__icon,
-// and ._skc-chip__ripple are private classes for use in this file only.
+// Selecters prefixed with _ are private classes for use in this file only.
 // Do not use these classes in any other file within this libary, or any
-// other libraries. They have been marked with an _ prefix for clarity.
+// other libraries.
 //
 // Explaination:
 // Since these classes will not be used in libraries wrapping this library,
@@ -16,6 +25,7 @@
 // not using them because we have many instances of complex selectors that
 // placeholder selectors can’t handle.
 
+/// @access private
 ._skc-chip {
   position: relative;
   display: flex;
@@ -77,6 +87,8 @@
   }
 }
 
+// Elevated
+/// @access private
 ._skc-chip--elevated {
   border: none;
   background-color: var(--surface-1);
@@ -94,11 +106,26 @@
   }
 }
 
+// Dangerous
+
+/// @access private
+._skc-chip--dangerous {
+  ._skc-chip__icon .skc-icon {
+    color: var(--error);
+  }
+}
+
+// Label
+
+/// @access private
 ._skc-chip__label {
   @extend .label-large;
   font-family: var(--font-display);
 }
 
+// Icon
+/// @access
+///  private
 ._skc-chip__icon {
   width: 1.125rem;
   height: 1.125rem;
@@ -110,18 +137,32 @@
   }
 }
 
+// Ripple
+
+/// @access private
 ._skc-chip__ripple {
   @include mix.ripple();
   background-color: var(--on-surface-variant);
 }
 
-// Assist chip
+/// **Assist Chip**
+/// Assist Chips are similar to Buttons in that it helps users take action. The
+/// difference is a Button is persistent (doesn’t change) and an Assist Chip is
+/// dynamic and contextual (changes according to the context).
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.6b3bv92d22u9 SKCom documentation
+
 .skc-assist-chip {
   @extend ._skc-chip;
 
   // With icon padding
   &:has(.skc-assist-chip__icon:first-child) {
     padding-left: 0.5rem;
+  }
+
+  // Dangerous
+  &:not([aria-disabled="true"]).skc-assist-chip--dangerous {
+    @extend ._skc-chip--dangerous;
   }
 }
 
