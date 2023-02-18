@@ -1,5 +1,5 @@
 // External libraries
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -104,23 +104,13 @@ export interface FABProps extends SKComponent {
    */
   element?: ({
     children,
-    ref,
-    title,
-    style,
-    className,
     href,
-    onClick,
     onMouseDown,
     onTouchStart,
     onKeyDown,
   }: {
     children: React.ReactNode;
-    ref: React.MutableRefObject<any>;
-    title?: string;
-    style?: React.CSSProperties;
-    className: any;
     href: string;
-    onClick: (event: React.MouseEvent) => void;
     onMouseDown: (event: React.MouseEvent) => void;
     onTouchStart: (event: React.TouchEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
@@ -181,45 +171,64 @@ export function FAB({
     };
   }, []);
 
+  const content = (
+    <AnimatePresence>
+      {
+        // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
+        !(stateOnScroll === "disappear" && !(scrollDir === "up")) && (
+          <motion.div
+            ref={fabRef}
+            style={style}
+            className={cn([
+              "skc-fab",
+              color === "surface"
+                ? "skc-fab--surface"
+                : color === "primary"
+                ? "skc-fab--primary"
+                : color === "secondary"
+                ? "skc-fab--secondary"
+                : color === "tertiary"
+                ? "skc-fab--tertiary"
+                : undefined,
+              size === "small"
+                ? "skc-fab--small"
+                : size === "large"
+                ? "skc-fab--large"
+                : "skc-fab--standard",
+              className,
+            ])}
+          >
+            {icon && <div className="skc-fab__icon">{icon}</div>}
+            {
+              // Hide the label on scroll if `stateOnScroll` set to `minimize`
+              !(stateOnScroll === "minimize" && !(scrollDir === "up")) &&
+                children && <span className="skc-fab__label">{children}</span>
+            }
+            <motion.span
+              initial={{ scale: 0, opacity: 0.36 }}
+              animate={rippleControls}
+              className="skc-fab__ripple"
+              style={rippleStyle}
+            />
+          </motion.div>
+        )
+      }
+    </AnimatePresence>
+  );
+
   return (
-    // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
-    !(stateOnScroll === "disappear" && !(scrollDir === "up")) && (
-      <button
-        ref={fabRef}
-        type="button"
-        style={style}
-        className={cn([
-          "skc-fab",
-          color === "surface"
-            ? "skc-fab--surface"
-            : color === "primary"
-            ? "skc-fab--primary"
-            : color === "secondary"
-            ? "skc-fab--secondary"
-            : color === "tertiary"
-            ? "skc-fab--tertiary"
-            : undefined,
-          size === "small"
-            ? "skc-fab--small"
-            : size === "large"
-            ? "skc-fab--large"
-            : "skc-fab--standard",
-          className,
-        ])}
-        {...rippleListeners}
-      >
-        {icon && <div className="skc-fab__icon">{icon}</div>}
-        {
-          // Hide the label on scroll if `stateOnScroll` set to `minimize`
-          !(stateOnScroll === "minimize" && !(scrollDir === "up")) &&
-            children && <span className="skc-fab__label">{children}</span>
-        }
-        <motion.span
-          initial={{ scale: 0, opacity: 0.36 }}
-          animate={rippleControls}
-          className="skc-fab__ripple"
-          style={rippleStyle}
-        />
+    // Render with `element` if defined
+    href && element ? (
+      element({ children: content, href, ...rippleListeners })
+    ) : // Render an `<a>` if link passed in
+    href ? (
+      <a href={href} {...rippleListeners}>
+        {content}
+      </a>
+    ) : (
+      // Otherwise, render a `<button>`
+      <button type="button" {...rippleListeners}>
+        {content}
       </button>
     )
   );

@@ -467,14 +467,9 @@ interface FABProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, title, style, className, href, onClick, onMouseDown, onTouchStart, onKeyDown, }: {
+    element?: ({ children, href, onMouseDown, onTouchStart, onKeyDown, }: {
         children: React.ReactNode;
-        ref: React.MutableRefObject<any>;
-        title?: string;
-        style?: React.CSSProperties;
-        className: any;
         href: string;
-        onClick: (event: React.MouseEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onTouchStart: (event: React.TouchEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
@@ -496,7 +491,7 @@ interface FABProps extends SKComponent {
  * @param href The URL of the page this FAB leads to.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function FAB({ children, color, size, icon, alt, tooltip, stateOnScroll, onClick, href, element, style, className, }: FABProps): false | JSX.Element;
+declare function FAB({ children, color, size, icon, alt, tooltip, stateOnScroll, onClick, href, element, style, className, }: FABProps): JSX.Element;
 declare namespace FAB {
     var displayName: string;
 }

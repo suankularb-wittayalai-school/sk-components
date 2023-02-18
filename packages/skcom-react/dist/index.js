@@ -411,33 +411,42 @@ function FAB({
       window.onscroll = null;
     };
   }, []);
-  return !(stateOnScroll === "disappear" && !(scrollDir === "up")) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-    ref: fabRef,
-    type: "button",
-    style,
-    className: cn([
-      "skc-fab",
-      color === "surface" ? "skc-fab--surface" : color === "primary" ? "skc-fab--primary" : color === "secondary" ? "skc-fab--secondary" : color === "tertiary" ? "skc-fab--tertiary" : void 0,
-      size === "small" ? "skc-fab--small" : size === "large" ? "skc-fab--large" : "skc-fab--standard",
-      className
-    ]),
+  const content = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion4.AnimatePresence, {
+    children: !(stateOnScroll === "disappear" && !(scrollDir === "up")) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_framer_motion4.motion.div, {
+      ref: fabRef,
+      style,
+      className: cn([
+        "skc-fab",
+        color === "surface" ? "skc-fab--surface" : color === "primary" ? "skc-fab--primary" : color === "secondary" ? "skc-fab--secondary" : color === "tertiary" ? "skc-fab--tertiary" : void 0,
+        size === "small" ? "skc-fab--small" : size === "large" ? "skc-fab--large" : "skc-fab--standard",
+        className
+      ]),
+      children: [
+        icon && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+          className: "skc-fab__icon",
+          children: icon
+        }),
+        !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+          className: "skc-fab__label",
+          children
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion4.motion.span, {
+          initial: { scale: 0, opacity: 0.36 },
+          animate: rippleControls,
+          className: "skc-fab__ripple",
+          style: rippleStyle
+        })
+      ]
+    })
+  });
+  return href && element ? element({ children: content, href, ...rippleListeners }) : href ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+    href,
     ...rippleListeners,
-    children: [
-      icon && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-        className: "skc-fab__icon",
-        children: icon
-      }),
-      !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-        className: "skc-fab__label",
-        children
-      }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion4.motion.span, {
-        initial: { scale: 0, opacity: 0.36 },
-        animate: rippleControls,
-        className: "skc-fab__ripple",
-        style: rippleStyle
-      })
-    ]
+    children: content
+  }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+    type: "button",
+    ...rippleListeners,
+    children: content
   });
 }
 FAB.displayName = "FAB";

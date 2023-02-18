@@ -338,7 +338,7 @@ function ToggleButton({
 ToggleButton.displayName = "Toggle Button";
 
 // src/components/FAB/index.tsx
-import { motion as motion4 } from "framer-motion";
+import { AnimatePresence, motion as motion4 } from "framer-motion";
 import * as React4 from "react";
 
 // ../skcom-css/dist/css/components/fab.css
@@ -375,33 +375,42 @@ function FAB({
       window.onscroll = null;
     };
   }, []);
-  return !(stateOnScroll === "disappear" && !(scrollDir === "up")) && /* @__PURE__ */ jsxs3("button", {
-    ref: fabRef,
-    type: "button",
-    style,
-    className: cn([
-      "skc-fab",
-      color === "surface" ? "skc-fab--surface" : color === "primary" ? "skc-fab--primary" : color === "secondary" ? "skc-fab--secondary" : color === "tertiary" ? "skc-fab--tertiary" : void 0,
-      size === "small" ? "skc-fab--small" : size === "large" ? "skc-fab--large" : "skc-fab--standard",
-      className
-    ]),
+  const content = /* @__PURE__ */ jsx6(AnimatePresence, {
+    children: !(stateOnScroll === "disappear" && !(scrollDir === "up")) && /* @__PURE__ */ jsxs3(motion4.div, {
+      ref: fabRef,
+      style,
+      className: cn([
+        "skc-fab",
+        color === "surface" ? "skc-fab--surface" : color === "primary" ? "skc-fab--primary" : color === "secondary" ? "skc-fab--secondary" : color === "tertiary" ? "skc-fab--tertiary" : void 0,
+        size === "small" ? "skc-fab--small" : size === "large" ? "skc-fab--large" : "skc-fab--standard",
+        className
+      ]),
+      children: [
+        icon && /* @__PURE__ */ jsx6("div", {
+          className: "skc-fab__icon",
+          children: icon
+        }),
+        !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ jsx6("span", {
+          className: "skc-fab__label",
+          children
+        }),
+        /* @__PURE__ */ jsx6(motion4.span, {
+          initial: { scale: 0, opacity: 0.36 },
+          animate: rippleControls,
+          className: "skc-fab__ripple",
+          style: rippleStyle
+        })
+      ]
+    })
+  });
+  return href && element ? element({ children: content, href, ...rippleListeners }) : href ? /* @__PURE__ */ jsx6("a", {
+    href,
     ...rippleListeners,
-    children: [
-      icon && /* @__PURE__ */ jsx6("div", {
-        className: "skc-fab__icon",
-        children: icon
-      }),
-      !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ jsx6("span", {
-        className: "skc-fab__label",
-        children
-      }),
-      /* @__PURE__ */ jsx6(motion4.span, {
-        initial: { scale: 0, opacity: 0.36 },
-        animate: rippleControls,
-        className: "skc-fab__ripple",
-        style: rippleStyle
-      })
-    ]
+    children: content
+  }) : /* @__PURE__ */ jsx6("button", {
+    type: "button",
+    ...rippleListeners,
+    children: content
   });
 }
 FAB.displayName = "FAB";
