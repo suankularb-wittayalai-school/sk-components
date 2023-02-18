@@ -7,14 +7,17 @@
 ///
 ///
 @use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss";
 
 .skc-fab {
+  position: absolute;
   display: flex;
+  overflow: hidden;
+  align-items: center;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding: 1rem 1.5rem;
   gap: 12px;
+  padding: 1rem 1.5rem;
   border-radius: 1rem;
   box-shadow: var(--shadow-3);
 
@@ -24,7 +27,8 @@
 }
 
 .skc-fab__label {
-  // TODO
+  @extend .label-large;
+  font-family: var(--font-display);
 }
 
 .skc-fab__ripple {
@@ -34,4 +38,39 @@
 .skc-fab.skc-fab--surface {
   color: var(--primary);
   background-color: var(--surface-3);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--primary);
+  }
+}
+
+.skc-fab.skc-fab--primary {
+  color: var(--on-primary-container);
+  background-color: var(--primary-container);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--on-primary-container);
+  }
+}
+
+.skc-fab.skc-fab--secondary {
+  color: var(--on-secondary-container);
+  background-color: var(--secondary-container);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--on-secondary-container);
+  }
+}
+
+.skc-fab.skc-fab--tertiary {
+  color: var(--on-tertiary-container);
+  background-color: var(--tertiary-container);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--on-tertiary-container);
+  }
 }

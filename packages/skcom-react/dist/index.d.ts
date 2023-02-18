@@ -383,7 +383,8 @@ declare namespace MaterialIcon {
  * Props for {@link FAB}.
  */
 interface FABProps extends SKComponent {
-    children: React.ReactNode;
+    children?: React.ReactNode;
+    color: "surface" | "primary" | "secondary" | "tertiary";
 }
 /**
  * The Floating Action Button or FAB is the main action of a page.
@@ -392,7 +393,7 @@ interface FABProps extends SKComponent {
  *
  * @param
  */
-declare function FAB({ children, style, className }: FABProps): JSX.Element;
+declare function FAB({ children, color, style, className }: FABProps): JSX.Element;
 declare namespace FAB {
     var displayName: string;
 }

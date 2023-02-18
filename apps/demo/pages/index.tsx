@@ -146,7 +146,7 @@ const Home: NextPage = () => {
       </Actions>
       <ToggleButtonsSection />
       <div>
-        <FAB>Checkout</FAB>
+        <FAB color="tertiary">Checkout</FAB>
       </div>
     </main>
   );

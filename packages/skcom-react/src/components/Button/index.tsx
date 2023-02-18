@@ -224,6 +224,12 @@ export function Button({
         </div>
       )}
       {children && <span className="skc-button__label">{children}</span>}
+      <motion.span
+        initial={{ scale: 0, opacity: 0.36 }}
+        animate={rippleControls}
+        className="skc-button__ripple"
+        style={rippleStyle}
+      />
     </>
   );
 
@@ -240,12 +246,6 @@ export function Button({
       // Otherwise, render a `<button>`
       <button {...props} type="button">
         {content}
-        <motion.span
-          initial={{ scale: 0, opacity: 0.36 }}
-          animate={rippleControls}
-          className="skc-button__ripple"
-          style={rippleStyle}
-        />
       </button>
     )
   );
