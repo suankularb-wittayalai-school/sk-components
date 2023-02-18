@@ -104,15 +104,15 @@ export interface FABProps extends SKComponent {
    */
   element?: ({
     children,
+    className,
     href,
     onMouseDown,
-    onTouchStart,
     onKeyDown,
   }: {
     children: React.ReactNode;
+    className: string;
     href: string;
     onMouseDown: (event: React.MouseEvent) => void;
-    onTouchStart: (event: React.TouchEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
   }) => JSX.Element;
 }
@@ -219,15 +219,20 @@ export function FAB({
   return (
     // Render with `element` if defined
     href && element ? (
-      element({ children: content, href, ...rippleListeners })
+      element({
+        children: content,
+        className: "skc-fab__wrapper",
+        href,
+        ...rippleListeners,
+      })
     ) : // Render an `<a>` if link passed in
     href ? (
-      <a href={href} {...rippleListeners}>
+      <a href={href} className="skc-fab__wrapper" {...rippleListeners}>
         {content}
       </a>
     ) : (
       // Otherwise, render a `<button>`
-      <button type="button" {...rippleListeners}>
+      <button type="button" className="skc-fab__wrapper" {...rippleListeners}>
         {content}
       </button>
     )

@@ -101,7 +101,6 @@ export function transition(
 export function useRipple(parentRef: React.MutableRefObject<any>): {
   rippleListeners: {
     onMouseDown: (event: React.MouseEvent) => void;
-    onTouchStart: (event: React.TouchEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
   };
   rippleControls: AnimationControls;
@@ -146,15 +145,6 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
       // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event: React.MouseEvent) => {
         setPosition(calculatePosition(event.pageX, event.pageY));
-        animateRipple();
-      },
-      // Use the touch position to calculate the ripple position and animate it
-      onTouchStart: (event: React.TouchEvent) => {
-        // Ignore multi-touch
-        if (event.touches.length !== 1) return;
-
-        const touch = event.touches[0];
-        setPosition(calculatePosition(touch.pageX, touch.pageY));
         animateRipple();
       },
       // On key down, put the ripple in the middle of the Button and animate it

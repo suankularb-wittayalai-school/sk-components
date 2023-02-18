@@ -149,7 +149,7 @@ interface ButtonProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, title, style, className, href, onClick, onMouseDown, onTouchStart, onKeyDown, }: {
+    element?: ({ children, ref, title, style, className, href, onClick, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         title?: string;
@@ -158,7 +158,6 @@ interface ButtonProps extends SKComponent {
         href: string;
         onClick: (event: React.MouseEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
-        onTouchStart: (event: React.TouchEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element;
 }
@@ -467,11 +466,11 @@ interface FABProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, href, onMouseDown, onTouchStart, onKeyDown, }: {
+    element?: ({ children, className, href, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
+        className: string;
         href: string;
         onMouseDown: (event: React.MouseEvent) => void;
-        onTouchStart: (event: React.TouchEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element;
 }
