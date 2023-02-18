@@ -1,7 +1,7 @@
 ////
 /// **Toggle Button**
 /// A Button with just an icon that can be toggled on and off.
-/// 
+///
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3rmzxf2aqo3r SKCom documentation
 ////
 
@@ -16,7 +16,8 @@
   overflow: hidden;
   place-content: center;
   padding: 0.5rem;
-  transition: background-color, color var(--motion-short-4) var(--easing-standard);
+  transition: background-color,
+    color var(--motion-short-4) var(--easing-standard);
   border-radius: var(--rounded-full);
 
   &::before {
@@ -48,7 +49,8 @@
 .skc-icon {
   .skc-toggle-button & {
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
+    transition: font-variation-settings var(--motion-short-4)
+      var(--easing-standard);
   }
 
   // Hover: make icon bolder
@@ -211,7 +213,7 @@
 
   &::before,
   .skc-toggle-button__ripple {
-    color: var(--on-surface);
+    background-color: var(--on-surface);
   }
 
   // Selected
@@ -221,7 +223,7 @@
     // Dangerous
     &::before,
     .skc-toggle-button__ripple {
-      color: var(--primary);
+      background-color: var(--primary);
     }
   }
 }

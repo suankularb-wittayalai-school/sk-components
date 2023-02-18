@@ -128,6 +128,10 @@ export function ToggleButton({
   return (
     <button
       ref={buttonRef}
+      // We’re using `aria-disabled` instead of `disabled` because it does not
+      // disable tabbing in, which is better for accessibility.
+      aria-disabled={disabled}
+      aria-label={alt}
       title={tooltip}
       style={style}
       className={cn([

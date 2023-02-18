@@ -183,7 +183,7 @@ export function Button({
    */
   const props = {
     ref: buttonRef,
-    // We’re using `aria-disabled` instead of `disabled` because it does no
+    // We’re using `aria-disabled` instead of `disabled` because it does not
     // disable tabbing in, which is better for accessibility.
     "aria-disabled": disabled || loading,
     "aria-label": alt,
