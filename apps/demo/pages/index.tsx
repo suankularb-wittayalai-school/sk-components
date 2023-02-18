@@ -6,6 +6,7 @@ import { FC, useState } from "react";
 import {
   Actions,
   Button,
+  FAB,
   MaterialIcon,
   SegmentedButton,
   ToggleButton,
@@ -144,6 +145,9 @@ const Home: NextPage = () => {
         </Button>
       </Actions>
       <ToggleButtonsSection />
+      <div>
+        <FAB>Checkout</FAB>
+      </div>
     </main>
   );
 };

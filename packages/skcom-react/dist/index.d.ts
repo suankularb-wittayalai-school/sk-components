@@ -380,6 +380,24 @@ declare namespace MaterialIcon {
 }
 
 /**
+ * Props for {@link FAB}.
+ */
+interface FABProps extends SKComponent {
+    children: React.ReactNode;
+}
+/**
+ * The Floating Action Button or FAB is the main action of a page.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation}
+ *
+ * @param
+ */
+declare function FAB({ children, style, className }: FABProps): JSX.Element;
+declare namespace FAB {
+    var displayName: string;
+}
+
+/**
  * A hook with duration and easing definitions for use with Framer Motion.
  * The definitions can be used with {@link transition}.
  *
@@ -421,4 +439,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, Button, ButtonProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, Button, ButtonProps, FAB, FABProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

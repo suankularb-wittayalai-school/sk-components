@@ -8,9 +8,12 @@ export {
   ToggleButton,
   type ToggleButtonProps,
 } from "./components/ToggleButton";
+
 export {
   MaterialIcon,
   type MaterialIconProps,
 } from "./components/MaterialIcon";
+
+export { FAB, type FABProps } from "./components/FAB";
 
 export { useAnimationConfig } from "./utils/animation";
