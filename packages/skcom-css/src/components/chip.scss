@@ -38,6 +38,7 @@
   color: var(--on-surface);
   border: 1px solid var(--outline);
   border-radius: 0.5rem;
+  -webkit-tap-highlight-color: transparent;
 
   // State layer
   &::before {
