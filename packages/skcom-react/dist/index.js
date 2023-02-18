@@ -168,7 +168,13 @@ function useRipple(parentRef) {
     if (!button)
       return;
     setDiameter(
-      Math.min(Math.max(button.clientWidth, button.clientHeight), 160)
+      Math.min(
+        Math.max(
+          Math.max(button.clientWidth, button.clientHeight),
+          80
+        ),
+        160
+      )
     );
   }, []);
   const [position, setPosition] = import_react.default.useState({ top: "0", left: "0" });

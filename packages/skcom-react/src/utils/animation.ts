@@ -113,8 +113,23 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
   React.useEffect(() => {
     const button = parentRef.current as any;
     if (!button) return;
+
+    // Read the width and height of the parent element and set the ripple size
+    // appropriate for the parent
     setDiameter(
-      Math.min(Math.max(button.clientWidth, button.clientHeight), 160)
+      Math.min(
+        Math.max(
+          // Use either the width or height of parent element, whichever is
+          // bigger
+          Math.max(button.clientWidth, button.clientHeight),
+          // Minimum diameter of 80px; square element causes the ripple to be
+          // less impactful
+          80
+        ),
+        // Maximum diameter of 160px; big element causes the ripple to scale
+        // too fast
+        160
+      )
     );
   }, []);
   const [position, setPosition] = React.useState({ top: "0", left: "0" });
