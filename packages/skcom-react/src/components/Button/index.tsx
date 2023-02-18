@@ -128,13 +128,27 @@ export interface ButtonProps extends SKComponent {
    */
   element?: ({
     children,
-    href,
+    ref,
+    title,
+    style,
     className,
+    href,
+    onClick,
+    onMouseDown,
+    onTouchStart,
+    onKeyDown,
   }: {
-    children: React.ReactNode;
+    children: React.ReactNode,
+    ref: React.MutableRefObject<any>;
+    title?: string;
+    style?: React.CSSProperties;
+    className: any;
     href: string;
-    className: string;
-  }) => any;
+    onClick: (event: React.MouseEvent) => void;
+    onMouseDown: (event: React.MouseEvent) => void;
+    onTouchStart: (event: React.TouchEvent) => void;
+    onKeyDown: (event: React.KeyboardEvent) => void;
+  }) => JSX.Element;
 }
 
 /**

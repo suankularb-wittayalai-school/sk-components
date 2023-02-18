@@ -113,6 +113,7 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
   const [diameter, setDiameter] = React.useState(0);
   React.useEffect(() => {
     const button = parentRef.current as any;
+    if (!button) return;
     setDiameter(
       Math.min(Math.max(button.clientWidth, button.clientHeight), 160)
     );
@@ -121,6 +122,7 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
 
   function calculatePosition(x: number, y: number) {
     const button = parentRef.current as any;
+    if (!button) return { top: "0", left: "0" };
     return {
       top: `${y - (button.offsetTop + diameter / 2)}px`,
       left: `${x - (button.offsetLeft + diameter / 2)}px`,
@@ -162,6 +164,7 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
 
         // Set the ripple position to the middle of the Button
         const button = parentRef.current as any;
+        if (!button) return;
         setPosition({
           top: `${button.clientHeight / 2 - diameter / 2}px`,
           left: `${button.clientWidth / 2 - diameter / 2}px`,

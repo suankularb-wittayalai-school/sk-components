@@ -145,8 +145,26 @@ const Home: NextPage = () => {
         </Button>
       </Actions>
       <ToggleButtonsSection />
-      <div>
-        <FAB color="tertiary">Checkout</FAB>
+      <div className="flex flex-row gap-2 items-start">
+        <FAB color="tertiary" icon={<MaterialIcon icon="shopping_cart" />}>
+          Checkout
+        </FAB>
+        <FAB
+          color="surface"
+          size="small"
+          icon={<MaterialIcon icon="shopping_cart" />}
+        />
+        <FAB
+          color="primary"
+          size="small"
+          icon={<MaterialIcon icon="shopping_cart" />}
+        />
+        <FAB color="secondary" icon={<MaterialIcon icon="shopping_cart" />} />
+        <FAB
+          color="tertiary"
+          size="large"
+          icon={<MaterialIcon icon="shopping_cart" />}
+        />
       </div>
     </main>
   );
