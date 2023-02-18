@@ -198,6 +198,7 @@ export function Button({
     // We’re using `aria-disabled` instead of `disabled` because it does not
     // disable tabbing in, which is better for accessibility.
     "aria-disabled": disabled || loading,
+    "aria-selected": selected,
     "aria-label": alt,
     title: tooltip,
     style,

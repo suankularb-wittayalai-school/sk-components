@@ -203,6 +203,7 @@ function Button({
   const props = {
     ref: buttonRef,
     "aria-disabled": disabled || loading,
+    "aria-selected": selected,
     "aria-label": alt,
     title: tooltip,
     style,
@@ -305,6 +306,7 @@ function ToggleButton({
   return /* @__PURE__ */ jsxs2("button", {
     ref: buttonRef,
     "aria-disabled": disabled,
+    "aria-pressed": value,
     "aria-label": alt,
     title: tooltip,
     style,
