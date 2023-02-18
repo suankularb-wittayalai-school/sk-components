@@ -22,16 +22,7 @@
 
   // State layer
   &::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    content: "";
-    transition: opacity var(--motion-short-4) var(--easing-standard);
-    pointer-events: none;
-    opacity: 0;
-    border-radius: inherit;
+    @include mix.state-layer();
   }
 
   &[aria-disabled="true"] {
@@ -84,14 +75,7 @@
 
 // Ripple
 .skc-button__ripple {
-  position: absolute;
-  z-index: 90;
-  content: "";
-  transform: scale(0);
-  filter: blur(16px);
-  pointer-events: none;
-  opacity: 0.36;
-  border-radius: 50%;
+  @include mix.ripple();
 }
 
 // Icon
