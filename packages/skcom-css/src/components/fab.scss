@@ -4,8 +4,7 @@
 ///
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation
 ////
-///
-///
+
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss";
 @use "../components/icon.scss" as ci;
@@ -60,17 +59,34 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.skc-fab__icon .skc-icon {
-  @include ci.icon(0, 400, 0, 24);
+// Ripple
+.skc-fab__ripple {
+  @include mix.ripple();
 }
 
+// Icon
+.skc-fab__icon .skc-icon {
+  @include ci.icon(0, 400, 0, 24);
+  transition: font-variation-settings var(--motion-short-4)
+    var(--easing-standard);
+
+  // Hover: make icon bolder
+  .skc-fab__wrapper:hover &,
+  .skc-fab:hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  // Active: make icon thinner
+  .skc-fab__wrapper:active &,
+  .skc-fab:active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
+}
+
+// Label
 .skc-fab__label {
   @extend .label-large;
   font-family: var(--font-display);
-}
-
-.skc-fab__ripple {
-  @include mix.ripple();
 }
 
 // Sizes
@@ -79,23 +95,15 @@
 .skc-fab.skc-fab--small {
   padding: 0.5rem;
   border-radius: var(--rounded-lg);
-
-  .skc-fab__icon .skc-icon {
-    @include ci.icon(0, 400, 0, 24);
-  }
 }
 
 // Standard FAB
 .skc-fab.skc-fab--standard {
   padding: 1rem;
   border-radius: var(--rounded-xl);
-
-  .skc-fab__icon .skc-icon {
-    @include ci.icon(0, 400, 0, 24);
-  }
 }
 
-// Small FAB
+// Large FAB
 .skc-fab.skc-fab--large {
   padding: 1.875rem;
   border-radius: var(--rounded-2xl);
@@ -103,6 +111,20 @@
   .skc-fab__icon .skc-icon {
     @include ci.icon(0, 400, 0, 40);
     font-size: 2.25rem;
+
+    // Hover: make icon bolder
+    .skc-fab__wrapper:hover &,
+    .skc-fab:hover & {
+      @include ci.icon(0, 600, 0, 40);
+      font-size: 2.25rem;
+    }
+
+    // Active: make icon thinner
+    .skc-fab__wrapper:active &,
+    .skc-fab:active & {
+      @include ci.icon(0, 300, 0, 40);
+      font-size: 2.25rem;
+    }
   }
 }
 

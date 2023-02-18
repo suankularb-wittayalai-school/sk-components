@@ -145,7 +145,7 @@ const Home: NextPage = () => {
         </Button>
       </Actions>
       <ToggleButtonsSection />
-      <div className="flex flex-row gap-2 items-start">
+      <div className="flex flex-row gap-2 items-start flex-wrap">
         <FAB color="tertiary" icon={<MaterialIcon icon="shopping_cart" />}>
           Checkout
         </FAB>
