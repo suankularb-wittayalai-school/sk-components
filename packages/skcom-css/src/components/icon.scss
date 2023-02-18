@@ -37,6 +37,6 @@
 
 @include mix.scheme("dark") {
   .skc-icon {
-    @include icon(1, 400, -25, 24);
+    @include icon(0, 400, -25, 24);
   }
 }

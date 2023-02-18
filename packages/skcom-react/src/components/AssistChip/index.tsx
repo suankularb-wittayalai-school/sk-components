@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,6 +9,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/chip.css";
 
 // Utilities
+import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -99,7 +101,6 @@ export interface AssistChipProps extends SKComponent {
   element?: ({
     children,
     ref,
-    title,
     style,
     className,
     href,
@@ -109,7 +110,6 @@ export interface AssistChipProps extends SKComponent {
   }: {
     children: React.ReactNode;
     ref: React.MutableRefObject<any>;
-    title?: string;
     style?: React.CSSProperties;
     className: any;
     href: string;
@@ -154,14 +154,56 @@ export function AssistChip({
   style,
   className,
 }: AssistChipProps) {
-  const props: React.HTMLAttributes<HTMLButtonElement> = {
+  // Ripple setup
+  const buttonRef = React.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
+
+  const props = {
+    ref: buttonRef,
+    "aria-disabled": disabled,
+    title: tooltip,
+    onClick: () => {
+      if (!(disabled || loading) && onClick && !href) onClick();
+    },
     style: style,
-    className: cn(["skc-assist-chip", className]),
+    className: cn([
+      "skc-assist-chip",
+      elevated && "skc-assist-chip--elevated",
+      dangerous && "skc-assist-chip--dangerous",
+      className,
+    ]),
+    ...rippleListeners,
   };
 
-  const content = <>{children}</>;
+  const content = (
+    <>
+      {icon && <div className="skc-assist-chip__icon">{icon}</div>}
+      <span className="skc-assist-chip__label">{children}</span>
+      <motion.span
+        initial={{ scale: 0, opacity: 0.36 }}
+        animate={rippleControls}
+        className="skc-assist-chip__ripple"
+        style={rippleStyle}
+      />
+    </>
+  );
 
-  return <button {...props}>{content}</button>;
+  return (
+    // Render with `element` if defined
+    href && element ? (
+      element({ ...props, children: content, href })
+    ) : // Render an `<a>` if link passed in
+    href ? (
+      <a {...props} href={href}>
+        {content}
+      </a>
+    ) : (
+      // Otherwise, render a `<button>`
+      <button {...props} type="button">
+        {content}
+      </button>
+    )
+  );
 }
 
 AssistChip.displayName = "AssistChip";

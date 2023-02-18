@@ -398,10 +398,9 @@ interface AssistChipProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, title, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
-        title?: string;
         style?: React.CSSProperties;
         className: any;
         href: string;

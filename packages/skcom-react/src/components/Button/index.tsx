@@ -137,7 +137,7 @@ export interface ButtonProps extends SKComponent {
     onMouseDown,
     onKeyDown,
   }: {
-    children: React.ReactNode,
+    children: React.ReactNode;
     ref: React.MutableRefObject<any>;
     title?: string;
     style?: React.CSSProperties;

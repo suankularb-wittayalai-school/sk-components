@@ -5,6 +5,7 @@ import { FC, useState } from "react";
 // SK Components
 import {
   Actions,
+  AssistChip,
   Button,
   FAB,
   MaterialIcon,
@@ -176,6 +177,31 @@ const Home: NextPage = () => {
           icon={<MaterialIcon icon="shopping_cart" />}
           tooltip="Go to checkout"
         />
+      </div>
+      <div className="flex flex-row gap-2 items-start flex-wrap">
+        <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
+          Turn on lights
+        </AssistChip>
+        <AssistChip icon={<MaterialIcon icon="lightbulb" />} dangerous>
+          Turn on lights
+        </AssistChip>
+        <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
+          Turn on lights
+        </AssistChip>
+        <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
+          Turn on lights
+        </AssistChip>
+        <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated dangerous>
+          Turn on lights
+        </AssistChip>
+        <AssistChip
+          icon={<MaterialIcon icon="lightbulb" />}
+          elevated
+          dangerous
+          disabled
+        >
+          Turn on lights
+        </AssistChip>
       </div>
     </main>
   );
