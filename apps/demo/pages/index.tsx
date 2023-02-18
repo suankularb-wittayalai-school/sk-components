@@ -80,7 +80,7 @@ const ToggleButtonsSection = () => {
   const [star, setStar] = useState<boolean>(false);
 
   return (
-    <Actions align="full">
+    <Actions align="left">
       <ToggleButton
         appearance="filled"
         icon={<MaterialIcon icon="favorite" />}

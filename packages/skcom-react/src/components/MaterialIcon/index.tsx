@@ -86,19 +86,17 @@ export function MaterialIcon({
   return (
     <i
       aria-hidden="true"
-      style={style}
-      className={cn([
-        "skc-icon",
-        fill && "skc-icon--filled",
-        weight && `skc-icon--weight-${weight}`,
-        grade == -25
-          ? "skc-icon--grade-[-25]"
-          : grade !== undefined
-          ? `skc-icon--grade-${grade}`
-          : undefined,
-        size && `skc-icon--size-${size}`,
-        className,
-      ])}
+      style={{
+        ...style,
+        fontSize: size ? `${size / 16}rem` : undefined,
+        fontVariationSettings:
+          fill || weight || grade || size
+            ? `"FILL" ${fill ? 1 : 0}, "wght" ${weight || 400}, "GRAD" ${
+                grade || 0
+              }, "opsz" ${size || 24}`
+            : undefined,
+      }}
+      className={cn(["skc-icon", className])}
       translate="no"
     >
       {icon}

@@ -13,8 +13,8 @@
 .skc-toggle-button {
   position: relative;
   display: grid;
-  place-content: center;
   overflow: hidden;
+  place-content: center;
   padding: 0.5rem;
   transition: background-color, color var(--motion-short-4) var(--easing-standard);
   border-radius: var(--rounded-full);
@@ -48,8 +48,7 @@
 .skc-icon {
   .skc-toggle-button & {
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4)
-    var(--easing-standard);
+    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
   }
 
   // Hover: make icon bolder
@@ -219,7 +218,7 @@
   &.skc-toggle-button--selected {
     color: var(--primary);
 
-  // Dangerous
+    // Dangerous
     &::before,
     .skc-toggle-button__ripple {
       color: var(--primary);
