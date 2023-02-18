@@ -27,6 +27,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 var src_exports = {};
 __export(src_exports, {
   Actions: () => Actions,
+  AssistChip: () => AssistChip,
   Button: () => Button,
   FAB: () => FAB,
   MaterialIcon: () => MaterialIcon,
@@ -368,6 +369,39 @@ function ToggleButton({
 }
 ToggleButton.displayName = "Toggle Button";
 
+// ../skcom-css/dist/css/components/chip.css
+styleInject("");
+
+// src/components/AssistChip/index.tsx
+var import_jsx_runtime = require("react/jsx-runtime");
+function AssistChip({
+  children,
+  icon,
+  tooltip,
+  elevated,
+  dangerous,
+  loading,
+  disabled,
+  onClick,
+  href,
+  element,
+  style,
+  className
+}) {
+  const props = {
+    style,
+    className: cn(["skc-assist-chip", className])
+  };
+  const content = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, {
+    children
+  });
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+    ...props,
+    children: content
+  });
+}
+AssistChip.displayName = "AssistChip";
+
 // src/components/FAB/index.tsx
 var import_framer_motion4 = require("framer-motion");
 var React4 = __toESM(require("react"));
@@ -458,6 +492,7 @@ FAB.displayName = "FAB";
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Actions,
+  AssistChip,
   Button,
   FAB,
   MaterialIcon,

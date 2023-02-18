@@ -9,6 +9,8 @@ export {
   type ToggleButtonProps,
 } from "./components/ToggleButton";
 
+export { AssistChip, type AssistChipProps } from "./components/AssistChip";
+
 export {
   MaterialIcon,
   type MaterialIconProps,
