@@ -16,8 +16,7 @@
   overflow: hidden;
   place-content: center;
   padding: 0.5rem;
-  transition: background-color,
-    color var(--motion-short-4) var(--easing-standard);
+  transition: background-color var(--motion-short-4) var(--easing-standard), color var(--motion-short-4) var(--easing-standard);
   border-radius: var(--rounded-full);
 
   &::before {

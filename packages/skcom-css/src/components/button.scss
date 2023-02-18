@@ -52,9 +52,14 @@
     }
   }
 
-  // With Icon padding
-  &:has(.skc-button__icon:first-child) {
+  // Icon with label padding
+  &:has(.skc-button__icon:first-child):has(.skc-button__label) {
     padding-left: 1rem;
+  }
+
+  // With only Icon padding
+  &:not(:has(.skc-button__label)) {
+    padding: 0.5rem;
   }
 }
 
@@ -73,6 +78,21 @@
 // Icon
 .skc-button__icon .skc-icon {
   @include ci.icon(0, 400, 0, 20);
+
+  .skc-button:not(:has(.skc-button__label)) & {
+    @include ci.icon(0, 400, 0, 24);
+    transition: font-variation-settings var(--motion-short-4) var(--easing-standard);
+  }
+
+  // Hover: make icon bolder
+  .skc-button:not(:has(.skc-button__label)):hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  // Active: make icon thinner
+  .skc-button:not(:has(.skc-button__label)):active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
 }
 
 // Label
