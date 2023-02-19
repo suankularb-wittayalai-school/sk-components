@@ -86,7 +86,7 @@ export function NavBar({
   className,
 }: NavBarProps) {
   return (
-    <nav className={cn(["skc-nav-bar", className])}>
+    <nav style={style} className={cn(["skc-nav-bar", className])}>
       <div className="skc-nav-bar__main">
         <section className="skc-nav-bar__toggle-and-fab">
           <Button

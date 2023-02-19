@@ -32,6 +32,10 @@
   }
 }
 
+.skc-nav-bar-item.skc-nav-bar-item--rail-only {
+  display: none;
+}
+
 // Icon
 .skc-nav-bar-item__icon {
   @include mix.transition(
@@ -129,6 +133,10 @@
 @include mix.breakpoint("sm") {
   .skc-nav-bar-item {
     padding: 0 0 0.25rem;
+  }
+
+  .skc-nav-bar-item.skc-nav-bar-item--rail-only {
+    display: flex;
   }
 
   .skc-nav-bar-item__icon {
