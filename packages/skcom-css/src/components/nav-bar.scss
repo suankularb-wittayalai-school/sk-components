@@ -11,6 +11,7 @@
 .skc-nav-bar {
   width: 100vw;
   background-color: var(--surface-2);
+  overflow-x: scroll;
 }
 
 .skc-nav-bar__toggle-and-fab,
@@ -42,6 +43,7 @@
     width: 5rem;
     height: 100vh;
     padding: 2.75rem 0 3.5rem;
+    overflow: initial scroll;
   }
 
   .skc-nav-bar__main {
