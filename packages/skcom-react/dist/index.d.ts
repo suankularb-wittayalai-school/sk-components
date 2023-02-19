@@ -159,7 +159,7 @@ interface ButtonProps extends SKComponent {
         onClick: (event: React.MouseEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
-    }) => JSX.Element;
+    }) => JSX.Element | null;
 }
 /**
  * Button helps users take action, whether it’s logging in, liking a post, or going to a page.
@@ -179,7 +179,7 @@ interface ButtonProps extends SKComponent {
  * @param href The URL of the page this Button leads to.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, onClick, href, element, style, className, }: ButtonProps): JSX.Element;
+declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, onClick, href, element: Element, style, className, }: ButtonProps): JSX.Element;
 declare namespace Button {
     var displayName: string;
 }
@@ -407,7 +407,7 @@ interface AssistChipProps extends SKComponent {
         onClick: (event: React.MouseEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
-    }) => JSX.Element;
+    }) => JSX.Element | null;
 }
 /**
  * Assist Chips are similar to Buttons in that it helps users take action. The
@@ -430,7 +430,7 @@ interface AssistChipProps extends SKComponent {
  * @param href The URL of the page this Assist Chip leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function AssistChip({ children, icon, tooltip, elevated, dangerous, loading, disabled, onClick, href, element, style, className, }: AssistChipProps): JSX.Element;
+declare function AssistChip({ children, icon, tooltip, elevated, dangerous, loading, disabled, onClick, href, element: Element, style, className, }: AssistChipProps): JSX.Element;
 declare namespace AssistChip {
     var displayName: string;
 }
@@ -633,7 +633,15 @@ interface NavBarItemProps extends SKComponent {
      *
      * - Optional.
      */
-    element?: () => JSX.Element;
+    element?: ({ children, title, style, className, href, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        title?: string;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onMouseDown: (event: React.MouseEvent) => void;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
 }
 /**
  *
@@ -649,7 +657,7 @@ interface NavBarItemProps extends SKComponent {
  * @param href The URL of the page this Navigation Bar Item leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function NavBarItem({ icon, label, alt, tooltip, badge, selected, railOnly, href, element, style, className, }: NavBarItemProps): JSX.Element;
+declare function NavBarItem({ icon, label, alt, tooltip, badge, selected, railOnly, href, element: Element, style, className, }: NavBarItemProps): JSX.Element;
 declare namespace NavBarItem {
     var displayName: string;
 }
@@ -741,7 +749,7 @@ interface FABProps extends SKComponent {
         href: string;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
-    }) => JSX.Element;
+    }) => JSX.Element | null;
 }
 /**
  * The Floating Action Button or FAB is the main action of a page.
@@ -759,7 +767,7 @@ interface FABProps extends SKComponent {
  * @param href The URL of the page this FAB leads to.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function FAB({ children, color, size, icon, alt, tooltip, stateOnScroll, onClick, href, element, style, className, }: FABProps): JSX.Element;
+declare function FAB({ children, color, size, icon, alt, tooltip, stateOnScroll, onClick, href, element: Element, style, className, }: FABProps): JSX.Element;
 declare namespace FAB {
     var displayName: string;
 }

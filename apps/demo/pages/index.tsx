@@ -1,6 +1,7 @@
 // External libraries
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { FC, useState } from "react";
 
@@ -52,17 +53,20 @@ const Navigation: FC = () => {
         label="Learn"
         selected
         href="#"
+        element={Link}
       />
       <NavBarItem
         icon={<MaterialIcon icon="search" />}
         label="Lookup"
         href="#"
+        element={Link}
       />
       <NavBarItem
         icon={<MaterialIcon icon="account_circle" />}
         label="Account"
         badge={7}
         href="#"
+        element={Link}
       />
       <NavBarItem
         icon={<MaterialIcon icon="admin_panel_settings" />}
@@ -70,6 +74,7 @@ const Navigation: FC = () => {
         badge={null}
         railOnly
         href="#"
+        element={Link}
       />
     </NavBar>
   );

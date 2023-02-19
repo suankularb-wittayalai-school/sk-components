@@ -1,4 +1,5 @@
 // External libraries
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,13 +9,12 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/nav-bar-item.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import {
   transition,
   useAnimationConfig,
   useRipple,
 } from "../../utils/animation";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link NavBarItem Navigation Bar Item}.
@@ -96,7 +96,23 @@ export interface NavBarItemProps extends SKComponent {
    *
    * - Optional.
    */
-  element?: () => JSX.Element;
+  element?: ({
+    children,
+    title,
+    style,
+    className,
+    href,
+    onMouseDown,
+    onKeyDown,
+  }: {
+    children: React.ReactNode;
+    title?: string;
+    style?: React.CSSProperties;
+    className: any;
+    href: string;
+    onMouseDown: (event: React.MouseEvent) => void;
+    onKeyDown: (event: React.KeyboardEvent) => void;
+  }) => JSX.Element | null;
 }
 
 /**
@@ -122,7 +138,7 @@ export function NavBarItem({
   selected,
   railOnly,
   href,
-  element,
+  element: Element,
   style,
   className,
 }: NavBarItemProps) {
@@ -136,21 +152,23 @@ export function NavBarItem({
   // Label ID for `aria-labelledby`
   const navID = `nav-${typeof label === "string" ? label.toLowerCase() : alt}`;
 
-  return (
-    <a
-      aria-current={selected}
-      aria-labelledby={label ? navID : undefined}
-      href={href}
-      title={tooltip}
-      style={style}
-      className={cn([
-        "skc-nav-bar-item",
-        selected && "skc-nav-bar-item--selected",
-        railOnly && "skc-nav-bar-item--rail-only",
-        className,
-      ])}
-      {...rippleListeners}
-    >
+  const props = {
+    "aria-current": selected,
+    "aria-labelledby": label ? navID : undefined,
+    href: href,
+    title: tooltip,
+    style: style,
+    className: cn([
+      "skc-nav-bar-item",
+      selected && "skc-nav-bar-item--selected",
+      railOnly && "skc-nav-bar-item--rail-only",
+      className,
+    ]),
+    ...rippleListeners,
+  };
+
+  const content = (
+    <>
       <div ref={iconRef} className="skc-nav-bar-item__icon">
         {icon}
         <LayoutGroup>
@@ -181,7 +199,17 @@ export function NavBarItem({
           {label}
         </span>
       )}
-    </a>
+    </>
+  );
+
+  return (
+    // Render with `element` if defined
+    Element ? (
+      <Element {...props}>{content}</Element>
+    ) : (
+      // Otherwise, render an `<a>`
+      <a {...props}>{content}</a>
+    )
   );
 }
 

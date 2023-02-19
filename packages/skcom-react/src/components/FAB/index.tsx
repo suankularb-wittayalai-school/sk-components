@@ -9,8 +9,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/fab.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { useRipple } from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link FAB}.
@@ -114,7 +114,7 @@ export interface FABProps extends SKComponent {
     href: string;
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element;
+  }) => JSX.Element | null;
 }
 
 /**
@@ -143,7 +143,7 @@ export function FAB({
   stateOnScroll,
   onClick,
   href,
-  element,
+  element: Element,
   style,
   className,
 }: FABProps) {
@@ -225,12 +225,10 @@ export function FAB({
 
   return (
     // Render with `element` if defined
-    href && element ? (
-      element({
-        children: content,
-        href,
-        ...props,
-      })
+    href && Element ? (
+      <Element {...props} href={href}>
+        {content}
+      </Element>
     ) : // Render an `<a>` if link passed in
     href ? (
       <a href={href} {...props}>
@@ -238,7 +236,7 @@ export function FAB({
       </a>
     ) : (
       // Otherwise, render a `<button>`
-      <button type="button" {...props}>
+      <button type="button" onClick={onClick} {...props}>
         {content}
       </button>
     )
