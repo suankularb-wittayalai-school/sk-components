@@ -34,7 +34,8 @@ const Navigation: FC = () => {
         <>
           <NavBarItem
             icon={<MaterialIcon icon="translate" />}
-            label="Language"
+            label="เปลี่ยนภาษา"
+            tooltip="Change language / เปลี่ยนภาษา"
             href="#"
           />
           <NavBarItem
@@ -49,7 +50,7 @@ const Navigation: FC = () => {
       <NavBarItem
         icon={<MaterialIcon icon="school" />}
         label="Learn"
-        // selected
+        selected
         href="#"
       />
       <NavBarItem
@@ -60,12 +61,13 @@ const Navigation: FC = () => {
       <NavBarItem
         icon={<MaterialIcon icon="account_circle" />}
         label="Account"
-        selected
+        badge={7}
         href="#"
       />
       <NavBarItem
         icon={<MaterialIcon icon="admin_panel_settings" />}
         label="Admin"
+        badge={null}
         railOnly
         href="#"
       />

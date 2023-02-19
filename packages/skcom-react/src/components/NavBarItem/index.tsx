@@ -9,8 +9,12 @@ import "@suankularb-components/css/dist/css/components/nav-bar-item.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { useRipple } from "../../utils/animation";
-import { motion } from "framer-motion";
+import {
+  transition,
+  useAnimationConfig,
+  useRipple,
+} from "../../utils/animation";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 /**
  * Props for {@link NavBarItem Navigation Bar Item}.
@@ -122,6 +126,9 @@ export function NavBarItem({
   style,
   className,
 }: NavBarItemProps) {
+  // Animation config
+  const { duration, easing } = useAnimationConfig();
+
   // Ripple setup
   const iconRef = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
@@ -146,6 +153,22 @@ export function NavBarItem({
     >
       <div ref={iconRef} className="skc-nav-bar-item__icon">
         {icon}
+        <LayoutGroup>
+          <AnimatePresence>
+            {badge !== undefined && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                layoutId={[navID, "badge"].join("-")}
+                transition={transition(duration.short4, easing.standard)}
+                className="skc-nav-bar-item__badge"
+              >
+                {badge !== null ? (badge > 99 ? "99+" : badge) : null}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </LayoutGroup>
         <motion.span
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}
