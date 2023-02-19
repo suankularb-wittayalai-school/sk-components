@@ -500,6 +500,161 @@ declare namespace MaterialIcon {
 }
 
 /**
+ * Props for {@link NavBar Navigation Bar}.
+ */
+interface NavBarProps extends SKComponent {
+    /**
+     * A Navigation Bar contains Navigation Bar Items, each leading to a different
+     * top-level page. These pages should only be navigated to from the Navigation
+     * Bar and the Navigation Drawer.
+     *
+     * - Must include at least 3 Navigation Bar Items.
+     * - Must not include more than 5 Navigation Bar Items visible on mobile.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * A small image of your brand can be put on the Navigation Rail to constantly
+     * remind your users that they are, in fact, in your app.
+     *
+     * - Not displayed on mobile.
+     * - Ensure the image is simple and undistracting.
+     * - Optional but recommended.
+     */
+    brand?: JSX.Element;
+    /**
+     * If a page includes a FAB, it is moved to the Navigation Rail in larger
+     * screens to assert its dominance.
+     *
+     * - Ensure that the FAB is both in Page Layout and Navigation Bar’s `fab`
+     *   prop for both to work properly. The FAB in Page Layout disappears on
+     *   larger screens, and the one in `fab` disappears on smaller screens.
+     * - Optional.
+     */
+    fab?: JSX.Element;
+    /**
+     * More Navigation Items can be placed on the bottom of the Navigation Rail
+     * in larger screens. Use cases are settings and log out.
+     *
+     * - Optional.
+     */
+    end?: JSX.Element;
+    /**
+     * The function called when the user clicks on the navigation Button.
+     *
+     * - Always required.
+     */
+    onNavToggle: () => any;
+}
+/**
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
+ *
+ * @param children A Navigation Bar contains Navigation Bar Items, each leading to a different top-level page.
+ * @param brand A small image of your brand can be put on the Navigation Rail.
+ * @param fab If a page includes a FAB, it is moved to the Navigation Rail in larger screens.
+ * @param end More Navigation Items can be placed on the bottom of the Navigation Rail in larger screens.
+ * @param onNavToggle The function called when the user clicks on the navigation Button.
+ */
+declare function NavBar({ children, brand, fab, end, onNavToggle, style, className, }: NavBarProps): JSX.Element;
+declare namespace NavBar {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link NavBarItem Navigation Bar Item}.
+ */
+interface NavBarItemProps extends SKComponent {
+    /**
+     * Icons help users identify pages more quickly, which is crucial for
+     * frequent destinations like those from the Navigation Bar/Rail.
+     *
+     * - If the icon is sufficiently representative of the page, a label isn’t
+     *   needed.
+     * - Always required.
+     */
+    icon: JSX.Element;
+    /**
+     * An additional text label underneath the icon. This is useful if the icon
+     * isn’t sufficiently representative of the page.
+     *
+     * - Optional.
+     */
+    label?: string | JSX.Element;
+    /**
+     * A description of the Navigation Bar Item for screen readers, similar to `alt` on `<img>`.
+     *
+     * - Required if the Navigation Bar Item just includes `icon`, because an
+     *   icon has no significance for screen readers.
+     */
+    alt?: string;
+    /**
+     * A message shown in a tooltip when the user hovers over the Navigation Bar
+     * Item.
+     *
+     * - Optional.
+     */
+    tooltip: string;
+    /**
+     * The number in the notification badge of this Navigation Bar Item.
+     *
+     * - Must be a positive integer or `null`. `null` displays a small red circle
+     *   instead of a large one with numbers.
+     * - Optional.
+     */
+    badge?: number | null;
+    /**
+     * Highlights the Navigation Bar Item. If the user is currently on this page,
+     * the Navigation Bar Item should be highlighted.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * This Navigation Bar Item will only show on the Navigation Rail visible on
+     * larger screens and disappears on smaller screens. Since there can only be
+     * a maximum of 5 destinations on a Navigation Bar, other destinations must
+     * be hidden with `railOnly`.
+     *
+     * - Optional.
+     */
+    railOnly?: boolean;
+    /**
+     * The URL of the page this Navigation Bar Item leads to, similar to `href`
+     * on `<a>`.
+     *
+     * - Always required.
+     */
+    href: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Optional.
+     */
+    element?: () => JSX.Element;
+}
+/**
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s8z7t3ulnwdb SKCom documentation}
+ *
+ * @param icon Icons help users identify pages more quickly, which is crucial for frequent destinations like those from the Navigation Bar/Rail.
+ * @param label An additional text label underneath the icon.
+ * @param alt A description of the Navigation Bar Item for screen readers, similar to `alt` on `<img>`.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Bar Item.
+ * @param badge The number in the notification badge of this Navigation Bar Item.
+ * @param selected Highlights the Navigation Bar Item. If the user is currently on this page, the Navigation Bar Item should be highlighted.
+ * @param railOnly This Navigation Bar Item will only show on the Navigation Rail visible on larger screens and disappears on smaller screens.
+ * @param href The URL of the page this Navigation Bar Item leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function NavBarItem({ icon, label, alt, tooltip, badge, selected, railOnly, href, element, style, className, }: NavBarItemProps): JSX.Element;
+declare namespace NavBarItem {
+    var displayName: string;
+}
+
+/**
  * Props for {@link FAB}.
  */
 interface FABProps extends SKComponent {
@@ -651,4 +806,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, FAB, FABProps, MaterialIcon, MaterialIconProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

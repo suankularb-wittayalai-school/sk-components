@@ -16,6 +16,9 @@ export {
   type MaterialIconProps,
 } from "./components/MaterialIcon";
 
+export { NavBar, type NavBarProps } from "./components/NavBar";
+export { NavBarItem, type NavBarItemProps } from "./components/NavBarItem";
+
 export { FAB, type FABProps } from "./components/FAB";
 
 export { useAnimationConfig } from "./utils/animation";

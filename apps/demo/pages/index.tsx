@@ -9,6 +9,8 @@ import {
   Button,
   FAB,
   MaterialIcon,
+  NavBar,
+  NavBarItem,
   SegmentedButton,
   ToggleButton,
 } from "@suankularb-components/react";
@@ -195,25 +197,48 @@ const AssistChipsSection: FC = () => (
 
 const Home: NextPage = () => {
   return (
-    <main className="flex flex-col gap-6 p-4">
-      <ButtonsSection />
-      <SegmentedButtonSection />
-      <Actions align="full">
-        <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-          Add
-        </Button>
-        <Button
-          appearance="outlined"
-          icon={<MaterialIcon icon="delete" />}
-          dangerous
-        >
-          Delete
-        </Button>
-      </Actions>
-      <ToggleButtonsSection />
-      <FABsSection />
-      <AssistChipsSection />
-    </main>
+    <>
+      <NavBar onNavToggle={() => {}}>
+        <NavBarItem
+          icon={<MaterialIcon icon="school" />}
+          label="Learn"
+          tooltip="Learn"
+          selected
+          href="#"
+        />
+        <NavBarItem
+          icon={<MaterialIcon icon="search" />}
+          label="Lookup"
+          tooltip="Lookup"
+          href="#"
+        />
+        <NavBarItem
+          icon={<MaterialIcon icon="account_circle" />}
+          label="Account"
+          tooltip="Account"
+          href="#"
+        />
+      </NavBar>
+      <main className="flex flex-col gap-6 p-4">
+        <ButtonsSection />
+        <SegmentedButtonSection />
+        <Actions align="full">
+          <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
+            Add
+          </Button>
+          <Button
+            appearance="outlined"
+            icon={<MaterialIcon icon="delete" />}
+            dangerous
+          >
+            Delete
+          </Button>
+        </Actions>
+        <ToggleButtonsSection />
+        <FABsSection />
+        <AssistChipsSection />
+      </main>
+    </>
   );
 };
 

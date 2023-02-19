@@ -5,10 +5,12 @@ import * as React from "react";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/nav-bar.css";
+import "@suankularb-components/css/dist/css/components/nav-bar-item.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { useRipple } from "../../utils/animation";
+import { motion } from "framer-motion";
 
 /**
  * Props for {@link NavBarItem Navigation Bar Item}.
@@ -17,7 +19,7 @@ export interface NavBarItemProps extends SKComponent {
   /**
    * Icons help users identify pages more quickly, which is crucial for
    * frequent destinations like those from the Navigation Bar/Rail.
-   * 
+   *
    * - If the icon is sufficiently representative of the page, a label isn’t
    *   needed.
    * - Always required.
@@ -27,14 +29,14 @@ export interface NavBarItemProps extends SKComponent {
   /**
    * An additional text label underneath the icon. This is useful if the icon
    * isn’t sufficiently representative of the page.
-   * 
+   *
    * - Optional.
    */
   label?: string | JSX.Element;
 
   /**
    * A description of the Navigation Bar Item for screen readers, similar to `alt` on `<img>`.
-   * 
+   *
    * - Required if the Navigation Bar Item just includes `icon`, because an
    *   icon has no significance for screen readers.
    */
@@ -43,14 +45,14 @@ export interface NavBarItemProps extends SKComponent {
   /**
    * A message shown in a tooltip when the user hovers over the Navigation Bar
    * Item.
-   * 
+   *
    * - Optional.
    */
   tooltip: string;
 
   /**
    * The number in the notification badge of this Navigation Bar Item.
-   * 
+   *
    * - Must be a positive integer or `null`. `null` displays a small red circle
    *   instead of a large one with numbers.
    * - Optional.
@@ -60,7 +62,7 @@ export interface NavBarItemProps extends SKComponent {
   /**
    * Highlights the Navigation Bar Item. If the user is currently on this page,
    * the Navigation Bar Item should be highlighted.
-   * 
+   *
    * - Optional.
    */
   selected?: boolean;
@@ -70,7 +72,7 @@ export interface NavBarItemProps extends SKComponent {
    * larger screens and disappears on smaller screens. Since there can only be
    * a maximum of 5 destinations on a Navigation Bar, other destinations must
    * be hidden with `railOnly`.
-   * 
+   *
    * - Optional.
    */
   railOnly?: boolean;
@@ -78,7 +80,7 @@ export interface NavBarItemProps extends SKComponent {
   /**
    * The URL of the page this Navigation Bar Item leads to, similar to `href`
    * on `<a>`.
-   * 
+   *
    * - Always required.
    */
   href: string;
@@ -87,7 +89,7 @@ export interface NavBarItemProps extends SKComponent {
    * Change the underlying element from `<a>` to a custom element. This is
    * useful when a framework you’re using has a Link component for routing. An
    * example is `next/link` from Next.js.
-   * 
+   *
    * - Optional.
    */
   element?: () => JSX.Element;
@@ -120,7 +122,44 @@ export function NavBarItem({
   style,
   className,
 }: NavBarItemProps) {
-  return <div>TODO</div>;
+  // Ripple setup
+  const iconRef = React.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
+
+  // Label ID for `aria-labelledby`
+  const navID = `nav-${typeof label === "string" ? label.toLowerCase() : alt}`;
+
+  return (
+    <a
+      aria-current={selected}
+      aria-labelledby={label ? navID : undefined}
+      href={href}
+      title={tooltip}
+      style={style}
+      className={cn([
+        "skc-nav-bar-item",
+        selected && "skc-nav-bar-item--selected",
+        railOnly && "skc-nav-bar-item--rail-only",
+        className,
+      ])}
+      {...rippleListeners}
+    >
+      <div ref={iconRef} className="skc-nav-bar-item__icon">
+        {icon}
+        <motion.span
+          initial={{ scale: 0, opacity: 0.36 }}
+          animate={rippleControls}
+          className="skc-nav-bar-item__ripple"
+          style={rippleStyle}
+        />
+      </div>
+      {label && (
+        <span id={navID} className="skc-nav-bar-item__label">
+          {label}
+        </span>
+      )}
+    </a>
+  );
 }
 
 NavBarItem.displayName = "NavBarItem";

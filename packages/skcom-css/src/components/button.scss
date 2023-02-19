@@ -299,7 +299,6 @@
 
 // Text Button
 .skc-button.skc-button--text {
-  padding: 0.625rem 0.75rem;
   color: var(--primary);
 
   // States
@@ -347,8 +346,13 @@
     }
   }
 
-  // With Icon padding
-  &:has(.skc-button__icon:first-child) {
-    padding-left: 0.75rem;
+  // With label padding
+  &:has(.skc-button__label) {
+    padding: 0.625rem 0.75rem;
+
+    // With Icon padding
+    &:has(.skc-button__icon:first-child) {
+      padding-left: 0.75rem;
+    }
   }
 }
