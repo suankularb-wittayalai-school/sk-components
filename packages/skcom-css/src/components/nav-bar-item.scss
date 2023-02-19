@@ -39,7 +39,7 @@
 // Icon
 .skc-nav-bar-item__icon {
   @include mix.transition(
-    padding background-color,
+    background-color,
     var(--motion-short-4),
     var(--easing-standard)
   );
@@ -67,9 +67,12 @@
   }
 
   .skc-icon {
+    @include mix.transition(
+      font-variation-settings,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4)
-      var(--easing-standard);
 
     // Hover: make icon bolder
     .skc-nav-bar-item:hover & {
