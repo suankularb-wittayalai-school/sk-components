@@ -11,12 +11,14 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "csscomb packages && csscomb apps && prettier --write \"**/*.{scss,ts,tsx,md}\""
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
+    "csscomb": "^3.1.8",
     "eslint-config-custom": "*",
     "prettier": "latest",
+    "prettier-plugin-tailwindcss": "^0.2.3",
     "react": "^18.2.0",
     "turbo": "latest"
   },

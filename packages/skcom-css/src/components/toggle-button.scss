@@ -1,0 +1,301 @@
+////
+/// **Toggle Button**
+/// A Button with just an icon that can be toggled on and off.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3rmzxf2aqo3r SKCom documentation
+////
+
+@use "sass:math";
+@use "../abstracts/palette.scss";
+@use "../abstracts/mixins.scss" as mix;
+@use "../components/icon.scss" as ci;
+
+// Base Toggle Button
+.skc-toggle-button {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  place-content: center;
+  padding: 0.5rem;
+  transition: background-color var(--motion-short-4) var(--easing-standard),
+    color var(--motion-short-4) var(--easing-standard);
+  border-radius: var(--rounded-full);
+  -webkit-tap-highlight-color: transparent;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    cursor: default;
+
+    &:hover,
+    &:focus,
+    &:active {
+      // Block state layer effect
+      &::before {
+        opacity: 0;
+      }
+
+      // Block ripple
+      > .skc-button__ripple {
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+// Icon
+.skc-icon {
+  .skc-toggle-button & {
+    @include ci.icon(0, 400, 0, 24);
+    transition: font-variation-settings var(--motion-short-4)
+      var(--easing-standard);
+  }
+
+  // Hover: make icon bolder
+  .skc-toggle-button:not([aria-disabled="true"]):hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  // Active: make icon thinner
+  .skc-toggle-button:not([aria-disabled="true"]):active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
+
+  // Selected: make icon filled
+  .skc-toggle-button.skc-toggle-button--selected & {
+    @include ci.icon(1, 400, 0, 24);
+  }
+
+  // Selected hover: make icon bolder
+  .skc-toggle-button.skc-toggle-button--selected:not(
+      [aria-disabled="true"]
+    ):hover
+    & {
+    @include ci.icon(1, 600, 0, 24);
+  }
+
+  // Selected active: make icon thinner
+  .skc-toggle-button.skc-toggle-button--selected:not(
+      [aria-disabled="true"]
+    ):active
+    & {
+    @include ci.icon(1, 300, 0, 24);
+  }
+}
+
+// Ripple
+.skc-toggle-button__ripple {
+  @include mix.ripple();
+}
+
+// Filled Toggle Button
+.skc-toggle-button.skc-toggle-button--filled {
+  color: var(--primary);
+  background-color: var(--surface-variant);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    background-color: var(--primary);
+  }
+
+  // Selected
+  &.skc-toggle-button--selected {
+    color: var(--on-primary);
+    background-color: var(--primary);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--on-primary);
+    }
+  }
+
+  // Dangerous
+  &.skc-toggle-button--dangerous {
+    color: var(--error);
+    background-color: var(--error-container);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--error);
+    }
+
+    &.skc-toggle-button--selected {
+      color: var(--on-error);
+      background-color: var(--error);
+
+      &::before,
+      .skc-toggle-button__ripple {
+        background-color: var(--on-error);
+      }
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+// Tonal Toggle Button
+.skc-toggle-button.skc-toggle-button--tonal {
+  color: var(--on-surface-variant);
+  background-color: var(--surface-variant);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    background-color: var(--on-surface-variant);
+  }
+
+  // Selected
+  &.skc-toggle-button--selected {
+    color: var(--on-secondary-container);
+    background-color: var(--secondary-container);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--on-secondary-container);
+    }
+  }
+
+  // Dangerous
+  &.skc-toggle-button--dangerous {
+    color: var(--error);
+    background-color: var(--error-container);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--error);
+    }
+
+    &.skc-toggle-button--selected {
+      color: var(--on-error);
+      background-color: var(--error);
+
+      &::before,
+      .skc-toggle-button__ripple {
+        background-color: var(--on-error);
+      }
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+// Outlined Toggle Button
+.skc-toggle-button.skc-toggle-button--outlined {
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    background-color: var(--on-surface);
+  }
+
+  // Selected
+  &.skc-toggle-button--selected {
+    color: var(--inverse-on-surface);
+    border-color: var(--inverse-surface);
+    background-color: var(--inverse-surface);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--inverse-on-surface);
+    }
+  }
+
+  // Dangerous
+  &.skc-toggle-button--dangerous {
+    color: var(--error);
+
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--error);
+    }
+
+    &.skc-toggle-button--selected {
+      color: var(--error-container);
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    border-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      border: 1px solid var(--on-surface);
+      background-color: transparent;
+    }
+
+    // Disabled selected
+    &.skc-toggle-button--selected {
+      background-color: transparent;
+
+      &::before {
+        border-color: transparent;
+        background-color: var(--on-surface);
+      }
+    }
+  }
+}
+
+// Standard Toggle Button
+.skc-toggle-button.skc-toggle-button--standard {
+  color: var(--on-surface);
+
+  &::before,
+  .skc-toggle-button__ripple {
+    background-color: var(--on-surface);
+  }
+
+  // Selected
+  &.skc-toggle-button--selected {
+    color: var(--primary);
+
+    // Dangerous
+    &::before,
+    .skc-toggle-button__ripple {
+      background-color: var(--primary);
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+  }
+}

@@ -1,0 +1,71 @@
+// Truncate text content
+@mixin truncate($lines: 1, $word-wrap: break-word) {
+  @if $lines == 1 {
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    word-break: $word-wrap;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $max-lines;
+  }
+}
+
+// State layer
+@mixin state-layer() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  transition: opacity var(--motion-short-4) var(--easing-standard);
+  pointer-events: none;
+  opacity: 0;
+  border-radius: inherit;
+}
+
+// Ripple
+@mixin ripple() {
+  position: absolute;
+  content: "";
+  transform: scale(0);
+  filter: blur(16px);
+  pointer-events: none;
+  opacity: 0.36;
+  border-radius: 50%;
+}
+
+// Responsive breakpoints
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == "sm" {
+    @media only screen and (min-width: 600px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == "md" {
+    @media only screen and (min-width: 905px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == "lg" {
+    @media only screen and (min-width: 1440px) {
+      @content;
+    }
+  }
+}
+
+// Color schemes
+@mixin scheme($scheme) {
+  @media (prefers-color-scheme: $scheme) {
+    @content;
+  }
+}

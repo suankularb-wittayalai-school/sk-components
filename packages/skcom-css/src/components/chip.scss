@@ -1,0 +1,184 @@
+////
+/// Chips are pieces of content that are either dynamically generated or
+/// provided by the user.
+///
+/// Note:
+/// - There is no entry for Chip in the SKCom documentation.
+/// - This file is a compilation of 4 types of Chips. More details on each
+///   below.
+////
+
+@use "sass:math";
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/palette.scss";
+@use "../abstracts/typography.scss";
+@use "../components/icon.scss" as ci;
+
+// ATTENTION:
+// Selecters prefixed with _ are private classes for use in this file only.
+// Do not use these classes in any other file within this libary, or any
+// other libraries.
+//
+// Explaination:
+// Since these classes will not be used in libraries wrapping this library,
+// using private placeholder selectors (%_class) would make more sense. We’re
+// not using them because we have many instances of complex selectors that
+// placeholder selectors can’t handle.
+
+/// @access private
+._skc-chip {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  color: var(--on-surface);
+  border: 1px solid var(--outline);
+  border-radius: 0.5rem;
+  -webkit-tap-highlight-color: transparent;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface-variant);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:has(._skc-chip__icon:first-child) {
+    padding-left: 0.5rem;
+  }
+
+  &:has(._skc-chip__icon:last-child) {
+    padding-right: 0.5rem;
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    cursor: default;
+    opacity: 0.38;
+    color: var(--on-surface);
+    border-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      border: 1px solid var(--on-surface);
+      background-color: transparent;
+    }
+
+    ._skc-chip__ripple {
+      background-color: transparent;
+    }
+
+    ._skc-chip__icon .skc-icon {
+      color: var(--on-surface);
+    }
+  }
+}
+
+// Elevated
+/// @access private
+._skc-chip--elevated {
+  border: none;
+  background-color: var(--surface-1);
+  box-shadow: var(--shadow-1);
+
+  &[aria-disabled="true"] {
+    color: var(--on-surface);
+    background-color: transparent;
+    box-shadow: none;
+
+    &::before {
+      border: none;
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+// Dangerous
+
+/// @access private
+._skc-chip--dangerous {
+  ._skc-chip__icon .skc-icon {
+    color: var(--error);
+  }
+}
+
+// Label
+
+/// @access private
+._skc-chip__label {
+  @extend .label-large;
+  font-family: var(--font-display);
+}
+
+// Icon
+/// @access
+///  private
+._skc-chip__icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--primary);
+
+  .skc-icon {
+    @include ci.icon(0, 400, 0, 20);
+    font-size: 1.125rem;
+  }
+}
+
+// Ripple
+
+/// @access private
+._skc-chip__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface-variant);
+}
+
+/// **Assist Chip**
+/// Assist Chips are similar to Buttons in that it helps users take action. The
+/// difference is a Button is persistent (doesn’t change) and an Assist Chip is
+/// dynamic and contextual (changes according to the context).
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.6b3bv92d22u9 SKCom documentation
+
+.skc-assist-chip {
+  @extend ._skc-chip;
+
+  // With icon padding
+  &:has(.skc-assist-chip__icon:first-child) {
+    padding-left: 0.5rem;
+  }
+
+  // Dangerous
+  &:not([aria-disabled="true"]).skc-assist-chip--dangerous {
+    @extend ._skc-chip--dangerous;
+  }
+}
+
+.skc-assist-chip.skc-assist-chip--elevated {
+  @extend ._skc-chip--elevated;
+}
+
+.skc-assist-chip__label {
+  @extend ._skc-chip__label;
+}
+
+.skc-assist-chip__icon {
+  @extend ._skc-chip__icon;
+}
+
+.skc-assist-chip__ripple {
+  @extend ._skc-chip__ripple;
+}

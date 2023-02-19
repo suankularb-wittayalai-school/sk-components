@@ -1,6 +1,354 @@
-.button {
+////
+/// **Button**
+/// Button helps users take action, whether it’s logging in, liking a post, or
+/// going to a page.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.lqzfs37p9m1b SKCom documentation
+////
+
+@use "sass:math";
+@use "../abstracts/animation.scss";
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/palette.scss";
+@use "../abstracts/typography.scss";
+@use "../components/icon.scss" as ci;
+
+// Base Button
+.skc-button {
   all: unset;
   font-family: var(--font-display);
-  background-color: #00658f;
-  color: #ffffff;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  cursor: pointer;
+  border-radius: var(--rounded-full);
+  -webkit-tap-highlight-color: transparent;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+  }
+
+  &[aria-disabled="true"] {
+    cursor: default;
+
+    &:not(:has(.skc-button__label)) {
+      &:hover,
+      &:focus,
+      &:active {
+        > .skc-button__icon > .skc-icon {
+          @include ci.icon(0, 400, 0, 24);
+        }
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      // Block shadow effect
+      box-shadow: none !important;
+
+      // Block state layer effect
+      &::before {
+        opacity: 0;
+      }
+
+      // Block icon bolding effect
+      > .skc-button__icon > .skc-icon {
+        @include ci.icon(0, 400, 0, 20);
+        transition: none;
+      }
+
+      // Block ripple
+      > .skc-button__ripple {
+        background-color: transparent;
+      }
+    }
+  }
+
+  // Icon with label padding
+  &:has(.skc-button__icon:first-child):has(.skc-button__label) {
+    padding-left: 1rem;
+  }
+
+  // With only Icon padding
+  &:not(:has(.skc-button__label)) {
+    padding: 0.5rem;
+  }
+}
+
+// Ripple
+.skc-button__ripple {
+  @include mix.ripple();
+}
+
+// Icon
+.skc-button__icon .skc-icon {
+  @include ci.icon(0, 400, 0, 20);
+
+  .skc-button:not(:has(.skc-button__label)) & {
+    @include ci.icon(0, 400, 0, 24);
+    transition: font-variation-settings var(--motion-short-4)
+      var(--easing-standard);
+  }
+
+  // Hover: make icon bolder
+  .skc-button:not(:has(.skc-button__label)):hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  // Active: make icon thinner
+  .skc-button:not(:has(.skc-button__label)):active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
+}
+
+// Label
+.skc-button__label {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25rem;
+}
+
+// Filled Button
+.skc-button.skc-button--filled {
+  transition: box-shadow var(--motion-short-4) var(--easing-standard);
+  color: var(--on-primary);
+  background-color: var(--primary);
+
+  // States
+  &::before,
+  .skc-button__ripple {
+    background-color: var(--on-primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--on-error);
+    background-color: var(--error);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-error);
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+// Tonal Button
+.skc-button.skc-button--tonal {
+  transition: box-shadow var(--motion-short-4) var(--easing-standard);
+  color: var(--on-secondary-container);
+  background-color: var(--secondary-container);
+
+  // States
+  &::before,
+  .skc-button__ripple {
+    background-color: var(--on-secondary-container);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--on-error-container);
+    background-color: var(--error-container);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-error-container);
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+// Outlined Button
+.skc-button.skc-button--outlined {
+  transition: border-color var(--motion-short-4) var(--easing-standard);
+  color: var(--primary);
+  border: 1px solid var(--outline);
+
+  // States
+  &::before,
+  .skc-button__ripple {
+    background-color: var(--primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:focus {
+    z-index: 10;
+    border-color: var(--primary);
+  }
+
+  // Selected
+  &.skc-button--selected {
+    color: var(--on-secondary-container);
+    background-color: var(--secondary-container);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-secondary-container);
+    }
+
+    &:focus {
+      border-color: var(--secondary);
+    }
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--error);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--error);
+    }
+
+    &:focus {
+      border-color: var(--error);
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+    border-color: transparent;
+
+    &::before {
+      opacity: math.div(0.12, 0.38);
+      border: 1px solid var(--on-surface);
+      background-color: transparent;
+    }
+  }
+}
+
+// Text Button
+.skc-button.skc-button--text {
+  padding: 0.625rem 0.75rem;
+  color: var(--primary);
+
+  // States
+  &::before,
+  .skc-button__ripple {
+    background-color: var(--primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &:focus {
+    border-color: var(--primary);
+  }
+
+  // Dangerous
+  &.skc-button--dangerous {
+    color: var(--error);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--error);
+    }
+
+    &:focus {
+      border-color: var(--error);
+    }
+  }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    opacity: 0.38;
+    color: var(--on-surface);
+
+    &::before {
+      background-color: transparent;
+    }
+  }
+
+  // With Icon padding
+  &:has(.skc-button__icon:first-child) {
+    padding-left: 0.75rem;
+  }
 }
