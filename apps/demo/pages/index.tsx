@@ -256,7 +256,7 @@ const AssistChipsSection: FC = () => (
 const Home: NextPage = () => {
   return (
     <>
-    <Navigation />
+      <Navigation />
       <main className="flex flex-col gap-6 p-4">
         <ButtonsSection />
         <SegmentedButtonSection />
