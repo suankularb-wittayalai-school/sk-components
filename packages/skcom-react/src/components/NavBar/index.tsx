@@ -89,7 +89,13 @@ export function NavBar({
     <nav className={cn(["skc-nav-bar", className])}>
       <div className="skc-nav-bar__main">
         <section className="skc-nav-bar__toggle-and-fab">
-          <Button appearance="text" icon={<MaterialIcon icon="menu" />} />
+          <Button
+            appearance="text"
+            icon={<MaterialIcon icon="menu" />}
+            onClick={onNavToggle}
+          />
+          <div className="skc-nav-bar__brand">{brand}</div>
+          {fab}
         </section>
         <section className="skc-nav-bar__destinations">{children}</section>
       </div>

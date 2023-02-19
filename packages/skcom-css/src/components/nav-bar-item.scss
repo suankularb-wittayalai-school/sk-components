@@ -9,6 +9,7 @@
 @use "../abstracts/typography.scss";
 @use "../components/icon.scss" as ci;
 
+// Base Navigation Bar Item
 .skc-nav-bar-item {
   display: flex;
   align-items: center;
@@ -33,6 +34,11 @@
 
 // Icon
 .skc-nav-bar-item__icon {
+  @include mix.transition(
+    background-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
   position: relative;
   display: flex;
   overflow: hidden;
@@ -118,4 +124,22 @@
 .skc-nav-bar-item__ripple {
   @include mix.ripple();
   background-color: var(--on-surface);
+}
+
+@include mix.breakpoint("sm") {
+  .skc-nav-bar-item {
+    padding: 0 0 0.25rem;
+  }
+
+  .skc-nav-bar-item__icon {
+    padding: 0.25rem 1rem;
+  }
+
+  .skc-nav-bar-item__label {
+    .skc-nav-bar-item:hover &,
+    .skc-nav-bar-item:active & {
+      font-weight: var(--font-medium);
+      letter-spacing: 0.5px;
+    }
+  }
 }

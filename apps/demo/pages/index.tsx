@@ -1,5 +1,7 @@
 // External libraries
 import { NextPage } from "next";
+import Image from "next/image";
+
 import { FC, useState } from "react";
 
 // SK Components
@@ -14,6 +16,62 @@ import {
   SegmentedButton,
   ToggleButton,
 } from "@suankularb-components/react";
+
+const Navigation: FC = () => {
+  return (
+    <NavBar
+      brand={
+        <Image
+          src="/images/logo.svg"
+          priority
+          width={56}
+          height={56}
+          alt="Simplified SKCom logo"
+        />
+      }
+      fab={<FAB color="tertiary" icon={<MaterialIcon icon="add" />} />}
+      end={
+        <>
+          <NavBarItem
+            icon={<MaterialIcon icon="translate" />}
+            label="Language"
+            href="#"
+          />
+          <NavBarItem
+            icon={<MaterialIcon icon="logout" />}
+            label="Log out"
+            href="#"
+          />
+        </>
+      }
+      onNavToggle={() => {}}
+    >
+      <NavBarItem
+        icon={<MaterialIcon icon="school" />}
+        label="Learn"
+        // selected
+        href="#"
+      />
+      <NavBarItem
+        icon={<MaterialIcon icon="search" />}
+        label="Lookup"
+        href="#"
+      />
+      <NavBarItem
+        icon={<MaterialIcon icon="account_circle" />}
+        label="Account"
+        selected
+        href="#"
+      />
+      <NavBarItem
+        icon={<MaterialIcon icon="admin_panel_settings" />}
+        label="Admin"
+        railOnly
+        href="#"
+      />
+    </NavBar>
+  );
+};
 
 const ButtonsSection: FC = () => (
   <Actions align="left">
@@ -198,27 +256,7 @@ const AssistChipsSection: FC = () => (
 const Home: NextPage = () => {
   return (
     <>
-      <NavBar onNavToggle={() => {}}>
-        <NavBarItem
-          icon={<MaterialIcon icon="school" />}
-          label="Learn"
-          tooltip="Learn"
-          selected
-          href="#"
-        />
-        <NavBarItem
-          icon={<MaterialIcon icon="search" />}
-          label="Lookup"
-          tooltip="Lookup"
-          href="#"
-        />
-        <NavBarItem
-          icon={<MaterialIcon icon="account_circle" />}
-          label="Account"
-          tooltip="Account"
-          href="#"
-        />
-      </NavBar>
+    <Navigation />
       <main className="flex flex-col gap-6 p-4">
         <ButtonsSection />
         <SegmentedButtonSection />

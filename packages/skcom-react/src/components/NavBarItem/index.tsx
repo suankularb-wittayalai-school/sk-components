@@ -48,7 +48,7 @@ export interface NavBarItemProps extends SKComponent {
    *
    * - Optional.
    */
-  tooltip: string;
+  tooltip?: string;
 
   /**
    * The number in the notification badge of this Navigation Bar Item.

@@ -39,7 +39,7 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 2.5rem;
-    width: fit-content;
+    width: 5rem;
     height: 100vh;
     padding: 2.75rem 0 3.5rem;
   }
@@ -58,13 +58,33 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 0.25rem;
+
+    .skc-button {
+      color: var(--on-surface);
+
+      &::before,
+      .skc-button__ripple {
+        background-color: var(--on-surface);
+      }
+    }
+
+    .skc-nav-bar__brand:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+
+    .skc-fab {
+      box-shadow: none;
+    }
   }
 
-  .skc-nav-bar__destinations {
+  .skc-nav-bar__destinations,
+  .skc-nav-bar__end {
+    display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
     gap: 0.25rem;
     padding: 0.3125rem;
+    margin: 0;
   }
 }
