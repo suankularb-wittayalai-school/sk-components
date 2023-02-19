@@ -114,6 +114,10 @@
   font-size: var(--text-base);
   font-weight: var(--font-medium);
   line-height: 1.25rem;
+
+  .skc-button:not(:has(.skc-button__icon)) & {
+    text-align: center;
+  }
 }
 
 // Filled Button
