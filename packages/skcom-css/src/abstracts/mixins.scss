@@ -42,6 +42,21 @@
   border-radius: 50%;
 }
 
+// Transition
+@mixin transition($properties, $duration, $easing) {
+  $transition-value: ();
+
+  @for $i from 1 through length($properties) {
+    $transition-value: append(
+      $transition-value,
+      nth($properties, $i) $duration $easing,
+      comma
+    );
+  }
+
+  transition: $transition-value;
+}
+
 // Responsive breakpoints
 @mixin breakpoint($breakpoint) {
   @if $breakpoint == "sm" {

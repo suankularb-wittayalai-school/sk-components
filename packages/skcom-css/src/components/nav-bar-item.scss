@@ -91,9 +91,12 @@
 // Label
 .skc-nav-bar-item__label {
   @extend .label-medium;
+  @include mix.transition(
+    font-weight letter-spacing,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
   font-family: var(--font-display);
-  transition: font-weight var(--motion-short-4) var(--easing-standard),
-    letter-spacing var(--motion-short-4) var(--easing-standard);
 
   .skc-nav-bar-item:hover & {
     font-weight: var(--font-bold);
