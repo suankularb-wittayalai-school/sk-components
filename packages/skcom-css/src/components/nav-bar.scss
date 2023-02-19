@@ -11,7 +11,7 @@
 .skc-nav-bar {
   width: 100vw;
   background-color: var(--surface-2);
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .skc-nav-bar__toggle-and-fab,
@@ -43,7 +43,13 @@
     width: 5rem;
     height: 100vh;
     padding: 2.75rem 0 3.5rem;
-    overflow: initial scroll;
+    overflow: initial auto;
+  }
+
+  @supports (height: 100dvh) {
+    .skc-nav-bar {
+      height: 100dvh;
+    }
   }
 
   .skc-nav-bar__main {
@@ -90,3 +96,11 @@
     padding: 0.3125rem;
   }
 }
+
+// @supports (height: 100dvh) {
+//   @include mix.breakpoint("sm") {
+//     .skc-nav-bar {
+//       height: 100dvh;
+//     }
+//   }
+// }
