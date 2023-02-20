@@ -35,6 +35,7 @@ __export(src_exports, {
   NavBar: () => NavBar,
   NavBarItem: () => NavBarItem,
   NavDrawer: () => NavDrawer,
+  NavDrawerSection: () => NavDrawerSection,
   RootLayout: () => RootLayout,
   SegmentedButton: () => SegmentedButton,
   ToggleButton: () => ToggleButton,
@@ -622,7 +623,7 @@ NavBarItem.displayName = "NavBarItem";
 var import_framer_motion6 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/nav-drawer.css
-styleInject(".skc-nav-drawer {\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 4rem);\n  max-width: 22.5rem;\n  height: 100vh;\n  padding: 1.5rem;\n  border-radius: 0 var(--rounded-xl) var(--rounded-xl) 0;\n  background-color: var(--surface-1);\n}\n@supports (height: 100dvh) {\n  .skc-nav-drawer {\n    height: 100dvh;\n  }\n}\n");
+styleInject(".skc-nav-drawer {\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 4rem);\n  max-width: 22.5rem;\n  height: 100vh;\n  padding: .75rem;\n  border-radius: 0 var(--rounded-xl) var(--rounded-xl) 0;\n  background-color: var(--surface-1);\n}\n@supports (height: 100dvh) {\n  .skc-nav-drawer {\n    height: 100dvh;\n  }\n}\n");
 
 // src/components/NavDrawer/index.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
@@ -652,7 +653,9 @@ function NavDrawer({
           style,
           className: cn(["skc-nav-drawer", className]),
           children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-            children
+            children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+              children
+            })
           })
         }),
         /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion6.motion.div, {
@@ -671,6 +674,35 @@ function NavDrawer({
   });
 }
 NavDrawer.displayName = "NavDrawer";
+
+// ../skcom-css/dist/css/components/nav-drawer-section.css
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.display-large {\n  font-family: var(--font-display);\n  font-size: var(--text-8xl);\n  font-weight: var(--font-regular);\n  line-height: 4rem;\n  letter-spacing: -0.25px;\n}\n.display-medium {\n  font-family: var(--font-display);\n  font-size: var(--text-7xl);\n  font-weight: var(--font-regular);\n  line-height: 3.25rem;\n  letter-spacing: 0px;\n}\n.display-small {\n  font-family: var(--font-display);\n  font-size: var(--text-6xl);\n  font-weight: var(--font-regular);\n  line-height: 2.75rem;\n  letter-spacing: 0px;\n}\n.headline-large {\n  font-family: var(--font-display);\n  font-size: var(--text-5xl);\n  font-weight: var(--font-regular);\n  line-height: 2.5rem;\n  letter-spacing: 0px;\n}\n.headline-medium {\n  font-family: var(--font-display);\n  font-size: var(--text-4xl);\n  font-weight: var(--font-regular);\n  line-height: 2.25rem;\n  letter-spacing: 0px;\n}\n.headline-small {\n  font-family: var(--font-display);\n  font-size: var(--text-3xl);\n  font-weight: var(--font-regular);\n  line-height: 2rem;\n  letter-spacing: 0px;\n}\n.title-large {\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n}\n.title-medium {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n}\n.title-small,\n.skc-nav-drawer-section__header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.label-large {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.label-medium {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n}\n.label-small {\n  font-family: var(--font-body);\n  font-size: var(--text-xs);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n}\n.body-large {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.body-medium {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n}\n.body-small {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n}\n.skc-nav-drawer-section {\n  display: flex;\n  flex-direction: column;\n}\n.skc-nav-drawer-section__header {\n  padding: 1.125rem 1rem;\n}\n");
+
+// src/components/NavDrawerSection/index.tsx
+var import_jsx_runtime = require("react/jsx-runtime");
+function NavDrawerSection({
+  children,
+  header,
+  style,
+  className
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, {
+    children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+      children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
+        style,
+        className: cn(["skc-nav-drawer-section", className]),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+            className: "skc-nav-drawer-section__header",
+            children: header
+          }),
+          children
+        ]
+      })
+    })
+  });
+}
+NavDrawerSection.displayName = "NavDrawerSection";
 
 // src/components/FAB/index.tsx
 var import_framer_motion7 = require("framer-motion");
@@ -834,6 +866,7 @@ RootLayout.displayName = "RootLayout";
   NavBar,
   NavBarItem,
   NavDrawer,
+  NavDrawerSection,
   RootLayout,
   SegmentedButton,
   ToggleButton,

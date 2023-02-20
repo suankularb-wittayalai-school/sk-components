@@ -701,6 +701,38 @@ declare namespace NavDrawer {
 }
 
 /**
+ * Props for {@link NavDrawerSection Navigation Drawer Section}.
+ */
+interface NavDrawerSectionProps extends SKComponent {
+    /**
+     * Destinations grouped into this section.
+     *
+     * - Must consist of Navigation Drawer Item(s).
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The header of the section.
+     *
+     * - Normally optional but required if this is the first Navigation Drawer
+     *   Section in a Navigation Drawer. In this case, it’d be the name of the app.
+     */
+    header?: string | JSX.Element;
+}
+/**
+ * A row of Buttons. NavDrawerSection handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param children Destinations grouped into this section.
+ * @param header The header of the section.
+ */
+declare function NavDrawerSection({ children, header, style, className, }: NavDrawerSectionProps): JSX.Element;
+declare namespace NavDrawerSection {
+    var displayName: string;
+}
+
+/**
  * Props for {@link FAB}.
  */
 interface FABProps extends SKComponent {
@@ -906,4 +938,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

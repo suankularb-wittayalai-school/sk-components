@@ -12,6 +12,7 @@ import {
   NavBar,
   NavBarItem,
   NavDrawer,
+  NavDrawerSection,
   RootLayout,
 } from "@suankularb-components/react";
 
@@ -21,7 +22,8 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <RootLayout>
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
-        TODO
+        <NavDrawerSection header="SK Components">TODO</NavDrawerSection>
+        <NavDrawerSection header="M.504">TODO</NavDrawerSection>
       </NavDrawer>
       <NavBar
         brand={
