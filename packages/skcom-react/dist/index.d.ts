@@ -773,6 +773,35 @@ declare namespace FAB {
 }
 
 /**
+ * Props for {@link RootLayout Root Layout}.
+ */
+interface RootLayoutProps extends SKComponent {
+    /**
+     * Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can
+     * contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content
+     * Layout, and Vertical Split Layout only.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * The container of everything inside an application. Components which must
+ * appear only once in like Navigation Drawer, Navigation Bar, FAB, and Page
+ * Header only work optimally as direct descendants of Root Layout.
+ *
+ * Root Layout handles positioning of components and responsiveness.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.q72flzs8g2k1 SKCom documentation}
+ *
+ * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
+ */
+declare function RootLayout({ children, className, style }: RootLayoutProps): JSX.Element;
+declare namespace RootLayout {
+    var displayName: string;
+}
+
+/**
  * A hook with duration and easing definitions for use with Framer Motion.
  * The definitions can be used with {@link transition}.
  *
@@ -814,4 +843,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

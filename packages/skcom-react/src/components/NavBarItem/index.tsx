@@ -147,7 +147,17 @@ export function NavBarItem({
 
   // Ripple setup
   const iconRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
+
+  const [clientHeight, setClientHeight] = React.useState(1080);
+  React.useEffect(() => {
+    if (window.innerWidth <= 600) setClientHeight(window.innerHeight);
+    else setClientHeight(80);
+  }, []);
+
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef, {
+    useClientPos: true,
+    posCorrection: { x: 0, y: 80 - clientHeight },
+  });
 
   // Label ID for `aria-labelledby`
   const navID = `nav-${typeof label === "string" ? label.toLowerCase() : alt}`;

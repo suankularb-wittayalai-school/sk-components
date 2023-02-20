@@ -7,14 +7,20 @@
 ////
 
 @use "../abstracts/mixins.scss" as mix;
+@use "../components/icon.scss" as ci;
 
 .skc-nav-bar {
+  overflow-x: auto;
   width: 100vw;
   background-color: var(--surface-2);
-  overflow-x: auto;
 }
 
-.skc-nav-bar__toggle-and-fab,
+.skc-nav-bar__toggle-and-fab {
+  height: 0;
+}
+
+.skc-nav-bar__toggle-and-fab .skc-button,
+.skc-nav-bar__brand,
 .skc-nav-bar__end {
   display: none;
 }
@@ -24,7 +30,7 @@
   flex-direction: row;
   gap: 0.5rem;
   width: 100%;
-  max-width: 25rem;
+  max-width: 32rem;
   margin: 0 auto;
   padding: 0 0.5rem;
 
@@ -36,6 +42,7 @@
 @include mix.breakpoint("sm") {
   .skc-nav-bar {
     display: flex;
+    overflow: initial auto;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
@@ -43,7 +50,6 @@
     width: 5rem;
     height: 100vh;
     padding: 2.75rem 0 3.5rem;
-    overflow: initial auto;
   }
 
   @supports (height: 100dvh) {
@@ -66,8 +72,10 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 0.25rem;
+    height: fit-content;
 
     .skc-button {
+      display: flex;
       color: var(--on-surface);
 
       &::before,
@@ -76,12 +84,34 @@
       }
     }
 
-    .skc-nav-bar__brand:not(:last-child) {
-      margin-bottom: 0.75rem;
+    .skc-nav-bar__brand {
+      display: block;
+
+      &:not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
     }
 
     .skc-fab {
       box-shadow: none;
+
+      &.skc-fab--small,
+      &.skc-fab--large {
+        padding: 1rem;
+        border-radius: var(--rounded-xl);
+      }
+    }
+
+    .skc-fab__wrapper,
+    .skc-fab.skc-fab--large {
+      .skc-fab__icon .skc-icon {
+        @include mix.transition(
+          font-size font-variation-settings,
+          var(--motion-short-4),
+          var(--easing-standard)
+        );
+        @include ci.icon(0, 400, 0, 24);
+      }
     }
   }
 
@@ -96,11 +126,3 @@
     padding: 0.3125rem;
   }
 }
-
-// @supports (height: 100dvh) {
-//   @include mix.breakpoint("sm") {
-//     .skc-nav-bar {
-//       height: 100dvh;
-//     }
-//   }
-// }

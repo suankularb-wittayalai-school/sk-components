@@ -18,68 +18,6 @@ import {
   ToggleButton,
 } from "@suankularb-components/react";
 
-const Navigation: FC = () => {
-  return (
-    <NavBar
-      brand={
-        <Image
-          src="/images/logo.svg"
-          priority
-          width={56}
-          height={56}
-          alt="Simplified SKCom logo"
-        />
-      }
-      fab={<FAB color="tertiary" icon={<MaterialIcon icon="add" />} />}
-      end={
-        <>
-          <NavBarItem
-            icon={<MaterialIcon icon="translate" />}
-            label="เปลี่ยนภาษา"
-            tooltip="Change language / เปลี่ยนภาษา"
-            href="#"
-          />
-          <NavBarItem
-            icon={<MaterialIcon icon="logout" />}
-            label="Log out"
-            href="#"
-          />
-        </>
-      }
-      onNavToggle={() => {}}
-    >
-      <NavBarItem
-        icon={<MaterialIcon icon="school" />}
-        label="Learn"
-        selected
-        href="#"
-        element={Link}
-      />
-      <NavBarItem
-        icon={<MaterialIcon icon="search" />}
-        label="Lookup"
-        href="#"
-        element={Link}
-      />
-      <NavBarItem
-        icon={<MaterialIcon icon="account_circle" />}
-        label="Account"
-        badge={7}
-        href="#"
-        element={Link}
-      />
-      <NavBarItem
-        icon={<MaterialIcon icon="admin_panel_settings" />}
-        label="Admin"
-        badge={null}
-        railOnly
-        href="#"
-        element={Link}
-      />
-    </NavBar>
-  );
-};
-
 const ButtonsSection: FC = () => (
   <Actions align="left">
     <Button appearance="filled">Button</Button>
@@ -262,28 +200,25 @@ const AssistChipsSection: FC = () => (
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Navigation />
-      <main className="flex flex-col gap-6 p-4">
-        <ButtonsSection />
-        <SegmentedButtonSection />
-        <Actions align="full">
-          <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-            Add
-          </Button>
-          <Button
-            appearance="outlined"
-            icon={<MaterialIcon icon="delete" />}
-            dangerous
-          >
-            Delete
-          </Button>
-        </Actions>
-        <ToggleButtonsSection />
-        <FABsSection />
-        <AssistChipsSection />
-      </main>
-    </>
+    <main className="flex flex-col gap-6 p-4">
+      <ButtonsSection />
+      <SegmentedButtonSection />
+      <Actions align="full">
+        <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
+          Add
+        </Button>
+        <Button
+          appearance="outlined"
+          icon={<MaterialIcon icon="delete" />}
+          dangerous
+        >
+          Delete
+        </Button>
+      </Actions>
+      <ToggleButtonsSection />
+      <FABsSection />
+      <AssistChipsSection />
+    </main>
   );
 };
 

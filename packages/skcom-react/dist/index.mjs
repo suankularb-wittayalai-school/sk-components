@@ -122,7 +122,7 @@ function transition(duration, easing) {
     ease: easing
   };
 }
-function useRipple(parentRef) {
+function useRipple(parentRef, options) {
   const { duration, easing } = useAnimationConfig();
   const rippleControls = useAnimationControls();
   const [diameter, setDiameter] = React.useState(0);
@@ -142,12 +142,17 @@ function useRipple(parentRef) {
   }, []);
   const [position, setPosition] = React.useState({ top: "0", left: "0" });
   function calculatePosition(x, y) {
+    var _a, _b;
     const button = parentRef.current;
     if (!button)
       return { top: "0", left: "0" };
+    const posCorrection = {
+      x: ((_a = options == null ? void 0 : options.posCorrection) == null ? void 0 : _a.x) || 0,
+      y: ((_b = options == null ? void 0 : options.posCorrection) == null ? void 0 : _b.y) || 0
+    };
     return {
-      top: `${y - (button.offsetTop + diameter / 2)}px`,
-      left: `${x - (button.offsetLeft + diameter / 2)}px`
+      top: `${y - (button.offsetTop + diameter / 2) + posCorrection.y}px`,
+      left: `${x - (button.offsetLeft + diameter / 2) + posCorrection.x}px`
     };
   }
   function animateRipple() {
@@ -161,7 +166,12 @@ function useRipple(parentRef) {
   return {
     rippleListeners: {
       onMouseDown: (event) => {
-        setPosition(calculatePosition(event.pageX, event.pageY));
+        setPosition(
+          calculatePosition(
+            (options == null ? void 0 : options.useClientPos) ? event.clientX : event.pageX,
+            (options == null ? void 0 : options.useClientPos) ? event.clientY : event.pageY
+          )
+        );
         animateRipple();
       },
       onKeyDown: (event) => {
@@ -419,7 +429,7 @@ function AssistChip({
 AssistChip.displayName = "AssistChip";
 
 // ../skcom-css/dist/css/components/nav-bar.css
-styleInject(".skc-nav-bar {\n  width: 100vw;\n  background-color: var(--surface-2);\n  overflow-x: auto;\n}\n.skc-nav-bar__toggle-and-fab,\n.skc-nav-bar__end {\n  display: none;\n}\n.skc-nav-bar__destinations {\n  display: flex;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  max-width: 25rem;\n  margin: 0 auto;\n  padding: 0 .5rem;\n}\n.skc-nav-bar__destinations .skc-nav-bar-item {\n  width: 100%;\n}\n@media only screen and (min-width: 600px) {\n  .skc-nav-bar {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: 2.5rem;\n    width: 5rem;\n    height: 100vh;\n    padding: 2.75rem 0 3.5rem;\n    overflow: initial auto;\n  }\n  @supports (height: 100dvh) {\n    .skc-nav-bar {\n      height: 100dvh;\n    }\n  }\n  .skc-nav-bar__main {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: 2.5rem;\n  }\n  .skc-nav-bar__toggle-and-fab {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: .25rem;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-button {\n    color: var(--on-surface);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-button::before,\n  .skc-nav-bar__toggle-and-fab .skc-button .skc-button__ripple {\n    background-color: var(--on-surface);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-nav-bar__brand:not(:last-child) {\n    margin-bottom: .75rem;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-fab {\n    box-shadow: none;\n  }\n  .skc-nav-bar__destinations,\n  .skc-nav-bar__end {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: .25rem;\n    margin: 0;\n    padding: .3125rem;\n  }\n}\n");
+styleInject('.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-nav-bar {\n  overflow-x: auto;\n  width: 100vw;\n  background-color: var(--surface-2);\n}\n.skc-nav-bar__toggle-and-fab {\n  height: 0;\n}\n.skc-nav-bar__toggle-and-fab .skc-button,\n.skc-nav-bar__brand,\n.skc-nav-bar__end {\n  display: none;\n}\n.skc-nav-bar__destinations {\n  display: flex;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  max-width: 32rem;\n  margin: 0 auto;\n  padding: 0 .5rem;\n}\n.skc-nav-bar__destinations .skc-nav-bar-item {\n  width: 100%;\n}\n@media only screen and (min-width: 600px) {\n  .skc-nav-bar {\n    display: flex;\n    overflow: initial auto;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: 2.5rem;\n    width: 5rem;\n    height: 100vh;\n    padding: 2.75rem 0 3.5rem;\n  }\n  @supports (height: 100dvh) {\n    .skc-nav-bar {\n      height: 100dvh;\n    }\n  }\n  .skc-nav-bar__main {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: 2.5rem;\n  }\n  .skc-nav-bar__toggle-and-fab {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: .25rem;\n    height: fit-content;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-button {\n    display: flex;\n    color: var(--on-surface);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-button::before,\n  .skc-nav-bar__toggle-and-fab .skc-button .skc-button__ripple {\n    background-color: var(--on-surface);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-nav-bar__brand {\n    display: block;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-nav-bar__brand:not(:last-child) {\n    margin-bottom: .75rem;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-fab {\n    box-shadow: none;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-fab.skc-fab--small,\n  .skc-nav-bar__toggle-and-fab .skc-fab.skc-fab--large {\n    padding: 1rem;\n    border-radius: var(--rounded-xl);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-fab__wrapper .skc-fab__icon .skc-icon,\n  .skc-nav-bar__toggle-and-fab .skc-fab.skc-fab--large .skc-fab__icon .skc-icon {\n    transition: font-size var(--motion-short-4) var(--easing-standard), font-variation-settings var(--motion-short-4) var(--easing-standard);\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" 0,\n      "opsz" 24;\n  }\n  .skc-nav-bar__destinations,\n  .skc-nav-bar__end {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: .25rem;\n    margin: 0;\n    padding: .3125rem;\n  }\n}\n');
 
 // src/components/NavBar/index.tsx
 import { jsx as jsx7, jsxs as jsxs4 } from "react/jsx-runtime";
@@ -495,7 +505,17 @@ function NavBarItem({
 }) {
   const { duration, easing } = useAnimationConfig();
   const iconRef = React5.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
+  const [clientHeight, setClientHeight] = React5.useState(1080);
+  React5.useEffect(() => {
+    if (window.innerWidth <= 600)
+      setClientHeight(window.innerHeight);
+    else
+      setClientHeight(80);
+  }, []);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef, {
+    useClientPos: true,
+    posCorrection: { x: 0, y: 80 - clientHeight }
+  });
   const navID = `nav-${typeof label === "string" ? label.toLowerCase() : alt}`;
   const props = {
     "aria-current": selected,
@@ -579,20 +599,30 @@ function FAB({
   style,
   className
 }) {
+  const { duration, easing } = useAnimationConfig();
   const fabRef = React6.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(fabRef);
   const [scrollDir, setScrollDir] = React6.useState("up");
+  const [canHide, setCanHide] = React6.useState(false);
   let prevScrollY = 0;
   React6.useEffect(() => {
-    window.onscroll = () => {
-      const { scrollY } = window;
-      const direction = prevScrollY < scrollY ? "down" : "up";
-      prevScrollY = scrollY;
-      setScrollDir(direction);
-    };
-    return () => {
-      window.onscroll = null;
-    };
+    if (stateOnScroll) {
+      const { innerWidth } = window;
+      setCanHide(innerWidth <= 600);
+      window.onscroll = () => {
+        const { scrollY } = window;
+        const direction = prevScrollY < scrollY ? "down" : "up";
+        prevScrollY = scrollY;
+        setScrollDir(direction);
+      };
+      window.onresize = () => {
+        const { innerWidth: innerWidth2 } = window;
+        setCanHide(innerWidth2 <= 600);
+      };
+      return () => {
+        window.onscroll = window.onresize = null;
+      };
+    }
   }, []);
   const props = {
     "aria-label": alt,
@@ -601,8 +631,22 @@ function FAB({
     ...rippleListeners
   };
   const content = /* @__PURE__ */ jsx9(AnimatePresence2, {
-    children: !(stateOnScroll === "disappear" && !(scrollDir === "up")) && /* @__PURE__ */ jsxs6(motion6.div, {
+    initial: false,
+    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ jsxs6(motion6.div, {
       ref: fabRef,
+      initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
+      animate: { scale: 1, x: 0, y: 0, opacity: 1 },
+      exit: {
+        scale: 0.4,
+        x: 20,
+        y: 20,
+        opacity: 0,
+        transition: transition(
+          duration.short2,
+          easing.standardAccelerate
+        )
+      },
+      transition: transition(duration.medium1, easing.standardDecelerate),
       style,
       className: cn([
         "skc-fab",
@@ -644,6 +688,20 @@ function FAB({
   });
 }
 FAB.displayName = "FAB";
+
+// ../skcom-css/dist/css/components/root-layout.css
+styleInject(".skc-root-layout {\n  padding-bottom: 5rem;\n}\n.skc-root-layout > .skc-nav-bar {\n  position: fixed;\n  z-index: 80;\n  bottom: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-nav-bar .skc-fab {\n  position: fixed;\n  right: 1rem;\n  bottom: 6rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-root-layout {\n    padding-bottom: 0;\n  }\n  .skc-root-layout > .skc-nav-bar {\n    top: 0;\n    bottom: initial;\n  }\n  .skc-root-layout > .skc-nav-bar .skc-fab {\n    position: relative;\n    right: 0;\n    bottom: 0;\n  }\n}\n");
+
+// src/components/RootLayout/index.tsx
+import { jsx as jsx10 } from "react/jsx-runtime";
+function RootLayout({ children, className, style }) {
+  return /* @__PURE__ */ jsx10("div", {
+    style,
+    className: cn(["skc-root-layout", className]),
+    children
+  });
+}
+RootLayout.displayName = "RootLayout";
 export {
   Actions,
   AssistChip,
@@ -652,6 +710,7 @@ export {
   MaterialIcon,
   NavBar,
   NavBarItem,
+  RootLayout,
   SegmentedButton,
   ToggleButton,
   useAnimationConfig
