@@ -1,7 +1,5 @@
 // External libraries
 import { NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
 
 import { FC, useState } from "react";
 
@@ -13,15 +11,15 @@ import {
   ContentLayout,
   FAB,
   MaterialIcon,
-  NavBar,
-  NavBarItem,
   SegmentedButton,
   ToggleButton,
 } from "@suankularb-components/react";
 
 const ButtonsSection: FC = () => (
   <Actions align="left">
-    <Button appearance="filled">Button</Button>
+    <Button appearance="filled">
+      Button
+    </Button>
     <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
       Button
     </Button>
