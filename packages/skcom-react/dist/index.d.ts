@@ -718,6 +718,14 @@ interface NavDrawerSectionProps extends SKComponent {
      *   Section in a Navigation Drawer. In this case, it’d be the name of the app.
      */
     header?: string | JSX.Element;
+    /**
+     * A description of the Navigation Drawer Section for screen readers,
+     * similar to `alt` on `<img>`.
+     *
+     * - Required if `header` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
 }
 /**
  * A row of Buttons. NavDrawerSection handles spacing and overflow.
@@ -726,8 +734,9 @@ interface NavDrawerSectionProps extends SKComponent {
  *
  * @param children Destinations grouped into this section.
  * @param header The header of the section.
+ * @param alt A description of the Navigation Drawer Section for screen readers, similar to `alt` on `<img>`.
  */
-declare function NavDrawerSection({ children, header, style, className, }: NavDrawerSectionProps): JSX.Element;
+declare function NavDrawerSection({ children, header, alt, style, className, }: NavDrawerSectionProps): JSX.Element;
 declare namespace NavDrawerSection {
     var displayName: string;
 }

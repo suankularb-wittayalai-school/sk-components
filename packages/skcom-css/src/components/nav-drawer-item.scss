@@ -46,6 +46,10 @@
   .skc-nav-drawer-item__ripple {
     background-color: var(--on-primary-container);
   }
+
+  .skc-nav-drawer-item__label {
+    font-weight: var(--font-bold);
+  }
 }
 
 .skc-nav-drawer-item__icon .skc-icon {

@@ -29,6 +29,15 @@ export interface NavDrawerSectionProps extends SKComponent {
    *   Section in a Navigation Drawer. In this case, it’d be the name of the app.
    */
   header?: string | JSX.Element;
+
+  /**
+   * A description of the Navigation Drawer Section for screen readers,
+   * similar to `alt` on `<img>`.
+   *
+   * - Required if `header` is a JSX Element, as it is used to generate the ID
+   *   crucial for accessibility.
+   */
+  alt?: string;
 }
 
 /**
@@ -38,22 +47,35 @@ export interface NavDrawerSectionProps extends SKComponent {
  *
  * @param children Destinations grouped into this section.
  * @param header The header of the section.
+ * @param alt A description of the Navigation Drawer Section for screen readers, similar to `alt` on `<img>`.
  */
 export function NavDrawerSection({
   children,
   header,
+  alt,
   style,
   className,
 }: NavDrawerSectionProps) {
+  const sectionID = `nav-section-${(typeof header === "string" ? header : alt)!
+    .toLowerCase()
+    .split(" ")
+    .join("-")}`;
+
   return (
-    <>
-      <li>
-        <ul style={style} className={cn(["skc-nav-drawer-section", className])}>
-          <li className="skc-nav-drawer-section__header">{header}</li>
-          {children}
-        </ul>
-      </li>
-    </>
+    <section
+      aria-labelledby={sectionID}
+      style={style}
+      className={cn(["skc-nav-drawer-section", className])}
+    >
+      <h2
+        id={sectionID}
+        aria-label={alt}
+        className="skc-nav-drawer-section__header"
+      >
+        {header}
+      </h2>
+      <ul>{children}</ul>
+    </section>
   );
 }
 

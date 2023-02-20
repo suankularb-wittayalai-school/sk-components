@@ -32,40 +32,47 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
               </span>
             </div>
           }
+          alt="SK Components"
         >
           <NavDrawerItem
             icon={<MaterialIcon icon="school" />}
             label="Learn"
             selected
-            href="#"
+            href="/"
+            element={Link}
           />
           <NavDrawerItem
             icon={<MaterialIcon icon="groups" />}
             label="Class"
-            href="#"
+            href="/"
+            element={Link}
           />
           <NavDrawerItem
             icon={<MaterialIcon icon="search" />}
             label="Lookup"
-            href="#"
+            href="/"
+            element={Link}
           />
           <NavDrawerItem
             icon={<MaterialIcon icon="account_circle" />}
             label="Account"
-            metadata="2 messages"
-            href="#"
+            metadata="7 messages"
+            href="/"
+            element={Link}
           />
         </NavDrawerSection>
         <NavDrawerSection header="M.504">
           <NavDrawerItem
             icon={<MaterialIcon icon="group" />}
             label="My teachers"
-            href="#"
+            href="/"
+            element={Link}
           />
           <NavDrawerItem
             icon={<MaterialIcon icon="contacts" />}
             label="My classmates"
-            href="#"
+            href="/"
+            element={Link}
           />
         </NavDrawerSection>
       </NavDrawer>
@@ -93,12 +100,14 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
               icon={<MaterialIcon icon="translate" />}
               label="เปลี่ยนภาษา"
               tooltip="Change language / เปลี่ยนภาษา"
-              href="#"
+              href="/"
+              element={Link}
             />
             <NavBarItem
               icon={<MaterialIcon icon="logout" />}
               label="Log out"
-              href="#"
+              href="/"
+              element={Link}
             />
           </>
         }

@@ -76,9 +76,7 @@ export function NavDrawer({
             style={style}
             className={cn(["skc-nav-drawer", className])}
           >
-            <nav>
-              <ul>{children}</ul>
-            </nav>
+            <nav>{children}</nav>
           </motion.aside>
           <motion.div
             initial={{ opacity: 0 }}
