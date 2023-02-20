@@ -1,8 +1,9 @@
 ////
-/// **Navigation Drawer Section**
-/// A group of destinations within a Navigation Drawer.
+/// **Navigation Drawer Item**
+/// A destination in a Navigation Drawer. Should be a child of a Navigation
+/// Drawer Section.
 ///
-/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.mte2ti4fbps0 SKCom documentation
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;

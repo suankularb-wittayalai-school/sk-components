@@ -15,6 +15,7 @@ import {
   useRipple,
 } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link NavBarItem Navigation Bar Item}.
@@ -160,7 +161,9 @@ export function NavBarItem({
   });
 
   // Label ID for `aria-labelledby`
-  const navID = `nav-${typeof label === "string" ? label.toLowerCase() : alt}`;
+  const navID = `nav-section-${kebabify(
+    (typeof label === "string" ? label : alt)!
+  )}`;
 
   const props = {
     "aria-current": selected,

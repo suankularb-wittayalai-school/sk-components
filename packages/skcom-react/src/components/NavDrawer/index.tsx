@@ -57,6 +57,27 @@ export function NavDrawer({
 }: NavDrawerProps) {
   const { duration, easing } = useAnimationConfig();
 
+  // Close the Drawer with the escape key
+  React.useEffect(() => {
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  // Focus on first link
+  React.useEffect(() => {
+    if (open) {
+      const navDrawerItem = document.querySelector<HTMLAnchorElement>(
+        ".skc-nav-drawer-item"
+      );
+      navDrawerItem?.focus();
+    }
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (

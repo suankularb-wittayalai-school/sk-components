@@ -59,6 +59,14 @@ export interface NavBarProps extends SKComponent {
   end?: JSX.Element;
 
   /**
+   * Allows for translation of the accessibility labels.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+   * - Optional.
+   */
+  locale?: "en-US" | "th";
+
+  /**
    * The function called when the user clicks on the navigation Button.
    *
    * - Always required.
@@ -82,6 +90,7 @@ export function NavBar({
   fab,
   end,
   onNavToggle,
+  locale,
   style,
   className,
 }: NavBarProps) {
@@ -92,6 +101,7 @@ export function NavBar({
           <Button
             appearance="text"
             icon={<MaterialIcon icon="menu" />}
+            alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
             onClick={onNavToggle}
           />
           <div className="skc-nav-bar__brand">{brand}</div>

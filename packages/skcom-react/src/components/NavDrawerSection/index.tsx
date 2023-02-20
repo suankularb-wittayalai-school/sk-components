@@ -9,6 +9,7 @@ import "@suankularb-components/css/dist/css/components/nav-drawer-section.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link NavDrawerSection Navigation Drawer Section}.
@@ -56,10 +57,9 @@ export function NavDrawerSection({
   style,
   className,
 }: NavDrawerSectionProps) {
-  const sectionID = `nav-section-${(typeof header === "string" ? header : alt)!
-    .toLowerCase()
-    .split(" ")
-    .join("-")}`;
+  const sectionID = `nav-section-${kebabify(
+    (typeof header === "string" ? header : alt)!
+  )}`;
 
   return (
     <section

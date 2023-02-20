@@ -83,7 +83,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             priority
             width={56}
             height={56}
-            alt="Simplified SKCom logo"
+            alt=""
           />
         }
         fab={
@@ -91,6 +91,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             color="tertiary"
             size="large"
             icon={<MaterialIcon icon="add" />}
+            alt="Add"
             stateOnScroll="disappear"
           />
         }

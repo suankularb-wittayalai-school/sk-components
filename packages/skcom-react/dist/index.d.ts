@@ -540,6 +540,13 @@ interface NavBarProps extends SKComponent {
      */
     end?: JSX.Element;
     /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
      * The function called when the user clicks on the navigation Button.
      *
      * - Always required.
@@ -556,7 +563,7 @@ interface NavBarProps extends SKComponent {
  * @param end More Navigation Items can be placed on the bottom of the Navigation Rail in larger screens.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
  */
-declare function NavBar({ children, brand, fab, end, onNavToggle, style, className, }: NavBarProps): JSX.Element;
+declare function NavBar({ children, brand, fab, end, onNavToggle, locale, style, className, }: NavBarProps): JSX.Element;
 declare namespace NavBar {
     var displayName: string;
 }
