@@ -731,7 +731,7 @@ function FAB({
 FAB.displayName = "FAB";
 
 // ../skcom-css/dist/css/components/content-layout.css
-styleInject(".skc-content-layout {\n  padding-top: 2rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  margin: 0 auto;\n  max-width: 70.5rem;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n}\n");
+styleInject(".skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  margin: 0 auto;\n  max-width: 70.5rem;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 7.5rem);\n  }\n}\n");
 
 // src/components/ContentLayout/index.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
