@@ -21,6 +21,10 @@ export { NavBarItem, type NavBarItemProps } from "./components/NavBarItem";
 
 export { FAB, type FABProps } from "./components/FAB";
 
+export {
+  ContentLayout,
+  type ContentLayoutProps,
+} from "./components/ContentLayout";
 export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
 export { useAnimationConfig } from "./utils/animation";

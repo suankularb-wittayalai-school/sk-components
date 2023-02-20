@@ -1,0 +1,27 @@
+////
+/// 
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+.skc-content-layout {
+  padding-top: 2rem;
+}
+
+.skc-content-layout__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 70.5rem;
+
+  > * {
+    margin-inline: 1rem;
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-content-layout {
+    padding: 2rem;
+  }
+}

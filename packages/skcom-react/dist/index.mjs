@@ -689,13 +689,34 @@ function FAB({
 }
 FAB.displayName = "FAB";
 
+// ../skcom-css/dist/css/components/content-layout.css
+styleInject(".skc-content-layout {\n  padding-top: 2rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  margin: 0 auto;\n  max-width: 70.5rem;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n}\n");
+
+// src/components/ContentLayout/index.tsx
+import { jsx as jsx10 } from "react/jsx-runtime";
+function ContentLayout({
+  children,
+  style,
+  className
+}) {
+  return /* @__PURE__ */ jsx10("main", {
+    style,
+    className: cn(["skc-content-layout", className]),
+    children: /* @__PURE__ */ jsx10("div", {
+      className: "skc-content-layout__content",
+      children
+    })
+  });
+}
+ContentLayout.displayName = "ContentLayout";
+
 // ../skcom-css/dist/css/components/root-layout.css
 styleInject(".skc-root-layout {\n  padding-bottom: 5rem;\n}\n.skc-root-layout > .skc-nav-bar {\n  position: fixed;\n  z-index: 80;\n  bottom: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-nav-bar .skc-fab {\n  position: fixed;\n  right: 1rem;\n  bottom: 6rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-root-layout {\n    padding-bottom: 0;\n  }\n  .skc-root-layout > .skc-nav-bar {\n    top: 0;\n    bottom: initial;\n  }\n  .skc-root-layout > .skc-nav-bar .skc-fab {\n    position: relative;\n    right: 0;\n    bottom: 0;\n  }\n}\n");
 
 // src/components/RootLayout/index.tsx
-import { jsx as jsx10 } from "react/jsx-runtime";
+import { jsx as jsx11 } from "react/jsx-runtime";
 function RootLayout({ children, className, style }) {
-  return /* @__PURE__ */ jsx10("div", {
+  return /* @__PURE__ */ jsx11("div", {
     style,
     className: cn(["skc-root-layout", className]),
     children
@@ -706,6 +727,7 @@ export {
   Actions,
   AssistChip,
   Button,
+  ContentLayout,
   FAB,
   MaterialIcon,
   NavBar,
