@@ -166,6 +166,13 @@ export function FAB({
   let prevScrollY = 0;
   React.useEffect(() => {
     if (stateOnScroll) {
+      // Disable hiding on Apple platforms since the rubberbanding effect
+      // causes the hiding behavior to malfunction
+      if (/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        setCanHide(false);
+        return;
+      }
+
       const { innerWidth } = window;
       setCanHide(innerWidth <= 600);
 

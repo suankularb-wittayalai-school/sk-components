@@ -607,6 +607,10 @@ function FAB({
   let prevScrollY = 0;
   React6.useEffect(() => {
     if (stateOnScroll) {
+      if (/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        setCanHide(false);
+        return;
+      }
       const { innerWidth } = window;
       setCanHide(innerWidth <= 600);
       window.onscroll = () => {
