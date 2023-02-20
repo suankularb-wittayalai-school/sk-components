@@ -18,6 +18,7 @@ export {
 
 export { NavBar, type NavBarProps } from "./components/NavBar";
 export { NavBarItem, type NavBarItemProps } from "./components/NavBarItem";
+export { NavDrawer, type NavDrawerProps } from "./components/NavDrawer";
 
 export { FAB, type FABProps } from "./components/FAB";
 

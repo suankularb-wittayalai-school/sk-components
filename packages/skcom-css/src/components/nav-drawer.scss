@@ -1,0 +1,22 @@
+////
+/// A list of all destinations within an app.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.2czacyab5zgs SKCom documentation
+////
+
+.skc-nav-drawer {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 4rem);
+  max-width: 22.5rem;
+  height: 100vh;
+  padding: 1.5rem;
+  border-radius: 0 var(--rounded-xl) var(--rounded-xl) 0;
+  background-color: var(--surface-1);
+}
+
+@supports (height: 100dvh) {
+  .skc-nav-drawer {
+    height: 100dvh;
+  }
+}

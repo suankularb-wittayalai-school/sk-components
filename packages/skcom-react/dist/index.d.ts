@@ -663,6 +663,44 @@ declare namespace NavBarItem {
 }
 
 /**
+ * Props for {@link NavDrawer}.
+ */
+interface NavDrawerProps extends SKComponent {
+    /**
+     * All destinations within an app. Destinations can be grouped with the help
+     * of Navigation Drawer Sections.
+     *
+     * - Must consist of Navigation Drawer Sections.
+     * - The first should consist of top-level pages.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If true, the Navigation Drawer will slide in to the screen, otherwise it
+     * would slide out of view.
+     *
+     * - Optional.
+     */
+    open?: boolean;
+    /**
+     * The function triggered when the scrim is clicked.
+     */
+    onClose: () => any;
+}
+/**
+ * A list of all destinations within an app.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.2czacyab5zgs SKCom documentation}
+ *
+ * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
+ * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
+ */
+declare function NavDrawer({ children, open, onClose, style, className, }: NavDrawerProps): JSX.Element;
+declare namespace NavDrawer {
+    var displayName: string;
+}
+
+/**
  * Props for {@link FAB}.
  */
 interface FABProps extends SKComponent {
@@ -868,4 +906,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

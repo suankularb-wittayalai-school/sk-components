@@ -2,20 +2,27 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 
 // SK Components
 import {
-  NavBar,
+  Button,
   FAB,
   MaterialIcon,
+  NavBar,
   NavBarItem,
+  NavDrawer,
   RootLayout,
 } from "@suankularb-components/react";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
+  const [navOpen, setNavOpen] = useState<boolean>(false);
+
   return (
     <RootLayout>
+      <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
+        TODO
+      </NavDrawer>
       <NavBar
         brand={
           <Image
@@ -49,7 +56,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             />
           </>
         }
-        onNavToggle={() => {}}
+        onNavToggle={() => setNavOpen(true)}
       >
         <NavBarItem
           icon={<MaterialIcon icon="school" />}
@@ -80,6 +87,9 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           element={Link}
         />
       </NavBar>
+      <Button appearance="filled" onClick={() => setNavOpen(true)}>
+        TEMP: Open Nav
+      </Button>
       {children}
     </RootLayout>
   );

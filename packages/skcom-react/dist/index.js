@@ -34,6 +34,7 @@ __export(src_exports, {
   MaterialIcon: () => MaterialIcon,
   NavBar: () => NavBar,
   NavBarItem: () => NavBarItem,
+  NavDrawer: () => NavDrawer,
   RootLayout: () => RootLayout,
   SegmentedButton: () => SegmentedButton,
   ToggleButton: () => ToggleButton,
@@ -617,8 +618,62 @@ function NavBarItem({
 }
 NavBarItem.displayName = "NavBarItem";
 
-// src/components/FAB/index.tsx
+// src/components/NavDrawer/index.tsx
 var import_framer_motion6 = require("framer-motion");
+
+// ../skcom-css/dist/css/components/nav-drawer.css
+styleInject(".skc-nav-drawer {\n  display: flex;\n  flex-direction: column;\n  width: calc(100% - 4rem);\n  max-width: 22.5rem;\n  height: 100vh;\n  padding: 1.5rem;\n  border-radius: 0 var(--rounded-xl) var(--rounded-xl) 0;\n  background-color: var(--surface-1);\n}\n@supports (height: 100dvh) {\n  .skc-nav-drawer {\n    height: 100dvh;\n  }\n}\n");
+
+// src/components/NavDrawer/index.tsx
+var import_jsx_runtime = require("react/jsx-runtime");
+function NavDrawer({
+  children,
+  open,
+  onClose,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion6.AnimatePresence, {
+    children: open && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, {
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion6.motion.aside, {
+          initial: { scaleX: 0.2, x: "-100%" },
+          animate: { scaleX: 1, x: "0%" },
+          exit: {
+            scaleX: 0.2,
+            x: "-100%",
+            transition: transition(
+              duration.short4,
+              easing.standardAccelerate
+            )
+          },
+          transition: transition(duration.medium4, easing.standardDecelerate),
+          style,
+          className: cn(["skc-nav-drawer", className]),
+          children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+            children
+          })
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion6.motion.div, {
+          initial: { opacity: 0 },
+          animate: { opacity: 0.5 },
+          exit: {
+            opacity: 0,
+            transition: transition(duration.short4, easing.standard)
+          },
+          transition: transition(duration.medium4, easing.standard),
+          onClick: onClose,
+          className: "skc-scrim"
+        })
+      ]
+    })
+  });
+}
+NavDrawer.displayName = "NavDrawer";
+
+// src/components/FAB/index.tsx
+var import_framer_motion7 = require("framer-motion");
 var React6 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/fab.css
@@ -675,9 +730,9 @@ function FAB({
     className: "skc-fab__wrapper",
     ...rippleListeners
   };
-  const content = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion6.AnimatePresence, {
+  const content = /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion7.AnimatePresence, {
     initial: false,
-    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_framer_motion6.motion.div, {
+    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_framer_motion7.motion.div, {
       ref: fabRef,
       initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
       animate: { scale: 1, x: 0, y: 0, opacity: 1 },
@@ -708,7 +763,7 @@ function FAB({
           className: "skc-fab__label",
           children
         }),
-        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion6.motion.span, {
+        /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion7.motion.span, {
           initial: { scale: 0, opacity: 0.36 },
           animate: rippleControls,
           className: "skc-fab__ripple",
@@ -735,7 +790,7 @@ function FAB({
 FAB.displayName = "FAB";
 
 // ../skcom-css/dist/css/components/content-layout.css
-styleInject(".skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  margin: 0 auto;\n  max-width: 70.5rem;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 7.5rem);\n  }\n}\n");
+styleInject(".skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 7.5rem);\n  }\n}\n");
 
 // src/components/ContentLayout/index.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
@@ -756,7 +811,7 @@ function ContentLayout({
 ContentLayout.displayName = "ContentLayout";
 
 // ../skcom-css/dist/css/components/root-layout.css
-styleInject(".skc-root-layout {\n  padding-bottom: 5rem;\n}\n.skc-root-layout > .skc-nav-bar {\n  position: fixed;\n  z-index: 80;\n  bottom: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-nav-bar .skc-fab {\n  position: fixed;\n  right: 1rem;\n  bottom: 6rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-root-layout {\n    padding-bottom: 0;\n  }\n  .skc-root-layout > .skc-nav-bar {\n    top: 0;\n    bottom: initial;\n  }\n  .skc-root-layout > .skc-nav-bar .skc-fab {\n    position: relative;\n    right: 0;\n    bottom: 0;\n  }\n}\n");
+styleInject(".skc-root-layout {\n  padding-bottom: 5rem;\n}\n.skc-root-layout > .skc-nav-bar {\n  position: fixed;\n  z-index: 70;\n  bottom: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-nav-bar .skc-fab {\n  position: fixed;\n  right: 1rem;\n  bottom: 6rem;\n}\n.skc-root-layout > .skc-nav-drawer {\n  position: fixed;\n  z-index: 85;\n  top: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-scrim {\n  position: fixed;\n  z-index: 80;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  opacity: .5;\n  background-color: var(--black);\n}\n@media only screen and (min-width: 600px) {\n  .skc-root-layout {\n    padding-bottom: 0;\n  }\n  .skc-root-layout > .skc-nav-bar {\n    top: 0;\n    bottom: initial;\n  }\n  .skc-root-layout > .skc-nav-bar .skc-fab {\n    position: relative;\n    right: 0;\n    bottom: 0;\n  }\n}\n");
 
 // src/components/RootLayout/index.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
@@ -778,6 +833,7 @@ RootLayout.displayName = "RootLayout";
   MaterialIcon,
   NavBar,
   NavBarItem,
+  NavDrawer,
   RootLayout,
   SegmentedButton,
   ToggleButton,

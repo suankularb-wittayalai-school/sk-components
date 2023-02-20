@@ -17,9 +17,7 @@ import {
 
 const ButtonsSection: FC = () => (
   <Actions align="left">
-    <Button appearance="filled">
-      Button
-    </Button>
+    <Button appearance="filled">Button</Button>
     <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
       Button
     </Button>
