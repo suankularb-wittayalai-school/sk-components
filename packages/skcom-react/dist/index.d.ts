@@ -733,6 +733,86 @@ declare namespace NavDrawerSection {
 }
 
 /**
+ * Props for {@link NavDrawerItem Navigation Drawer Item}.
+ */
+interface NavDrawerItemProps extends SKComponent {
+    /**
+     * Icons help users identify pages more quickly.
+     *
+     * - Always required.
+     */
+    icon: JSX.Element;
+    /**
+     * The title of the destination page.
+     *
+     * - Always required.
+     */
+    label?: string | JSX.Element;
+    /**
+     * Some text aligned to the right of a Navigation Drawer Item. This is useful
+     * for, for instance, displaying the number of new messages.
+     *
+     * - Optional.
+     */
+    metadata?: string | JSX.Element;
+    /**
+     * A message shown in a tooltip when the user hovers over the Navigation
+     * Drawer Item.
+     *
+     * - Optional.
+     */
+    tooltip?: string;
+    /**
+     * Highlights the Navigation Drawer Item. If the user is currently on this
+     * page, the Navigation Drawer Item should be highlighted.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * The URL of the page this Navigation Drawer Item leads to, similar to
+     * `href` on `<a>`.
+     *
+     * - Always required.
+     */
+    href: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Optional.
+     */
+    element?: ({ children, ref, title, style, className, href, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref: React.MutableRefObject<any>;
+        title?: string;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onMouseDown: (event: React.MouseEvent) => void;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * A row of Buttons. NavDrawerItem handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation}
+ *
+ * @param icon Icons help users identify pages more quickly.
+ * @param label The title of the destination page.
+ * @param metadata Some text aligned to the right of a Navigation Drawer Item.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Drawer Item.
+ * @param selected Highlights the Navigation Drawer Item.
+ * @param href The URL of the page this Navigation Drawer Item leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function NavDrawerItem({ icon, label, metadata, tooltip, selected, href, element: Element, style, className, }: NavDrawerItemProps): JSX.Element;
+declare namespace NavDrawerItem {
+    var displayName: string;
+}
+
+/**
  * Props for {@link FAB}.
  */
 interface FABProps extends SKComponent {
@@ -938,4 +1018,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

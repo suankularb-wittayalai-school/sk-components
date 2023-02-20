@@ -12,6 +12,7 @@ import {
   NavBar,
   NavBarItem,
   NavDrawer,
+  NavDrawerItem,
   NavDrawerSection,
   RootLayout,
 } from "@suankularb-components/react";
@@ -22,8 +23,51 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <RootLayout>
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
-        <NavDrawerSection header="SK Components">TODO</NavDrawerSection>
-        <NavDrawerSection header="M.504">TODO</NavDrawerSection>
+        <NavDrawerSection
+          header={
+            <div className="title-large">
+              <span>SK</span>
+              <span className="font-black text-blue-900 dark:text-blue-300">
+                Components
+              </span>
+            </div>
+          }
+        >
+          <NavDrawerItem
+            icon={<MaterialIcon icon="school" />}
+            label="Learn"
+            selected
+            href="#"
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="groups" />}
+            label="Class"
+            href="#"
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="search" />}
+            label="Lookup"
+            href="#"
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="account_circle" />}
+            label="Account"
+            metadata="2 messages"
+            href="#"
+          />
+        </NavDrawerSection>
+        <NavDrawerSection header="M.504">
+          <NavDrawerItem
+            icon={<MaterialIcon icon="group" />}
+            label="My teachers"
+            href="#"
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="contacts" />}
+            label="My classmates"
+            href="#"
+          />
+        </NavDrawerSection>
       </NavDrawer>
       <NavBar
         brand={
@@ -68,6 +112,12 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           element={Link}
         />
         <NavBarItem
+          icon={<MaterialIcon icon="groups" />}
+          label="Class"
+          href="#"
+          element={Link}
+        />
+        <NavBarItem
           icon={<MaterialIcon icon="search" />}
           label="Lookup"
           href="#"
@@ -77,14 +127,6 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           icon={<MaterialIcon icon="account_circle" />}
           label="Account"
           badge={7}
-          href="#"
-          element={Link}
-        />
-        <NavBarItem
-          icon={<MaterialIcon icon="admin_panel_settings" />}
-          label="Admin"
-          badge={null}
-          railOnly
           href="#"
           element={Link}
         />

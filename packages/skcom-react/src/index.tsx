@@ -23,6 +23,10 @@ export {
   NavDrawerSection,
   type NavDrawerSectionProps,
 } from "./components/NavDrawerSection";
+export {
+  NavDrawerItem,
+  type NavDrawerItemProps,
+} from "./components/NavDrawerItem";
 
 export { FAB, type FABProps } from "./components/FAB";
 
