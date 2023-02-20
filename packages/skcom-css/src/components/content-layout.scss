@@ -1,0 +1,34 @@
+////
+/// **Content Layout**
+/// A simple width-clamped vertical flow of content with minimal default styling.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.gxd7ps11kchv SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+.skc-content-layout {
+  padding: 2rem 0 1rem;
+}
+
+.skc-content-layout__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 70.5rem;
+  margin: 0 auto;
+
+  > * {
+    margin-inline: 1rem;
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-content-layout {
+    padding: 2rem;
+  }
+
+  .skc-content-layout__content {
+    width: calc(100% - (7.5rem));
+  }
+}

@@ -8,6 +8,8 @@ import {
 
 import "@/styles/globals.css";
 
+import Layout from "@/components/Layout";
+
 const bodyFontEN = Inter({ subsets: ["latin"] });
 const displayFontEN = Space_Grotesk({ subsets: ["latin"] });
 
@@ -31,7 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
             ${displayFontTH.style.fontFamily};
         }
       `}</style>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

@@ -1,0 +1,76 @@
+////
+/// **Navigation Drawer Item**
+/// A destination in a Navigation Drawer. Should be a child of a Navigation
+/// Drawer Section.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss";
+@use "../components/icon.scss" as ci;
+
+.skc-nav-drawer-item {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem 1rem 1rem;
+  border-radius: var(--rounded-full);
+  -webkit-tap-highlight-color: transparent;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+}
+
+.skc-nav-drawer-item.skc-nav-drawer-item--selected {
+  color: var(--on-primary-container);
+  background-color: var(--primary-container);
+
+  &::before,
+  .skc-nav-drawer-item__ripple {
+    background-color: var(--on-primary-container);
+  }
+
+  .skc-nav-drawer-item__label {
+    font-weight: var(--font-bold);
+  }
+}
+
+.skc-nav-drawer-item__icon .skc-icon {
+  @include ci.icon(0, 400, 0, 24);
+
+  .skc-nav-drawer-item.skc-nav-drawer-item--selected & {
+    @include ci.icon(1, 400, 0, 24);
+  }
+}
+
+.skc-nav-drawer-item__label {
+  @extend .label-large;
+  flex-grow: 1;
+}
+
+.skc-nav-drawer-item__metadata {
+  @extend .label-large;
+}
+
+.skc-nav-drawer-item__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+}

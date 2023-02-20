@@ -9,8 +9,12 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/fab.css";
 
 // Utilities
+import {
+  transition,
+  useAnimationConfig,
+  useRipple,
+} from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { useRipple } from "../../utils/animation";
 
 /**
  * Props for {@link FAB}.
@@ -114,7 +118,7 @@ export interface FABProps extends SKComponent {
     href: string;
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element;
+  }) => JSX.Element | null;
 }
 
 /**
@@ -143,32 +147,53 @@ export function FAB({
   stateOnScroll,
   onClick,
   href,
-  element,
+  element: Element,
   style,
   className,
 }: FABProps) {
+  // Animation config
+  const { duration, easing } = useAnimationConfig();
+
   // Ripple setup
   const fabRef = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(fabRef);
 
   // Scroll direciton
   const [scrollDir, setScrollDir] = React.useState<"up" | "down">("up");
+  const [canHide, setCanHide] = React.useState<boolean>(false);
 
   // Default scroll position to the top
   let prevScrollY = 0;
   React.useEffect(() => {
-    window.onscroll = () => {
-      // Compare to previous position and set the direction
-      const { scrollY } = window;
-      const direction = prevScrollY < scrollY ? "down" : "up";
-      prevScrollY = scrollY;
-      setScrollDir(direction);
-    };
+    if (stateOnScroll) {
+      // Disable hiding on Apple platforms since the rubberbanding effect
+      // causes the hiding behavior to malfunction
+      if (/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        setCanHide(false);
+        return;
+      }
 
-    // Cleanup
-    return () => {
-      window.onscroll = null;
-    };
+      const { innerWidth } = window;
+      setCanHide(innerWidth <= 600);
+
+      window.onscroll = () => {
+        // Compare to previous position and set the direction
+        const { scrollY } = window;
+        const direction = prevScrollY < scrollY ? "down" : "up";
+        prevScrollY = scrollY;
+        setScrollDir(direction);
+      };
+
+      window.onresize = () => {
+        const { innerWidth } = window;
+        setCanHide(innerWidth <= 600);
+      };
+
+      // Cleanup
+      return () => {
+        window.onscroll = window.onresize = null;
+      };
+    }
   }, []);
 
   const props = {
@@ -179,12 +204,25 @@ export function FAB({
   };
 
   const content = (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {
         // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
-        !(stateOnScroll === "disappear" && !(scrollDir === "up")) && (
+        !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && (
           <motion.div
             ref={fabRef}
+            initial={{ scale: 0.4, x: 20, y: 20, opacity: 0 }}
+            animate={{ scale: 1, x: 0, y: 0, opacity: 1 }}
+            exit={{
+              scale: 0.4,
+              x: 20,
+              y: 20,
+              opacity: 0,
+              transition: transition(
+                duration.short2,
+                easing.standardAccelerate
+              ),
+            }}
+            transition={transition(duration.medium1, easing.standardDecelerate)}
             style={style}
             className={cn([
               "skc-fab",
@@ -225,12 +263,10 @@ export function FAB({
 
   return (
     // Render with `element` if defined
-    href && element ? (
-      element({
-        children: content,
-        href,
-        ...props,
-      })
+    href && Element ? (
+      <Element {...props} href={href}>
+        {content}
+      </Element>
     ) : // Render an `<a>` if link passed in
     href ? (
       <a href={href} {...props}>
@@ -238,7 +274,7 @@ export function FAB({
       </a>
     ) : (
       // Otherwise, render a `<button>`
-      <button type="button" {...props}>
+      <button type="button" onClick={onClick} {...props}>
         {content}
       </button>
     )

@@ -1,0 +1,128 @@
+////
+/// **Navigation Bar**
+/// A Navigation Bar/Rail provides persistent access to all top-level pages. On
+/// larger screens, a Navigation Bar transforms into a Navigation Rail.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.x32yas2zvfe SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../components/icon.scss" as ci;
+
+.skc-nav-bar {
+  overflow-x: auto;
+  width: 100vw;
+  background-color: var(--surface-2);
+}
+
+.skc-nav-bar__toggle-and-fab {
+  height: 0;
+}
+
+.skc-nav-bar__toggle-and-fab .skc-button,
+.skc-nav-bar__brand,
+.skc-nav-bar__end {
+  display: none;
+}
+
+.skc-nav-bar__destinations {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+
+  .skc-nav-bar-item {
+    width: 100%;
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-nav-bar {
+    display: flex;
+    overflow: initial auto;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+    width: 5rem;
+    height: 100vh;
+    padding: 2.75rem 0 3.5rem;
+  }
+
+  @supports (height: 100dvh) {
+    .skc-nav-bar {
+      height: 100dvh;
+    }
+  }
+
+  .skc-nav-bar__main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+
+  .skc-nav-bar__toggle-and-fab {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.25rem;
+    height: fit-content;
+
+    .skc-button {
+      display: flex;
+      color: var(--on-surface);
+
+      &::before,
+      .skc-button__ripple {
+        background-color: var(--on-surface);
+      }
+    }
+
+    .skc-nav-bar__brand {
+      display: block;
+
+      &:not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .skc-fab {
+      box-shadow: none;
+
+      &.skc-fab--small,
+      &.skc-fab--large {
+        padding: 1rem;
+        border-radius: var(--rounded-xl);
+      }
+    }
+
+    .skc-fab__wrapper,
+    .skc-fab.skc-fab--large {
+      .skc-fab__icon .skc-icon {
+        @include mix.transition(
+        font-size font-variation-settings,
+        var(--motion-short-4),
+        var(--easing-standard)
+        );
+        @include ci.icon(0, 400, 0, 24);
+      }
+    }
+  }
+
+  .skc-nav-bar__destinations,
+  .skc-nav-bar__end {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.3125rem;
+  }
+}

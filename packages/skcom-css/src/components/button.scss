@@ -92,9 +92,12 @@
   @include ci.icon(0, 400, 0, 20);
 
   .skc-button:not(:has(.skc-button__label)) & {
+    @include mix.transition(
+      font-variation-settings,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
     @include ci.icon(0, 400, 0, 24);
-    transition: font-variation-settings var(--motion-short-4)
-      var(--easing-standard);
   }
 
   // Hover: make icon bolder
@@ -114,11 +117,19 @@
   font-size: var(--text-base);
   font-weight: var(--font-medium);
   line-height: 1.25rem;
+
+  .skc-button:not(:has(.skc-button__icon)) & {
+    text-align: center;
+  }
 }
 
 // Filled Button
 .skc-button.skc-button--filled {
-  transition: box-shadow var(--motion-short-4) var(--easing-standard);
+  @include mix.transition(
+    box-shadow,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
   color: var(--on-primary);
   background-color: var(--primary);
 
@@ -173,7 +184,11 @@
 
 // Tonal Button
 .skc-button.skc-button--tonal {
-  transition: box-shadow var(--motion-short-4) var(--easing-standard);
+  @include mix.transition(
+    box-shadow,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
   color: var(--on-secondary-container);
   background-color: var(--secondary-container);
 
@@ -228,7 +243,11 @@
 
 // Outlined Button
 .skc-button.skc-button--outlined {
-  transition: border-color var(--motion-short-4) var(--easing-standard);
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
   color: var(--primary);
   border: 1px solid var(--outline);
 
@@ -299,7 +318,6 @@
 
 // Text Button
 .skc-button.skc-button--text {
-  padding: 0.625rem 0.75rem;
   color: var(--primary);
 
   // States
@@ -347,8 +365,13 @@
     }
   }
 
-  // With Icon padding
-  &:has(.skc-button__icon:first-child) {
-    padding-left: 0.75rem;
+  // With label padding
+  &:has(.skc-button__label) {
+    padding: 0.625rem 0.75rem;
+
+    // With Icon padding
+    &:has(.skc-button__icon:first-child) {
+      padding-left: 0.75rem;
+    }
   }
 }

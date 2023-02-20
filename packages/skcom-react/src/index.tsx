@@ -16,6 +16,24 @@ export {
   type MaterialIconProps,
 } from "./components/MaterialIcon";
 
+export { NavBar, type NavBarProps } from "./components/NavBar";
+export { NavBarItem, type NavBarItemProps } from "./components/NavBarItem";
+export { NavDrawer, type NavDrawerProps } from "./components/NavDrawer";
+export {
+  NavDrawerSection,
+  type NavDrawerSectionProps,
+} from "./components/NavDrawerSection";
+export {
+  NavDrawerItem,
+  type NavDrawerItemProps,
+} from "./components/NavDrawerItem";
+
 export { FAB, type FABProps } from "./components/FAB";
+
+export {
+  ContentLayout,
+  type ContentLayoutProps,
+} from "./components/ContentLayout";
+export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
 export { useAnimationConfig } from "./utils/animation";

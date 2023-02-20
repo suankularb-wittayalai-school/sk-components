@@ -66,9 +66,12 @@
 
 // Icon
 .skc-fab__icon .skc-icon {
+  @include mix.transition(
+    font-variation-settings,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
   @include ci.icon(0, 400, 0, 24);
-  transition: font-variation-settings var(--motion-short-4)
-    var(--easing-standard);
 
   // Hover: make icon bolder
   .skc-fab__wrapper:hover &,

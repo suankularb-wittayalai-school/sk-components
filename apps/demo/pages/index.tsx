@@ -1,5 +1,6 @@
 // External libraries
 import { NextPage } from "next";
+
 import { FC, useState } from "react";
 
 // SK Components
@@ -7,6 +8,7 @@ import {
   Actions,
   AssistChip,
   Button,
+  ContentLayout,
   FAB,
   MaterialIcon,
   SegmentedButton,
@@ -195,7 +197,7 @@ const AssistChipsSection: FC = () => (
 
 const Home: NextPage = () => {
   return (
-    <main className="flex flex-col gap-6 p-4">
+    <ContentLayout>
       <ButtonsSection />
       <SegmentedButtonSection />
       <Actions align="full">
@@ -213,7 +215,7 @@ const Home: NextPage = () => {
       <ToggleButtonsSection />
       <FABsSection />
       <AssistChipsSection />
-    </main>
+    </ContentLayout>
   );
 };
 

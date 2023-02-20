@@ -19,13 +19,13 @@
 
 // State layer
 @mixin state-layer() {
+  @include transition(opacity, var(--motion-short-4), var(--easing-standard));
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   content: "";
-  transition: opacity var(--motion-short-4) var(--easing-standard);
   pointer-events: none;
   opacity: 0;
   border-radius: inherit;
@@ -40,6 +40,21 @@
   pointer-events: none;
   opacity: 0.36;
   border-radius: 50%;
+}
+
+// Transition
+@mixin transition($properties, $duration, $easing) {
+  $transition-value: ();
+
+  @for $i from 1 through length($properties) {
+    $transition-value: append(
+      $transition-value,
+      nth($properties, $i) $duration $easing,
+      comma
+    );
+  }
+
+  transition: $transition-value;
 }
 
 // Responsive breakpoints

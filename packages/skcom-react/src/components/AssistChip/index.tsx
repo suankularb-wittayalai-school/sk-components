@@ -116,7 +116,7 @@ export interface AssistChipProps extends SKComponent {
     onClick: (event: React.MouseEvent) => void;
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element;
+  }) => JSX.Element | null;
 }
 
 /**
@@ -150,7 +150,7 @@ export function AssistChip({
   disabled,
   onClick,
   href,
-  element,
+  element: Element,
   style,
   className,
 }: AssistChipProps) {
@@ -190,8 +190,10 @@ export function AssistChip({
 
   return (
     // Render with `element` if defined
-    href && element ? (
-      element({ ...props, children: content, href })
+    href && Element ? (
+      <Element {...props} href={href}>
+        {content}
+      </Element>
     ) : // Render an `<a>` if link passed in
     href ? (
       <a {...props} href={href}>
