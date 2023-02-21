@@ -164,4 +164,4 @@ export function ToggleButton({
   );
 }
 
-ToggleButton.displayName = "Toggle Button";
+ToggleButton.displayName = "ToggleButton";

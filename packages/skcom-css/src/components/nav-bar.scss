@@ -42,7 +42,7 @@
 @include mix.breakpoint("sm") {
   .skc-nav-bar {
     display: flex;
-    overflow: initial auto;
+    overflow: hidden auto;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
@@ -106,9 +106,9 @@
     .skc-fab.skc-fab--large {
       .skc-fab__icon .skc-icon {
         @include mix.transition(
-        font-size font-variation-settings,
-        var(--motion-short-4),
-        var(--easing-standard)
+          font-size font-variation-settings,
+          var(--motion-short-4),
+          var(--easing-standard)
         );
         @include ci.icon(0, 400, 0, 24);
       }

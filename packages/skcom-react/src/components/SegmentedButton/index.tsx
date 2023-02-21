@@ -84,4 +84,4 @@ export function SegmentedButton({
   );
 }
 
-SegmentedButton.displayName = "Segmented Button";
+SegmentedButton.displayName = "SegmentedButton";

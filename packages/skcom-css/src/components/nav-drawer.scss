@@ -14,13 +14,14 @@
   padding: 0.75rem;
   border-radius: 0 var(--rounded-xl) var(--rounded-xl) 0;
   background-color: var(--surface-1);
+  overflow-y: auto;
 
   // Divider
   .skc-nav-drawer-section:not(:last-child)::after {
-    content: "";
-    margin-left: 1rem;
     width: calc(100% - 2rem);
     height: 1px;
+    margin-left: 1rem;
+    content: "";
     background-color: var(--outline-variant);
   }
 }
