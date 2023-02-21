@@ -13,7 +13,7 @@ import "@suankularb-components/css/dist/css/components/page-header.css";
 // Utilities
 import { cn } from "../../utils/className";
 import { Button, ButtonProps } from "../Button";
-import { LayoutGroup, motion, Tween } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion, Tween } from "framer-motion";
 import { transition, useAnimationConfig } from "../../utils/animation";
 
 /**
@@ -43,7 +43,20 @@ export interface PageHeaderProps extends SKComponent {
   title: string | JSX.Element;
 
   /**
-   * @todo
+   * An icon representative of this page of the application.
+   *
+   * - Incompatible with `children`.
+   */
+  icon?: JSX.Element;
+
+  /**
+   * A small image of your brand can be put on the Page Header to constantly
+   * remind your users that they are, in fact, in your app.
+   *
+   * - Replaces the home Button icon.
+   * - Not displayed on desktop.
+   * - Ensure the image is simple and undistracting.
+   * - Optional but recommended.
    */
   brand?: JSX.Element;
 
@@ -111,6 +124,8 @@ export interface PageHeaderProps extends SKComponent {
  *
  * @param children Some additional components inside the Page Header area.
  * @param title The title text: the biggest text in a page and the only within a `<h1>` tag.
+ * @param icon The icon representative of this page.
+ * @param brand A small image of your brand can be put on the Page Header.
  * @param parentURL The link the back Button navigates to.
  * @param homeURL The link to the home page of this application.
  * @param element Change the underlying element from `<a>` to a custom element.
@@ -121,6 +136,7 @@ export interface PageHeaderProps extends SKComponent {
 export function PageHeader({
   children,
   title,
+  icon,
   brand,
   parentURL,
   homeURL,
@@ -133,6 +149,7 @@ export function PageHeader({
 }: PageHeaderProps) {
   const headerRef: React.LegacyRef<HTMLElement> = React.useRef(null);
   const [minimized, setMinimized] = React.useState<boolean>(false);
+  const [hideIcon, setHideIcon] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const header = headerRef.current;
@@ -142,6 +159,7 @@ export function PageHeader({
     const handleScroll = () => {
       const { scrollY } = window;
       setMinimized(scrollY > scrollMargin);
+      setHideIcon(scrollY > scrollMargin - 12);
     };
 
     document.addEventListener("scroll", handleScroll);
@@ -152,7 +170,7 @@ export function PageHeader({
   }, []);
 
   const { duration, easing } = useAnimationConfig();
-  const enterTransition = transition(duration.medium4, easing.standard);
+  const minimizeTransition = transition(duration.medium4, easing.standard);
 
   return (
     <>
@@ -160,64 +178,89 @@ export function PageHeader({
         style={{ height: minimized ? headerRef.current?.clientHeight : 0 }}
       />
       <LayoutGroup>
-        <header
-          ref={headerRef}
-          style={style}
-          className={cn([
-            "skc-page-header",
-            minimized && "skc-page-header--minimized",
-            className,
-          ])}
-        >
-          <div className="skc-page-header__content">
-            <motion.div
-              layoutId="page-header-actions"
-              transition={enterTransition}
-              className="skc-page-header__actions"
-            >
-              <Button
-                appearance="text"
-                icon={<MaterialIcon icon="arrow_backward" />}
-                onClick={onBack}
-                href={parentURL}
-                element={element}
-              />
-              {minimized && (
+        <AnimatePresence>
+          <header
+            ref={headerRef}
+            style={style}
+            className={cn([
+              "skc-page-header",
+              minimized && "skc-page-header--minimized",
+              className,
+            ])}
+          >
+            <div className="skc-page-header__content">
+              {/* Background icon */}
+              {icon && !children && !hideIcon && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, translateY: "-50%" }}
+                  animate={{ opacity: 0.12, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8, translateY: "-50%" }}
+                  transition={minimizeTransition}
+                  className="skc-page-header__icon"
+                >
+                  {icon}
+                </motion.div>
+              )}
+
+              <motion.div
+                layoutId="page-header-actions"
+                transition={minimizeTransition}
+                className="skc-page-header__actions"
+              >
+                {/* Back Button */}
+                <Button
+                  appearance="text"
+                  icon={<MaterialIcon icon="arrow_backward" />}
+                  onClick={onBack}
+                  href={parentURL}
+                  element={element}
+                />
+
+                {minimized && (
+                  // Header (when minimized)
+                  <motion.h1
+                    layoutId="page-header-text"
+                    transition={minimizeTransition}
+                  >
+                    {title}
+                  </motion.h1>
+                )}
+
+                <div className="skc-page-header__trailing">
+                  {homeURL && (
+                    // Home Button
+                    <Button
+                      appearance="text"
+                      icon={brand || <MaterialIcon icon="home" />}
+                      href={homeURL}
+                      element={element}
+                      {...backAttr}
+                    />
+                  )}
+                  {/* Menu toggle */}
+                  <Button
+                    appearance="text"
+                    icon={<MaterialIcon icon="menu" />}
+                    onClick={onNavToggle}
+                  />
+                </div>
+              </motion.div>
+
+              {!minimized && (
+                // Header (initial)
                 <motion.h1
                   layoutId="page-header-text"
-                  transition={enterTransition}
+                  transition={minimizeTransition}
                 >
                   {title}
                 </motion.h1>
               )}
-              <div className="skc-page-header__trailing">
-                {homeURL && (
-                  <Button
-                    appearance="text"
-                    icon={brand || <MaterialIcon icon="home" />}
-                    href={homeURL}
-                    element={element}
-                    {...backAttr}
-                  />
-                )}
-                <Button
-                  appearance="text"
-                  icon={<MaterialIcon icon="menu" />}
-                  onClick={onNavToggle}
-                />
-              </div>
-            </motion.div>
-            {!minimized && (
-              <motion.h1
-                layoutId="page-header-text"
-                transition={enterTransition}
-              >
-                {title}
-              </motion.h1>
-            )}
-            {children}
-          </div>
-        </header>
+
+              {/* Related content */}
+              {children}
+            </div>
+          </header>
+        </AnimatePresence>
       </LayoutGroup>
     </>
   );

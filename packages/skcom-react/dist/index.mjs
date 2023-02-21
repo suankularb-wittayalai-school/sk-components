@@ -893,7 +893,7 @@ function FAB({
 FAB.displayName = "FAB";
 
 // ../skcom-css/dist/css/components/content-layout.css
-styleInject(".skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 9.5rem);\n  }\n  .skc-content-layout__content > * {\n    margin-inline: 0;\n  }\n}\n");
+styleInject(".skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > * {\n    margin-inline: 0;\n  }\n}\n");
 
 // src/components/ContentLayout/index.tsx
 import { jsx as jsx13 } from "react/jsx-runtime";
@@ -931,14 +931,15 @@ RootLayout.displayName = "RootLayout";
 import * as React10 from "react";
 
 // ../skcom-css/dist/css/components/page-header.css
-styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-page-header {\n  padding: 1rem 0 1.75rem;\n  background-color: var(--surface-5);\n}\n.skc-page-header.skc-page-header--minimized {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  z-index: 60;\n  padding: .75rem .5rem;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions {\n  gap: .5rem;\n  margin: 0;\n  width: calc(100% - 1rem);\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions .skc-button {\n  left: 0;\n}\n.skc-page-header__content {\n  display: flex;\n  align-items: flex-start;\n  flex-direction: column;\n  gap: .75rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-page-header__content > * {\n  margin-inline: 1rem;\n}\n.skc-page-header__content > h1 {\n  font-family: var(--font-display);\n  font-size: var(--text-7xl);\n  font-weight: var(--font-regular);\n  line-height: 3.25rem;\n  letter-spacing: 0px;\n  width: calc(100% - 2rem);\n}\n.skc-page-header__actions {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: space-between;\n  width: calc(100% - 2rem);\n}\n.skc-page-header__actions > .skc-button {\n  position: relative;\n  left: -0.5rem;\n}\n.skc-page-header__actions > h1 {\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n  width: fit-content;\n  flex-grow: 1;\n}\n.skc-page-header__trailing {\n  display: flex;\n  flex-direction: row;\n  gap: .5rem;\n}\n.skc-page-header__actions .skc-button,\n.skc-page-header__trailing .skc-button {\n  color: var(--on-surface);\n}\n.skc-page-header__actions .skc-button::before,\n.skc-page-header__actions .skc-button .skc-button__ripple,\n.skc-page-header__trailing .skc-button::before,\n.skc-page-header__trailing .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n@media only screen and (min-width: 600px) {\n  .skc-page-header {\n    padding: 2.75rem 1.5rem 2rem;\n  }\n  .skc-page-header__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-page-header__content > * {\n    margin-inline: 0;\n  }\n  .skc-page-header__content > h1 {\n    font-family: var(--font-display);\n    font-size: var(--text-8xl);\n    line-height: 4rem;\n    letter-spacing: -0.25px;\n    width: fit-content;\n  }\n  .skc-page-header__actions {\n    justify-content: flex-start;\n  }\n  .skc-page-header__actions > h1 {\n    flex-grow: 0;\n  }\n  .skc-page-header__trailing {\n    display: none;\n  }\n}\n");
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-page-header {\n  overflow: hidden;\n  padding: 1rem 0 1.75rem;\n  background-color: var(--surface-5);\n}\n.skc-page-header.skc-page-header--minimized {\n  position: fixed;\n  z-index: 60;\n  top: 0;\n  right: 0;\n  left: 0;\n  padding: .75rem .5rem;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions {\n  gap: .5rem;\n  width: calc(100% - 1rem);\n  margin: 0;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions .skc-button {\n  left: 0;\n}\n.skc-page-header__content {\n  position: relative;\n  display: flex;\n  align-items: flex-start;\n  flex-direction: column;\n  gap: .75rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-page-header__content > * {\n  margin-inline: 1rem;\n}\n.skc-page-header__content > h1 {\n  font-family: var(--font-display);\n  font-size: var(--text-7xl);\n  font-weight: var(--font-regular);\n  line-height: 3.25rem;\n  letter-spacing: 0px;\n  width: calc(100% - 2rem);\n}\n.skc-page-header__actions {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  justify-content: space-between;\n  width: calc(100% - 2rem);\n}\n.skc-page-header__actions > .skc-button {\n  position: relative;\n  left: -0.5rem;\n}\n.skc-page-header__actions > h1 {\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n  flex-grow: 1;\n  width: fit-content;\n}\n.skc-page-header__trailing {\n  display: flex;\n  flex-direction: row;\n  gap: .5rem;\n}\n.skc-page-header__actions .skc-button,\n.skc-page-header__trailing .skc-button {\n  color: var(--on-surface);\n}\n.skc-page-header__actions .skc-button::before,\n.skc-page-header__actions .skc-button .skc-button__ripple,\n.skc-page-header__trailing .skc-button::before,\n.skc-page-header__trailing .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-page-header__icon {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  right: -1.375rem;\n  opacity: .12;\n  color: var(--primary);\n  pointer-events: none;\n}\n.skc-page-header__icon .skc-icon {\n  font-size: 48px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 48;\n  font-size: 14.375rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-page-header {\n    padding: 2.75rem 1.5rem 2rem;\n  }\n  .skc-page-header__content {\n    width: calc(100% - 11rem);\n  }\n  .skc-page-header__content > * {\n    margin-inline: 0;\n  }\n  .skc-page-header__content > h1 {\n    font-family: var(--font-display);\n    font-size: var(--text-8xl);\n    line-height: 4rem;\n    letter-spacing: -0.25px;\n    width: fit-content;\n  }\n  .skc-page-header__actions {\n    justify-content: flex-start;\n  }\n  .skc-page-header__actions > h1 {\n    flex-grow: 0;\n  }\n  .skc-page-header__trailing {\n    display: none;\n  }\n  .skc-page-header__icon {\n    right: 0rem;\n  }\n  .skc-page-header__icon .skc-icon {\n    font-size: 21rem;\n  }\n}\n');
 
 // src/components/PageHeader/index.tsx
-import { LayoutGroup as LayoutGroup2, motion as motion9 } from "framer-motion";
+import { AnimatePresence as AnimatePresence4, LayoutGroup as LayoutGroup2, motion as motion9 } from "framer-motion";
 import { Fragment as Fragment6, jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
 function PageHeader({
   children,
   title,
+  icon,
   brand,
   parentURL,
   homeURL,
@@ -952,6 +953,7 @@ function PageHeader({
   var _a;
   const headerRef = React10.useRef(null);
   const [minimized, setMinimized] = React10.useState(false);
+  const [hideIcon, setHideIcon] = React10.useState(false);
   React10.useEffect(() => {
     const header = headerRef.current;
     if (!header)
@@ -960,6 +962,7 @@ function PageHeader({
     const handleScroll = () => {
       const { scrollY } = window;
       setMinimized(scrollY > scrollMargin);
+      setHideIcon(scrollY > scrollMargin - 12);
     };
     document.addEventListener("scroll", handleScroll);
     return () => {
@@ -967,73 +970,83 @@ function PageHeader({
     };
   }, []);
   const { duration, easing } = useAnimationConfig();
-  const enterTransition = transition(duration.medium4, easing.standard);
+  const minimizeTransition = transition(duration.medium4, easing.standard);
   return /* @__PURE__ */ jsxs10(Fragment6, {
     children: [
       /* @__PURE__ */ jsx15("div", {
         style: { height: minimized ? (_a = headerRef.current) == null ? void 0 : _a.clientHeight : 0 }
       }),
       /* @__PURE__ */ jsx15(LayoutGroup2, {
-        children: /* @__PURE__ */ jsx15("header", {
-          ref: headerRef,
-          style,
-          className: cn([
-            "skc-page-header",
-            minimized && "skc-page-header--minimized",
-            className
-          ]),
-          children: /* @__PURE__ */ jsxs10("div", {
-            className: "skc-page-header__content",
-            children: [
-              /* @__PURE__ */ jsxs10(motion9.div, {
-                layoutId: "page-header-actions",
-                transition: enterTransition,
-                className: "skc-page-header__actions",
-                children: [
-                  /* @__PURE__ */ jsx15(Button, {
-                    appearance: "text",
-                    icon: /* @__PURE__ */ jsx15(MaterialIcon, {
-                      icon: "arrow_backward"
-                    }),
-                    onClick: onBack,
-                    href: parentURL,
-                    element
-                  }),
-                  minimized && /* @__PURE__ */ jsx15(motion9.h1, {
-                    layoutId: "page-header-text",
-                    transition: enterTransition,
-                    children: title
-                  }),
-                  /* @__PURE__ */ jsxs10("div", {
-                    className: "skc-page-header__trailing",
-                    children: [
-                      homeURL && /* @__PURE__ */ jsx15(Button, {
-                        appearance: "text",
-                        icon: brand || /* @__PURE__ */ jsx15(MaterialIcon, {
-                          icon: "home"
-                        }),
-                        href: homeURL,
-                        element,
-                        ...backAttr
+        children: /* @__PURE__ */ jsx15(AnimatePresence4, {
+          children: /* @__PURE__ */ jsx15("header", {
+            ref: headerRef,
+            style,
+            className: cn([
+              "skc-page-header",
+              minimized && "skc-page-header--minimized",
+              className
+            ]),
+            children: /* @__PURE__ */ jsxs10("div", {
+              className: "skc-page-header__content",
+              children: [
+                icon && !children && !hideIcon && /* @__PURE__ */ jsx15(motion9.div, {
+                  initial: { opacity: 0, scale: 0.8, translateY: "-50%" },
+                  animate: { opacity: 0.12, scale: 1 },
+                  exit: { opacity: 0, scale: 0.8, translateY: "-50%" },
+                  transition: minimizeTransition,
+                  className: "skc-page-header__icon",
+                  children: icon
+                }),
+                /* @__PURE__ */ jsxs10(motion9.div, {
+                  layoutId: "page-header-actions",
+                  transition: minimizeTransition,
+                  className: "skc-page-header__actions",
+                  children: [
+                    /* @__PURE__ */ jsx15(Button, {
+                      appearance: "text",
+                      icon: /* @__PURE__ */ jsx15(MaterialIcon, {
+                        icon: "arrow_backward"
                       }),
-                      /* @__PURE__ */ jsx15(Button, {
-                        appearance: "text",
-                        icon: /* @__PURE__ */ jsx15(MaterialIcon, {
-                          icon: "menu"
+                      onClick: onBack,
+                      href: parentURL,
+                      element
+                    }),
+                    minimized && /* @__PURE__ */ jsx15(motion9.h1, {
+                      layoutId: "page-header-text",
+                      transition: minimizeTransition,
+                      children: title
+                    }),
+                    /* @__PURE__ */ jsxs10("div", {
+                      className: "skc-page-header__trailing",
+                      children: [
+                        homeURL && /* @__PURE__ */ jsx15(Button, {
+                          appearance: "text",
+                          icon: brand || /* @__PURE__ */ jsx15(MaterialIcon, {
+                            icon: "home"
+                          }),
+                          href: homeURL,
+                          element,
+                          ...backAttr
                         }),
-                        onClick: onNavToggle
-                      })
-                    ]
-                  })
-                ]
-              }),
-              !minimized && /* @__PURE__ */ jsx15(motion9.h1, {
-                layoutId: "page-header-text",
-                transition: enterTransition,
-                children: title
-              }),
-              children
-            ]
+                        /* @__PURE__ */ jsx15(Button, {
+                          appearance: "text",
+                          icon: /* @__PURE__ */ jsx15(MaterialIcon, {
+                            icon: "menu"
+                          }),
+                          onClick: onNavToggle
+                        })
+                      ]
+                    })
+                  ]
+                }),
+                !minimized && /* @__PURE__ */ jsx15(motion9.h1, {
+                  layoutId: "page-header-text",
+                  transition: minimizeTransition,
+                  children: title
+                }),
+                children
+              ]
+            })
           })
         })
       })

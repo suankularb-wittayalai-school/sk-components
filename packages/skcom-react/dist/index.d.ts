@@ -1017,7 +1017,19 @@ interface PageHeaderProps extends SKComponent {
      */
     title: string | JSX.Element;
     /**
-     * @todo
+     * An icon representative of this page of the application.
+     *
+     * - Incompatible with `children`.
+     */
+    icon?: JSX.Element;
+    /**
+     * A small image of your brand can be put on the Page Header to constantly
+     * remind your users that they are, in fact, in your app.
+     *
+     * - Replaces the home Button icon.
+     * - Not displayed on desktop.
+     * - Ensure the image is simple and undistracting.
+     * - Optional but recommended.
      */
     brand?: JSX.Element;
     /**
@@ -1078,6 +1090,8 @@ interface PageHeaderProps extends SKComponent {
  *
  * @param children Some additional components inside the Page Header area.
  * @param title The title text: the biggest text in a page and the only within a `<h1>` tag.
+ * @param icon The icon representative of this page.
+ * @param brand A small image of your brand can be put on the Page Header.
  * @param parentURL The link the back Button navigates to.
  * @param homeURL The link to the home page of this application.
  * @param element Change the underlying element from `<a>` to a custom element.
@@ -1085,7 +1099,7 @@ interface PageHeaderProps extends SKComponent {
  * @param onNavToggle The function called when the user clicks on the navigation Button.
  * @param backAttr Props for the underlying Button component the back Button uses.
  */
-declare function PageHeader({ children, title, brand, parentURL, homeURL, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
+declare function PageHeader({ children, title, icon, brand, parentURL, homeURL, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
 declare namespace PageHeader {
     var displayName: string;
 }

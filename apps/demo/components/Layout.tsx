@@ -146,6 +146,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
         </NavBar>
         <PageHeader
           title="Learn"
+          icon={<MaterialIcon icon="school" />}
           brand={<Favicon />}
           homeURL="/"
           element={Link}
