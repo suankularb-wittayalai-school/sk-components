@@ -38,4 +38,9 @@ export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
+export {
+  ThemeProvider,
+  type ThemeProviderProps,
+} from "./components/ThemeProvider";
+
 export { useAnimationConfig } from "./utils/animation";

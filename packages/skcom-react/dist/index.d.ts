@@ -1091,6 +1091,25 @@ declare namespace PageHeader {
 }
 
 /**
+ * Props for {@link ThemeProvider}.
+ */
+interface ThemeProviderProps {
+    /**
+     * Content that uses this theme.
+     */
+    children: React.ReactNode;
+}
+/**
+ * Provides default variables for SK Components.
+ *
+ * @param children Content that uses this theme.
+ */
+declare function ThemeProvider({ children }: ThemeProviderProps): JSX.Element;
+declare namespace ThemeProvider {
+    var displayName: string;
+}
+
+/**
  * A hook with duration and easing definitions for use with Framer Motion.
  * The definitions can be used with {@link transition}.
  *
@@ -1132,4 +1151,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

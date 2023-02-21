@@ -11,8 +11,8 @@
 @use "../abstracts/typography.scss" as type;
 
 .skc-page-header {
-  background-color: var(--surface-5);
   padding: 1rem 0 1.75rem;
+  background-color: var(--surface-5);
 
   h1 {
     @include type.font("display-medium");
