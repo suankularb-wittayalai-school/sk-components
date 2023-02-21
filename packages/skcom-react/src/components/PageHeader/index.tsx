@@ -147,6 +147,7 @@ export function PageHeader({
   style,
   className,
 }: PageHeaderProps) {
+  // Page Header minimizes on scroll, this section does the calculation
   const headerRef: React.LegacyRef<HTMLElement> = React.useRef(null);
   const [minimized, setMinimized] = React.useState<boolean>(false);
 
@@ -154,21 +155,26 @@ export function PageHeader({
     const header = headerRef.current;
     if (!header) return;
 
+    // Set scroll distance from top until minimize
+    // (The height of the minimized Page Header is 64px)
     const scrollMargin = header.clientHeight - 64;
-    const handleScroll = () => {
-      const { scrollY } = window;
-      setMinimized(scrollY > scrollMargin);
-    };
 
+    // Minimize on load if page already scrolled
+    setMinimized(window.scrollY > scrollMargin);
+
+    // Decide whether to minimize depending on the scroll position when the
+    // user scrolls
+    const handleScroll = () => setMinimized(window.scrollY > scrollMargin);
     document.addEventListener("scroll", handleScroll);
 
+    // Cleanup
     return () => {
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const { duration, easing } = useAnimationConfig();
-  const minimizeTransition = transition(duration.medium4, easing.standard);
+  const minimizeTransition = transition(duration.short4, easing.standard);
 
   return (
     <>

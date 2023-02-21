@@ -976,17 +976,15 @@ function PageHeader({
     if (!header)
       return;
     const scrollMargin = header.clientHeight - 64;
-    const handleScroll = () => {
-      const { scrollY } = window;
-      setMinimized(scrollY > scrollMargin);
-    };
+    setMinimized(window.scrollY > scrollMargin);
+    const handleScroll = () => setMinimized(window.scrollY > scrollMargin);
     document.addEventListener("scroll", handleScroll);
     return () => {
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
   const { duration, easing } = useAnimationConfig();
-  const minimizeTransition = transition(duration.medium4, easing.standard);
+  const minimizeTransition = transition(duration.short4, easing.standard);
   return /* @__PURE__ */ jsxs10(Fragment6, {
     children: [
       /* @__PURE__ */ jsx16("div", {
