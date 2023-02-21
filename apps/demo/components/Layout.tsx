@@ -14,8 +14,10 @@ import {
   NavDrawer,
   NavDrawerItem,
   NavDrawerSection,
+  PageHeader,
   RootLayout,
 } from "@suankularb-components/react";
+import Favicon from "./Favicon";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   const [navOpen, setNavOpen] = useState<boolean>(false);
@@ -141,9 +143,13 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           element={Link}
         />
       </NavBar>
-      <Button appearance="filled" onClick={() => setNavOpen(true)}>
-        TEMP: Open Nav
-      </Button>
+      <PageHeader
+        title="Learn"
+        brand={<Favicon />}
+        homeURL="/"
+        element={Link}
+        onNavToggle={() => setNavOpen(true)}
+      />
       {children}
     </RootLayout>
   );

@@ -197,25 +197,25 @@ const AssistChipsSection: FC = () => (
 
 const Home: NextPage = () => {
   return (
-    <ContentLayout>
-      <ButtonsSection />
-      <SegmentedButtonSection />
-      <Actions align="full">
-        <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-          Add
-        </Button>
-        <Button
-          appearance="outlined"
-          icon={<MaterialIcon icon="delete" />}
-          dangerous
-        >
-          Delete
-        </Button>
-      </Actions>
-      <ToggleButtonsSection />
-      <FABsSection />
-      <AssistChipsSection />
-    </ContentLayout>
+      <ContentLayout>
+        <ButtonsSection />
+        <SegmentedButtonSection />
+        <Actions align="full">
+          <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
+            Add
+          </Button>
+          <Button
+            appearance="outlined"
+            icon={<MaterialIcon icon="delete" />}
+            dangerous
+          >
+            Delete
+          </Button>
+        </Actions>
+        <ToggleButtonsSection />
+        <FABsSection />
+        <AssistChipsSection />
+      </ContentLayout>
   );
 };
 

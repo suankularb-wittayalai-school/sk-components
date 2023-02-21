@@ -29,6 +29,10 @@
   }
 
   .skc-content-layout__content {
-    width: calc(100% - (7.5rem));
+    width: calc(100% - (9.5rem));
+
+    > * {
+      margin-inline: 0;
+    }
   }
 }
