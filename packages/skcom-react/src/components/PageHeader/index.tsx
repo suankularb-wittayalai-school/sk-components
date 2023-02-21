@@ -1,7 +1,9 @@
 // External libraries
+import { LayoutGroup, motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
+import { Button, ButtonProps } from "../Button";
 import { MaterialIcon } from "../MaterialIcon";
 
 // Types
@@ -11,10 +13,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/page-header.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { Button, ButtonProps } from "../Button";
-import { AnimatePresence, LayoutGroup, motion, Tween } from "framer-motion";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link PageHeader Page Header}.
@@ -176,67 +176,37 @@ export function PageHeader({
         style={{ height: minimized ? headerRef.current?.clientHeight : 0 }}
       />
       <LayoutGroup>
-          <header
-            ref={headerRef}
-            style={style}
-            className={cn([
-              "skc-page-header",
-              minimized && "skc-page-header--minimized",
-              className,
-            ])}
-          >
-            <div className="skc-page-header__content">
-              {/* Background icon */}
-              {icon && !children && (
-                <div className="skc-page-header__icon">{icon}</div>
-              )}
+        <header
+          ref={headerRef}
+          style={style}
+          className={cn([
+            "skc-page-header",
+            minimized && "skc-page-header--minimized",
+            className,
+          ])}
+        >
+          <div className="skc-page-header__content">
+            {/* Background icon */}
+            {icon && !children && (
+              <div className="skc-page-header__icon">{icon}</div>
+            )}
 
-              <motion.div
-                layoutId="page-header-actions"
-                transition={minimizeTransition}
-                className="skc-page-header__actions"
-              >
-                {/* Back Button */}
-                <Button
-                  appearance="text"
-                  icon={<MaterialIcon icon="arrow_backward" />}
-                  onClick={onBack}
-                  href={parentURL}
-                  element={element}
-                />
+            <motion.div
+              layoutId="page-header-actions"
+              transition={minimizeTransition}
+              className="skc-page-header__actions"
+            >
+              {/* Back Button */}
+              <Button
+                appearance="text"
+                icon={<MaterialIcon icon="arrow_backward" />}
+                onClick={onBack}
+                href={parentURL}
+                element={element}
+              />
 
-                {minimized && (
-                  // Header (when minimized)
-                  <motion.h1
-                    layoutId="page-header-text"
-                    transition={minimizeTransition}
-                  >
-                    {title}
-                  </motion.h1>
-                )}
-
-                <div className="skc-page-header__trailing">
-                  {homeURL && (
-                    // Home Button
-                    <Button
-                      appearance="text"
-                      icon={brand || <MaterialIcon icon="home" />}
-                      href={homeURL}
-                      element={element}
-                      {...backAttr}
-                    />
-                  )}
-                  {/* Menu toggle */}
-                  <Button
-                    appearance="text"
-                    icon={<MaterialIcon icon="menu" />}
-                    onClick={onNavToggle}
-                  />
-                </div>
-              </motion.div>
-
-              {!minimized && (
-                // Header (initial)
+              {minimized && (
+                // Header (when minimized)
                 <motion.h1
                   layoutId="page-header-text"
                   transition={minimizeTransition}
@@ -245,10 +215,42 @@ export function PageHeader({
                 </motion.h1>
               )}
 
-              {/* Related content */}
-              {children}
-            </div>
-          </header>
+              <div className="skc-page-header__trailing">
+                {homeURL && (
+                  // Home Button
+                  <Button
+                    appearance="text"
+                    icon={brand || <MaterialIcon icon="home" />}
+                    href={homeURL}
+                    element={element}
+                    {...backAttr}
+                  />
+                )}
+                {/* Menu toggle */}
+                <Button
+                  appearance="text"
+                  icon={<MaterialIcon icon="menu" />}
+                  onClick={onNavToggle}
+                />
+              </div>
+            </motion.div>
+
+            {!minimized && (
+              // Header (initial)
+              <motion.h1
+                layoutId="page-header-text"
+                transition={minimizeTransition}
+              >
+                {title}
+              </motion.h1>
+            )}
+
+            {/* Related content */}
+            {children && (
+              <div className="skc-page-header__related">{children}</div>
+            )}
+          </div>
+        </header>
       </LayoutGroup>
     </>
   );

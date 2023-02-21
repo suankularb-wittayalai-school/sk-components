@@ -152,12 +152,11 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           homeURL="/"
           element={Link}
           onNavToggle={() => setNavOpen(true)}
-        >
-          <Button appearance="filled">Bananas</Button>
-        </PageHeader>
+        />
         {children}
       </RootLayout>
     </ThemeProvider>
   );
 };
+
 export default Layout;

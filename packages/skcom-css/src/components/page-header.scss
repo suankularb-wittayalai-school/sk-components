@@ -35,7 +35,8 @@
     }
   }
 
-  .skc-page-header__icon {
+  .skc-page-header__icon,
+  .skc-page-header__related {
     display: none;
   }
 }
@@ -56,6 +57,14 @@
   > h1 {
     @include type.font("display-medium");
     width: calc(100% - 2rem);
+
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &:has(.skc-page-header__related) {
+    position: static;
   }
 }
 
@@ -96,14 +105,18 @@
   }
 }
 
+.skc-page-header__related {
+  display: contents;
+}
+
 .skc-page-header__icon {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   right: -1.375rem;
+  transform: translateY(-50%);
+  pointer-events: none;
   opacity: 0.12;
   color: var(--primary);
-  pointer-events: none;
 
   .skc-icon {
     @include ci.icon(0, 400, 0, 48);
