@@ -8,14 +8,14 @@
 ////
 
 @use "../abstracts/mixins.scss" as mix;
-@use "../abstracts/typography.scss";
+@use "../abstracts/typography.scss" as type;
 
 .skc-page-header {
   background-color: var(--surface-5);
   padding: 1rem 0 1.75rem;
 
   h1 {
-    @extend .display-medium;
+    @include type.font("display-medium");
   }
 }
 
@@ -64,6 +64,10 @@
 @include mix.breakpoint("sm") {
   .skc-page-header {
     padding: 2.75rem 1.5rem 2rem;
+
+    h1 {
+      @include type.font("display-large");
+    }
   }
 
   .skc-page-header__content {

@@ -6,7 +6,7 @@
 ////
 
 @use "../abstracts/mixins.scss" as mix;
-@use "../abstracts/typography.scss";
+@use "../abstracts/typography.scss" as type;
 @use "../components/icon.scss" as ci;
 
 .skc-fab {
@@ -88,7 +88,7 @@
 
 // Label
 .skc-fab__label {
-  @extend .label-large;
+  @include type.font("label-large");
   font-family: var(--font-display);
 }
 
