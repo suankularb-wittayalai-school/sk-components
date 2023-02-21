@@ -322,6 +322,44 @@ declare namespace ToggleButton {
 }
 
 /**
+ * Props for {@link Columns}.
+ */
+interface ColumnsProps extends SKComponent {
+    /**
+     * The content to be divided.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Number of columns.
+     *
+     * - Must be an integer from 2, 3, 4, 6, or 12.
+     * - Always required.
+     */
+    columns: 2 | 3 | 4 | 6 | 12;
+}
+/**
+ * Columns break up content in larger screens into multiple columns, so as to
+ * make the content easier to read. On smaller screens, Columns automatically
+ * collapse columns into one column.
+ *
+ * The columns inside of Columns are based on the layout grid, which is a grid
+ * system that keeps elements of a page aligned to a common grid
+ * ({@link https://m3.material.io/foundations/adaptive-design/large-screens/overview#55fc0118-1fa3-48a3-b805-169bb58e6e78 M3 reference};
+ * {@link https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins M2 reference}).
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.j3ziatuuxd12 SKCom documentation}
+ *
+ * @param children The content to be divided.
+ * @param columns Number of columns.
+ */
+declare function Columns({ children, columns, style, className }: ColumnsProps): JSX.Element;
+declare namespace Columns {
+    var displayName: string;
+}
+
+/**
  * Props for {@link AssistChip}.
  */
 interface AssistChipProps extends SKComponent {
@@ -1165,4 +1203,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

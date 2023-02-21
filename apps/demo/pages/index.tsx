@@ -8,6 +8,7 @@ import {
   Actions,
   AssistChip,
   Button,
+  Columns,
   ContentLayout,
   FAB,
   MaterialIcon,
@@ -176,7 +177,10 @@ const AssistChipsSection: FC = () => (
         Turn on lights
       </AssistChip>
     </div>
-    <div className="flex flex-row flex-wrap place-content-center gap-2 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4">
+    <div
+      className="flex flex-row flex-wrap place-content-center gap-2
+        rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4"
+    >
       <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
         Turn on lights
       </AssistChip>
@@ -215,6 +219,17 @@ const Home: NextPage = () => {
       <ToggleButtonsSection />
       <FABsSection />
       <AssistChipsSection />
+      <Columns columns={6}>
+        {[...Array(12)].map((_, i) => (
+          <div
+            className="skc-headline-large grid h-20 place-content-center
+              rounded-xl border-2 border-blue-900"
+            key={i}
+          >
+            {i + 1}
+          </div>
+        ))}
+      </Columns>
     </ContentLayout>
   );
 };

@@ -9,6 +9,8 @@ export {
   type ToggleButtonProps,
 } from "./components/ToggleButton";
 
+export { Columns, type ColumnsProps } from "./components/Columns";
+
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
 
 export {
