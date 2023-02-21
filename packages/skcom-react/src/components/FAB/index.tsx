@@ -15,6 +15,7 @@ import {
   useRipple,
 } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { useScrollDirection } from "../../utils/window";
 
 /**
  * Props for {@link FAB}.
@@ -158,12 +159,11 @@ export function FAB({
   const fabRef = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(fabRef);
 
-  // Scroll direciton
-  const [scrollDir, setScrollDir] = React.useState<"up" | "down">("up");
+  // Scroll direction
+  const { scrollDir } = useScrollDirection();
   const [canHide, setCanHide] = React.useState<boolean>(false);
 
   // Default scroll position to the top
-  let prevScrollY = 0;
   React.useEffect(() => {
     if (stateOnScroll) {
       // Disable hiding on Apple platforms since the rubberbanding effect
@@ -176,22 +176,16 @@ export function FAB({
       const { innerWidth } = window;
       setCanHide(innerWidth <= 600);
 
-      window.onscroll = () => {
-        // Compare to previous position and set the direction
-        const { scrollY } = window;
-        const direction = prevScrollY < scrollY ? "down" : "up";
-        prevScrollY = scrollY;
-        setScrollDir(direction);
-      };
-
-      window.onresize = () => {
+      const handleResize = () => {
         const { innerWidth } = window;
         setCanHide(innerWidth <= 600);
       };
 
+      window.addEventListener("resize", handleResize);
+
       // Cleanup
       return () => {
-        window.onscroll = window.onresize = null;
+        window.removeEventListener("resize", handleResize);
       };
     }
   }, []);

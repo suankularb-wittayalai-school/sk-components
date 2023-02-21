@@ -1,6 +1,9 @@
 // External libraries
 import * as React from "react";
 
+// Internal components
+import { MaterialIcon } from "../MaterialIcon";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -10,7 +13,8 @@ import "@suankularb-components/css/dist/css/components/page-header.css";
 // Utilities
 import { cn } from "../../utils/className";
 import { Button, ButtonProps } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
+import { LayoutGroup, motion, Tween } from "framer-motion";
+import { transition, useAnimationConfig } from "../../utils/animation";
 
 /**
  * Props for {@link PageHeader Page Header}.
@@ -127,38 +131,95 @@ export function PageHeader({
   style,
   className,
 }: PageHeaderProps) {
+  const headerRef: React.LegacyRef<HTMLElement> = React.useRef(null);
+  const [minimized, setMinimized] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const scrollMargin = header.clientHeight - 64;
+    const handleScroll = () => {
+      const { scrollY } = window;
+      setMinimized(scrollY > scrollMargin);
+    };
+
+    document.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const { duration, easing } = useAnimationConfig();
+  const enterTransition = transition(duration.medium4, easing.standard);
+
   return (
-    <header style={style} className={cn(["skc-page-header", className])}>
-      <div className="skc-page-header__content">
-        <div className="skc-page-header__actions">
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="arrow_backward" />}
-            onClick={onBack}
-            href={parentURL}
-            element={element}
-          />
-          <div className="skc-page-header__trailing">
-            {homeURL && (
+    <>
+      <div
+        style={{ height: minimized ? headerRef.current?.clientHeight : 0 }}
+      />
+      <LayoutGroup>
+        <header
+          ref={headerRef}
+          style={style}
+          className={cn([
+            "skc-page-header",
+            minimized && "skc-page-header--minimized",
+            className,
+          ])}
+        >
+          <div className="skc-page-header__content">
+            <motion.div
+              layoutId="page-header-actions"
+              transition={enterTransition}
+              className="skc-page-header__actions"
+            >
               <Button
                 appearance="text"
-                icon={brand || <MaterialIcon icon="home" />}
-                href={homeURL}
+                icon={<MaterialIcon icon="arrow_backward" />}
+                onClick={onBack}
+                href={parentURL}
                 element={element}
-                {...backAttr}
               />
+              {minimized && (
+                <motion.h1
+                  layoutId="page-header-text"
+                  transition={enterTransition}
+                >
+                  {title}
+                </motion.h1>
+              )}
+              <div className="skc-page-header__trailing">
+                {homeURL && (
+                  <Button
+                    appearance="text"
+                    icon={brand || <MaterialIcon icon="home" />}
+                    href={homeURL}
+                    element={element}
+                    {...backAttr}
+                  />
+                )}
+                <Button
+                  appearance="text"
+                  icon={<MaterialIcon icon="menu" />}
+                  onClick={onNavToggle}
+                />
+              </div>
+            </motion.div>
+            {!minimized && (
+              <motion.h1
+                layoutId="page-header-text"
+                transition={enterTransition}
+              >
+                {title}
+              </motion.h1>
             )}
-            <Button
-              appearance="text"
-              icon={<MaterialIcon icon="menu" />}
-              onClick={onNavToggle}
-            />
+            {children}
           </div>
-        </div>
-        <h1>{title}</h1>
-        {children}
-      </div>
-    </header>
+        </header>
+      </LayoutGroup>
+    </>
   );
 }
 
