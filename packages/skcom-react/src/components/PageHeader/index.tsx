@@ -149,7 +149,6 @@ export function PageHeader({
 }: PageHeaderProps) {
   const headerRef: React.LegacyRef<HTMLElement> = React.useRef(null);
   const [minimized, setMinimized] = React.useState<boolean>(false);
-  const [hideIcon, setHideIcon] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     const header = headerRef.current;
@@ -159,7 +158,6 @@ export function PageHeader({
     const handleScroll = () => {
       const { scrollY } = window;
       setMinimized(scrollY > scrollMargin);
-      setHideIcon(scrollY > scrollMargin - 12);
     };
 
     document.addEventListener("scroll", handleScroll);
@@ -178,7 +176,6 @@ export function PageHeader({
         style={{ height: minimized ? headerRef.current?.clientHeight : 0 }}
       />
       <LayoutGroup>
-        <AnimatePresence>
           <header
             ref={headerRef}
             style={style}
@@ -190,16 +187,8 @@ export function PageHeader({
           >
             <div className="skc-page-header__content">
               {/* Background icon */}
-              {icon && !children && !hideIcon && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, translateY: "-50%" }}
-                  animate={{ opacity: 0.12, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8, translateY: "-50%" }}
-                  transition={minimizeTransition}
-                  className="skc-page-header__icon"
-                >
-                  {icon}
-                </motion.div>
+              {icon && !children && (
+                <div className="skc-page-header__icon">{icon}</div>
               )}
 
               <motion.div
@@ -260,7 +249,6 @@ export function PageHeader({
               {children}
             </div>
           </header>
-        </AnimatePresence>
       </LayoutGroup>
     </>
   );

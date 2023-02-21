@@ -6,6 +6,7 @@ import { FC, ReactNode, useState } from "react";
 
 // SK Components
 import {
+  Button,
   FAB,
   MaterialIcon,
   NavBar,
@@ -151,7 +152,9 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
           homeURL="/"
           element={Link}
           onNavToggle={() => setNavOpen(true)}
-        />
+        >
+          <Button appearance="filled">Bananas</Button>
+        </PageHeader>
         {children}
       </RootLayout>
     </ThemeProvider>
