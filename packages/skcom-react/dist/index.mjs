@@ -1104,7 +1104,8 @@ function PageHeader({
                     }),
                     onClick: onBack,
                     href: parentURL,
-                    element
+                    element,
+                    disabled: !(onBack || parentURL)
                   }),
                   minimized && /* @__PURE__ */ jsx17(motion10.h1, {
                     ...headerTextProps,

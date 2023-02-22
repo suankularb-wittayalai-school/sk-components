@@ -253,6 +253,7 @@ export function PageHeader({
                 onClick={onBack}
                 href={parentURL}
                 element={element}
+                disabled={!(onBack || parentURL)}
               />
               {minimized && (
                 // Header (when minimized)

@@ -1148,7 +1148,8 @@ function PageHeader({
                     }),
                     onClick: onBack,
                     href: parentURL,
-                    element
+                    element,
+                    disabled: !(onBack || parentURL)
                   }),
                   minimized && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_framer_motion11.motion.h1, {
                     ...headerTextProps,
