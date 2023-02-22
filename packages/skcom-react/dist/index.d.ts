@@ -739,6 +739,7 @@ interface NavDrawerProps extends SKComponent {
  *
  * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
  * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
+ * @param onClose The function triggered when the scrim is clicked.
  */
 declare function NavDrawer({ children, open, onClose, style, className, }: NavDrawerProps): JSX.Element;
 declare namespace NavDrawer {
@@ -824,6 +825,10 @@ interface NavDrawerItemProps extends SKComponent {
      */
     selected?: boolean;
     /**
+     * @private
+     */
+    onClick?: () => any;
+    /**
      * The URL of the page this Navigation Drawer Item leads to, similar to
      * `href` on `<a>`.
      *
@@ -861,7 +866,7 @@ interface NavDrawerItemProps extends SKComponent {
  * @param href The URL of the page this Navigation Drawer Item leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function NavDrawerItem({ icon, label, metadata, tooltip, selected, href, element: Element, style, className, }: NavDrawerItemProps): JSX.Element;
+declare function NavDrawerItem({ icon, label, metadata, tooltip, selected, onClick, href, element: Element, style, className, }: NavDrawerItemProps): JSX.Element;
 declare namespace NavDrawerItem {
     var displayName: string;
 }

@@ -638,6 +638,15 @@ function NavDrawer({
       navDrawerItem == null ? void 0 : navDrawerItem.focus();
     }
   }, [open]);
+  const injectedChildren = React6.Children.map(
+    children,
+    (section) => React6.cloneElement(section, {
+      children: React6.Children.map(
+        section.props.children,
+        (item) => React6.cloneElement(item, { onClick: onClose })
+      )
+    })
+  );
   return /* @__PURE__ */ jsx10(AnimatePresence2, {
     children: open && /* @__PURE__ */ jsxs6(Fragment4, {
       children: [
@@ -653,10 +662,11 @@ function NavDrawer({
             )
           },
           transition: transition(duration.medium4, easing.standardDecelerate),
+          "aria-modal": true,
           style,
           className: cn(["skc-nav-drawer", className]),
           children: /* @__PURE__ */ jsx10("nav", {
-            children
+            children: injectedChildren
           })
         }),
         /* @__PURE__ */ jsx10(motion6.div, {
@@ -725,6 +735,7 @@ function NavDrawerItem({
   metadata,
   tooltip,
   selected,
+  onClick,
   href,
   element: Element,
   style,
@@ -743,6 +754,7 @@ function NavDrawerItem({
       className
     ]),
     href,
+    onClick,
     ...rippleListeners
   };
   const content = /* @__PURE__ */ jsxs8(Fragment5, {

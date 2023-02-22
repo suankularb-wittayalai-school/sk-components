@@ -55,6 +55,11 @@ export interface NavDrawerItemProps extends SKComponent {
   selected?: boolean;
 
   /**
+   * @private
+   */
+  onClick?: () => any;
+
+  /**
    * The URL of the page this Navigation Drawer Item leads to, similar to
    * `href` on `<a>`.
    *
@@ -109,6 +114,7 @@ export function NavDrawerItem({
   metadata,
   tooltip,
   selected,
+  onClick,
   href,
   element: Element,
   style,
@@ -129,6 +135,7 @@ export function NavDrawerItem({
       className,
     ]),
     href,
+    onClick,
     ...rippleListeners,
   };
 

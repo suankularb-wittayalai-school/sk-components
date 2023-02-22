@@ -11,6 +11,7 @@ import "@suankularb-components/css/dist/css/components/nav-drawer.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { NavDrawerSectionProps } from "../NavDrawerSection";
 
 /**
  * Props for {@link NavDrawer}.
@@ -47,6 +48,7 @@ export interface NavDrawerProps extends SKComponent {
  *
  * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
  * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
+ * @param onClose The function triggered when the scrim is clicked.
  */
 export function NavDrawer({
   children,
@@ -78,6 +80,23 @@ export function NavDrawer({
     }
   }, [open]);
 
+  // Make the Navigation Drawer close when a Navigation Drawer Item is clicked
+  const injectedChildren =
+    // For each Navigation Drawer Section
+    React.Children.map(children, (section) =>
+      React.cloneElement(section as JSX.Element, {
+        children:
+          // For each Navigation Drawer Item
+          React.Children.map(
+            ((section as JSX.Element).props as NavDrawerSectionProps).children,
+            // Inject `onClick`, where the Navigation Drawer will close when a
+            // Navigation Drawer Item is clicked
+            (item) =>
+              React.cloneElement(item as JSX.Element, { onClick: onClose })
+          ),
+      })
+    );
+
   return (
     <AnimatePresence>
       {open && (
@@ -94,10 +113,11 @@ export function NavDrawer({
               ),
             }}
             transition={transition(duration.medium4, easing.standardDecelerate)}
+            aria-modal={true}
             style={style}
             className={cn(["skc-nav-drawer", className])}
           >
-            <nav>{children}</nav>
+            <nav>{injectedChildren}</nav>
           </motion.aside>
           <motion.div
             initial={{ opacity: 0 }}
