@@ -12,14 +12,15 @@
 @use "../components/icon.scss" as ci;
 
 .skc-page-header {
+  position: relative;
   overflow: hidden;
   padding: 1rem 0 1.75rem;
   background-color: var(--surface-5);
+  z-index: 65;
 }
 
 .skc-page-header.skc-page-header--minimized {
   position: fixed;
-  z-index: 60;
   top: 0;
   right: 0;
   left: 0;
@@ -124,6 +125,14 @@
   }
 }
 
+.skc-page-header__replacement-color {
+  background-color: var(--surface-5);
+  position: absolute;
+  inset: 0 0 auto;
+  height: 9.25rem;
+  z-index: 60;
+}
+
 @include mix.breakpoint("sm") {
   .skc-page-header {
     padding: 2.75rem 1.5rem 2rem;
@@ -160,5 +169,9 @@
     .skc-icon {
       font-size: 21rem;
     }
+  }
+
+  .skc-page-header__replacement-color {
+    height: 12rem;
   }
 }

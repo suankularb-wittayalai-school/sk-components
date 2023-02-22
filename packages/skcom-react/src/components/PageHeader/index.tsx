@@ -215,12 +215,15 @@ export function PageHeader({
 
   return (
     <>
+      <div className="skc-page-header__replacement-color" />
       <div
         style={{ height: minimized ? headerRef.current?.clientHeight : 0 }}
       />
       <LayoutGroup>
-        <header
+        <motion.header
           ref={headerRef}
+          layoutId="page-header"
+          transition={minimizeTransition}
           style={style}
           className={cn([
             "skc-page-header",
@@ -281,14 +284,14 @@ export function PageHeader({
             {/* Related content */}
             {children && (
               <motion.div
-                layoutId="page-header-related"
+                animate={headerTextControls}
                 className="skc-page-header__related"
               >
                 {children}
               </motion.div>
             )}
           </div>
-        </header>
+        </motion.header>
       </LayoutGroup>
     </>
   );
