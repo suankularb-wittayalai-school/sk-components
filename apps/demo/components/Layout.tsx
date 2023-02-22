@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { FC, ReactNode, useState } from "react";
+import { FC, forwardRef, ReactNode, useState } from "react";
 
 // SK Components
 import {
@@ -88,21 +88,21 @@ const Layout: FC<{
               icon={<MaterialIcon icon="description" />}
               label="Documentation"
               href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
-              element={(props) => (
-                <a {...props} target="_blank" rel="noreferrer">
+              element={forwardRef((props, ref) => (
+                <a {...props} ref={ref} target="_blank" rel="noreferrer">
                   {props.children}
                 </a>
-              )}
+              ))}
             />
             <NavDrawerItem
               icon={<MaterialIcon icon="handshake" />}
               label="Contribute"
               href="https://github.com/suankularb-wittayalai-school/sk-components"
-              element={(props) => (
-                <a {...props} target="_blank" rel="noreferrer">
+              element={forwardRef((props, ref) => (
+                <a {...props} ref={ref} target="_blank" rel="noreferrer">
                   {props.children}
                 </a>
-              )}
+              ))}
             />
           </NavDrawerSection>
         </NavDrawer>
