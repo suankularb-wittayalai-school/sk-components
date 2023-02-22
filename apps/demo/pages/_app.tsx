@@ -1,4 +1,4 @@
-import type { AppProps } from "next/app";
+// External libraries
 import {
   Inter,
   Space_Grotesk,
@@ -6,13 +6,20 @@ import {
   IBM_Plex_Sans_Thai,
 } from "@next/font/google";
 
-import "@/styles/globals.css";
-
+// Internal components
 import Layout from "@/components/Layout";
 
+// Styles
+import "@/styles/globals.css";
+
+// Utilities
+import { CustomAppProps } from "@/utils/types";
+
+// Thai fonts
 const bodyFontEN = Inter({ subsets: ["latin"] });
 const displayFontEN = Space_Grotesk({ subsets: ["latin"] });
 
+// Thai fonts
 const bodyFontTH = Sarabun({
   weight: ["300", "400", "500", "700"],
   subsets: ["thai"],
@@ -22,7 +29,9 @@ const displayFontTH = IBM_Plex_Sans_Thai({
   subsets: ["thai"],
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: CustomAppProps) {
+  const { fab, pageHeader } = Component;
+
   return (
     <>
       <style jsx global>{`
@@ -33,7 +42,8 @@ export default function App({ Component, pageProps }: AppProps) {
             ${displayFontTH.style.fontFamily};
         }
       `}</style>
-      <Layout>
+
+      <Layout {...{ fab, pageHeader }}>
         <Component {...pageProps} />
       </Layout>
     </>
