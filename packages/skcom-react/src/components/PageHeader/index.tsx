@@ -1,5 +1,10 @@
 // External libraries
-import { LayoutGroup, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  useAnimationControls,
+} from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -15,6 +20,7 @@ import "@suankularb-components/css/dist/css/components/page-header.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link PageHeader Page Header}.
@@ -176,6 +182,37 @@ export function PageHeader({
   const { duration, easing } = useAnimationConfig();
   const minimizeTransition = transition(duration.short4, easing.standard);
 
+  // Animate header text on page change
+  const headerTextControls = useAnimationControls();
+  React.useEffect(() => {
+    headerTextControls.set({ opacity: 0, scale: 0.8, y: 10 });
+    headerTextControls.start({
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: transition(duration.medium2, easing.standard),
+    });
+  }, [title]);
+
+  // Animate icon on page change
+  const iconControls = useAnimationControls();
+  React.useEffect(() => {
+    if (!icon) return;
+
+    iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
+    iconControls.start({
+      opacity: 0.08,
+      scale: 1,
+      transition: transition(duration.long4, easing.standard),
+    });
+  }, [icon]);
+
+  const headerTextProps = {
+    layoutId: "page-header-text",
+    animate: headerTextControls,
+    transition: minimizeTransition,
+  };
+
   return (
     <>
       <div
@@ -194,9 +231,13 @@ export function PageHeader({
           <div className="skc-page-header__content">
             {/* Background icon */}
             {icon && !children && (
-              <div className="skc-page-header__icon">{icon}</div>
+              <motion.div
+                animate={iconControls}
+                className="skc-page-header__icon"
+              >
+                {icon}
+              </motion.div>
             )}
-
             <motion.div
               layoutId="page-header-actions"
               transition={minimizeTransition}
@@ -210,17 +251,10 @@ export function PageHeader({
                 href={parentURL}
                 element={element}
               />
-
               {minimized && (
                 // Header (when minimized)
-                <motion.h1
-                  layoutId="page-header-text"
-                  transition={minimizeTransition}
-                >
-                  {title}
-                </motion.h1>
+                <motion.h1 {...headerTextProps}>{title}</motion.h1>
               )}
-
               <div className="skc-page-header__trailing">
                 {homeURL && (
                   // Home Button
@@ -240,20 +274,18 @@ export function PageHeader({
                 />
               </div>
             </motion.div>
-
             {!minimized && (
               // Header (initial)
-              <motion.h1
-                layoutId="page-header-text"
-                transition={minimizeTransition}
-              >
-                {title}
-              </motion.h1>
+              <motion.h1 {...headerTextProps}>{title}</motion.h1>
             )}
-
             {/* Related content */}
             {children && (
-              <div className="skc-page-header__related">{children}</div>
+              <motion.div
+                layoutId="page-header-related"
+                className="skc-page-header__related"
+              >
+                {children}
+              </motion.div>
             )}
           </div>
         </header>

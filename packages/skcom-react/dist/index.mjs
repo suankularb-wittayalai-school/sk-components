@@ -946,7 +946,11 @@ function RootLayout({ children, className, style }) {
 RootLayout.displayName = "RootLayout";
 
 // src/components/PageHeader/index.tsx
-import { LayoutGroup as LayoutGroup2, motion as motion9 } from "framer-motion";
+import {
+  LayoutGroup as LayoutGroup2,
+  motion as motion9,
+  useAnimationControls as useAnimationControls2
+} from "framer-motion";
 import * as React10 from "react";
 
 // ../skcom-css/dist/css/components/page-header.css
@@ -985,6 +989,32 @@ function PageHeader({
   }, []);
   const { duration, easing } = useAnimationConfig();
   const minimizeTransition = transition(duration.short4, easing.standard);
+  const headerTextControls = useAnimationControls2();
+  React10.useEffect(() => {
+    headerTextControls.set({ opacity: 0, scale: 0.8, y: 10 });
+    headerTextControls.start({
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: transition(duration.medium2, easing.standard)
+    });
+  }, [title]);
+  const iconControls = useAnimationControls2();
+  React10.useEffect(() => {
+    if (!icon)
+      return;
+    iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
+    iconControls.start({
+      opacity: 0.08,
+      scale: 1,
+      transition: transition(duration.long4, easing.standard)
+    });
+  }, [icon]);
+  const headerTextProps = {
+    layoutId: "page-header-text",
+    animate: headerTextControls,
+    transition: minimizeTransition
+  };
   return /* @__PURE__ */ jsxs10(Fragment6, {
     children: [
       /* @__PURE__ */ jsx16("div", {
@@ -1002,7 +1032,8 @@ function PageHeader({
           children: /* @__PURE__ */ jsxs10("div", {
             className: "skc-page-header__content",
             children: [
-              icon && !children && /* @__PURE__ */ jsx16("div", {
+              icon && !children && /* @__PURE__ */ jsx16(motion9.div, {
+                animate: iconControls,
                 className: "skc-page-header__icon",
                 children: icon
               }),
@@ -1021,8 +1052,7 @@ function PageHeader({
                     element
                   }),
                   minimized && /* @__PURE__ */ jsx16(motion9.h1, {
-                    layoutId: "page-header-text",
-                    transition: minimizeTransition,
+                    ...headerTextProps,
                     children: title
                   }),
                   /* @__PURE__ */ jsxs10("div", {
@@ -1049,11 +1079,11 @@ function PageHeader({
                 ]
               }),
               !minimized && /* @__PURE__ */ jsx16(motion9.h1, {
-                layoutId: "page-header-text",
-                transition: minimizeTransition,
+                ...headerTextProps,
                 children: title
               }),
-              children && /* @__PURE__ */ jsx16("div", {
+              children && /* @__PURE__ */ jsx16(motion9.div, {
+                layoutId: "page-header-related",
                 className: "skc-page-header__related",
                 children
               })
