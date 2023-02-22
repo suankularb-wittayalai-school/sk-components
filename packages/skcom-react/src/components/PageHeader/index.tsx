@@ -193,32 +193,35 @@ export function PageHeader({
       transition: transition(duration.medium2, easing.standard),
     });
   }, [title]);
-
-  // Animate icon on page change
-  const iconControls = useAnimationControls();
-  React.useEffect(() => {
-    if (!icon) return;
-
-    iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
-    iconControls.start({
-      opacity: 0.08,
-      scale: 1,
-      transition: transition(duration.long4, easing.standard),
-    });
-  }, [icon]);
-
   const headerTextProps = {
     layoutId: "page-header-text",
     animate: headerTextControls,
     transition: minimizeTransition,
   };
 
+  // Animate icon on page change
+  const iconControls = useAnimationControls();
+  React.useEffect(() => {
+    if (icon || !minimized) {
+      iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
+      iconControls.start({
+        opacity: 0.08,
+        scale: 1,
+        transition: transition(duration.long4, easing.standard),
+      });
+    }
+  }, [icon, minimized]);
+
   return (
     <>
+      {/* Background color replacement */}
       <div className="skc-page-header__replacement-color" />
+
+      {/* Displacement prevention */}
       <div
         style={{ height: minimized ? headerRef.current?.clientHeight : 0 }}
       />
+
       <LayoutGroup>
         <motion.header
           ref={headerRef}
@@ -241,6 +244,7 @@ export function PageHeader({
                 {icon}
               </motion.div>
             )}
+
             <motion.div
               layoutId="page-header-actions"
               transition={minimizeTransition}
@@ -255,10 +259,12 @@ export function PageHeader({
                 element={element}
                 disabled={!(onBack || parentURL)}
               />
+
               {minimized && (
                 // Header (when minimized)
                 <motion.h1 {...headerTextProps}>{title}</motion.h1>
               )}
+
               <div className="skc-page-header__trailing">
                 {homeURL && (
                   // Home Button
@@ -278,10 +284,12 @@ export function PageHeader({
                 />
               </div>
             </motion.div>
+
             {!minimized && (
               // Header (initial)
               <motion.h1 {...headerTextProps}>{title}</motion.h1>
             )}
+
             {/* Related content */}
             {children && (
               <motion.div

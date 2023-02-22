@@ -1049,22 +1049,22 @@ function PageHeader({
       transition: transition(duration.medium2, easing.standard)
     });
   }, [title]);
-  const iconControls = useAnimationControls2();
-  React11.useEffect(() => {
-    if (!icon)
-      return;
-    iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
-    iconControls.start({
-      opacity: 0.08,
-      scale: 1,
-      transition: transition(duration.long4, easing.standard)
-    });
-  }, [icon]);
   const headerTextProps = {
     layoutId: "page-header-text",
     animate: headerTextControls,
     transition: minimizeTransition
   };
+  const iconControls = useAnimationControls2();
+  React11.useEffect(() => {
+    if (icon || !minimized) {
+      iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
+      iconControls.start({
+        opacity: 0.08,
+        scale: 1,
+        transition: transition(duration.long4, easing.standard)
+      });
+    }
+  }, [icon, minimized]);
   return /* @__PURE__ */ jsxs11(Fragment6, {
     children: [
       /* @__PURE__ */ jsx17("div", {
