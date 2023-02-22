@@ -474,6 +474,22 @@ declare namespace AssistChip {
 }
 
 /**
+ * Props for {@link Divider}.
+ */
+interface DividerProps extends SKComponent {
+}
+/**
+ * A Divider separates items in a list with a thin line. This is used when
+ * separation cannot be accomplished with Cards or white space.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v0rwfas9jvl0 SKCom documentation}
+ */
+declare function Divider({ style, className }: DividerProps): JSX.Element;
+declare namespace Divider {
+    var displayName: string;
+}
+
+/**
  * Props for {@link MaterialIcon Material Icon}.
  */
 interface MaterialIconProps extends SKComponent {
@@ -1208,4 +1224,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

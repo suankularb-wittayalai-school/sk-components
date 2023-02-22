@@ -13,10 +13,10 @@
 
 .skc-page-header {
   position: relative;
+  z-index: 65;
   overflow: hidden;
   padding: 1rem 0 1.75rem;
   background-color: var(--surface-5);
-  z-index: 65;
 }
 
 .skc-page-header.skc-page-header--minimized {
@@ -126,11 +126,11 @@
 }
 
 .skc-page-header__replacement-color {
-  background-color: var(--surface-5);
   position: absolute;
+  z-index: 60;
   inset: 0 0 auto;
   height: 9.25rem;
-  z-index: 60;
+  background-color: var(--surface-5);
 }
 
 @include mix.breakpoint("sm") {
@@ -172,6 +172,6 @@
   }
 
   .skc-page-header__replacement-color {
-    height: 12rem;
+    height: 9.5rem;
   }
 }
