@@ -1,10 +1,14 @@
 // External libraries
+import { MotionConfig } from "framer-motion";
 import {
   Inter,
   Space_Grotesk,
   Sarabun,
   IBM_Plex_Sans_Thai,
 } from "@next/font/google";
+
+// SK Components
+import { ThemeProvider } from "@suankularb-components/react";
 
 // Internal components
 import Layout from "@/components/Layout";
@@ -43,9 +47,13 @@ export default function App({ Component, pageProps }: CustomAppProps) {
         }
       `}</style>
 
-      <Layout {...{ fab, pageHeader }}>
-        <Component {...pageProps} />
-      </Layout>
+      <MotionConfig reducedMotion="user">
+        <ThemeProvider>
+          <Layout {...{ fab, pageHeader }}>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </MotionConfig>
     </>
   );
 }

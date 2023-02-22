@@ -240,6 +240,7 @@ const ActionsPage: CustomPage = () => {
 ActionsPage.pageHeader = {
   title: "Actions",
   icon: <MaterialIcon icon="touch_app" />,
+  parentURL: "/",
 };
 
 export default ActionsPage;
