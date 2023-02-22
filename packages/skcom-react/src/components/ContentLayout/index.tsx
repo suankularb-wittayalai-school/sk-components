@@ -9,9 +9,11 @@ import "@suankularb-components/css/dist/css/components/content-layout.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { motion } from "framer-motion";
+import { transition, useAnimationConfig } from "../../utils/animation";
 
 /**
- * Props for {@link ContentLayout}.
+ * Props for {@link ContentLayout Content Layout}.
  */
 export interface ContentLayoutProps extends SKComponent {
   /**
@@ -36,10 +38,19 @@ export function ContentLayout({
   style,
   className,
 }: ContentLayoutProps) {
+  const { duration, easing } = useAnimationConfig();
+
   return (
-    <main style={style} className={cn(["skc-content-layout", className])}>
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={transition(duration.short4, easing.standard)}
+      style={style}
+      className={cn(["skc-content-layout", className])}
+    >
       <div className="skc-content-layout__content">{children}</div>
-    </main>
+    </motion.main>
   );
 }
 

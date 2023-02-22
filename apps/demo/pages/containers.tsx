@@ -1,8 +1,14 @@
+// SK Components
+import { ContentLayout, MaterialIcon } from "@suankularb-components/react";
+
 // Utilities
-import { MaterialIcon } from "@/../../packages/skcom-react/dist";
 import { CustomPage } from "@/utils/types";
 
-const ContainersPage: CustomPage = () => null;
+const ContainersPage: CustomPage = () => (
+  <ContentLayout>
+    <p>TODO</p>
+  </ContentLayout>
+);
 
 ContainersPage.pageHeader = {
   title: "Containers",

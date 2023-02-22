@@ -9,6 +9,7 @@ import "@suankularb-components/css/dist/css/components/root-layout.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { AnimatePresence } from "framer-motion";
 
 /**
  * Props for {@link RootLayout Root Layout}.
@@ -36,9 +37,25 @@ export interface RootLayoutProps extends SKComponent {
  * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
  */
 export function RootLayout({ children, className, style }: RootLayoutProps) {
+  // Seperate children into:
+  // - Persistent components (like Navigation Bar and Page Header) that won’t animate, and
+  // - Page content that will animate
+  let content;
+  const persistentComponents = React.Children.map(children, (child) => {
+    if ((child as JSX.Element).type.displayName) return child;
+    else content = child;
+  });
+
   return (
     <div style={style} className={cn(["skc-root-layout", className])}>
-      {children}
+      {persistentComponents}
+      <AnimatePresence
+        mode="wait"
+        initial={false}
+        onExitComplete={() => window.scrollTo(0, 0)}
+      >
+        {content}
+      </AnimatePresence>
     </div>
   );
 }

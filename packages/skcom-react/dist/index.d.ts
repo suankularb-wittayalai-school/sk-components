@@ -977,7 +977,7 @@ declare namespace FAB {
 }
 
 /**
- * Props for {@link ContentLayout}.
+ * Props for {@link ContentLayout Content Layout}.
  */
 interface ContentLayoutProps extends SKComponent {
     /**
