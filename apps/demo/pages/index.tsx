@@ -1,13 +1,30 @@
 // External libraries
-import { GetServerSideProps } from "next";
+import Head from "next/head";
+
+// SK Components
+import {
+  Button,
+  ContentLayout,
+  MaterialIcon,
+} from "@suankularb-components/react";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
 
-const ActionsRedirect: CustomPage = () => null;
+const AboutPage: CustomPage = () => (
+  <>
+    <Head>
+      <title>About - SK Components</title>
+    </Head>
+    <ContentLayout>
+      <p>TODO</p>
+    </ContentLayout>
+  </>
+);
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  return { redirect: { destination: "/actions", permanent: true } };
+AboutPage.pageHeader = {
+  title: "About",
+  icon: <MaterialIcon icon="info" />,
 };
 
-export default ActionsRedirect;
+export default AboutPage;

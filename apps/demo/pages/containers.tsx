@@ -1,3 +1,6 @@
+// External libraries
+import Head from "next/head";
+
 // SK Components
 import { ContentLayout, MaterialIcon } from "@suankularb-components/react";
 
@@ -5,9 +8,14 @@ import { ContentLayout, MaterialIcon } from "@suankularb-components/react";
 import { CustomPage } from "@/utils/types";
 
 const ContainersPage: CustomPage = () => (
-  <ContentLayout>
-    <p>TODO</p>
-  </ContentLayout>
+  <>
+    <Head>
+      <title>Containers - SK Components</title>
+    </Head>
+    <ContentLayout>
+      <p>TODO</p>
+    </ContentLayout>
+  </>
 );
 
 ContainersPage.pageHeader = {

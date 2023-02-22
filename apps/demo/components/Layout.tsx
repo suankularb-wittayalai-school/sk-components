@@ -79,6 +79,7 @@ const Layout: FC<{
           <NavDrawerItem
             icon={<MaterialIcon icon="info" />}
             label="About"
+            selected={getIsSelected(/^\/$/)}
             href="/"
             element={Link}
           />

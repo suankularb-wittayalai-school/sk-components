@@ -1,6 +1,5 @@
 // External libraries
-import { NextPage } from "next";
-
+import Head from "next/head";
 import { FC, useState } from "react";
 
 // SK Components
@@ -204,36 +203,41 @@ const AssistChipsSection: FC = () => (
 
 const ActionsPage: CustomPage = () => {
   return (
-    <ContentLayout>
-      <ButtonsSection />
-      <SegmentedButtonSection />
-      <Actions align="full">
-        <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-          Add
-        </Button>
-        <Button
-          appearance="outlined"
-          icon={<MaterialIcon icon="delete" />}
-          dangerous
-        >
-          Delete
-        </Button>
-      </Actions>
-      <ToggleButtonsSection />
-      <FABsSection />
-      <AssistChipsSection />
-      <Columns columns={6}>
-        {[...Array(12)].map((_, i) => (
-          <div
-            className="skc-headline-large grid h-20 place-content-center
-              rounded-xl border-2 border-blue-900"
-            key={i}
+    <>
+      <Head>
+        <title>Actions - SK Components</title>
+      </Head>
+      <ContentLayout>
+        <ButtonsSection />
+        <SegmentedButtonSection />
+        <Actions align="full">
+          <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
+            Add
+          </Button>
+          <Button
+            appearance="outlined"
+            icon={<MaterialIcon icon="delete" />}
+            dangerous
           >
-            {i + 1}
-          </div>
-        ))}
-      </Columns>
-    </ContentLayout>
+            Delete
+          </Button>
+        </Actions>
+        <ToggleButtonsSection />
+        <FABsSection />
+        <AssistChipsSection />
+        <Columns columns={6}>
+          {[...Array(12)].map((_, i) => (
+            <div
+              className="skc-headline-large grid h-20 place-content-center
+              rounded-xl border-2 border-blue-900"
+              key={i}
+            >
+              {i + 1}
+            </div>
+          ))}
+        </Columns>
+      </ContentLayout>
+    </>
   );
 };
 
