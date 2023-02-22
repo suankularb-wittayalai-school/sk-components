@@ -104,4 +104,4 @@ export function MaterialIcon({
   );
 }
 
-MaterialIcon.displayName = "Button";
+MaterialIcon.displayName = "MaterialIcon";
