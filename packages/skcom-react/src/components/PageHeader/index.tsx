@@ -1,6 +1,7 @@
 // External libraries
 import {
   AnimatePresence,
+  HTMLMotionProps,
   LayoutGroup,
   motion,
   useAnimationControls,
@@ -197,7 +198,7 @@ export function PageHeader({
     layoutId: "page-header-text",
     animate: headerTextControls,
     transition: minimizeTransition,
-  };
+  } satisfies HTMLMotionProps<"header">;
 
   // Animate icon on page change
   const iconControls = useAnimationControls();

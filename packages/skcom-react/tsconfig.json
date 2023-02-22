@@ -1,7 +1,5 @@
-
-
 {
-    "extends": "configs/react-library.json",
-    "include": ["."],
-    "exclude": ["dist", "build", "node_modules"]
-  }
+  "extends": "configs/react-library.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}

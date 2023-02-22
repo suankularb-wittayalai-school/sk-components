@@ -1,3 +1,23 @@
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+
 // #style-inject:#style-inject
 function styleInject(css, { insertAt } = {}) {
   if (!css || typeof document === "undefined")
@@ -32,15 +52,18 @@ function cn(classNames) {
 // src/components/Actions/index.tsx
 import { jsx } from "react/jsx-runtime";
 function Actions({ children, align, style, className }) {
-  return /* @__PURE__ */ jsx("div", {
-    style,
-    className: cn([
-      "skc-actions",
-      align === "left" ? "skc-actions--left" : align === "center" ? "skc-actions--center" : align === "right" ? "skc-actions--right" : align === "full" ? "skc-actions--full" : void 0,
-      className
-    ]),
-    children
-  });
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      style,
+      className: cn([
+        "skc-actions",
+        align === "left" ? "skc-actions--left" : align === "center" ? "skc-actions--center" : align === "right" ? "skc-actions--right" : align === "full" ? "skc-actions--full" : void 0,
+        className
+      ]),
+      children
+    }
+  );
 }
 Actions.displayName = "Actions";
 
@@ -62,17 +85,19 @@ function MaterialIcon({
   style,
   className
 }) {
-  return /* @__PURE__ */ jsx2("i", {
-    "aria-hidden": "true",
-    style: {
-      ...style,
-      fontSize: size ? `${size / 16}rem` : void 0,
-      fontVariationSettings: fill || weight || grade || size ? `"FILL" ${fill ? 1 : 0}, "wght" ${weight || 400}, "GRAD" ${grade || 0}, "opsz" ${size || 24}` : void 0
-    },
-    className: cn(["skc-icon", className]),
-    translate: "no",
-    children: icon
-  });
+  return /* @__PURE__ */ jsx2(
+    "i",
+    {
+      "aria-hidden": "true",
+      style: __spreadProps(__spreadValues({}, style), {
+        fontSize: size ? `${size / 16}rem` : void 0,
+        fontVariationSettings: fill || weight || grade || size ? `"FILL" ${fill ? 1 : 0}, "wght" ${weight || 400}, "GRAD" ${grade || 0}, "opsz" ${size || 24}` : void 0
+      }),
+      className: cn(["skc-icon", className]),
+      translate: "no",
+      children: icon
+    }
+  );
 }
 MaterialIcon.displayName = "MaterialIcon";
 
@@ -86,6 +111,9 @@ import {
 import React from "react";
 function useAnimationConfig() {
   return {
+    /**
+     * Duration: how long the transition takes.
+     */
     duration: {
       short1: 0.05,
       short2: 0.1,
@@ -104,6 +132,9 @@ function useAnimationConfig() {
       extraLong3: 0.9,
       extraLong4: 1
     },
+    /**
+     * Easing: the easing definition.
+     */
     easing: {
       linear: [0, 0, 1, 1],
       standard: [0.2, 0, 0, 1],
@@ -133,9 +164,15 @@ function useRipple(parentRef, options) {
     setDiameter(
       Math.min(
         Math.max(
+          // Use either the width or height of parent element, whichever is
+          // bigger
           Math.max(button.clientWidth, button.clientHeight),
+          // Minimum diameter of 80px; square element causes the ripple to be
+          // less impactful
           80
         ),
+        // Maximum diameter of 160px; big element causes the ripple to scale
+        // too fast
         160
       )
     );
@@ -164,7 +201,11 @@ function useRipple(parentRef, options) {
     });
   }
   return {
+    /**
+     * Event listeners on the parent element.
+     */
     rippleListeners: {
+      // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event) => {
         setPosition(
           calculatePosition(
@@ -174,6 +215,7 @@ function useRipple(parentRef, options) {
         );
         animateRipple();
       },
+      // On key down, put the ripple in the middle of the Button and animate it
       onKeyDown: (event) => {
         if (!["Enter", " "].includes(event.key))
           return;
@@ -187,12 +229,17 @@ function useRipple(parentRef, options) {
         animateRipple();
       }
     },
+    /**
+     * Framer Motion animation controls to put on the ripple.
+     */
     rippleControls,
-    rippleStyle: {
-      ...position,
+    /**
+     * Styles to put on the ripple.
+     */
+    rippleStyle: __spreadProps(__spreadValues({}, position), {
       width: `${diameter}px`,
       height: `${diameter}px`
-    }
+    })
   };
 }
 
@@ -216,8 +263,10 @@ function Button({
 }) {
   const buttonRef = React2.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-  const props = {
+  const props = __spreadValues({
     ref: buttonRef,
+    // We’re using `aria-disabled` instead of `disabled` because it does not
+    // disable tabbing in, which is better for accessibility.
     "aria-disabled": disabled || loading,
     "aria-selected": selected,
     "aria-label": alt,
@@ -233,42 +282,31 @@ function Button({
     onClick: () => {
       if (!(disabled || loading) && onClick && !href)
         onClick();
-    },
-    ...rippleListeners
-  };
-  const content = /* @__PURE__ */ jsxs(Fragment, {
-    children: [
-      (selected || icon) && /* @__PURE__ */ jsx3("div", {
-        className: "skc-button__icon",
-        children: selected ? /* @__PURE__ */ jsx3(MaterialIcon, {
-          icon: "done"
-        }) : icon
-      }),
-      children && /* @__PURE__ */ jsx3("span", {
-        className: "skc-button__label",
-        children
-      }),
-      /* @__PURE__ */ jsx3(motion2.span, {
+    }
+  }, rippleListeners);
+  const content = /* @__PURE__ */ jsxs(Fragment, { children: [
+    (selected || icon) && /* @__PURE__ */ jsx3("div", { className: "skc-button__icon", children: selected ? /* @__PURE__ */ jsx3(MaterialIcon, { icon: "done" }) : icon }),
+    children && /* @__PURE__ */ jsx3("span", { className: "skc-button__label", children }),
+    /* @__PURE__ */ jsx3(
+      motion2.span,
+      {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-button__ripple",
         style: rippleStyle
-      })
-    ]
-  });
-  return href && Element ? /* @__PURE__ */ jsx3(Element, {
-    ...props,
-    href,
-    children: content
-  }) : href ? /* @__PURE__ */ jsx3("a", {
-    ...props,
-    href,
-    children: content
-  }) : /* @__PURE__ */ jsx3("button", {
-    ...props,
-    type: "button",
-    children: content
-  });
+      }
+    )
+  ] });
+  return (
+    // Render with `element` if defined
+    href && Element ? /* @__PURE__ */ jsx3(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      // Render an `<a>` if link passed in
+      href ? /* @__PURE__ */ jsx3("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+        // Otherwise, render a `<button>`
+        /* @__PURE__ */ jsx3("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
+      )
+    )
+  );
 }
 Button.displayName = "Button";
 
@@ -285,18 +323,21 @@ function SegmentedButton({
   style,
   className
 }) {
-  return /* @__PURE__ */ jsx4("div", {
-    style,
-    className: cn([
-      "skc-segmented-button",
-      density == 0 ? "skc-segmented-button--density-0" : density !== void 0 ? `skc-segmented-button--density-[${density}]` : void 0,
-      full && "skc-segmented-button--full",
-      className
-    ]),
-    role: "group",
-    "aria-label": alt,
-    children
-  });
+  return /* @__PURE__ */ jsx4(
+    "div",
+    {
+      style,
+      className: cn([
+        "skc-segmented-button",
+        density == 0 ? "skc-segmented-button--density-0" : density !== void 0 ? `skc-segmented-button--density-[${density}]` : void 0,
+        full && "skc-segmented-button--full",
+        className
+      ]),
+      role: "group",
+      "aria-label": alt,
+      children
+    }
+  );
 }
 SegmentedButton.displayName = "SegmentedButton";
 
@@ -323,32 +364,38 @@ function ToggleButton({
 }) {
   const buttonRef = React3.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-  return /* @__PURE__ */ jsxs2("button", {
-    ref: buttonRef,
-    "aria-disabled": disabled,
-    "aria-pressed": value,
-    "aria-label": alt,
-    title: tooltip,
-    style,
-    className: cn([
-      "skc-toggle-button",
-      appearance === "filled" ? "skc-toggle-button--filled" : appearance === "tonal" ? "skc-toggle-button--tonal" : appearance === "outlined" ? "skc-toggle-button--outlined" : appearance === "standard" ? "skc-toggle-button--standard" : void 0,
-      value && "skc-toggle-button--selected",
-      dangerous && "skc-toggle-button--dangerous",
-      className
-    ]),
-    onClick: () => onChange && !disabled && onChange(!value),
-    ...rippleListeners,
-    children: [
-      icon,
-      /* @__PURE__ */ jsx5(motion3.span, {
-        initial: { scale: 0, opacity: 0.36 },
-        animate: rippleControls,
-        className: "skc-toggle-button__ripple",
-        style: rippleStyle
-      })
-    ]
-  });
+  return /* @__PURE__ */ jsxs2(
+    "button",
+    __spreadProps(__spreadValues({
+      ref: buttonRef,
+      "aria-disabled": disabled,
+      "aria-pressed": value,
+      "aria-label": alt,
+      title: tooltip,
+      style,
+      className: cn([
+        "skc-toggle-button",
+        appearance === "filled" ? "skc-toggle-button--filled" : appearance === "tonal" ? "skc-toggle-button--tonal" : appearance === "outlined" ? "skc-toggle-button--outlined" : appearance === "standard" ? "skc-toggle-button--standard" : void 0,
+        value && "skc-toggle-button--selected",
+        dangerous && "skc-toggle-button--dangerous",
+        className
+      ]),
+      onClick: () => onChange && !disabled && onChange(!value)
+    }, rippleListeners), {
+      children: [
+        icon,
+        /* @__PURE__ */ jsx5(
+          motion3.span,
+          {
+            initial: { scale: 0, opacity: 0.36 },
+            animate: rippleControls,
+            className: "skc-toggle-button__ripple",
+            style: rippleStyle
+          }
+        )
+      ]
+    })
+  );
 }
 ToggleButton.displayName = "ToggleButton";
 
@@ -358,15 +405,18 @@ styleInject(".skc-columns {\n  display: grid;\n  gap: .5rem;\n}\n.skc-columns--2
 // src/components/Columns/index.tsx
 import { jsx as jsx6 } from "react/jsx-runtime";
 function Columns({ children, columns, style, className }) {
-  return /* @__PURE__ */ jsx6("div", {
-    style,
-    className: cn([
-      "skc-columns",
-      columns === 2 ? "skc-columns--2" : columns === 3 ? "skc-columns--3" : columns === 4 ? "skc-columns--4" : columns === 6 ? "skc-columns--6" : columns === 12 ? "skc-columns--12" : void 0,
-      className
-    ]),
-    children
-  });
+  return /* @__PURE__ */ jsx6(
+    "div",
+    {
+      style,
+      className: cn([
+        "skc-columns",
+        columns === 2 ? "skc-columns--2" : columns === 3 ? "skc-columns--3" : columns === 4 ? "skc-columns--4" : columns === 6 ? "skc-columns--6" : columns === 12 ? "skc-columns--12" : void 0,
+        className
+      ]),
+      children
+    }
+  );
 }
 Columns.displayName = "Columns";
 
@@ -395,7 +445,7 @@ function AssistChip({
 }) {
   const buttonRef = React4.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-  const props = {
+  const props = __spreadValues({
     ref: buttonRef,
     "aria-disabled": disabled,
     title: tooltip,
@@ -409,40 +459,31 @@ function AssistChip({
       elevated && "skc-assist-chip--elevated",
       dangerous && "skc-assist-chip--dangerous",
       className
-    ]),
-    ...rippleListeners
-  };
-  const content = /* @__PURE__ */ jsxs3(Fragment2, {
-    children: [
-      icon && /* @__PURE__ */ jsx7("div", {
-        className: "skc-assist-chip__icon",
-        children: icon
-      }),
-      /* @__PURE__ */ jsx7("span", {
-        className: "skc-assist-chip__label",
-        children
-      }),
-      /* @__PURE__ */ jsx7(motion4.span, {
+    ])
+  }, rippleListeners);
+  const content = /* @__PURE__ */ jsxs3(Fragment2, { children: [
+    icon && /* @__PURE__ */ jsx7("div", { className: "skc-assist-chip__icon", children: icon }),
+    /* @__PURE__ */ jsx7("span", { className: "skc-assist-chip__label", children }),
+    /* @__PURE__ */ jsx7(
+      motion4.span,
+      {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-assist-chip__ripple",
         style: rippleStyle
-      })
-    ]
-  });
-  return href && Element ? /* @__PURE__ */ jsx7(Element, {
-    ...props,
-    href,
-    children: content
-  }) : href ? /* @__PURE__ */ jsx7("a", {
-    ...props,
-    href,
-    children: content
-  }) : /* @__PURE__ */ jsx7("button", {
-    ...props,
-    type: "button",
-    children: content
-  });
+      }
+    )
+  ] });
+  return (
+    // Render with `element` if defined
+    href && Element ? /* @__PURE__ */ jsx7(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      // Render an `<a>` if link passed in
+      href ? /* @__PURE__ */ jsx7("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+        // Otherwise, render a `<button>`
+        /* @__PURE__ */ jsx7("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
+      )
+    )
+  );
 }
 AssistChip.displayName = "AssistChip";
 
@@ -452,10 +493,7 @@ styleInject(".skc-divider {\n  border: none;\n  border-top: 1px solid var(--outl
 // src/components/Divider/index.tsx
 import { jsx as jsx8 } from "react/jsx-runtime";
 function Divider({ style, className }) {
-  return /* @__PURE__ */ jsx8("hr", {
-    style,
-    className: cn(["skc-divider", className])
-  });
+  return /* @__PURE__ */ jsx8("hr", { style, className: cn(["skc-divider", className]) });
 }
 Divider.displayName = "Divider";
 
@@ -474,43 +512,25 @@ function NavBar({
   style,
   className
 }) {
-  return /* @__PURE__ */ jsxs4("nav", {
-    style,
-    className: cn(["skc-nav-bar", className]),
-    children: [
-      /* @__PURE__ */ jsxs4("div", {
-        className: "skc-nav-bar__main",
-        children: [
-          /* @__PURE__ */ jsxs4("section", {
-            className: "skc-nav-bar__toggle-and-fab",
-            children: [
-              /* @__PURE__ */ jsx9(Button, {
-                appearance: "text",
-                icon: /* @__PURE__ */ jsx9(MaterialIcon, {
-                  icon: "menu"
-                }),
-                alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39" : "Toggle Navigation Drawer",
-                onClick: onNavToggle
-              }),
-              /* @__PURE__ */ jsx9("div", {
-                className: "skc-nav-bar__brand",
-                children: brand
-              }),
-              fab
-            ]
-          }),
-          /* @__PURE__ */ jsx9("section", {
-            className: "skc-nav-bar__destinations",
-            children
-          })
-        ]
-      }),
-      /* @__PURE__ */ jsx9("section", {
-        className: "skc-nav-bar__end",
-        children: end
-      })
-    ]
-  });
+  return /* @__PURE__ */ jsxs4("nav", { style, className: cn(["skc-nav-bar", className]), children: [
+    /* @__PURE__ */ jsxs4("div", { className: "skc-nav-bar__main", children: [
+      /* @__PURE__ */ jsxs4("section", { className: "skc-nav-bar__toggle-and-fab", children: [
+        /* @__PURE__ */ jsx9(
+          Button,
+          {
+            appearance: "text",
+            icon: /* @__PURE__ */ jsx9(MaterialIcon, { icon: "menu" }),
+            alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39" : "Toggle Navigation Drawer",
+            onClick: onNavToggle
+          }
+        ),
+        /* @__PURE__ */ jsx9("div", { className: "skc-nav-bar__brand", children: brand }),
+        fab
+      ] }),
+      /* @__PURE__ */ jsx9("section", { className: "skc-nav-bar__destinations", children })
+    ] }),
+    /* @__PURE__ */ jsx9("section", { className: "skc-nav-bar__end", children: end })
+  ] });
 }
 NavBar.displayName = "NavBar";
 
@@ -557,7 +577,7 @@ function NavBarItem({
   const navID = `nav-section-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
-  const props = {
+  const props = __spreadValues({
     "aria-current": selected,
     "aria-labelledby": label ? navID : void 0,
     href,
@@ -568,51 +588,42 @@ function NavBarItem({
       selected && "skc-nav-bar-item--selected",
       railOnly && "skc-nav-bar-item--rail-only",
       className
-    ]),
-    ...rippleListeners
-  };
-  const content = /* @__PURE__ */ jsxs5(Fragment3, {
-    children: [
-      /* @__PURE__ */ jsxs5("div", {
-        ref: iconRef,
-        className: "skc-nav-bar-item__icon",
-        children: [
-          icon,
-          /* @__PURE__ */ jsx10(LayoutGroup, {
-            children: /* @__PURE__ */ jsx10(AnimatePresence, {
-              children: badge !== void 0 && /* @__PURE__ */ jsx10(motion5.div, {
-                initial: { scale: 0 },
-                animate: { scale: 1 },
-                exit: { scale: 0 },
-                layoutId: [navID, "badge"].join("-"),
-                transition: transition(duration.short4, easing.standard),
-                className: "skc-nav-bar-item__badge",
-                children: badge !== null ? badge > 99 ? "99+" : badge : null
-              })
-            })
-          }),
-          /* @__PURE__ */ jsx10(motion5.span, {
-            initial: { scale: 0, opacity: 0.36 },
-            animate: rippleControls,
-            className: "skc-nav-bar-item__ripple",
-            style: rippleStyle
-          })
-        ]
-      }),
-      label && /* @__PURE__ */ jsx10("span", {
-        id: navID,
-        className: "skc-nav-bar-item__label",
-        children: label
-      })
-    ]
-  });
-  return Element ? /* @__PURE__ */ jsx10(Element, {
-    ...props,
-    children: content
-  }) : /* @__PURE__ */ jsx10("a", {
-    ...props,
-    children: content
-  });
+    ])
+  }, rippleListeners);
+  const content = /* @__PURE__ */ jsxs5(Fragment3, { children: [
+    /* @__PURE__ */ jsxs5("div", { ref: iconRef, className: "skc-nav-bar-item__icon", children: [
+      icon,
+      /* @__PURE__ */ jsx10(LayoutGroup, { children: /* @__PURE__ */ jsx10(AnimatePresence, { children: badge !== void 0 && /* @__PURE__ */ jsx10(
+        motion5.div,
+        {
+          initial: { scale: 0 },
+          animate: { scale: 1 },
+          exit: { scale: 0 },
+          layoutId: [navID, "badge"].join("-"),
+          transition: transition(duration.short4, easing.standard),
+          className: "skc-nav-bar-item__badge",
+          children: badge !== null ? badge > 99 ? "99+" : badge : null
+        }
+      ) }) }),
+      /* @__PURE__ */ jsx10(
+        motion5.span,
+        {
+          initial: { scale: 0, opacity: 0.36 },
+          animate: rippleControls,
+          className: "skc-nav-bar-item__ripple",
+          style: rippleStyle
+        }
+      )
+    ] }),
+    label && /* @__PURE__ */ jsx10("span", { id: navID, className: "skc-nav-bar-item__label", children: label })
+  ] });
+  return (
+    // Render with `element` if defined
+    Element ? /* @__PURE__ */ jsx10(Element, __spreadProps(__spreadValues({}, props), { children: content })) : (
+      // Otherwise, render an `<a>`
+      /* @__PURE__ */ jsx10("a", __spreadProps(__spreadValues({}, props), { children: content }))
+    )
+  );
 }
 NavBarItem.displayName = "NavBarItem";
 
@@ -651,51 +662,59 @@ function NavDrawer({
       navDrawerItem == null ? void 0 : navDrawerItem.focus();
     }
   }, [open]);
-  const injectedChildren = React6.Children.map(
-    children,
-    (section) => React6.cloneElement(section, {
-      children: React6.Children.map(
-        section.props.children,
-        (item) => React6.cloneElement(item, { onClick: onClose })
-      )
-    })
+  const injectedChildren = (
+    // For each Navigation Drawer Section
+    React6.Children.map(
+      children,
+      (section) => React6.cloneElement(section, {
+        children: (
+          // For each Navigation Drawer Item
+          React6.Children.map(
+            section.props.children,
+            // Inject `onClick`, where the Navigation Drawer will close when a
+            // Navigation Drawer Item is clicked
+            (item) => React6.cloneElement(item, { onClick: onClose })
+          )
+        )
+      })
+    )
   );
-  return /* @__PURE__ */ jsx11(AnimatePresence2, {
-    children: open && /* @__PURE__ */ jsxs6(Fragment4, {
-      children: [
-        /* @__PURE__ */ jsx11(motion6.aside, {
-          initial: { scaleX: 0.2, x: "-100%" },
-          animate: { scaleX: 1, x: "0%" },
-          exit: {
-            scaleX: 0.2,
-            x: "-100%",
-            transition: transition(
-              duration.short4,
-              easing.standardAccelerate
-            )
-          },
-          transition: transition(duration.medium4, easing.standardDecelerate),
-          "aria-modal": true,
-          style,
-          className: cn(["skc-nav-drawer", className]),
-          children: /* @__PURE__ */ jsx11("nav", {
-            children: injectedChildren
-          })
-        }),
-        /* @__PURE__ */ jsx11(motion6.div, {
-          initial: { opacity: 0 },
-          animate: { opacity: 0.5 },
-          exit: {
-            opacity: 0,
-            transition: transition(duration.short4, easing.standard)
-          },
-          transition: transition(duration.medium4, easing.standard),
-          onClick: onClose,
-          className: "skc-scrim"
-        })
-      ]
-    })
-  });
+  return /* @__PURE__ */ jsx11(AnimatePresence2, { children: open && /* @__PURE__ */ jsxs6(Fragment4, { children: [
+    /* @__PURE__ */ jsx11(
+      motion6.aside,
+      {
+        initial: { scaleX: 0.2, x: "-100%" },
+        animate: { scaleX: 1, x: "0%" },
+        exit: {
+          scaleX: 0.2,
+          x: "-100%",
+          transition: transition(
+            duration.short4,
+            easing.standardAccelerate
+          )
+        },
+        transition: transition(duration.medium4, easing.standardDecelerate),
+        "aria-modal": true,
+        style,
+        className: cn(["skc-nav-drawer", className]),
+        children: /* @__PURE__ */ jsx11("nav", { children: injectedChildren })
+      }
+    ),
+    /* @__PURE__ */ jsx11(
+      motion6.div,
+      {
+        initial: { opacity: 0 },
+        animate: { opacity: 0.5 },
+        exit: {
+          opacity: 0,
+          transition: transition(duration.short4, easing.standard)
+        },
+        transition: transition(duration.medium4, easing.standard),
+        onClick: onClose,
+        className: "skc-scrim"
+      }
+    )
+  ] }) });
 }
 NavDrawer.displayName = "NavDrawer";
 
@@ -714,22 +733,26 @@ function NavDrawerSection({
   const sectionID = `nav-section-${kebabify(
     typeof header === "string" ? header : alt
   )}`;
-  return /* @__PURE__ */ jsxs7("section", {
-    "aria-labelledby": sectionID,
-    style,
-    className: cn(["skc-nav-drawer-section", className]),
-    children: [
-      /* @__PURE__ */ jsx12("h2", {
-        id: sectionID,
-        "aria-label": alt,
-        className: "skc-nav-drawer-section__header",
-        children: header
-      }),
-      /* @__PURE__ */ jsx12("ul", {
-        children
-      })
-    ]
-  });
+  return /* @__PURE__ */ jsxs7(
+    "section",
+    {
+      "aria-labelledby": sectionID,
+      style,
+      className: cn(["skc-nav-drawer-section", className]),
+      children: [
+        /* @__PURE__ */ jsx12(
+          "h2",
+          {
+            id: sectionID,
+            "aria-label": alt,
+            className: "skc-nav-drawer-section__header",
+            children: header
+          }
+        ),
+        /* @__PURE__ */ jsx12("ul", { children })
+      ]
+    }
+  );
 }
 NavDrawerSection.displayName = "NavDrawerSection";
 
@@ -756,7 +779,7 @@ function NavDrawerItem({
 }) {
   const linkRef = React7.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(linkRef);
-  const props = {
+  const props = __spreadValues({
     ref: linkRef,
     "aria-current": selected,
     title: tooltip,
@@ -767,40 +790,23 @@ function NavDrawerItem({
       className
     ]),
     href,
-    onClick,
-    ...rippleListeners
-  };
-  const content = /* @__PURE__ */ jsxs8(Fragment5, {
-    children: [
-      /* @__PURE__ */ jsx13("div", {
-        className: "skc-nav-drawer-item__icon",
-        children: icon
-      }),
-      /* @__PURE__ */ jsx13("span", {
-        className: "skc-nav-drawer-item__label",
-        children: label
-      }),
-      metadata && /* @__PURE__ */ jsx13("span", {
-        className: "skc-nav-drawer-item__metadata",
-        children: metadata
-      }),
-      /* @__PURE__ */ jsx13(motion7.span, {
+    onClick
+  }, rippleListeners);
+  const content = /* @__PURE__ */ jsxs8(Fragment5, { children: [
+    /* @__PURE__ */ jsx13("div", { className: "skc-nav-drawer-item__icon", children: icon }),
+    /* @__PURE__ */ jsx13("span", { className: "skc-nav-drawer-item__label", children: label }),
+    metadata && /* @__PURE__ */ jsx13("span", { className: "skc-nav-drawer-item__metadata", children: metadata }),
+    /* @__PURE__ */ jsx13(
+      motion7.span,
+      {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-nav-drawer-item__ripple",
         style: rippleStyle
-      })
-    ]
-  });
-  return /* @__PURE__ */ jsx13("li", {
-    children: Element ? /* @__PURE__ */ jsx13(Element, {
-      ...props,
-      children: content
-    }) : /* @__PURE__ */ jsx13("a", {
-      ...props,
-      children: content
-    })
-  });
+      }
+    )
+  ] });
+  return /* @__PURE__ */ jsx13("li", { children: Element ? /* @__PURE__ */ jsx13(Element, __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ jsx13("a", __spreadProps(__spreadValues({}, props), { children: content })) });
 }
 NavDrawerItem.displayName = "NavDrawerItem";
 
@@ -870,68 +876,65 @@ function FAB({
       };
     }
   }, []);
-  const props = {
+  const props = __spreadValues({
     "aria-label": alt,
     title: tooltip,
-    className: "skc-fab__wrapper",
-    ...rippleListeners
-  };
+    className: "skc-fab__wrapper"
+  }, rippleListeners);
   const content = /* @__PURE__ */ jsx14(AnimatePresence3, {
     initial: false,
-    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ jsxs9(motion8.div, {
-      ref: fabRef,
-      initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
-      animate: { scale: 1, x: 0, y: 0, opacity: 1 },
-      exit: {
-        scale: 0.4,
-        x: 20,
-        y: 20,
-        opacity: 0,
-        transition: transition(
-          duration.short2,
-          easing.standardAccelerate
-        )
-      },
-      transition: transition(duration.medium1, easing.standardDecelerate),
-      style,
-      className: cn([
-        "skc-fab",
-        color === "surface" ? "skc-fab--surface" : color === "primary" ? "skc-fab--primary" : color === "secondary" ? "skc-fab--secondary" : color === "tertiary" ? "skc-fab--tertiary" : void 0,
-        size === "small" ? "skc-fab--small" : size === "large" ? "skc-fab--large" : "skc-fab--standard",
-        className
-      ]),
-      children: [
-        icon && /* @__PURE__ */ jsx14("div", {
-          className: "skc-fab__icon",
-          children: icon
-        }),
-        !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ jsx14("span", {
-          className: "skc-fab__label",
-          children
-        }),
-        /* @__PURE__ */ jsx14(motion8.span, {
-          initial: { scale: 0, opacity: 0.36 },
-          animate: rippleControls,
-          className: "skc-fab__ripple",
-          style: rippleStyle
-        })
-      ]
-    })
+    // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
+    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ jsxs9(
+      motion8.div,
+      {
+        ref: fabRef,
+        initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
+        animate: { scale: 1, x: 0, y: 0, opacity: 1 },
+        exit: {
+          scale: 0.4,
+          x: 20,
+          y: 20,
+          opacity: 0,
+          transition: transition(
+            duration.short2,
+            easing.standardAccelerate
+          )
+        },
+        transition: transition(duration.medium1, easing.standardDecelerate),
+        style,
+        className: cn([
+          "skc-fab",
+          color === "surface" ? "skc-fab--surface" : color === "primary" ? "skc-fab--primary" : color === "secondary" ? "skc-fab--secondary" : color === "tertiary" ? "skc-fab--tertiary" : void 0,
+          size === "small" ? "skc-fab--small" : size === "large" ? "skc-fab--large" : "skc-fab--standard",
+          className
+        ]),
+        children: [
+          icon && /* @__PURE__ */ jsx14("div", { className: "skc-fab__icon", children: icon }),
+          // Hide the label on scroll if `stateOnScroll` set to `minimize`
+          !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ jsx14("span", { className: "skc-fab__label", children }),
+          /* @__PURE__ */ jsx14(
+            motion8.span,
+            {
+              initial: { scale: 0, opacity: 0.36 },
+              animate: rippleControls,
+              className: "skc-fab__ripple",
+              style: rippleStyle
+            }
+          )
+        ]
+      }
+    )
   });
-  return href && Element ? /* @__PURE__ */ jsx14(Element, {
-    ...props,
-    href,
-    children: content
-  }) : href ? /* @__PURE__ */ jsx14("a", {
-    href,
-    ...props,
-    children: content
-  }) : /* @__PURE__ */ jsx14("button", {
-    type: "button",
-    onClick,
-    ...props,
-    children: content
-  });
+  return (
+    // Render with `element` if defined
+    href && Element ? /* @__PURE__ */ jsx14(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      // Render an `<a>` if link passed in
+      href ? /* @__PURE__ */ jsx14("a", __spreadProps(__spreadValues({ href }, props), { children: content })) : (
+        // Otherwise, render a `<button>`
+        /* @__PURE__ */ jsx14("button", __spreadProps(__spreadValues({ type: "button", onClick }, props), { children: content }))
+      )
+    )
+  );
 }
 FAB.displayName = "FAB";
 
@@ -947,18 +950,18 @@ function ContentLayout({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ jsx15(motion9.main, {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: transition(duration.short4, easing.standard),
-    style,
-    className: cn(["skc-content-layout", className]),
-    children: /* @__PURE__ */ jsx15("div", {
-      className: "skc-content-layout__content",
-      children
-    })
-  });
+  return /* @__PURE__ */ jsx15(
+    motion9.main,
+    {
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      transition: transition(duration.short4, easing.standard),
+      style,
+      className: cn(["skc-content-layout", className]),
+      children: /* @__PURE__ */ jsx15("div", { className: "skc-content-layout__content", children })
+    }
+  );
 }
 ContentLayout.displayName = "ContentLayout";
 
@@ -979,19 +982,18 @@ function RootLayout({ children, className, style }) {
     else
       content = child;
   });
-  return /* @__PURE__ */ jsxs10("div", {
-    style,
-    className: cn(["skc-root-layout", className]),
-    children: [
-      persistentComponents,
-      /* @__PURE__ */ jsx16(AnimatePresence4, {
+  return /* @__PURE__ */ jsxs10("div", { style, className: cn(["skc-root-layout", className]), children: [
+    persistentComponents,
+    /* @__PURE__ */ jsx16(
+      AnimatePresence4,
+      {
         mode: "wait",
         initial: false,
         onExitComplete: () => window.scrollTo(0, 0),
         children: content
-      })
-    ]
-  });
+      }
+    )
+  ] });
 }
 RootLayout.displayName = "RootLayout";
 
@@ -1065,90 +1067,92 @@ function PageHeader({
       });
     }
   }, [icon, minimized]);
-  return /* @__PURE__ */ jsxs11(Fragment6, {
-    children: [
-      /* @__PURE__ */ jsx17("div", {
-        className: "skc-page-header__replacement-color"
-      }),
-      /* @__PURE__ */ jsx17("div", {
+  return /* @__PURE__ */ jsxs11(Fragment6, { children: [
+    /* @__PURE__ */ jsx17("div", { className: "skc-page-header__replacement-color" }),
+    /* @__PURE__ */ jsx17(
+      "div",
+      {
         style: { height: minimized ? (_a = headerRef.current) == null ? void 0 : _a.clientHeight : 0 }
-      }),
-      /* @__PURE__ */ jsx17(LayoutGroup2, {
-        children: /* @__PURE__ */ jsx17(motion10.header, {
-          ref: headerRef,
-          layoutId: "page-header",
-          transition: minimizeTransition,
-          style,
-          className: cn([
-            "skc-page-header",
-            minimized && "skc-page-header--minimized",
-            className
-          ]),
-          children: /* @__PURE__ */ jsxs11("div", {
-            className: "skc-page-header__content",
-            children: [
-              icon && !children && /* @__PURE__ */ jsx17(motion10.div, {
-                animate: iconControls,
-                className: "skc-page-header__icon",
-                children: icon
-              }),
-              /* @__PURE__ */ jsxs11(motion10.div, {
-                layoutId: "page-header-actions",
-                transition: minimizeTransition,
-                className: "skc-page-header__actions",
-                children: [
-                  /* @__PURE__ */ jsx17(Button, {
+      }
+    ),
+    /* @__PURE__ */ jsx17(LayoutGroup2, { children: /* @__PURE__ */ jsx17(
+      motion10.header,
+      {
+        ref: headerRef,
+        layoutId: "page-header",
+        transition: minimizeTransition,
+        style,
+        className: cn([
+          "skc-page-header",
+          minimized && "skc-page-header--minimized",
+          className
+        ]),
+        children: /* @__PURE__ */ jsxs11("div", { className: "skc-page-header__content", children: [
+          icon && !children && /* @__PURE__ */ jsx17(
+            motion10.div,
+            {
+              animate: iconControls,
+              className: "skc-page-header__icon",
+              children: icon
+            }
+          ),
+          /* @__PURE__ */ jsxs11(
+            motion10.div,
+            {
+              layoutId: "page-header-actions",
+              transition: minimizeTransition,
+              className: "skc-page-header__actions",
+              children: [
+                /* @__PURE__ */ jsx17(
+                  Button,
+                  {
                     appearance: "text",
-                    icon: /* @__PURE__ */ jsx17(MaterialIcon, {
-                      icon: "arrow_backward"
-                    }),
+                    icon: /* @__PURE__ */ jsx17(MaterialIcon, { icon: "arrow_backward" }),
                     onClick: onBack,
                     href: parentURL,
                     element,
                     disabled: !(onBack || parentURL)
-                  }),
-                  minimized && /* @__PURE__ */ jsx17(motion10.h1, {
-                    ...headerTextProps,
-                    children: title
-                  }),
-                  /* @__PURE__ */ jsxs11("div", {
-                    className: "skc-page-header__trailing",
-                    children: [
-                      homeURL && /* @__PURE__ */ jsx17(Button, {
-                        appearance: "text",
-                        icon: brand || /* @__PURE__ */ jsx17(MaterialIcon, {
-                          icon: "home"
-                        }),
-                        href: homeURL,
-                        element,
-                        ...backAttr
-                      }),
-                      /* @__PURE__ */ jsx17(Button, {
-                        appearance: "text",
-                        icon: /* @__PURE__ */ jsx17(MaterialIcon, {
-                          icon: "menu"
-                        }),
-                        onClick: onNavToggle
-                      })
-                    ]
-                  })
-                ]
-              }),
-              !minimized && /* @__PURE__ */ jsx17(motion10.h1, {
-                ...headerTextProps,
-                children: title
-              }),
-              children && /* @__PURE__ */ jsx17(motion10.div, {
-                animate: headerTextControls,
-                className: "skc-page-header__related",
-                children
-              })
-            ]
-          })
-        })
-      })
-    ]
-  });
+                  }
+                ),
+                minimized && // Header (when minimized)
+                /* @__PURE__ */ jsx17(motion10.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+                /* @__PURE__ */ jsxs11("div", { className: "skc-page-header__trailing", children: [
+                  homeURL && // Home Button
+                  /* @__PURE__ */ jsx17(
+                    Button,
+                    __spreadValues({
+                      appearance: "text",
+                      icon: brand || /* @__PURE__ */ jsx17(MaterialIcon, { icon: "home" }),
+                      href: homeURL,
+                      element
+                    }, backAttr)
+                  ),
+                  /* @__PURE__ */ jsx17(
+                    Button,
+                    {
+                      appearance: "text",
+                      icon: /* @__PURE__ */ jsx17(MaterialIcon, { icon: "menu" }),
+                      onClick: onNavToggle
+                    }
+                  )
+                ] })
+              ]
+            }
+          ),
+          !minimized && // Header (initial)
+          /* @__PURE__ */ jsx17(motion10.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+          children && /* @__PURE__ */ jsx17(
+            motion10.div,
+            {
+              animate: headerTextControls,
+              className: "skc-page-header__related",
+              children
+            }
+          )
+        ] })
+      }
+    ) })
+  ] });
 }
 PageHeader.displayName = "PageHeader";
 
@@ -1158,9 +1162,7 @@ styleInject(":root {\n  --motion-short-1: 50ms;\n  --motion-short-2: 100ms;\n  -
 // src/components/ThemeProvider/index.tsx
 import { Fragment as Fragment7, jsx as jsx18 } from "react/jsx-runtime";
 function ThemeProvider({ children }) {
-  return /* @__PURE__ */ jsx18(Fragment7, {
-    children
-  });
+  return /* @__PURE__ */ jsx18(Fragment7, { children });
 }
 ThemeProvider.displayName = "ThemeProvider";
 export {
