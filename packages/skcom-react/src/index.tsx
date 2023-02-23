@@ -44,6 +44,8 @@ export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
+export { Section, type SectionProps } from "./components/Section";
+
 export {
   ThemeProvider,
   type ThemeProviderProps,

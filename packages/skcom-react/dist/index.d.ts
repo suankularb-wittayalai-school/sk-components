@@ -1214,6 +1214,37 @@ declare namespace PageHeader {
 }
 
 /**
+ * Props for {@link Section}.
+ */
+interface SectionProps extends SKComponent {
+    /**
+     * Section must have exactly 1 Header as the first direct descendent. After
+     * that, it can include anything.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Attributes for the underlying `<section>` element.
+     *
+     * - Optional.
+     */
+    sectionAttr?: React.HTMLAttributes<HTMLElement>;
+}
+/**
+ * Section is a way to group content under one Header.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cpfnymlipawc SKCom documentation}
+ *
+ * @param children Section must have exactly 1 Header as the first direct descendent. After that, it can include anything.
+ * @param sectionAttr Attributes for the underlying `<section>` element.
+ */
+declare function Section({ children, sectionAttr, style, className, }: SectionProps): JSX.Element;
+declare namespace Section {
+    var displayName: string;
+}
+
+/**
  * Props for {@link ThemeProvider}.
  */
 interface ThemeProviderProps {
@@ -1274,4 +1305,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
