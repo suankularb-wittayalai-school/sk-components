@@ -11,6 +11,7 @@ export {
 
 export { Card, type CardProps } from "./components/Card";
 export { CardHeader, type CardHeaderProps } from "./components/CardHeader";
+export { CardContent, type CardContentProps } from "./components/CardContent";
 
 export { Columns, type ColumnsProps } from "./components/Columns";
 

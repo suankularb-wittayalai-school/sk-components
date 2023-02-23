@@ -492,6 +492,29 @@ declare namespace CardHeader {
 }
 
 /**
+ * Props for {@link CardContent Card Content}.
+ */
+interface CardContentProps extends SKComponent {
+    /**
+     * Card Content can contain anything, from supporting text to Actions.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * A section of content inside Card.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.anun9n3ld6tj SKCom documentation}
+ *
+ * @param children Card Content can contain anything, from supporting text to Actions.
+ */
+declare function CardContent({ children, style, className }: CardContentProps): JSX.Element;
+declare namespace CardContent {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Columns}.
  */
 interface ColumnsProps extends SKComponent {
@@ -1475,4 +1498,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

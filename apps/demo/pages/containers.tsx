@@ -7,6 +7,7 @@ import {
   Actions,
   Button,
   Card,
+  CardContent,
   CardHeader,
   Columns,
   ContentLayout,
@@ -40,9 +41,15 @@ const ContainersPage: CustomPage = () => (
               alt="Atipol Sukrisadanon"
               className="w-full"
             />
-            <Actions>
-              <Button appearance="filled">Learn more</Button>
-            </Actions>
+            <CardContent>
+              <p>
+                Atipol Sukrisadanon is arguably one of the teachers in
+                Suankularb Wittayalai School.
+              </p>
+              <Actions>
+                <Button appearance="filled">Learn more</Button>
+              </Actions>
+            </CardContent>
           </Card>
         </Columns>
       </Section>
