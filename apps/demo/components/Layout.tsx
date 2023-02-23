@@ -151,14 +151,16 @@ const Layout: FC<{
       </NavBar>
 
       {/* Page Header */}
-      <PageHeader
-        title="SK Components Demo"
-        brand={<Favicon />}
-        homeURL="/"
-        element={Link}
-        onNavToggle={() => setNavOpen(true)}
-        {...pageHeader}
-      />
+      {pageHeader && (
+        <PageHeader
+          title="SK Components Demo"
+          brand={<Favicon />}
+          homeURL="/"
+          element={Link}
+          onNavToggle={() => setNavOpen(true)}
+          {...pageHeader}
+        />
+      )}
 
       {/* Content */}
       {children}

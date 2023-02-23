@@ -42,7 +42,7 @@ export function RootLayout({ children, className, style }: RootLayoutProps) {
   // - Page content that will animate
   let content;
   const persistentComponents = React.Children.map(children, (child) => {
-    if ((child as JSX.Element).type.displayName) return child;
+    if ((child as JSX.Element)?.type.displayName) return child;
     else content = child;
   });
 

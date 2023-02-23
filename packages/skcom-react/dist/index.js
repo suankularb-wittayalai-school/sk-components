@@ -1179,7 +1179,7 @@ var import_jsx_runtime20 = require("react/jsx-runtime");
 function RootLayout({ children, className, style }) {
   let content;
   const persistentComponents = React12.Children.map(children, (child) => {
-    if (child.type.displayName)
+    if (child == null ? void 0 : child.type.displayName)
       return child;
     else
       content = child;
