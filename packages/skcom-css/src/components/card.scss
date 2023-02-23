@@ -1,15 +1,47 @@
 ////
 /// **Card**
-/// 
+///
 /// Card is a container for information and actions about a subject. It can be
 /// in a list, on its own, or as a link to another page; Card is extremely versatile.
-/// 
+///
 /// To quote Material Design 3, there is no right way to make a Card. However,
 /// we have provided some useful props and components to get you started.
 ///
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation
 ////
 
+// Base Card
 .skc-card {
-  // TODO
+  display: flex;
+  border-radius: var(--rounded-lg);
+  color: var(--on-surface);
+}
+
+// Appearance
+.skc-card.skc-card--outlined {
+  background-color: var(--surface);
+  border: 1px solid var(--outline-variant);
+}
+
+.skc-card.skc-card--elevated {
+  background-color: var(--surface-1);
+  box-shadow: var(--shadow-2);
+}
+
+.skc-card.skc-card--filled {
+  background-color: var(--surface-variant);
+
+  &.skc-card--row {
+    border: 1px solid var(--outline-variant);
+  }
+}
+
+// Direction
+.skc-card,
+.skc-card.skc-card--column {
+  flex-direction: column;
+}
+
+.skc-card.skc-card--row {
+  flex-direction: row;
 }

@@ -427,7 +427,7 @@ interface CardProps extends SKComponent {
  * @param href The URL of the page this Card leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Card({ children, style, className }: CardProps): JSX.Element;
+declare function Card({ children, style, appearance, direction, stateLayerEffect, shadowEffect, layoutID, onClick, href, element, className, }: CardProps): JSX.Element;
 declare namespace Card {
     var displayName: string;
 }

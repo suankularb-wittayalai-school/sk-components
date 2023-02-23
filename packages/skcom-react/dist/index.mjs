@@ -400,12 +400,36 @@ function ToggleButton({
 ToggleButton.displayName = "ToggleButton";
 
 // ../skcom-css/dist/css/components/card.css
-styleInject("");
+styleInject(".skc-card {\n  display: flex;\n  border-radius: var(--rounded-lg);\n  color: var(--on-surface);\n}\n.skc-card.skc-card--outlined {\n  background-color: var(--surface);\n  border: 1px solid var(--outline-variant);\n}\n.skc-card.skc-card--elevated {\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-2);\n}\n.skc-card.skc-card--filled {\n  background-color: var(--surface-variant);\n}\n.skc-card.skc-card--filled.skc-card--row {\n  border: 1px solid var(--outline-variant);\n}\n.skc-card,\n.skc-card.skc-card--column {\n  flex-direction: column;\n}\n.skc-card.skc-card--row {\n  flex-direction: row;\n}\n");
 
 // src/components/Card/index.tsx
 import { jsx as jsx6 } from "react/jsx-runtime";
-function Card({ children, style, className }) {
-  return /* @__PURE__ */ jsx6("div", { style, className: cn(["skc-card", className]), children });
+function Card({
+  children,
+  style,
+  appearance,
+  direction,
+  stateLayerEffect,
+  shadowEffect,
+  layoutID,
+  onClick,
+  href,
+  element,
+  className
+}) {
+  return /* @__PURE__ */ jsx6(
+    "div",
+    {
+      style,
+      className: cn([
+        "skc-card",
+        appearance === "outlined" ? "skc-card--outlined" : appearance === "elevated" ? "skc-card--elevated" : appearance === "filled" ? "skc-card--filled" : void 0,
+        direction === "row" ? "skc-card--row" : "skc-card--column",
+        className
+      ]),
+      children
+    }
+  );
 }
 Card.displayName = "Card";
 

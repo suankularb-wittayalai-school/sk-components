@@ -134,9 +134,35 @@ export interface CardProps extends SKComponent {
  * @param href The URL of the page this Card leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-export function Card({ children, style, className }: CardProps) {
+export function Card({
+  children,
+  style,
+  appearance,
+  direction,
+  stateLayerEffect,
+  shadowEffect,
+  layoutID,
+  onClick,
+  href,
+  element,
+  className,
+}: CardProps) {
   return (
-    <div style={style} className={cn(["skc-card", className])}>
+    <div
+      style={style}
+      className={cn([
+        "skc-card",
+        appearance === "outlined"
+          ? "skc-card--outlined"
+          : appearance === "elevated"
+          ? "skc-card--elevated"
+          : appearance === "filled"
+          ? "skc-card--filled"
+          : undefined,
+        direction === "row" ? "skc-card--row" : "skc-card--column",
+        className,
+      ])}
+    >
       {children}
     </div>
   );

@@ -3,6 +3,7 @@ import Head from "next/head";
 
 // SK Components
 import {
+  Card,
   Columns,
   ContentLayout,
   Header,
@@ -23,13 +24,13 @@ const ContainersPage: CustomPage = () => (
         <Header>Columns</Header>
         <Columns columns={6}>
           {[...Array(12)].map((_, i) => (
-            <div
-              className="skc-headline-large grid h-20 place-content-center
-                rounded-xl border-2 border-blue-900"
+            <Card
               key={i}
+              appearance="outlined"
+              className="skc-headline-large !grid h-20 place-content-center"
             >
               {i + 1}
-            </div>
+            </Card>
           ))}
         </Columns>
       </Section>
