@@ -1,0 +1,58 @@
+////
+/// **Header**
+/// A Header helps users quickly identifies sections and their purpose.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation
+////
+
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
+.skc-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+$header-levels: (
+  2: (
+    font: "display-small",
+    icon-size: 2.5rem,
+  ),
+  3: (
+    font: "headline-large",
+    icon-size: 2.375rem,
+  ),
+  4: (
+    font: "headline-medium",
+    icon-size: 2.25rem,
+  ),
+  5: (
+    font: "headline-small",
+    icon-size: 2rem,
+  ),
+  6: (
+    font: "title-large",
+    icon-size: 1.75rem,
+  ),
+);
+
+@each $level, $style in $header-levels {
+  h#{$level} {
+    &.skc-header,
+    &.skc-header__text {
+      @include type.font(map-get($style, "font"));
+    }
+
+    .skc-header__icon .skc-icon {
+      @include ci.icon(0, 400, 0, 40);
+      font-size: map-get($style, "icon-size");
+    }
+  }
+}
+
+.skc-header__icon .skc-icon {
+  @include ci.icon(0, 400, 0, 40);
+  color: var(--on-surface-variant);
+}

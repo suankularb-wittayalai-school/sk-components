@@ -9,7 +9,13 @@ export {
   type ToggleButtonProps,
 } from "./components/ToggleButton";
 
+export { Columns, type ColumnsProps } from "./components/Columns";
+
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
+
+export { Divider, type DividerProps } from "./components/Divider";
+
+export { Header, type HeaderProps } from "./components/Header";
 
 export {
   MaterialIcon,
@@ -35,5 +41,14 @@ export {
   type ContentLayoutProps,
 } from "./components/ContentLayout";
 export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
+
+export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
+
+export { Section, type SectionProps } from "./components/Section";
+
+export {
+  ThemeProvider,
+  type ThemeProviderProps,
+} from "./components/ThemeProvider";
 
 export { useAnimationConfig } from "./utils/animation";

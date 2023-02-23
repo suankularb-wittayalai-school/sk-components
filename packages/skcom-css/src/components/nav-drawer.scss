@@ -7,6 +7,7 @@
 
 .skc-nav-drawer {
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   width: calc(100% - 4rem);
   max-width: 22.5rem;
@@ -17,10 +18,10 @@
 
   // Divider
   .skc-nav-drawer-section:not(:last-child)::after {
-    content: "";
-    margin-left: 1rem;
     width: calc(100% - 2rem);
     height: 1px;
+    margin-left: 1rem;
+    content: "";
     background-color: var(--outline-variant);
   }
 }

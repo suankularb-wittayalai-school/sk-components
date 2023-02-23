@@ -1,0 +1,10 @@
+@use "./animation.scss";
+@use "./typography.scss" as type;
+@use "./palette.scss";
+
+// Generate classes for font styles
+@each $name, $properties in type.$font-styles {
+  .skc-#{$name} {
+    @include type.font($name);
+  }
+}

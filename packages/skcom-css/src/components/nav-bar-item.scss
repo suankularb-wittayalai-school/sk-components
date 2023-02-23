@@ -6,7 +6,7 @@
 ////
 
 @use "../abstracts/mixins.scss" as mix;
-@use "../abstracts/typography.scss";
+@use "../abstracts/typography.scss" as type;
 @use "../components/icon.scss" as ci;
 
 // Base Navigation Bar Item
@@ -104,7 +104,7 @@
 
 // Label
 .skc-nav-bar-item__label {
-  @extend .label-medium;
+  @include type.font("label-medium");
   @include mix.transition(
     font-weight letter-spacing,
     var(--motion-short-4),
@@ -130,7 +130,7 @@
 }
 
 .skc-nav-bar-item__badge {
-  @extend .label-small;
+  @include type.font("label-small");
   position: absolute;
   top: 0.125rem;
   right: 1rem;

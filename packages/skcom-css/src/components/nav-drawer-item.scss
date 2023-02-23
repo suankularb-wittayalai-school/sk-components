@@ -7,7 +7,7 @@
 ////
 
 @use "../abstracts/mixins.scss" as mix;
-@use "../abstracts/typography.scss";
+@use "../abstracts/typography.scss" as type;
 @use "../components/icon.scss" as ci;
 
 .skc-nav-drawer-item {
@@ -31,7 +31,7 @@
     opacity: 0.08;
   }
 
-  &:focus,
+  &:focus-visible,
   &:active {
     &::before {
       opacity: 0.12;
@@ -62,12 +62,12 @@
 }
 
 .skc-nav-drawer-item__label {
-  @extend .label-large;
+  @include type.font("label-large");
   flex-grow: 1;
 }
 
 .skc-nav-drawer-item__metadata {
-  @extend .label-large;
+  @include type.font("label-large");
 }
 
 .skc-nav-drawer-item__ripple {

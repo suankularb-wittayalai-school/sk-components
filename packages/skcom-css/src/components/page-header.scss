@@ -1,0 +1,177 @@
+////
+/// **Page Header**
+/// There’s exactly one Page Header on every page. It displays the title (in
+/// the only `<h1>` in the page), the back Button for navigating up, and
+/// additional components very closely related to the title.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
+.skc-page-header {
+  position: relative;
+  z-index: 65;
+  overflow: hidden;
+  padding: 1rem 0 1.75rem;
+  background-color: var(--surface-5);
+}
+
+.skc-page-header.skc-page-header--minimized {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0.75rem 0.5rem;
+
+  .skc-page-header__actions {
+    gap: 0.5rem;
+    width: calc(100% - 1rem);
+    margin: 0;
+
+    .skc-button {
+      left: 0;
+    }
+  }
+
+  .skc-page-header__icon,
+  .skc-page-header__related {
+    display: none;
+  }
+}
+
+.skc-page-header__content {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 70.5rem;
+  margin: 0 auto;
+
+  > * {
+    margin-inline: 1rem;
+  }
+
+  > h1 {
+    @include type.font("display-medium");
+    width: calc(100% - 2rem);
+
+    &:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &:has(.skc-page-header__related) {
+    position: static;
+  }
+}
+
+.skc-page-header__actions {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 2rem);
+
+  > .skc-button {
+    position: relative;
+    left: -0.5rem;
+  }
+
+  > h1 {
+    @include type.font("title-large");
+    flex-grow: 1;
+    width: fit-content;
+  }
+}
+
+.skc-page-header__trailing {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.skc-page-header__actions,
+.skc-page-header__trailing {
+  .skc-button {
+    color: var(--on-surface);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+.skc-page-header__related {
+  display: contents;
+}
+
+.skc-page-header__icon {
+  position: absolute;
+  top: 50%;
+  right: -1.375rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.12;
+  color: var(--primary);
+
+  .skc-icon {
+    @include ci.icon(0, 400, 0, 48);
+    font-size: 14.375rem;
+  }
+}
+
+.skc-page-header__replacement-color {
+  position: absolute;
+  z-index: 60;
+  inset: 0 0 auto;
+  height: 9.25rem;
+  background-color: var(--surface-5);
+}
+
+@include mix.breakpoint("sm") {
+  .skc-page-header {
+    padding: 2.75rem 1.5rem 2rem;
+  }
+
+  .skc-page-header__content {
+    width: calc(100% - 11rem);
+
+    > * {
+      margin-inline: 0;
+    }
+
+    > h1 {
+      @include type.font("display-large");
+      width: fit-content;
+    }
+  }
+
+  .skc-page-header__actions {
+    justify-content: flex-start;
+
+    > h1 {
+      flex-grow: 0;
+    }
+  }
+
+  .skc-page-header__trailing {
+    display: none;
+  }
+
+  .skc-page-header__icon {
+    right: 0rem;
+
+    .skc-icon {
+      font-size: 21rem;
+    }
+  }
+
+  .skc-page-header__replacement-color {
+    height: 9.5rem;
+  }
+}

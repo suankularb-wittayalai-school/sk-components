@@ -209,6 +209,6 @@ export function useRipple(
       ...position,
       width: `${diameter}px`,
       height: `${diameter}px`,
-    },
+    } satisfies React.CSSProperties,
   };
 }

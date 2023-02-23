@@ -322,6 +322,44 @@ declare namespace ToggleButton {
 }
 
 /**
+ * Props for {@link Columns}.
+ */
+interface ColumnsProps extends SKComponent {
+    /**
+     * The content to be divided.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Number of columns.
+     *
+     * - Must be an integer from 2, 3, 4, 6, or 12.
+     * - Always required.
+     */
+    columns: 2 | 3 | 4 | 6 | 12;
+}
+/**
+ * Columns break up content in larger screens into multiple columns, so as to
+ * make the content easier to read. On smaller screens, Columns automatically
+ * collapse columns into one column.
+ *
+ * The columns inside of Columns are based on the layout grid, which is a grid
+ * system that keeps elements of a page aligned to a common grid
+ * ({@link https://m3.material.io/foundations/adaptive-design/large-screens/overview#55fc0118-1fa3-48a3-b805-169bb58e6e78 M3 reference};
+ * {@link https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins M2 reference}).
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.j3ziatuuxd12 SKCom documentation}
+ *
+ * @param children The content to be divided.
+ * @param columns Number of columns.
+ */
+declare function Columns({ children, columns, style, className }: ColumnsProps): JSX.Element;
+declare namespace Columns {
+    var displayName: string;
+}
+
+/**
  * Props for {@link AssistChip}.
  */
 interface AssistChipProps extends SKComponent {
@@ -432,6 +470,72 @@ interface AssistChipProps extends SKComponent {
  */
 declare function AssistChip({ children, icon, tooltip, elevated, dangerous, loading, disabled, onClick, href, element: Element, style, className, }: AssistChipProps): JSX.Element;
 declare namespace AssistChip {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link Divider}.
+ */
+interface DividerProps extends SKComponent {
+}
+/**
+ * A Divider separates items in a list with a thin line. This is used when
+ * separation cannot be accomplished with Cards or white space.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v0rwfas9jvl0 SKCom documentation}
+ */
+declare function Divider({ style, className }: DividerProps): JSX.Element;
+declare namespace Divider {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link Header}.
+ */
+interface HeaderProps extends SKComponent {
+    /**
+     * Header contains Buttons. You can put as many Buttons inside Header as
+     * needed, but the recommended limit is 3.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The level of the Header. The number corresponds to an HTML header element,
+     * i.e., `3` corresponds to `<h3>`.
+     *
+     * - `2` by default.
+     * - Must be a number from 2-6. `1` is not allowed as `<h1>` is reserved for Page Header.
+     * - Optional.
+     */
+    level?: 2 | 3 | 4 | 5 | 6;
+    /**
+     * An icon can appear before the text (`children`) in a Header. In a page
+     * with many headers, icons can quickly orient users.
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * Attributes for the underlying `<h2>`-`<h6>` element.
+     *
+     * - Optional.
+     */
+    hAttr?: React.HTMLAttributes<HTMLHeadingElement>;
+}
+/**
+ * A row of Buttons. Header handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation}
+ *
+ * @param children The text of the Header.
+ * @param level The level of the Header. The number corresponds to an HTML header element.
+ * @param icon An icon can appear before the text (`children`) in a Header.
+ * @param hAttr Attributes for the underlying `<h2>`-`<h6>` element.
+ */
+declare function Header({ children, level, icon, hAttr, style, className, }: HeaderProps): JSX.Element;
+declare namespace Header {
     var displayName: string;
 }
 
@@ -701,6 +805,7 @@ interface NavDrawerProps extends SKComponent {
  *
  * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
  * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
+ * @param onClose The function triggered when the scrim is clicked.
  */
 declare function NavDrawer({ children, open, onClose, style, className, }: NavDrawerProps): JSX.Element;
 declare namespace NavDrawer {
@@ -786,6 +891,10 @@ interface NavDrawerItemProps extends SKComponent {
      */
     selected?: boolean;
     /**
+     * @private
+     */
+    onClick?: () => any;
+    /**
      * The URL of the page this Navigation Drawer Item leads to, similar to
      * `href` on `<a>`.
      *
@@ -823,7 +932,7 @@ interface NavDrawerItemProps extends SKComponent {
  * @param href The URL of the page this Navigation Drawer Item leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function NavDrawerItem({ icon, label, metadata, tooltip, selected, href, element: Element, style, className, }: NavDrawerItemProps): JSX.Element;
+declare function NavDrawerItem({ icon, label, metadata, tooltip, selected, onClick, href, element: Element, style, className, }: NavDrawerItemProps): JSX.Element;
 declare namespace NavDrawerItem {
     var displayName: string;
 }
@@ -939,7 +1048,7 @@ declare namespace FAB {
 }
 
 /**
- * Props for {@link ContentLayout}.
+ * Props for {@link ContentLayout Content Layout}.
  */
 interface ContentLayoutProps extends SKComponent {
     /**
@@ -993,6 +1102,168 @@ declare namespace RootLayout {
 }
 
 /**
+ * Props for {@link PageHeader Page Header}.
+ */
+interface PageHeaderProps extends SKComponent {
+    /**
+     * Some additional components inside the Page Header area.
+     *
+     * - Ensure that these components are highly related to the title itself.
+     * - Examples are:
+     *   - A Search field in a lookup page (Search is highly related to “School
+     *     lookup”).
+     *   - A TL;DR section and tags in a news article (a summary of an article
+     *     is highly related to the headline).
+     *   - etc.
+     * - Optional.
+     */
+    children?: React.ReactNode;
+    /**
+     * The title text: the biggest text in a page and the only within a `<h1>`
+     * tag.
+     *
+     * - Always required.
+     */
+    title: string | JSX.Element;
+    /**
+     * An icon representative of this page of the application.
+     *
+     * - Incompatible with `children`.
+     */
+    icon?: JSX.Element;
+    /**
+     * A small image of your brand can be put on the Page Header to constantly
+     * remind your users that they are, in fact, in your app.
+     *
+     * - Replaces the home Button icon.
+     * - Not displayed on desktop.
+     * - Ensure the image is simple and undistracting.
+     * - Optional but recommended.
+     */
+    brand?: JSX.Element;
+    /**
+     * The link the back Button navigates to.
+     *
+     * - Important: the Back button is not for going back, but for going up a
+     *   hierarchy in the sitemap. As a page can sometimes be navigated to from
+     *   many places, this ensures that the Back button of a page always goes to
+     *   the same place.
+     *   {@link https://m2.material.io/design/navigation/understanding-navigation.html Learn more about navigation.}
+     * - Required if `onBack` is not defined, as the back Button cannot have no
+     *   functionality.
+     * - Incompatible with `onBack`.
+     */
+    parentURL?: string;
+    /**
+     * The link to the home page of this application.
+     *
+     * - Optional.
+     */
+    homeURL?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Optional.
+     * - Incompatible with `onBack`.
+     */
+    element?: ButtonProps["element"];
+    /**
+     * The function triggered when the back Button is clicked.
+     *
+     * - Required if `parentURL` is not defined, as the back Button cannot have
+     *   no functionality.
+     * - Incompatible with `parentURL`.
+     */
+    onBack?: () => any;
+    /**
+     * The function called when the user clicks on the navigation Button.
+     *
+     * - Always required.
+     */
+    onNavToggle: () => any;
+    /**
+     * Props for the underlying Button component the back Button uses.
+     *
+     * - Optional.
+     */
+    backAttr?: ButtonProps;
+}
+/**
+ * There’s exactly one Page Header on every page. It displays the title (in
+ * the only `<h1>` in the page), the back Button for navigating up, and
+ * additional components very closely related to the title.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
+ *
+ * @param children Some additional components inside the Page Header area.
+ * @param title The title text: the biggest text in a page and the only within a `<h1>` tag.
+ * @param icon The icon representative of this page.
+ * @param brand A small image of your brand can be put on the Page Header.
+ * @param parentURL The link the back Button navigates to.
+ * @param homeURL The link to the home page of this application.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ * @param onBack The function triggered when the back Button is clicked.
+ * @param onNavToggle The function called when the user clicks on the navigation Button.
+ * @param backAttr Props for the underlying Button component the back Button uses.
+ */
+declare function PageHeader({ children, title, icon, brand, parentURL, homeURL, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
+declare namespace PageHeader {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link Section}.
+ */
+interface SectionProps extends SKComponent {
+    /**
+     * Section must have exactly 1 Header as the first direct descendent. After
+     * that, it can include anything.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Attributes for the underlying `<section>` element.
+     *
+     * - Optional.
+     */
+    sectionAttr?: React.HTMLAttributes<HTMLElement>;
+}
+/**
+ * Section is a way to group content under one Header.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cpfnymlipawc SKCom documentation}
+ *
+ * @param children Section must have exactly 1 Header as the first direct descendent. After that, it can include anything.
+ * @param sectionAttr Attributes for the underlying `<section>` element.
+ */
+declare function Section({ children, sectionAttr, style, className, }: SectionProps): JSX.Element;
+declare namespace Section {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link ThemeProvider}.
+ */
+interface ThemeProviderProps {
+    /**
+     * Content that uses this theme.
+     */
+    children: React.ReactNode;
+}
+/**
+ * Provides default variables for SK Components.
+ *
+ * @param children Content that uses this theme.
+ */
+declare function ThemeProvider({ children }: ThemeProviderProps): JSX.Element;
+declare namespace ThemeProvider {
+    var displayName: string;
+}
+
+/**
  * A hook with duration and easing definitions for use with Framer Motion.
  * The definitions can be used with {@link transition}.
  *
@@ -1034,4 +1305,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, ContentLayout, ContentLayoutProps, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

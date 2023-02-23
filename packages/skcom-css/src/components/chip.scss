@@ -10,8 +10,7 @@
 
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
-@use "../abstracts/palette.scss";
-@use "../abstracts/typography.scss";
+@use "../abstracts/typography.scss" as type;
 @use "../components/icon.scss" as ci;
 
 // ATTENTION:
@@ -120,7 +119,7 @@
 
 /// @access private
 ._skc-chip__label {
-  @extend .label-large;
+  @include type.font("label-large");
   font-family: var(--font-display);
 }
 

@@ -1,0 +1,69 @@
+////
+/// **Columns**
+///
+/// Columns break up content in larger screens into multiple columns, so as to
+/// make the content easier to read. On smaller screens, Columns automatically
+/// collapse columns into one column.
+///
+/// The columns inside of Columns are based on the layout grid, which is a
+/// grid system that keeps elements of a page aligned to a common grid.
+///
+/// @link https://m3.material.io/foundations/adaptive-design/large-screens/overview#55fc0118-1fa3-48a3-b805-169bb58e6e78 M3 reference
+/// @link https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins M2 reference
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+.skc-columns {
+  display: grid;
+  gap: 0.5rem;
+}
+
+$column-numbers: (
+  2: (
+    "base": 1,
+    "sm": 2,
+    "md": 2,
+    "lg": 2,
+  ),
+  3: (
+    "base": 1,
+    "sm": 2,
+    "md": 3,
+    "lg": 3,
+  ),
+  4: (
+    "base": 1,
+    "sm": 2,
+    "md": 4,
+    "lg": 4,
+  ),
+  6: (
+    "base": 2,
+    "sm": 4,
+    "md": 6,
+    "lg": 6,
+  ),
+  12: (
+    "base": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 12,
+  ),
+);
+
+@each $max, $list in $column-numbers {
+  .skc-columns--#{$max} {
+    grid-template-columns: repeat(map-get($list, "base"), 1fr);
+  }
+
+  @each $breakpoint, $cols in $list {
+    @include mix.breakpoint($breakpoint) {
+      .skc-columns--#{$max} {
+        grid-template-columns: repeat($cols, 1fr);
+      }
+    }
+  }
+}
