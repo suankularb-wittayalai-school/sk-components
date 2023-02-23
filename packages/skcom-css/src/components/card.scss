@@ -15,14 +15,14 @@
 // Base Card
 .skc-card {
   display: flex;
-  border-radius: var(--rounded-lg);
   color: var(--on-surface);
+  border-radius: var(--rounded-lg);
 }
 
 // Appearance
 .skc-card.skc-card--outlined {
-  background-color: var(--surface);
   border: 1px solid var(--outline-variant);
+  background-color: var(--surface);
 }
 
 .skc-card.skc-card--elevated {

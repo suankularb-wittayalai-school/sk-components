@@ -1,9 +1,13 @@
 // External libraries
 import Head from "next/head";
+import Image from "next/image";
 
 // SK Components
 import {
+  Actions,
+  Button,
   Card,
+  CardHeader,
   Columns,
   ContentLayout,
   Header,
@@ -20,6 +24,28 @@ const ContainersPage: CustomPage = () => (
       <title>Containers - SK Components</title>
     </Head>
     <ContentLayout>
+      <Section>
+        <Header>Card</Header>
+        <Columns columns={3}>
+          <Card appearance="elevated">
+            <CardHeader
+              icon={<MaterialIcon icon="person" />}
+              title="Atipol Sukrisadanon"
+              subtitle="Foreign Languages teacher"
+            />
+            <Image
+              src="/images/atipol.jpg"
+              width={800}
+              height={533}
+              alt="Atipol Sukrisadanon"
+              className="w-full"
+            />
+            <Actions>
+              <Button appearance="filled">Learn more</Button>
+            </Actions>
+          </Card>
+        </Columns>
+      </Section>
       <Section>
         <Header>Columns</Header>
         <Columns columns={6}>

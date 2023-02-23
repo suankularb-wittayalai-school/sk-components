@@ -10,6 +10,7 @@ export {
 } from "./components/ToggleButton";
 
 export { Card, type CardProps } from "./components/Card";
+export { CardHeader, type CardHeaderProps } from "./components/CardHeader";
 
 export { Columns, type ColumnsProps } from "./components/Columns";
 

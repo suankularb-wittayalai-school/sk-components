@@ -433,6 +433,65 @@ declare namespace Card {
 }
 
 /**
+ * Props for {@link CardHeader Card Header}.
+ */
+interface CardHeaderProps extends SKComponent {
+    /**
+     * An avatar is placed before all content in a Card Header. A use case would
+     * be the profile picture of a user.
+     *
+     * - You are encouraged to use Avatar as the value for `avatar`.
+     * - Incompatible with `icon`.
+     * - Optional.
+     */
+    avatar?: JSX.Element;
+    /**
+     * An icon can appear before all content in a Card Header. In a page with
+     * many cards, icons can quickly orient users.
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Incompatible with `avatar`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * The most predominant text inside a Card.
+     *
+     * - Always required.
+     */
+    title: string | JSX.Element;
+    /**
+     * A short text complementing the title text.
+     *
+     * - Optional.
+     */
+    subtitle?: string | JSX.Element;
+    /**
+     * The overflow Menu of this Card. If defined, an overflow icon appears on
+     * the right. The value of `overflow` is shown on click.
+     *
+     * - Must be a Menu.
+     * - Optional.
+     */
+    overflow?: JSX.Element;
+}
+/**
+ * The header of a Card. Sometimes all a Card needs is a Card Header.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation}
+ *
+ * @param avatar An avatar is placed before all content in a Card Header.
+ * @param icon An icon can appear before all content in a Card Header.
+ * @param title The most predominant text inside a Card.
+ * @param subtitle A short text complementing the title text.
+ * @param overflow The overflow Menu of this Card. If defined, an overflow icon appears on the right.
+ */
+declare function CardHeader({ avatar, icon, title, subtitle, overflow, style, className, }: CardHeaderProps): JSX.Element;
+declare namespace CardHeader {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Columns}.
  */
 interface ColumnsProps extends SKComponent {
@@ -1416,4 +1475,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
