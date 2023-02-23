@@ -9,6 +9,8 @@ import "@suankularb-components/css/dist/css/components/card.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { motion } from "framer-motion";
+import { useRipple } from "../../utils/animation";
 
 /**
  * Props for {@link Card}.
@@ -105,13 +107,13 @@ export interface CardProps extends SKComponent {
     onKeyDown,
   }: {
     children: React.ReactNode;
-    ref: React.MutableRefObject<any>;
+    ref?: React.MutableRefObject<any>;
     style?: React.CSSProperties;
     className: any;
     href: string;
-    onClick: (event: React.MouseEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
+    onClick?: (event: React.MouseEvent) => void;
+    onMouseDown?: (event: React.MouseEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
   }) => JSX.Element | null;
 }
 
@@ -144,27 +146,87 @@ export function Card({
   layoutID,
   onClick,
   href,
-  element,
+  element: Element,
   className,
 }: CardProps) {
-  return (
-    <div
-      style={style}
-      className={cn([
-        "skc-card",
-        appearance === "outlined"
-          ? "skc-card--outlined"
-          : appearance === "elevated"
-          ? "skc-card--elevated"
-          : appearance === "filled"
-          ? "skc-card--filled"
-          : undefined,
-        direction === "row" ? "skc-card--row" : "skc-card--column",
-        className,
-      ])}
-    >
+  // Ripple setup
+  const cardRef = React.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(cardRef);
+
+  const props = {
+    ref: cardRef,
+    style,
+    className: cn([
+      "skc-card",
+      appearance === "outlined"
+        ? "skc-card--outlined"
+        : appearance === "elevated"
+        ? "skc-card--elevated"
+        : appearance === "filled"
+        ? "skc-card--filled"
+        : undefined,
+      direction === "row" ? "skc-card--row" : "skc-card--column",
+      stateLayerEffect && "skc-card--state-layer",
+      shadowEffect && "skc-card--shadow",
+      className,
+    ]),
+    ...rippleListeners,
+  } satisfies JSX.IntrinsicElements["div"];
+
+  const content = (
+    <>
       {children}
-    </div>
+      {stateLayerEffect && (
+        <motion.span
+          initial={{ scale: 0, opacity: 0.36 }}
+          animate={rippleControls}
+          className="skc-card__ripple"
+          style={rippleStyle}
+        />
+      )}
+    </>
+  );
+
+  return (
+    // Render with `element` if defined
+    href && Element ? (
+      <Element {...props} href={href}>
+        {content}
+      </Element>
+    ) : // Render an `<a>` if link passed in
+    href ? (
+      layoutID ? (
+        <motion.a {...props} layoutId={layoutID}>
+          {content}
+        </motion.a>
+      ) : (
+        <a {...props} href={href}>
+          {content}
+        </a>
+      )
+    ) : // Render a `<button>` if `onClick` passed in
+    onClick ? (
+      layoutID ? (
+        <motion.button
+          {...{ ...props, onClick }}
+          layoutId={layoutID}
+          type="button"
+        >
+          {content}
+        </motion.button>
+      ) : (
+        <button {...{ ...props, onClick }} type="button">
+          {content}
+        </button>
+      )
+    ) : // Otherwise, render a `<div>`
+    layoutID ? (
+      <motion.div {...props} layoutId={layoutID}>
+        {content}
+      </motion.div>
+    ) : (
+      <div {...props}>{content}</div>
+    )
   );
 }
 

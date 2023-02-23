@@ -399,13 +399,13 @@ interface CardProps extends SKComponent {
      */
     element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
-        ref: React.MutableRefObject<any>;
+        ref?: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
-        onClick: (event: React.MouseEvent) => void;
-        onMouseDown: (event: React.MouseEvent) => void;
-        onKeyDown: (event: React.KeyboardEvent) => void;
+        onClick?: (event: React.MouseEvent) => void;
+        onMouseDown?: (event: React.MouseEvent) => void;
+        onKeyDown?: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
 }
 /**
@@ -427,7 +427,7 @@ interface CardProps extends SKComponent {
  * @param href The URL of the page this Card leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Card({ children, style, appearance, direction, stateLayerEffect, shadowEffect, layoutID, onClick, href, element, className, }: CardProps): JSX.Element;
+declare function Card({ children, style, appearance, direction, stateLayerEffect, shadowEffect, layoutID, onClick, href, element: Element, className, }: CardProps): JSX.Element;
 declare namespace Card {
     var displayName: string;
 }
