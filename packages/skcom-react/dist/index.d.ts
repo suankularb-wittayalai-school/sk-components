@@ -490,6 +490,56 @@ declare namespace Divider {
 }
 
 /**
+ * Props for {@link Header}.
+ */
+interface HeaderProps extends SKComponent {
+    /**
+     * Header contains Buttons. You can put as many Buttons inside Header as
+     * needed, but the recommended limit is 3.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The level of the Header. The number corresponds to an HTML header element,
+     * i.e., `3` corresponds to `<h3>`.
+     *
+     * - `2` by default.
+     * - Must be a number from 2-6. `1` is not allowed as `<h1>` is reserved for Page Header.
+     * - Optional.
+     */
+    level?: 2 | 3 | 4 | 5 | 6;
+    /**
+     * An icon can appear before the text (`children`) in a Header. In a page
+     * with many headers, icons can quickly orient users.
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * Attributes for the underlying `<h2>`-`<h6>` element.
+     *
+     * - Optional.
+     */
+    hAttr?: React.HTMLAttributes<HTMLHeadingElement>;
+}
+/**
+ * A row of Buttons. Header handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation}
+ *
+ * @param children The text of the Header.
+ * @param level The level of the Header. The number corresponds to an HTML header element.
+ * @param icon An icon can appear before the text (`children`) in a Header.
+ * @param hAttr Attributes for the underlying `<h2>`-`<h6>` element.
+ */
+declare function Header({ children, level, icon, hAttr, style, className, }: HeaderProps): JSX.Element;
+declare namespace Header {
+    var displayName: string;
+}
+
+/**
  * Props for {@link MaterialIcon Material Icon}.
  */
 interface MaterialIconProps extends SKComponent {
@@ -1224,4 +1274,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, FAB, FABProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

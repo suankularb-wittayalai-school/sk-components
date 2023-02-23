@@ -13,7 +13,9 @@ export { Columns, type ColumnsProps } from "./components/Columns";
 
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
 
-export { Divider } from "./components/Divider";
+export { Divider, type DividerProps } from "./components/Divider";
+
+export { Header, type HeaderProps } from "./components/Header";
 
 export {
   MaterialIcon,

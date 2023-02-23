@@ -9,8 +9,8 @@ import {
   Button,
   Columns,
   ContentLayout,
-  Divider,
   FAB,
+  Header,
   MaterialIcon,
   SegmentedButton,
   ToggleButton,
@@ -20,39 +20,42 @@ import {
 import { CustomPage } from "@/utils/types";
 
 const ButtonsSection: FC = () => (
-  <Actions align="left">
-    <Button appearance="filled">Button</Button>
-    <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-      Button
-    </Button>
-    <Button appearance="filled" dangerous>
-      Button
-    </Button>
-    <Button appearance="filled" disabled>
-      Button
-    </Button>
-    <Button appearance="tonal">Button</Button>
-    <Button appearance="tonal" dangerous>
-      Button
-    </Button>
-    <Button appearance="tonal" disabled>
-      Button
-    </Button>
-    <Button appearance="outlined">Button</Button>
-    <Button appearance="outlined" dangerous>
-      Button
-    </Button>
-    <Button appearance="outlined" disabled>
-      Button
-    </Button>
-    <Button appearance="text">Button</Button>
-    <Button appearance="text" dangerous>
-      Button
-    </Button>
-    <Button appearance="text" disabled>
-      Button
-    </Button>
-  </Actions>
+  <>
+    <Header>Button</Header>
+    <Actions align="left">
+      <Button appearance="filled">Button</Button>
+      <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
+        Button
+      </Button>
+      <Button appearance="filled" dangerous>
+        Button
+      </Button>
+      <Button appearance="filled" disabled>
+        Button
+      </Button>
+      <Button appearance="tonal">Button</Button>
+      <Button appearance="tonal" dangerous>
+        Button
+      </Button>
+      <Button appearance="tonal" disabled>
+        Button
+      </Button>
+      <Button appearance="outlined">Button</Button>
+      <Button appearance="outlined" dangerous>
+        Button
+      </Button>
+      <Button appearance="outlined" disabled>
+        Button
+      </Button>
+      <Button appearance="text">Button</Button>
+      <Button appearance="text" dangerous>
+        Button
+      </Button>
+      <Button appearance="text" disabled>
+        Button
+      </Button>
+    </Actions>
+  </>
 );
 
 const SegmentedButtonSection: FC = () => {
