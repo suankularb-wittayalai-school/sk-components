@@ -19,7 +19,7 @@ import "@/styles/globals.css";
 // Utilities
 import { CustomAppProps } from "@/utils/types";
 
-// Thai fonts
+// English fonts
 const bodyFontEN = Inter({ subsets: ["latin"] });
 const displayFontEN = Space_Grotesk({ subsets: ["latin"] });
 
