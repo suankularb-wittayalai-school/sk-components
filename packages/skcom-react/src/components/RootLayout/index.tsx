@@ -1,4 +1,5 @@
 // External libraries
+import { AnimatePresence } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -9,7 +10,6 @@ import "@suankularb-components/css/dist/css/components/root-layout.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { AnimatePresence } from "framer-motion";
 
 /**
  * Props for {@link RootLayout Root Layout}.

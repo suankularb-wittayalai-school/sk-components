@@ -963,11 +963,13 @@ function FAB({
 }
 FAB.displayName = "FAB";
 
+// src/components/ContentLayout/index.tsx
+import { motion as motion9 } from "framer-motion";
+
 // ../skcom-css/dist/css/components/content-layout.css
 styleInject(".skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > * {\n    margin-inline: 0;\n  }\n}\n");
 
 // src/components/ContentLayout/index.tsx
-import { motion as motion9 } from "framer-motion";
 import { jsx as jsx16 } from "react/jsx-runtime";
 function ContentLayout({
   children,
@@ -991,13 +993,13 @@ function ContentLayout({
 ContentLayout.displayName = "ContentLayout";
 
 // src/components/RootLayout/index.tsx
+import { AnimatePresence as AnimatePresence4 } from "framer-motion";
 import * as React10 from "react";
 
 // ../skcom-css/dist/css/components/root-layout.css
 styleInject(".skc-root-layout {\n  overflow-x: hidden;\n  padding-bottom: 5rem;\n}\n.skc-root-layout > .skc-nav-bar {\n  position: fixed;\n  z-index: 70;\n  bottom: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-nav-bar .skc-fab {\n  position: fixed;\n  right: 1rem;\n  bottom: 6rem;\n}\n.skc-root-layout > .skc-nav-drawer {\n  position: fixed;\n  z-index: 85;\n  top: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-scrim {\n  position: fixed;\n  z-index: 80;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  opacity: .5;\n  background-color: var(--black);\n}\n@media only screen and (min-width: 600px) {\n  .skc-root-layout {\n    padding-bottom: 0;\n  }\n  .skc-root-layout > .skc-nav-bar {\n    top: 0;\n    bottom: initial;\n  }\n  .skc-root-layout > .skc-nav-bar .skc-fab {\n    position: relative;\n    right: 0;\n    bottom: 0;\n  }\n}\n");
 
 // src/components/RootLayout/index.tsx
-import { AnimatePresence as AnimatePresence4 } from "framer-motion";
 import { jsx as jsx17, jsxs as jsxs11 } from "react/jsx-runtime";
 function RootLayout({ children, className, style }) {
   let content;
