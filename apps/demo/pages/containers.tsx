@@ -1,8 +1,14 @@
 // External libraries
 import Head from "next/head";
+import Image from "next/image";
 
 // SK Components
 import {
+  Actions,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
   Columns,
   ContentLayout,
   Header,
@@ -20,16 +26,44 @@ const ContainersPage: CustomPage = () => (
     </Head>
     <ContentLayout>
       <Section>
+        <Header>Card</Header>
+        <Columns columns={3}>
+          <Card appearance="elevated">
+            <CardHeader
+              icon={<MaterialIcon icon="person" />}
+              title="Atipol Sukrisadanon"
+              subtitle="Foreign Languages teacher"
+            />
+            <Image
+              src="/images/atipol.jpg"
+              width={800}
+              height={533}
+              alt="Atipol Sukrisadanon"
+              className="w-full"
+            />
+            <CardContent>
+              <p>
+                Atipol Sukrisadanon is arguably one of the teachers in
+                Suankularb Wittayalai School.
+              </p>
+              <Actions>
+                <Button appearance="filled">Learn more</Button>
+              </Actions>
+            </CardContent>
+          </Card>
+        </Columns>
+      </Section>
+      <Section>
         <Header>Columns</Header>
         <Columns columns={6}>
           {[...Array(12)].map((_, i) => (
-            <div
-              className="skc-headline-large grid h-20 place-content-center
-                rounded-xl border-2 border-blue-900"
+            <Card
               key={i}
+              appearance="outlined"
+              className="skc-headline-large !grid h-20 place-content-center"
             >
               {i + 1}
-            </div>
+            </Card>
           ))}
         </Columns>
       </Section>

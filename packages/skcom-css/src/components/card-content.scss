@@ -1,0 +1,17 @@
+////
+/// **Card Content**
+/// A section of content inside Card.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.anun9n3ld6tj SKCom documentation
+////
+
+.skc-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+
+  > .skc-actions {
+    margin-top: 1.25rem;
+  }
+}

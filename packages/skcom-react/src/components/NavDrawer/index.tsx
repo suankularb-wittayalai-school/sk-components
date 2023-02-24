@@ -2,6 +2,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
+// Internal components
+import { NavDrawerSectionProps } from "../NavDrawerSection";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -11,7 +14,6 @@ import "@suankularb-components/css/dist/css/components/nav-drawer.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { NavDrawerSectionProps } from "../NavDrawerSection";
 
 /**
  * Props for {@link NavDrawer}.

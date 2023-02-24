@@ -1,0 +1,46 @@
+////
+/// **Card Header**
+/// The header of a Card. Sometimes all a Card needs is a Card Header.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation
+////
+
+@use "../abstracts/typography.scss" as type;
+
+.skc-card-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.75rem 0.25rem 0.75rem 1rem;
+}
+
+.skc-card-header__content {
+  flex-grow: 1;
+}
+
+.skc-card-header__icon .skc-icon {
+  color: var(--on-surface-variant);
+}
+
+.skc-card-header__title {
+  @include type.font("title-medium");
+}
+
+.skc-card-header__subtitle {
+  @include type.font("body-medium");
+  font-family: var(--font-display);
+}
+
+.skc-card-header__overflow {
+  padding: 0.25rem;
+
+  .skc-button {
+    color: var(--outline);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-surface-variant);
+    }
+  }
+}

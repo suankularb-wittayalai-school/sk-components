@@ -1,0 +1,127 @@
+////
+/// **Card**
+///
+/// Card is a container for information and actions about a subject. It can be
+/// in a list, on its own, or as a link to another page; Card is extremely versatile.
+///
+/// To quote Material Design 3, there is no right way to make a Card. However,
+/// we have provided some useful props and components to get you started.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+// Base Card
+.skc-card {
+  display: flex;
+  color: var(--on-surface);
+  border-radius: var(--rounded-lg);
+}
+
+// Appearance
+.skc-card.skc-card--outlined {
+  border: 1px solid var(--outline-variant);
+  background-color: var(--surface);
+}
+
+.skc-card.skc-card--elevated {
+  background-color: var(--surface-1);
+  box-shadow: var(--shadow-2);
+}
+
+.skc-card.skc-card--filled {
+  background-color: var(--surface-variant);
+
+  &.skc-card--row {
+    border: 1px solid var(--outline-variant);
+  }
+}
+
+// Direction
+.skc-card,
+.skc-card.skc-card--column {
+  flex-direction: column;
+}
+
+.skc-card.skc-card--row {
+  flex-direction: row;
+}
+
+// State layer effect
+.skc-card.skc-card--state-layer {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::before {
+    @include mix.state-layer();
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  &.skc-card--outlined {
+    @include mix.transition(
+      border-color,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
+
+    &:focus {
+      border-color: var(--primary);
+    }
+  }
+
+  .skc-card__ripple {
+    @include mix.ripple();
+  }
+
+  &::before,
+  .skc-card__ripple {
+    background-color: var(--primary);
+  }
+}
+
+// Shadow effect
+.skc-card.skc-card--shadow {
+  @include mix.transition(
+    box-shadow,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+
+  &.skc-card--outlined {
+    @include mix.transition(
+      border-color box-shadow,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &.skc-card--elevated.skc-card--shadow {
+    &:hover {
+      box-shadow: var(--shadow-3);
+    }
+
+    &:active {
+      box-shadow: var(--shadow-2);
+    }
+  }
+}

@@ -322,6 +322,199 @@ declare namespace ToggleButton {
 }
 
 /**
+ * Props for {@link Card}.
+ */
+interface CardProps extends SKComponent {
+    /**
+     * Card must contain at least 1 JSX element; here is a list of SKCom
+     * components that work well with Card: Card Header, Card Media, Card
+     * Content, Chip List, Actions.
+     *
+     * - Required.
+     */
+    children: React.ReactNode;
+    /**
+     * The appearance of the Card.
+     *
+     * - Each appearance puts different amounts of emphasis on the subject. From
+     *   most to least emphasis, a Card can be outlined, elevated, and filled.
+     * - Must be `outlined`, `elevated`, or `filled`, from highest to lowest
+     *   emphasis.
+     * - Always required.
+     */
+    appearance: "outlined" | "elevated" | "filled";
+    /**
+     * The flow of the Card’s content, like the CSS property `flex-direction`.
+     * The default is `column`.
+     *
+     * - Must be `row` or `column`.
+     * - Optional.
+     */
+    direction?: "row" | "column";
+    /**
+     * In interactive components like Button, the state layer reacts to changes
+     * to the state to signify its interactivity. For example, a Button’s state
+     * layer turns up its opacity on hover.
+     *
+     * - This effect can be enabled on Card as well, letting the user know that
+     *   this Card is interactive.
+     * - Optional.
+     */
+    stateLayerEffect?: boolean;
+    /**
+     * Elevates Card on hover and focus to signify its interactivity.
+     *
+     * - Optional.
+     */
+    shadowEffect?: boolean;
+    /**
+     * An ID for transitioning to and from this Card. See Framer Motion’s
+     * documentation on
+     * {@link https://www.framer.com/docs/layout-group/ LayoutGroup}
+     * for more details.
+     *
+     * - Must be unique within the page.
+     * - Optional.
+     */
+    layoutID?: any;
+    /**
+     * The function called when the user interacts with the Card, similar to
+     * `onClick` on `<button>`.
+     *
+     * - Incompatible with `href`.
+     */
+    onClick?: () => any;
+    /**
+     * The URL of the page this Card leads to, similar to `href` on `<a>`.
+     *
+     * - Incompatible with `onClick`.
+     */
+    href?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Incompatible with `onClick`.
+     */
+    element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref?: React.MutableRefObject<any>;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onClick?: (event: React.MouseEvent) => void;
+        onMouseDown?: (event: React.MouseEvent) => void;
+        onKeyDown?: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * Card is a container for information and actions about a subject. It can be
+ * in a list, on its own, or as a link to another page; Card is extremely versatile.
+ *
+ * To quote Material Design 3, there is no right way to make a Card. However,
+ * we have provided some useful props and components to get you started.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation}
+ *
+ * @param children Card must contain at least 1 JSX element
+ * @param appearance The appearance of the Card. Each appearance puts different amounts of emphasis on the subject.
+ * @param direction The flow of the Card’s content, like the CSS property `flex-direction`.
+ * @param stateLayerEffect The state layer reacts to changes to the state to signify its interactivity. This effect can be enabled on Card as well.
+ * @param shadowEffect Elevates Card on hover and focus to signify its interactivity.
+ * @param layoutID An ID for transitioning to and from this Card.
+ * @param onClick The function called when the user interacts with the Card, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Card leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function Card({ children, style, appearance, direction, stateLayerEffect, shadowEffect, layoutID, onClick, href, element: Element, className, }: CardProps): JSX.Element;
+declare namespace Card {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link CardHeader Card Header}.
+ */
+interface CardHeaderProps extends SKComponent {
+    /**
+     * An avatar is placed before all content in a Card Header. A use case would
+     * be the profile picture of a user.
+     *
+     * - You are encouraged to use Avatar as the value for `avatar`.
+     * - Incompatible with `icon`.
+     * - Optional.
+     */
+    avatar?: JSX.Element;
+    /**
+     * An icon can appear before all content in a Card Header. In a page with
+     * many cards, icons can quickly orient users.
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Incompatible with `avatar`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * The most predominant text inside a Card.
+     *
+     * - Always required.
+     */
+    title: string | JSX.Element;
+    /**
+     * A short text complementing the title text.
+     *
+     * - Optional.
+     */
+    subtitle?: string | JSX.Element;
+    /**
+     * The overflow Menu of this Card. If defined, an overflow icon appears on
+     * the right. The value of `overflow` is shown on click.
+     *
+     * - Must be a Menu.
+     * - Optional.
+     */
+    overflow?: JSX.Element;
+}
+/**
+ * The header of a Card. Sometimes all a Card needs is a Card Header.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation}
+ *
+ * @param avatar An avatar is placed before all content in a Card Header.
+ * @param icon An icon can appear before all content in a Card Header.
+ * @param title The most predominant text inside a Card.
+ * @param subtitle A short text complementing the title text.
+ * @param overflow The overflow Menu of this Card. If defined, an overflow icon appears on the right.
+ */
+declare function CardHeader({ avatar, icon, title, subtitle, overflow, style, className, }: CardHeaderProps): JSX.Element;
+declare namespace CardHeader {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link CardContent Card Content}.
+ */
+interface CardContentProps extends SKComponent {
+    /**
+     * Card Content can contain anything, from supporting text to Actions.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * A section of content inside Card.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.anun9n3ld6tj SKCom documentation}
+ *
+ * @param children Card Content can contain anything, from supporting text to Actions.
+ */
+declare function CardContent({ children, style, className }: CardContentProps): JSX.Element;
+declare namespace CardContent {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Columns}.
  */
 interface ColumnsProps extends SKComponent {
@@ -1305,4 +1498,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

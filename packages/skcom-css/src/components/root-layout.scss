@@ -13,6 +13,7 @@
 @use "../abstracts/mixins.scss" as mix;
 
 .skc-root-layout {
+  font-size: var(--text-base);
   overflow-x: hidden;
   padding-bottom: 5rem;
 }
