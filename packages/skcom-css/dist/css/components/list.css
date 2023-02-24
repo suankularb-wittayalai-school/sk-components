@@ -1,1 +1,1 @@
-.skc-list{display:flex;flex-direction:column;gap:.5rem 1.5rem}/*# sourceMappingURL=list.css.map */
+.skc-list{display:flex;flex-direction:column;gap:.5rem 1.5rem}.skc-list--divided>:not(:last-child){padding-bottom:.5rem;border-bottom:1px solid var(--outline-variant)}/*# sourceMappingURL=list.css.map */

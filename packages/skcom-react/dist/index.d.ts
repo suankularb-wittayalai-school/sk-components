@@ -733,6 +733,45 @@ declare namespace Header {
 }
 
 /**
+ * Props for {@link List}.
+ */
+interface ListProps extends SKComponent {
+    /**
+     * List contains Buttons. You can put as many Buttons inside List as
+     * needed, but the recommended limit is 3.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Uses Columns under the hood. Number of columns.
+     *
+     * - Must be an integer from 2, 3, 4, 6, or 12.
+     * - Optional.
+     */
+    columns?: ColumnsProps["columns"];
+    /**
+     * Puts a Divider between List Items.
+     *
+     * - Optional.
+     */
+    divided?: boolean;
+}
+/**
+ * A vertical index of texts or images.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iyg4spbf5pwr SKCom documentation}
+ *
+ * @param children Items inside the List.
+ * @param columns Uses Columns under the hood. Number of columns.
+ * @param divided Puts a Divider between List Items.
+ */
+declare function List({ children, columns, divided, style, className, }: ListProps): JSX.Element;
+declare namespace List {
+    var displayName: string;
+}
+
+/**
  * Props for {@link MaterialIcon Material Icon}.
  */
 interface MaterialIconProps extends SKComponent {
@@ -1498,4 +1537,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

@@ -58,7 +58,7 @@ export function List({
   className,
 }: ListProps) {
   return (
-    <div style={style} className={cn(["skc-list", className])}>
+    <div style={style} className={cn(["skc-list", divided && "skc-list--divided", className])}>
       {columns ? <Columns columns={columns}>{children}</Columns> : children}
     </div>
   );

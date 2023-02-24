@@ -12,6 +12,7 @@ import {
   Columns,
   ContentLayout,
   Header,
+  List,
   MaterialIcon,
   Section,
 } from "@suankularb-components/react";
@@ -89,6 +90,14 @@ const ContainersPage: CustomPage = () => (
           voluptatibus numquam accusamus voluptatum, eaque consectetur est
           maxime asperiores rem deleniti accusantium iste ex quisquam!
         </p>
+      </Section>
+      <Section>
+        <Header>List</Header>
+        <List columns={2} divided>
+          <p>Placeholder List Item 1</p>
+          <p>Placeholder List Item 2</p>
+          <p>Placeholder List Item 3</p>
+        </List>
       </Section>
     </ContentLayout>
   </>
