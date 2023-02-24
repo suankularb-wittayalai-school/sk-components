@@ -1,0 +1,12 @@
+////
+/// **List**
+/// A vertical index of texts or images.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iyg4spbf5pwr SKCom documentation
+////
+
+.skc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem 1.5rem;
+}
