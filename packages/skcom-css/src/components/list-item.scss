@@ -5,12 +5,15 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.33dks77m5ey9 SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
+
 .skc-list-item {
   display: flex;
-  align-items: flex-start;
+  overflow: hidden;
   flex-direction: row;
   gap: 1rem;
   padding: 0.5rem 2rem 0.5rem 1rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .skc-list-item.skc-list-item--top {
@@ -29,8 +32,41 @@
   padding-block: 0.75rem;
 }
 
+.skc-list-item.skc-list-item--state-layer {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--primary);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+}
+
 .skc-list-item > img {
   width: 3.5rem;
   height: 3.5rem;
   background-color: var(--surface-variant);
+}
+
+.skc-list-item__ripple {
+  @include mix.ripple();
+  background-color: var(--primary);
+}
+
+@include mix.breakpoint("sm") {
+  .skc-columns .skc-list-item.skc-list-item--state-layer {
+    border-radius: var(--rounded-lg);
+  }
 }

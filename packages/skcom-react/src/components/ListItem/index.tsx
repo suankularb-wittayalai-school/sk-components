@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,6 +9,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/list-item.css";
 
 // Utilities
+import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 type ListItemLines = 1 | 2 | 3;
@@ -45,6 +47,17 @@ export interface ListItemProps extends SKComponent {
     | [ListItemLines, ListItemLines, ListItemLines, ListItemLines];
 
   /**
+   * In interactive components like Button, the state layer reacts to changes
+   * to the state to signify its interactivity. For example, a Button’s state
+   * layer turns up its opacity on hover.
+   *
+   * - This effect can be enabled on List Item as well, letting the user know
+   *   that this List Item is interactive.
+   * - Optional.
+   */
+  stateLayerEffect?: boolean;
+
+  /**
    * The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
    *
    * - If this is defined, a state layer is added.
@@ -68,7 +81,23 @@ export interface ListItemProps extends SKComponent {
    * - Incompatible with `onClick`.
    * - Optional.
    */
-  element?: JSX.Element;
+  element?: ({
+    children,
+    ref,
+    style,
+    className,
+    href,
+    onMouseDown,
+    onKeyDown,
+  }: {
+    children: React.ReactNode;
+    ref?: React.MutableRefObject<any>;
+    style?: React.CSSProperties;
+    className: any;
+    href: string;
+    onMouseDown?: (event: React.MouseEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
+  }) => JSX.Element | null;
 }
 
 /**
@@ -79,6 +108,7 @@ export interface ListItemProps extends SKComponent {
  * @param children The content of a List Item consists of the leading section, the content section, and the trailing section.
  * @param align The vertical alignment of the List Item’s content.
  * @param lines The number of lines contained by the List Item.
+ * @param stateLayerEffect The state layer reacts to changes to the state to signify its interactivity. This effect can be enabled on List item as well.
  * @param onClick The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
  * @param href The URL of the page this List Item leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
@@ -87,29 +117,79 @@ export function ListItem({
   children,
   align,
   lines,
+  stateLayerEffect,
   onClick,
   href,
-  element,
+  element: Element,
   style,
   className,
 }: ListItemProps) {
-  return (
-    <div
-      style={style}
-      className={cn([
-        "skc-list-item",
-        align === "top"
-          ? "skc-list-item--top"
-          : align === "center"
-          ? "skc-list-item--center"
-          : align === "bottom"
-          ? "skc-list-item--bottom"
-          : undefined,
-        className,
-      ])}
-    >
+  // Ripple setup
+  const itemRef = React.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(itemRef);
+
+  const props = {
+    ref: itemRef,
+    style,
+    className: cn([
+      "skc-list-item",
+      align === "top"
+        ? "skc-list-item--top"
+        : align === "center"
+        ? "skc-list-item--center"
+        : align === "bottom"
+        ? "skc-list-item--bottom"
+        : undefined,
+      lines === 1
+        ? "skc-list-item--1-line"
+        : lines === 2
+        ? "skc-list-item--2-lines"
+        : lines === 3
+        ? "skc-list-item--3-lines"
+        : undefined,
+      stateLayerEffect && "skc-list-item--state-layer",
+      className,
+    ]),
+    ...rippleListeners,
+  } satisfies JSX.IntrinsicElements["button" | "a" | "div"];
+
+  const content = (
+    <>
       {children}
-    </div>
+      {stateLayerEffect && (
+        <motion.span
+          initial={{ scale: 0, opacity: 0.36 }}
+          animate={rippleControls}
+          className="skc-list-item__ripple"
+          style={rippleStyle}
+        />
+      )}
+    </>
+  );
+
+  return (
+    // Render with `element`, `<a>`, or `<button>` if functionality passed in
+    href || onClick || stateLayerEffect ? (
+      // Render with `element` if defined
+      href && Element ? (
+        <Element {...props} href={href}>
+          {content}
+        </Element>
+      ) : // Render an `<a>` if link passed in
+      href ? (
+        <a {...props} href={href}>
+          {content}
+        </a>
+      ) : (
+        // Otherwise, render a `<button>`
+        <button {...{ ...props, onClick }} type="button">
+          {content}
+        </button>
+      )
+    ) : (
+      // If this Item has no functionality, just render a `<li>`
+      <li {...props}>{content}</li>
+    )
   );
 }
 

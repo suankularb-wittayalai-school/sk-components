@@ -5,17 +5,27 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iyg4spbf5pwr SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
+
 .skc-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem 1.5rem;
 }
 
 .skc-list--divided > :not(:last-child) {
-  padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--outline-variant);
 }
 
-.skc-list--divided > .skc-list-item:not(:last-child) {
-  padding-bottom: 1.25rem;
+.skc-section:has(.skc-list) {
+  margin-inline: 0;
+
+  > *:not(.skc-list) {
+    margin-inline: 1rem;
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-section > * {
+    margin-inline: 0 !important;
+  }
 }

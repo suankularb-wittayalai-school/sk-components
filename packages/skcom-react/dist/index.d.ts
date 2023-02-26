@@ -800,6 +800,16 @@ interface ListItemProps extends SKComponent {
      */
     lines: ListItemLines | [ListItemLines, ListItemLines, ListItemLines, ListItemLines];
     /**
+     * In interactive components like Button, the state layer reacts to changes
+     * to the state to signify its interactivity. For example, a Button’s state
+     * layer turns up its opacity on hover.
+     *
+     * - This effect can be enabled on List Item as well, letting the user know
+     *   that this List Item is interactive.
+     * - Optional.
+     */
+    stateLayerEffect?: boolean;
+    /**
      * The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
      *
      * - If this is defined, a state layer is added.
@@ -821,7 +831,15 @@ interface ListItemProps extends SKComponent {
      * - Incompatible with `onClick`.
      * - Optional.
      */
-    element?: JSX.Element;
+    element?: ({ children, ref, style, className, href, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref?: React.MutableRefObject<any>;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onMouseDown?: (event: React.MouseEvent) => void;
+        onKeyDown?: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
 }
 /**
  * An item inside a List.
@@ -831,11 +849,12 @@ interface ListItemProps extends SKComponent {
  * @param children The content of a List Item consists of the leading section, the content section, and the trailing section.
  * @param align The vertical alignment of the List Item’s content.
  * @param lines The number of lines contained by the List Item.
+ * @param stateLayerEffect The state layer reacts to changes to the state to signify its interactivity. This effect can be enabled on List item as well.
  * @param onClick The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
  * @param href The URL of the page this List Item leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function ListItem({ children, align, lines, onClick, href, element, style, className, }: ListItemProps): JSX.Element;
+declare function ListItem({ children, align, lines, stateLayerEffect, onClick, href, element: Element, style, className, }: ListItemProps): JSX.Element;
 declare namespace ListItem {
     var displayName: string;
 }

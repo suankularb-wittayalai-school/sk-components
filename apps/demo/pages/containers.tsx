@@ -96,7 +96,7 @@ const ContainersPage: CustomPage = () => (
       <Section>
         <Header>List</Header>
         <List divided>
-          <ListItem align="center" lines={3}>
+          <ListItem align="center" lines={3} stateLayerEffect>
             <Image src="/images/burger.png" width={56} height={56} alt="" />
             <ListItemContent
               overline="Meal of the day"
@@ -104,11 +104,11 @@ const ContainersPage: CustomPage = () => (
               desc="฿50.00 • Contains fish"
             />
           </ListItem>
-          <ListItem align="center" lines={2}>
+          <ListItem align="center" lines={2} stateLayerEffect>
             <Image src="/images/burger.png" width={56} height={56} alt="" />
             <ListItemContent title="Pork Burger" desc="฿50.00" />
           </ListItem>
-          <ListItem align="center" lines={2}>
+          <ListItem align="center" lines={2} stateLayerEffect>
             <Image src="/images/burger.png" width={56} height={56} alt="" />
             <ListItemContent
               title="Beef Burger"

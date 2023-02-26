@@ -57,9 +57,7 @@ export function ListItemContent({
       {overline && (
         <span className="skc-list-item-content__overline">{overline}</span>
       )}
-      <span className="skc-list-item-content__title">
-        {title}
-      </span>
+      <span className="skc-list-item-content__title">{title}</span>
       {desc && <span className="skc-list-item-content__desc">{desc}</span>}
     </div>
   );
