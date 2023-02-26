@@ -22,6 +22,7 @@ export { Divider, type DividerProps } from "./components/Divider";
 export { Header, type HeaderProps } from "./components/Header";
 
 export { List, type ListProps } from "./components/List";
+export { ListItem, type ListItemProps } from "./components/ListItem";
 
 export {
   MaterialIcon,

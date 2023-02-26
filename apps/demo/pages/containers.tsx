@@ -13,6 +13,7 @@ import {
   ContentLayout,
   Header,
   List,
+  ListItem,
   MaterialIcon,
   Section,
 } from "@suankularb-components/react";
@@ -93,10 +94,16 @@ const ContainersPage: CustomPage = () => (
       </Section>
       <Section>
         <Header>List</Header>
-        <List columns={2} divided>
-          <p>Placeholder List Item 1</p>
-          <p>Placeholder List Item 2</p>
-          <p>Placeholder List Item 3</p>
+        <List divided>
+          <ListItem align="center" lines={1}>
+            Placeholder List Item 1
+          </ListItem>
+          <ListItem align="center" lines={1}>
+            Placeholder List Item 2
+          </ListItem>
+          <ListItem align="center" lines={1}>
+            Placeholder List Item 3
+          </ListItem>
         </List>
       </Section>
     </ContentLayout>
