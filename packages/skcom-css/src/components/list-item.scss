@@ -7,6 +7,7 @@
 
 @use "../abstracts/mixins.scss" as mix;
 
+// Base List Item
 .skc-list-item {
   display: flex;
   overflow: hidden;
@@ -16,6 +17,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+// Alignment
 .skc-list-item.skc-list-item--top {
   align-items: flex-start;
 }
@@ -28,10 +30,12 @@
   align-items: flex-end;
 }
 
+// Lines
 .skc-list-item.skc-list-item--3-lines {
   padding-block: 0.75rem;
 }
 
+// State layer
 .skc-list-item.skc-list-item--state-layer {
   position: relative;
   overflow: hidden;
@@ -54,15 +58,16 @@
   }
 }
 
+.skc-list-item__ripple {
+  @include mix.ripple();
+  background-color: var(--primary);
+}
+
+// Image
 .skc-list-item > img {
   width: 3.5rem;
   height: 3.5rem;
   background-color: var(--surface-variant);
-}
-
-.skc-list-item__ripple {
-  @include mix.ripple();
-  background-color: var(--primary);
 }
 
 @include mix.breakpoint("sm") {

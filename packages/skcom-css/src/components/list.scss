@@ -7,15 +7,18 @@
 
 @use "../abstracts/mixins.scss" as mix;
 
+// Base List
 .skc-list {
   display: flex;
   flex-direction: column;
 }
 
+// Divided List
 .skc-list--divided > :not(:last-child) {
   border-bottom: 1px solid var(--outline-variant);
 }
 
+// Have List fill the entire screen width on mobile only
 .skc-section:has(.skc-list) {
   margin-inline: 0;
 
