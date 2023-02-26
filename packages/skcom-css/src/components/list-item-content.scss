@@ -1,10 +1,29 @@
 ////
 /// **List Item Content**
-/// A vertical index of texts or images.
+/// The text content of a List Item.
 ///
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.33dks77m5ey9 SKCom documentation
 ////
 
+@use "../abstracts/typography.scss" as type;
+
 .skc-list-item-content {
-  // TODO
+  display: flex;
+  flex-direction: column;
+}
+
+.skc-list-item-content__overline {
+  @include type.font("label-small");
+  font-family: var(--font-display);
+  color: var(--on-surface-variant);
+}
+
+.skc-list-item-content__title {
+  @include type.font("body-large");
+  color: var(--on-surface);
+}
+
+.skc-list-item-content__desc {
+  @include type.font("body-medium");
+  color: var(--on-surface-variant);
 }

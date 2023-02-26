@@ -13,6 +13,18 @@
   padding: 0.5rem 2rem 0.5rem 1rem;
 }
 
+.skc-list-item.skc-list-item--top {
+  align-items: flex-start;
+}
+
+.skc-list-item.skc-list-item--center {
+  align-items: center;
+}
+
+.skc-list-item.skc-list-item--bottom {
+  align-items: flex-end;
+}
+
 .skc-list-item.skc-list-item--3-lines {
   padding-block: 0.75rem;
 }

@@ -14,6 +14,7 @@ import {
   Header,
   List,
   ListItem,
+  ListItemContent,
   MaterialIcon,
   Section,
 } from "@suankularb-components/react";
@@ -95,20 +96,24 @@ const ContainersPage: CustomPage = () => (
       <Section>
         <Header>List</Header>
         <List divided>
-          <ListItem align="center" lines={1}>
-            <Image
-              src="/images/fish-burger.png"
-              width={56}
-              height={56}
-              alt=""
+          <ListItem align="center" lines={3}>
+            <Image src="/images/burger.png" width={56} height={56} alt="" />
+            <ListItemContent
+              overline="Meal of the day"
+              title="Fish Burger"
+              desc="฿50.00 • Contains fish"
             />
-            Placeholder List Item 1
           </ListItem>
-          <ListItem align="center" lines={1}>
-            Placeholder List Item 2
+          <ListItem align="center" lines={2}>
+            <Image src="/images/burger.png" width={56} height={56} alt="" />
+            <ListItemContent title="Pork Burger" desc="฿50.00" />
           </ListItem>
-          <ListItem align="center" lines={1}>
-            Placeholder List Item 3
+          <ListItem align="center" lines={2}>
+            <Image src="/images/burger.png" width={56} height={56} alt="" />
+            <ListItemContent
+              title="Beef Burger"
+              desc="฿50.00 • Contains beef"
+            />
           </ListItem>
         </List>
       </Section>

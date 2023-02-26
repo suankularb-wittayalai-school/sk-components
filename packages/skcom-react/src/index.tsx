@@ -23,6 +23,10 @@ export { Header, type HeaderProps } from "./components/Header";
 
 export { List, type ListProps } from "./components/List";
 export { ListItem, type ListItemProps } from "./components/ListItem";
+export {
+  ListItemContent,
+  type ListItemContentProps,
+} from "./components/ListItemContent";
 
 export {
   MaterialIcon,
