@@ -660,7 +660,7 @@ function List({
 List.displayName = "List";
 
 // ../skcom-css/dist/css/components/list-item.css
-styleInject(".skc-list-item {\n  display: flex;\n  flex-direction: row;\n  align-items: flex-start;\n  padding: .75rem 2rem .75rem 1rem;\n  gap: 1rem;\n}\n");
+styleInject(".skc-list-item {\n  display: flex;\n  align-items: flex-start;\n  flex-direction: row;\n  gap: 1rem;\n  padding: .5rem 2rem .5rem 1rem;\n}\n.skc-list-item.skc-list-item--3-lines {\n  padding-block: .75rem;\n}\n.skc-list-item > img {\n  width: 3.5rem;\n  height: 3.5rem;\n  background-color: var(--surface-variant);\n}\n");
 
 // src/components/ListItem/index.tsx
 import { jsx as jsx14 } from "react/jsx-runtime";

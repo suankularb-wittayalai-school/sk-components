@@ -1,1 +1,1 @@
-.skc-list-item{display:flex;flex-direction:row;align-items:flex-start;padding:.75rem 2rem .75rem 1rem;gap:1rem}/*# sourceMappingURL=list-item.css.map */
+.skc-list-item{display:flex;align-items:flex-start;flex-direction:row;gap:1rem;padding:.5rem 2rem .5rem 1rem}.skc-list-item.skc-list-item--3-lines{padding-block:.75rem}.skc-list-item>img{width:3.5rem;height:3.5rem;background-color:var(--surface-variant)}/*# sourceMappingURL=list-item.css.map */

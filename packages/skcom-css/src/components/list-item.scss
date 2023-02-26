@@ -7,8 +7,18 @@
 
 .skc-list-item {
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
-  padding: 0.75rem 2rem 0.75rem 1rem;
+  flex-direction: row;
   gap: 1rem;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+}
+
+.skc-list-item.skc-list-item--3-lines {
+  padding-block: 0.75rem;
+}
+
+.skc-list-item > img {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--surface-variant);
 }

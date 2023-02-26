@@ -96,6 +96,12 @@ const ContainersPage: CustomPage = () => (
         <Header>List</Header>
         <List divided>
           <ListItem align="center" lines={1}>
+            <Image
+              src="/images/fish-burger.png"
+              width={56}
+              height={56}
+              alt=""
+            />
             Placeholder List Item 1
           </ListItem>
           <ListItem align="center" lines={1}>
