@@ -801,6 +801,63 @@ declare namespace DialogContent {
 }
 
 /**
+ * Props for {@link FullscreenDialog Full-screen Dialog}.
+ */
+interface FullscreenDialogProps extends SKComponent {
+    /**
+     * The content.
+     *
+     * - Always required.
+     */
+    children?: React.ReactNode;
+    /**
+     * If the Full-screen Dialog is open and shown.
+     *
+     * - Optional.
+     */
+    open?: boolean;
+    /**
+     * The title text.
+     *
+     * - Always required.
+     */
+    title: string | JSX.Element;
+    /**
+     * The submission Button.
+     *
+     * - Should be a Button.
+     * - Always required.
+     */
+    action: JSX.Element;
+    /**
+     * Full-screen Dialog transforms into a basic Dialog on larger screens. The
+     * width of the Dialog can be set here.
+     *
+     * - Optional.
+     */
+    width?: React.CSSProperties["width"];
+}
+/**
+ * A Full-screen Dialog fills the entire screen containing a series of tasks
+ * required to complete.
+ *
+ * A Full-screen Dialog only fills the screen on mobile and turns into a Dialog
+ * on larger screens. A Dialog can appear above a Full-screen Dialog.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation}
+ *
+ * @param children The content.
+ * @param open If the Full-screen Dialog is open and shown.
+ * @param title The title text.
+ * @param action The submission Button.
+ * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
+ */
+declare function FullscreenDialog({ children, open, title, action, width, style, className, }: FullscreenDialogProps): JSX.Element;
+declare namespace FullscreenDialog {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Divider}.
  */
 interface DividerProps extends SKComponent {
@@ -1808,4 +1865,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

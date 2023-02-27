@@ -1,0 +1,20 @@
+////
+/// **Full-screen Dialog**
+/// A Full-screen Dialog fills the entire screen containing a series of tasks
+/// required to complete.
+/// 
+/// A Full-screen Dialog only fills the screen on mobile and turns into a
+/// Dialog on larger screens. A Dialog can appear above a Full-screen Dialog.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation
+////
+
+.skc-fullscreen-dialog {
+  position: fixed;
+  z-index: 90;
+  inset: 0;
+  // Unlike some other components, Full-screen Dialog should work everywhere, and
+  // !important makes sure of that
+  margin: 0 !important;
+  background-color: var(--surface);
+}

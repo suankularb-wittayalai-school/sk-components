@@ -26,6 +26,10 @@ export {
   DialogContent,
   type DialogContentProps,
 } from "./components/DialogContent";
+export {
+  FullscreenDialog,
+  type FullscreenDialogProps,
+} from "./components/FullscreenDialog";
 
 export { Divider, type DividerProps } from "./components/Divider";
 

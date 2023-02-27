@@ -15,12 +15,14 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  FullscreenDialog,
   Header,
   List,
   ListItem,
   ListItemContent,
   MaterialIcon,
   Section,
+  SegmentedButton,
 } from "@suankularb-components/react";
 
 // Utilities
@@ -41,6 +43,7 @@ const CardSection: FC = () => (
           width={800}
           height={533}
           alt="Atipol Sukrisadanon"
+          priority
           className="w-full"
         />
         <CardContent>
@@ -75,7 +78,12 @@ const ColumnsSection: FC = () => (
 );
 
 const DialogSection: FC = () => {
-  const [removeStudentsOpen, setRemoveStudentsOpen] = useState<boolean>(false);
+  const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
+  const [showReport, setShowReport] = useState<boolean>(false);
+  const [view, setView] = useState<"bug-report" | "feature-request">(
+    "bug-report"
+  );
+
   return (
     <Section>
       <Header>Dialog</Header>
@@ -86,20 +94,21 @@ const DialogSection: FC = () => {
           appearance="filled"
           icon={<MaterialIcon icon="delete" />}
           dangerous
-          onClick={() => setRemoveStudentsOpen(true)}
+          onClick={() => setShowRemStudents(true)}
         >
           Remove students
         </Button>
-        <Button appearance="outlined" icon={<MaterialIcon icon="bug_report" />}>
+        <Button
+          appearance="outlined"
+          icon={<MaterialIcon icon="bug_report" />}
+          onClick={() => setShowReport(true)}
+        >
           Report issue
         </Button>
       </Actions>
 
-      {/* Remove Students Dialog */}
-      <Dialog
-        open={removeStudentsOpen}
-        onClose={() => setRemoveStudentsOpen(false)}
-      >
+      {/* Remove students Dialog */}
+      <Dialog open={showRemStudents} onClose={() => setShowRemStudents(false)}>
         <DialogHeader
           title="Remove students?"
           desc="The following students will no longer have access to the
@@ -116,20 +125,62 @@ const DialogSection: FC = () => {
           </List>
         </DialogContent>
         <Actions>
-          <Button
-            appearance="text"
-            onClick={() => setRemoveStudentsOpen(false)}
-          >
+          <Button appearance="text" onClick={() => setShowRemStudents(false)}>
             Cancel
           </Button>
-          <Button
-            appearance="text"
-            onClick={() => setRemoveStudentsOpen(false)}
-          >
+          <Button appearance="text" onClick={() => setShowRemStudents(false)}>
             Remove
           </Button>
         </Actions>
       </Dialog>
+
+      {/* Report issue Full-screen Dialog */}
+      <FullscreenDialog
+        open={showReport}
+        title="Report an issue"
+        action={
+          <Button appearance="text" onClick={() => setShowReport(false)}>
+            Submit
+          </Button>
+        }
+      >
+        <p>
+          If you have a GitHub account, please consider reporting issues on our{" "}
+          <a href="#">GitHub repository</a>. Thank you!
+        </p>
+        <SegmentedButton alt="View">
+          <Button
+            appearance="outlined"
+            selected={view === "bug-report"}
+            onClick={() => setView("bug-report")}
+          >
+            Bug report
+          </Button>
+          <Button
+            appearance="outlined"
+            selected={view === "feature-request"}
+            onClick={() => setView("feature-request")}
+          >
+            Feature request
+          </Button>
+        </SegmentedButton>
+        {/* <TextField
+          label="Title"
+          behavior="single-line"
+          helperMsg="What is your issue?"
+        />
+        <TextField
+          label="Description"
+          behavior="textarea"
+          helperMsg="A clear and concise description."
+        />
+        <TextField
+          label="Expectation"
+          behavior="textarea"
+          helperMsg="What you expected to have happened/think should be
+            implemented."
+        /> */}
+      </FullscreenDialog>
     </Section>
   );
 };
