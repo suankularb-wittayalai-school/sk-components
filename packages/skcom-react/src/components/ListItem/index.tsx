@@ -2,6 +2,9 @@
 import { motion } from "framer-motion";
 import * as React from "react";
 
+// Internal components
+import { ListItemContentProps } from "../ListItemContent";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -11,7 +14,11 @@ import "@suankularb-components/css/dist/css/components/list-item.css";
 // Utilities
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
+/**
+ * The number of lines a List Item can contain.
+ */
 type ListItemLines = 1 | 2 | 3;
 
 /**
@@ -128,8 +135,26 @@ export function ListItem({
   const itemRef = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(itemRef);
 
+  // Accessibility
+  let itemID: string | undefined;
+  React.Children.forEach(children, (child) => {
+    // Find the List Item Content (if exists)
+    if ((child as JSX.Element).type.displayName === "ListItemContent") {
+      // Grab `title` and `alt`
+      const { title, alt } = (child as JSX.Element)
+        .props as ListItemContentProps;
+
+      // Only use `title` if it is a string, otherwise use `alt`
+      itemID = `list-item-${kebabify(
+        (typeof title === "string" ? title : alt)!
+      )}`;
+    }
+  });
+
+  // Props
   const props = {
     ref: itemRef,
+    "aria-labelledby": itemID,
     style,
     className: cn([
       "skc-list-item",
@@ -153,6 +178,7 @@ export function ListItem({
     ...rippleListeners,
   } satisfies JSX.IntrinsicElements["button" | "a" | "div"];
 
+  // Content
   const content = (
     <>
       {children}
@@ -170,25 +196,31 @@ export function ListItem({
   return (
     // Render with `element`, `<a>`, or `<button>` if functionality passed in
     href || onClick || stateLayerEffect ? (
-      // Render with `element` if defined
-      href && Element ? (
-        <Element {...props} href={href}>
-          {content}
-        </Element>
-      ) : // Render an `<a>` if link passed in
-      href ? (
-        <a {...props} href={href}>
-          {content}
-        </a>
-      ) : (
-        // Otherwise, render a `<button>`
-        <button {...{ ...props, onClick }} type="button">
-          {content}
-        </button>
-      )
+      <li aria-labelledby={itemID}>
+        {
+          // Render with `element` if defined
+          href && Element ? (
+            <Element {...props} href={href}>
+              {content}
+            </Element>
+          ) : // Render an `<a>` if link passed in
+          href ? (
+            <a {...props} href={href}>
+              {content}
+            </a>
+          ) : (
+            // Otherwise, render a `<button>`
+            <button {...{ ...props, onClick }} type="button">
+              {content}
+            </button>
+          )
+        }
+      </li>
     ) : (
       // If this Item has no functionality, just render a `<li>`
-      <li {...props}>{content}</li>
+      <li {...props}>
+        {content}
+      </li>
     )
   );
 }

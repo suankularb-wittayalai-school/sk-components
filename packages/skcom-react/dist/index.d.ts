@@ -771,6 +771,9 @@ declare namespace List {
     var displayName: string;
 }
 
+/**
+ * The number of lines a List Item can contain.
+ */
 type ListItemLines = 1 | 2 | 3;
 /**
  * Props for {@link ListItem List Item}.
@@ -881,6 +884,14 @@ interface ListItemContentProps extends SKComponent {
      * - Optional.
      */
     desc?: string | JSX.Element;
+    /**
+     * A description of the List Item Content for screen readers, similar to
+     * `alt` on `<img>`.
+     *
+     * - Required if `title` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
 }
 /**
  * A row of Buttons. ListItemContent handles spacing and overflow.
@@ -890,8 +901,9 @@ interface ListItemContentProps extends SKComponent {
  * @param overline Small text on top of the title text.
  * @param title The main text of the List Item Content.
  * @param desc A description supplementing the title text.
+ * @param alt A description of the List Item Content for screen readers, similar to `alt` on `<img>`.
  */
-declare function ListItemContent({ overline, title, desc, style, className, }: ListItemContentProps): JSX.Element;
+declare function ListItemContent({ overline, title, desc, alt, style, className, }: ListItemContentProps): JSX.Element;
 declare namespace ListItemContent {
     var displayName: string;
 }
