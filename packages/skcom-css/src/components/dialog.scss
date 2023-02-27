@@ -8,14 +8,16 @@
 
 .skc-dialog {
   position: fixed;
-  inset: 50% auto auto 50%;
   z-index: 90;
-  background-color: var(--surface-3);
-  transform: translate(-50%, -50%);
-  border-radius: var(--rounded-2xl);
+  inset: 50% auto auto 50%;
   width: 22.5rem;
   max-width: calc(100vw - 3rem);
+  // Unlike some other components, Dialog should work everywhere, and
+  // !important makes sure of that
   margin: 0 !important;
+  transform: translate(-50%, -50%);
+  border-radius: var(--rounded-2xl);
+  background-color: var(--surface-3);
 
   > .skc-actions {
     padding: 1.5rem 1.5rem 1.5rem 1rem;
@@ -23,5 +25,5 @@
 }
 
 .skc-dialog ~ .skc-scrim {
-  margin: 0;
+  margin: 0 !important;
 }
