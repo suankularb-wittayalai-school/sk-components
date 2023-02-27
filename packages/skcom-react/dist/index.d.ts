@@ -756,6 +756,40 @@ declare namespace DialogHeader {
 }
 
 /**
+ * Props for {@link DialogContent Dialog Header}.
+ */
+interface DialogContentProps extends SKComponent {
+    /**
+     * A Dialog Content can include anything. A common use case is List.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The height of this component. If its content is taller than this value,
+     * Dialog Content scrolls.
+     *
+     * - Setting a height will show Dividers on top of and below the component.
+     * - Optional.
+     */
+    height?: number;
+}
+/**
+ * Additional content that supplements the Dialog Header. This is where the
+ * user can see more details about a decision or a space for the user to enter
+ * information.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vcs7cvubpd7l SKCom documentation}
+ *
+ * @param children A Dialog Content can include anything. A common use case is List.
+ * @param height The height of this component. If its content is taller than this value, Dialog Content scrolls.
+ */
+declare function DialogContent({ children, height, style, className, }: DialogContentProps): JSX.Element;
+declare namespace DialogContent {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Divider}.
  */
 interface DividerProps extends SKComponent {
@@ -1763,4 +1797,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

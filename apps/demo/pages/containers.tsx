@@ -12,6 +12,7 @@ import {
   Columns,
   ContentLayout,
   Dialog,
+  DialogContent,
   DialogHeader,
   Header,
   List,
@@ -98,14 +99,16 @@ const ContainersPage: CustomPage = () => {
             desc="The following students will no longer have access to the
               organization “Kornor.”"
           />
-          <List divided>
-            <ListItem align="center" lines={1}>
-              <ListItemContent title="Sadudee Theparree" />
-            </ListItem>
-            <ListItem align="center" lines={1}>
-              <ListItemContent title="Tempoom Leelacharoen" />
-            </ListItem>
-          </List>
+          <DialogContent>
+            <List divided>
+              <ListItem align="center" lines={1}>
+                <ListItemContent title="Sadudee Theparree" />
+              </ListItem>
+              <ListItem align="center" lines={1}>
+                <ListItemContent title="Tempoom Leelacharoen" />
+              </ListItem>
+            </List>
+          </DialogContent>
           <Actions>
             <Button
               appearance="text"
