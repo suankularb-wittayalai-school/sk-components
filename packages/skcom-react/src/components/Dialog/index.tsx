@@ -119,14 +119,14 @@ export function Dialog({
             aria-modal="true"
             aria-labelledby={`${dialogID}-title`}
             aria-describedby={`${dialogID}-desc`}
-            initial={{ opacity: 0, scaleY: 0.5, x: "-50%", y: "-120%" }}
+            initial={{ opacity: 0, scaleY: 0, x: "-50%", y: "-150%" }}
             animate={{ opacity: 1, scaleY: 1, y: "-50%" }}
             exit={{
               opacity: 0,
               scaleY: 0.5,
               y: "-90%",
               transition: transition(
-                duration.short3,
+                duration.short2,
                 easing.standardAccelerate
               ),
             }}
