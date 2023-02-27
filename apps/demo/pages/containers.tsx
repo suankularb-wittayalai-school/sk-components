@@ -12,6 +12,7 @@ import {
   Columns,
   ContentLayout,
   Dialog,
+  DialogHeader,
   Header,
   List,
   ListItem,
@@ -92,7 +93,19 @@ const ContainersPage: CustomPage = () => {
           open={removeStudentsOpen}
           onClose={() => setRemoveStudentsOpen(false)}
         >
-          <p>TODO</p>
+          <DialogHeader
+            title="Remove students?"
+            desc="The following students will no longer have access to the
+              organization “Kornor.”"
+          />
+          <List divided>
+            <ListItem align="center" lines={1}>
+              <ListItemContent title="Sadudee Theparree" />
+            </ListItem>
+            <ListItem align="center" lines={1}>
+              <ListItemContent title="Tempoom Leelacharoen" />
+            </ListItem>
+          </List>
           <Actions>
             <Button
               appearance="text"
@@ -101,7 +114,7 @@ const ContainersPage: CustomPage = () => {
               Cancel
             </Button>
             <Button
-              appearance="tonal"
+              appearance="text"
               onClick={() => setRemoveStudentsOpen(false)}
             >
               Remove

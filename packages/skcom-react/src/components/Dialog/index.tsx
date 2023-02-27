@@ -91,9 +91,9 @@ export function Dialog({
             exit={{
               opacity: 0,
               scaleY: 0.5,
-              y: "-120%",
+              y: "-100%",
               transition: transition(
-                duration.short4,
+                duration.short3,
                 easing.standardAccelerate
               ),
             }}

@@ -714,6 +714,48 @@ declare namespace Dialog {
 }
 
 /**
+ * Props for {@link DialogHeader Dialog Header}.
+ */
+interface DialogHeaderProps extends SKComponent {
+    /**
+     * The hero icon shown above the title text (`title`).
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * The title text. This is useful when the supporting text is long and needs a summary.
+     *
+     * - Optional.
+     */
+    title?: string | JSX.Element;
+    /**
+     * With a title (`title`), the supporting text complements the title text
+     * with more details.
+     *
+     * On its own, it succinctly presents the purpose of the Dialog, like
+     * “Discard draft?,” for a confirmation on exiting a page without saving.
+     *
+     * - Always required.
+     */
+    desc: string | JSX.Element;
+}
+/**
+ * A row of Buttons. DialogHeader handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param icon The hero icon shown above the title text (`title`).
+ * @param title The title text.
+ * @param desc Complements the title text or succinctly presents the purpose of the Dialog.
+ */
+declare function DialogHeader({ icon, title, desc, style, className, }: DialogHeaderProps): JSX.Element;
+declare namespace DialogHeader {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Divider}.
  */
 interface DividerProps extends SKComponent {
@@ -1721,4 +1763,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
