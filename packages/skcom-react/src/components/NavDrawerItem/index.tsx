@@ -137,7 +137,7 @@ export function NavDrawerItem({
     href,
     onClick,
     ...rippleListeners,
-  };
+  } satisfies JSX.IntrinsicElements["a"];
 
   const content = (
     <>

@@ -12,6 +12,9 @@ import {
   Columns,
   ContentLayout,
   Header,
+  List,
+  ListItem,
+  ListItemContent,
   MaterialIcon,
   Section,
 } from "@suankularb-components/react";
@@ -89,6 +92,30 @@ const ContainersPage: CustomPage = () => (
           voluptatibus numquam accusamus voluptatum, eaque consectetur est
           maxime asperiores rem deleniti accusantium iste ex quisquam!
         </p>
+      </Section>
+      <Section>
+        <Header>List</Header>
+        <List divided>
+          <ListItem align="center" lines={3} stateLayerEffect>
+            <Image src="/images/burger.png" width={56} height={56} alt="" />
+            <ListItemContent
+              overline="Meal of the day"
+              title="Fish Burger"
+              desc="฿50.00 • Contains fish"
+            />
+          </ListItem>
+          <ListItem align="center" lines={2} stateLayerEffect>
+            <Image src="/images/burger.png" width={56} height={56} alt="" />
+            <ListItemContent title="Pork Burger" desc="฿50.00" />
+          </ListItem>
+          <ListItem align="center" lines={2} stateLayerEffect>
+            <Image src="/images/burger.png" width={56} height={56} alt="" />
+            <ListItemContent
+              title="Beef Burger"
+              desc="฿50.00 • Contains beef"
+            />
+          </ListItem>
+        </List>
       </Section>
     </ContentLayout>
   </>

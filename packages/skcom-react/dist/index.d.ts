@@ -733,6 +733,182 @@ declare namespace Header {
 }
 
 /**
+ * Props for {@link List}.
+ */
+interface ListProps extends SKComponent {
+    /**
+     * List contains Buttons. You can put as many Buttons inside List as
+     * needed, but the recommended limit is 3.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Uses Columns under the hood. Number of columns.
+     *
+     * - Must be an integer from 2, 3, 4, 6, or 12.
+     * - Optional.
+     */
+    columns?: ColumnsProps["columns"];
+    /**
+     * Puts a Divider between List Items.
+     *
+     * - Optional.
+     */
+    divided?: boolean;
+}
+/**
+ * A vertical index of texts or images.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iyg4spbf5pwr SKCom documentation}
+ *
+ * @param children Items inside the List.
+ * @param columns Uses Columns under the hood. Number of columns.
+ * @param divided Puts a Divider between List Items.
+ */
+declare function List({ children, columns, divided, style, className, }: ListProps): JSX.Element;
+declare namespace List {
+    var displayName: string;
+}
+
+/**
+ * The number of lines a List Item can contain.
+ */
+type ListItemLines = 1 | 2 | 3;
+/**
+ * Props for {@link ListItem List Item}.
+ */
+interface ListItemProps extends SKComponent {
+    /**
+     * The content of a List Item consists of the leading section, the content
+     * section, and the trailing section.
+     *
+     * - Any components placed before List Item Content is put into the leading
+     *   section, and any after is put into the trailing section.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The vertical alignment of the List Item’s content.
+     *
+     * - Must be `top`, `center`, or `bottom`.
+     * - Always required.
+     */
+    align: "top" | "center" | "bottom";
+    /**
+     * The number of lines contained by the List Item. The height is set from this prop.
+     *
+     * - Must be an integer (or a list of 4 integers, each corresponding to a breakpoint) from 1 to 3.
+     * - Always required.
+     */
+    lines: ListItemLines | [ListItemLines, ListItemLines, ListItemLines, ListItemLines];
+    /**
+     * In interactive components like Button, the state layer reacts to changes
+     * to the state to signify its interactivity. For example, a Button’s state
+     * layer turns up its opacity on hover.
+     *
+     * - This effect can be enabled on List Item as well, letting the user know
+     *   that this List Item is interactive.
+     * - Optional.
+     */
+    stateLayerEffect?: boolean;
+    /**
+     * The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
+     *
+     * - If this is defined, a state layer is added.
+     * - Incompatible with `href`.
+     * - Optional.
+     */
+    onClick?: () => any;
+    /**
+     * The URL of the page this List Item leads to, similar to `href` on `<a>`.
+     *
+     * - If this is defined, a state layer is added.
+     * - Incompatible with `onClick`.
+     * - Optional.
+     */
+    href?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is useful when a framework you’re using has a Link component for routing. An example is `next/link` from Next.js.
+     *
+     * - Incompatible with `onClick`.
+     * - Optional.
+     */
+    element?: ({ children, ref, style, className, href, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref?: React.MutableRefObject<any>;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onMouseDown?: (event: React.MouseEvent) => void;
+        onKeyDown?: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * An item inside a List.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.33dks77m5ey9 SKCom documentation}
+ *
+ * @param children The content of a List Item consists of the leading section, the content section, and the trailing section.
+ * @param align The vertical alignment of the List Item’s content.
+ * @param lines The number of lines contained by the List Item.
+ * @param stateLayerEffect The state layer reacts to changes to the state to signify its interactivity. This effect can be enabled on List item as well.
+ * @param onClick The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this List Item leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function ListItem({ children, align, lines, stateLayerEffect, onClick, href, element: Element, style, className, }: ListItemProps): JSX.Element;
+declare namespace ListItem {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link ListItemContent List Item Content}.
+ */
+interface ListItemContentProps extends SKComponent {
+    /**
+     * Small text on top of the title text.
+     *
+     * - Optional.
+     */
+    overline?: string | JSX.Element;
+    /**
+     * The main text of the List Item Content.
+     *
+     * - Always required.
+     */
+    title: string | JSX.Element;
+    /**
+     * A description supplementing the title text.
+     *
+     * - Optional.
+     */
+    desc?: string | JSX.Element;
+    /**
+     * A description of the List Item Content for screen readers, similar to
+     * `alt` on `<img>`.
+     *
+     * - Required if `title` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+}
+/**
+ * A row of Buttons. ListItemContent handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param overline Small text on top of the title text.
+ * @param title The main text of the List Item Content.
+ * @param desc A description supplementing the title text.
+ * @param alt A description of the List Item Content for screen readers, similar to `alt` on `<img>`.
+ */
+declare function ListItemContent({ overline, title, desc, alt, style, className, }: ListItemContentProps): JSX.Element;
+declare namespace ListItemContent {
+    var displayName: string;
+}
+
+/**
  * Props for {@link MaterialIcon Material Icon}.
  */
 interface MaterialIconProps extends SKComponent {
@@ -1498,4 +1674,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

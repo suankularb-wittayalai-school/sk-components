@@ -178,7 +178,7 @@ export function NavBarItem({
       className,
     ]),
     ...rippleListeners,
-  };
+  } satisfies JSX.IntrinsicElements["a"];
 
   const content = (
     <>

@@ -21,7 +21,7 @@ export interface CardHeaderProps extends SKComponent {
   /**
    * An avatar is placed before all content in a Card Header. A use case would
    * be the profile picture of a user.
-   * 
+   *
    * - You are encouraged to use Avatar as the value for `avatar`.
    * - Incompatible with `icon`.
    * - Optional.
@@ -88,7 +88,7 @@ export function CardHeader({
     <div style={style} className={cn(["skc-card-header", className])}>
       {/* Avatar */}
       {avatar && <div className="skc-card-header__avatar">{avatar}</div>}
-      
+
       {/* Icon */}
       {icon && <div className="skc-card-header__icon">{icon}</div>}
 

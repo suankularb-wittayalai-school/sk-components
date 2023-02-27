@@ -195,7 +195,7 @@ export function FAB({
     title: tooltip,
     className: "skc-fab__wrapper",
     ...rippleListeners,
-  };
+  } satisfies JSX.IntrinsicElements["a" | "button"];
 
   const content = (
     <AnimatePresence initial={false}>
