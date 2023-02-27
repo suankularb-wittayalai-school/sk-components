@@ -725,7 +725,8 @@ interface DialogHeaderProps extends SKComponent {
      */
     icon?: JSX.Element;
     /**
-     * The title text. This is useful when the supporting text is long and needs a summary.
+     * The title text. This is useful when the supporting text is long and needs
+     * a summary.
      *
      * - Optional.
      */
@@ -740,6 +741,15 @@ interface DialogHeaderProps extends SKComponent {
      * - Always required.
      */
     desc: string | JSX.Element;
+    /**
+     * A description of the Dialog Header for screen readers, similar to
+     * `alt` on `<img>`.
+     *
+     * - Required if:
+     *   - `title` is defined and is a JSX Element, or;
+     *   - `desc` is a JSX Element and title is undefined.
+     */
+    alt?: string;
 }
 /**
  * A row of Buttons. DialogHeader handles spacing and overflow.
@@ -749,8 +759,9 @@ interface DialogHeaderProps extends SKComponent {
  * @param icon The hero icon shown above the title text (`title`).
  * @param title The title text.
  * @param desc Complements the title text or succinctly presents the purpose of the Dialog.
+ * @param alt A description of the Dialog Header for screen readers, similar to `alt` on `<img>`.
  */
-declare function DialogHeader({ icon, title, desc, style, className, }: DialogHeaderProps): JSX.Element;
+declare function DialogHeader({ icon, title, desc, alt, style, className, }: DialogHeaderProps): JSX.Element;
 declare namespace DialogHeader {
     var displayName: string;
 }

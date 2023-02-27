@@ -2,6 +2,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
+// Internal components
+import { DialogHeaderProps } from "../DialogHeader";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -9,8 +12,9 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/dialog.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 /**
  * Props for {@link Dialog}.
  */
@@ -78,6 +82,33 @@ export function Dialog({
     };
   }, []);
 
+  // Accessibility labels
+  let dialogID: string | undefined;
+  React.Children.forEach(children, (child) => {
+    // Find the Dialog Header
+    if ((child as JSX.Element).type.displayName === "DialogHeader") {
+      // Grab `title`, `desc`, and `alt`
+      const { title, desc, alt } = (child as JSX.Element)
+        .props as DialogHeaderProps;
+
+      // Only use `title` if it is a string, otherwise use `alt`
+      dialogID = `dialog-${kebabify(
+        // Use `title` if defined
+        (title
+          ? // Use `title` if is not JSX Element
+            typeof title === "string"
+            ? title
+            : // Otherwise, use `alt`
+              alt
+          : // If `title` is not defined, use `desc`
+          typeof desc === "string"
+          ? desc
+          : // Otherwise, use `alt`
+            alt)!
+      )}`;
+    }
+  });
+
   return (
     <AnimatePresence>
       {open && (
@@ -86,6 +117,8 @@ export function Dialog({
             // `alertdialog` is a type of `dialog` for interrupting the user flow.
             role="alertdialog"
             aria-modal="true"
+            aria-labelledby={`${dialogID}-title`}
+            aria-describedby={`${dialogID}-desc`}
             initial={{ opacity: 0, scaleY: 0.5, x: "-50%", y: "-120%" }}
             animate={{ opacity: 1, scaleY: 1, y: "-50%" }}
             exit={{

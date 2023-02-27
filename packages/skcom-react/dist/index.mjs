@@ -615,6 +615,11 @@ import * as React7 from "react";
 // ../skcom-css/dist/css/components/dialog.css
 styleInject(".skc-dialog {\n  position: fixed;\n  inset: 50% auto auto 50%;\n  z-index: 90;\n  background-color: var(--surface-3);\n  transform: translate(-50%, -50%);\n  border-radius: var(--rounded-2xl);\n  width: 22.5rem;\n  max-width: calc(100vw - 3rem);\n  margin: 0 !important;\n}\n.skc-dialog > .skc-actions {\n  padding: 1.5rem 1.5rem 1.5rem 1rem;\n}\n.skc-dialog ~ .skc-scrim {\n  margin: 0;\n}\n");
 
+// src/utils/format.ts
+function kebabify(string) {
+  return string.toLowerCase().split(" ").join("-");
+}
+
 // src/components/Dialog/index.tsx
 import { Fragment as Fragment4, jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
 function Dialog({
@@ -636,12 +641,36 @@ function Dialog({
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
+  let dialogID;
+  React7.Children.forEach(children, (child) => {
+    if (child.type.displayName === "DialogHeader") {
+      const { title, desc, alt } = child.props;
+      dialogID = `dialog-${kebabify(
+        // Use `title` if defined
+        title ? (
+          // Use `title` if is not JSX Element
+          typeof title === "string" ? title : (
+            // Otherwise, use `alt`
+            alt
+          )
+        ) : (
+          // If `title` is not defined, use `desc`
+          typeof desc === "string" ? desc : (
+            // Otherwise, use `alt`
+            alt
+          )
+        )
+      )}`;
+    }
+  });
   return /* @__PURE__ */ jsx11(AnimatePresence, { children: open && /* @__PURE__ */ jsxs6(Fragment4, { children: [
     /* @__PURE__ */ jsx11(
       motion6.div,
       {
         role: "alertdialog",
         "aria-modal": "true",
+        "aria-labelledby": `${dialogID}-title`,
+        "aria-describedby": `${dialogID}-desc`,
         initial: { opacity: 0, scaleY: 0.5, x: "-50%", y: "-120%" },
         animate: { opacity: 1, scaleY: 1, y: "-50%" },
         exit: {
@@ -686,19 +715,43 @@ function DialogHeader({
   icon,
   title,
   desc,
+  alt,
   style,
   className
 }) {
+  const dialogID = `dialog-${kebabify(
+    // Use `title` if defined
+    title ? (
+      // Use `title` if is not JSX Element
+      typeof title === "string" ? title : (
+        // Otherwise, use `alt`
+        alt
+      )
+    ) : (
+      // If `title` is not defined, use `desc`
+      typeof desc === "string" ? desc : (
+        // Otherwise, use `alt`
+        alt
+      )
+    )
+  )}`;
   return /* @__PURE__ */ jsxs7("div", { style, className: cn(["skc-dialog-header", className]), children: [
     icon && /* @__PURE__ */ jsx12("div", { className: "skc-dialog-header__icon", children: icon }),
-    title && /* @__PURE__ */ jsx12("h2", { children: title }),
-    /* @__PURE__ */ jsx12("p", { children: desc })
+    title && /* @__PURE__ */ jsx12("h2", { "aria-label": alt, id: `${dialogID}-title`, children: title }),
+    /* @__PURE__ */ jsx12(
+      "p",
+      {
+        "aria-label": !title ? alt : void 0,
+        id: `${dialogID}-desc`,
+        children: desc
+      }
+    )
   ] });
 }
 DialogHeader.displayName = "DialogHeader";
 
 // ../skcom-css/dist/css/components/dialog-content.css
-styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-header:has(~.skc-dialog-content) {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrolls {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
+styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-header:has(~.skc-dialog-content) {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
 
 // src/components/DialogContent/index.tsx
 import { jsx as jsx13 } from "react/jsx-runtime";
@@ -787,11 +840,6 @@ import * as React8 from "react";
 
 // ../skcom-css/dist/css/components/list-item.css
 styleInject('.skc-list-item {\n  display: flex;\n  overflow: hidden;\n  flex-direction: row;\n  gap: 1rem;\n  padding: .5rem 2rem .5rem 1rem;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  width: 100%;\n}\n.skc-list-item.skc-list-item--top {\n  align-items: flex-start;\n}\n.skc-list-item.skc-list-item--center {\n  align-items: center;\n}\n.skc-list-item.skc-list-item--bottom {\n  align-items: flex-end;\n}\n.skc-list-item.skc-list-item--3-lines {\n  padding-block: .75rem;\n}\n.skc-list-item.skc-list-item--state-layer {\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n}\n.skc-list-item.skc-list-item--state-layer::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--primary);\n}\n.skc-list-item.skc-list-item--state-layer:hover::before {\n  opacity: .08;\n}\n.skc-list-item.skc-list-item--state-layer:focus::before,\n.skc-list-item.skc-list-item--state-layer:active::before {\n  opacity: .12;\n}\n.skc-list-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--primary);\n}\n.skc-list-item > img {\n  width: 3.5rem;\n  height: 3.5rem;\n  background-color: var(--surface-variant);\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns .skc-list-item.skc-list-item--state-layer {\n    border-radius: var(--rounded-lg);\n  }\n}\n');
-
-// src/utils/format.ts
-function kebabify(string) {
-  return string.toLowerCase().split(" ").join("-");
-}
 
 // src/components/ListItem/index.tsx
 import { Fragment as Fragment6, jsx as jsx17, jsxs as jsxs9 } from "react/jsx-runtime";
