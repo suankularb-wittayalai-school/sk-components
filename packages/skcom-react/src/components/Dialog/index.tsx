@@ -71,6 +71,19 @@ export function Dialog({
 }: DialogProps) {
   const { duration, easing } = useAnimationConfig();
 
+  // Focus on the main Button
+  React.useEffect(() => {
+    if (open) {
+      const actions = document.querySelector<HTMLDivElement>(
+        ".skc-dialog .skc-actions"
+      );
+
+      const buttons =
+        actions?.querySelectorAll<HTMLButtonElement>(".skc-button");
+      if (buttons?.length) buttons[buttons.length - 1].focus();
+    }
+  }, [open]);
+
   // Close the Dialog with the escape key
   React.useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {

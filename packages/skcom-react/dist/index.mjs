@@ -632,6 +632,16 @@ function Dialog({
 }) {
   const { duration, easing } = useAnimationConfig();
   React7.useEffect(() => {
+    if (open) {
+      const actions = document.querySelector(
+        ".skc-dialog .skc-actions"
+      );
+      const buttons = actions == null ? void 0 : actions.querySelectorAll(".skc-button");
+      if (buttons == null ? void 0 : buttons.length)
+        buttons[buttons.length - 1].focus();
+    }
+  }, [open]);
+  React7.useEffect(() => {
     const handleKeyUp = (event) => {
       if (event.key === "Escape")
         onClose();
