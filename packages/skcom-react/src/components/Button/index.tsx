@@ -221,7 +221,7 @@ export function Button({
       if (!(disabled || loading) && onClick && !href) onClick();
     },
     ...rippleListeners,
-  };
+  } satisfies JSX.IntrinsicElements["a" | "button"];
 
   /**
    * The inner content of `<a>` and `<button>`.

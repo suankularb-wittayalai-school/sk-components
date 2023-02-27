@@ -173,7 +173,7 @@ export function AssistChip({
       className,
     ]),
     ...rippleListeners,
-  };
+  } satisfies JSX.IntrinsicElements["a" | "button"];
 
   const content = (
     <>
