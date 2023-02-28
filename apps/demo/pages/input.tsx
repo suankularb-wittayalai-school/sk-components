@@ -1,4 +1,5 @@
 // External libraries
+import { FC, useState } from "react";
 import Head from "next/head";
 
 // SK Components
@@ -12,7 +13,6 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import { FC, useState } from "react";
 
 const TextFieldSection: FC = () => {
   const [name, setName] = useState<string>("");

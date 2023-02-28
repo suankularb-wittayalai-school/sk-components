@@ -1,4 +1,5 @@
 // External libraries
+import { motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -12,10 +13,9 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/text-field.css";
 
 // Utilities
+import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
-import { transition, useAnimationConfig } from "../../utils/animation";
-import { motion, useAnimationControls } from "framer-motion";
 
 /**
  * Props for {@link TextField Text Field}.
@@ -191,35 +191,41 @@ export function TextField({
     if (value) setMinifyLabel(true);
   }, [value]);
 
-  const placeholderLabel = {
+  // Label animation states
+  const plhLabelAnimState = {
     y: 0,
     fontSize: "var(--text-lg)",
     lineHeight: "1.5rem",
     letterSpacing: 0.5,
   };
-  const minifedLabel = {
+  const minifedLabelAnimState = {
     y: -24,
     fontSize: "var(--text-sm)",
     lineHeight: "1rem",
     letterSpacing: 0.4,
   };
 
+  // Label transition
   const labelTransition = transition(duration.short4, easing.standard);
 
+  // Watches `minifyLabel` and sets and starts transition accordingly
   React.useEffect(() => {
     // Disable initial animation
     if (minifyLabel === undefined) return;
 
     // Minify the label
     if (minifyLabel) {
-      labelControls.set(placeholderLabel);
-      labelControls.start({ ...minifedLabel, transition: labelTransition });
+      labelControls.set(plhLabelAnimState);
+      labelControls.start({
+        ...minifedLabelAnimState,
+        transition: labelTransition,
+      });
       return;
     }
 
     // Reset the label
-    labelControls.set(minifedLabel);
-    labelControls.start({ ...placeholderLabel, transition: labelTransition });
+    labelControls.set(minifedLabelAnimState);
+    labelControls.start({ ...plhLabelAnimState, transition: labelTransition });
   }, [minifyLabel]);
 
   // Accessibility

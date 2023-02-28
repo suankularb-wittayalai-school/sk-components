@@ -1862,13 +1862,13 @@ function Section({
 Section.displayName = "Section";
 
 // src/components/TextField/index.tsx
+var import_framer_motion16 = require("framer-motion");
 var React18 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/text-field.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field:focus-within {\n  border-color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) {\n  padding-left: 1rem;\n}\n.skc-text-field:has(.skc-text-field__trailing) {\n  padding-right: 1rem;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n  background-color: var(--background);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\ntextarea.skc-text-field__input {\n  height: 6.5rem;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n");
 
 // src/components/TextField/index.tsx
-var import_framer_motion16 = require("framer-motion");
 var import_jsx_runtime30 = require("react/jsx-runtime");
 function TextField({
   appearance,
@@ -1895,13 +1895,13 @@ function TextField({
     if (value)
       setMinifyLabel(true);
   }, [value]);
-  const placeholderLabel = {
+  const plhLabelAnimState = {
     y: 0,
     fontSize: "var(--text-lg)",
     lineHeight: "1.5rem",
     letterSpacing: 0.5
   };
-  const minifedLabel = {
+  const minifedLabelAnimState = {
     y: -24,
     fontSize: "var(--text-sm)",
     lineHeight: "1rem",
@@ -1912,12 +1912,14 @@ function TextField({
     if (minifyLabel === void 0)
       return;
     if (minifyLabel) {
-      labelControls.set(placeholderLabel);
-      labelControls.start(__spreadProps(__spreadValues({}, minifedLabel), { transition: labelTransition }));
+      labelControls.set(plhLabelAnimState);
+      labelControls.start(__spreadProps(__spreadValues({}, minifedLabelAnimState), {
+        transition: labelTransition
+      }));
       return;
     }
-    labelControls.set(minifedLabel);
-    labelControls.start(__spreadProps(__spreadValues({}, placeholderLabel), { transition: labelTransition }));
+    labelControls.set(minifedLabelAnimState);
+    labelControls.start(__spreadProps(__spreadValues({}, plhLabelAnimState), { transition: labelTransition }));
   }, [minifyLabel]);
   const fieldID = `field-${kebabify(
     typeof label === "string" ? label : alt
