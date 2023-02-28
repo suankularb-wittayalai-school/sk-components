@@ -71,6 +71,8 @@ export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
 export { Section, type SectionProps } from "./components/Section";
 
+export { TextField, type TextFieldProps } from "./components/TextField";
+
 export {
   ThemeProvider,
   type ThemeProviderProps,
