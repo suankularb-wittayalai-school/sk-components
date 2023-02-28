@@ -143,12 +143,21 @@ const DialogSection: FC = () => {
             Submit
           </Button>
         }
+        width={420}
+        onClose={() => setShowReport(false)}
       >
         <p>
           If you have a GitHub account, please consider reporting issues on our{" "}
-          <a href="#">GitHub repository</a>. Thank you!
+          <a
+            href="https://github.com/suankularb-wittayalai-school/mysk-frontend"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub repository
+          </a>
+          . Thank you!
         </p>
-        <SegmentedButton alt="View">
+        <SegmentedButton alt="View" full>
           <Button
             appearance="outlined"
             selected={view === "bug-report"}

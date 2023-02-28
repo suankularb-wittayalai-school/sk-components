@@ -836,6 +836,10 @@ interface FullscreenDialogProps extends SKComponent {
      * - Optional.
      */
     width?: React.CSSProperties["width"];
+    /**
+     * The function triggered when the scrim is clicked.
+     */
+    onClose: () => any;
 }
 /**
  * A Full-screen Dialog fills the entire screen containing a series of tasks
@@ -851,8 +855,9 @@ interface FullscreenDialogProps extends SKComponent {
  * @param title The title text.
  * @param action The submission Button.
  * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
+ * @param onClose The function triggered when the scrim is clicked.
  */
-declare function FullscreenDialog({ children, open, title, action, width, style, className, }: FullscreenDialogProps): JSX.Element;
+declare function FullscreenDialog({ children, open, title, action, width, onClose, style, className, }: FullscreenDialogProps): JSX.Element;
 declare namespace FullscreenDialog {
     var displayName: string;
 }
