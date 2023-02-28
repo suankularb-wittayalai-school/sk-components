@@ -83,6 +83,7 @@ export interface NavBarProps extends SKComponent {
  * @param fab If a page includes a FAB, it is moved to the Navigation Rail in larger screens.
  * @param end More Navigation Items can be placed on the bottom of the Navigation Rail in larger screens.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
+ * @param locale Allows for translation of the accessibility labels. 
  */
 export function NavBar({
   children,

@@ -837,6 +837,13 @@ interface FullscreenDialogProps extends SKComponent {
      */
     width?: React.CSSProperties["width"];
     /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
      * The function triggered when the scrim is clicked.
      */
     onClose: () => any;
@@ -855,9 +862,10 @@ interface FullscreenDialogProps extends SKComponent {
  * @param title The title text.
  * @param action The submission Button.
  * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
+ * @param locale Allows for translation of the accessibility labels.
  * @param onClose The function triggered when the scrim is clicked.
  */
-declare function FullscreenDialog({ children, open, title, action, width, onClose, style, className, }: FullscreenDialogProps): JSX.Element;
+declare function FullscreenDialog({ children, open, title, action, width, locale, onClose, style, className, }: FullscreenDialogProps): JSX.Element;
 declare namespace FullscreenDialog {
     var displayName: string;
 }
@@ -1231,6 +1239,7 @@ interface NavBarProps extends SKComponent {
  * @param fab If a page includes a FAB, it is moved to the Navigation Rail in larger screens.
  * @param end More Navigation Items can be placed on the bottom of the Navigation Rail in larger screens.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
+ * @param locale Allows for translation of the accessibility labels.
  */
 declare function NavBar({ children, brand, fab, end, onNavToggle, locale, style, className, }: NavBarProps): JSX.Element;
 declare namespace NavBar {
@@ -1726,6 +1735,13 @@ interface PageHeaderProps extends SKComponent {
      */
     homeURL?: string;
     /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
      * Change the underlying element from `<a>` to a custom element. This is
      * useful when a framework you’re using has a Link component for routing. An
      * example is `next/link` from Next.js.
@@ -1768,12 +1784,13 @@ interface PageHeaderProps extends SKComponent {
  * @param brand A small image of your brand can be put on the Page Header.
  * @param parentURL The link the back Button navigates to.
  * @param homeURL The link to the home page of this application.
+ * @param locale Allows for translation of the accessibility labels.
  * @param element Change the underlying element from `<a>` to a custom element.
  * @param onBack The function triggered when the back Button is clicked.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
  * @param backAttr Props for the underlying Button component the back Button uses.
  */
-declare function PageHeader({ children, title, icon, brand, parentURL, homeURL, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
+declare function PageHeader({ children, title, icon, brand, parentURL, homeURL, locale, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
 declare namespace PageHeader {
     var displayName: string;
 }

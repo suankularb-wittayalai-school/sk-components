@@ -59,6 +59,14 @@ export interface FullscreenDialogProps extends SKComponent {
   width?: React.CSSProperties["width"];
 
   /**
+   * Allows for translation of the accessibility labels.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+   * - Optional.
+   */
+  locale?: "en-US" | "th";
+
+  /**
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
@@ -78,6 +86,7 @@ export interface FullscreenDialogProps extends SKComponent {
  * @param title The title text.
  * @param action The submission Button.
  * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
+ * @param locale Allows for translation of the accessibility labels.
  * @param onClose The function triggered when the scrim is clicked.
  */
 export function FullscreenDialog({
@@ -86,6 +95,7 @@ export function FullscreenDialog({
   title,
   action,
   width,
+  locale,
   onClose,
   style,
   className,
@@ -161,6 +171,7 @@ export function FullscreenDialog({
               <Button
                 appearance="text"
                 icon={<MaterialIcon icon="close" />}
+                alt={locale === "th" ? "ปิดหน้าต่าง" : "Close"}
                 onClick={onClose}
               />
               <h2>{title}</h2>
