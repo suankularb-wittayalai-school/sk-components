@@ -21,7 +21,6 @@ import "@suankularb-components/css/dist/css/components/page-header.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link PageHeader Page Header}.
@@ -91,7 +90,8 @@ export interface PageHeaderProps extends SKComponent {
   /**
    * Allows for translation of the accessibility labels.
    *
-   * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
    * - Optional.
    */
   locale?: "en-US" | "th";

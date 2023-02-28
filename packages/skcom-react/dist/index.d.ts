@@ -837,9 +837,18 @@ interface FullscreenDialogProps extends SKComponent {
      */
     width?: React.CSSProperties["width"];
     /**
+     * A description of the Full-screen Dialog for screen readers, similar to
+     * `alt` on `<img>`.
+     *
+     * - Required if `title` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
      * Allows for translation of the accessibility labels.
      *
-     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
      * - Optional.
      */
     locale?: "en-US" | "th";
@@ -865,7 +874,7 @@ interface FullscreenDialogProps extends SKComponent {
  * @param locale Allows for translation of the accessibility labels.
  * @param onClose The function triggered when the scrim is clicked.
  */
-declare function FullscreenDialog({ children, open, title, action, width, locale, onClose, style, className, }: FullscreenDialogProps): JSX.Element;
+declare function FullscreenDialog({ children, open, title, action, width, alt, locale, onClose, style, className, }: FullscreenDialogProps): JSX.Element;
 declare namespace FullscreenDialog {
     var displayName: string;
 }
@@ -1737,7 +1746,8 @@ interface PageHeaderProps extends SKComponent {
     /**
      * Allows for translation of the accessibility labels.
      *
-     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
      * - Optional.
      */
     locale?: "en-US" | "th";

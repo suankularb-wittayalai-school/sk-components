@@ -15,6 +15,7 @@ import "@suankularb-components/css/dist/css/components/fullscreen-dialog.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 import { useBreakpoint } from "../../utils/window";
 
 /**
@@ -59,9 +60,19 @@ export interface FullscreenDialogProps extends SKComponent {
   width?: React.CSSProperties["width"];
 
   /**
+   * A description of the Full-screen Dialog for screen readers, similar to
+   * `alt` on `<img>`.
+   *
+   * - Required if `title` is a JSX Element, as it is used to generate the ID
+   *   crucial for accessibility.
+   */
+  alt?: string;
+
+  /**
    * Allows for translation of the accessibility labels.
    *
-   * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
    * - Optional.
    */
   locale?: "en-US" | "th";
@@ -95,6 +106,7 @@ export function FullscreenDialog({
   title,
   action,
   width,
+  alt,
   locale,
   onClose,
   style,
@@ -141,6 +153,40 @@ export function FullscreenDialog({
     }
   }, [open]);
 
+  // Close the Dialog with the escape key
+  React.useEffect(() => {
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  // Generate the base ID for `aria-labelledby` and `aria-describedby`
+  const dialogID = `dialog-${kebabify(
+    (typeof title === "string" ? title : alt)!
+  )}`;
+
+  // Inject first `<p>` element with an ID that `aria-describedby` can point to
+  let pIsInjected = false;
+  const injectedChildren = React.Children.map(children, (child) => {
+    if ((child as JSX.Element).type === "p") {
+      // If a `<p>` was already injected, don’t inject this `<p>`
+      if (pIsInjected) return child;
+
+      // Inject the first `<p>` with an ID
+      pIsInjected = true;
+      return React.cloneElement(child as JSX.Element, {
+        id: `${dialogID}-desc`,
+      });
+    }
+
+    // Leave other children untouched
+    return child;
+  });
+
   return (
     <AnimatePresence>
       {open && (
@@ -150,6 +196,8 @@ export function FullscreenDialog({
             // `alertdialog` is a type of `dialog` for interrupting the user
             // flow.
             role="alertdialog"
+            aria-labelledby={`${dialogID}-title`}
+            aria-describedby={`${dialogID}-desc`}
             aria-modal="true"
             initial="initial"
             animate="animate"
@@ -174,13 +222,13 @@ export function FullscreenDialog({
                 alt={locale === "th" ? "ปิดหน้าต่าง" : "Close"}
                 onClick={onClose}
               />
-              <h2>{title}</h2>
+              <h2 id={`${dialogID}-title`}>{title}</h2>
               {action}
             </div>
 
             {/* Content */}
             <motion.div className="skc-fullscreen-dialog__content">
-              {children}
+              {injectedChildren}
             </motion.div>
           </motion.div>
 

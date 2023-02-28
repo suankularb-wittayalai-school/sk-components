@@ -761,7 +761,7 @@ function DialogHeader({
 DialogHeader.displayName = "DialogHeader";
 
 // ../skcom-css/dist/css/components/dialog-content.css
-styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-header:has(~.skc-dialog-content) {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
+styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
 
 // src/components/DialogContent/index.tsx
 import { jsx as jsx13 } from "react/jsx-runtime";
@@ -850,6 +850,7 @@ function FullscreenDialog({
   title,
   action,
   width,
+  alt,
   locale,
   onClose,
   style,
@@ -886,11 +887,38 @@ function FullscreenDialog({
         buttons[buttons.length - 1].focus();
     }
   }, [open]);
+  React9.useEffect(() => {
+    const handleKeyUp = (event) => {
+      if (event.key === "Escape")
+        onClose();
+    };
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+  const dialogID = `dialog-${kebabify(
+    typeof title === "string" ? title : alt
+  )}`;
+  let pIsInjected = false;
+  const injectedChildren = React9.Children.map(children, (child) => {
+    if (child.type === "p") {
+      if (pIsInjected)
+        return child;
+      pIsInjected = true;
+      return React9.cloneElement(child, {
+        id: `${dialogID}-desc`
+      });
+    }
+    return child;
+  });
   return /* @__PURE__ */ jsx14(AnimatePresence2, { children: open && /* @__PURE__ */ jsxs8(Fragment5, { children: [
     /* @__PURE__ */ jsxs8(
       motion7.div,
       {
         role: "alertdialog",
+        "aria-labelledby": `${dialogID}-title`,
+        "aria-describedby": `${dialogID}-desc`,
         "aria-modal": "true",
         initial: "initial",
         animate: "animate",
@@ -912,10 +940,10 @@ function FullscreenDialog({
                 onClick: onClose
               }
             ),
-            /* @__PURE__ */ jsx14("h2", { children: title }),
+            /* @__PURE__ */ jsx14("h2", { id: `${dialogID}-title`, children: title }),
             action
           ] }),
-          /* @__PURE__ */ jsx14(motion7.div, { className: "skc-fullscreen-dialog__content", children })
+          /* @__PURE__ */ jsx14(motion7.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
         ]
       }
     ),
