@@ -218,9 +218,7 @@ export function ListItem({
       </li>
     ) : (
       // If this Item has no functionality, just render a `<li>`
-      <li {...props}>
-        {content}
-      </li>
+      <li {...props}>{content}</li>
     )
   );
 }

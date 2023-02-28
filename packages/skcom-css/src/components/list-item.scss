@@ -13,9 +13,9 @@
   overflow: hidden;
   flex-direction: row;
   gap: 1rem;
+  width: 100%;
   padding: 0.5rem 2rem 0.5rem 1rem;
   -webkit-tap-highlight-color: transparent;
-  width: 100%;
 }
 
 // Alignment
@@ -44,7 +44,7 @@
 
   &::before {
     @include mix.state-layer();
-    background-color: var(--primary);
+    background-color: var(--on-surface);
   }
 
   &:hover::before {
@@ -61,7 +61,7 @@
 
 .skc-list-item__ripple {
   @include mix.ripple();
-  background-color: var(--primary);
+  background-color: var(--on-surface);
 }
 
 // Image

@@ -21,7 +21,6 @@ import "@suankularb-components/css/dist/css/components/page-header.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link PageHeader Page Header}.
@@ -89,6 +88,15 @@ export interface PageHeaderProps extends SKComponent {
   homeURL?: string;
 
   /**
+   * Allows for translation of the accessibility labels.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
+   * - Optional.
+   */
+  locale?: "en-US" | "th";
+
+  /**
    * Change the underlying element from `<a>` to a custom element. This is
    * useful when a framework you’re using has a Link component for routing. An
    * example is `next/link` from Next.js.
@@ -135,6 +143,7 @@ export interface PageHeaderProps extends SKComponent {
  * @param brand A small image of your brand can be put on the Page Header.
  * @param parentURL The link the back Button navigates to.
  * @param homeURL The link to the home page of this application.
+ * @param locale Allows for translation of the accessibility labels.
  * @param element Change the underlying element from `<a>` to a custom element.
  * @param onBack The function triggered when the back Button is clicked.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
@@ -147,6 +156,7 @@ export function PageHeader({
   brand,
   parentURL,
   homeURL,
+  locale,
   element,
   onBack,
   onNavToggle,
@@ -255,6 +265,7 @@ export function PageHeader({
               <Button
                 appearance="text"
                 icon={<MaterialIcon icon="arrow_backward" />}
+                alt={locale === "th" ? "กลับ" : "Back"}
                 onClick={onBack}
                 href={parentURL}
                 element={element}

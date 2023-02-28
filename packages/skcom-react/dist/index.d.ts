@@ -667,6 +667,219 @@ declare namespace AssistChip {
 }
 
 /**
+ * Props for {@link Dialog}.
+ */
+interface DialogProps extends SKComponent {
+    /**
+     * Parts of a Dialog.
+     *
+     * - Dialog Header and Actions are required components and must appear in the
+     *   said order.
+     * - If present, Dialog Content must appear between Dialog Header and
+     *   Actions.
+     */
+    children: React.ReactNode;
+    /**
+     * If the Dialog is open and shown.
+     *
+     * - Optional.
+     */
+    open?: boolean;
+    /**
+     * The width of the Dialog. This is useful when you want to fit more content
+     * into a Dialog, or when you have many overlapping Dialogs.
+     *
+     * - Optional.
+     */
+    width?: React.CSSProperties["width"];
+    /**
+     * The function triggered when the scrim is clicked.
+     */
+    onClose: () => any;
+}
+/**
+ * A Dialog interrupts the user to have them make an immediately significant
+ * decision or prompts a user to enter important information.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param children Parts of a Dialog.
+ * @param open If the Dialog is open and shown.
+ * @param width The width of the Dialog.
+ * @param onClose The function triggered when the scrim is clicked.
+ */
+declare function Dialog({ children, open, width, onClose, style, className, }: DialogProps): JSX.Element;
+declare namespace Dialog {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DialogHeader Dialog Header}.
+ */
+interface DialogHeaderProps extends SKComponent {
+    /**
+     * The hero icon shown above the title text (`title`).
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * The title text. This is useful when the supporting text is long and needs
+     * a summary.
+     *
+     * - Optional.
+     */
+    title?: string | JSX.Element;
+    /**
+     * With a title (`title`), the supporting text complements the title text
+     * with more details.
+     *
+     * On its own, it succinctly presents the purpose of the Dialog, like
+     * “Discard draft?,” for a confirmation on exiting a page without saving.
+     *
+     * - Always required.
+     */
+    desc: string | JSX.Element;
+    /**
+     * A description of the Dialog Header for screen readers, similar to
+     * `alt` on `<img>`.
+     *
+     * - Required if:
+     *   - `title` is defined and is a JSX Element, or;
+     *   - `desc` is a JSX Element and title is undefined.
+     */
+    alt?: string;
+}
+/**
+ * A row of Buttons. DialogHeader handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param icon The hero icon shown above the title text (`title`).
+ * @param title The title text.
+ * @param desc Complements the title text or succinctly presents the purpose of the Dialog.
+ * @param alt A description of the Dialog Header for screen readers, similar to `alt` on `<img>`.
+ */
+declare function DialogHeader({ icon, title, desc, alt, style, className, }: DialogHeaderProps): JSX.Element;
+declare namespace DialogHeader {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DialogContent Dialog Header}.
+ */
+interface DialogContentProps extends SKComponent {
+    /**
+     * A Dialog Content can include anything. A common use case is List.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The height of this component. If its content is taller than this value,
+     * Dialog Content scrolls.
+     *
+     * - Setting a height will show Dividers on top of and below the component.
+     * - Optional.
+     */
+    height?: number;
+}
+/**
+ * Additional content that supplements the Dialog Header. This is where the
+ * user can see more details about a decision or a space for the user to enter
+ * information.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vcs7cvubpd7l SKCom documentation}
+ *
+ * @param children A Dialog Content can include anything. A common use case is List.
+ * @param height The height of this component. If its content is taller than this value, Dialog Content scrolls.
+ */
+declare function DialogContent({ children, height, style, className, }: DialogContentProps): JSX.Element;
+declare namespace DialogContent {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link FullscreenDialog Full-screen Dialog}.
+ */
+interface FullscreenDialogProps extends SKComponent {
+    /**
+     * The content.
+     *
+     * - Always required.
+     */
+    children?: React.ReactNode;
+    /**
+     * If the Full-screen Dialog is open and shown.
+     *
+     * - Optional.
+     */
+    open?: boolean;
+    /**
+     * The title text.
+     *
+     * - Always required.
+     */
+    title: string | JSX.Element;
+    /**
+     * The submission Button.
+     *
+     * - Should be a Button.
+     * - Always required.
+     */
+    action: JSX.Element;
+    /**
+     * Full-screen Dialog transforms into a basic Dialog on larger screens. The
+     * width of the Dialog can be set here.
+     *
+     * - Optional.
+     */
+    width?: React.CSSProperties["width"];
+    /**
+     * A description of the Full-screen Dialog for screen readers, similar to
+     * `alt` on `<img>`.
+     *
+     * - Required if `title` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
+     * The function triggered when the scrim is clicked.
+     */
+    onClose: () => any;
+}
+/**
+ * A Full-screen Dialog fills the entire screen containing a series of tasks
+ * required to complete.
+ *
+ * A Full-screen Dialog only fills the screen on mobile and turns into a Dialog
+ * on larger screens. A Dialog can appear above a Full-screen Dialog.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation}
+ *
+ * @param children The content.
+ * @param open If the Full-screen Dialog is open and shown.
+ * @param title The title text.
+ * @param action The submission Button.
+ * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
+ * @param locale Allows for translation of the accessibility labels.
+ * @param onClose The function triggered when the scrim is clicked.
+ */
+declare function FullscreenDialog({ children, open, title, action, width, alt, locale, onClose, style, className, }: FullscreenDialogProps): JSX.Element;
+declare namespace FullscreenDialog {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Divider}.
  */
 interface DividerProps extends SKComponent {
@@ -1035,6 +1248,7 @@ interface NavBarProps extends SKComponent {
  * @param fab If a page includes a FAB, it is moved to the Navigation Rail in larger screens.
  * @param end More Navigation Items can be placed on the bottom of the Navigation Rail in larger screens.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
+ * @param locale Allows for translation of the accessibility labels.
  */
 declare function NavBar({ children, brand, fab, end, onNavToggle, locale, style, className, }: NavBarProps): JSX.Element;
 declare namespace NavBar {
@@ -1530,6 +1744,14 @@ interface PageHeaderProps extends SKComponent {
      */
     homeURL?: string;
     /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
      * Change the underlying element from `<a>` to a custom element. This is
      * useful when a framework you’re using has a Link component for routing. An
      * example is `next/link` from Next.js.
@@ -1572,12 +1794,13 @@ interface PageHeaderProps extends SKComponent {
  * @param brand A small image of your brand can be put on the Page Header.
  * @param parentURL The link the back Button navigates to.
  * @param homeURL The link to the home page of this application.
+ * @param locale Allows for translation of the accessibility labels.
  * @param element Change the underlying element from `<a>` to a custom element.
  * @param onBack The function triggered when the back Button is clicked.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
  * @param backAttr Props for the underlying Button component the back Button uses.
  */
-declare function PageHeader({ children, title, icon, brand, parentURL, homeURL, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
+declare function PageHeader({ children, title, icon, brand, parentURL, homeURL, locale, element, onBack, onNavToggle, backAttr, style, className, }: PageHeaderProps): JSX.Element;
 declare namespace PageHeader {
     var displayName: string;
 }
@@ -1674,4 +1897,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Divider, DividerProps, FAB, FABProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

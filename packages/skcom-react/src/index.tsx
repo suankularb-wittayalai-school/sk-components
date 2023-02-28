@@ -17,6 +17,20 @@ export { Columns, type ColumnsProps } from "./components/Columns";
 
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
 
+export { Dialog, type DialogProps } from "./components/Dialog";
+export {
+  DialogHeader,
+  type DialogHeaderProps,
+} from "./components/DialogHeader";
+export {
+  DialogContent,
+  type DialogContentProps,
+} from "./components/DialogContent";
+export {
+  FullscreenDialog,
+  type FullscreenDialogProps,
+} from "./components/FullscreenDialog";
+
 export { Divider, type DividerProps } from "./components/Divider";
 
 export { Header, type HeaderProps } from "./components/Header";
