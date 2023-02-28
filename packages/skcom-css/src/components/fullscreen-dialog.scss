@@ -26,8 +26,8 @@
   position: fixed;
   inset: 0 0 auto;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
   gap: 0.5rem;
   padding: 0.75rem 0.5rem;
 
@@ -54,6 +54,7 @@
   // Top App Bar: 4rem
   // Navigation Bar: 5rem
   // Visible padding: 1rem
+
   padding-block: (4rem + 1rem) (5rem + 1rem);
 
   > * {
@@ -77,16 +78,17 @@
 
   .skc-fullscreen-dialog__top-app-bar {
     position: static;
+
     padding-inline: 0.75rem;
   }
 
   .skc-fullscreen-dialog__content {
-    padding: 1.5rem;
     overflow-y: auto;
-    border-top: 1px solid var(--outline);
     // Top App Bar: 4rem
     // Visible margin from edge of screen (top + bottom combined): 2rem
     max-height: calc(100vh - (4rem + 2rem));
+    padding: 1.5rem;
+    border-top: 1px solid var(--outline);
 
     > * {
       margin-inline: 0;
