@@ -23,6 +23,7 @@ import {
   MaterialIcon,
   Section,
   SegmentedButton,
+  TextField,
 } from "@suankularb-components/react";
 
 // Utilities
@@ -157,7 +158,7 @@ const DialogSection: FC = () => {
           </a>
           . Thank you!
         </p>
-        <SegmentedButton alt="View" full>
+        <SegmentedButton alt="View" full className="pb-4">
           <Button
             appearance="outlined"
             selected={view === "bug-report"}
@@ -173,22 +174,27 @@ const DialogSection: FC = () => {
             Feature request
           </Button>
         </SegmentedButton>
-        {/* <TextField
-          label="Title"
-          behavior="single-line"
-          helperMsg="What is your issue?"
-        />
-        <TextField
-          label="Description"
-          behavior="textarea"
-          helperMsg="A clear and concise description."
-        />
-        <TextField
-          label="Expectation"
-          behavior="textarea"
-          helperMsg="What you expected to have happened/think should be
-            implemented."
-        /> */}
+        <div className="flex flex-col gap-12 pb-12">
+          <TextField
+            appearance="outlined"
+            label="Title"
+            behavior="single-line"
+            helperMsg="What is your issue?"
+          />
+          <TextField
+            appearance="outlined"
+            label="Description"
+            behavior="textarea"
+            helperMsg="A clear and concise description."
+          />
+          <TextField
+            appearance="outlined"
+            label="Expectation"
+            behavior="textarea"
+            helperMsg="What you expected to have happened/think should be
+              implemented."
+          />
+        </div>
       </FullscreenDialog>
     </Section>
   );

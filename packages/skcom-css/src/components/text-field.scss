@@ -5,6 +5,92 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
 .skc-text-field {
-  // TODO
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  border: 1px solid var(--outline);
+  border-radius: 0.25rem;
+
+  &:focus-within {
+    border-color: var(--primary);
+  }
+
+  &:has(.skc-text-field__leading) {
+    padding-left: 1rem;
+  }
+
+  &:has(.skc-text-field__trailing) {
+    padding-right: 1rem;
+  }
+}
+
+.skc-text-field__label {
+  @include type.font("body-large");
+  font-family: var(--font-display);
+  position: absolute;
+  z-index: 10;
+  inset: 1rem auto auto 0.75rem;
+  padding-inline: 0.25rem;
+  pointer-events: none;
+  color: var(--on-surface-variant);
+  background-color: var(--background);
+
+  .skc-text-field:focus-within & {
+    color: var(--primary);
+  }
+
+  .skc-text-field:has(.skc-text-field__leading) & {
+    left: 2.75rem;
+  }
+}
+
+.skc-text-field__leading,
+.skc-text-field__trailing {
+  &,
+  & .skc-button__icon .skc-icon {
+    color: var(--on-surface-variant);
+  }
+}
+
+.skc-text-field__input {
+  @include type.font("body-large");
+  flex-grow: 1;
+  padding: 1rem;
+  color: var(--on-surface);
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  .skc-text-field:has(.skc-text-field__leading) & {
+    padding-left: 0;
+  }
+
+  .skc-text-field:has(.skc-text-field__trailing) & {
+    padding-right: 0;
+  }
+}
+
+textarea.skc-text-field__input {
+  height: 6.5rem;
+}
+
+.skc-text-field__helper-msg {
+  @include type.font("body-small");
+  position: absolute;
+  inset: auto 0 -2.25rem 1rem;
+  height: 2rem;
+  color: var(--on-surface-variant);
 }

@@ -1,6 +1,10 @@
 // External libraries
 import * as React from "react";
 
+// Internal components
+import { Button } from "../Button";
+import { MaterialIcon } from "../MaterialIcon";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -9,6 +13,9 @@ import "@suankularb-components/css/dist/css/components/text-field.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
+import { transition, useAnimationConfig } from "../../utils/animation";
+import { motion, useAnimationControls } from "framer-motion";
 
 /**
  * Props for {@link TextField Text Field}.
@@ -17,7 +24,7 @@ export interface TextFieldProps extends SKComponent {
   /**
    * How the Text Field looks. An outlined Text Field has a lower emphasis than
    * filled, so it is great for a form with many fields.
-   * 
+   *
    * - Keep the appearance consistent across Text Fields. Separate different
    *   appearances by region.
    * - Must be `outlined` or `filled`.
@@ -28,14 +35,14 @@ export interface TextFieldProps extends SKComponent {
   /**
    * The placeholder text (when not focused and no value) and the label text
    * (when focused or has value).
-   * 
+   *
    * - Always required.
    */
   label: string | JSX.Element;
 
   /**
    * How the Text Field behaves if the field value exceeds the visual space.
-   * 
+   *
    * - Must be `single-line`, `multi-line`, or `textarea`.
    * - A single line Text Field can only accompany 1 line of text. Field value
    *   never wraps and instead scrolls.
@@ -48,7 +55,7 @@ export interface TextFieldProps extends SKComponent {
 
   /**
    * The alignment of the input field.
-   * 
+   *
    * - This is useful if the input value should come immediately before the
    *   trailing text, like the start of an email.
    * - Optional.
@@ -57,14 +64,14 @@ export interface TextFieldProps extends SKComponent {
 
   /**
    * The leading text or icon, aligned to the left.
-   * 
+   *
    * - Optional.
    */
   leading?: string | JSX.Element;
 
   /**
    * The trailing text or icon, aligned to the right.
-   * 
+   *
    * - Incompatible with `canClear`, as that requires the space of the trailing icon for the clear button.
    * - Optional.
    */
@@ -72,29 +79,29 @@ export interface TextFieldProps extends SKComponent {
 
   /**
    * A description of the Text Field for screen readers, similar to `alt` on `<img>`.
-   * 
+   *
    * - Required if `label` is a JSX Element, as it is used to generate the ID crucial for accessibility.
    */
   alt?: string;
 
   /**
    * A short description of the Text Field, or an error message during an error state.
-   * 
+   *
    * - Optional but recommended during an error state.
    */
   helperMsg?: string | JSX.Element;
 
   /**
    * If the user has to enter text in this field for the form to be valid.
-   * 
+   *
    * - Activates the error state after the user exits the Text Field without entering anything, even if `error` is false.
    * - Optional.
    */
   required?: boolean;
 
   /**
-   * Allows the user to clear the field value with the clear button. 
-   * 
+   * Allows the user to clear the field value with the clear button.
+   *
    * - The clear button only appears if this is defined.
    * - Incompatible with `trailing`, as that uses the space of the clear button
    *   for the trailing icon.
@@ -105,14 +112,14 @@ export interface TextFieldProps extends SKComponent {
   /**
    * Tells Text Field that it contains an invalid value and activates the error
    * state.
-   * 
+   *
    * - Optional.
    */
   error?: boolean;
 
   /**
    * The value inside the field. This is useful if you want a controlled input.
-   * 
+   *
    * - Optional.
    */
   value?: string;
@@ -120,16 +127,16 @@ export interface TextFieldProps extends SKComponent {
   /**
    * This function triggers when the user make changes to the field value. The
    * value is passed in via the function.
-   * 
+   *
    * - Optional.
-   * 
-   * @param value 
+   *
+   * @param value
    */
   onChange?: (value: string) => any;
 
   /**
    * Attributes for the underlying `<input>` element used as the field.
-   * 
+   *
    * - Optional.
    */
   inputAttr?: JSX.IntrinsicElements["input"];
@@ -173,8 +180,121 @@ export function TextField({
   style,
   className,
 }: TextFieldProps) {
+  // Animation
+  const { duration, easing } = useAnimationConfig();
+  const labelControls = useAnimationControls();
+  const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
+
+  // Account for when the value is set from a different source that doesn’t
+  // involve focusing on the Text Field
+  React.useEffect(() => {
+    if (value) setMinifyLabel(true);
+  }, [value]);
+
+  const placeholderLabel = {
+    y: 0,
+    fontSize: "var(--text-lg)",
+    lineHeight: "1.5rem",
+    letterSpacing: 0.5,
+  };
+  const minifedLabel = {
+    y: -24,
+    fontSize: "var(--text-sm)",
+    lineHeight: "1rem",
+    letterSpacing: 0.4,
+  };
+
+  const labelTransition = transition(duration.short4, easing.standard);
+
+  React.useEffect(() => {
+    // Disable initial animation
+    if (minifyLabel === undefined) return;
+
+    // Minify the label
+    if (minifyLabel) {
+      labelControls.set(placeholderLabel);
+      labelControls.start({ ...minifedLabel, transition: labelTransition });
+      return;
+    }
+
+    // Reset the label
+    labelControls.set(minifedLabel);
+    labelControls.start({ ...placeholderLabel, transition: labelTransition });
+  }, [minifyLabel]);
+
+  // Accessibility
+  // Generate the base ID for `<label>` and `aria-describedby`
+  const fieldID = `field-${kebabify(
+    (typeof label === "string" ? label : alt)!
+  )}`;
+
+  // Props for the `<input>` or `<textarea>`
+  const inputProps = {
+    id: fieldID,
+    "aria-describedby": `${fieldID}-helper`,
+    value,
+    required,
+    onFocus: () => setMinifyLabel(true),
+    onBlur:
+      value !== undefined ? () => setMinifyLabel(Boolean(value)) : undefined,
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      onChange && onChange(e.target.value),
+    className: "skc-text-field__input",
+  } satisfies JSX.IntrinsicElements["input" | "textarea"];
+
   return (
-    <div style={style} className={cn(["skc-text-field", className])}></div>
+    <div
+      style={style}
+      className={cn([
+        "skc-text-field",
+        appearance === "outlined"
+          ? "skc-text-field--outlined"
+          : appearance === "filled"
+          ? "skc-text-field--filled"
+          : undefined,
+        align === "right" ? "skc-text-field--right" : "skc-text-field--left",
+        error && "skc-text-field--error",
+        className,
+      ])}
+      {...inputAttr}
+    >
+      {/* Label */}
+      <motion.label
+        htmlFor={fieldID}
+        animate={labelControls}
+        className="skc-text-field__label"
+      >
+        {label}
+      </motion.label>
+
+      {/* Leading section */}
+      {leading && <div className="skc-text-field__leading">{leading}</div>}
+
+      {/* Input */}
+      {behavior === "textarea" ? (
+        <textarea {...inputProps} />
+      ) : (
+        <input {...inputProps} />
+      )}
+
+      {/* Trailing section/clear Button */}
+      {(canClear || trailing) && (
+        <div className="skc-text-field__leading">
+          {canClear ? (
+            <Button appearance="text" icon={<MaterialIcon icon="cancel" />} />
+          ) : (
+            trailing
+          )}
+        </div>
+      )}
+
+      {/* Helper message */}
+      {helperMsg && (
+        <span id={`${fieldID}-helper`} className="skc-text-field__helper-msg">
+          {helperMsg}
+        </span>
+      )}
+    </div>
   );
 }
 
