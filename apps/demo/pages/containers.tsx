@@ -36,7 +36,7 @@ const AvatarSection: FC = () => (
     <div className="flex flex-row gap-2">
       <Avatar>ST</Avatar>
       <Avatar>
-        <Image src="/images/burger.png" width={40} height={40} alt="" />
+        <Image src="/images/sadudee.png" width={40} height={40} alt="" />
       </Avatar>
       <Avatar />
     </div>
