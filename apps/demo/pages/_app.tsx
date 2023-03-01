@@ -5,7 +5,7 @@ import {
   Space_Grotesk,
   Sarabun,
   IBM_Plex_Sans_Thai,
-} from "@next/font/google";
+} from "next/font/google";
 
 // SK Components
 import { ThemeProvider } from "@suankularb-components/react";

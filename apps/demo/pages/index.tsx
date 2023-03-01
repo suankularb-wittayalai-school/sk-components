@@ -2,11 +2,7 @@
 import Head from "next/head";
 
 // SK Components
-import {
-  Button,
-  ContentLayout,
-  MaterialIcon,
-} from "@suankularb-components/react";
+import { ContentLayout, MaterialIcon } from "@suankularb-components/react";
 
 // Utilities
 import { CustomPage } from "@/utils/types";

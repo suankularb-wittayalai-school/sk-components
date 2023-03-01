@@ -16,6 +16,8 @@
   position: fixed;
   z-index: 90;
   inset: 0;
+  overflow-y: auto;
+  height: 100vh;
   // Unlike some other components, Full-screen Dialog should work everywhere,]
   // and !important makes sure of that
   margin: 0 !important;
@@ -54,7 +56,6 @@
   // Top App Bar: 4rem
   // Navigation Bar: 5rem
   // Visible padding: 1rem
-
   padding-block: (4rem + 1rem) (5rem + 1rem);
 
   > * {
@@ -66,19 +67,38 @@
   margin: 0 !important;
 }
 
+@supports (height: 100dvh) {
+  .skc-fullscreen-dialog {
+    height: 100dvh;
+  }
+}
+
 @include mix.breakpoint("sm") {
   .skc-fullscreen-dialog {
     inset: 50% auto auto 50%;
     width: 22.5rem;
     max-width: calc(100vw - 3rem);
+    height: initial;
     transform: translate(-50%, -50%);
     border-radius: var(--rounded-2xl);
     background-color: var(--surface-3);
+
+    &,
+    .skc-text-field--outlined .skc-text-field__label {
+      background-color: var(--surface-3);
+    }
+
+    .skc-text-field--filled {
+      background-color: var(--surface-1);
+
+      &::before {
+        background-color: var(--outline);
+      }
+    }
   }
 
   .skc-fullscreen-dialog__top-app-bar {
     position: static;
-
     padding-inline: 0.75rem;
   }
 

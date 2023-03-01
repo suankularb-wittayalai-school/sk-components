@@ -6,6 +6,7 @@ import { FC, useState } from "react";
 // SK Components
 import {
   Actions,
+  Avatar,
   Button,
   Card,
   CardContent,
@@ -23,10 +24,24 @@ import {
   MaterialIcon,
   Section,
   SegmentedButton,
+  TextField,
 } from "@suankularb-components/react";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+
+const AvatarSection: FC = () => (
+  <Section>
+    <Header>Avatar</Header>
+    <div className="flex flex-row gap-2">
+      <Avatar>ST</Avatar>
+      <Avatar>
+        <Image src="/images/sadudee.png" width={40} height={40} alt="" />
+      </Avatar>
+      <Avatar />
+    </div>
+  </Section>
+);
 
 const CardSection: FC = () => (
   <Section>
@@ -80,9 +95,13 @@ const ColumnsSection: FC = () => (
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
   const [showReport, setShowReport] = useState<boolean>(false);
+
   const [view, setView] = useState<"bug-report" | "feature-request">(
     "bug-report"
   );
+  const [issueTitle, setIssueTitle] = useState<string>("");
+  const [issueDesc, setIssueDesc] = useState<string>("");
+  const [issueExpect, setIssueExpect] = useState<string>("");
 
   return (
     <Section>
@@ -117,9 +136,11 @@ const DialogSection: FC = () => {
         <DialogContent>
           <List divided>
             <ListItem align="center" lines={1}>
+              <Avatar>ST</Avatar>
               <ListItemContent title="Sadudee Theparree" />
             </ListItem>
             <ListItem align="center" lines={1}>
+              <Avatar>TL</Avatar>
               <ListItemContent title="Tempoom Leelacharoen" />
             </ListItem>
           </List>
@@ -157,7 +178,7 @@ const DialogSection: FC = () => {
           </a>
           . Thank you!
         </p>
-        <SegmentedButton alt="View" full>
+        <SegmentedButton alt="View" full className="pb-4">
           <Button
             appearance="outlined"
             selected={view === "bug-report"}
@@ -173,22 +194,33 @@ const DialogSection: FC = () => {
             Feature request
           </Button>
         </SegmentedButton>
-        {/* <TextField
-          label="Title"
-          behavior="single-line"
-          helperMsg="What is your issue?"
-        />
-        <TextField
-          label="Description"
-          behavior="textarea"
-          helperMsg="A clear and concise description."
-        />
-        <TextField
-          label="Expectation"
-          behavior="textarea"
-          helperMsg="What you expected to have happened/think should be
-            implemented."
-        /> */}
+        <div className="flex flex-col gap-12 pb-12">
+          <TextField
+            appearance="outlined"
+            label="Title"
+            behavior="single-line"
+            helperMsg="What is your issue?"
+            value={issueTitle}
+            onChange={setIssueTitle}
+          />
+          <TextField
+            appearance="outlined"
+            label="Description"
+            behavior="textarea"
+            helperMsg="A clear and concise description."
+            value={issueDesc}
+            onChange={setIssueDesc}
+          />
+          <TextField
+            appearance="outlined"
+            label="Expectation"
+            behavior="textarea"
+            helperMsg="What you expected to have happened/think should be
+              implemented."
+            value={issueExpect}
+            onChange={setIssueExpect}
+          />
+        </div>
       </FullscreenDialog>
     </Section>
   );
@@ -260,6 +292,7 @@ const ContainersPage: CustomPage = () => {
         <title>Containers - SK Components</title>
       </Head>
       <ContentLayout>
+        <AvatarSection />
         <CardSection />
         <ColumnsSection />
         <DialogSection />
