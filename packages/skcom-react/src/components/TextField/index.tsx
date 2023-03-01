@@ -228,6 +228,14 @@ export function TextField({
     labelControls.start({ ...plhLabelAnimState, transition: labelTransition });
   }, [minifyLabel]);
 
+  // Auto-expand the `<textarea>` if behavior set to `multi-line`
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (onChange) onChange(e.target.value);
+    if (behavior !== "multi-line") return;
+  };
+
   // Accessibility
   // Generate the base ID for `<label>` and `aria-describedby`
   const fieldID = `field-${kebabify(
@@ -243,8 +251,7 @@ export function TextField({
     onFocus: () => setMinifyLabel(true),
     onBlur:
       value !== undefined ? () => setMinifyLabel(Boolean(value)) : undefined,
-    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      onChange && onChange(e.target.value),
+    onChange: handleChange,
     className: "skc-text-field__input",
   } satisfies JSX.IntrinsicElements["input" | "textarea"];
 
@@ -258,6 +265,11 @@ export function TextField({
           : appearance === "filled"
           ? "skc-text-field--filled"
           : undefined,
+        behavior === "multi-line"
+          ? "skc-text-field--multi-line"
+          : behavior === "textarea"
+          ? "skc-text-field--textarea"
+          : "skc-text-field--single-line",
         align === "right" ? "skc-text-field--right" : "skc-text-field--left",
         error && "skc-text-field--error",
         className,
@@ -277,15 +289,15 @@ export function TextField({
       {leading && <div className="skc-text-field__leading">{leading}</div>}
 
       {/* Input */}
-      {behavior === "textarea" ? (
-        <textarea {...inputProps} />
-      ) : (
+      {behavior === "single-line" ? (
         <input {...inputProps} />
+      ) : (
+        <textarea {...inputProps} />
       )}
 
       {/* Trailing section/clear Button */}
       {(canClear || trailing) && (
-        <div className="skc-text-field__leading">
+        <div className="skc-text-field__trailing">
           {canClear ? (
             <Button appearance="text" icon={<MaterialIcon icon="cancel" />} />
           ) : (

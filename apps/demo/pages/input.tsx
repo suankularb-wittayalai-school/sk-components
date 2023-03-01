@@ -4,6 +4,7 @@ import Head from "next/head";
 
 // SK Components
 import {
+  Columns,
   ContentLayout,
   Header,
   MaterialIcon,
@@ -17,21 +18,45 @@ import { CustomPage } from "@/utils/types";
 const TextFieldSection: FC = () => {
   const [name, setName] = useState<string>("");
   const [partyList, setPartyList] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
   const [policies, setPolicies] = useState<string>("");
 
   return (
     <Section>
       <Header>Text Field</Header>
       <div className="flex flex-col gap-8 pb-8">
-        <TextField
-          appearance="outlined"
-          label="Candidate name"
-          behavior="single-line"
-          leading={<MaterialIcon icon="person" />}
-          helperMsg="Full name and surname of candidate"
-          value={name}
-          onChange={setName}
-        />
+        <Columns columns={3}>
+          <TextField
+            appearance="outlined"
+            label="Candidate name"
+            behavior="single-line"
+            leading={<MaterialIcon icon="person" />}
+            helperMsg="Full name and surname of candidate"
+            value={name}
+            onChange={setName}
+          />
+          <TextField
+            appearance="outlined"
+            label="Email"
+            behavior="single-line"
+            align="right"
+            leading={<MaterialIcon icon="email" />}
+            trailing="@student.sk.ac.th"
+            value={email}
+            onChange={setEmail}
+          />
+          <TextField
+            appearance="outlined"
+            label="Tel."
+            behavior="single-line"
+            leading={<MaterialIcon icon="phone" />}
+            canClear
+            value={phone}
+            onChange={setPhone}
+            inputAttr={{ type: "email" }}
+          />
+        </Columns>
         <TextField
           appearance="outlined"
           label="Party list"

@@ -1866,7 +1866,7 @@ var import_framer_motion16 = require("framer-motion");
 var React18 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/text-field.css
-styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field:focus-within {\n  border-color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) {\n  padding-left: 1rem;\n}\n.skc-text-field:has(.skc-text-field__trailing) {\n  padding-right: 1rem;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n  background-color: var(--background);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\ntextarea.skc-text-field__input {\n  height: 6.5rem;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n");
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field:focus-within {\n  border-color: var(--primary);\n}\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n  background-color: var(--background);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  color: var(--outline);\n}\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  padding: 1rem;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n");
 
 // src/components/TextField/index.tsx
 var import_jsx_runtime30 = require("react/jsx-runtime");
@@ -1921,6 +1921,12 @@ function TextField({
     labelControls.set(minifedLabelAnimState);
     labelControls.start(__spreadProps(__spreadValues({}, plhLabelAnimState), { transition: labelTransition }));
   }, [minifyLabel]);
+  const handleChange = (e) => {
+    if (onChange)
+      onChange(e.target.value);
+    if (behavior !== "multi-line")
+      return;
+  };
   const fieldID = `field-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
@@ -1931,7 +1937,7 @@ function TextField({
     required,
     onFocus: () => setMinifyLabel(true),
     onBlur: value !== void 0 ? () => setMinifyLabel(Boolean(value)) : void 0,
-    onChange: (e) => onChange && onChange(e.target.value),
+    onChange: handleChange,
     className: "skc-text-field__input"
   };
   return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(
@@ -1941,6 +1947,7 @@ function TextField({
       className: cn([
         "skc-text-field",
         appearance === "outlined" ? "skc-text-field--outlined" : appearance === "filled" ? "skc-text-field--filled" : void 0,
+        behavior === "multi-line" ? "skc-text-field--multi-line" : behavior === "textarea" ? "skc-text-field--textarea" : "skc-text-field--single-line",
         align === "right" ? "skc-text-field--right" : "skc-text-field--left",
         error && "skc-text-field--error",
         className
@@ -1957,8 +1964,8 @@ function TextField({
           }
         ),
         leading && /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "skc-text-field__leading", children: leading }),
-        behavior === "textarea" ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("textarea", __spreadValues({}, inputProps)) : /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("input", __spreadValues({}, inputProps)),
-        (canClear || trailing) && /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "skc-text-field__leading", children: canClear ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Button, { appearance: "text", icon: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MaterialIcon, { icon: "cancel" }) }) : trailing }),
+        behavior === "single-line" ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("input", __spreadValues({}, inputProps)) : /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("textarea", __spreadValues({}, inputProps)),
+        (canClear || trailing) && /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "skc-text-field__trailing", children: canClear ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Button, { appearance: "text", icon: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MaterialIcon, { icon: "cancel" }) }) : trailing }),
         helperMsg && /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { id: `${fieldID}-helper`, className: "skc-text-field__helper-msg", children: helperMsg })
       ]
     })
