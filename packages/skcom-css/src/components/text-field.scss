@@ -20,16 +20,20 @@
   align-items: center;
   flex-direction: row;
   min-height: 3.5rem;
-
-  &:focus-within {
-    border-color: var(--primary);
-  }
 }
 
 // Appearance
 .skc-text-field--outlined {
   border: 1px solid var(--outline);
   border-radius: 0.25rem;
+
+  &:hover {
+    border-color: var(--on-surface);
+  }
+
+  &:focus-within {
+    border-color: var(--primary);
+  }
 
   .skc-text-field__label {
     background-color: var(--background);
@@ -44,6 +48,19 @@
   border-bottom: 1px solid var(--outline);
   border-radius: 0.25rem 0.25rem 0 0;
   background-color: var(--surface-variant);
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus-within {
+    border-color: var(--primary);
+  }
 
   .skc-text-field__input {
     padding: 1.5rem 1rem 0.5rem;
