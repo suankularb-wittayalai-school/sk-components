@@ -1915,14 +1915,16 @@ interface TextFieldProps extends SKComponent {
     /**
      * The trailing text or icon, aligned to the right.
      *
-     * - Incompatible with `canClear`, as that requires the space of the trailing icon for the clear button.
+     * - Incompatible with `canClear`, as that requires the space of the trailing
+     *   icon for the clear button.
      * - Optional.
      */
     trailing?: string | JSX.Element;
     /**
      * A description of the Text Field for screen readers, similar to `alt` on `<img>`.
      *
-     * - Required if `label` is a JSX Element, as it is used to generate the ID crucial for accessibility.
+     * - Required if `label` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
      */
     alt?: string;
     /**
@@ -1934,10 +1936,18 @@ interface TextFieldProps extends SKComponent {
     /**
      * If the user has to enter text in this field for the form to be valid.
      *
-     * - Activates the error state after the user exits the Text Field without entering anything, even if `error` is false.
+     * - Activates the error state after the user exits the Text Field without
+     *   entering anything, even if `error` is false.
      * - Optional.
      */
     required?: boolean;
+    /**
+     * Turns the Text Field gray and block user input. `onChange` will not fire.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
     /**
      * Allows the user to clear the field value with the clear button.
      *
@@ -1996,7 +2006,7 @@ interface TextFieldProps extends SKComponent {
  * @param onChange This function triggers when the user make changes to the field value.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, canClear, error, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
+declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
 declare namespace TextField {
     var displayName: string;
 }

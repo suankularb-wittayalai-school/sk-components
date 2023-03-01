@@ -60,6 +60,14 @@ const TextFieldSection: FC = () => {
           />
           <TextField
             appearance="outlined"
+            label="Facebook"
+            behavior="single-line"
+            leading={<MaterialIcon icon="forum" />}
+            canClear
+            disabled
+          />
+          <TextField
+            appearance="outlined"
             label="Birthdate"
             behavior="single-line"
             leading={<MaterialIcon icon="cake" />}

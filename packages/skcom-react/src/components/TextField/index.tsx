@@ -72,7 +72,8 @@ export interface TextFieldProps extends SKComponent {
   /**
    * The trailing text or icon, aligned to the right.
    *
-   * - Incompatible with `canClear`, as that requires the space of the trailing icon for the clear button.
+   * - Incompatible with `canClear`, as that requires the space of the trailing
+   *   icon for the clear button.
    * - Optional.
    */
   trailing?: string | JSX.Element;
@@ -80,7 +81,8 @@ export interface TextFieldProps extends SKComponent {
   /**
    * A description of the Text Field for screen readers, similar to `alt` on `<img>`.
    *
-   * - Required if `label` is a JSX Element, as it is used to generate the ID crucial for accessibility.
+   * - Required if `label` is a JSX Element, as it is used to generate the ID
+   *   crucial for accessibility.
    */
   alt?: string;
 
@@ -94,10 +96,19 @@ export interface TextFieldProps extends SKComponent {
   /**
    * If the user has to enter text in this field for the form to be valid.
    *
-   * - Activates the error state after the user exits the Text Field without entering anything, even if `error` is false.
+   * - Activates the error state after the user exits the Text Field without
+   *   entering anything, even if `error` is false.
    * - Optional.
    */
   required?: boolean;
+
+  /**
+   * Turns the Text Field gray and block user input. `onChange` will not fire.
+   * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+   *
+   * - Optional.
+   */
+  disabled?: boolean;
 
   /**
    * Allows the user to clear the field value with the clear button.
@@ -172,6 +183,7 @@ export function TextField({
   alt,
   helperMsg,
   required,
+  disabled,
   canClear,
   error,
   value,
@@ -302,9 +314,11 @@ export function TextField({
     id: fieldID,
     "aria-labelledby": `${fieldID}-label`,
     "aria-describedby": `${fieldID}-helper`,
+    "aria-disabled": disabled,
     value,
     required,
-    onFocus: () => setMinifyLabel(true),
+    readOnly: disabled,
+    onFocus: !disabled ? () => setMinifyLabel(true) : undefined,
     onBlur:
       value !== undefined ? () => setMinifyLabel(Boolean(value)) : undefined,
     onChange: handleChange,
@@ -327,6 +341,7 @@ export function TextField({
           ? "skc-text-field--textarea"
           : "skc-text-field--single-line",
         align === "right" ? "skc-text-field--right" : "skc-text-field--left",
+        disabled && "skc-text-field--disabled",
         error && "skc-text-field--error",
         className,
       ])}
@@ -366,6 +381,7 @@ export function TextField({
             <Button
               appearance="text"
               icon={<MaterialIcon icon="cancel" />}
+              disabled={disabled}
               onClick={() => onChange && onChange("")}
             />
           ) : (

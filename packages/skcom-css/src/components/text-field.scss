@@ -5,6 +5,7 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation
 ////
 
+@use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
 
@@ -46,6 +47,35 @@
 
   .skc-text-field__input {
     padding: 1rem;
+  }
+
+  // (@SiravitPhokeed)
+  // We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
+  // attribute is on the underlying `<input>`, not `.skc-text-field`, which
+  // makes using it in this case a pain in the hindquarters.
+  &.skc-text-field--disabled {
+    opacity: 0.38;
+    color: var(--on-surface);
+    border-color: transparent;
+
+    .skc-button[aria-disabled="true"] {
+      opacity: 1;
+    }
+
+    &::before {
+      content: "";
+      inset: 0;
+      position: absolute;
+      opacity: math.div(0.12, 0.38);
+      border: 1px solid var(--on-surface);
+      border-radius: inherit;
+    }
+
+    &:focus-within {
+      .skc-text-field__label {
+        color: var(--on-surface-variant);
+      }
+    }
   }
 }
 
