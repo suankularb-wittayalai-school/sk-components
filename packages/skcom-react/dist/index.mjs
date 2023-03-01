@@ -1932,7 +1932,7 @@ function TextField({
         (canClear || trailing) && /* @__PURE__ */ jsx30(
           motion15.div,
           {
-            animate: align === "right" && typeof trailing === "string" && trailingControls,
+            animate: appearance === "filled" && align === "right" && typeof trailing === "string" && trailingControls,
             className: "skc-text-field__trailing",
             children: canClear ? /* @__PURE__ */ jsx30(
               Button,

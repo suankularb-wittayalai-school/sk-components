@@ -334,6 +334,7 @@ export function TextField({
       {(canClear || trailing) && (
         <motion.div
           animate={
+            appearance === "filled" &&
             align === "right" &&
             typeof trailing === "string" &&
             trailingControls
