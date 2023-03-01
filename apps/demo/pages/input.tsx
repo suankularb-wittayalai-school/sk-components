@@ -26,7 +26,7 @@ const TextFieldSection: FC = () => {
     <Section>
       <Header>Text Field</Header>
       <div className="flex flex-col gap-8 pb-8">
-        <Columns columns={3}>
+        <Columns columns={3} className="!gap-y-8">
           <TextField
             appearance="outlined"
             label="Candidate name"

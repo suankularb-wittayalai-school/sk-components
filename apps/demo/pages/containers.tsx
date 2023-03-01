@@ -81,9 +81,13 @@ const ColumnsSection: FC = () => (
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
   const [showReport, setShowReport] = useState<boolean>(false);
+
   const [view, setView] = useState<"bug-report" | "feature-request">(
     "bug-report"
   );
+  const [issueTitle, setIssueTitle] = useState<string>("");
+  const [issueDesc, setIssueDesc] = useState<string>("");
+  const [issueExpect, setIssueExpect] = useState<string>("");
 
   return (
     <Section>
@@ -180,12 +184,16 @@ const DialogSection: FC = () => {
             label="Title"
             behavior="single-line"
             helperMsg="What is your issue?"
+            value={issueTitle}
+            onChange={setIssueTitle}
           />
           <TextField
             appearance="outlined"
             label="Description"
             behavior="textarea"
             helperMsg="A clear and concise description."
+            value={issueDesc}
+            onChange={setIssueDesc}
           />
           <TextField
             appearance="outlined"
@@ -193,6 +201,8 @@ const DialogSection: FC = () => {
             behavior="textarea"
             helperMsg="What you expected to have happened/think should be
               implemented."
+            value={issueExpect}
+            onChange={setIssueExpect}
           />
         </div>
       </FullscreenDialog>
