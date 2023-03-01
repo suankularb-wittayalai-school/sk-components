@@ -2000,6 +2000,7 @@ interface TextFieldProps extends SKComponent {
  * @param alt A description of the Text Field for screen readers, similar to `alt` on `<img>`.
  * @param helperMsg A short description of the Text Field, or an error message during an error state.
  * @param required If the user has to enter text in this field for the form to be valid.
+ * @param disabled Turns the Text Field gray and block user input.
  * @param canClear Allows the user to clear the field value with the clear button.
  * @param error Tells Text Field that it contains an invalid value and activates the error state.
  * @param value The value inside the field. This is useful if you want a controlled input.
