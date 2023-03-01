@@ -6,6 +6,7 @@ import { FC, useState } from "react";
 // SK Components
 import {
   Actions,
+  Avatar,
   Button,
   Card,
   CardContent,
@@ -122,9 +123,11 @@ const DialogSection: FC = () => {
         <DialogContent>
           <List divided>
             <ListItem align="center" lines={1}>
+              <Avatar>ST</Avatar>
               <ListItemContent title="Sadudee Theparree" />
             </ListItem>
             <ListItem align="center" lines={1}>
+              <Avatar>TL</Avatar>
               <ListItemContent title="Tempoom Leelacharoen" />
             </ListItem>
           </List>

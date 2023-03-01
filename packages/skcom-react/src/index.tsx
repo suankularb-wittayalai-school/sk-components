@@ -1,4 +1,7 @@
 export { Actions, type ActionsProps } from "./components/Actions";
+
+export { Avatar, type AvatarProps } from "./components/Avatar";
+
 export { Button, type ButtonProps } from "./components/Button";
 export {
   SegmentedButton,

@@ -50,6 +50,35 @@ declare namespace Actions {
 }
 
 /**
+ * Props for {@link Avatar}.
+ */
+interface AvatarProps extends SKComponent {
+    /**
+     * A user’s initials or their profile image.
+     *
+     * - The value has 3 meanings:
+     *   - If the value is a string, it is displayed as the user’s initials. The
+     *     string should be no more that 2 characters long.
+     *   - If the value is a JSX Element, it is displayed as the user’s profile
+     *     picture. Note that the picture is cropped to a circle.
+     *   - If not defined, a placeholder avatar is displayed.
+     * - Optional.
+     */
+    children: React.ReactNode;
+}
+/**
+ * An avatar represents the user, whether by their initials or their picture.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param children A user’s initials or their profile image.
+ */
+declare function Avatar({ children, style, className }: AvatarProps): JSX.Element;
+declare namespace Avatar {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Button}.
  */
 interface ButtonProps extends SKComponent {
@@ -2033,4 +2062,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
