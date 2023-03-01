@@ -86,6 +86,10 @@
     .skc-text-field--outlined .skc-text-field__label {
       background-color: var(--surface-3);
     }
+
+    .skc-text-field--filled {
+      background-color: var(--surface-1);
+    }
   }
 
   .skc-fullscreen-dialog__top-app-bar {

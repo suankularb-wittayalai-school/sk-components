@@ -180,7 +180,7 @@ const DialogSection: FC = () => {
         </SegmentedButton>
         <div className="flex flex-col gap-12 pb-12">
           <TextField
-            appearance="outlined"
+            appearance="filled"
             label="Title"
             behavior="single-line"
             helperMsg="What is your issue?"
@@ -188,7 +188,7 @@ const DialogSection: FC = () => {
             onChange={setIssueTitle}
           />
           <TextField
-            appearance="outlined"
+            appearance="filled"
             label="Description"
             behavior="textarea"
             helperMsg="A clear and concise description."
@@ -196,7 +196,7 @@ const DialogSection: FC = () => {
             onChange={setIssueDesc}
           />
           <TextField
-            appearance="outlined"
+            appearance="filled"
             label="Expectation"
             behavior="textarea"
             helperMsg="What you expected to have happened/think should be

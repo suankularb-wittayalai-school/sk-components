@@ -242,7 +242,10 @@ export function TextField({
 
     // Reset the trailing section
     trailingControls.set(focusedTrailingAnimState);
-    trailingControls.start({ ...orgtrailingAnimState, transition: labelTransition });
+    trailingControls.start({
+      ...orgtrailingAnimState,
+      transition: labelTransition,
+    });
   }, [minifyLabel]);
 
   // Auto-expand the `<textarea>` if behavior set to `multi-line`
