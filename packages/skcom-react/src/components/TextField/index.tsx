@@ -299,7 +299,11 @@ export function TextField({
       {(canClear || trailing) && (
         <div className="skc-text-field__trailing">
           {canClear ? (
-            <Button appearance="text" icon={<MaterialIcon icon="cancel" />} />
+            <Button
+              appearance="text"
+              icon={<MaterialIcon icon="cancel" />}
+              onClick={() => onChange && onChange("")}
+            />
           ) : (
             trailing
           )}
