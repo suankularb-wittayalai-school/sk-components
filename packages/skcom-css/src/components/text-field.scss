@@ -40,6 +40,17 @@
   }
 }
 
+.skc-text-field--multi-line,
+.skc-text-field--textarea {
+  .skc-text-field__leading,
+  .skc-text-field__trailing {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    height: 3.5rem;
+  }
+}
+
 // Alignment
 .skc-text-field--left .skc-text-field__input {
   text-align: left;

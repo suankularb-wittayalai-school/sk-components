@@ -229,11 +229,24 @@ export function TextField({
   }, [minifyLabel]);
 
   // Auto-expand the `<textarea>` if behavior set to `multi-line`
+  const textareaRef: React.LegacyRef<HTMLTextAreaElement> = React.useRef(null);
+  const expandTextarea = () => {
+    if (behavior !== "multi-line") return;
+
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    textarea.style.height = "0";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  };
+
+  React.useEffect(() => expandTextarea, [value]);
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     if (onChange) onChange(e.target.value);
-    if (behavior !== "multi-line") return;
+    if (value === undefined) expandTextarea();
   };
 
   // Accessibility
@@ -245,6 +258,7 @@ export function TextField({
   // Props for the `<input>` or `<textarea>`
   const inputProps = {
     id: fieldID,
+    "aria-labelledby": `${fieldID}-label`,
     "aria-describedby": `${fieldID}-helper`,
     value,
     required,
@@ -256,7 +270,7 @@ export function TextField({
   } satisfies JSX.IntrinsicElements["input" | "textarea"];
 
   return (
-    <div
+    <label
       style={style}
       className={cn([
         "skc-text-field",
@@ -274,25 +288,24 @@ export function TextField({
         error && "skc-text-field--error",
         className,
       ])}
-      {...inputAttr}
     >
       {/* Label */}
-      <motion.label
-        htmlFor={fieldID}
+      <motion.span
+        id={`${fieldID}-label`}
         animate={labelControls}
         className="skc-text-field__label"
       >
         {label}
-      </motion.label>
+      </motion.span>
 
       {/* Leading section */}
       {leading && <div className="skc-text-field__leading">{leading}</div>}
 
       {/* Input */}
       {behavior === "single-line" ? (
-        <input {...inputProps} />
+        <input {...inputProps} {...inputAttr} />
       ) : (
-        <textarea {...inputProps} />
+        <textarea ref={textareaRef} {...inputProps} />
       )}
 
       {/* Trailing section/clear Button */}
@@ -316,7 +329,7 @@ export function TextField({
           {helperMsg}
         </span>
       )}
-    </div>
+    </label>
   );
 }
 
