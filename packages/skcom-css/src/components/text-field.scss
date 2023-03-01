@@ -20,6 +20,11 @@
   align-items: center;
   flex-direction: row;
   min-height: 3.5rem;
+
+  .skc-text-field__input {
+    box-sizing: border-box;
+    border: none;
+  }
 }
 
 // Appearance
@@ -68,15 +73,18 @@
 }
 
 // Behavior
+.skc-text-field--single-line,
 .skc-text-field--multi-line {
   .skc-text-field__input {
     height: 3.5rem;
+    resize: none;
   }
 }
 
 .skc-text-field--textarea {
   .skc-text-field__input {
     height: 6.5rem;
+    resize: vertical;
   }
 }
 

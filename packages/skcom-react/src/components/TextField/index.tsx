@@ -357,7 +357,6 @@ export function TextField({
         <motion.div
           animate={
             appearance === "filled" &&
-            align === "right" &&
             typeof trailing === "string" &&
             trailingControls
           }

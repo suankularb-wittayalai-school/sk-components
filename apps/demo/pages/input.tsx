@@ -46,6 +46,7 @@ const TextFieldSection: FC = () => {
             trailing="@student.sk.ac.th"
             value={email}
             onChange={setEmail}
+            inputAttr={{ autoCorrect: "off", autoCapitalize: "none" }}
           />
           <TextField
             appearance="outlined"
