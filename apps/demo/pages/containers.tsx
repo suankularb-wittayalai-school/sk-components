@@ -30,6 +30,19 @@ import {
 // Utilities
 import { CustomPage } from "@/utils/types";
 
+const AvatarSection: FC = () => (
+  <Section>
+    <Header>Avatar</Header>
+    <div className="flex flex-row gap-2">
+      <Avatar>ST</Avatar>
+      <Avatar>
+        <Image src="/images/burger.png" width={40} height={40} alt="" />
+      </Avatar>
+      <Avatar />
+    </div>
+  </Section>
+);
+
 const CardSection: FC = () => (
   <Section>
     <Header>Card</Header>
@@ -279,6 +292,7 @@ const ContainersPage: CustomPage = () => {
         <title>Containers - SK Components</title>
       </Head>
       <ContentLayout>
+        <AvatarSection />
         <CardSection />
         <ColumnsSection />
         <DialogSection />

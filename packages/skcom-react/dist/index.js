@@ -133,12 +133,48 @@ function Actions({ children, align, style, className }) {
 Actions.displayName = "Actions";
 
 // ../skcom-css/dist/css/components/avatar.css
-styleInject("");
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-avatar {\n  position: relative;\n  display: grid;\n  place-content: center;\n  width: 2.5rem;\n  height: 2.5rem;\n  color: var(--primary);\n  border-radius: 50%;\n  background-color: var(--primary-container);\n}\n.skc-avatar img {\n  width: 2.5rem;\n  height: 2.5rem;\n  border-radius: inherit;\n  object-fit: cover;\n}\n.skc-avatar .skc-icon {\n  font-size: 48px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 200,\n    "GRAD" 0,\n    "opsz" 48;\n  position: absolute;\n  top: .25rem;\n  left: -0.25rem;\n}\n.skc-avatar__initials {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n  user-select: none;\n}\n');
 
 // src/components/Avatar/index.tsx
-var import_jsx_runtime2 = require("react/jsx-runtime");
+var import_jsx_runtime2 = (
+  // Initials
+  require("react/jsx-runtime")
+);
 function Avatar({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { style, className: cn(["skc-avatar", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { style, className: cn(["skc-avatar", className]), children: typeof children === "string" ? /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "skc-avatar__initials", children }) : children ? (
+    // Image
+    children
+  ) : (
+    // Placeholder
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
+      "svg",
+      {
+        width: "40",
+        height: "40",
+        viewBox: "0 0 40 40",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "path",
+            {
+              fillRule: "evenodd",
+              clipRule: "evenodd",
+              d: "M26.0002 16C26.0002 19.3137 23.314 22 20.0002 22C16.6865 22\r\n              14.0002 19.3137 14.0002 16C14.0002 12.6863 16.6865 10 20.0002 10C23.314 10 26.0002 12.6863 26.0002 16ZM24.0002 16C24.0002 18.2091 22.2094 20 20.0002 20C17.7911 20 16.0002 18.2091 16.0002 16C16.0002 13.7909 17.7911 12 20.0002 12C22.2094 12 24.0002 13.7909 24.0002 16Z",
+              fill: "currentColor"
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "path",
+            {
+              d: "M20.0002 25C13.5259 25 8.00952 28.8284 5.9082 34.192C6.4201 34.7004 6.95934 35.1812 7.52353 35.6321C9.08827 30.7077 13.997 27 20.0002 27C26.0035 27 30.9122 30.7077 32.477 35.6321C33.0412 35.1812 33.5804 34.7004 34.0923 34.1921C31.991 28.8284 26.4746 25 20.0002 25Z",
+              fill: "currentColor"
+            }
+          )
+        ]
+      }
+    )
+  ) });
 }
 Avatar.displayName = "Avatar";
 

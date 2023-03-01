@@ -5,14 +5,35 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.csw1mxghdgpu SKCom documentation
 ////
 
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
 .skc-avatar {
-  // TODO
+  position: relative;
+  display: grid;
+  place-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary);
+  border-radius: 50%;
+  background-color: var(--primary-container);
 
   img {
-    // TODO
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: inherit;
+    object-fit: cover;
+  }
+
+  .skc-icon {
+    @include ci.icon(0, 200, 0, 48);
+    position: absolute;
+    top: 0.25rem;
+    left: -0.25rem;
   }
 }
 
 .skc-avatar__initials {
-  // TODO
+  @include type.font("title-medium");
+  user-select: none;
 }

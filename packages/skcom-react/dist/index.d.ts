@@ -64,7 +64,7 @@ interface AvatarProps extends SKComponent {
      *   - If not defined, a placeholder avatar is displayed.
      * - Optional.
      */
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 /**
  * An avatar represents the user, whether by their initials or their picture.

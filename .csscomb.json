@@ -207,6 +207,7 @@
       "outline-style",
       "outline-color",
       "outline-offset",
+      "object-fit",
       "background",
       "background-color",
       "background-image",
