@@ -19,6 +19,7 @@
 .skc-columns {
   display: grid;
   gap: 0.5rem 1.5rem;
+  align-items: start;
 }
 
 $column-numbers: (
@@ -56,13 +57,13 @@ $column-numbers: (
 
 @each $max, $list in $column-numbers {
   .skc-columns--#{$max} {
-    grid-template-columns: repeat(map-get($list, "base"), 1fr);
+    grid-template-columns: repeat(map-get($list, "base"), minmax(0, 1fr));
   }
 
   @each $breakpoint, $cols in $list {
     @include mix.breakpoint($breakpoint) {
       .skc-columns--#{$max} {
-        grid-template-columns: repeat($cols, 1fr);
+        grid-template-columns: repeat($cols, minmax(0, 1fr));
       }
     }
   }
