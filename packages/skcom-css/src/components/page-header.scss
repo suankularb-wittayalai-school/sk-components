@@ -16,7 +16,19 @@
   z-index: 65;
   overflow: hidden;
   padding: 1rem 0 1.75rem;
-  background-color: var(--surface-5);
+
+  &,
+  .skc-text-field--outlined .skc-text-field__label {
+    background-color: var(--surface-5);
+  }
+
+  .skc-text-field--filled {
+    background-color: var(--surface-1);
+
+    &::before {
+      background-color: var(--outline);
+    }
+  }
 }
 
 .skc-page-header.skc-page-header--minimized {
