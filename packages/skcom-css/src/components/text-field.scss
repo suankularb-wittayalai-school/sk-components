@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  min-height: 3.5rem;
 
   &:focus-within {
     border-color: var(--primary);

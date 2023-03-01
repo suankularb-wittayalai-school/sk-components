@@ -20,6 +20,7 @@ const TextFieldSection: FC = () => {
   const [partyList, setPartyList] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [birthdate, setBirthdate] = useState<string>("");
   const [policies, setPolicies] = useState<string>("");
 
   return (
@@ -55,6 +56,15 @@ const TextFieldSection: FC = () => {
             value={phone}
             onChange={setPhone}
             inputAttr={{ type: "email" }}
+          />
+          <TextField
+            appearance="outlined"
+            label="Birthdate"
+            behavior="single-line"
+            leading={<MaterialIcon icon="cake" />}
+            value={birthdate}
+            onChange={setBirthdate}
+            inputAttr={{ type: "date" }}
           />
         </Columns>
         <TextField

@@ -185,6 +185,7 @@ export function TextField({
   const labelControls = useAnimationControls();
   const trailingControls = useAnimationControls();
   const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
+  const [neverResetLabel, setNeverMinifyLabel] = React.useState<boolean>(false);
 
   // Account for when the value is set from a different source that doesn’t
   // involve focusing on the Text Field
@@ -213,10 +214,31 @@ export function TextField({
   // Label transition
   const labelTransition = transition(duration.short4, easing.standard);
 
+  // Always minify label for specific input types as to not block the browser
+  // input controls
+  React.useEffect(() => {
+    if (
+      (
+        [
+          "color",
+          "date",
+          "datetime-local",
+          "month",
+          "time",
+          "week",
+        ] as React.InputHTMLAttributes<HTMLInputElement>["type"][]
+      ).includes(inputAttr?.type)
+    ) {
+      labelControls.set(minifedLabelAnimState);
+      setNeverMinifyLabel(true);
+    }
+  }, [appearance, inputAttr?.type]);
+
   // Watches `minifyLabel` and sets and starts transition accordingly
   React.useEffect(() => {
+    // Disable animation for some input types
     // Disable initial animation
-    if (minifyLabel === undefined) return;
+    if (neverResetLabel || minifyLabel === undefined) return;
 
     if (minifyLabel) {
       // Minify the label
