@@ -19,15 +19,37 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  border: 1px solid var(--outline);
-  border-radius: 0.25rem;
 
   &:focus-within {
     border-color: var(--primary);
   }
 }
 
-// Behaviors
+// Appearance
+.skc-text-field--outlined {
+  border: 1px solid var(--outline);
+  border-radius: 0.25rem;
+
+  .skc-text-field__label {
+    background-color: var(--background);
+  }
+
+  .skc-text-field__input {
+    padding: 1rem;
+  }
+}
+
+.skc-text-field--filled {
+  border-bottom: 1px solid var(--outline);
+  border-radius: 0.25rem 0.25rem 0 0;
+  background-color: var(--surface-variant);
+
+  .skc-text-field__input {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+}
+
+// Behavior
 .skc-text-field--multi-line {
   .skc-text-field__input {
     height: 3.5rem;
@@ -75,7 +97,6 @@
   padding-inline: 0.25rem;
   pointer-events: none;
   color: var(--on-surface-variant);
-  background-color: var(--background);
 
   .skc-text-field:focus-within & {
     color: var(--primary);
@@ -90,10 +111,14 @@
 .skc-text-field__leading,
 .skc-text-field__trailing {
   @include type.font("body-large");
-  color: var(--outline);
 
+  &,
   .skc-button__icon .skc-icon {
     color: var(--on-surface-variant);
+  }
+
+  &.skc-button::before {
+    background-color: var(--on-surface-variant);
   }
 }
 
@@ -115,7 +140,6 @@
   // For some reason `flex-grow` doesn’t work when inside Columns. The magic of
   // CSS.
   width: 100%;
-  padding: 1rem;
   color: var(--on-surface);
   background-color: transparent;
 

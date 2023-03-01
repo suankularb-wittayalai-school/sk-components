@@ -183,6 +183,7 @@ export function TextField({
   // Animation
   const { duration, easing } = useAnimationConfig();
   const labelControls = useAnimationControls();
+  const trailingControls = useAnimationControls();
   const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
 
   // Account for when the value is set from a different source that doesn’t
@@ -199,11 +200,15 @@ export function TextField({
     letterSpacing: 0.5,
   };
   const minifedLabelAnimState = {
-    y: -24,
+    y: appearance === "outlined" ? -24 : -8,
     fontSize: "var(--text-sm)",
     lineHeight: "1rem",
     letterSpacing: 0.4,
   };
+
+  // Trailing section states
+  const orgtrailingAnimState = { y: 0 };
+  const focusedTrailingAnimState = { y: 8 };
 
   // Label transition
   const labelTransition = transition(duration.short4, easing.standard);
@@ -213,19 +218,31 @@ export function TextField({
     // Disable initial animation
     if (minifyLabel === undefined) return;
 
-    // Minify the label
     if (minifyLabel) {
+      // Minify the label
       labelControls.set(plhLabelAnimState);
       labelControls.start({
         ...minifedLabelAnimState,
         transition: labelTransition,
       });
+
+      // Move down the trailing section
+      trailingControls.set(orgtrailingAnimState);
+      trailingControls.start({
+        ...focusedTrailingAnimState,
+        transition: labelTransition,
+      });
+
       return;
     }
 
     // Reset the label
     labelControls.set(minifedLabelAnimState);
     labelControls.start({ ...plhLabelAnimState, transition: labelTransition });
+
+    // Reset the trailing section
+    trailingControls.set(focusedTrailingAnimState);
+    trailingControls.start({ ...orgtrailingAnimState, transition: labelTransition });
   }, [minifyLabel]);
 
   // Auto-expand the `<textarea>` if behavior set to `multi-line`
@@ -241,7 +258,7 @@ export function TextField({
   };
 
   React.useEffect(() => expandTextarea, [value]);
-  
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -299,7 +316,9 @@ export function TextField({
       </motion.span>
 
       {/* Leading section */}
-      {leading && <div className="skc-text-field__leading">{leading}</div>}
+      {leading && (
+        <motion.div className="skc-text-field__leading">{leading}</motion.div>
+      )}
 
       {/* Input */}
       {behavior === "single-line" ? (
@@ -310,7 +329,14 @@ export function TextField({
 
       {/* Trailing section/clear Button */}
       {(canClear || trailing) && (
-        <div className="skc-text-field__trailing">
+        <motion.div
+          animate={
+            align === "right" &&
+            typeof trailing === "string" &&
+            trailingControls
+          }
+          className="skc-text-field__trailing"
+        >
           {canClear ? (
             <Button
               appearance="text"
@@ -320,7 +346,7 @@ export function TextField({
           ) : (
             trailing
           )}
-        </div>
+        </motion.div>
       )}
 
       {/* Helper message */}
