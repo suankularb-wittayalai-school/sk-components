@@ -2006,7 +2006,7 @@ interface TextFieldProps extends SKComponent {
  * @param onChange This function triggers when the user make changes to the field value.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
+declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
 declare namespace TextField {
     var displayName: string;
 }

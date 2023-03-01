@@ -26,6 +26,46 @@
     box-sizing: border-box;
     border: none;
   }
+
+  // Disabled
+
+  // (@SiravitPhokeed)
+  // We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
+  // attribute is on the underlying `<input>`, not `.skc-text-field`, which
+  // makes using it in this case a pain in the hindquarters.
+  &.skc-text-field--disabled {
+    &:focus-within .skc-text-field__label {
+      color: var(--on-surface-variant);
+    }
+
+    // (@SiravitPhokeed)
+    // A disabled Button already looks disabled, and we’re putting more
+    // disabled styles on top of that. That’s way too disabled.
+    // We’re overriding the disabled-ness of Button so we can apply the
+    // disabled styling on the whole Text Field, including the Button.
+    // I hope that makes sense.
+    .skc-button[aria-disabled="true"] {
+      opacity: 1;
+    }
+  }
+
+  // Error
+  &.skc-text-field--error {
+    &,
+    &:hover,
+    &:focus-within {
+      .skc-text-field__label {
+        color: var(--error);
+      }
+
+      border-color: var(--error);
+    }
+
+    .skc-text-field__trailing .skc-icon,
+    .skc-text-field__helper-msg {
+      color: var(--error);
+    }
+  }
 }
 
 // Appearance
@@ -38,7 +78,8 @@
   }
 
   &:focus-within {
-    border-color: var(--primary);
+    border: 2px solid var(--primary);
+    margin: -1px;
   }
 
   .skc-text-field__label {
@@ -49,18 +90,11 @@
     padding: 1rem;
   }
 
-  // (@SiravitPhokeed)
-  // We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
-  // attribute is on the underlying `<input>`, not `.skc-text-field`, which
-  // makes using it in this case a pain in the hindquarters.
+  // Disabled
   &.skc-text-field--disabled {
     opacity: 0.38;
     color: var(--on-surface);
     border-color: transparent;
-
-    .skc-button[aria-disabled="true"] {
-      opacity: 1;
-    }
 
     &::before {
       content: "";
@@ -70,12 +104,12 @@
       border: 1px solid var(--on-surface);
       border-radius: inherit;
     }
+  }
 
-    &:focus-within {
-      .skc-text-field__label {
-        color: var(--on-surface-variant);
-      }
-    }
+  // Error
+  &.skc-text-field--error {
+    border: 2px solid var(--error);
+    margin: -1px;
   }
 }
 
@@ -94,11 +128,35 @@
   }
 
   &:focus-within {
-    border-color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: -1px;
   }
 
   .skc-text-field__input {
     padding: 1.5rem 1rem 0.5rem;
+  }
+
+  // Disabled
+  &.skc-text-field--disabled {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.04, 0.38);
+      background-color: var(--on-surface);
+    }
+
+    &:focus-within {
+      border: 1px solid var(--outline);
+      margin: 0;
+    }
+  }
+
+  // Error
+  &.skc-text-field--error {
+    border-bottom: 2px solid var(--error);
+    margin-bottom: -1px;
   }
 }
 
@@ -144,6 +202,7 @@
   }
 }
 
+// Label text
 .skc-text-field__label {
   @include type.font("body-large");
   font-family: var(--font-display);
@@ -190,6 +249,7 @@
   }
 }
 
+// Input element
 .skc-text-field__input {
   @include type.font("body-large");
   // (@SiravitPhokeed)
@@ -212,6 +272,7 @@
   }
 }
 
+// Helper/error message
 .skc-text-field__helper-msg {
   @include type.font("body-small");
   position: absolute;

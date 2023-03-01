@@ -1,5 +1,5 @@
 // External libraries
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Head from "next/head";
 
 // SK Components
@@ -20,8 +20,11 @@ const TextFieldSection: FC = () => {
   const [partyList, setPartyList] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [weight, setWeight] = useState<string>("");
   const [birthdate, setBirthdate] = useState<string>("");
   const [policies, setPolicies] = useState<string>("");
+
+  useEffect(() => setEmail(email.split("@student.sk.ac.th")[0]), [email]);
 
   return (
     <Section>
@@ -34,6 +37,7 @@ const TextFieldSection: FC = () => {
             behavior="single-line"
             leading={<MaterialIcon icon="person" />}
             helperMsg="Full name and surname of candidate"
+            required
             value={name}
             onChange={setName}
           />
@@ -44,6 +48,8 @@ const TextFieldSection: FC = () => {
             align="right"
             leading={<MaterialIcon icon="email" />}
             trailing="@student.sk.ac.th"
+            required
+            error={email.includes("@")}
             value={email}
             onChange={setEmail}
             inputAttr={{ autoCorrect: "off", autoCapitalize: "none" }}
@@ -65,6 +71,17 @@ const TextFieldSection: FC = () => {
             leading={<MaterialIcon icon="forum" />}
             canClear
             disabled
+          />
+          <TextField
+            appearance="outlined"
+            label="Candidate weight"
+            behavior="single-line"
+            leading={<MaterialIcon icon="monitor_weight" />}
+            trailing="kg"
+            error={Number.isNaN(Number(weight)) || Number(weight) < 0}
+            value={weight}
+            onChange={setWeight}
+            inputAttr={{ type: "number", step: 0.5, min: 0 }}
           />
           <TextField
             appearance="outlined"

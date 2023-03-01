@@ -1850,11 +1850,16 @@ function Section({
 Section.displayName = "Section";
 
 // src/components/TextField/index.tsx
-import { motion as motion15, useAnimationControls as useAnimationControls3 } from "framer-motion";
+import {
+  AnimatePresence as AnimatePresence8,
+  LayoutGroup as LayoutGroup3,
+  motion as motion15,
+  useAnimationControls as useAnimationControls3
+} from "framer-motion";
 import * as React18 from "react";
 
 // ../skcom-css/dist/css/components/text-field.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  border-color: var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  content: "";\n  inset: 0;\n  position: absolute;\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--disabled:focus-within .skc-text-field__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within {\n  border-color: var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-text-field__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading.skc-button::before,\n.skc-text-field__trailing.skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  border: 2px solid var(--primary);\n  margin: -1px;\n}\n.skc-text-field--outlined .skc-text-field__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  content: "";\n  inset: 0;\n  position: absolute;\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  border: 2px solid var(--error);\n  margin: -1px;\n}\n.skc-text-field--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within {\n  border-bottom: 2px solid var(--primary);\n  margin-bottom: -1px;\n}\n.skc-text-field--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within {\n  border: 1px solid var(--outline);\n  margin: 0;\n}\n.skc-text-field--filled.skc-text-field--error {\n  border-bottom: 2px solid var(--error);\n  margin-bottom: -1px;\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-text-field__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading.skc-button::before,\n.skc-text-field__trailing.skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n');
 
 // src/components/TextField/index.tsx
 import { jsx as jsx31, jsxs as jsxs21 } from "react/jsx-runtime";
@@ -1870,7 +1875,7 @@ function TextField({
   required,
   disabled,
   canClear,
-  error,
+  error: incError,
   value,
   onChange,
   inputAttr,
@@ -1882,6 +1887,7 @@ function TextField({
   const trailingControls = useAnimationControls3();
   const [minifyLabel, setMinifyLabel] = React18.useState();
   const [neverResetLabel, setNeverMinifyLabel] = React18.useState(false);
+  const fieldTransition = transition(duration.short4, easing.standard);
   React18.useEffect(() => {
     if (value)
       setMinifyLabel(true);
@@ -1900,7 +1906,6 @@ function TextField({
   };
   const orgtrailingAnimState = { y: 0 };
   const focusedTrailingAnimState = { y: 8 };
-  const labelTransition = transition(duration.short4, easing.standard);
   React18.useEffect(() => {
     if ([
       "color",
@@ -1920,19 +1925,19 @@ function TextField({
     if (minifyLabel) {
       labelControls.set(plhLabelAnimState);
       labelControls.start(__spreadProps(__spreadValues({}, minifedLabelAnimState), {
-        transition: labelTransition
+        transition: fieldTransition
       }));
       trailingControls.set(orgtrailingAnimState);
       trailingControls.start(__spreadProps(__spreadValues({}, focusedTrailingAnimState), {
-        transition: labelTransition
+        transition: fieldTransition
       }));
       return;
     }
     labelControls.set(minifedLabelAnimState);
-    labelControls.start(__spreadProps(__spreadValues({}, plhLabelAnimState), { transition: labelTransition }));
+    labelControls.start(__spreadProps(__spreadValues({}, plhLabelAnimState), { transition: fieldTransition }));
     trailingControls.set(focusedTrailingAnimState);
     trailingControls.start(__spreadProps(__spreadValues({}, orgtrailingAnimState), {
-      transition: labelTransition
+      transition: fieldTransition
     }));
   }, [minifyLabel]);
   const textareaRef = React18.useRef(null);
@@ -1946,12 +1951,8 @@ function TextField({
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
   React18.useEffect(() => expandTextarea, [value]);
-  const handleChange = (e) => {
-    if (onChange)
-      onChange(e.target.value);
-    if (value === void 0)
-      expandTextarea();
-  };
+  const [error, setError] = React18.useState(false);
+  React18.useEffect(() => setError(Boolean(incError)), [incError]);
   const fieldID = `field-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
@@ -1960,12 +1961,23 @@ function TextField({
     "aria-labelledby": `${fieldID}-label`,
     "aria-describedby": `${fieldID}-helper`,
     "aria-disabled": disabled,
+    "aria-invalid": incError,
     value,
     required,
     readOnly: disabled,
     onFocus: !disabled ? () => setMinifyLabel(true) : void 0,
-    onBlur: value !== void 0 ? () => setMinifyLabel(Boolean(value)) : void 0,
-    onChange: handleChange,
+    onBlur: () => {
+      if (value === void 0)
+        return;
+      setMinifyLabel(Boolean(value));
+      setError(Boolean(incError || required && !value));
+    },
+    onChange: (e) => {
+      if (onChange)
+        onChange(e.target.value);
+      if (value === void 0)
+        expandTextarea();
+    },
     className: "skc-text-field__input"
   };
   return /* @__PURE__ */ jsxs21(
@@ -1993,22 +2005,38 @@ function TextField({
         ),
         leading && /* @__PURE__ */ jsx31(motion15.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ jsx31("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ jsx31("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        (canClear || trailing) && /* @__PURE__ */ jsx31(
-          motion15.div,
-          {
-            animate: appearance === "filled" && typeof trailing === "string" && trailingControls,
-            className: "skc-text-field__trailing",
-            children: canClear ? /* @__PURE__ */ jsx31(
-              Button,
-              {
-                appearance: "text",
-                icon: /* @__PURE__ */ jsx31(MaterialIcon, { icon: "cancel" }),
-                disabled,
-                onClick: () => onChange && onChange("")
-              }
-            ) : trailing
-          }
-        ),
+        /* @__PURE__ */ jsx31(LayoutGroup3, { children: /* @__PURE__ */ jsxs21(AnimatePresence8, { children: [
+          trailing && /* @__PURE__ */ jsx31(
+            motion15.div,
+            {
+              animate: appearance === "filled" && typeof trailing === "string" ? trailingControls : void 0,
+              layoutId: `${fieldID}-trailing`,
+              transition: fieldTransition,
+              className: "skc-text-field__trailing",
+              children: trailing
+            }
+          ),
+          (canClear || error) && /* @__PURE__ */ jsx31(
+            motion15.div,
+            {
+              initial: { scale: 0.6, opacity: 0 },
+              animate: { scale: 1, opacity: 1 },
+              exit: { scale: 0.6, opacity: 0 },
+              layoutId: `${fieldID}-button-or-icon`,
+              transition: fieldTransition,
+              className: "skc-text-field__trailing",
+              children: canClear ? /* @__PURE__ */ jsx31(
+                Button,
+                {
+                  appearance: "text",
+                  icon: /* @__PURE__ */ jsx31(MaterialIcon, { icon: "cancel" }),
+                  disabled,
+                  onClick: () => onChange && onChange("")
+                }
+              ) : error ? /* @__PURE__ */ jsx31(MaterialIcon, { icon: "error", fill: true }) : null
+            }
+          )
+        ] }) }),
         helperMsg && /* @__PURE__ */ jsx31("span", { id: `${fieldID}-helper`, className: "skc-text-field__helper-msg", children: helperMsg })
       ]
     }

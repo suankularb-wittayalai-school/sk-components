@@ -1,5 +1,10 @@
 // External libraries
-import { motion, useAnimationControls } from "framer-motion";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  useAnimationControls,
+} from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -185,7 +190,7 @@ export function TextField({
   required,
   disabled,
   canClear,
-  error,
+  error: incError,
   value,
   onChange,
   inputAttr,
@@ -198,6 +203,9 @@ export function TextField({
   const trailingControls = useAnimationControls();
   const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
   const [neverResetLabel, setNeverMinifyLabel] = React.useState<boolean>(false);
+
+  // Transition
+  const fieldTransition = transition(duration.short4, easing.standard);
 
   // Account for when the value is set from a different source that doesn’t
   // involve focusing on the Text Field
@@ -222,9 +230,6 @@ export function TextField({
   // Trailing section states
   const orgtrailingAnimState = { y: 0 };
   const focusedTrailingAnimState = { y: 8 };
-
-  // Label transition
-  const labelTransition = transition(duration.short4, easing.standard);
 
   // Always minify label for specific input types as to not block the browser
   // input controls
@@ -257,14 +262,14 @@ export function TextField({
       labelControls.set(plhLabelAnimState);
       labelControls.start({
         ...minifedLabelAnimState,
-        transition: labelTransition,
+        transition: fieldTransition,
       });
 
       // Move down the trailing section
       trailingControls.set(orgtrailingAnimState);
       trailingControls.start({
         ...focusedTrailingAnimState,
-        transition: labelTransition,
+        transition: fieldTransition,
       });
 
       return;
@@ -272,13 +277,13 @@ export function TextField({
 
     // Reset the label
     labelControls.set(minifedLabelAnimState);
-    labelControls.start({ ...plhLabelAnimState, transition: labelTransition });
+    labelControls.start({ ...plhLabelAnimState, transition: fieldTransition });
 
     // Reset the trailing section
     trailingControls.set(focusedTrailingAnimState);
     trailingControls.start({
       ...orgtrailingAnimState,
-      transition: labelTransition,
+      transition: fieldTransition,
     });
   }, [minifyLabel]);
 
@@ -293,15 +298,11 @@ export function TextField({
     textarea.style.height = "0";
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
-
   React.useEffect(() => expandTextarea, [value]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (onChange) onChange(e.target.value);
-    if (value === undefined) expandTextarea();
-  };
+  // Error state
+  const [error, setError] = React.useState<boolean>(false);
+  React.useEffect(() => setError(Boolean(incError)), [incError]);
 
   // Accessibility
   // Generate the base ID for `<label>` and `aria-describedby`
@@ -315,13 +316,22 @@ export function TextField({
     "aria-labelledby": `${fieldID}-label`,
     "aria-describedby": `${fieldID}-helper`,
     "aria-disabled": disabled,
+    "aria-invalid": incError,
     value,
     required,
     readOnly: disabled,
     onFocus: !disabled ? () => setMinifyLabel(true) : undefined,
-    onBlur:
-      value !== undefined ? () => setMinifyLabel(Boolean(value)) : undefined,
-    onChange: handleChange,
+    onBlur: () => {
+      if (value === undefined) return;
+      setMinifyLabel(Boolean(value));
+      setError(Boolean(incError || (required && !value)));
+    },
+    onChange: (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+      if (onChange) onChange(e.target.value);
+      if (value === undefined) expandTextarea();
+    },
     className: "skc-text-field__input",
   } satisfies JSX.IntrinsicElements["input" | "textarea"];
 
@@ -367,30 +377,50 @@ export function TextField({
         <textarea ref={textareaRef} {...inputProps} />
       )}
 
-      {/* Trailing section/clear Button */}
-      {(canClear || trailing) && (
-        <motion.div
-          animate={
-            appearance === "filled" &&
-            typeof trailing === "string" &&
-            trailingControls
-          }
-          className="skc-text-field__trailing"
-        >
-          {canClear ? (
-            <Button
-              appearance="text"
-              icon={<MaterialIcon icon="cancel" />}
-              disabled={disabled}
-              onClick={() => onChange && onChange("")}
-            />
-          ) : (
-            trailing
+      {/* Trailing section */}
+      <LayoutGroup>
+        <AnimatePresence>
+          {/* Trailing section */}
+          {trailing && (
+            <motion.div
+              animate={
+                appearance === "filled" && typeof trailing === "string"
+                  ? trailingControls
+                  : undefined
+              }
+              layoutId={`${fieldID}-trailing`}
+              transition={fieldTransition}
+              className="skc-text-field__trailing"
+            >
+              {trailing}
+            </motion.div>
           )}
-        </motion.div>
-      )}
+          {/* Clear button/error Icon */}
+          {(canClear || error) && (
+            <motion.div
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.6, opacity: 0 }}
+              layoutId={`${fieldID}-button-or-icon`}
+              transition={fieldTransition}
+              className="skc-text-field__trailing"
+            >
+              {canClear ? (
+                <Button
+                  appearance="text"
+                  icon={<MaterialIcon icon="cancel" />}
+                  disabled={disabled}
+                  onClick={() => onChange && onChange("")}
+                />
+              ) : error ? (
+                <MaterialIcon icon="error" fill />
+              ) : null}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </LayoutGroup>
 
-      {/* Helper message */}
+      {/* Helper/error message */}
       {helperMsg && (
         <span id={`${fieldID}-helper`} className="skc-text-field__helper-msg">
           {helperMsg}
