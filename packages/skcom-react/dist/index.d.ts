@@ -1835,6 +1835,50 @@ declare namespace PageHeader {
 }
 
 /**
+ * Props for {@link Progress}.
+ */
+interface ProgressProps extends SKComponent {
+    /**
+     * Progress can be either a loading spinner or a linear loading bar.
+     *
+     * - Must be `linear` or `circular`.
+     * - Keep the appearance consistent for the same actions. For example, if
+     *   loading a post uses `linear` in one place, the same action should always
+     *   use `linear` elsewhere.
+     * - Always required.
+     */
+    appearance: "linear" | "circular";
+    /**
+     * A description of the Progress for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Always required, because a Progress has no significance to screenreaders.
+     */
+    alt: string;
+    /**
+     * The progress percentage (out of 100) of an activity.
+     *
+     * - If undefined, the Progress will be in an indeterminate state.
+     * - Optional.
+     */
+    value?: number;
+}
+/**
+ * A Progress indicates that something is ongoing. It can also indicate how
+ * much of that something has been done.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.12x5jav7hhzm SKCom documentation}
+ *
+ * @param appearance Progress can be either a loading spinner or a linear loading bar.
+ * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
+ * @param value The progress percentage (out of 100) of an activity.
+ */
+declare function Progress({ appearance, alt, value, style, className, }: ProgressProps): JSX.Element;
+declare namespace Progress {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Section}.
  */
 interface SectionProps extends SKComponent {
@@ -2073,4 +2117,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

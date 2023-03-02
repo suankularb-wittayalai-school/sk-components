@@ -72,6 +72,8 @@ export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
+export { Progress, type ProgressProps } from "./components/Progress";
+
 export { Section, type SectionProps } from "./components/Section";
 
 export { TextField, type TextFieldProps } from "./components/TextField";
