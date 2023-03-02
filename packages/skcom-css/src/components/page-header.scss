@@ -29,13 +29,15 @@
       background-color: var(--outline);
     }
   }
+
+  + .skc-progress {
+    margin-bottom: -0.25rem;
+  }
 }
 
 .skc-page-header.skc-page-header--minimized {
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
+  inset: 0 0 auto;
   padding: 0.75rem 0.5rem;
 
   .skc-page-header__actions {
@@ -51,6 +53,11 @@
   .skc-page-header__icon,
   .skc-page-header__related {
     display: none;
+  }
+
+  + .skc-progress {
+    position: fixed;
+    inset: 4rem 0 auto 0;
   }
 }
 
