@@ -22,6 +22,9 @@ import {
 // Internal components
 import Favicon from "@/components/Favicon";
 
+// Utilities
+import { usePageIsLoading } from "@/utils/page-load";
+
 const Layout: FC<{
   children: ReactNode;
   fab?: JSX.Element;
@@ -29,6 +32,8 @@ const Layout: FC<{
 }> = ({ children, fab, pageHeader }) => {
   const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
+
+  const { pageIsLoading } = usePageIsLoading();
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
 
@@ -164,7 +169,11 @@ const Layout: FC<{
       )}
 
       {/* Page loading indicator */}
-      <Progress appearance="linear" alt="Loading page…" />
+      <Progress
+        appearance="linear"
+        alt="Loading page…"
+        visible={pageIsLoading}
+      />
 
       {/* Content */}
       {children}
