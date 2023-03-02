@@ -1862,6 +1862,12 @@ interface ProgressProps extends SKComponent {
      * - Optional.
      */
     value?: number;
+    /**
+     * If this Progress is visible.
+     *
+     * - Optional.
+     */
+    visible?: boolean;
 }
 /**
  * A Progress indicates that something is ongoing. It can also indicate how
@@ -1872,8 +1878,9 @@ interface ProgressProps extends SKComponent {
  * @param appearance Progress can be either a loading spinner or a linear loading bar.
  * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
  * @param value The progress percentage (out of 100) of an activity.
+ * @param visible If this Progress is visible.
  */
-declare function Progress({ appearance, alt, value, style, className, }: ProgressProps): JSX.Element;
+declare function Progress({ appearance, alt, value, visible, style, className, }: ProgressProps): JSX.Element;
 declare namespace Progress {
     var displayName: string;
 }

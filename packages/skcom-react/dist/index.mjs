@@ -1812,27 +1812,45 @@ function PageHeader({
 PageHeader.displayName = "PageHeader";
 
 // ../skcom-css/dist/css/components/progress.css
-styleInject(".skc-progress .skc-progress__indicator {\n  transition: width var(--motion-short-3) var(--easing-standard);\n}\n.skc-progress--linear .skc-progress__track {\n  height: .25rem;\n  background-color: var(--surface-variant);\n}\n.skc-progress--linear .skc-progress__indicator {\n  height: .25rem;\n  background-color: var(--primary);\n}\n.skc-progress--indeterminate.skc-progress--linear .skc-progress__track {\n  overflow-x: hidden;\n}\n.skc-progress--indeterminate.skc-progress--linear .skc-progress__indicator {\n  transform: translateX(-100%);\n  animation: linear-dash 1.5s ease-in-out infinite;\n}\n@keyframes linear-dash {\n  100% {\n    transform: scaleX(0.5) translateX(150%);\n  }\n}\n.skc-progress--circular .skc-progress__track {\n  transform: rotate(270deg);\n  width: 3rem;\n  height: 3rem;\n}\n.skc-progress--circular .skc-progress__indicator {\n  stroke: var(--primary);\n  stroke-dasharray: 200;\n}\n.skc-progress--indeterminate.skc-progress--circular .skc-progress__track {\n  transform: rotate(0deg);\n  animation: circular-rotate 2s linear infinite;\n}\n.skc-progress--indeterminate.skc-progress--circular .skc-progress__indicator {\n  stroke-dasharray: 1, 200;\n  stroke-dashoffset: 0;\n  animation: circular-dash 1.5s ease-in-out infinite;\n}\n@keyframes circular-rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@keyframes circular-dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 90, 200;\n    stroke-dashoffset: -2.25rem;\n  }\n  100% {\n    stroke-dasharray: 90, 200;\n    stroke-dashoffset: -7.75rem;\n  }\n}\n");
+styleInject(".skc-progress--linear .skc-progress__track {\n  height: .25rem;\n  background-color: var(--surface-variant);\n}\n.skc-progress--linear .skc-progress__indicator {\n  transition: width var(--motion-short-3) var(--easing-standard);\n  height: 100%;\n  background-color: var(--primary);\n}\n.skc-progress--indeterminate.skc-progress--linear .skc-progress__track {\n  overflow-x: hidden;\n}\n.skc-progress--indeterminate.skc-progress--linear .skc-progress__indicator {\n  transform: translateX(-100%);\n  animation: linear-dash 1.5s ease-in-out infinite;\n}\n@keyframes linear-dash {\n  100% {\n    transform: scaleX(0.5) translateX(150%);\n  }\n}\n.skc-progress--circular .skc-progress__track {\n  transform: rotate(270deg);\n  width: 3rem;\n  height: 3rem;\n}\n.skc-progress--circular .skc-progress__indicator {\n  stroke: var(--primary);\n  stroke-dasharray: 200;\n}\n.skc-progress--indeterminate.skc-progress--circular .skc-progress__track {\n  transform: rotate(0deg);\n  animation: circular-rotate 2s linear infinite;\n}\n.skc-progress--indeterminate.skc-progress--circular .skc-progress__indicator {\n  stroke-dasharray: 1, 200;\n  stroke-dashoffset: 0;\n  animation: circular-dash 1.5s ease-in-out infinite;\n}\n@keyframes circular-rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@keyframes circular-dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 90, 200;\n    stroke-dashoffset: -2.25rem;\n  }\n  100% {\n    stroke-dasharray: 90, 200;\n    stroke-dashoffset: -7.75rem;\n  }\n}\n");
 
 // src/components/Progress/index.tsx
+import { AnimatePresence as AnimatePresence8, motion as motion15 } from "framer-motion";
 import { jsx as jsx30 } from "react/jsx-runtime";
 function Progress({
   appearance,
   alt,
   value,
+  visible,
   style,
   className
 }) {
-  const linearProgress = /* @__PURE__ */ jsx30("div", { className: "skc-progress__track", children: /* @__PURE__ */ jsx30(
-    "div",
+  const { duration, easing } = useAnimationConfig();
+  const progressTransition = transition(duration.short2, easing.standard);
+  const linearProgress = /* @__PURE__ */ jsx30(
+    motion15.div,
     {
-      className: "skc-progress__indicator",
-      style: { width: value !== void 0 ? `${value}%` : void 0 }
+      initial: { scaleY: 0 },
+      animate: { scaleY: 1 },
+      exit: { scaleY: 0 },
+      transition: progressTransition,
+      className: "skc-progress__track",
+      children: /* @__PURE__ */ jsx30(
+        "div",
+        {
+          className: "skc-progress__indicator",
+          style: { width: value !== void 0 ? `${value}%` : void 0 }
+        }
+      )
     }
-  ) });
+  );
   const circularProgress = /* @__PURE__ */ jsx30("svg", { className: "skc-progress__track", viewBox: "24 24 48 48", children: /* @__PURE__ */ jsx30(
-    "circle",
+    motion15.circle,
     {
+      initial: { strokeWidth: 0 },
+      animate: { strokeWidth: 4 },
+      exit: { strokeWidth: 0 },
+      transition: progressTransition,
       className: "skc-progress__indicator",
       style: {
         strokeDashoffset: value !== void 0 ? 200 - value * 1.25 : void 0
@@ -1845,11 +1863,12 @@ function Progress({
       strokeMiterlimit: "10"
     }
   ) });
-  return /* @__PURE__ */ jsx30(
+  return /* @__PURE__ */ jsx30(AnimatePresence8, { children: visible && /* @__PURE__ */ jsx30(
     "div",
     {
       role: "progressbar",
       "aria-label": alt,
+      "aria-valuenow": value,
       style,
       className: cn([
         "skc-progress",
@@ -1859,7 +1878,7 @@ function Progress({
       ]),
       children: appearance === "linear" ? linearProgress : appearance === "circular" && circularProgress
     }
-  );
+  ) });
 }
 Progress.displayName = "Progress";
 
@@ -1903,9 +1922,9 @@ Section.displayName = "Section";
 
 // src/components/TextField/index.tsx
 import {
-  AnimatePresence as AnimatePresence8,
+  AnimatePresence as AnimatePresence9,
   LayoutGroup as LayoutGroup3,
-  motion as motion15,
+  motion as motion16,
   useAnimationControls as useAnimationControls3
 } from "framer-motion";
 import * as React18 from "react";
@@ -2047,7 +2066,7 @@ function TextField({
       ]),
       children: [
         /* @__PURE__ */ jsx32(
-          motion15.span,
+          motion16.span,
           {
             id: `${fieldID}-label`,
             animate: labelControls,
@@ -2055,11 +2074,11 @@ function TextField({
             children: label
           }
         ),
-        leading && /* @__PURE__ */ jsx32(motion15.div, { className: "skc-text-field__leading", children: leading }),
+        leading && /* @__PURE__ */ jsx32(motion16.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ jsx32("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ jsx32("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        /* @__PURE__ */ jsx32(LayoutGroup3, { children: /* @__PURE__ */ jsxs21(AnimatePresence8, { children: [
+        /* @__PURE__ */ jsx32(LayoutGroup3, { children: /* @__PURE__ */ jsxs21(AnimatePresence9, { children: [
           trailing && /* @__PURE__ */ jsx32(
-            motion15.div,
+            motion16.div,
             {
               animate: appearance === "filled" && typeof trailing === "string" ? trailingControls : void 0,
               layoutId: `${fieldID}-trailing`,
@@ -2069,7 +2088,7 @@ function TextField({
             }
           ),
           (canClear || error) && /* @__PURE__ */ jsx32(
-            motion15.div,
+            motion16.div,
             {
               initial: { scale: 0.6, opacity: 0 },
               animate: { scale: 1, opacity: 1 },

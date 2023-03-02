@@ -163,6 +163,9 @@ const Layout: FC<{
         />
       )}
 
+      {/* Page loading indicator */}
+      <Progress appearance="linear" alt="Loading page…" />
+
       {/* Content */}
       {children}
     </RootLayout>

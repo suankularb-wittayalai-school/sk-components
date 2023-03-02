@@ -8,17 +8,6 @@
 
 @use "../abstracts/mixins.scss" as mix;
 
-// Base Progress
-.skc-progress {
-  .skc-progress__indicator {
-    @include mix.transition(
-      width,
-      var(--motion-short-3),
-      var(--easing-standard)
-    );
-  }
-}
-
 // Linear determinate
 .skc-progress--linear {
   .skc-progress__track {
@@ -27,7 +16,12 @@
   }
 
   .skc-progress__indicator {
-    height: 0.25rem;
+    @include mix.transition(
+      width,
+      var(--motion-short-3),
+      var(--easing-standard)
+    );
+    height: 100%;
     background-color: var(--primary);
   }
 }

@@ -9,6 +9,8 @@ import "@suankularb-components/css/dist/css/components/progress.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { AnimatePresence, motion } from "framer-motion";
+import { transition, useAnimationConfig } from "../../utils/animation";
 
 /**
  * Props for {@link Progress}.
@@ -40,6 +42,13 @@ export interface ProgressProps extends SKComponent {
    * - Optional.
    */
   value?: number;
+
+  /**
+   * If this Progress is visible.
+   *
+   * - Optional.
+   */
+  visible?: boolean;
 }
 
 /**
@@ -51,25 +60,43 @@ export interface ProgressProps extends SKComponent {
  * @param appearance Progress can be either a loading spinner or a linear loading bar.
  * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
  * @param value The progress percentage (out of 100) of an activity.
+ * @param visible If this Progress is visible.
  */
 export function Progress({
   appearance,
   alt,
   value,
+  visible,
   style,
   className,
 }: ProgressProps) {
+  const { duration, easing } = useAnimationConfig();
+  const progressTransition = transition(duration.short2, easing.standard);
+
+  // Linear variant
   const linearProgress = (
-    <div className="skc-progress__track">
+    <motion.div
+      initial={{ scaleY: 0 }}
+      animate={{ scaleY: 1 }}
+      exit={{ scaleY: 0 }}
+      transition={progressTransition}
+      className="skc-progress__track"
+    >
       <div
         className="skc-progress__indicator"
         style={{ width: value !== undefined ? `${value}%` : undefined }}
       />
-    </div>
+    </motion.div>
   );
+
+  // Circular variant
   const circularProgress = (
     <svg className="skc-progress__track" viewBox="24 24 48 48">
-      <circle
+      <motion.circle
+        initial={{ strokeWidth: 0 }}
+        animate={{ strokeWidth: 4 }}
+        exit={{ strokeWidth: 0 }}
+        transition={progressTransition}
         className="skc-progress__indicator"
         style={{
           strokeDashoffset:
@@ -86,23 +113,28 @@ export function Progress({
   );
 
   return (
-    <div
-      role="progressbar"
-      aria-label={alt}
-      style={style}
-      className={cn([
-        "skc-progress",
-        appearance === "linear"
-          ? "skc-progress--linear"
-          : appearance === "circular" && "skc-progress--circular",
-        value === undefined && "skc-progress--indeterminate",
-        className,
-      ])}
-    >
-      {appearance === "linear"
-        ? linearProgress
-        : appearance === "circular" && circularProgress}
-    </div>
+    <AnimatePresence>
+      {visible && (
+        <div
+          role="progressbar"
+          aria-label={alt}
+          aria-valuenow={value}
+          style={style}
+          className={cn([
+            "skc-progress",
+            appearance === "linear"
+              ? "skc-progress--linear"
+              : appearance === "circular" && "skc-progress--circular",
+            value === undefined && "skc-progress--indeterminate",
+            className,
+          ])}
+        >
+          {appearance === "linear"
+            ? linearProgress
+            : appearance === "circular" && circularProgress}
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
 

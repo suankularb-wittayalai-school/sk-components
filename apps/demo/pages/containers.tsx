@@ -294,16 +294,23 @@ const ProgressSection: FC = () => (
         appearance="linear"
         alt="Linear determinate Progress demo"
         value={70}
+        visible
       />
-      <Progress appearance="linear" alt="Linear indeterminate Progress demo" />
+      <Progress
+        appearance="linear"
+        alt="Linear indeterminate Progress demo"
+        visible
+      />
       <Progress
         appearance="circular"
         alt="Circular determinate Progress demo"
         value={70}
+        visible
       />
       <Progress
         appearance="circular"
         alt="Circular indeterminate Progress demo"
+        visible
       />
     </Columns>
   </Section>
