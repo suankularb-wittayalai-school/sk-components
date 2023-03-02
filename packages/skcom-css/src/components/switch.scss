@@ -95,6 +95,23 @@
       }
     }
   }
+
+  // Disabled
+  &[aria-disabled="true"] {
+    cursor: default;
+    opacity: 0.12;
+    background-color: var(--on-surface);
+    border-color: var(--on-surface);
+
+    &::before {
+      display: none
+    }
+
+    > .skc-switch__handle {
+      background-color: var(--surface);
+      color: var(--on-surface);
+    }
+  }
 }
 
 // Switch handle

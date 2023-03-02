@@ -119,7 +119,7 @@ const TextFieldSection: FC = () => {
 const SwitchSection: FC = () => {
   const [switchOn, setSwitchOn] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(true);
-  const [done, setDone] = useState<boolean>(false);
+  const [done, setDone] = useState<boolean>(true);
 
   return (
     <Section>
