@@ -1917,6 +1917,72 @@ declare namespace Section {
 }
 
 /**
+ * Props for {@link Switch}.
+ */
+interface SwitchProps extends SKComponent {
+    /**
+     * The state of the Switch. This is useful if you want a controlled input.
+     *
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: boolean;
+    /**
+     * This function triggers when the user toggles the switch. The state is
+     * passed in via the function as a boolean.
+     *
+     * - Optional.
+     */
+    onChange?: (value: boolean) => any;
+    /**
+     * An icon inside the Thumb when the switch is off.
+     *
+     * - You are encouraged to use Material Icons as the value for `offIcon`.
+     * - Optional.
+     */
+    offIcon?: JSX.Element;
+    /**
+     * An icon inside the Thumb when the switch is on.
+     *
+     * - You are encouraged to use Material Icons as the value for `onIcon`.
+     * - Optional.
+     */
+    onIcon?: JSX.Element;
+    /**
+     * Turns the Switch gray and block any action associated with it.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Attributes for the underlying `<button>` element.
+     *
+     * - Optional.
+     */
+    buttonAttr?: JSX.IntrinsicElements["button"];
+}
+/**
+ * A Switch toggles something on and off. It is usually in a Form Item. Unlike
+ * Checkbox and Radio, a Switch is independent.
+ * {@link https://m3.material.io/components/switch/guidelines#4f51b236-583e-4caa-9ae6-c8079325ef6b Learn the differences.}
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ab4q1pg880wv SKCom documentation}
+ *
+ * @param value The state of the Switch. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the switch. The state is passed in via the function as a boolean.
+ * @param offIcon An icon inside the Thumb when the switch is off.
+ * @param onIcon An icon inside the Thumb when the switch is on.
+ * @param disabled Turns the Switch gray and block any action associated with it.
+ * @param buttonAttr Attributes for the underlying `<button>` element.
+ */
+declare function Switch({ value, onChange, offIcon, onIcon, disabled, buttonAttr, style, className, }: SwitchProps): JSX.Element;
+declare namespace Switch {
+    var displayName: string;
+}
+
+/**
  * Props for {@link TextField Text Field}.
  */
 interface TextFieldProps extends SKComponent {
@@ -2019,6 +2085,8 @@ interface TextFieldProps extends SKComponent {
      * The value inside the field. This is useful if you want a controlled input.
      *
      * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
      */
     value?: string;
     /**
@@ -2124,4 +2192,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

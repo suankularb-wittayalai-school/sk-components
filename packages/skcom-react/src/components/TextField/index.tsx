@@ -137,6 +137,8 @@ export interface TextFieldProps extends SKComponent {
    * The value inside the field. This is useful if you want a controlled input.
    *
    * - Optional.
+   *
+   * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
    */
   value?: string;
 
