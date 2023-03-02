@@ -54,11 +54,10 @@
     &,
     &:hover,
     &:focus-within {
+      border-color: var(--error);
       .skc-text-field__label {
         color: var(--error);
       }
-
-      border-color: var(--error);
     }
 
     .skc-text-field__trailing .skc-icon,
@@ -78,8 +77,8 @@
   }
 
   &:focus-within {
-    border: 2px solid var(--primary);
     margin: -1px;
+    border: 2px solid var(--primary);
   }
 
   .skc-text-field__label {
@@ -97,9 +96,9 @@
     border-color: transparent;
 
     &::before {
-      content: "";
-      inset: 0;
       position: absolute;
+      inset: 0;
+      content: "";
       opacity: math.div(0.12, 0.38);
       border: 1px solid var(--on-surface);
       border-radius: inherit;
@@ -108,8 +107,8 @@
 
   // Error
   &.skc-text-field--error {
-    border: 2px solid var(--error);
     margin: -1px;
+    border: 2px solid var(--error);
   }
 }
 
@@ -128,8 +127,8 @@
   }
 
   &:focus-within {
-    border-bottom: 2px solid var(--primary);
     margin-bottom: -1px;
+    border-bottom: 2px solid var(--primary);
   }
 
   .skc-text-field__input {
@@ -148,15 +147,15 @@
     }
 
     &:focus-within {
-      border: 1px solid var(--outline);
       margin: 0;
+      border: 1px solid var(--outline);
     }
   }
 
   // Error
   &.skc-text-field--error {
-    border-bottom: 2px solid var(--error);
     margin-bottom: -1px;
+    border-bottom: 2px solid var(--error);
   }
 }
 
