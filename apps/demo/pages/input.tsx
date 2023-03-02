@@ -1,6 +1,6 @@
 // External libraries
-import { FC, useEffect, useState } from "react";
 import Head from "next/head";
+import { FC, useEffect, useState } from "react";
 
 // SK Components
 import {
