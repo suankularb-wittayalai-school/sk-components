@@ -33,8 +33,6 @@
   }
 
   &[aria-disabled="true"] {
-    cursor: default;
-
     &:not(:has(.skc-button__label)) {
       &:hover,
       &:focus,
@@ -45,26 +43,30 @@
       }
     }
 
-    &:hover,
-    &:focus,
-    &:active {
-      // Block shadow effect
-      box-shadow: none !important;
+    &:not(.skc-button--loading) {
+      cursor: default;
 
-      // Block state layer effect
-      &::before {
-        opacity: 0;
-      }
+      &:hover,
+      &:focus,
+      &:active {
+        // Block shadow effect
+        box-shadow: none !important;
 
-      // Block icon bolding effect
-      > .skc-button__icon > .skc-icon {
-        @include ci.icon(0, 400, 0, 20);
-        transition: none;
-      }
+        // Block state layer effect
+        &::before {
+          opacity: 0;
+        }
 
-      // Block ripple
-      > .skc-button__ripple {
-        background-color: transparent;
+        // Block icon bolding effect
+        > .skc-button__icon > .skc-icon {
+          @include ci.icon(0, 400, 0, 20);
+          transition: none;
+        }
+
+        // Block ripple
+        > .skc-button__ripple {
+          background-color: transparent;
+        }
       }
     }
   }
@@ -75,7 +77,7 @@
   }
 
   // With only Icon padding
-  &:not(:has(.skc-button__label)) {
+  &:has(.skc-button__icon):not(:has(.skc-button__label)) {
     padding: 0.5rem;
   }
 }
@@ -116,6 +118,33 @@
 
   .skc-button:not(:has(.skc-button__icon)) & {
     text-align: center;
+  }
+}
+
+// Loading
+.skc-button.skc-button--loading {
+  padding-inline: 0;
+
+  .skc-actions--full & {
+    padding-inline: 1.25rem;
+  }
+
+  > .skc-progress {
+    &.skc-progress--linear .skc-progress__track {
+      width: 2rem;
+      margin-block: 0.5rem;
+    }
+
+    &.skc-progress--circular {
+      .skc-progress__track {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      .skc-progress__indicator {
+        stroke: currentColor;
+      }
+    }
   }
 }
 
@@ -166,7 +195,7 @@
   }
 
   // Disabled
-  &[aria-disabled="true"] {
+  &:not(.skc-button--loading)[aria-disabled="true"] {
     opacity: 0.38;
     color: var(--on-surface);
     background-color: transparent;
@@ -225,7 +254,7 @@
   }
 
   // Disabled
-  &[aria-disabled="true"] {
+  &:not(.skc-button--loading)[aria-disabled="true"] {
     opacity: 0.38;
     color: var(--on-surface);
     background-color: transparent;
@@ -299,7 +328,7 @@
   }
 
   // Disabled
-  &[aria-disabled="true"] {
+  &:not(.skc-button--loading)[aria-disabled="true"] {
     opacity: 0.38;
     color: var(--on-surface);
     border-color: transparent;
@@ -352,9 +381,11 @@
   }
 
   // Disabled
-  &[aria-disabled="true"] {
-    opacity: 0.38;
-    color: var(--on-surface);
+  [aria-disabled="true"] {
+    &:not(.skc-button--loading) {
+      opacity: 0.38;
+      color: var(--on-surface);
+    }
 
     &::before {
       background-color: transparent;

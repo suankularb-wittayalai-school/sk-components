@@ -149,7 +149,7 @@ interface ButtonProps extends SKComponent {
      *
      * - Optional.
      */
-    loading?: boolean;
+    loading?: boolean | number;
     /**
      * Turns the Button gray and block any action associated with it. `onClick`
      * and `href` will have no effect.
@@ -158,6 +158,14 @@ interface ButtonProps extends SKComponent {
      * - Optional.
      */
     disabled?: boolean;
+    /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
     /**
      * The function called when the user interacts with the Button, similar to
      * `onClick` on `<button>`.
@@ -204,11 +212,12 @@ interface ButtonProps extends SKComponent {
  * @param dangerous If the action the Button accomplishes is dangerous, like deleting your account.
  * @param loading Disable the Button and add a Progress spinner in front of the text to signify loading status.
  * @param disabled Turns the Button gray and block any action associated with it.
+ * @param locale Allows for translation of the accessibility labels.
  * @param onClick The function called when the user interacts with the Button.
  * @param href The URL of the page this Button leads to.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, onClick, href, element: Element, style, className, }: ButtonProps): JSX.Element;
+declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, locale, onClick, href, element: Element, style, className, }: ButtonProps): JSX.Element;
 declare namespace Button {
     var displayName: string;
 }
