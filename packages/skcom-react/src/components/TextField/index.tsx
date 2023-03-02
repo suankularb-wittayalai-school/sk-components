@@ -382,7 +382,7 @@ export function TextField({
 
       {/* Trailing section */}
       <LayoutGroup>
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {/* Trailing section */}
           {trailing && (
             <motion.div

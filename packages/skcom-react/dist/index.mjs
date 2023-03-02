@@ -2106,7 +2106,7 @@ function TextField({
         ),
         leading && /* @__PURE__ */ jsx33(motion16.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ jsx33("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ jsx33("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        /* @__PURE__ */ jsx33(LayoutGroup3, { children: /* @__PURE__ */ jsxs21(AnimatePresence9, { children: [
+        /* @__PURE__ */ jsx33(LayoutGroup3, { children: /* @__PURE__ */ jsxs21(AnimatePresence9, { initial: false, children: [
           trailing && /* @__PURE__ */ jsx33(
             motion16.div,
             {

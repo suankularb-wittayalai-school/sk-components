@@ -2162,7 +2162,7 @@ function TextField({
         ),
         leading && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_framer_motion17.motion.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_framer_motion17.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(import_framer_motion17.AnimatePresence, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_framer_motion17.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(import_framer_motion17.AnimatePresence, { initial: false, children: [
           trailing && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
             import_framer_motion17.motion.div,
             {
