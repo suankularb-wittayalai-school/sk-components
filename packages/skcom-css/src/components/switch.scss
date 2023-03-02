@@ -81,6 +81,10 @@
   }
 
   &:not([aria-disabled="true"]) {
+    > .skc-switch__handle::before {
+      background-color: var(--primary);
+    }
+
     &:active > .skc-switch__handle {
       inset: 0 auto auto 1.25rem;
       width: 1.75rem;
