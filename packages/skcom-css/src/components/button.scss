@@ -43,7 +43,7 @@
       }
     }
 
-    &:not(.skc-button--loading):has(.skc-button__label) {
+    &:not(.skc-button--loading) {
       cursor: default;
 
       &:hover,
@@ -55,12 +55,6 @@
         // Block state layer effect
         &::before {
           opacity: 0;
-        }
-
-        // Block icon bolding effect
-        > .skc-button__icon > .skc-icon {
-          @include ci.icon(0, 400, 0, 20);
-          transition: none;
         }
 
         // Block ripple
