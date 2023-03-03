@@ -131,6 +131,7 @@ export function ChipField({
   const { duration, easing } = useAnimationConfig();
   const labelControls = useAnimationControls();
   const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
+  const [neverResetLabel, setNeverResetLabel] = React.useState<boolean>(false);
 
   // Transition
   const labelTransition = transition(duration.short4, easing.standard);
@@ -152,7 +153,7 @@ export function ChipField({
   // Animate as specified by `minifyLabel`
   React.useEffect(() => {
     // Disable initial animation
-    if (minifyLabel === undefined) return;
+    if (neverResetLabel || minifyLabel === undefined) return;
 
     if (minifyLabel) {
       labelControls.set(plhLabelAnimState);
@@ -165,8 +166,19 @@ export function ChipField({
 
     // Reset the label
     labelControls.set(minifedLabelAnimState);
-    labelControls.start({ ...plhLabelAnimState, transition: labelTransition });
+    labelControls.start({
+      ...plhLabelAnimState,
+      transition: labelTransition,
+    });
   }, [minifyLabel]);
+
+  // Never minify the label if placeholder specified
+  React.useEffect(() => {
+    if (placeholder) {
+      setNeverResetLabel(true);
+      labelControls.set(minifedLabelAnimState);
+    }
+  }, [placeholder]);
 
   // Minify on focus to leave space to type
   const handleFocus = () => setMinifyLabel(true);

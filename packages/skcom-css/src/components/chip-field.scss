@@ -52,6 +52,10 @@
 
     & ~ .skc-chip-field__input {
       padding-left: 0.25rem;
+
+      &::placeholder {
+        padding-left: 0;
+      }
     }
   }
 }
@@ -80,4 +84,11 @@
   border: none;
   padding-block: 1rem;
   background-color: transparent;
+
+  &::placeholder {
+    @include type.font("body-large");
+    font-family: var(--font-display);
+    color: var(--outline);
+    padding-left: 0.25rem;
+  }
 }

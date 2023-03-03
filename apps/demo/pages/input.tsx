@@ -34,6 +34,7 @@ const ChipFieldSection: FC = () => {
             setClasses([...classes, Number(value)]);
         }}
         onDeleteLast={() => setClasses(classes.slice(0, -1))}
+        placeholder="Enter class number"
       >
         <ChipSet>
           {classes.map((classItem) => (
