@@ -21,4 +21,5 @@
 .skc-nav-drawer-section__header {
   @include type.font("title-small");
   padding: 1.125rem 1rem;
+  margin-block: 0;
 }
