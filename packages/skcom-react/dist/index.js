@@ -939,10 +939,17 @@ ChipSet.displayName = "ChipSet";
 // ../skcom-css/dist/css/components/chip-field.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-chip-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  height: 3.5rem;\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-chip-field:hover {\n  border-color: var(--on-surface);\n}\n.skc-chip-field:focus-within {\n  border: 2px solid var(--primary);\n}\n.skc-chip-field__scrollable {\n  overflow-x: auto;\n}\n.skc-chip-field__content {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  width: fit-content;\n  min-width: 100%;\n  column-gap: .5rem;\n  padding-inline: .75rem;\n}\n.skc-chip-field .skc-chip-set {\n  padding-block: .5rem;\n  flex-wrap: nowrap;\n}\n.skc-chip-field .skc-chip-set:empty {\n  display: none;\n}\n.skc-chip-field .skc-chip-set:empty ~ .skc-chip-field__input {\n  padding-left: .25rem;\n}\n.skc-chip-field .skc-chip-set:empty ~ .skc-chip-field__input::placeholder {\n  padding-left: 0;\n}\n.skc-chip-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  inset: 1rem auto auto .75rem;\n  background-color: var(--background);\n  z-index: 10;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-chip-field:focus-within .skc-chip-field__label {\n  color: var(--primary);\n}\n.skc-chip-field__input {\n  outline: none;\n  flex-grow: 1;\n  min-width: 1rem;\n  box-sizing: border-box;\n  border: none;\n  padding-block: 1rem;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-chip-field__input::placeholder {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  color: var(--outline);\n  padding-left: .25rem;\n}\n");
 
+// src/utils/format.ts
+function kebabify(string) {
+  return string.toLowerCase().split(" ").join("-");
+}
+
 // src/components/ChipField/index.tsx
 var import_jsx_runtime15 = require("react/jsx-runtime");
 function ChipField({
   children,
+  label,
+  alt,
   value,
   onChange,
   onNewEntry,
@@ -1040,8 +1047,19 @@ function ChipField({
     } else if (["Escape", "ArrowRight", "Right", "End"].includes(event.key) && lastSelected)
       setLastSelected(false);
   };
+  const fieldID = `chip-field-${kebabify(
+    typeof label === "string" ? label : alt
+  )}`;
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { style, className: cn(["skc-chip-field", className]), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_framer_motion8.motion.label, { animate: labelControls, className: "skc-chip-field__label", children: "Classes learning this subject" }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+      import_framer_motion8.motion.label,
+      {
+        htmlFor: fieldID,
+        animate: labelControls,
+        className: "skc-chip-field__label",
+        children: label
+      }
+    ),
     /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "skc-chip-field__content", children: [
       lastSelected ? (
         // Modify the Chip Set so that the last Chip is displayed as
@@ -1060,6 +1078,8 @@ function ChipField({
       /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
         "input",
         __spreadValues({
+          id: fieldID,
+          "aria-label": alt,
           "aria-disabled": disabled,
           enterKeyHint: "enter",
           className: "skc-chip-field__input",
@@ -1082,11 +1102,6 @@ var React9 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/dialog.css
 styleInject(".skc-dialog {\n  position: fixed;\n  z-index: 90;\n  inset: 50% auto auto 50%;\n  width: 22.5rem;\n  max-width: calc(100vw - 3rem);\n  margin: 0 !important;\n  transform: translate(-50%, -50%);\n  border-radius: var(--rounded-2xl);\n  background-color: var(--surface-3);\n}\n.skc-dialog > .skc-actions {\n  padding: 1.5rem 1.5rem 1.5rem 1rem;\n}\n.skc-dialog,\n.skc-dialog .skc-text-field--outlined .skc-text-field__label {\n  background-color: var(--surface-3);\n}\n.skc-dialog .skc-text-field--filled {\n  background-color: var(--surface-1);\n}\n.skc-dialog .skc-text-field--filled::before {\n  background-color: var(--outline);\n}\n.skc-dialog ~ .skc-scrim {\n  margin: 0 !important;\n}\n");
-
-// src/utils/format.ts
-function kebabify(string) {
-  return string.toLowerCase().split(" ").join("-");
-}
 
 // src/components/Dialog/index.tsx
 var import_jsx_runtime16 = require("react/jsx-runtime");

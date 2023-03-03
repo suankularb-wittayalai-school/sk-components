@@ -842,6 +842,21 @@ interface ChipFieldProps extends SKComponent {
      */
     children: React.ReactNode;
     /**
+     * The placeholder text (if no placeholder specified or when not focused and
+     * no value) and the label text (when focused or has value).
+     *
+     * - Always required.
+     */
+    label: string | JSX.Element;
+    /**
+     * A description of the Chip Field for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Required if `label` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
      * The value inside the field that is used to create Input Chips. This is
      * useful if you want a controlled input.
      *
@@ -898,6 +913,8 @@ interface ChipFieldProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
  *
  * @param children The Input Chips that the user have already entered.
+ * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
+ * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
  * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user make changes to the field value. The value is passed in via the function.
  * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
@@ -906,7 +923,7 @@ interface ChipFieldProps extends SKComponent {
  * @param disabled The field cannot be edited.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-declare function ChipField({ children, value, onChange, onNewEntry, onDeleteLast, placeholder, disabled, inputAttr, style, className, }: ChipFieldProps): JSX.Element;
+declare function ChipField({ children, label, alt, value, onChange, onNewEntry, onDeleteLast, placeholder, disabled, inputAttr, style, className, }: ChipFieldProps): JSX.Element;
 declare namespace ChipField {
     var displayName: string;
 }

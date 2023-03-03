@@ -27,6 +27,7 @@ const ChipFieldSection: FC = () => {
     <Section>
       <Header>Chip Field</Header>
       <ChipField
+        label="Classes learning this subject"
         value={value}
         onChange={setValue}
         onNewEntry={(value) => {

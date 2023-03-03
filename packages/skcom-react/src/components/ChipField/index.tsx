@@ -14,6 +14,7 @@ import "@suankularb-components/css/dist/css/components/chip-field.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link ChipField Chip Field}.
@@ -26,6 +27,23 @@ export interface ChipFieldProps extends SKComponent {
    * - Always required.
    */
   children: React.ReactNode;
+
+  /**
+   * The placeholder text (if no placeholder specified or when not focused and
+   * no value) and the label text (when focused or has value).
+   *
+   * - Always required.
+   */
+  label: string | JSX.Element;
+
+  /**
+   * A description of the Chip Field for screen readers, similar to `alt` on
+   * `<img>`.
+   *
+   * - Required if `label` is a JSX Element, as it is used to generate the ID
+   *   crucial for accessibility.
+   */
+  alt?: string;
 
   /**
    * The value inside the field that is used to create Input Chips. This is
@@ -91,6 +109,8 @@ export interface ChipFieldProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
  *
  * @param children The Input Chips that the user have already entered.
+ * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
+ * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
  * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user make changes to the field value. The value is passed in via the function.
  * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
@@ -101,6 +121,8 @@ export interface ChipFieldProps extends SKComponent {
  */
 export function ChipField({
   children,
+  label,
+  alt,
   value,
   onChange,
   onNewEntry,
@@ -247,10 +269,20 @@ export function ChipField({
       setLastSelected(false);
   };
 
+  // Accessibility
+  // Generate the base ID for `<label>`
+  const fieldID = `chip-field-${kebabify(
+    (typeof label === "string" ? label : alt)!
+  )}`;
+
   return (
     <div style={style} className={cn(["skc-chip-field", className])}>
-      <motion.label animate={labelControls} className="skc-chip-field__label">
-        Classes learning this subject
+      <motion.label
+        htmlFor={fieldID}
+        animate={labelControls}
+        className="skc-chip-field__label"
+      >
+        {label}
       </motion.label>
 
       <div className="skc-chip-field__scrollable">
@@ -277,6 +309,8 @@ export function ChipField({
 
           {/* Input */}
           <input
+            id={fieldID}
+            aria-label={alt}
             aria-disabled={disabled}
             enterKeyHint="enter"
             className="skc-chip-field__input"

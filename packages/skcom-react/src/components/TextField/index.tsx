@@ -308,7 +308,7 @@ export function TextField({
   React.useEffect(() => setError(Boolean(incError)), [incError]);
 
   // Accessibility
-  // Generate the base ID for `<label>` and `aria-describedby`
+  // Generate the base ID for `aria-labelledby` and `aria-describedby`
   const fieldID = `field-${kebabify(
     (typeof label === "string" ? label : alt)!
   )}`;
