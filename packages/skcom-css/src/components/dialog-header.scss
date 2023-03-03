@@ -18,10 +18,12 @@
 
 .skc-dialog-header h2 {
   @include type.font("headline-small");
+  margin-block: 0;
   color: var(--on-surface);
 }
 
 .skc-dialog-header p {
   @include type.font("body-medium");
+  margin-block: 0;
   color: var(--on-surface-variant);
 }

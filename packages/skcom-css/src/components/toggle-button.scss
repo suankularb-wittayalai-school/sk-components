@@ -21,7 +21,10 @@
   overflow: hidden;
   place-content: center;
   padding: 0.5rem;
+  cursor: pointer;
+  border: 0;
   border-radius: var(--rounded-full);
+  background-color: transparent;
   -webkit-tap-highlight-color: transparent;
 
   // State layer

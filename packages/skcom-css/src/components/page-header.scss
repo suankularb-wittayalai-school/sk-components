@@ -77,6 +77,7 @@
   > h1 {
     @include type.font("display-medium");
     width: calc(100% - 2rem);
+    margin-block: 0;
 
     &:not(:last-child) {
       margin-bottom: 0.75rem;
@@ -104,6 +105,7 @@
     @include type.font("title-large");
     flex-grow: 1;
     width: fit-content;
+    margin-block: 0;
   }
 }
 

@@ -59,6 +59,7 @@ export function List({
 }: ListProps) {
   return (
     <ul
+      role="list"
       style={style}
       className={cn(["skc-list", divided && "skc-list--divided", className])}
     >

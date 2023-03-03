@@ -74,7 +74,7 @@ export function NavDrawerSection({
       >
         {header}
       </h2>
-      <ul>{children}</ul>
+      <ul role="list">{children}</ul>
     </section>
   );
 }

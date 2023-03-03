@@ -1,4 +1,5 @@
 // External libraries
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,9 +9,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/progress.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { AnimatePresence, motion } from "framer-motion";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link Progress}.

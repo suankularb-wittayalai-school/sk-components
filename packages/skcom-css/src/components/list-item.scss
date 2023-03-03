@@ -13,8 +13,12 @@
   overflow: hidden;
   flex-direction: row;
   gap: 1rem;
+  box-sizing: border-box;
   width: 100%;
   padding: 0.5rem 2rem 0.5rem 1rem;
+  text-decoration: none;
+  border: 0;
+  background-color: transparent;
   -webkit-tap-highlight-color: transparent;
 }
 

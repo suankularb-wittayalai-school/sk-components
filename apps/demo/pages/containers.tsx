@@ -60,7 +60,7 @@ const CardSection: FC = () => (
           height={533}
           alt="Atipol Sukrisadanon"
           priority
-          className="w-full"
+          className="h-auto w-full"
         />
         <CardContent>
           <p>
