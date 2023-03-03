@@ -8,6 +8,7 @@ import {
   AssistChip,
   Avatar,
   Button,
+  ChipSet,
   ContentLayout,
   FAB,
   Header,
@@ -217,7 +218,7 @@ const ChipsSection: FC = () => {
       <Header>Chips</Header>
       <Section>
         <Header level={3}>Input Chip</Header>
-        <div className="flex flex-row flex-wrap items-start gap-2">
+        <ChipSet>
           <InputChip onClick={() => {}}>Siravit Phokeed</InputChip>
           <InputChip onDelete={() => {}}>Siravit Phokeed</InputChip>
           <InputChip selected onDelete={() => {}}>
@@ -237,11 +238,11 @@ const ChipsSection: FC = () => {
           <InputChip avatar={<Avatar />} selected onDelete={() => {}}>
             Siravit Phokeed
           </InputChip>
-        </div>
+        </ChipSet>
       </Section>
       <Section>
         <Header level={3}>Assist Chip</Header>
-        <div className="flex flex-row flex-wrap items-start gap-2">
+        <ChipSet>
           <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
             Turn on lights
           </AssistChip>
@@ -251,7 +252,7 @@ const ChipsSection: FC = () => {
           <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
             Turn on lights
           </AssistChip>
-        </div>
+        </ChipSet>
         <div
           className="flex flex-row flex-wrap place-content-center gap-2
           rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4"
