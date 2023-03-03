@@ -269,4 +269,13 @@ ActionsPage.pageHeader = {
   parentURL: "/",
 };
 
+ActionsPage.fab = (
+  <FAB
+    color="tertiary"
+    icon={<MaterialIcon icon="shopping_cart" />}
+    tooltip="Go to checkout"
+    size="large"
+  />
+);
+
 export default ActionsPage;

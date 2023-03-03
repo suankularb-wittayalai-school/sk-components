@@ -267,7 +267,7 @@ function transition(duration, easing) {
     ease: easing
   };
 }
-function useRipple(parentRef, options) {
+function useRipple(parentRef) {
   const { duration, easing } = useAnimationConfig();
   const rippleControls = (0, import_framer_motion.useAnimationControls)();
   const [diameter, setDiameter] = import_react.default.useState(0);
@@ -293,17 +293,13 @@ function useRipple(parentRef, options) {
   }, []);
   const [position, setPosition] = import_react.default.useState({ top: "0", left: "0" });
   function calculatePosition(x, y) {
-    var _a, _b;
     const button = parentRef.current;
     if (!button)
       return { top: "0", left: "0" };
-    const posCorrection = {
-      x: ((_a = options == null ? void 0 : options.posCorrection) == null ? void 0 : _a.x) || 0,
-      y: ((_b = options == null ? void 0 : options.posCorrection) == null ? void 0 : _b.y) || 0
-    };
+    const { top, left } = button.getBoundingClientRect();
     return {
-      top: `${y - (button.offsetTop + diameter / 2) + posCorrection.y}px`,
-      left: `${x - (button.offsetLeft + diameter / 2) + posCorrection.x}px`
+      top: `${y - (top + diameter / 2)}px`,
+      left: `${x - (left + diameter / 2)}px`
     };
   }
   function animateRipple() {
@@ -321,12 +317,7 @@ function useRipple(parentRef, options) {
     rippleListeners: {
       // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event) => {
-        setPosition(
-          calculatePosition(
-            (options == null ? void 0 : options.useClientPos) ? event.clientX : event.pageX,
-            (options == null ? void 0 : options.useClientPos) ? event.clientY : event.pageY
-          )
-        );
+        setPosition(calculatePosition(event.clientX, event.clientY));
         animateRipple();
       },
       // On key down, put the ripple in the middle of the Button and animate it
@@ -1400,10 +1391,7 @@ function NavBarItem({
     else
       setClientHeight(80);
   }, []);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef, {
-    useClientPos: true,
-    posCorrection: { x: 0, y: 80 - clientHeight }
-  });
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
   const navID = `nav-section-${kebabify(
     typeof label === "string" ? label : alt
   )}`;

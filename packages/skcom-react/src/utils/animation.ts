@@ -96,17 +96,9 @@ export function transition(
  * ```
  *
  * @param parentRef The React Reference Object pointing to the parent element of the ripple.
- * @param options.useClientPos Use `clientX` and `clientY` for position instead of `pageX` and `pageY.
- * @param options.posCorrection Correct cursor position in both axes.
  * @returns Event listeners, animation controls, and styles to put on the ripple `motion` element.
  */
-export function useRipple(
-  parentRef: React.MutableRefObject<any>,
-  options?: Partial<{
-    useClientPos: boolean;
-    posCorrection: { x: number; y: number };
-  }>
-): {
+export function useRipple(parentRef: React.MutableRefObject<any>): {
   rippleListeners: {
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
@@ -145,15 +137,11 @@ export function useRipple(
   function calculatePosition(x: number, y: number) {
     const button = parentRef.current as any;
     if (!button) return { top: "0", left: "0" };
-
-    const posCorrection = {
-      x: options?.posCorrection?.x || 0,
-      y: options?.posCorrection?.y || 0,
-    };
+    const { top, left } = button.getBoundingClientRect();
 
     return {
-      top: `${y - (button.offsetTop + diameter / 2) + posCorrection.y}px`,
-      left: `${x - (button.offsetLeft + diameter / 2) + posCorrection.x}px`,
+      top: `${y - (top + diameter / 2)}px`,
+      left: `${x - (left + diameter / 2)}px`,
     };
   }
 
@@ -173,12 +161,7 @@ export function useRipple(
     rippleListeners: {
       // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event: React.MouseEvent) => {
-        setPosition(
-          calculatePosition(
-            options?.useClientPos ? event.clientX : event.pageX,
-            options?.useClientPos ? event.clientY : event.pageY
-          )
-        );
+        setPosition(calculatePosition(event.clientX, event.clientY));
         animateRipple();
       },
       // On key down, put the ripple in the middle of the Button and animate it
