@@ -89,8 +89,8 @@
 
 // Icon
 .skc-button__icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 
   .skc-icon {
     @include ci.icon(0, 400, 0, 20);
@@ -141,10 +141,8 @@
     }
 
     &.skc-progress--circular {
-      .skc-progress__track {
-        width: 1.25rem;
-        height: 1.25rem;
-      }
+      width: 1.25rem;
+      height: 1.25rem;
 
       .skc-progress__indicator {
         stroke: currentColor;
