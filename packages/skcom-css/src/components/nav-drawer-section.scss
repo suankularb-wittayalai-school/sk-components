@@ -10,6 +10,12 @@
 .skc-nav-drawer-section {
   display: flex;
   flex-direction: column;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .skc-nav-drawer-section__header {
