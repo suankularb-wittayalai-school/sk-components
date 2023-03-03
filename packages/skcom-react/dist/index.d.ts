@@ -876,7 +876,7 @@ interface ChipFieldProps extends SKComponent {
      *
      * - Optional.
      */
-    placeholder?: string | JSX.Element;
+    placeholder?: string;
     /**
      * The field cannot be edited.
      *

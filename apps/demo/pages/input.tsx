@@ -29,12 +29,22 @@ const ChipFieldSection: FC = () => {
       <ChipField
         value={value}
         onChange={setValue}
-        onNewEntry={(value) => console.log({ newEntry: value })}
+        onNewEntry={(value) => {
+          if (/[1-6](0[1-9]|1[0-9])/.test(value))
+            setClasses([...classes, Number(value)]);
+        }}
         onDeleteLast={() => setClasses(classes.slice(0, -1))}
       >
-        <ChipSet scrollable>
+        <ChipSet>
           {classes.map((classItem) => (
-            <InputChip key={classItem}>{`M.${classItem}`}</InputChip>
+            <InputChip
+              key={classItem}
+              onDelete={() =>
+                setClasses(classes.filter((item) => classItem !== item))
+              }
+            >
+              {`M.${classItem}`}
+            </InputChip>
           ))}
         </ChipSet>
       </ChipField>

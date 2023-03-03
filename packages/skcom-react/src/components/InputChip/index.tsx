@@ -209,7 +209,11 @@ export function InputChip({
       {icon && <div className="skc-input-chip__icon">{icon}</div>}
       <span className="skc-input-chip__label">{children}</span>
       {onDelete && (
-        <Button appearance="text" icon={<MaterialIcon icon="close" />} />
+        <Button
+          appearance="text"
+          icon={<MaterialIcon icon="close" />}
+          onClick={onDelete}
+        />
       )}
     </>
   );

@@ -16,9 +16,6 @@
     var(--easing-standard)
   );
   position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
   height: 3.5rem;
   border: 1px solid var(--outline);
   border-radius: 0.25rem;
@@ -28,30 +25,59 @@
   }
 
   &:focus-within {
-    // margin: -1px;
     border: 2px solid var(--primary);
   }
 }
 
+.skc-chip-field__scrollable {
+  overflow-x: auto;
+}
+
+.skc-chip-field__content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: fit-content;
+  min-width: 100%;
+  column-gap: 0.5rem;
+  padding-inline: 0.75rem;
+}
+
 .skc-chip-field .skc-chip-set {
-  padding-left: 0.75rem;
+  padding-block: 0.5rem;
   flex-wrap: nowrap;
+
+  &:empty {
+    display: none;
+
+    & ~ .skc-chip-field__input {
+      padding-left: 0.25rem;
+    }
+  }
 }
 
 .skc-chip-field__label {
-  @include type.font("label-small");
+  @include type.font("body-large");
   font-family: var(--font-display);
   position: absolute;
-  inset: -0.5rem auto auto 0.75rem;
+  inset: 1rem auto auto 0.75rem;
   background-color: var(--background);
+  z-index: 10;
+  padding-inline: 0.25rem;
+  pointer-events: none;
+  color: var(--on-surface-variant);
+
+  .skc-chip-field:focus-within & {
+    color: var(--primary);
+  }
 }
 
 .skc-chip-field__input {
   outline: none;
   flex-grow: 1;
-  min-width: 5rem;
+  min-width: 1rem;
   box-sizing: border-box;
   border: none;
-  padding: 1rem;
+  padding-block: 1rem;
   background-color: transparent;
 }

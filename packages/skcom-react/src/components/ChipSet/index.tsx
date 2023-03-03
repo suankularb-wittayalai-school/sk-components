@@ -51,12 +51,11 @@ export function ChipSet({
     <div
       style={style}
       className={cn([
-        "skc-chip-set",
-        scrollable && "skc-chip-set--scrollable",
+        scrollable ? "skc-chip-set__wrapper" : "skc-chip-set",
         className,
       ])}
     >
-      {children}
+      {scrollable ? <div className="skc-chip-set">{children}</div> : children}
     </div>
   );
 }

@@ -1,5 +1,9 @@
 // External libraries
+import { motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { ChipSet } from "../ChipSet";
 
 // Types
 import { SKComponent } from "../../types";
@@ -8,6 +12,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/chip-field.css";
 
 // Utilities
+import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -61,7 +66,7 @@ export interface ChipFieldProps extends SKComponent {
    *
    * - Optional.
    */
-  placeholder?: string | JSX.Element;
+  placeholder?: string;
 
   /**
    * The field cannot be edited.
@@ -106,40 +111,168 @@ export function ChipField({
   style,
   className,
 }: ChipFieldProps) {
+  // Chip deletion preparation
   const [lastSelected, setLastSelected] = React.useState<boolean>(false);
+  const [noOfChips, setNoOfChips] = React.useState<number>(0);
+
+  // Count the number of Input Chips as so to know which Chip to select for the
+  // “last Chip”
+  React.useEffect(
+    () =>
+      setNoOfChips(
+        React.Children.count(
+          (React.Children.only(children) as JSX.Element).props.children
+        )
+      ),
+    [children]
+  );
+
+  // Animation
+  const { duration, easing } = useAnimationConfig();
+  const labelControls = useAnimationControls();
+  const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
+
+  // Transition
+  const labelTransition = transition(duration.short4, easing.standard);
+
+  // Label animation states
+  const plhLabelAnimState = {
+    y: 0,
+    fontSize: "var(--text-lg)",
+    lineHeight: "1.5rem",
+    letterSpacing: 0.5,
+  };
+  const minifedLabelAnimState = {
+    y: -24,
+    fontSize: "var(--text-sm)",
+    lineHeight: "1rem",
+    letterSpacing: 0.4,
+  };
+
+  // Animate as specified by `minifyLabel`
+  React.useEffect(() => {
+    // Disable initial animation
+    if (minifyLabel === undefined) return;
+
+    if (minifyLabel) {
+      labelControls.set(plhLabelAnimState);
+      labelControls.start({
+        ...minifedLabelAnimState,
+        transition: labelTransition,
+      });
+      return;
+    }
+
+    // Reset the label
+    labelControls.set(minifedLabelAnimState);
+    labelControls.start({ ...plhLabelAnimState, transition: labelTransition });
+  }, [minifyLabel]);
+
+  // Minify on focus to leave space to type
+  const handleFocus = () => setMinifyLabel(true);
+  const handleBlur = () => {
+    if (!noOfChips) setMinifyLabel(false);
+  };
+
+  // Always minify the label if Chips are present
+  React.useEffect(() => {
+    if (noOfChips) setMinifyLabel(true);
+  }, [noOfChips]);
+
+  // Chip creation and deletion
+
+  const handleChange = (event: React.ChangeEvent) => {
+    // Only execute if all required functions passed in
+    if (!onChange) return;
+
+    // If the last character of the field value is a seperator, the user has
+    // entered a new entry. This entry is passed to `onNewEntry`/
+    const { value } = event.target as HTMLInputElement;
+
+    if (onNewEntry && [" ", ",", ";"].includes(value?.at(-1) || "")) {
+      onNewEntry(value.slice(0, -1));
+      onChange("");
+      return;
+    }
+
+    // Otherwise, just pass the value to `onChange` as part of the controlled
+    // input
+    onChange(value);
+  };
+
+  const handleKeyUp = (event: React.KeyboardEvent) => {
+    const { value } = event.target as HTMLInputElement;
+
+    // Handles creation
+    if (event.key === "Enter") {
+      // Enter signals creation of a new Chip
+      if (onNewEntry && onChange) {
+        onNewEntry(value);
+        onChange("");
+      }
+    }
+
+    // Handles deletion
+    else if (event.key === "Backspace" && value === "") {
+      // First backspace selects the last Chip
+      if (!lastSelected) setLastSelected(true);
+      // Second backspace signals deletion of the last Chip
+      else if (onDeleteLast) {
+        onDeleteLast();
+        setLastSelected(false);
+      }
+    }
+
+    // Handles cancellation of deletion
+    else if (
+      ["Escape", "ArrowRight", "Right", "End"].includes(event.key) &&
+      lastSelected
+    )
+      setLastSelected(false);
+  };
 
   return (
     <div style={style} className={cn(["skc-chip-field", className])}>
-      {children}
-      <label className="skc-chip-field__label">
+      <motion.label animate={labelControls} className="skc-chip-field__label">
         Classes learning this subject
-      </label>
-      <input
-        className="skc-chip-field__input"
-        value={value}
-        onChange={(event) => onChange && onChange(event.target.value)}
-        onKeyUp={(event) => {
-          const { value } = event.target as HTMLInputElement;
+      </motion.label>
 
-          // Handles creation
-          if ([" ", "Enter"].includes(event.key)) {
-            // Enter signals creation of a new Chip
-            if (onNewEntry)
-              onNewEntry(value.slice(0, event.key === " " ? -1 : 0));
-          }
+      <div className="skc-chip-field__scrollable">
+        <div className="skc-chip-field__content">
+          {/* Chip Set */}
+          {lastSelected ? (
+            // Modify the Chip Set so that the last Chip is displayed as
+            // selected
+            <ChipSet>
+              {React.Children.map(
+                (React.Children.only(children) as JSX.Element).props.children,
+                (child, idx) => {
+                  if (idx === noOfChips - 1)
+                    return React.cloneElement(child as JSX.Element, {
+                      selected: true,
+                    });
+                  return child;
+                }
+              )}
+            </ChipSet>
+          ) : (
+            children
+          )}
 
-          // Handles deletion
-          else if (event.key === "Backspace" && value === "") {
-            // First backspace selects the last Chip
-            if (!lastSelected) setLastSelected(true);
-            // Second backspace signals deletion of the last Chip
-            else if (onDeleteLast) {
-              onDeleteLast();
-              setLastSelected(false);
-            }
-          }
-        }}
-      />
+          {/* Input */}
+          <input
+            aria-disabled={disabled}
+            className="skc-chip-field__input"
+            placeholder={placeholder}
+            value={value}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onKeyUp={handleKeyUp}
+            {...inputAttr}
+          />
+        </div>
+      </div>
     </div>
   );
 }

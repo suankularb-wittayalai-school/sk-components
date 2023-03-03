@@ -16,7 +16,11 @@
 }
 
 // Scrollable Chip Set
-.skc-chip-set--scrollable {
+.skc-chip-set__wrapper {
   overflow-x: auto;
-  flex-wrap: nowrap;
+
+  .skc-chip-set {
+    flex-wrap: nowrap;
+    width: fit-content;
+  }
 }
