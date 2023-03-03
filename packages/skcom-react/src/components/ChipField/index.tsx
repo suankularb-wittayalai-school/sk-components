@@ -182,6 +182,10 @@ export function ChipField({
   // Chip creation and deletion
 
   const handleChange = (event: React.ChangeEvent) => {
+    // If the user continues typing after they selected a Chip, that Chip is
+    // unselected
+    if (lastSelected) setLastSelected(false);
+
     // Only execute if all required functions passed in
     if (!onChange) return;
 
@@ -262,6 +266,7 @@ export function ChipField({
           {/* Input */}
           <input
             aria-disabled={disabled}
+            enterKeyHint="enter"
             className="skc-chip-field__input"
             placeholder={placeholder}
             value={value}

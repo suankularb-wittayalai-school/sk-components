@@ -934,6 +934,8 @@ function ChipField({
       setMinifyLabel(true);
   }, [noOfChips]);
   const handleChange = (event) => {
+    if (lastSelected)
+      setLastSelected(false);
     if (!onChange)
       return;
     const { value: value2 } = event.target;
@@ -982,6 +984,7 @@ function ChipField({
         "input",
         __spreadValues({
           "aria-disabled": disabled,
+          enterKeyHint: "enter",
           className: "skc-chip-field__input",
           placeholder,
           value,
