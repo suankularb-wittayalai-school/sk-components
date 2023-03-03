@@ -112,12 +112,12 @@
 
   .skc-fullscreen-dialog__content {
     overflow-y: auto;
+    box-sizing: border-box;
     // Top App Bar: 4rem
     // Visible margin from edge of screen (top + bottom combined): 2rem
     max-height: calc(100vh - (4rem + 2rem));
     padding: 1.5rem;
     border-top: 1px solid var(--outline);
-    box-sizing: border-box;
 
     > * {
       margin-inline: 0;
