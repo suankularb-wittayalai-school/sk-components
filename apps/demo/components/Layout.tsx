@@ -15,11 +15,15 @@ import {
   NavDrawerSection,
   PageHeader,
   PageHeaderProps,
+  Progress,
   RootLayout,
 } from "@suankularb-components/react";
 
 // Internal components
 import Favicon from "@/components/Favicon";
+
+// Utilities
+import { usePageIsLoading } from "@/utils/page-load";
 
 const Layout: FC<{
   children: ReactNode;
@@ -28,6 +32,8 @@ const Layout: FC<{
 }> = ({ children, fab, pageHeader }) => {
   const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
+
+  const { pageIsLoading } = usePageIsLoading();
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
 
@@ -161,6 +167,13 @@ const Layout: FC<{
           {...pageHeader}
         />
       )}
+
+      {/* Page loading indicator */}
+      <Progress
+        appearance="linear"
+        alt="Loading page…"
+        visible={pageIsLoading}
+      />
 
       {/* Content */}
       {children}

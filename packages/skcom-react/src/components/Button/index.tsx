@@ -4,6 +4,7 @@ import * as React from "react";
 
 // Internal components
 import { MaterialIcon } from "../MaterialIcon";
+import { Progress } from "../Progress";
 
 // Types
 import { SKComponent } from "../../types";
@@ -93,7 +94,7 @@ export interface ButtonProps extends SKComponent {
    *
    * - Optional.
    */
-  loading?: boolean;
+  loading?: boolean | number;
 
   /**
    * Turns the Button gray and block any action associated with it. `onClick`
@@ -103,6 +104,15 @@ export interface ButtonProps extends SKComponent {
    * - Optional.
    */
   disabled?: boolean;
+
+  /**
+   * Allows for translation of the accessibility labels.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
+   * - Optional.
+   */
+  locale?: "en-US" | "th";
 
   /**
    * The function called when the user interacts with the Button, similar to
@@ -163,6 +173,7 @@ export interface ButtonProps extends SKComponent {
  * @param dangerous If the action the Button accomplishes is dangerous, like deleting your account.
  * @param loading Disable the Button and add a Progress spinner in front of the text to signify loading status.
  * @param disabled Turns the Button gray and block any action associated with it.
+ * @param locale Allows for translation of the accessibility labels.
  * @param onClick The function called when the user interacts with the Button.
  * @param href The URL of the page this Button leads to.
  * @param element Change the underlying element from `<a>` to a custom element.
@@ -177,6 +188,7 @@ export function Button({
   dangerous,
   loading,
   disabled,
+  locale,
   onClick,
   href,
   element: Element,
@@ -184,8 +196,20 @@ export function Button({
   className,
 }: ButtonProps) {
   // Ripple setup
-  const buttonRef = React.useRef(null);
+  const buttonRef: React.LegacyRef<any> = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
+
+  const [buttonWidth, setButtonWidth] = React.useState<number>();
+  React.useEffect(() => {
+    const button = buttonRef.current;
+    if (!button) return;
+    // (@SiravitPhokeed)
+    // We’re not using `clientWidth` here because that property is rounded,
+    // which can cause layout shifts as the Button transition to and from the
+    // loading state. `getBoundingClientRect` produces the exact width value.
+    const { width } = button.getBoundingClientRect();
+    setButtonWidth(width - (appearance === "outlined" ? 2 : 0));
+  }, []);
 
   /**
    * Props on `<a>` or `<button>`.
@@ -197,11 +221,11 @@ export function Button({
     ref: buttonRef,
     // We’re using `aria-disabled` instead of `disabled` because it does not
     // disable tabbing in, which is better for accessibility.
-    "aria-disabled": disabled || loading,
+    "aria-disabled": disabled || loading !== undefined,
     "aria-selected": selected,
     "aria-label": alt,
     title: tooltip,
-    style,
+    style: { ...style, width: loading !== undefined ? buttonWidth : undefined },
     className: cn([
       "skc-button",
       appearance === "filled"
@@ -215,6 +239,7 @@ export function Button({
         : undefined,
       selected && "skc-button--selected",
       dangerous && "skc-button--dangerous",
+      loading !== undefined && "skc-button--loading",
       className,
     ]),
     onClick: () => {
@@ -230,13 +255,23 @@ export function Button({
    */
   const content = (
     <>
-      {/* TODO: `loading` should put a Progress here. */}
-      {(selected || icon) && (
-        <div className="skc-button__icon">
-          {selected ? <MaterialIcon icon="done" /> : icon}
-        </div>
+      {loading ? (
+        <Progress
+          appearance="circular"
+          alt={locale === "th" ? "กำลังโหลด" : "Loading…"}
+          value={typeof loading === "number" ? loading : undefined}
+          visible
+        />
+      ) : (
+        <>
+          {(selected || icon) && (
+            <div className="skc-button__icon">
+              {selected ? <MaterialIcon icon="done" /> : icon}
+            </div>
+          )}
+          {children && <span className="skc-button__label">{children}</span>}
+        </>
       )}
-      {children && <span className="skc-button__label">{children}</span>}
       <motion.span
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}

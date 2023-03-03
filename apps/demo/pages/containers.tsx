@@ -22,6 +22,7 @@ import {
   ListItem,
   ListItemContent,
   MaterialIcon,
+  Progress,
   Section,
   SegmentedButton,
   TextField,
@@ -285,6 +286,36 @@ const ListSection: FC = () => (
   </Section>
 );
 
+const ProgressSection: FC = () => (
+  <Section>
+    <Header>Progress</Header>
+    <Columns columns={2}>
+      <Progress
+        appearance="linear"
+        alt="Linear determinate Progress demo"
+        value={70}
+        visible
+      />
+      <Progress
+        appearance="linear"
+        alt="Linear indeterminate Progress demo"
+        visible
+      />
+      <Progress
+        appearance="circular"
+        alt="Circular determinate Progress demo"
+        value={70}
+        visible
+      />
+      <Progress
+        appearance="circular"
+        alt="Circular indeterminate Progress demo"
+        visible
+      />
+    </Columns>
+  </Section>
+);
+
 const ContainersPage: CustomPage = () => {
   return (
     <>
@@ -298,6 +329,7 @@ const ContainersPage: CustomPage = () => {
         <DialogSection />
         <HeaderSection />
         <ListSection />
+        <ProgressSection />
       </ContentLayout>
     </>
   );

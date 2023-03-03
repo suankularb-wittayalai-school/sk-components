@@ -149,7 +149,7 @@ interface ButtonProps extends SKComponent {
      *
      * - Optional.
      */
-    loading?: boolean;
+    loading?: boolean | number;
     /**
      * Turns the Button gray and block any action associated with it. `onClick`
      * and `href` will have no effect.
@@ -158,6 +158,14 @@ interface ButtonProps extends SKComponent {
      * - Optional.
      */
     disabled?: boolean;
+    /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
     /**
      * The function called when the user interacts with the Button, similar to
      * `onClick` on `<button>`.
@@ -204,11 +212,12 @@ interface ButtonProps extends SKComponent {
  * @param dangerous If the action the Button accomplishes is dangerous, like deleting your account.
  * @param loading Disable the Button and add a Progress spinner in front of the text to signify loading status.
  * @param disabled Turns the Button gray and block any action associated with it.
+ * @param locale Allows for translation of the accessibility labels.
  * @param onClick The function called when the user interacts with the Button.
  * @param href The URL of the page this Button leads to.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, onClick, href, element: Element, style, className, }: ButtonProps): JSX.Element;
+declare function Button({ children, appearance, icon, alt, tooltip, selected, dangerous, loading, disabled, locale, onClick, href, element: Element, style, className, }: ButtonProps): JSX.Element;
 declare namespace Button {
     var displayName: string;
 }
@@ -1835,6 +1844,57 @@ declare namespace PageHeader {
 }
 
 /**
+ * Props for {@link Progress}.
+ */
+interface ProgressProps extends SKComponent {
+    /**
+     * Progress can be either a loading spinner or a linear loading bar.
+     *
+     * - Must be `linear` or `circular`.
+     * - Keep the appearance consistent for the same actions. For example, if
+     *   loading a post uses `linear` in one place, the same action should always
+     *   use `linear` elsewhere.
+     * - Always required.
+     */
+    appearance: "linear" | "circular";
+    /**
+     * A description of the Progress for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Always required, because a Progress has no significance to screenreaders.
+     */
+    alt: string;
+    /**
+     * The progress percentage (out of 100) of an activity.
+     *
+     * - If undefined, the Progress will be in an indeterminate state.
+     * - Optional.
+     */
+    value?: number;
+    /**
+     * If this Progress is visible.
+     *
+     * - Optional.
+     */
+    visible?: boolean;
+}
+/**
+ * A Progress indicates that something is ongoing. It can also indicate how
+ * much of that something has been done.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.12x5jav7hhzm SKCom documentation}
+ *
+ * @param appearance Progress can be either a loading spinner or a linear loading bar.
+ * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
+ * @param value The progress percentage (out of 100) of an activity.
+ * @param visible If this Progress is visible.
+ */
+declare function Progress({ appearance, alt, value, visible, style, className, }: ProgressProps): JSX.Element;
+declare namespace Progress {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Section}.
  */
 interface SectionProps extends SKComponent {
@@ -1862,6 +1922,72 @@ interface SectionProps extends SKComponent {
  */
 declare function Section({ children, sectionAttr, style, className, }: SectionProps): JSX.Element;
 declare namespace Section {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link Switch}.
+ */
+interface SwitchProps extends SKComponent {
+    /**
+     * The state of the Switch. This is useful if you want a controlled input.
+     *
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: boolean;
+    /**
+     * This function triggers when the user toggles the switch. The state is
+     * passed in via the function as a boolean.
+     *
+     * - Optional.
+     */
+    onChange?: (value: boolean) => any;
+    /**
+     * An icon inside the Thumb when the switch is off.
+     *
+     * - You are encouraged to use Material Icons as the value for `offIcon`.
+     * - Optional.
+     */
+    offIcon?: JSX.Element;
+    /**
+     * An icon inside the Thumb when the switch is on.
+     *
+     * - You are encouraged to use Material Icons as the value for `onIcon`.
+     * - Optional.
+     */
+    onIcon?: JSX.Element;
+    /**
+     * Turns the Switch gray and block any action associated with it.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Attributes for the underlying `<button>` element.
+     *
+     * - Optional.
+     */
+    buttonAttr?: JSX.IntrinsicElements["button"];
+}
+/**
+ * A Switch toggles something on and off. It is usually in a Form Item. Unlike
+ * Checkbox and Radio, a Switch is independent.
+ * {@link https://m3.material.io/components/switch/guidelines#4f51b236-583e-4caa-9ae6-c8079325ef6b Learn the differences.}
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ab4q1pg880wv SKCom documentation}
+ *
+ * @param value The state of the Switch. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the switch. The state is passed in via the function as a boolean.
+ * @param offIcon An icon inside the Thumb when the switch is off.
+ * @param onIcon An icon inside the Thumb when the switch is on.
+ * @param disabled Turns the Switch gray and block any action associated with it.
+ * @param buttonAttr Attributes for the underlying `<button>` element.
+ */
+declare function Switch({ value, onChange, offIcon, onIcon, disabled, buttonAttr, style, className, }: SwitchProps): JSX.Element;
+declare namespace Switch {
     var displayName: string;
 }
 
@@ -1968,6 +2094,8 @@ interface TextFieldProps extends SKComponent {
      * The value inside the field. This is useful if you want a controlled input.
      *
      * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
      */
     value?: string;
     /**
@@ -2073,4 +2201,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

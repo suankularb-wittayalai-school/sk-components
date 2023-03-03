@@ -1,6 +1,6 @@
 // External libraries
 import Head from "next/head";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 // SK Components
 import {
@@ -19,56 +19,72 @@ import {
 // Utilities
 import { CustomPage } from "@/utils/types";
 
-const ButtonsSection: FC = () => (
-  <Section>
-    <Header level={3}>Common Button</Header>
-    <Actions align="left">
-      <Button appearance="filled">Button</Button>
-      <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-        Button
-      </Button>
-      <Button appearance="filled" dangerous>
-        Button
-      </Button>
-      <Button appearance="filled" disabled>
-        Button
-      </Button>
-      <Button appearance="tonal">Button</Button>
-      <Button appearance="tonal" dangerous>
-        Button
-      </Button>
-      <Button appearance="tonal" disabled>
-        Button
-      </Button>
-      <Button appearance="outlined">Button</Button>
-      <Button appearance="outlined" dangerous>
-        Button
-      </Button>
-      <Button appearance="outlined" disabled>
-        Button
-      </Button>
-      <Button appearance="text">Button</Button>
-      <Button appearance="text" dangerous>
-        Button
-      </Button>
-      <Button appearance="text" disabled>
-        Button
-      </Button>
-    </Actions>
-    <Actions align="full">
-      <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
-        Add
-      </Button>
-      <Button
-        appearance="outlined"
-        icon={<MaterialIcon icon="delete" />}
-        dangerous
-      >
-        Delete
-      </Button>
-    </Actions>
-  </Section>
-);
+const ButtonsSection: FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    let loadingSim: NodeJS.Timeout;
+    if (loading) loadingSim = setTimeout(() => setLoading(false), 2000);
+    return () => {
+      if (loadingSim) clearTimeout(loadingSim);
+    };
+  }, [loading]);
+
+  return (
+    <Section>
+      <Header level={3}>Common Button</Header>
+      <Actions align="left">
+        <Button appearance="filled">Button</Button>
+        <Button appearance="filled" icon={<MaterialIcon icon="add" />}>
+          Button
+        </Button>
+        <Button appearance="filled" dangerous>
+          Button
+        </Button>
+        <Button appearance="filled" disabled>
+          Button
+        </Button>
+        <Button appearance="tonal">Button</Button>
+        <Button appearance="tonal" dangerous>
+          Button
+        </Button>
+        <Button appearance="tonal" disabled>
+          Button
+        </Button>
+        <Button appearance="outlined">Button</Button>
+        <Button appearance="outlined" dangerous>
+          Button
+        </Button>
+        <Button appearance="outlined" disabled>
+          Button
+        </Button>
+        <Button appearance="text">Button</Button>
+        <Button appearance="text" dangerous>
+          Button
+        </Button>
+        <Button appearance="text" disabled>
+          Button
+        </Button>
+      </Actions>
+      <Actions align="full">
+        <Button
+          appearance="filled"
+          icon={<MaterialIcon icon="add" />}
+          onClick={() => setLoading(true)}
+          loading={loading}
+        >
+          Add
+        </Button>
+        <Button
+          appearance="outlined"
+          icon={<MaterialIcon icon="delete" />}
+          dangerous
+        >
+          Delete
+        </Button>
+      </Actions>
+    </Section>
+  );
+};
 
 const SegmentedButtonSection: FC = () => {
   const [view, setView] = useState<"schedule" | "list">("schedule");
