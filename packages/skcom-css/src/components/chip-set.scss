@@ -1,0 +1,26 @@
+////
+/// **Chip Set**
+/// Chips are normally alongside each other. A Chip Set is a container for
+/// Chips, handling gaps, wrap, etc.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vu5fu2ylc51e SKCom documentation
+////
+
+// Base Chip Set
+.skc-chip-set {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+// Scrollable Chip Set
+.skc-chip-set__wrapper {
+  overflow-x: auto;
+
+  .skc-chip-set {
+    flex-wrap: nowrap;
+    width: fit-content;
+  }
+}

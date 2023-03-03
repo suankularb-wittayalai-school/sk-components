@@ -1,0 +1,95 @@
+////
+/// **Chip Field**
+/// A combination of Input Chips and a Text Field. Users can simply start
+/// typing into the Chip Field; their input is converted into an Input Chip on spacebar press.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-chip-field {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  height: 3.5rem;
+  border: 1px solid var(--outline);
+  border-radius: 0.25rem;
+
+  &:hover {
+    border-color: var(--on-surface);
+  }
+
+  &:focus-within {
+    border: 2px solid var(--primary);
+  }
+}
+
+.skc-chip-field__scrollable {
+  overflow-x: auto;
+}
+
+.skc-chip-field__content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: fit-content;
+  min-width: 100%;
+  column-gap: 0.5rem;
+  padding-inline: 0.75rem;
+}
+
+.skc-chip-field .skc-chip-set {
+  padding-block: 0.5rem;
+  flex-wrap: nowrap;
+
+  &:empty {
+    display: none;
+
+    & ~ .skc-chip-field__input {
+      padding-left: 0.25rem;
+
+      &::placeholder {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.skc-chip-field__label {
+  @include type.font("body-large");
+  font-family: var(--font-display);
+  position: absolute;
+  inset: 1rem auto auto 0.75rem;
+  background-color: var(--background);
+  z-index: 10;
+  padding-inline: 0.25rem;
+  pointer-events: none;
+  color: var(--on-surface-variant);
+
+  .skc-chip-field:focus-within & {
+    color: var(--primary);
+  }
+}
+
+.skc-chip-field__input {
+  @include type.font("body-large");
+  outline: none;
+  flex-grow: 1;
+  min-width: 1rem;
+  box-sizing: border-box;
+  border: none;
+  padding-block: 1rem;
+  background-color: transparent;
+
+  &::placeholder {
+    @include type.font("body-large");
+    font-family: var(--font-display);
+    color: var(--outline);
+    padding-left: 0.25rem;
+  }
+}

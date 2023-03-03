@@ -155,10 +155,7 @@ export function NavBarItem({
     else setClientHeight(80);
   }, []);
 
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef, {
-    useClientPos: true,
-    posCorrection: { x: 0, y: 80 - clientHeight },
-  });
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
 
   // Label ID for `aria-labelledby`
   const navID = `nav-section-${kebabify(

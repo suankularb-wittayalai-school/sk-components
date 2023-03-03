@@ -591,6 +591,132 @@ declare namespace Columns {
 }
 
 /**
+ * Props for {@link InputChip Input Chip}.
+ */
+interface InputChipProps extends SKComponent {
+    /**
+     * The text displayed inside the chip.
+     *
+     * - Must be a string or a JSX Element.
+     * - Always required.
+     */
+    children: string | JSX.Element;
+    /**
+     * An avatar is placed before all content in an Input Chip. A use case would
+     * be the profile picture of a user.
+     *
+     * - You are encouraged to use Avatar as the value for `avatar`.
+     * - Incompatible with `icon`.
+     * - Optional.
+     */
+    avatar?: JSX.Element;
+    /**
+     * An icon can appear before all content in an Input Chip. In a page with
+     * many chips, icons can quickly orient users.
+     *
+     * - You are encouraged to use {@link MaterialIcon Material Icons} as the
+     *   value for `icon`.
+     * - Incompatible with `avatar`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * If the Input Chip is selected. `avatar` is replaced with a checkmark if
+     * this is `true`.
+     *
+     * - Material Guidelines and the
+     *   {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
+     *   recommend selecting the Input Chip set to be deleted via backspace,
+     *   requiring another backspace to confirm.
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * An ID for transitioning to and from this Input Chip. See Framer Motion’s
+     * documentation on LayoutGroup for more details.
+     *
+     * - Must be unique within the page.
+     * - Optional.
+     */
+    layoutID?: any;
+    /**
+     * Triggers when the user click anywhere in the Input Chip except the delete button.
+     *
+     * - This is useful if there’s more information on the chip that can be
+     *   displayed on click,
+     *  {@link https://m3.material.io/components/chips/guidelines#4ebdaf13-08c1-4959-a481-1fc2be2fa1f2 as seen here}.
+     * - Optional.
+     */
+    onClick?: () => any;
+    /**
+     * Triggers when the user click the delete button.
+     *
+     * - Optional.
+     */
+    onDelete?: () => any;
+    /**
+     * If the Input Chip can be edited, clicking on it revert it back to the
+     * original text, which can be edited normally.
+     *
+     * - Optional.
+     */
+    editable?: boolean;
+    /**
+     * The value inside the field that appears after entering edit mode. This is
+     * useful if you want a controlled input.
+     *
+     * - Only available if `editable` is `true`.
+     * - Only functional after entering edit mode.
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: string;
+    /**
+     * This function triggers when the user make changes to the field value. The
+     * value is passed in via the function.
+     *
+     * - Only available if `editable` is `true`.
+     * - Only functional after entering edit mode.
+     * - Optional.
+     *
+     * @param value The value of the text field.
+     */
+    onChange?: (value: string) => any;
+    /**
+     * Triggers when the user exit edit mode.
+     *
+     * - Optional.
+     */
+    onEditExit?: () => any;
+}
+/**
+ * A Chip displaying a piece of information entered by the user is an Input
+ * Chip. This type of Chip can be added, edited, and deleted by the user.
+ *
+ * Like all Chips, an Input Chip appears alongside other Input Chips, but these
+ * can also appear inside a text field like in Chip Field.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
+ *
+ * @param children The text displayed inside the chip.
+ * @param avatar An avatar is placed before all content in an Input Chip.
+ * @param icon An icon can appear before all content in an Input Chip. In a page with many chips, icons can quickly orient users.
+ * @param selected If the Input Chip is selected. `avatar` is replaced with a checkmark if this is `true`.
+ * @param layoutID An ID for transitioning to and from this Input Chip.
+ * @param onClick Triggers when the user click anywhere in the Input Chip except the delete button.
+ * @param onDelete Triggers when the user click the delete button.
+ * @param editable If the Input Chip can be edited, clicking on it revert it back to the original text, which can be edited normally.
+ * @param value The value inside the field that appears after entering edit mode. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param onEditExit Triggers when the user exit edit mode.
+ */
+declare function InputChip({ children, avatar, icon, selected, layoutID, onClick, onDelete, editable, value, onChange, onEditExit, style, className, }: InputChipProps): JSX.Element;
+declare namespace InputChip {
+    var displayName: string;
+}
+
+/**
  * Props for {@link AssistChip}.
  */
 interface AssistChipProps extends SKComponent {
@@ -701,6 +827,138 @@ interface AssistChipProps extends SKComponent {
  */
 declare function AssistChip({ children, icon, tooltip, elevated, dangerous, loading, disabled, onClick, href, element: Element, style, className, }: AssistChipProps): JSX.Element;
 declare namespace AssistChip {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link ChipField Chip Field}.
+ */
+interface ChipFieldProps extends SKComponent {
+    /**
+     * The Input Chips that the user have already entered.
+     *
+     * - Must be a Chip Set with only Input Chips.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The placeholder text (if no placeholder specified or when not focused and
+     * no value) and the label text (when focused or has value).
+     *
+     * - Always required.
+     */
+    label: string | JSX.Element;
+    /**
+     * A description of the Chip Field for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Required if `label` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
+     * The value inside the field that is used to create Input Chips. This is
+     * useful if you want a controlled input.
+     *
+     * - Optional.
+     */
+    value?: string;
+    /**
+     * This function triggers when the user make changes to the field value. The value is passed in via the function.
+     *
+     * - Optional.
+     */
+    onChange?: (value: string) => any;
+    /**
+     * This function triggers when the user hits the spacebar while in the field.
+     *
+     * - The behavior expected to be implemented by the developer is that a new
+     *   Input Chip is created in the preceding Chip Set with the data passed
+     *   through this function.
+     * - Optional.
+     */
+    onNewEntry?: (value: string) => any;
+    /**
+     * This function triggers when the user hits backspace twice while in the field.
+     *
+     * - The behavior expected to be implemented by the developer is that the
+     *   last Chip in the preceding Chip Set should be removed.
+     * - Optional.
+     */
+    onDeleteLast?: () => any;
+    /**
+     * The field can have some faint text guiding the user about what to write to create an Input Chip. For example, a Chip Field for entering students into a class by student code could have a placeholder say “Enter student code.”
+     *
+     * - Optional.
+     */
+    placeholder?: string;
+    /**
+     * The field cannot be edited.
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Attributes for the underlying `<input>` element used as the field.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * A combination of Input Chips and a Text Field. Users can simply start typing
+ * into the Chip Field; their input is converted into an Input Chip on spacebar
+ * press.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
+ *
+ * @param children The Input Chips that the user have already entered.
+ * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
+ * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
+ * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value. The value is passed in via the function.
+ * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
+ * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
+ * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
+ * @param disabled The field cannot be edited.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
+ */
+declare function ChipField({ children, label, alt, value, onChange, onNewEntry, onDeleteLast, placeholder, disabled, inputAttr, style, className, }: ChipFieldProps): JSX.Element;
+declare namespace ChipField {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link ChipSet Chip Set}.
+ */
+interface ChipSetProps extends SKComponent {
+    /**
+     * Chips.
+     *
+     * - Must include ≥2 Chips.
+     * - Must be the same type of Chips.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If the parent element is not wide enough for all Chips to be visible, the
+     * Chip Set can be scrolled horizontally.
+     *
+     * - Optional.
+     */
+    scrollable?: boolean;
+}
+/**
+ * Chips are normally alongside each other. A Chip Set is a container for
+ * Chips, handling gaps, wrap, etc.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vu5fu2ylc51e SKCom documentation}
+ *
+ * @param children Chips.
+ * @param scrollable If the parent element is not wide enough for all Chips to be visible, the Chip Set can be scrolled horizontally.
+ */
+declare function ChipSet({ children, scrollable, style, className, }: ChipSetProps): JSX.Element;
+declare namespace ChipSet {
     var displayName: string;
 }
 
@@ -2201,4 +2459,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

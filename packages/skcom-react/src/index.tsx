@@ -18,7 +18,10 @@ export { CardContent, type CardContentProps } from "./components/CardContent";
 
 export { Columns, type ColumnsProps } from "./components/Columns";
 
+export { InputChip, type InputChipProps } from "./components/InputChip";
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
+export { ChipField, type ChipFieldProps } from "./components/ChipField";
+export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 
 export { Dialog, type DialogProps } from "./components/Dialog";
 export {

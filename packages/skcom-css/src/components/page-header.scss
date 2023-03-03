@@ -157,6 +157,10 @@
 @include mix.breakpoint("sm") {
   .skc-page-header {
     padding: 2.75rem 1.5rem 2rem;
+
+    + .skc-progress {
+      margin-left: 5rem;
+    }
   }
 
   .skc-page-header__content {
