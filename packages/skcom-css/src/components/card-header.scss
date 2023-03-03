@@ -25,11 +25,13 @@
 
 .skc-card-header__title {
   @include type.font("title-medium");
+  margin-block: 0;
 }
 
 .skc-card-header__subtitle {
   @include type.font("body-medium");
   font-family: var(--font-display);
+  margin-block: 0;
 }
 
 .skc-card-header__overflow {
