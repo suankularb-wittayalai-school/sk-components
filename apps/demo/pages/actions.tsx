@@ -6,10 +6,12 @@ import { FC, useEffect, useState } from "react";
 import {
   Actions,
   AssistChip,
+  Avatar,
   Button,
   ContentLayout,
   FAB,
   Header,
+  InputChip,
   MaterialIcon,
   Section,
   SegmentedButton,
@@ -207,41 +209,72 @@ const FABsSection: FC = () => (
   </Section>
 );
 
-const AssistChipsSection: FC = () => (
-  <Section>
-    <Header>Assist Chip</Header>
-    <div className="flex flex-row flex-wrap items-start gap-2">
-      <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
-        Turn on lights
-      </AssistChip>
-      <AssistChip icon={<MaterialIcon icon="block" />} dangerous>
-        Block number
-      </AssistChip>
-      <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
-        Turn on lights
-      </AssistChip>
-    </div>
-    <div
-      className="flex flex-row flex-wrap place-content-center gap-2
-        rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4"
-    >
-      <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
-        Turn on lights
-      </AssistChip>
-      <AssistChip icon={<MaterialIcon icon="block" />} elevated dangerous>
-        Block number
-      </AssistChip>
-      <AssistChip
-        icon={<MaterialIcon icon="lightbulb" />}
-        elevated
-        dangerous
-        disabled
-      >
-        Turn on lights
-      </AssistChip>
-    </div>
-  </Section>
-);
+const ChipsSection: FC = () => {
+  const [chipValue, setChipValue] = useState<string>("siravit@yahoo.com");
+
+  return (
+    <Section>
+      <Header>Chips</Header>
+      <Section>
+        <Header level={3}>Input Chip</Header>
+        <div className="flex flex-row flex-wrap items-start gap-2">
+          <InputChip onClick={() => {}}>Siravit Phokeed</InputChip>
+          <InputChip onDelete={() => {}}>Siravit Phokeed</InputChip>
+          <InputChip selected onDelete={() => {}}>
+            Siravit Phokeed
+          </InputChip>
+          <InputChip
+            avatar={<Avatar />}
+            editable
+            value={chipValue}
+            onChange={setChipValue}
+          >
+            Siravit Phokeed
+          </InputChip>
+          <InputChip avatar={<Avatar />} onDelete={() => {}}>
+            Siravit Phokeed
+          </InputChip>
+          <InputChip avatar={<Avatar />} selected onDelete={() => {}}>
+            Siravit Phokeed
+          </InputChip>
+        </div>
+      </Section>
+      <Section>
+        <Header level={3}>Assist Chip</Header>
+        <div className="flex flex-row flex-wrap items-start gap-2">
+          <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
+            Turn on lights
+          </AssistChip>
+          <AssistChip icon={<MaterialIcon icon="block" />} dangerous>
+            Block number
+          </AssistChip>
+          <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
+            Turn on lights
+          </AssistChip>
+        </div>
+        <div
+          className="flex flex-row flex-wrap place-content-center gap-2
+          rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4"
+        >
+          <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
+            Turn on lights
+          </AssistChip>
+          <AssistChip icon={<MaterialIcon icon="block" />} elevated dangerous>
+            Block number
+          </AssistChip>
+          <AssistChip
+            icon={<MaterialIcon icon="lightbulb" />}
+            elevated
+            dangerous
+            disabled
+          >
+            Turn on lights
+          </AssistChip>
+        </div>
+      </Section>
+    </Section>
+  );
+};
 
 const ActionsPage: CustomPage = () => {
   return (
@@ -257,7 +290,7 @@ const ActionsPage: CustomPage = () => {
           <ToggleButtonsSection />
           <FABsSection />
         </Section>
-        <AssistChipsSection />
+        <ChipsSection />
       </ContentLayout>
     </>
   );

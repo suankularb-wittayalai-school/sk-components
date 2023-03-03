@@ -591,6 +591,132 @@ declare namespace Columns {
 }
 
 /**
+ * Props for {@link InputChip Input Chip}.
+ */
+interface InputChipProps extends SKComponent {
+    /**
+     * The text displayed inside the chip.
+     *
+     * - Must be a string or a JSX Element.
+     * - Always required.
+     */
+    children: string | JSX.Element;
+    /**
+     * An avatar is placed before all content in an Input Chip. A use case would
+     * be the profile picture of a user.
+     *
+     * - You are encouraged to use Avatar as the value for `avatar`.
+     * - Incompatible with `icon`.
+     * - Optional.
+     */
+    avatar?: JSX.Element;
+    /**
+     * An icon can appear before all content in an Input Chip. In a page with
+     * many chips, icons can quickly orient users.
+     *
+     * - You are encouraged to use {@link MaterialIcon Material Icons} as the
+     *   value for `icon`.
+     * - Incompatible with `avatar`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * If the Input Chip is selected. `avatar` is replaced with a checkmark if
+     * this is `true`.
+     *
+     * - Material Guidelines and the
+     *   {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
+     *   recommend selecting the Input Chip set to be deleted via backspace,
+     *   requiring another backspace to confirm.
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * An ID for transitioning to and from this Input Chip. See Framer Motion’s
+     * documentation on LayoutGroup for more details.
+     *
+     * - Must be unique within the page.
+     * - Optional.
+     */
+    layoutID?: any;
+    /**
+     * Triggers when the user click anywhere in the Input Chip except the delete button.
+     *
+     * - This is useful if there’s more information on the chip that can be
+     *   displayed on click,
+     *  {@link https://m3.material.io/components/chips/guidelines#4ebdaf13-08c1-4959-a481-1fc2be2fa1f2 as seen here}.
+     * - Optional.
+     */
+    onClick?: () => any;
+    /**
+     * Triggers when the user click the delete button.
+     *
+     * - Optional.
+     */
+    onDelete?: () => any;
+    /**
+     * If the Input Chip can be edited, clicking on it revert it back to the
+     * original text, which can be edited normally.
+     *
+     * - Optional.
+     */
+    editable?: boolean;
+    /**
+     * The value inside the field that appears after entering edit mode. This is
+     * useful if you want a controlled input.
+     *
+     * - Only available if `editable` is `true`.
+     * - Only functional after entering edit mode.
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: string;
+    /**
+     * This function triggers when the user make changes to the field value. The
+     * value is passed in via the function.
+     *
+     * - Only available if `editable` is `true`.
+     * - Only functional after entering edit mode.
+     * - Optional.
+     *
+     * @param value The value of the text field.
+     */
+    onChange?: (value: string) => any;
+    /**
+     * Triggers when the user exit edit mode.
+     *
+     * - Optional.
+     */
+    onEditExit?: () => any;
+}
+/**
+ * A Chip displaying a piece of information entered by the user is an Input
+ * Chip. This type of Chip can be added, edited, and deleted by the user.
+ *
+ * Like all Chips, an Input Chip appears alongside other Input Chips, but these
+ * can also appear inside a text field like in Chip Field.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
+ *
+ * @param children The text displayed inside the chip.
+ * @param avatar An avatar is placed before all content in an Input Chip.
+ * @param icon An icon can appear before all content in an Input Chip. In a page with many chips, icons can quickly orient users.
+ * @param selected If the Input Chip is selected. `avatar` is replaced with a checkmark if this is `true`.
+ * @param layoutID An ID for transitioning to and from this Input Chip.
+ * @param onClick Triggers when the user click anywhere in the Input Chip except the delete button.
+ * @param onDelete Triggers when the user click the delete button.
+ * @param editable If the Input Chip can be edited, clicking on it revert it back to the original text, which can be edited normally.
+ * @param value The value inside the field that appears after entering edit mode. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param onEditExit Triggers when the user exit edit mode.
+ */
+declare function InputChip({ children, avatar, icon, selected, layoutID, onClick, onDelete, editable, value, onChange, onEditExit, style, className, }: InputChipProps): JSX.Element;
+declare namespace InputChip {
+    var displayName: string;
+}
+
+/**
  * Props for {@link AssistChip}.
  */
 interface AssistChipProps extends SKComponent {
@@ -2201,4 +2327,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
