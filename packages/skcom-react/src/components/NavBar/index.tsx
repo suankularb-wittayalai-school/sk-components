@@ -13,6 +13,7 @@ import "@suankularb-components/css/dist/css/components/nav-bar.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { useBreakpoint } from "../../utils/window";
 
 /**
  * Props for {@link NavBar Navigation Bar}.
@@ -95,6 +96,18 @@ export function NavBar({
   style,
   className,
 }: NavBarProps) {
+  const { atBreakpoint } = useBreakpoint();
+  const navRailFab = React.Children.map(fab, (child) => {
+    if ((child as JSX.Element).type?.displayName === "FAB") {
+      return React.cloneElement(child as JSX.Element, {
+        children: undefined,
+        size: "standard",
+        stateOnScroll: undefined,
+      });
+    }
+    return child;
+  });
+
   return (
     <nav style={style} className={cn(["skc-nav-bar", className])}>
       <div className="skc-nav-bar__main">
@@ -106,7 +119,7 @@ export function NavBar({
             onClick={onNavToggle}
           />
           <div className="skc-nav-bar__brand">{brand}</div>
-          {fab}
+          {atBreakpoint === "base" ? fab : navRailFab}
         </section>
         <section className="skc-nav-bar__destinations">{children}</section>
       </div>

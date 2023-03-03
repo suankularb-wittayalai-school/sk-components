@@ -96,24 +96,6 @@
 
     .skc-fab {
       box-shadow: none;
-
-      &.skc-fab--small,
-      &.skc-fab--large {
-        padding: 1rem;
-        border-radius: var(--rounded-xl);
-      }
-    }
-
-    .skc-fab__wrapper,
-    .skc-fab.skc-fab--large {
-      .skc-fab__icon .skc-icon {
-        @include mix.transition(
-          font-size font-variation-settings,
-          var(--motion-short-4),
-          var(--easing-standard)
-        );
-        @include ci.icon(0, 400, 0, 24);
-      }
     }
   }
 
