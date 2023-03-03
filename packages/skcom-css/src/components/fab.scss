@@ -37,6 +37,14 @@
   }
 }
 
+.skc-fab__wrapper {
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+  background-color: transparent;
+}
+
 // Hover effect on state layer
 .skc-fab__wrapper:hover .skc-fab,
 .skc-fab:hover {
