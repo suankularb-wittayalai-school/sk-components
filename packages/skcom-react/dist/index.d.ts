@@ -831,6 +831,87 @@ declare namespace AssistChip {
 }
 
 /**
+ * Props for {@link ChipField Chip Field}.
+ */
+interface ChipFieldProps extends SKComponent {
+    /**
+     * The Input Chips that the user have already entered.
+     *
+     * - Must be a Chip Set with only Input Chips.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The value inside the field that is used to create Input Chips. This is
+     * useful if you want a controlled input.
+     *
+     * - Optional.
+     */
+    value?: string;
+    /**
+     * This function triggers when the user make changes to the field value. The value is passed in via the function.
+     *
+     * - Optional.
+     */
+    onChange?: (value: string) => any;
+    /**
+     * This function triggers when the user hits the spacebar while in the field.
+     *
+     * - The behavior expected to be implemented by the developer is that a new
+     *   Input Chip is created in the preceding Chip Set with the data passed
+     *   through this function.
+     * - Optional.
+     */
+    onNewEntry?: (value: string) => any;
+    /**
+     * This function triggers when the user hits backspace twice while in the field.
+     *
+     * - The behavior expected to be implemented by the developer is that the
+     *   last Chip in the preceding Chip Set should be removed.
+     * - Optional.
+     */
+    onDeleteLast?: () => any;
+    /**
+     * The field can have some faint text guiding the user about what to write to create an Input Chip. For example, a Chip Field for entering students into a class by student code could have a placeholder say “Enter student code.”
+     *
+     * - Optional.
+     */
+    placeholder?: string | JSX.Element;
+    /**
+     * The field cannot be edited.
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Attributes for the underlying `<input>` element used as the field.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * A combination of Input Chips and a Text Field. Users can simply start typing
+ * into the Chip Field; their input is converted into an Input Chip on spacebar
+ * press.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
+ *
+ * @param children The Input Chips that the user have already entered.
+ * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value. The value is passed in via the function.
+ * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
+ * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
+ * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
+ * @param disabled The field cannot be edited.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
+ */
+declare function ChipField({ children, value, onChange, onNewEntry, onDeleteLast, placeholder, disabled, inputAttr, style, className, }: ChipFieldProps): JSX.Element;
+declare namespace ChipField {
+    var displayName: string;
+}
+
+/**
  * Props for {@link ChipSet Chip Set}.
  */
 interface ChipSetProps extends SKComponent {
@@ -2361,4 +2442,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

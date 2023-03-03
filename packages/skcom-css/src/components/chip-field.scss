@@ -1,0 +1,57 @@
+////
+/// **Chip Field**
+/// A combination of Input Chips and a Text Field. Users can simply start
+/// typing into the Chip Field; their input is converted into an Input Chip on spacebar press.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-chip-field {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 3.5rem;
+  border: 1px solid var(--outline);
+  border-radius: 0.25rem;
+
+  &:hover {
+    border-color: var(--on-surface);
+  }
+
+  &:focus-within {
+    // margin: -1px;
+    border: 2px solid var(--primary);
+  }
+}
+
+.skc-chip-field .skc-chip-set {
+  padding-left: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+.skc-chip-field__label {
+  @include type.font("label-small");
+  font-family: var(--font-display);
+  position: absolute;
+  inset: -0.5rem auto auto 0.75rem;
+  background-color: var(--background);
+}
+
+.skc-chip-field__input {
+  outline: none;
+  flex-grow: 1;
+  min-width: 5rem;
+  box-sizing: border-box;
+  border: none;
+  padding: 1rem;
+  background-color: transparent;
+}

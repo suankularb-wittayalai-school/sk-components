@@ -4,9 +4,12 @@ import { FC, useEffect, useState } from "react";
 
 // SK Components
 import {
+  ChipField,
+  ChipSet,
   Columns,
   ContentLayout,
   Header,
+  InputChip,
   MaterialIcon,
   Section,
   Switch,
@@ -15,6 +18,29 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+
+const ChipFieldSection: FC = () => {
+  const [value, setValue] = useState<string>("");
+  const [classes, setClasses] = useState<number[]>([501, 502, 504]);
+
+  return (
+    <Section>
+      <Header>Chip Field</Header>
+      <ChipField
+        value={value}
+        onChange={setValue}
+        onNewEntry={(value) => console.log({ newEntry: value })}
+        onDeleteLast={() => setClasses(classes.slice(0, -1))}
+      >
+        <ChipSet scrollable>
+          {classes.map((classItem) => (
+            <InputChip key={classItem}>{`M.${classItem}`}</InputChip>
+          ))}
+        </ChipSet>
+      </ChipField>
+    </Section>
+  );
+};
 
 const TextFieldSection: FC = () => {
   const [name, setName] = useState<string>("");
@@ -150,6 +176,7 @@ const InputPage: CustomPage = () => (
       <title>Input - SK Components</title>
     </Head>
     <ContentLayout>
+      <ChipFieldSection />
       <TextFieldSection />
       <SwitchSection />
     </ContentLayout>
