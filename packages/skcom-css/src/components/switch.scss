@@ -28,8 +28,8 @@
   height: 2rem;
   border: 2px solid var(--outline);
   border-radius: var(--rounded-full);
-  background-color: var(--surface-variant);
   outline: none;
+  background-color: var(--surface-variant);
   -webkit-tap-highlight-color: transparent;
 
   &:not([aria-disabled="true"]) {
@@ -53,8 +53,8 @@
     cursor: default;
     opacity: 0.38;
     color: var(--on-surface);
-    background-color: transparent;
     border-color: transparent;
+    background-color: transparent;
 
     &::before {
       @include mix.state-layer();
@@ -104,16 +104,16 @@
   &[aria-disabled="true"] {
     cursor: default;
     opacity: 0.12;
-    background-color: var(--on-surface);
     border-color: var(--on-surface);
+    background-color: var(--on-surface);
 
     &::before {
-      display: none
+      display: none;
     }
 
     > .skc-switch__handle {
-      background-color: var(--surface);
       color: var(--on-surface);
+      background-color: var(--surface);
     }
   }
 }
