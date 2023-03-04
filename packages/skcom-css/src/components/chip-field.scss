@@ -37,15 +37,15 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  column-gap: 0.5rem;
   width: fit-content;
   min-width: 100%;
-  column-gap: 0.5rem;
   padding-inline: 0.75rem;
 }
 
 .skc-chip-field .skc-chip-set {
-  padding-block: 0.5rem;
   flex-wrap: nowrap;
+  padding-block: 0.5rem;
 
   &:empty {
     display: none;
@@ -64,12 +64,12 @@
   @include type.font("body-large");
   font-family: var(--font-display);
   position: absolute;
-  inset: 1rem auto auto 0.75rem;
-  background-color: var(--background);
   z-index: 10;
+  inset: 1rem auto auto 0.75rem;
   padding-inline: 0.25rem;
   pointer-events: none;
   color: var(--on-surface-variant);
+  background-color: var(--background);
 
   .skc-chip-field:focus-within & {
     color: var(--primary);
@@ -78,18 +78,18 @@
 
 .skc-chip-field__input {
   @include type.font("body-large");
-  outline: none;
   flex-grow: 1;
-  min-width: 1rem;
   box-sizing: border-box;
-  border: none;
+  min-width: 1rem;
   padding-block: 1rem;
+  border: none;
+  outline: none;
   background-color: transparent;
 
   &::placeholder {
     @include type.font("body-large");
     font-family: var(--font-display);
-    color: var(--outline);
     padding-left: 0.25rem;
+    color: var(--outline);
   }
 }
