@@ -19,12 +19,17 @@
   }
 
   &:not(.skc-radio--disabled) {
-    &:hover::before {
-      opacity: 0.08;
+    &:hover,
+    .skc-form-item:hover & {
+      &::before {
+        opacity: 0.08;
+      }
     }
 
     &:focus-within,
-    &:active {
+    &:active,
+    .skc-form-item:focus-within &,
+    .skc-form-item:active & {
       &::before {
         opacity: 0.12;
       }
