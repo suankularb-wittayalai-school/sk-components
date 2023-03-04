@@ -919,19 +919,21 @@ import { jsx as jsx15 } from "react/jsx-runtime";
 function ChipSet({
   children,
   scrollable,
+  divAttr,
   style,
   className
 }) {
   return /* @__PURE__ */ jsx15(
     "div",
-    {
+    __spreadProps(__spreadValues({
       style,
       className: cn([
         scrollable ? "skc-chip-set__wrapper" : "skc-chip-set",
         className
-      ]),
-      children: scrollable ? /* @__PURE__ */ jsx15("div", { className: "skc-chip-set", children }) : children
-    }
+      ])
+    }, !scrollable ? divAttr : null), {
+      children: scrollable ? /* @__PURE__ */ jsx15("div", __spreadProps(__spreadValues({ className: "skc-chip-set" }, scrollable ? divAttr : null), { children })) : children
+    })
   );
 }
 ChipSet.displayName = "ChipSet";
@@ -1061,20 +1063,27 @@ function ChipField({
       }
     ),
     /* @__PURE__ */ jsx16("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ jsxs9("div", { className: "skc-chip-field__content", children: [
-      lastSelected ? (
-        // Modify the Chip Set so that the last Chip is displayed as
-        // selected
-        /* @__PURE__ */ jsx16(ChipSet, { children: React9.Children.map(
-          React9.Children.only(children).props.children,
-          (child, idx) => {
-            if (idx === noOfChips - 1)
-              return React9.cloneElement(child, {
-                selected: true
-              });
-            return child;
-          }
-        ) })
-      ) : children,
+      /* @__PURE__ */ jsx16(
+        ChipSet,
+        {
+          divAttr: {
+            "aria-live": "polite",
+            "aria-relevant": "all"
+          },
+          children: React9.Children.map(
+            React9.Children.only(children).props.children,
+            (child, idx) => {
+              if (!lastSelected)
+                return child;
+              if (idx === noOfChips - 1)
+                return React9.cloneElement(child, {
+                  selected: true
+                });
+              return child;
+            }
+          )
+        }
+      ),
       /* @__PURE__ */ jsx16(
         "input",
         __spreadValues({

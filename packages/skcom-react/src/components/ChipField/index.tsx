@@ -288,24 +288,26 @@ export function ChipField({
       <div className="skc-chip-field__scrollable">
         <div className="skc-chip-field__content">
           {/* Chip Set */}
-          {lastSelected ? (
-            // Modify the Chip Set so that the last Chip is displayed as
-            // selected
-            <ChipSet>
-              {React.Children.map(
-                (React.Children.only(children) as JSX.Element).props.children,
-                (child, idx) => {
-                  if (idx === noOfChips - 1)
-                    return React.cloneElement(child as JSX.Element, {
-                      selected: true,
-                    });
-                  return child;
-                }
-              )}
-            </ChipSet>
-          ) : (
-            children
-          )}
+
+          <ChipSet
+            divAttr={{
+              "aria-live": "polite",
+              "aria-relevant": "all",
+            }}
+          >
+            {React.Children.map(
+              (React.Children.only(children) as JSX.Element).props.children,
+              (child, idx) => {
+                if (!lastSelected) return child;
+
+                if (idx === noOfChips - 1)
+                  return React.cloneElement(child as JSX.Element, {
+                    selected: true,
+                  });
+                return child;
+              }
+            )}
+          </ChipSet>
 
           {/* Input */}
           <input

@@ -1006,6 +1006,12 @@ interface ChipSetProps extends SKComponent {
      * - Optional.
      */
     scrollable?: boolean;
+    /**
+     * Attributes for the underlying `<div>` element used as the field.
+     *
+     * - Optional.
+     */
+    divAttr?: JSX.IntrinsicElements["div"];
 }
 /**
  * Chips are normally alongside each other. A Chip Set is a container for
@@ -1015,8 +1021,9 @@ interface ChipSetProps extends SKComponent {
  *
  * @param children Chips.
  * @param scrollable If the parent element is not wide enough for all Chips to be visible, the Chip Set can be scrolled horizontally.
+ * @param divAttr Attributes for the underlying `<div>` element used as the field.
  */
-declare function ChipSet({ children, scrollable, style, className, }: ChipSetProps): JSX.Element;
+declare function ChipSet({ children, scrollable, divAttr, style, className, }: ChipSetProps): JSX.Element;
 declare namespace ChipSet {
     var displayName: string;
 }
