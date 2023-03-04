@@ -745,7 +745,7 @@ var import_framer_motion6 = require("framer-motion");
 var React6 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/checkbox.css
-styleInject('.skc-checkbox {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox::before {\n  background-color: var(--on-surface);\n}\n.skc-checkbox:hover::before {\n  opacity: .08;\n}\n.skc-checkbox:focus-within::before,\n.skc-checkbox:active::before {\n  opacity: .12;\n}\n.skc-checkbox::before,\n.skc-checkbox__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-checkbox__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-checkbox__box {\n  transition: background-color var(--motion-short-2) var(--easing-standard), transform var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: var(--rounded-sm);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox:active .skc-checkbox__box {\n  transform: scale(0.9);\n}\n.skc-checkbox__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-checkbox__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-checkbox:has(.skc-checkbox__input:checked)::before,\n.skc-checkbox:has(.skc-checkbox__input:checked) .skc-checkbox__ripple,\n.skc-checkbox--indeterminate::before,\n.skc-checkbox--indeterminate .skc-checkbox__ripple {\n  background-color: var(--primary);\n}\n.skc-checkbox__input:checked ~ .skc-checkbox__box,\n.skc-checkbox--indeterminate .skc-checkbox__box {\n  border-color: var(--primary);\n  background-color: var(--primary);\n}\n.skc-checkbox__icon {\n  color: var(--on-primary);\n}\n');
+styleInject('.skc-checkbox {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox::before {\n  background-color: var(--on-surface);\n}\n.skc-checkbox:not(.skc-checkbox--disabled):hover::before {\n  opacity: .08;\n}\n.skc-checkbox:not(.skc-checkbox--disabled):focus-within::before,\n.skc-checkbox:not(.skc-checkbox--disabled):active::before {\n  opacity: .12;\n}\n.skc-checkbox::before,\n.skc-checkbox__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-checkbox__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-checkbox__box {\n  transition: background-color var(--motion-short-2) var(--easing-standard), transform var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: var(--rounded-sm);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox:active .skc-checkbox__box {\n  transform: scale(0.9);\n}\n.skc-checkbox__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-checkbox__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-checkbox:has(.skc-checkbox__input:checked)::before,\n.skc-checkbox:has(.skc-checkbox__input:checked) .skc-checkbox__ripple,\n.skc-checkbox--selected::before,\n.skc-checkbox--selected .skc-checkbox__ripple,\n.skc-checkbox--indeterminate::before,\n.skc-checkbox--indeterminate .skc-checkbox__ripple {\n  background-color: var(--primary);\n}\n.skc-checkbox__input:checked ~ .skc-checkbox__box,\n.skc-checkbox--selected .skc-checkbox__box,\n.skc-checkbox--indeterminate .skc-checkbox__box {\n  border-color: var(--primary);\n  background-color: var(--primary);\n}\n.skc-checkbox__icon {\n  color: var(--on-primary);\n}\n.skc-checkbox--disabled {\n  opacity: .38;\n}\n.skc-checkbox--disabled .skc-checkbox__box {\n  cursor: default;\n}\n.skc-checkbox--disabled:active .skc-checkbox__box {\n  transform: scale(1);\n}\n.skc-checkbox--disabled .skc-checkbox__icon {\n  color: var(--surface);\n}\n.skc-checkbox--disabled .skc-checkbox__ripple {\n  display: none;\n}\n.skc-checkbox--disabled .skc-checkbox__input:checked ~ .skc-checkbox__box,\n.skc-checkbox--disabled.skc-checkbox--selected .skc-checkbox__box {\n  background-color: var(--on-surface);\n  border-color: var(--on-surface);\n}\n');
 
 // src/components/Checkbox/index.tsx
 var import_jsx_runtime12 = require("react/jsx-runtime");
@@ -766,6 +766,7 @@ function Checkbox({
       style,
       className: cn([
         "skc-checkbox",
+        value === true && "skc-checkbox--selected",
         value === null && tristate && "skc-checkbox--indeterminate",
         disabled && "skc-checkbox--disabled",
         className
@@ -779,7 +780,15 @@ function Checkbox({
             className: "skc-checkbox__input",
             type: "checkbox",
             value: value ? "true" : "false",
-            onChange: (event) => onChange && !disabled && onChange(event.target.checked)
+            onChange: (event) => {
+              const { checked } = event.target;
+              if (disabled) {
+                setTimeout(() => event.target.checked = !checked, 0);
+                return;
+              }
+              if (onChange)
+                onChange(checked);
+            }
           }, inputAttr)
         ),
         /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),

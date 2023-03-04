@@ -93,6 +93,7 @@ export function Checkbox({
       style={style}
       className={cn([
         "skc-checkbox",
+        value === true && "skc-checkbox--selected",
         value === null && tristate && "skc-checkbox--indeterminate",
         disabled && "skc-checkbox--disabled",
         className,
@@ -105,9 +106,21 @@ export function Checkbox({
         className="skc-checkbox__input"
         type="checkbox"
         value={value ? "true" : "false"}
-        onChange={(event) =>
-          onChange && !disabled && onChange(event.target.checked)
-        }
+        onChange={(event) => {
+          const { checked } = event.target;
+
+          // (@SiravitPhokeed)
+          // Since we’re not using the `disabled` attribute, we cannot prevent
+          // changing the state of the Checkbox completely. To solve this, we’ll
+          // switch the `checked` state back to what it was before right after
+          // it was changed.
+          if (disabled) {
+            setTimeout(() => (event.target.checked = !checked), 0);
+            return;
+          }
+
+          if (onChange) onChange(checked);
+        }}
         {...inputAttr}
       />
 

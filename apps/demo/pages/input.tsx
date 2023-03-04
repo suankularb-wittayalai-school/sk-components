@@ -27,12 +27,16 @@ const CheckboxSection: FC = () => {
   return (
     <Section>
       <Header>Checkbox</Header>
-      <Checkbox value={checked} onChange={setChecked} />
-      <Checkbox
-        value={tristateChecked}
-        onChange={setTristateChecked}
-        tristate
-      />
+      <div className="flex flex-row flex-wrap gap-4">
+        <Checkbox value={checked} onChange={setChecked} />
+        <Checkbox
+          value={tristateChecked}
+          onChange={setTristateChecked}
+          tristate
+        />
+        <Checkbox value={false} disabled />
+        <Checkbox value={true} disabled />
+      </div>
     </Section>
   );
 };

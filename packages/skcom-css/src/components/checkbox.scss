@@ -1,5 +1,5 @@
 ////
-/// **Dialog Content**
+/// **Checkbox**
 /// A choice from a multi-select set of choices. When alone, a Checkbox is
 /// usually used for acknowledgement of or agreement to something, like a
 /// terms and conditions.
@@ -9,6 +9,7 @@
 
 @use "../abstracts/mixins.scss" as mix;
 
+// Checkbox
 .skc-checkbox {
   position: relative;
   width: fit-content;
@@ -18,14 +19,16 @@
     background-color: var(--on-surface);
   }
 
-  &:hover::before {
-    opacity: 0.08;
-  }
+  &:not(.skc-checkbox--disabled) {
+    &:hover::before {
+      opacity: 0.08;
+    }
 
-  &:focus-within,
-  &:active {
-    &::before {
-      opacity: 0.12;
+    &:focus-within,
+    &:active {
+      &::before {
+        opacity: 0.12;
+      }
     }
   }
 }
@@ -82,6 +85,7 @@
 
 // Checked/indeterminate state
 .skc-checkbox:has(.skc-checkbox__input:checked),
+.skc-checkbox--selected,
 .skc-checkbox--indeterminate {
   &::before,
   .skc-checkbox__ripple {
@@ -91,6 +95,7 @@
 
 .skc-checkbox__box {
   .skc-checkbox__input:checked ~ &,
+  .skc-checkbox--selected &,
   .skc-checkbox--indeterminate & {
     border-color: var(--primary);
     background-color: var(--primary);
@@ -99,4 +104,37 @@
 
 .skc-checkbox__icon {
   color: var(--on-primary);
+}
+
+// Disabled state
+
+// (@SiravitPhokeed)
+// We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
+// attribute is on the underlying `<input>`, not `.skc-checkbox`, which makes
+// using it in this case a pain in the hindquarters.
+.skc-checkbox--disabled {
+  opacity: 0.38;
+
+  .skc-checkbox__box {
+    cursor: default;
+  }
+
+  &:active .skc-checkbox__box {
+    transform: scale(1);
+  }
+
+  .skc-checkbox__icon {
+    color: var(--surface);
+  }
+
+  .skc-checkbox__ripple {
+    display: none;
+  }
+
+  // Disabled selected
+  .skc-checkbox__input:checked ~ .skc-checkbox__box,
+  &.skc-checkbox--selected .skc-checkbox__box {
+    background-color: var(--on-surface);
+    border-color: var(--on-surface);
+  }
 }
