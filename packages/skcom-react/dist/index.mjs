@@ -715,16 +715,24 @@ function Checkbox({
             onChange: (event) => onChange && !disabled && onChange(event.target.checked)
           }, inputAttr)
         ),
-        /* @__PURE__ */ jsx12("div", { className: "skc-checkbox__box", children: /* @__PURE__ */ jsx12("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ jsx12(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ jsx12(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
-        /* @__PURE__ */ jsx12("div", { ref: rippleParentRef, className: "skc-checkbox__ripple-parent", children: /* @__PURE__ */ jsx12(
-          motion6.span,
+        /* @__PURE__ */ jsx12("div", { "aria-hidden": true, className: "skc-checkbox__box", children: /* @__PURE__ */ jsx12("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ jsx12(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ jsx12(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
+        /* @__PURE__ */ jsx12(
+          "div",
           {
-            initial: { scale: 0, opacity: 0.36 },
-            animate: rippleControls,
-            className: "skc-checkbox__ripple",
-            style: rippleStyle
+            ref: rippleParentRef,
+            "aria-hidden": true,
+            className: "skc-checkbox__ripple-parent",
+            children: /* @__PURE__ */ jsx12(
+              motion6.span,
+              {
+                initial: { scale: 0, opacity: 0.36 },
+                animate: rippleControls,
+                className: "skc-checkbox__ripple",
+                style: rippleStyle
+              }
+            )
           }
-        ) })
+        )
       ]
     })
   );

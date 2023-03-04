@@ -115,8 +115,8 @@ export function Checkbox({
         {...inputAttr}
       />
 
-      {/* Visivle checkbox */}
-      <div className="skc-checkbox__box">
+      {/* Visible checkbox */}
+      <div aria-hidden className="skc-checkbox__box">
         <div className="skc-checkbox__icon">
           {value === true ? (
             <MaterialIcon icon="check_small" />
@@ -128,7 +128,11 @@ export function Checkbox({
       </div>
 
       {/* Ripple */}
-      <div ref={rippleParentRef} className="skc-checkbox__ripple-parent">
+      <div
+        ref={rippleParentRef}
+        aria-hidden
+        className="skc-checkbox__ripple-parent"
+      >
         <motion.span
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}

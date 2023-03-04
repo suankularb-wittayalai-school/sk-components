@@ -134,7 +134,7 @@
   // Disabled selected
   .skc-checkbox__input:checked ~ .skc-checkbox__box,
   &.skc-checkbox--selected .skc-checkbox__box {
-    background-color: var(--on-surface);
     border-color: var(--on-surface);
+    background-color: var(--on-surface);
   }
 }

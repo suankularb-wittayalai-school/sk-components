@@ -785,16 +785,24 @@ function Checkbox({
             onChange: (event) => onChange && !disabled && onChange(event.target.checked)
           }, inputAttr)
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { ref: rippleParentRef, className: "skc-checkbox__ripple-parent", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
-          import_framer_motion6.motion.span,
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { "aria-hidden": true, className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          "div",
           {
-            initial: { scale: 0, opacity: 0.36 },
-            animate: rippleControls,
-            className: "skc-checkbox__ripple",
-            style: rippleStyle
+            ref: rippleParentRef,
+            "aria-hidden": true,
+            className: "skc-checkbox__ripple-parent",
+            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              import_framer_motion6.motion.span,
+              {
+                initial: { scale: 0, opacity: 0.36 },
+                animate: rippleControls,
+                className: "skc-checkbox__ripple",
+                style: rippleStyle
+              }
+            )
           }
-        ) })
+        )
       ]
     })
   );
