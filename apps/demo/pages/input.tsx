@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 
 // SK Components
 import {
+  Checkbox,
   ChipField,
   ChipSet,
   Columns,
@@ -18,6 +19,23 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+
+const CheckboxSection: FC = () => {
+  const [checked, setChecked] = useState<boolean>(false);
+  const [tristateChecked, setTristateChecked] = useState<boolean | null>(null);
+
+  return (
+    <Section>
+      <Header>Checkbox</Header>
+      <Checkbox value={checked} onChange={setChecked} />
+      <Checkbox
+        value={tristateChecked}
+        onChange={setTristateChecked}
+        tristate
+      />
+    </Section>
+  );
+};
 
 const ChipFieldSection: FC = () => {
   const [value, setValue] = useState<string>("");
@@ -188,6 +206,7 @@ const InputPage: CustomPage = () => (
       <title>Input - SK Components</title>
     </Head>
     <ContentLayout>
+      <CheckboxSection />
       <ChipFieldSection />
       <TextFieldSection />
       <SwitchSection />

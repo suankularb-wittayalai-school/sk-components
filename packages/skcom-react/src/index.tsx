@@ -18,6 +18,8 @@ export { CardContent, type CardContentProps } from "./components/CardContent";
 
 export { Columns, type ColumnsProps } from "./components/Columns";
 
+export { Checkbox, type CheckboxProps } from "./components/Checkbox";
+
 export { InputChip, type InputChipProps } from "./components/InputChip";
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
 export { ChipField, type ChipFieldProps } from "./components/ChipField";

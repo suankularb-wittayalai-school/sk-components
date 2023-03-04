@@ -591,6 +591,65 @@ declare namespace Columns {
 }
 
 /**
+ * Props for {@link Checkbox}.
+ */
+interface CheckboxProps extends SKComponent {
+    /**
+     * The state of the Checkbox. This is useful if you want a controlled input.
+     *
+     * - If `tristate` is `true`, a `value` of `null` means indeterminate, which
+     *   displays a dash. If not, `value` cannot be `null`.
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: boolean | null;
+    /**
+     * This function triggers when the user toggles the Checkbox. The state is
+     * passed in via the function as a boolean.
+     *
+     * - Optional.
+     */
+    onChange?: (value: boolean) => any;
+    /**
+     * Turns the Checkbox gray and block any action associated with it.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Allows the Checkbox to have 3 states: off, on, and indeterminate.
+     *
+     * - Optional.
+     */
+    tristate?: boolean;
+    /**
+     * Attributes for the underlying `<input>` element.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * A choice from a multi-select set of choices. When alone, a Checkbox is
+ * usually used for acknowledgement of or agreement to something, like a terms
+ * and conditions.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cy04od1b0wro SKCom documentation}
+ *
+ * @param value The state of the Checkbox. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the Checkbox.
+ * @param disabled Turns the Checkbox gray and block any action associated with it.
+ * @param tristate Allows the Checkbox to have 3 states: off, on, and indeterminate.
+ * @param inputAttr Attributes for the underlying `<input>` element.
+ */
+declare function Checkbox({ value, onChange, tristate, disabled, inputAttr, style, className, }: CheckboxProps): JSX.Element;
+declare namespace Checkbox {
+    var displayName: string;
+}
+
+/**
  * Props for {@link InputChip Input Chip}.
  */
 interface InputChipProps extends SKComponent {
@@ -2459,4 +2518,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
