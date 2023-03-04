@@ -186,7 +186,7 @@ interface ButtonProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, title, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, title, style, className, href, onClick, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         title?: string;
@@ -194,6 +194,7 @@ interface ButtonProps extends SKComponent {
         className: any;
         href: string;
         onClick: (event: React.MouseEvent) => void;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -435,13 +436,14 @@ interface CardProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onClick, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref?: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
         onClick?: (event: React.MouseEvent) => void;
+        onTouchStart?: (event: React.TouchEvent) => void;
         onMouseDown?: (event: React.MouseEvent) => void;
         onKeyDown?: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -852,13 +854,14 @@ interface AssistChipProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onClick, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
         onClick: (event: React.MouseEvent) => void;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -1506,12 +1509,13 @@ interface ListItemProps extends SKComponent {
      * - Incompatible with `onClick`.
      * - Optional.
      */
-    element?: ({ children, ref, style, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref?: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
+        onTouchStart?: (event: React.TouchEvent) => void;
         onMouseDown?: (event: React.MouseEvent) => void;
         onKeyDown?: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -1786,12 +1790,13 @@ interface NavBarItemProps extends SKComponent {
      *
      * - Optional.
      */
-    element?: ({ children, title, style, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         title?: string;
         style?: React.CSSProperties;
         className: any;
         href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -1950,13 +1955,14 @@ interface NavDrawerItemProps extends SKComponent {
      *
      * - Optional.
      */
-    element?: ({ children, ref, title, style, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         title?: string;
         style?: React.CSSProperties;
         className: any;
         href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -2060,10 +2066,11 @@ interface FABProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         className: string;
         href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;

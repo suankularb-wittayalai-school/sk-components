@@ -317,13 +317,25 @@ function useRipple(parentRef) {
       transition: transition(duration.long4, easing.standard)
     });
   }
+  const [touched, setTouched] = import_react.default.useState(false);
   return {
     /**
      * Event listeners on the parent element.
      */
     rippleListeners: {
+      // Use the tap position to calculate the ripple position and animate it
+      onTouchStart: (event) => {
+        setTouched(true);
+        const touch = event.touches[0];
+        setPosition(calculatePosition(touch.clientX, touch.clientY));
+        animateRipple();
+      },
       // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event) => {
+        if (touched) {
+          setTouched(false);
+          return;
+        }
         setPosition(calculatePosition(event.clientX, event.clientY));
         animateRipple();
       },
@@ -1316,7 +1328,7 @@ function DialogHeader({
 DialogHeader.displayName = "DialogHeader";
 
 // ../skcom-css/dist/css/components/dialog-content.css
-styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-header:has(~.skc-dialog-content) {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
+styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
 
 // src/components/DialogContent/index.tsx
 var import_jsx_runtime19 = require("react/jsx-runtime");

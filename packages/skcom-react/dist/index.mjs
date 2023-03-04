@@ -114,7 +114,7 @@ function Avatar({ children, style, className }) {
 Avatar.displayName = "Avatar";
 
 // src/components/Button/index.tsx
-import { motion as motion3 } from "framer-motion";
+import { motion as motion2 } from "framer-motion";
 import * as React2 from "react";
 
 // ../skcom-css/dist/css/components/icon.css
@@ -148,7 +148,7 @@ function MaterialIcon({
 MaterialIcon.displayName = "MaterialIcon";
 
 // src/components/Progress/index.tsx
-import { AnimatePresence, motion as motion2 } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 // ../skcom-css/dist/css/components/progress.css
 styleInject(".skc-progress--linear .skc-progress__track {\n  height: .25rem;\n  background-color: var(--surface-variant);\n}\n.skc-progress--linear .skc-progress__indicator {\n  transition: width var(--motion-short-3) var(--easing-standard);\n  height: 100%;\n  background-color: var(--primary);\n}\n.skc-progress--indeterminate.skc-progress--linear .skc-progress__track {\n  overflow-x: hidden;\n}\n.skc-progress--indeterminate.skc-progress--linear .skc-progress__indicator {\n  transform: translateX(-100%);\n  animation: linear-dash 1s ease-in-out infinite;\n}\n@keyframes linear-dash {\n  100% {\n    transform: scaleX(0.5) translateX(150%);\n  }\n}\n.skc-progress--circular {\n  width: 3rem;\n  height: 3rem;\n}\n.skc-progress--circular .skc-progress__track {\n  width: 100%;\n  height: 100%;\n  transform: rotate(270deg);\n}\n.skc-progress--circular .skc-progress__indicator {\n  stroke: var(--primary);\n  stroke-dasharray: 200;\n}\n.skc-progress--indeterminate.skc-progress--circular .skc-progress__track {\n  transform: rotate(0deg);\n  animation: circular-rotate 2s linear infinite;\n}\n.skc-progress--indeterminate.skc-progress--circular .skc-progress__indicator {\n  animation: circular-dash 1.5s ease-in-out infinite;\n  stroke-dasharray: 1, 200;\n  stroke-dashoffset: 0;\n}\n@keyframes circular-rotate {\n  100% {\n    transform: rotate(360deg);\n  }\n}\n@keyframes circular-dash {\n  0% {\n    stroke-dasharray: 1, 200;\n    stroke-dashoffset: 0;\n  }\n  50% {\n    stroke-dasharray: 90, 200;\n    stroke-dashoffset: -35;\n  }\n  100% {\n    stroke-dasharray: 90, 200;\n    stroke-dashoffset: -125;\n  }\n}\n");
@@ -245,13 +245,25 @@ function useRipple(parentRef) {
       transition: transition(duration.long4, easing.standard)
     });
   }
+  const [touched, setTouched] = React.useState(false);
   return {
     /**
      * Event listeners on the parent element.
      */
     rippleListeners: {
+      // Use the tap position to calculate the ripple position and animate it
+      onTouchStart: (event) => {
+        setTouched(true);
+        const touch = event.touches[0];
+        setPosition(calculatePosition(touch.clientX, touch.clientY));
+        animateRipple();
+      },
       // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event) => {
+        if (touched) {
+          setTouched(false);
+          return;
+        }
         setPosition(calculatePosition(event.clientX, event.clientY));
         animateRipple();
       },
@@ -296,7 +308,7 @@ function Progress({
   const { duration, easing } = useAnimationConfig();
   const progressTransition = transition(duration.short2, easing.standard);
   const linearProgress = /* @__PURE__ */ jsx4(
-    motion2.div,
+    motion.div,
     {
       initial: { scaleY: 0 },
       animate: { scaleY: 1 },
@@ -313,7 +325,7 @@ function Progress({
     }
   );
   const circularProgress = /* @__PURE__ */ jsx4("svg", { className: "skc-progress__track", viewBox: "24 24 48 48", children: /* @__PURE__ */ jsx4(
-    motion2.circle,
+    motion.circle,
     {
       initial: { strokeWidth: 0 },
       animate: { strokeWidth: 4 },
@@ -418,7 +430,7 @@ function Button({
       children && /* @__PURE__ */ jsx5("span", { className: "skc-button__label", children })
     ] }),
     /* @__PURE__ */ jsx5(
-      motion3.span,
+      motion2.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -472,7 +484,7 @@ function SegmentedButton({
 SegmentedButton.displayName = "SegmentedButton";
 
 // src/components/ToggleButton/index.tsx
-import { motion as motion4 } from "framer-motion";
+import { motion as motion3 } from "framer-motion";
 import * as React3 from "react";
 
 // ../skcom-css/dist/css/components/toggle-button.css
@@ -515,7 +527,7 @@ function ToggleButton({
       children: [
         icon,
         /* @__PURE__ */ jsx7(
-          motion4.span,
+          motion3.span,
           {
             initial: { scale: 0, opacity: 0.36 },
             animate: rippleControls,
@@ -536,7 +548,7 @@ import * as React4 from "react";
 styleInject('.skc-card {\n  display: flex;\n  color: var(--on-surface);\n  border-radius: var(--rounded-lg);\n}\n.skc-card.skc-card--outlined {\n  border: 1px solid var(--outline-variant);\n  background-color: var(--surface);\n}\n.skc-card.skc-card--elevated {\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-2);\n}\n.skc-card.skc-card--filled {\n  background-color: var(--surface-variant);\n}\n.skc-card.skc-card--filled.skc-card--row {\n  border: 1px solid var(--outline-variant);\n}\n.skc-card,\n.skc-card.skc-card--column {\n  flex-direction: column;\n}\n.skc-card.skc-card--row {\n  flex-direction: row;\n}\n.skc-card.skc-card--state-layer {\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n}\n.skc-card.skc-card--state-layer::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n}\n.skc-card.skc-card--state-layer:hover::before {\n  opacity: .08;\n}\n.skc-card.skc-card--state-layer:focus::before,\n.skc-card.skc-card--state-layer:active::before {\n  opacity: .12;\n}\n.skc-card.skc-card--state-layer.skc-card--outlined {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n}\n.skc-card.skc-card--state-layer.skc-card--outlined:focus {\n  border-color: var(--primary);\n}\n.skc-card.skc-card--state-layer .skc-card__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n}\n.skc-card.skc-card--state-layer::before,\n.skc-card.skc-card--state-layer .skc-card__ripple {\n  background-color: var(--primary);\n}\n.skc-card.skc-card--shadow {\n  transition: box-shadow var(--motion-short-4) var(--easing-standard);\n}\n.skc-card.skc-card--shadow.skc-card--outlined {\n  transition: border-color var(--motion-short-4) var(--easing-standard), box-shadow var(--motion-short-4) var(--easing-standard);\n}\n.skc-card.skc-card--shadow:hover {\n  box-shadow: var(--shadow-1);\n}\n.skc-card.skc-card--shadow:active {\n  box-shadow: none;\n}\n.skc-card.skc-card--shadow.skc-card--elevated.skc-card--shadow:hover {\n  box-shadow: var(--shadow-3);\n}\n.skc-card.skc-card--shadow.skc-card--elevated.skc-card--shadow:active {\n  box-shadow: var(--shadow-2);\n}\n');
 
 // src/components/Card/index.tsx
-import { motion as motion5 } from "framer-motion";
+import { motion as motion4 } from "framer-motion";
 import { Fragment as Fragment2, jsx as jsx8, jsxs as jsxs4 } from "react/jsx-runtime";
 function Card({
   children,
@@ -568,7 +580,7 @@ function Card({
   const content = /* @__PURE__ */ jsxs4(Fragment2, { children: [
     children,
     stateLayerEffect && /* @__PURE__ */ jsx8(
-      motion5.span,
+      motion4.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -581,10 +593,10 @@ function Card({
     // Render with `element` if defined
     href && Element ? /* @__PURE__ */ jsx8(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
       // Render an `<a>` if link passed in
-      href ? layoutID ? /* @__PURE__ */ jsx8(motion5.a, __spreadProps(__spreadValues({}, props), { layoutId: layoutID, children: content })) : /* @__PURE__ */ jsx8("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      href ? layoutID ? /* @__PURE__ */ jsx8(motion4.a, __spreadProps(__spreadValues({}, props), { layoutId: layoutID, children: content })) : /* @__PURE__ */ jsx8("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
         // Render a `<button>` if `onClick` passed in
         onClick ? layoutID ? /* @__PURE__ */ jsx8(
-          motion5.button,
+          motion4.button,
           __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), {
             layoutId: layoutID,
             type: "button",
@@ -592,7 +604,7 @@ function Card({
           })
         ) : /* @__PURE__ */ jsx8("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content })) : (
           // Otherwise, render a `<div>`
-          layoutID ? /* @__PURE__ */ jsx8(motion5.div, __spreadProps(__spreadValues({}, props), { layoutId: layoutID, children: content })) : /* @__PURE__ */ jsx8("div", __spreadProps(__spreadValues({}, props), { children: content }))
+          layoutID ? /* @__PURE__ */ jsx8(motion4.div, __spreadProps(__spreadValues({}, props), { layoutId: layoutID, children: content })) : /* @__PURE__ */ jsx8("div", __spreadProps(__spreadValues({}, props), { children: content }))
         )
       )
     )
@@ -672,7 +684,7 @@ function Columns({ children, columns, style, className }) {
 Columns.displayName = "Columns";
 
 // src/components/Checkbox/index.tsx
-import { motion as motion6 } from "framer-motion";
+import { motion as motion5 } from "framer-motion";
 import * as React6 from "react";
 
 // ../skcom-css/dist/css/components/checkbox.css
@@ -723,7 +735,7 @@ function Checkbox({
             "aria-hidden": true,
             className: "skc-checkbox__ripple-parent",
             children: /* @__PURE__ */ jsx12(
-              motion6.span,
+              motion5.span,
               {
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
@@ -746,7 +758,7 @@ import * as React7 from "react";
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n._skc-chip,\n.skc-input-chip,\n.skc-assist-chip {\n  transition: border-color var(--motion-short-4) var(--easing-standard), background-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  justify-content: center;\n  gap: .5rem;\n  padding: .375rem 1rem;\n  cursor: pointer;\n  color: var(--on-surface);\n  border: 1px solid var(--outline);\n  border-radius: .5rem;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n._skc-chip::before,\n.skc-input-chip::before,\n.skc-assist-chip::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface-variant);\n}\n._skc-chip:hover::before,\n.skc-input-chip:hover::before,\n.skc-assist-chip:hover::before {\n  opacity: .08;\n}\n._skc-chip:focus::before,\n.skc-input-chip:focus::before,\n.skc-assist-chip:focus::before,\n._skc-chip:active::before,\n.skc-input-chip:active::before,\n.skc-assist-chip:active::before {\n  opacity: .12;\n}\n._skc-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-input-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-assist-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n._skc-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-input-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-assist-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-assist-chip__icon:last-child) {\n  padding-right: .5rem;\n}\n._skc-chip[aria-disabled=true],\n[aria-disabled=true].skc-input-chip,\n[aria-disabled=true].skc-assist-chip {\n  cursor: default;\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true]::before,\n[aria-disabled=true].skc-input-chip::before,\n[aria-disabled=true].skc-assist-chip::before {\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__ripple,\n._skc-chip[aria-disabled=true] button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip ._skc-chip[aria-disabled=true] .skc-input-chip__ripple,\n[aria-disabled=true].skc-input-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-input-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-input-chip .skc-input-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-assist-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-assist-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-assist-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-assist-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__ripple {\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-input-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__icon .skc-icon {\n  color: var(--on-surface);\n}\n._skc-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated {\n  border: none;\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-1);\n}\n._skc-chip--elevated[aria-disabled=true],\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated {\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n  box-shadow: none;\n}\n._skc-chip--elevated[aria-disabled=true]::before,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated::before {\n  border: none;\n  background-color: var(--on-surface);\n}\n._skc-chip--dangerous ._skc-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-input-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-assist-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous ._skc-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-input-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-assist-chip__icon .skc-icon {\n  color: var(--error);\n}\n._skc-chip--selected,\n.skc-input-chip--selected {\n  color: var(--on-secondary-container);\n  border-color: rgba(0, 0, 0, 0);\n  background-color: var(--secondary-container);\n}\n._skc-chip__label,\n.skc-input-chip__label,\n.skc-assist-chip__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  font-family: var(--font-display);\n}\n._skc-chip__icon,\n.skc-input-chip__icon,\n.skc-assist-chip__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n  color: var(--primary);\n}\n._skc-chip__icon .skc-icon,\n.skc-input-chip__icon .skc-icon,\n.skc-assist-chip__icon .skc-icon {\n  font-size: 20px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 20;\n  font-size: 1.125rem;\n}\n._skc-chip__ripple,\nbutton.skc-input-chip .skc-input-chip__ripple,\n.skc-assist-chip__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface-variant);\n}\n.skc-assist-chip:has(.skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip {\n  cursor: initial;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) {\n  padding: .1875rem;\n  color: var(--on-surface);\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon,\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)):hover .skc-button__icon .skc-icon,\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)):active .skc-button__icon .skc-icon {\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-input-chip::before {\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child) {\n  padding-block: .25rem;\n  padding-left: .25rem;\n  border-radius: var(--rounded-full);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child):has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip:has(.skc-input-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip:has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip__avatar {\n  width: 1.5rem;\n  height: 1.5rem;\n}\n.skc-input-chip__avatar .skc-avatar {\n  width: 100%;\n  height: 100%;\n}\n.skc-input-chip__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  padding-block: .375rem;\n  outline: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip--selected .skc-input-chip__avatar {\n  color: var(--on-secondary);\n  border-radius: var(--rounded-full);\n  background-color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button {\n  color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button::before,\n.skc-input-chip--selected .skc-button .skc-button__ripple {\n  background-color: var(--on-secondary-container);\n}\nbutton.skc-input-chip {\n  cursor: pointer;\n}\nbutton.skc-input-chip::before {\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/InputChip/index.tsx
-import { motion as motion7 } from "framer-motion";
+import { motion as motion6 } from "framer-motion";
 import { Fragment as Fragment3, jsx as jsx13, jsxs as jsxs7 } from "react/jsx-runtime";
 function InputChip({
   children,
@@ -814,7 +826,7 @@ function InputChip({
   const buttonContent = /* @__PURE__ */ jsxs7(Fragment3, { children: [
     divContent,
     /* @__PURE__ */ jsx13(
-      motion7.span,
+      motion6.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -841,12 +853,12 @@ function InputChip({
           setEditing(false);
       }
     }
-  ) : editable || onClick ? layoutID ? /* @__PURE__ */ jsx13(motion7.button, __spreadProps(__spreadValues({ layoutId: layoutID }, buttonProps), { children: buttonContent })) : /* @__PURE__ */ jsx13("button", __spreadProps(__spreadValues({}, buttonProps), { children: buttonContent })) : layoutID ? /* @__PURE__ */ jsx13(motion7.div, __spreadProps(__spreadValues({ layoutId: layoutID }, divProps), { children: divContent })) : /* @__PURE__ */ jsx13("div", __spreadProps(__spreadValues({}, divProps), { children: divContent }));
+  ) : editable || onClick ? layoutID ? /* @__PURE__ */ jsx13(motion6.button, __spreadProps(__spreadValues({ layoutId: layoutID }, buttonProps), { children: buttonContent })) : /* @__PURE__ */ jsx13("button", __spreadProps(__spreadValues({}, buttonProps), { children: buttonContent })) : layoutID ? /* @__PURE__ */ jsx13(motion6.div, __spreadProps(__spreadValues({ layoutId: layoutID }, divProps), { children: divContent })) : /* @__PURE__ */ jsx13("div", __spreadProps(__spreadValues({}, divProps), { children: divContent }));
 }
 InputChip.displayName = "InputChip";
 
 // src/components/AssistChip/index.tsx
-import { motion as motion8 } from "framer-motion";
+import { motion as motion7 } from "framer-motion";
 import * as React8 from "react";
 import { Fragment as Fragment4, jsx as jsx14, jsxs as jsxs8 } from "react/jsx-runtime";
 function AssistChip({
@@ -885,7 +897,7 @@ function AssistChip({
     icon && /* @__PURE__ */ jsx14("div", { className: "skc-assist-chip__icon", children: icon }),
     /* @__PURE__ */ jsx14("span", { className: "skc-assist-chip__label", children }),
     /* @__PURE__ */ jsx14(
-      motion8.span,
+      motion7.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -908,7 +920,7 @@ function AssistChip({
 AssistChip.displayName = "AssistChip";
 
 // src/components/ChipField/index.tsx
-import { motion as motion9, useAnimationControls as useAnimationControls2 } from "framer-motion";
+import { motion as motion8, useAnimationControls as useAnimationControls2 } from "framer-motion";
 import * as React9 from "react";
 
 // ../skcom-css/dist/css/components/chip-set.css
@@ -1054,7 +1066,7 @@ function ChipField({
   )}`;
   return /* @__PURE__ */ jsxs9("div", { style, className: cn(["skc-chip-field", className]), children: [
     /* @__PURE__ */ jsx16(
-      motion9.label,
+      motion8.label,
       {
         htmlFor: fieldID,
         animate: labelControls,
@@ -1097,7 +1109,7 @@ function ChipField({
 ChipField.displayName = "ChipField";
 
 // src/components/Dialog/index.tsx
-import { AnimatePresence as AnimatePresence2, motion as motion10 } from "framer-motion";
+import { AnimatePresence as AnimatePresence2, motion as motion9 } from "framer-motion";
 import * as React10 from "react";
 
 // ../skcom-css/dist/css/components/dialog.css
@@ -1158,7 +1170,7 @@ function Dialog({
   });
   return /* @__PURE__ */ jsx17(AnimatePresence2, { children: open && /* @__PURE__ */ jsxs10(Fragment5, { children: [
     /* @__PURE__ */ jsx17(
-      motion10.div,
+      motion9.div,
       {
         role: "alertdialog",
         "aria-modal": "true",
@@ -1182,7 +1194,7 @@ function Dialog({
       }
     ),
     /* @__PURE__ */ jsx17(
-      motion10.div,
+      motion9.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -1244,7 +1256,7 @@ function DialogHeader({
 DialogHeader.displayName = "DialogHeader";
 
 // ../skcom-css/dist/css/components/dialog-content.css
-styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-header:has(~.skc-dialog-content) {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
+styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog-content ~ .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
 
 // src/components/DialogContent/index.tsx
 import { jsx as jsx19 } from "react/jsx-runtime";
@@ -1270,7 +1282,7 @@ function DialogContent({
 DialogContent.displayName = "DialogContent";
 
 // src/components/FullscreenDialog/index.tsx
-import { AnimatePresence as AnimatePresence3, motion as motion11 } from "framer-motion";
+import { AnimatePresence as AnimatePresence3, motion as motion10 } from "framer-motion";
 import * as React12 from "react";
 
 // ../skcom-css/dist/css/components/fullscreen-dialog.css
@@ -1397,7 +1409,7 @@ function FullscreenDialog({
   });
   return /* @__PURE__ */ jsx20(AnimatePresence3, { children: open && /* @__PURE__ */ jsxs12(Fragment6, { children: [
     /* @__PURE__ */ jsxs12(
-      motion11.div,
+      motion10.div,
       {
         role: "alertdialog",
         "aria-labelledby": `${dialogID}-title`,
@@ -1426,12 +1438,12 @@ function FullscreenDialog({
             /* @__PURE__ */ jsx20("h2", { id: `${dialogID}-title`, children: title }),
             action
           ] }),
-          /* @__PURE__ */ jsx20(motion11.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
+          /* @__PURE__ */ jsx20(motion10.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
         ]
       }
     ),
     /* @__PURE__ */ jsx20(
-      motion11.div,
+      motion10.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -1582,7 +1594,7 @@ function List({
 List.displayName = "List";
 
 // src/components/ListItem/index.tsx
-import { motion as motion12 } from "framer-motion";
+import { motion as motion11 } from "framer-motion";
 import * as React14 from "react";
 
 // ../skcom-css/dist/css/components/list-item.css
@@ -1627,7 +1639,7 @@ function ListItem({
   const content = /* @__PURE__ */ jsxs16(Fragment8, { children: [
     children,
     stateLayerEffect && /* @__PURE__ */ jsx26(
-      motion12.span,
+      motion11.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1738,7 +1750,7 @@ function NavBar({
 NavBar.displayName = "NavBar";
 
 // src/components/NavBarItem/index.tsx
-import { AnimatePresence as AnimatePresence4, LayoutGroup, motion as motion13 } from "framer-motion";
+import { AnimatePresence as AnimatePresence4, LayoutGroup, motion as motion12 } from "framer-motion";
 import * as React16 from "react";
 
 // ../skcom-css/dist/css/components/nav-bar-item.css
@@ -1789,7 +1801,7 @@ function NavBarItem({
     /* @__PURE__ */ jsxs19("div", { ref: iconRef, className: "skc-nav-bar-item__icon", children: [
       icon,
       /* @__PURE__ */ jsx29(LayoutGroup, { children: /* @__PURE__ */ jsx29(AnimatePresence4, { children: badge !== void 0 && /* @__PURE__ */ jsx29(
-        motion13.div,
+        motion12.div,
         {
           initial: { scale: 0 },
           animate: { scale: 1 },
@@ -1801,7 +1813,7 @@ function NavBarItem({
         }
       ) }) }),
       /* @__PURE__ */ jsx29(
-        motion13.span,
+        motion12.span,
         {
           initial: { scale: 0, opacity: 0.36 },
           animate: rippleControls,
@@ -1823,7 +1835,7 @@ function NavBarItem({
 NavBarItem.displayName = "NavBarItem";
 
 // src/components/NavDrawer/index.tsx
-import { AnimatePresence as AnimatePresence5, motion as motion14 } from "framer-motion";
+import { AnimatePresence as AnimatePresence5, motion as motion13 } from "framer-motion";
 import * as React17 from "react";
 
 // ../skcom-css/dist/css/components/nav-drawer.css
@@ -1876,7 +1888,7 @@ function NavDrawer({
   );
   return /* @__PURE__ */ jsx30(AnimatePresence5, { children: open && /* @__PURE__ */ jsxs20(Fragment10, { children: [
     /* @__PURE__ */ jsx30(
-      motion14.aside,
+      motion13.aside,
       {
         initial: { scaleX: 0.2, x: "-100%" },
         animate: { scaleX: 1, x: "0%" },
@@ -1896,7 +1908,7 @@ function NavDrawer({
       }
     ),
     /* @__PURE__ */ jsx30(
-      motion14.div,
+      motion13.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -1958,7 +1970,7 @@ import * as React18 from "react";
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-nav-drawer-item {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .75rem;\n  padding: 1rem 1.5rem 1rem 1rem;\n  text-decoration: none;\n  color: var(--on-surface);\n  border-radius: var(--rounded-full);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-nav-drawer-item::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-nav-drawer-item:hover::before {\n  opacity: .08;\n}\n.skc-nav-drawer-item:focus-visible::before,\n.skc-nav-drawer-item:active::before {\n  opacity: .12;\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected {\n  color: var(--on-primary-container);\n  background-color: var(--primary-container);\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected::before,\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__ripple {\n  background-color: var(--on-primary-container);\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__label {\n  font-weight: var(--font-bold);\n}\n.skc-nav-drawer-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-drawer-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  flex-grow: 1;\n}\n.skc-nav-drawer-item__metadata {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-nav-drawer-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/NavDrawerItem/index.tsx
-import { motion as motion15 } from "framer-motion";
+import { motion as motion14 } from "framer-motion";
 import { Fragment as Fragment11, jsx as jsx32, jsxs as jsxs22 } from "react/jsx-runtime";
 function NavDrawerItem({
   icon,
@@ -1992,7 +2004,7 @@ function NavDrawerItem({
     /* @__PURE__ */ jsx32("span", { className: "skc-nav-drawer-item__label", children: label }),
     metadata && /* @__PURE__ */ jsx32("span", { className: "skc-nav-drawer-item__metadata", children: metadata }),
     /* @__PURE__ */ jsx32(
-      motion15.span,
+      motion14.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -2006,7 +2018,7 @@ function NavDrawerItem({
 NavDrawerItem.displayName = "NavDrawerItem";
 
 // src/components/FAB/index.tsx
-import { AnimatePresence as AnimatePresence6, motion as motion16 } from "framer-motion";
+import { AnimatePresence as AnimatePresence6, motion as motion15 } from "framer-motion";
 import * as React19 from "react";
 
 // ../skcom-css/dist/css/components/fab.css
@@ -2060,7 +2072,7 @@ function FAB({
     initial: false,
     // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
     children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ jsxs23(
-      motion16.div,
+      motion15.div,
       {
         ref: fabRef,
         initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
@@ -2088,7 +2100,7 @@ function FAB({
           // Hide the label on scroll if `stateOnScroll` set to `minimize`
           !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ jsx33("span", { className: "skc-fab__label", children }),
           /* @__PURE__ */ jsx33(
-            motion16.span,
+            motion15.span,
             {
               initial: { scale: 0, opacity: 0.36 },
               animate: rippleControls,
@@ -2114,7 +2126,7 @@ function FAB({
 FAB.displayName = "FAB";
 
 // src/components/ContentLayout/index.tsx
-import { motion as motion17 } from "framer-motion";
+import { motion as motion16 } from "framer-motion";
 
 // ../skcom-css/dist/css/components/content-layout.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout p {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > .skc-section > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > * {\n    margin-inline: 0;\n  }\n}\n");
@@ -2128,7 +2140,7 @@ function ContentLayout({
 }) {
   const { duration, easing } = useAnimationConfig();
   return /* @__PURE__ */ jsx34(
-    motion17.main,
+    motion16.main,
     {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
@@ -2177,7 +2189,7 @@ RootLayout.displayName = "RootLayout";
 // src/components/PageHeader/index.tsx
 import {
   LayoutGroup as LayoutGroup2,
-  motion as motion18,
+  motion as motion17,
   useAnimationControls as useAnimationControls3
 } from "framer-motion";
 import * as React21 from "react";
@@ -2254,7 +2266,7 @@ function PageHeader({
       }
     ),
     /* @__PURE__ */ jsx36(LayoutGroup2, { children: /* @__PURE__ */ jsx36(
-      motion18.header,
+      motion17.header,
       {
         ref: headerRef,
         layoutId: "page-header",
@@ -2267,7 +2279,7 @@ function PageHeader({
         ]),
         children: /* @__PURE__ */ jsxs25("div", { className: "skc-page-header__content", children: [
           icon && !children && /* @__PURE__ */ jsx36(
-            motion18.div,
+            motion17.div,
             {
               animate: iconControls,
               className: "skc-page-header__icon",
@@ -2275,7 +2287,7 @@ function PageHeader({
             }
           ),
           /* @__PURE__ */ jsxs25(
-            motion18.div,
+            motion17.div,
             {
               layoutId: "page-header-actions",
               transition: minimizeTransition,
@@ -2294,7 +2306,7 @@ function PageHeader({
                   }
                 ),
                 minimized && // Header (when minimized)
-                /* @__PURE__ */ jsx36(motion18.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+                /* @__PURE__ */ jsx36(motion17.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
                 /* @__PURE__ */ jsxs25("div", { className: "skc-page-header__trailing", children: [
                   homeURL && // Home Button
                   /* @__PURE__ */ jsx36(
@@ -2319,9 +2331,9 @@ function PageHeader({
             }
           ),
           !minimized && // Header (initial)
-          /* @__PURE__ */ jsx36(motion18.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+          /* @__PURE__ */ jsx36(motion17.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
           children && /* @__PURE__ */ jsx36(
-            motion18.div,
+            motion17.div,
             {
               animate: headerTextControls,
               className: "skc-page-header__related",
@@ -2342,7 +2354,7 @@ import * as React22 from "react";
 styleInject('.skc-radio {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-radio::before {\n  background-color: var(--on-surface);\n}\n.skc-radio:not(.skc-radio--disabled):hover::before,\n.skc-form-item:hover .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .08;\n}\n.skc-radio:not(.skc-radio--disabled):focus-within::before,\n.skc-radio:not(.skc-radio--disabled):active::before,\n.skc-form-item:focus-within .skc-radio:not(.skc-radio--disabled)::before,\n.skc-form-item:active .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .12;\n}\n.skc-radio::before,\n.skc-radio__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-radio__circle {\n  transition: border-color var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: 50%;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-radio__marker {\n  transition: transform var(--motion-short-2) var(--easing-standard);\n  box-sizing: border-box;\n  width: .625rem;\n  height: .625rem;\n  transform: scale(0);\n  border-radius: inherit;\n  background-color: var(--primary);\n}\n.skc-radio__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-radio__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-radio__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-radio:has(.skc-radio__input:checked)::before,\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__ripple {\n  background-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__circle {\n  border-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__marker {\n  transform: scale(1);\n}\n.skc-radio--disabled {\n  opacity: .38;\n}\n.skc-radio--disabled .skc-radio__circle {\n  cursor: default;\n}\n.skc-radio--disabled .skc-radio__marker {\n  background-color: var(--on-surface);\n}\n.skc-radio--disabled .skc-radio__ripple {\n  display: none;\n}\n.skc-radio--disabled .skc-radio__input:checked ~ .skc-radio__circle {\n  border-color: var(--on-surface);\n}\n');
 
 // src/components/Radio/index.tsx
-import { motion as motion19 } from "framer-motion";
+import { motion as motion18 } from "framer-motion";
 import { jsx as jsx37, jsxs as jsxs26 } from "react/jsx-runtime";
 function Radio({
   value,
@@ -2384,7 +2396,7 @@ function Radio({
             "aria-hidden": true,
             className: "skc-radio__ripple-parent",
             children: /* @__PURE__ */ jsx37(
-              motion19.span,
+              motion18.span,
               {
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
@@ -2472,7 +2484,7 @@ Switch.displayName = "Switch";
 import {
   AnimatePresence as AnimatePresence9,
   LayoutGroup as LayoutGroup3,
-  motion as motion20,
+  motion as motion19,
   useAnimationControls as useAnimationControls4
 } from "framer-motion";
 import * as React24 from "react";
@@ -2614,7 +2626,7 @@ function TextField({
       ]),
       children: [
         /* @__PURE__ */ jsx40(
-          motion20.span,
+          motion19.span,
           {
             id: `${fieldID}-label`,
             animate: labelControls,
@@ -2622,11 +2634,11 @@ function TextField({
             children: label
           }
         ),
-        leading && /* @__PURE__ */ jsx40(motion20.div, { className: "skc-text-field__leading", children: leading }),
+        leading && /* @__PURE__ */ jsx40(motion19.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ jsx40("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ jsx40("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
         /* @__PURE__ */ jsx40(LayoutGroup3, { children: /* @__PURE__ */ jsxs27(AnimatePresence9, { initial: false, children: [
           trailing && /* @__PURE__ */ jsx40(
-            motion20.div,
+            motion19.div,
             {
               animate: appearance === "filled" && typeof trailing === "string" ? trailingControls : void 0,
               layoutId: `${fieldID}-trailing`,
@@ -2636,7 +2648,7 @@ function TextField({
             }
           ),
           (canClear || error) && /* @__PURE__ */ jsx40(
-            motion20.div,
+            motion19.div,
             {
               initial: { scale: 0.6, opacity: 0 },
               animate: { scale: 1, opacity: 1 },
