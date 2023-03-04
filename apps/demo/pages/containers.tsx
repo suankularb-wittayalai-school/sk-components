@@ -276,6 +276,22 @@ const ListSection: FC = () => {
     <Section>
       <Header>List</Header>
       <List divided>
+        {/* Select all */}
+        <ListItem align="center" lines={1}>
+          <ListItemContent title="Select all" />
+          <Checkbox
+            value={cart.length === 3 ? true : cart.length === 0 ? false : null}
+            tristate
+            onChange={(value) =>
+              setCart(
+                value ? ["fish-burger", "pork-burger", "beef-burger"] : []
+              )
+            }
+            inputAttr={{ "aria-labelledby": "list-item-select-all" }}
+          />
+        </ListItem>
+
+        {/* Menu */}
         <ListItem align="center" lines={3}>
           <Image src="/images/burger.png" width={56} height={56} alt="" />
           <ListItemContent
