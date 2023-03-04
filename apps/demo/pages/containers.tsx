@@ -17,6 +17,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  FormItem,
   FullscreenDialog,
   Header,
   List,
@@ -97,6 +98,7 @@ const ColumnsSection: FC = () => (
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
   const [showReport, setShowReport] = useState<boolean>(false);
+  const [understood, setUnderstood] = useState<boolean>(false);
 
   const [view, setView] = useState<"bug-report" | "feature-request">(
     "bug-report"
@@ -180,6 +182,12 @@ const DialogSection: FC = () => {
           </a>
           . Thank you!
         </p>
+        <FormItem
+          label="I have already queried the issues page and cannot find my
+            issue."
+        >
+          <Checkbox value={understood} onChange={setUnderstood} />
+        </FormItem>
         <SegmentedButton alt="View" full className="pb-4">
           <Button
             appearance="outlined"

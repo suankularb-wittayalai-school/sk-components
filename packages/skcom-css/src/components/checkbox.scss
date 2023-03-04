@@ -20,12 +20,17 @@
   }
 
   &:not(.skc-checkbox--disabled) {
-    &:hover::before {
-      opacity: 0.08;
+    &:hover,
+    .skc-form-item:hover & {
+      &::before {
+        opacity: 0.08;
+      }
     }
 
     &:focus-within,
-    &:active {
+    &:active,
+    .skc-form-item:focus-within &,
+    .skc-form-item:active & {
       &::before {
         opacity: 0.12;
       }
@@ -59,6 +64,7 @@
   );
   display: grid;
   place-content: center;
+  box-sizing: border-box;
   width: 1.125rem;
   height: 1.125rem;
   cursor: pointer;
@@ -67,7 +73,8 @@
   border-radius: var(--rounded-sm);
   background-color: transparent;
 
-  .skc-checkbox:active & {
+  .skc-checkbox:active &,
+  .skc-form-item:active & {
     transform: scale(0.9);
   }
 }

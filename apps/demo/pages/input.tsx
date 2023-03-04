@@ -9,6 +9,7 @@ import {
   ChipSet,
   Columns,
   ContentLayout,
+  FormItem,
   Header,
   InputChip,
   MaterialIcon,
@@ -22,12 +23,17 @@ import {
 import { CustomPage } from "@/utils/types";
 
 const CheckboxSection: FC = () => {
+  const [termsAgreed, setTermsAgreed] = useState<boolean>(false);
+
   const [checked, setChecked] = useState<boolean>(false);
   const [tristateChecked, setTristateChecked] = useState<boolean | null>(null);
 
   return (
     <Section>
       <Header>Checkbox</Header>
+      <FormItem label="I agree to the terms and conditions">
+        <Checkbox value={termsAgreed} onChange={setTermsAgreed} />
+      </FormItem>
       <div className="flex flex-row flex-wrap gap-4">
         <Checkbox value={checked} onChange={setChecked} />
         <Checkbox

@@ -1251,6 +1251,55 @@ declare namespace Divider {
 }
 
 /**
+ * Props for {@link FormItem Form Item}.
+ */
+interface FormItemProps extends SKComponent {
+    /**
+     * The input.
+     *
+     * - Must be a Checkbox, Radio, or Switch.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The label for the input.
+     *
+     * - Must be a string or JSX Element.
+     * - Always required.
+     */
+    label: string | JSX.Element;
+    /**
+     * A description of the Form Item for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Required if `label` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
+     * Attributes for the underlying `<label>` element used as the field.
+     *
+     * - Optional.
+     */
+    labelAttr?: JSX.IntrinsicElements["label"];
+}
+/**
+ * A wrapper for form control components like Checkbox, Radio, and Switch with
+ * a label.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation}
+ *
+ * @param children The input.
+ * @param label The label for the input.
+ * @param alt A description of the Form Item for screen readers, similar to `alt` on `<img>`.
+ * @param labelAttr Attributes for the underlying `<label>` element used as the field.
+ */
+declare function FormItem({ children, label, alt, labelAttr, style, className, }: FormItemProps): JSX.Element;
+declare namespace FormItem {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Header}.
  */
 interface HeaderProps extends SKComponent {
@@ -2569,4 +2618,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

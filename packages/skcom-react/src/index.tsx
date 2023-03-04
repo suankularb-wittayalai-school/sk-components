@@ -41,6 +41,8 @@ export {
 
 export { Divider, type DividerProps } from "./components/Divider";
 
+export { FormItem, type FormItemProps } from "./components/FormItem";
+
 export { Header, type HeaderProps } from "./components/Header";
 
 export { List, type ListProps } from "./components/List";

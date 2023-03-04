@@ -52,6 +52,7 @@
   );
   display: grid;
   place-content: center;
+  box-sizing: border-box;
   width: 1.125rem;
   height: 1.125rem;
   cursor: pointer;
@@ -69,6 +70,7 @@
   );
   width: 0.625rem;
   height: 0.625rem;
+  box-sizing: border-box;
   transform: scale(0);
   border-radius: inherit;
   background-color: var(--primary);
