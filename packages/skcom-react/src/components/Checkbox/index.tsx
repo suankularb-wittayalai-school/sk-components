@@ -100,27 +100,18 @@ export function Checkbox({
       ])}
       {...rippleListeners}
     >
-      {/* Native input (for logic only, hidden) */}
+      {/* Native input (for logic and accessibility only and is hidden to
+          sighted users)
+        */}
       <input
+        aria-checked={value === null ? "mixed" : value}
         aria-disabled={disabled}
         className="skc-checkbox__input"
         type="checkbox"
-        value={value ? "true" : "false"}
-        onChange={(event) => {
-          const { checked } = event.target;
-
-          // (@SiravitPhokeed)
-          // Since we’re not using the `disabled` attribute, we cannot prevent
-          // changing the state of the Checkbox completely. To solve this, we’ll
-          // switch the `checked` state back to what it was before right after
-          // it was changed.
-          if (disabled) {
-            setTimeout(() => (event.target.checked = !checked), 0);
-            return;
-          }
-
-          if (onChange) onChange(checked);
-        }}
+        checked={Boolean(value)}
+        onChange={(event) =>
+          onChange && !disabled && onChange(event.target.checked)
+        }
         {...inputAttr}
       />
 

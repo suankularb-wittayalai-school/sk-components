@@ -776,19 +776,12 @@ function Checkbox({
         /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
           "input",
           __spreadValues({
+            "aria-checked": value === null ? "mixed" : value,
             "aria-disabled": disabled,
             className: "skc-checkbox__input",
             type: "checkbox",
-            value: value ? "true" : "false",
-            onChange: (event) => {
-              const { checked } = event.target;
-              if (disabled) {
-                setTimeout(() => event.target.checked = !checked, 0);
-                return;
-              }
-              if (onChange)
-                onChange(checked);
-            }
+            checked: Boolean(value),
+            onChange: (event) => onChange && !disabled && onChange(event.target.checked)
           }, inputAttr)
         ),
         /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
