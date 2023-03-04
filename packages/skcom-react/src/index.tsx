@@ -79,6 +79,8 @@ export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
 export { Progress, type ProgressProps } from "./components/Progress";
 
+export { Radio, type RadioProps } from "./components/Radio";
+
 export { Section, type SectionProps } from "./components/Section";
 
 export { Switch, type SwitchProps } from "./components/Switch";

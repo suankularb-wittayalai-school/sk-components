@@ -12,6 +12,7 @@ import {
   Header,
   InputChip,
   MaterialIcon,
+  Radio,
   Section,
   Switch,
   TextField,
@@ -176,6 +177,23 @@ const TextFieldSection: FC = () => {
   );
 };
 
+const RadioSection: FC = () => {
+  const [checked, setChecked] = useState<number>(0);
+
+  return (
+    <Section>
+      <Header>Radio</Header>
+      <div className="flex flex-row flex-wrap gap-4">
+        <Radio value={checked === 0} onChange={() => setChecked(0)} />
+        <Radio value={checked === 1} onChange={() => setChecked(1)} />
+        <Radio value={checked === 2} onChange={() => setChecked(2)} />
+        <Radio value={false} disabled />
+        <Radio value={true} disabled />
+      </div>
+    </Section>
+  );
+};
+
 const SwitchSection: FC = () => {
   const [switchOn, setSwitchOn] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(true);
@@ -213,6 +231,7 @@ const InputPage: CustomPage = () => (
       <CheckboxSection />
       <ChipFieldSection />
       <TextFieldSection />
+      <RadioSection />
       <SwitchSection />
     </ContentLayout>
   </>
