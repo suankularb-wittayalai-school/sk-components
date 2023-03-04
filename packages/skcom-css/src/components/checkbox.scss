@@ -1,0 +1,144 @@
+////
+/// **Checkbox**
+/// A choice from a multi-select set of choices. When alone, a Checkbox is
+/// usually used for acknowledgement of or agreement to something, like a
+/// terms and conditions.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cy04od1b0wro SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+// Checkbox
+.skc-checkbox {
+  position: relative;
+  width: fit-content;
+  -webkit-tap-highlight-color: transparent;
+
+  &::before {
+    background-color: var(--on-surface);
+  }
+
+  &:not(.skc-checkbox--disabled) {
+    &:hover,
+    .skc-form-item:hover & {
+      &::before {
+        opacity: 0.08;
+      }
+    }
+
+    &:focus-within,
+    &:active,
+    .skc-form-item:focus-within &,
+    .skc-form-item:active & {
+      &::before {
+        opacity: 0.12;
+      }
+    }
+  }
+}
+
+// State layer
+.skc-checkbox::before,
+.skc-checkbox__ripple-parent {
+  @include mix.state-layer();
+  inset: 50% auto auto 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.skc-checkbox__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.skc-checkbox__box {
+  @include mix.transition(
+    background-color transform,
+    var(--motion-short-2),
+    var(--easing-standard)
+  );
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
+  width: 1.125rem;
+  height: 1.125rem;
+  cursor: pointer;
+  transform: scale(1);
+  border: 2px solid var(--on-surface-variant);
+  border-radius: var(--rounded-sm);
+  background-color: transparent;
+
+  .skc-checkbox:active &,
+  .skc-form-item:active & {
+    transform: scale(0.9);
+  }
+}
+
+.skc-checkbox__ripple-parent {
+  overflow: hidden;
+  transition: none;
+  opacity: 1;
+}
+
+.skc-checkbox__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+}
+
+// Checked/indeterminate state
+.skc-checkbox:has(.skc-checkbox__input:checked),
+.skc-checkbox--indeterminate {
+  &::before,
+  .skc-checkbox__ripple {
+    background-color: var(--primary);
+  }
+}
+
+.skc-checkbox__box {
+  .skc-checkbox__input:checked ~ &,
+  .skc-checkbox--indeterminate & {
+    border-color: var(--primary);
+    background-color: var(--primary);
+  }
+}
+
+.skc-checkbox__icon {
+  color: var(--on-primary);
+}
+
+// Disabled state
+
+// (@SiravitPhokeed)
+// We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
+// attribute is on the underlying `<input>`, not `.skc-checkbox`, which makes
+// using it in this case a pain in the hindquarters.
+.skc-checkbox--disabled {
+  opacity: 0.38;
+
+  .skc-checkbox__box {
+    cursor: default;
+  }
+
+  &:active .skc-checkbox__box {
+    transform: scale(1);
+  }
+
+  .skc-checkbox__icon {
+    color: var(--surface);
+  }
+
+  .skc-checkbox__ripple {
+    display: none;
+  }
+
+  // Disabled selected
+  .skc-checkbox__input:checked ~ .skc-checkbox__box {
+    border-color: var(--on-surface);
+    background-color: var(--on-surface);
+  }
+}

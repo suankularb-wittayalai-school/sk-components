@@ -1,0 +1,34 @@
+////
+/// **Form Group**
+/// A group of related form items, like options in a radio group.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.bqiuhjqlrvvz SKCom documentation
+////
+
+@use "../abstracts/typography.scss" as type;
+
+.skc-form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  .skc-form-item {
+    padding-left: 0.55rem;
+
+    .skc-checkbox,
+    .skc-radio {
+      padding-block: 0.5rem;
+    }
+
+    .skc-form-item__label {
+      padding-block: 0.4375rem;
+    }
+  }
+}
+
+.skc-form-group__label {
+  @include type.font("title-small");
+  padding-block: 0.5rem;
+}

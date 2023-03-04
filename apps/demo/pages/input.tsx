@@ -4,13 +4,17 @@ import { FC, useEffect, useState } from "react";
 
 // SK Components
 import {
+  Checkbox,
   ChipField,
   ChipSet,
   Columns,
   ContentLayout,
+  FormGroup,
+  FormItem,
   Header,
   InputChip,
   MaterialIcon,
+  Radio,
   Section,
   Switch,
   TextField,
@@ -18,6 +22,32 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+
+const CheckboxSection: FC = () => {
+  const [termsAgreed, setTermsAgreed] = useState<boolean>(false);
+
+  const [checked, setChecked] = useState<boolean>(false);
+  const [tristateChecked, setTristateChecked] = useState<boolean | null>(null);
+
+  return (
+    <Section>
+      <Header>Checkbox</Header>
+      <FormItem label="I agree to the terms and conditions">
+        <Checkbox value={termsAgreed} onChange={setTermsAgreed} />
+      </FormItem>
+      <div className="flex flex-row flex-wrap gap-4">
+        <Checkbox value={checked} onChange={setChecked} />
+        <Checkbox
+          value={tristateChecked}
+          onChange={setTristateChecked}
+          tristate
+        />
+        <Checkbox value={false} disabled />
+        <Checkbox value={true} disabled />
+      </div>
+    </Section>
+  );
+};
 
 const ChipFieldSection: FC = () => {
   const [value, setValue] = useState<string>("");
@@ -154,6 +184,34 @@ const TextFieldSection: FC = () => {
   );
 };
 
+const RadioSection: FC = () => {
+  const [atkResult, setATKResult] = useState<"negative" | "positive">();
+
+  return (
+    <Section>
+      <Header>Radio</Header>
+      <FormGroup label="ATK result">
+        <FormItem label="Negative">
+          <Radio
+            value={atkResult === "negative"}
+            onChange={() => setATKResult("negative")}
+          />
+        </FormItem>
+        <FormItem label="Positive">
+          <Radio
+            value={atkResult === "positive"}
+            onChange={() => setATKResult("positive")}
+          />
+        </FormItem>
+      </FormGroup>
+      <div className="flex flex-row flex-wrap gap-4">
+        <Radio value={false} disabled />
+        <Radio value={true} disabled />
+      </div>
+    </Section>
+  );
+};
+
 const SwitchSection: FC = () => {
   const [switchOn, setSwitchOn] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(true);
@@ -188,8 +246,10 @@ const InputPage: CustomPage = () => (
       <title>Input - SK Components</title>
     </Head>
     <ContentLayout>
+      <CheckboxSection />
       <ChipFieldSection />
       <TextFieldSection />
+      <RadioSection />
       <SwitchSection />
     </ContentLayout>
   </>

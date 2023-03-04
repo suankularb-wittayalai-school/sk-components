@@ -30,6 +30,13 @@ export interface ChipSetProps extends SKComponent {
    * - Optional.
    */
   scrollable?: boolean;
+
+  /**
+   * Attributes for the underlying `<div>` element used as the field.
+   *
+   * - Optional.
+   */
+  divAttr?: JSX.IntrinsicElements["div"];
 }
 
 /**
@@ -40,10 +47,12 @@ export interface ChipSetProps extends SKComponent {
  *
  * @param children Chips.
  * @param scrollable If the parent element is not wide enough for all Chips to be visible, the Chip Set can be scrolled horizontally.
+ * @param divAttr Attributes for the underlying `<div>` element used as the field.
  */
 export function ChipSet({
   children,
   scrollable,
+  divAttr,
   style,
   className,
 }: ChipSetProps) {
@@ -54,8 +63,15 @@ export function ChipSet({
         scrollable ? "skc-chip-set__wrapper" : "skc-chip-set",
         className,
       ])}
+      {...(!scrollable ? divAttr : null)}
     >
-      {scrollable ? <div className="skc-chip-set">{children}</div> : children}
+      {scrollable ? (
+        <div className="skc-chip-set" {...(scrollable ? divAttr : null)}>
+          {children}
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
 }

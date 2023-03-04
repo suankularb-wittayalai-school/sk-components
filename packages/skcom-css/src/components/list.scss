@@ -22,17 +22,7 @@
   border-bottom: 1px solid var(--outline-variant);
 }
 
-// Have List fill the entire screen width on mobile only
-.skc-section:has(.skc-list) {
+// Have List fill the entire screen width on mobile
+.skc-content-layout__content > .skc-section > .skc-list {
   margin-inline: 0;
-
-  > *:not(.skc-list) {
-    margin-inline: 1rem;
-  }
-}
-
-@include mix.breakpoint("sm") {
-  .skc-section > * {
-    margin-inline: 0 !important;
-  }
 }

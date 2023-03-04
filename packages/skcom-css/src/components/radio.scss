@@ -1,0 +1,145 @@
+////
+/// **Radio**
+/// A choice from a single-select set of choices. Unlike Checkbox and Switch,
+/// Radio always appear in a group.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ilewd6wmow42 SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+// Radio
+.skc-radio {
+  position: relative;
+  width: fit-content;
+  -webkit-tap-highlight-color: transparent;
+
+  &::before {
+    background-color: var(--on-surface);
+  }
+
+  &:not(.skc-radio--disabled) {
+    &:hover,
+    .skc-form-item:hover & {
+      &::before {
+        opacity: 0.08;
+      }
+    }
+
+    &:focus-within,
+    &:active,
+    .skc-form-item:focus-within &,
+    .skc-form-item:active & {
+      &::before {
+        opacity: 0.12;
+      }
+    }
+  }
+}
+
+// State layer
+.skc-radio::before,
+.skc-radio__ripple-parent {
+  @include mix.state-layer();
+  inset: 50% auto auto 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+// Custom radio
+.skc-radio__circle {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-2),
+    var(--easing-standard)
+  );
+  display: grid;
+  place-content: center;
+  box-sizing: border-box;
+  width: 1.125rem;
+  height: 1.125rem;
+  cursor: pointer;
+  transform: scale(1);
+  border: 2px solid var(--on-surface-variant);
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.skc-radio__marker {
+  @include mix.transition(
+    transform,
+    var(--motion-short-2),
+    var(--easing-standard)
+  );
+  box-sizing: border-box;
+  width: 0.625rem;
+  height: 0.625rem;
+  transform: scale(0);
+  border-radius: inherit;
+  background-color: var(--primary);
+}
+
+// Hide native input
+.skc-radio__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+// Ripple
+.skc-radio__ripple-parent {
+  overflow: hidden;
+  transition: none;
+  opacity: 1;
+}
+
+.skc-radio__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+}
+
+// Selected state
+.skc-radio:has(.skc-radio__input:checked) {
+  &::before,
+  .skc-radio__ripple {
+    background-color: var(--primary);
+  }
+
+  .skc-radio__circle {
+    border-color: var(--primary);
+  }
+
+  .skc-radio__marker {
+    transform: scale(1);
+  }
+}
+
+// Disabled state
+
+// (@SiravitPhokeed)
+// We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
+// attribute is on the underlying `<input>`, not `.skc-radio`, which makes
+// using it in this case a pain in the hindquarters.
+.skc-radio--disabled {
+  opacity: 0.38;
+
+  .skc-radio__circle {
+    cursor: default;
+  }
+
+  .skc-radio__marker {
+    background-color: var(--on-surface);
+  }
+
+  .skc-radio__ripple {
+    display: none;
+  }
+
+  // Disabled selected
+  .skc-radio__input:checked ~ .skc-radio__circle {
+    border-color: var(--on-surface);
+  }
+}

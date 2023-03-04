@@ -591,6 +591,65 @@ declare namespace Columns {
 }
 
 /**
+ * Props for {@link Checkbox}.
+ */
+interface CheckboxProps extends SKComponent {
+    /**
+     * The state of the Checkbox. This is useful if you want a controlled input.
+     *
+     * - If `tristate` is `true`, a `value` of `null` means indeterminate, which
+     *   displays a dash. If not, `value` cannot be `null`.
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: boolean | null;
+    /**
+     * This function triggers when the user toggles the Checkbox. The state is
+     * passed in via the function as a boolean.
+     *
+     * - Optional.
+     */
+    onChange?: (value: boolean) => any;
+    /**
+     * Turns the Checkbox gray and block any action associated with it.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Allows the Checkbox to have 3 states: off, on, and indeterminate.
+     *
+     * - Optional.
+     */
+    tristate?: boolean;
+    /**
+     * Attributes for the underlying `<input>` element.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * A choice from a multi-select set of choices. When alone, a Checkbox is
+ * usually used for acknowledgement of or agreement to something, like a terms
+ * and conditions.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cy04od1b0wro SKCom documentation}
+ *
+ * @param value The state of the Checkbox. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the Checkbox.
+ * @param disabled Turns the Checkbox gray and block any action associated with it.
+ * @param tristate Allows the Checkbox to have 3 states: off, on, and indeterminate.
+ * @param inputAttr Attributes for the underlying `<input>` element.
+ */
+declare function Checkbox({ value, onChange, tristate, disabled, inputAttr, style, className, }: CheckboxProps): JSX.Element;
+declare namespace Checkbox {
+    var displayName: string;
+}
+
+/**
  * Props for {@link InputChip Input Chip}.
  */
 interface InputChipProps extends SKComponent {
@@ -947,6 +1006,12 @@ interface ChipSetProps extends SKComponent {
      * - Optional.
      */
     scrollable?: boolean;
+    /**
+     * Attributes for the underlying `<div>` element used as the field.
+     *
+     * - Optional.
+     */
+    divAttr?: JSX.IntrinsicElements["div"];
 }
 /**
  * Chips are normally alongside each other. A Chip Set is a container for
@@ -956,8 +1021,9 @@ interface ChipSetProps extends SKComponent {
  *
  * @param children Chips.
  * @param scrollable If the parent element is not wide enough for all Chips to be visible, the Chip Set can be scrolled horizontally.
+ * @param divAttr Attributes for the underlying `<div>` element used as the field.
  */
-declare function ChipSet({ children, scrollable, style, className, }: ChipSetProps): JSX.Element;
+declare function ChipSet({ children, scrollable, divAttr, style, className, }: ChipSetProps): JSX.Element;
 declare namespace ChipSet {
     var displayName: string;
 }
@@ -1188,6 +1254,103 @@ interface DividerProps extends SKComponent {
  */
 declare function Divider({ style, className }: DividerProps): JSX.Element;
 declare namespace Divider {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link FormGroup Form Group}.
+ */
+interface FormGroupProps extends SKComponent {
+    /**
+     * Form Items within this group, be it a set of options to choose from or
+     * related settings in a preferences page.
+     *
+     * - Must only be Form Items.
+     * - Always required.
+     */
+    children?: React.ReactNode;
+    /**
+     * The legend for the entire group.
+     *
+     * - Must be a string or JSX Element.
+     * - Always required.
+     */
+    label: string | JSX.Element;
+    /**
+     * A description of the Form Group for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Optional.
+     */
+    alt?: string;
+    /**
+     * Attributes for the underlying `<legend>` element used as the field.
+     *
+     * - Optional.
+     */
+    legendAttr?: JSX.IntrinsicElements["legend"];
+}
+/**
+ * A group of related form items, like options in a radio group.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param children Form Items within this group, be it a set of options to choose from or related settings in a preferences page.
+ * @param label The legend for the entire field.
+ * @param alt A description of the Form Group for screen readers, similar to `alt` on `<img>`.
+ * @param legendAttr Attributes for the underlying `<legend>` element used as the field.
+ */
+declare function FormGroup({ children, label, alt, legendAttr, style, className, }: FormGroupProps): JSX.Element;
+declare namespace FormGroup {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link FormItem Form Item}.
+ */
+interface FormItemProps extends SKComponent {
+    /**
+     * The input.
+     *
+     * - Must be a Checkbox, Radio, or Switch.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The label for the input.
+     *
+     * - Must be a string or JSX Element.
+     * - Always required.
+     */
+    label: string | JSX.Element;
+    /**
+     * A description of the Form Item for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Required if `label` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
+     * Attributes for the underlying `<label>` element used as the field.
+     *
+     * - Optional.
+     */
+    labelAttr?: JSX.IntrinsicElements["label"];
+}
+/**
+ * A wrapper for form control components like Checkbox, Radio, and Switch with
+ * a label.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation}
+ *
+ * @param children The input.
+ * @param label The label for the input.
+ * @param alt A description of the Form Item for screen readers, similar to `alt` on `<img>`.
+ * @param labelAttr Attributes for the underlying `<label>` element used as the field.
+ */
+declare function FormItem({ children, label, alt, labelAttr, style, className, }: FormItemProps): JSX.Element;
+declare namespace FormItem {
     var displayName: string;
 }
 
@@ -2153,6 +2316,57 @@ declare namespace Progress {
 }
 
 /**
+ * Props for {@link Radio}.
+ */
+interface RadioProps extends SKComponent {
+    /**
+     * The state of the Radio. This is useful if you want a controlled input.
+     *
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: boolean;
+    /**
+     * This function triggers when the user toggles the Radio. The state is
+     * passed in via the function as a boolean.
+     *
+     * - Optional.
+     *
+     * @param value Whether the Radio is toggled to on or off.
+     */
+    onChange?: (value: boolean) => any;
+    /**
+     * Turns the Radio gray and block any action associated with it.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Attributes for the underlying `<input>` element.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * A choice from a single-select set of choices. Unlike Checkbox and Switch,
+ * Radio always appear in a group.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ilewd6wmow42 SKCom documentation}
+ *
+ * @param value The state of the Radio. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the Radio.
+ * @param disabled Turns the Radio gray and block any action associated with it.
+ * @param inputAttr Attributes for the underlying `<input>` element.
+ */
+declare function Radio({ value, onChange, disabled, inputAttr, style, className, }: RadioProps): JSX.Element;
+declare namespace Radio {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Section}.
  */
 interface SectionProps extends SKComponent {
@@ -2459,4 +2673,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

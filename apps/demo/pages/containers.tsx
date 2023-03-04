@@ -11,11 +11,13 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Checkbox,
   Columns,
   ContentLayout,
   Dialog,
   DialogContent,
   DialogHeader,
+  FormItem,
   FullscreenDialog,
   Header,
   List,
@@ -96,6 +98,7 @@ const ColumnsSection: FC = () => (
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
   const [showReport, setShowReport] = useState<boolean>(false);
+  const [understood, setUnderstood] = useState<boolean>(false);
 
   const [view, setView] = useState<"bug-report" | "feature-request">(
     "bug-report"
@@ -179,6 +182,12 @@ const DialogSection: FC = () => {
           </a>
           . Thank you!
         </p>
+        <FormItem
+          label="I have already queried the issues page and cannot find my
+            issue."
+        >
+          <Checkbox value={understood} onChange={setUnderstood} />
+        </FormItem>
         <SegmentedButton alt="View" full className="pb-4">
           <Button
             appearance="outlined"
@@ -262,29 +271,70 @@ const HeaderSection: FC = () => (
   </Section>
 );
 
-const ListSection: FC = () => (
-  <Section>
-    <Header>List</Header>
-    <List divided>
-      <ListItem align="center" lines={3} stateLayerEffect>
-        <Image src="/images/burger.png" width={56} height={56} alt="" />
-        <ListItemContent
-          overline="Meal of the day"
-          title="Fish Burger"
-          desc="฿50.00 • Contains fish"
-        />
-      </ListItem>
-      <ListItem align="center" lines={2} stateLayerEffect>
-        <Image src="/images/burger.png" width={56} height={56} alt="" />
-        <ListItemContent title="Pork Burger" desc="฿50.00" />
-      </ListItem>
-      <ListItem align="center" lines={2} stateLayerEffect>
-        <Image src="/images/burger.png" width={56} height={56} alt="" />
-        <ListItemContent title="Beef Burger" desc="฿50.00 • Contains beef" />
-      </ListItem>
-    </List>
-  </Section>
-);
+const ListSection: FC = () => {
+  const [cart, setCart] = useState<string[]>(["fish-burger"]);
+
+  function modifyCart(item: string) {
+    if (cart.includes(item))
+      setCart(cart.filter((cartItem) => item !== cartItem));
+    else setCart([...cart, item]);
+  }
+
+  return (
+    <Section>
+      <Header>List</Header>
+      <List divided>
+        {/* Select all */}
+        <ListItem align="center" lines={1}>
+          <ListItemContent title="Select all" />
+          <Checkbox
+            value={cart.length === 3 ? true : cart.length === 0 ? false : null}
+            tristate
+            onChange={(value) =>
+              setCart(
+                value ? ["fish-burger", "pork-burger", "beef-burger"] : []
+              )
+            }
+            inputAttr={{ "aria-labelledby": "list-item-select-all" }}
+          />
+        </ListItem>
+
+        {/* Menu */}
+        <ListItem align="center" lines={3}>
+          <Image src="/images/burger.png" width={56} height={56} alt="" />
+          <ListItemContent
+            overline="Meal of the day"
+            title="Fish Burger"
+            desc="฿50.00 • Contains fish"
+          />
+          <Checkbox
+            value={cart.includes("fish-burger")}
+            onChange={() => modifyCart("fish-burger")}
+            inputAttr={{ "aria-labelledby": "list-item-fish-burger" }}
+          />
+        </ListItem>
+        <ListItem align="center" lines={2}>
+          <Image src="/images/burger.png" width={56} height={56} alt="" />
+          <ListItemContent title="Pork Burger" desc="฿50.00" />
+          <Checkbox
+            value={cart.includes("pork-burger")}
+            onChange={() => modifyCart("pork-burger")}
+            inputAttr={{ "aria-labelledby": "list-item-pork-burger" }}
+          />
+        </ListItem>
+        <ListItem align="center" lines={2}>
+          <Image src="/images/burger.png" width={56} height={56} alt="" />
+          <ListItemContent title="Beef Burger" desc="฿50.00 • Contains beef" />
+          <Checkbox
+            value={cart.includes("beef-burger")}
+            onChange={() => modifyCart("beef-burger")}
+            inputAttr={{ "aria-labelledby": "list-item-beef-burger" }}
+          />
+        </ListItem>
+      </List>
+    </Section>
+  );
+};
 
 const ProgressSection: FC = () => (
   <Section>
