@@ -11,6 +11,7 @@ import {
   Card,
   CardContent,
   CardHeader,
+  Checkbox,
   Columns,
   ContentLayout,
   Dialog,
@@ -262,29 +263,51 @@ const HeaderSection: FC = () => (
   </Section>
 );
 
-const ListSection: FC = () => (
-  <Section>
-    <Header>List</Header>
-    <List divided>
-      <ListItem align="center" lines={3} stateLayerEffect>
-        <Image src="/images/burger.png" width={56} height={56} alt="" />
-        <ListItemContent
-          overline="Meal of the day"
-          title="Fish Burger"
-          desc="฿50.00 • Contains fish"
-        />
-      </ListItem>
-      <ListItem align="center" lines={2} stateLayerEffect>
-        <Image src="/images/burger.png" width={56} height={56} alt="" />
-        <ListItemContent title="Pork Burger" desc="฿50.00" />
-      </ListItem>
-      <ListItem align="center" lines={2} stateLayerEffect>
-        <Image src="/images/burger.png" width={56} height={56} alt="" />
-        <ListItemContent title="Beef Burger" desc="฿50.00 • Contains beef" />
-      </ListItem>
-    </List>
-  </Section>
-);
+const ListSection: FC = () => {
+  const [cart, setCart] = useState<string[]>(["fish-burger"]);
+
+  function modifyCart(item: string) {
+    if (cart.includes(item))
+      setCart(cart.filter((cartItem) => item !== cartItem));
+    else setCart([...cart, item]);
+  }
+
+  return (
+    <Section>
+      <Header>List</Header>
+      <List divided>
+        <ListItem align="center" lines={3}>
+          <Image src="/images/burger.png" width={56} height={56} alt="" />
+          <ListItemContent
+            overline="Meal of the day"
+            title="Fish Burger"
+            desc="฿50.00 • Contains fish"
+          />
+          <Checkbox
+            value={cart.includes("fish-burger")}
+            onChange={() => modifyCart("fish-burger")}
+          />
+        </ListItem>
+        <ListItem align="center" lines={2}>
+          <Image src="/images/burger.png" width={56} height={56} alt="" />
+          <ListItemContent title="Pork Burger" desc="฿50.00" />
+          <Checkbox
+            value={cart.includes("pork-burger")}
+            onChange={() => modifyCart("pork-burger")}
+          />
+        </ListItem>
+        <ListItem align="center" lines={2}>
+          <Image src="/images/burger.png" width={56} height={56} alt="" />
+          <ListItemContent title="Beef Burger" desc="฿50.00 • Contains beef" />
+          <Checkbox
+            value={cart.includes("beef-burger")}
+            onChange={() => modifyCart("beef-burger")}
+          />
+        </ListItem>
+      </List>
+    </Section>
+  );
+};
 
 const ProgressSection: FC = () => (
   <Section>
