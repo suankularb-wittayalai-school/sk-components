@@ -286,6 +286,7 @@ const ListSection: FC = () => {
           <Checkbox
             value={cart.includes("fish-burger")}
             onChange={() => modifyCart("fish-burger")}
+            inputAttr={{ "aria-labelledby": "list-item-fish-burger" }}
           />
         </ListItem>
         <ListItem align="center" lines={2}>
@@ -294,6 +295,7 @@ const ListSection: FC = () => {
           <Checkbox
             value={cart.includes("pork-burger")}
             onChange={() => modifyCart("pork-burger")}
+            inputAttr={{ "aria-labelledby": "list-item-pork-burger" }}
           />
         </ListItem>
         <ListItem align="center" lines={2}>
@@ -302,6 +304,7 @@ const ListSection: FC = () => {
           <Checkbox
             value={cart.includes("beef-burger")}
             onChange={() => modifyCart("beef-burger")}
+            inputAttr={{ "aria-labelledby": "list-item-beef-burger" }}
           />
         </ListItem>
       </List>
