@@ -78,9 +78,7 @@ export function FormItem({
 
   const injectedChildren = React.cloneElement(
     React.Children.only(children) as JSX.Element,
-    {
-      inputAttr: { id: formItemID },
-    } satisfies CheckboxProps | RadioProps
+    { inputAttr: { id: formItemID } } satisfies CheckboxProps | RadioProps
   );
 
   return (

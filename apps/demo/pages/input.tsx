@@ -9,6 +9,7 @@ import {
   ChipSet,
   Columns,
   ContentLayout,
+  FormGroup,
   FormItem,
   Header,
   InputChip,
@@ -184,15 +185,26 @@ const TextFieldSection: FC = () => {
 };
 
 const RadioSection: FC = () => {
-  const [checked, setChecked] = useState<number>(0);
+  const [atkResult, setATKResult] = useState<"negative" | "positive">();
 
   return (
     <Section>
       <Header>Radio</Header>
+      <FormGroup label="ATK result">
+        <FormItem label="Negative">
+          <Radio
+            value={atkResult === "negative"}
+            onChange={() => setATKResult("negative")}
+          />
+        </FormItem>
+        <FormItem label="Positive">
+          <Radio
+            value={atkResult === "positive"}
+            onChange={() => setATKResult("positive")}
+          />
+        </FormItem>
+      </FormGroup>
       <div className="flex flex-row flex-wrap gap-4">
-        <Radio value={checked === 0} onChange={() => setChecked(0)} />
-        <Radio value={checked === 1} onChange={() => setChecked(1)} />
-        <Radio value={checked === 2} onChange={() => setChecked(2)} />
         <Radio value={false} disabled />
         <Radio value={true} disabled />
       </div>
