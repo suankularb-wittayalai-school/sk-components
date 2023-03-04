@@ -9,7 +9,6 @@ import "@suankularb-components/css/dist/css/components/form-group.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link FormGroup Form Group}.
@@ -68,7 +67,11 @@ export function FormGroup({
   className,
 }: FormGroupProps) {
   return (
-    <fieldset aria-label={alt} style={style} className={cn(["skc-form-group", className])}>
+    <fieldset
+      aria-label={alt}
+      style={style}
+      className={cn(["skc-form-group", className])}
+    >
       <legend className="skc-form-group__label" {...legendAttr}>
         {label}
       </legend>

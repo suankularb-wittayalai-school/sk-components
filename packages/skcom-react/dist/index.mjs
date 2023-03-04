@@ -1063,27 +1063,18 @@ function ChipField({
       }
     ),
     /* @__PURE__ */ jsx16("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ jsxs9("div", { className: "skc-chip-field__content", children: [
-      /* @__PURE__ */ jsx16(
-        ChipSet,
-        {
-          divAttr: {
-            "aria-live": "polite",
-            "aria-relevant": "all"
-          },
-          children: React9.Children.map(
-            React9.Children.only(children).props.children,
-            (child, idx) => {
-              if (!lastSelected)
-                return child;
-              if (idx === noOfChips - 1)
-                return React9.cloneElement(child, {
-                  selected: true
-                });
-              return child;
-            }
-          )
+      /* @__PURE__ */ jsx16(ChipSet, { divAttr: { "aria-live": "polite", "aria-relevant": "all" }, children: React9.Children.map(
+        React9.Children.only(children).props.children,
+        (child, idx) => {
+          if (!lastSelected)
+            return child;
+          if (idx === noOfChips - 1)
+            return React9.cloneElement(child, {
+              selected: true
+            });
+          return child;
         }
-      ),
+      ) }),
       /* @__PURE__ */ jsx16(
         "input",
         __spreadValues({
@@ -1480,10 +1471,18 @@ function FormGroup({
   style,
   className
 }) {
-  return /* @__PURE__ */ jsxs13("fieldset", { "aria-label": alt, style, className: cn(["skc-form-group", className]), children: [
-    /* @__PURE__ */ jsx22("legend", __spreadProps(__spreadValues({ className: "skc-form-group__label" }, legendAttr), { children: label })),
-    children
-  ] });
+  return /* @__PURE__ */ jsxs13(
+    "fieldset",
+    {
+      "aria-label": alt,
+      style,
+      className: cn(["skc-form-group", className]),
+      children: [
+        /* @__PURE__ */ jsx22("legend", __spreadProps(__spreadValues({ className: "skc-form-group__label" }, legendAttr), { children: label })),
+        children
+      ]
+    }
+  );
 }
 FormGroup.displayName = "FormGroup";
 
@@ -2340,7 +2339,7 @@ PageHeader.displayName = "PageHeader";
 import * as React22 from "react";
 
 // ../skcom-css/dist/css/components/radio.css
-styleInject('.skc-radio {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-radio::before {\n  background-color: var(--on-surface);\n}\n.skc-radio:not(.skc-radio--disabled):hover::before,\n.skc-form-item:hover .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .08;\n}\n.skc-radio:not(.skc-radio--disabled):focus-within::before,\n.skc-radio:not(.skc-radio--disabled):active::before,\n.skc-form-item:focus-within .skc-radio:not(.skc-radio--disabled)::before,\n.skc-form-item:active .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .12;\n}\n.skc-radio::before,\n.skc-radio__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-radio__circle {\n  transition: border-color var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: 50%;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-radio__marker {\n  transition: transform var(--motion-short-2) var(--easing-standard);\n  width: .625rem;\n  height: .625rem;\n  box-sizing: border-box;\n  transform: scale(0);\n  border-radius: inherit;\n  background-color: var(--primary);\n}\n.skc-radio__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-radio__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-radio__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-radio:has(.skc-radio__input:checked)::before,\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__ripple {\n  background-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__circle {\n  border-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__marker {\n  transform: scale(1);\n}\n.skc-radio--disabled {\n  opacity: .38;\n}\n.skc-radio--disabled .skc-radio__circle {\n  cursor: default;\n}\n.skc-radio--disabled .skc-radio__marker {\n  background-color: var(--on-surface);\n}\n.skc-radio--disabled .skc-radio__ripple {\n  display: none;\n}\n.skc-radio--disabled .skc-radio__input:checked ~ .skc-radio__circle {\n  border-color: var(--on-surface);\n}\n');
+styleInject('.skc-radio {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-radio::before {\n  background-color: var(--on-surface);\n}\n.skc-radio:not(.skc-radio--disabled):hover::before,\n.skc-form-item:hover .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .08;\n}\n.skc-radio:not(.skc-radio--disabled):focus-within::before,\n.skc-radio:not(.skc-radio--disabled):active::before,\n.skc-form-item:focus-within .skc-radio:not(.skc-radio--disabled)::before,\n.skc-form-item:active .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .12;\n}\n.skc-radio::before,\n.skc-radio__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-radio__circle {\n  transition: border-color var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: 50%;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-radio__marker {\n  transition: transform var(--motion-short-2) var(--easing-standard);\n  box-sizing: border-box;\n  width: .625rem;\n  height: .625rem;\n  transform: scale(0);\n  border-radius: inherit;\n  background-color: var(--primary);\n}\n.skc-radio__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-radio__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-radio__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-radio:has(.skc-radio__input:checked)::before,\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__ripple {\n  background-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__circle {\n  border-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__marker {\n  transform: scale(1);\n}\n.skc-radio--disabled {\n  opacity: .38;\n}\n.skc-radio--disabled .skc-radio__circle {\n  cursor: default;\n}\n.skc-radio--disabled .skc-radio__marker {\n  background-color: var(--on-surface);\n}\n.skc-radio--disabled .skc-radio__ripple {\n  display: none;\n}\n.skc-radio--disabled .skc-radio__input:checked ~ .skc-radio__circle {\n  border-color: var(--on-surface);\n}\n');
 
 // src/components/Radio/index.tsx
 import { motion as motion19 } from "framer-motion";

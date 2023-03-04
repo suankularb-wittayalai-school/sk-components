@@ -73,9 +73,9 @@
     var(--motion-short-2),
     var(--easing-standard)
   );
+  box-sizing: border-box;
   width: 0.625rem;
   height: 0.625rem;
-  box-sizing: border-box;
   transform: scale(0);
   border-radius: inherit;
   background-color: var(--primary);

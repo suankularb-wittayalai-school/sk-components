@@ -288,13 +288,7 @@ export function ChipField({
       <div className="skc-chip-field__scrollable">
         <div className="skc-chip-field__content">
           {/* Chip Set */}
-
-          <ChipSet
-            divAttr={{
-              "aria-live": "polite",
-              "aria-relevant": "all",
-            }}
-          >
+          <ChipSet divAttr={{ "aria-live": "polite", "aria-relevant": "all" }}>
             {React.Children.map(
               (React.Children.only(children) as JSX.Element).props.children,
               (child, idx) => {
