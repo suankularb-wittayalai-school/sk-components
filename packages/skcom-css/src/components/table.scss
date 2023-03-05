@@ -1,0 +1,17 @@
+////
+/// **Table**
+/// A Table displays information in columns and rows, each row representing a
+/// set of data in each aspect, represented by columns.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.10em52qqcep7 SKCom documentation
+////
+
+.skc-table {
+  overflow: auto;
+  background-color: var(--surface-2);
+  border: 2px solid var(--outline-variant);
+}
+
+.skc-table__content {
+  background-color: var(--surface);
+}
