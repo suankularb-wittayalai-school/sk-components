@@ -27,6 +27,12 @@ import {
   Progress,
   Section,
   SegmentedButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableFoot,
+  TableHead,
+  TableRow,
   TextField,
 } from "@suankularb-components/react";
 
@@ -168,69 +174,76 @@ const DialogSection: FC = () => {
             Submit
           </Button>
         }
-        width={420}
+        width={820}
         onClose={() => setShowReport(false)}
       >
-        <p>
-          If you have a GitHub account, please consider reporting issues on our{" "}
-          <a
-            href="https://github.com/suankularb-wittayalai-school/mysk-frontend"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub repository
-          </a>
-          . Thank you!
-        </p>
-        <FormItem
-          label="I have already queried the issues page and cannot find my
-            issue."
-        >
-          <Checkbox value={understood} onChange={setUnderstood} />
-        </FormItem>
-        <SegmentedButton alt="View" full className="pb-4">
-          <Button
-            appearance="outlined"
-            selected={view === "bug-report"}
-            onClick={() => setView("bug-report")}
-          >
-            Bug report
-          </Button>
-          <Button
-            appearance="outlined"
-            selected={view === "feature-request"}
-            onClick={() => setView("feature-request")}
-          >
-            Feature request
-          </Button>
-        </SegmentedButton>
-        <div className="flex flex-col gap-12 pb-12">
-          <TextField
-            appearance="outlined"
-            label="Title"
-            behavior="single-line"
-            helperMsg="What is your issue?"
-            value={issueTitle}
-            onChange={setIssueTitle}
-          />
-          <TextField
-            appearance="outlined"
-            label="Description"
-            behavior="textarea"
-            helperMsg="A clear and concise description."
-            value={issueDesc}
-            onChange={setIssueDesc}
-          />
-          <TextField
-            appearance="outlined"
-            label="Expectation"
-            behavior="textarea"
-            helperMsg="What you expected to have happened/think should be
-              implemented."
-            value={issueExpect}
-            onChange={setIssueExpect}
-          />
-        </div>
+        <Columns columns={2}>
+          <div className="flex flex-col gap-4">
+            <p id="dialog-report-an-issue">
+              If you have a GitHub account, please consider reporting issues on
+              our{" "}
+              <a
+                href="https://github.com/suankularb-wittayalai-school/mysk-frontend"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub repository
+              </a>
+              . Thank you!
+            </p>
+            <FormItem
+              label="I have already queried the issues page and cannot find my
+              issue."
+            >
+              <Checkbox value={understood} onChange={setUnderstood} />
+            </FormItem>
+            <SegmentedButton alt="View" full className="pb-4">
+              <Button
+                appearance="outlined"
+                selected={view === "bug-report"}
+                onClick={() => setView("bug-report")}
+              >
+                Bug report
+              </Button>
+              <Button
+                appearance="outlined"
+                selected={view === "feature-request"}
+                onClick={() => setView("feature-request")}
+              >
+                Feature request
+              </Button>
+            </SegmentedButton>
+          </div>
+          <div>
+            <div className="flex flex-col gap-12 pb-12">
+              <TextField
+                appearance="outlined"
+                label="Title"
+                behavior="single-line"
+                helperMsg="What is your issue?"
+                value={issueTitle}
+                onChange={setIssueTitle}
+              />
+              <TextField
+                appearance="outlined"
+                label="Description"
+                behavior="textarea"
+                helperMsg="A clear and concise description."
+                value={issueDesc}
+                onChange={setIssueDesc}
+              />
+              <TextField
+                appearance="outlined"
+                label="Expectation"
+                behavior="textarea"
+                helperMsg="What you expected to have happened/think should be
+                  implemented."
+                value={issueExpect}
+                onChange={setIssueExpect}
+              />
+            </div>
+          </div>
+        </Columns>
       </FullscreenDialog>
     </Section>
   );
@@ -366,6 +379,38 @@ const ProgressSection: FC = () => (
   </Section>
 );
 
+const TableSection: FC = () => (
+  <Section>
+    <Header>Table</Header>
+    <Table contentWidth={480}>
+      <TableHead>
+        <TableRow>
+          <TableCell header>Test date</TableCell>
+          <TableCell header>Method</TableCell>
+          <TableCell header>Result</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Jan 8, 2023</TableCell>
+          <TableCell>ATK via saliva</TableCell>
+          <TableCell>Negative</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jan 1, 2023</TableCell>
+          <TableCell>RT-PCR</TableCell>
+          <TableCell>Positive</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jan 1, 2023</TableCell>
+          <TableCell>ATK via saliva</TableCell>
+          <TableCell>Positive</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </Section>
+);
+
 const ContainersPage: CustomPage = () => {
   return (
     <>
@@ -380,6 +425,7 @@ const ContainersPage: CustomPage = () => {
         <HeaderSection />
         <ListSection />
         <ProgressSection />
+        <TableSection />
       </ContentLayout>
     </>
   );

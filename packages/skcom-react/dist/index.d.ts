@@ -186,7 +186,7 @@ interface ButtonProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, title, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, title, style, className, href, onClick, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         title?: string;
@@ -194,6 +194,7 @@ interface ButtonProps extends SKComponent {
         className: any;
         href: string;
         onClick: (event: React.MouseEvent) => void;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -435,13 +436,14 @@ interface CardProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onClick, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref?: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
         onClick?: (event: React.MouseEvent) => void;
+        onTouchStart?: (event: React.TouchEvent) => void;
         onMouseDown?: (event: React.MouseEvent) => void;
         onKeyDown?: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -852,13 +854,14 @@ interface AssistChipProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, ref, style, className, href, onClick, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onClick, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
         onClick: (event: React.MouseEvent) => void;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -1506,12 +1509,13 @@ interface ListItemProps extends SKComponent {
      * - Incompatible with `onClick`.
      * - Optional.
      */
-    element?: ({ children, ref, style, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref?: React.MutableRefObject<any>;
         style?: React.CSSProperties;
         className: any;
         href: string;
+        onTouchStart?: (event: React.TouchEvent) => void;
         onMouseDown?: (event: React.MouseEvent) => void;
         onKeyDown?: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -1786,12 +1790,13 @@ interface NavBarItemProps extends SKComponent {
      *
      * - Optional.
      */
-    element?: ({ children, title, style, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         title?: string;
         style?: React.CSSProperties;
         className: any;
         href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -1950,13 +1955,14 @@ interface NavDrawerItemProps extends SKComponent {
      *
      * - Optional.
      */
-    element?: ({ children, ref, title, style, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, ref, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         ref: React.MutableRefObject<any>;
         title?: string;
         style?: React.CSSProperties;
         className: any;
         href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -2060,10 +2066,11 @@ interface FABProps extends SKComponent {
      *
      * - Incompatible with `onClick`.
      */
-    element?: ({ children, className, href, onMouseDown, onKeyDown, }: {
+    element?: ({ children, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
         children: React.ReactNode;
         className: string;
         href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
         onMouseDown: (event: React.MouseEvent) => void;
         onKeyDown: (event: React.KeyboardEvent) => void;
     }) => JSX.Element | null;
@@ -2464,6 +2471,215 @@ declare namespace Switch {
 }
 
 /**
+ * Props for {@link Table}.
+ */
+interface TableProps extends SKComponent {
+    /**
+     * The content of the Table.
+     *
+     * - Must include Table Head and Table Body.
+     * - Can include Table Foot in addition to the 2 required components.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The minimum width of the content. When the Table’s width is lower than
+     * this value, it becomes scrollable. Otherwise, the content fills the width
+     * of the Table.
+     *
+     * - Optional.
+     */
+    contentWidth?: number;
+    /**
+     * The maximum height of the Table. The Table uses the content’s height until
+     * it exceeds this value.
+     *
+     * - Optional.
+     */
+    height?: number;
+}
+/**
+ * A row of Buttons. Table handles spacing and overflow.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ *
+ * @param children The content of the Table.
+ * @param contentWidth The minimum width of the content.
+ * @param height The maximum height of the Table.
+ */
+declare function Table({ children, contentWidth, height, style, className, }: TableProps): JSX.Element;
+declare namespace Table {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TableHead Table Head}.
+ */
+interface TableHeadProps extends SKComponent {
+    /**
+     * Table Head has the same behaviour as `<thead>`.
+     *
+     * - Must consist of Table Row(s), which must consist of Table Cells with the
+     *   `header` enabled.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If the Table Head stays put on scroll.
+     *
+     * - Table Head will be fixed to the top of the parent Table, not the screen.
+     * - Only effective if `height` is set on the parent Table.
+     * - Optional.
+     */
+    fixed?: boolean;
+}
+/**
+ * The head area of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
+ *
+ * @param children Table Head has the same behaviour as `<thead>`.
+ * @param fixed If the Table Head stays put on scroll.
+ */
+declare function TableHead({ children, fixed, style, className, }: TableHeadProps): JSX.Element;
+declare namespace TableHead {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TableBody Table Body}.
+ */
+interface TableBodyProps extends SKComponent {
+    /**
+     * Table Body has the same behaviour as `<tbody>`.
+     *
+     * - Must consist of Table Rows, which must consist of Table Cells.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * The body area of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation}
+ *
+ * @param children Table Body has the same behaviour as `<tbody>`.
+ */
+declare function TableBody({ children, style, className }: TableBodyProps): JSX.Element;
+declare namespace TableBody {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TableFoot Table Foot}.
+ */
+interface TableFootProps extends SKComponent {
+    /**
+     * Table Foot has the same behaviour as `<tfoot>`.
+     *
+     * - Must consist of Table Rows, which must consist of Table Cells.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * The foot area of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5lm5awdc1t9l SKCom documentation}
+ *
+ * @param children Table Foot has the same behaviour as `<tfoot>`.
+ */
+declare function TableFoot({ children, style, className }: TableFootProps): JSX.Element;
+declare namespace TableFoot {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TableRow Table Row}.
+ */
+interface TableRowProps extends SKComponent {
+    /**
+     * Table Row has the same behaviour as `<tr>`.
+     *
+     * - Must consist of Table Cells.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * A row of a Table, must be within a table area (Table Head, Table Body, or
+ * Table Foot).
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation}
+ *
+ * @param children Table Row has the same behaviour as `<tr>`.
+ */
+declare function TableRow({ children, style, className }: TableRowProps): JSX.Element;
+declare namespace TableRow {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TableCell Table Body}.
+ */
+interface TableCellProps extends SKComponent {
+    /**
+     * The content of the cell.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
+     *
+     * - Optional.
+     */
+    header?: boolean;
+    /**
+     * How the Buttons should be positioned. It can be aligned to the left, the
+     * center (default), or the right.
+     *
+     * - Must be `left`, `center`, `right`.
+     * - Optional.
+     */
+    align?: "left" | "center" | "right";
+    /**
+     * An inline menu. This is useful for editable tables.
+     *
+     * - Optional.
+     */
+    menu?: JSX.Element;
+    /**
+     * Triggers on click if defined.
+     * - If this is defined, a dropdown button appears.
+     * - Optional.
+     */
+    onMenuToggle?: () => any;
+    /**
+     * Attributes for the underlying `<td>` element.
+     *
+     * - Optional.
+     */
+    tdAttr?: JSX.IntrinsicElements["td" | "th"];
+}
+/**
+ * A cell of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation}
+ *
+ * @param children The content of the cell.
+ * @param header If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
+ * @param align How the Buttons should be positioned. It can be aligned to the left, the center (default), or the right.
+ * @param menu An inline menu. This is useful for editable tables.
+ * @param onMenuToggle Triggers on click if defined.
+ * @param tdAttr Attributes for the underlying `<td>` element.
+ */
+declare function TableCell({ children, header, align, menu, onMenuToggle, tdAttr, style, className, }: TableCellProps): JSX.Element;
+declare namespace TableCell {
+    var displayName: string;
+}
+
+/**
  * Props for {@link TextField Text Field}.
  */
 interface TextFieldProps extends SKComponent {
@@ -2673,4 +2889,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

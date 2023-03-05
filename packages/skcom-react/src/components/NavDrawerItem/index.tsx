@@ -81,6 +81,7 @@ export interface NavDrawerItemProps extends SKComponent {
     style,
     className,
     href,
+    onTouchStart,
     onMouseDown,
     onKeyDown,
   }: {
@@ -90,6 +91,7 @@ export interface NavDrawerItemProps extends SKComponent {
     style?: React.CSSProperties;
     className: any;
     href: string;
+    onTouchStart: (event: React.TouchEvent) => void;
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
   }) => JSX.Element | null;

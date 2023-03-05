@@ -111,12 +111,14 @@ export interface FABProps extends SKComponent {
     children,
     className,
     href,
+    onTouchStart,
     onMouseDown,
     onKeyDown,
   }: {
     children: React.ReactNode;
     className: string;
     href: string;
+    onTouchStart: (event: React.TouchEvent) => void;
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
   }) => JSX.Element | null;

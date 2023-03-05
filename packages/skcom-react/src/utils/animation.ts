@@ -2,7 +2,6 @@
 import {
   AnimationControls,
   BezierDefinition,
-  motion,
   MotionStyle,
   Tween,
   useAnimationControls,
@@ -100,6 +99,7 @@ export function transition(
  */
 export function useRipple(parentRef: React.MutableRefObject<any>): {
   rippleListeners: {
+    onTouchStart: (event: React.TouchEvent) => void;
     onMouseDown: (event: React.MouseEvent) => void;
     onKeyDown: (event: React.KeyboardEvent) => void;
   };
@@ -154,16 +154,36 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
     });
   }
 
+  // (@SiravitPhokeed)
+  // When an element is tapped, the mouse events are fired after the tap
+  // events. We prevent this by keeping track of it the user has already
+  // started a touch, and prevent a ripple from starting from the mouse event.
+  // We’re supposed to use `preventDefault` here but React said no.
+  const [touched, setTouched] = React.useState<boolean>(false);
+
   return {
     /**
      * Event listeners on the parent element.
      */
     rippleListeners: {
+      // Use the tap position to calculate the ripple position and animate it
+      onTouchStart: (event: React.TouchEvent) => {
+        setTouched(true);
+        const touch = event.touches[0];
+        setPosition(calculatePosition(touch.clientX, touch.clientY));
+        animateRipple();
+      },
+
       // Use the mouse position to calculate the ripple position and animate it
       onMouseDown: (event: React.MouseEvent) => {
+        if (touched) {
+          setTouched(false);
+          return;
+        }
         setPosition(calculatePosition(event.clientX, event.clientY));
         animateRipple();
       },
+
       // On key down, put the ripple in the middle of the Button and animate it
       onKeyDown: (event: React.KeyboardEvent) => {
         // Only allow Enter and Space keys as only those can trigger `onClick`
