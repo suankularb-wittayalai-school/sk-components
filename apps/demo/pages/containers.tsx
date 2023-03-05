@@ -27,6 +27,11 @@ import {
   Progress,
   Section,
   SegmentedButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
   TextField,
 } from "@suankularb-components/react";
 
@@ -366,6 +371,38 @@ const ProgressSection: FC = () => (
   </Section>
 );
 
+const TableSection: FC = () => (
+  <Section>
+    <Header>Table</Header>
+    <Table contentWidth={480}>
+      <TableHead fixed>
+        <TableRow>
+          <TableCell header>Test date</TableCell>
+          <TableCell header>Method</TableCell>
+          <TableCell header>Result</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Jan 8, 2023</TableCell>
+          <TableCell>ATK via saliva</TableCell>
+          <TableCell>Negative</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jan 1, 2023</TableCell>
+          <TableCell>RT-PCR</TableCell>
+          <TableCell>Positive</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jan 1, 2023</TableCell>
+          <TableCell>ATK via saliva</TableCell>
+          <TableCell>Positive</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  </Section>
+);
+
 const ContainersPage: CustomPage = () => {
   return (
     <>
@@ -380,6 +417,7 @@ const ContainersPage: CustomPage = () => {
         <HeaderSection />
         <ListSection />
         <ProgressSection />
+        <TableSection />
       </ContentLayout>
     </>
   );
