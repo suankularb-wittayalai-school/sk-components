@@ -1,1 +1,1 @@
-.skc-table{overflow:auto;background-color:var(--surface-2);border:2px solid var(--outline-variant)}.skc-table__content{background-color:var(--surface)}/*# sourceMappingURL=table.css.map */
+.skc-table{overflow:auto;border:2px solid var(--outline-variant);border-radius:var(--rounded-xl);background-color:var(--surface-2)}.skc-table__content{width:100%;border-collapse:collapse;text-indent:0;background-color:var(--surface)}/*# sourceMappingURL=table.css.map */

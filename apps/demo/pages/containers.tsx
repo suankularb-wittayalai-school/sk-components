@@ -30,6 +30,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFoot,
   TableHead,
   TableRow,
   TextField,
@@ -374,7 +375,7 @@ const ProgressSection: FC = () => (
 const TableSection: FC = () => (
   <Section>
     <Header>Table</Header>
-    <Table contentWidth={480}>
+    <Table contentWidth={480} height={120}>
       <TableHead fixed>
         <TableRow>
           <TableCell header>Test date</TableCell>

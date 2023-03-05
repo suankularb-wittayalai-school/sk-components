@@ -5,7 +5,7 @@ import * as React from "react";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/table-body.css";
+import "@suankularb-components/css/dist/css/components/table-cell.css";
 
 // Utilities
 import { cn } from "../../utils/className";
@@ -56,7 +56,7 @@ export interface TableCellProps extends SKComponent {
    *
    * - Optional.
    */
-  tdAttr?: JSX.IntrinsicElements["td"];
+  tdAttr?: JSX.IntrinsicElements["td" | "th"];
 }
 
 /**
@@ -83,10 +83,20 @@ export function TableCell({
 }: TableCellProps) {
   const props = {
     style,
-    className: cn(["skc-table-body", className]),
+    className: cn([
+      "skc-table-cell",
+      header && "skc-table-cell--header",
+      align === "left"
+        ? "skc-table-cell--left"
+        : align === "right"
+        ? "skc-table-cell--right"
+        : "skc-table-cell--center",
+      className,
+    ]),
+    ...tdAttr,
   } satisfies JSX.IntrinsicElements["td" | "th"];
 
-  const content = children;
+  const content = <div className="skc-table-cell__content">{children}</div>;
 
   return header ? <th {...props}>{content}</th> : <td {...props}>{content}</td>;
 }

@@ -5,6 +5,60 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation
 ////
 
+@use "../abstracts/typography.scss" as type;
+
+// Base Table Cell
 .skc-table-cell {
-  // TODO
+  @include type.font("body-medium");
+  display: table-cell;
+  padding: 1rem 1.5rem;
+  text-align: center;
+
+  &:not(:last-child) {
+    border-right: 1px solid var(--outline-variant);
+  }
+
+  .skc-table-row:not(:first-child) &,
+  .skc-table-head ~ .skc-table-body &,
+  .skc-table-head ~ .skc-table-foot &,
+  .skc-table-body ~ .skc-table-foot & {
+    border-bottom: 1px solid var(--outline-variant);
+  }
+}
+
+// Cell content
+.skc-table-cell__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Header cell
+.skc-table-cell--header {
+  @include type.font("title-small");
+}
+
+// Alignment
+.skc-table-cell--left {
+  text-align: left;
+
+  .skc-table-cell__content {
+    justify-content: flex-start;
+  }
+}
+
+.skc-table-cell--center {
+  text-align: center;
+
+  .skc-table-cell__content {
+    justify-content: center;
+  }
+}
+
+.skc-table-cell--right {
+  text-align: right;
+
+  .skc-table-cell__content {
+    justify-content: flex-end;
+  }
 }

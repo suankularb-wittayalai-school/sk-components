@@ -36,7 +36,7 @@
   .skc-content-layout__content {
     width: calc(100% - (10rem));
 
-    > * {
+    > .skc-section > * {
       margin-inline: 0;
     }
   }

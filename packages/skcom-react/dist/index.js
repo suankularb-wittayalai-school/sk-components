@@ -2207,7 +2207,7 @@ FAB.displayName = "FAB";
 var import_framer_motion17 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/content-layout.css
-styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout p {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > .skc-section > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > * {\n    margin-inline: 0;\n  }\n}\n");
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout p {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > .skc-section > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > .skc-section > * {\n    margin-inline: 0;\n  }\n}\n");
 
 // src/components/ContentLayout/index.tsx
 var import_jsx_runtime34 = require("react/jsx-runtime");
@@ -2555,7 +2555,7 @@ function Switch({
 Switch.displayName = "Switch";
 
 // ../skcom-css/dist/css/components/table.css
-styleInject(".skc-table {\n  overflow: auto;\n  background-color: var(--surface-2);\n  border: 2px solid var(--outline-variant);\n}\n.skc-table__content {\n  background-color: var(--surface);\n}\n");
+styleInject(".skc-table {\n  overflow: auto;\n  border: 2px solid var(--outline-variant);\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-2);\n}\n.skc-table__content {\n  width: 100%;\n  border-collapse: collapse;\n  text-indent: 0;\n  background-color: var(--surface);\n}\n");
 
 // src/components/Table/index.tsx
 var import_jsx_runtime40 = require("react/jsx-runtime");
@@ -2578,7 +2578,7 @@ function Table({
 Table.displayName = "Table";
 
 // ../skcom-css/dist/css/components/table-head.css
-styleInject(".skc-table-head {\n  background-color: var(--surface-1);\n}\n.skc-table-head--fixed {\n  position: sticky;\n}\n");
+styleInject(".skc-table-head {\n  display: table-header-group;\n  background-color: var(--surface-1);\n}\n.skc-table-head--fixed {\n  position: sticky;\n  inset: 0 0 auto 0;\n  box-shadow: 0 1px var(--outline-variant);\n}\n");
 
 // src/components/TableHead/index.tsx
 var import_jsx_runtime41 = require("react/jsx-runtime");
@@ -2604,7 +2604,7 @@ function TableHead({
 TableHead.displayName = "TableHead";
 
 // ../skcom-css/dist/css/components/table-body.css
-styleInject("");
+styleInject(".skc-table-body {\n  display: table-row-group;\n}\n");
 
 // src/components/TableBody/index.tsx
 var import_jsx_runtime42 = require("react/jsx-runtime");
@@ -2614,17 +2614,17 @@ function TableBody({ children, style, className }) {
 TableBody.displayName = "TableBody";
 
 // ../skcom-css/dist/css/components/table-foot.css
-styleInject(".skc-table-foot {\n  background-color: var(--surface-1);\n}\n");
+styleInject(".skc-table-foot {\n  display: table-footer-group;\n  background-color: var(--surface-1);\n}\n");
 
 // src/components/TableFoot/index.tsx
 var import_jsx_runtime43 = require("react/jsx-runtime");
 function TableFoot({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("tfoot", { style, className: cn(["skc-table-body", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("tfoot", { style, className: cn(["skc-table-foot", className]), children });
 }
 TableFoot.displayName = "TableFoot";
 
 // ../skcom-css/dist/css/components/table-row.css
-styleInject("");
+styleInject(".skc-table-row {\n  display: table-row;\n}\n");
 
 // src/components/TableRow/index.tsx
 var import_jsx_runtime44 = require("react/jsx-runtime");
@@ -2632,6 +2632,9 @@ function TableRow({ children, style, className }) {
   return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("tr", { style, className: cn(["skc-table-row", className]), children });
 }
 TableRow.displayName = "TableRow";
+
+// ../skcom-css/dist/css/components/table-cell.css
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  display: table-cell;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:first-child) .skc-table-cell,\n.skc-table-head ~ .skc-table-body .skc-table-cell,\n.skc-table-head ~ .skc-table-foot .skc-table-cell,\n.skc-table-body ~ .skc-table-foot .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--left {\n  text-align: left;\n}\n.skc-table-cell--left .skc-table-cell__content {\n  justify-content: flex-start;\n}\n.skc-table-cell--center {\n  text-align: center;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  justify-content: center;\n}\n.skc-table-cell--right {\n  text-align: right;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  justify-content: flex-end;\n}\n");
 
 // src/components/TableCell/index.tsx
 var import_jsx_runtime45 = require("react/jsx-runtime");
@@ -2645,11 +2648,16 @@ function TableCell({
   style,
   className
 }) {
-  const props = {
+  const props = __spreadValues({
     style,
-    className: cn(["skc-table-body", className])
-  };
-  const content = children;
+    className: cn([
+      "skc-table-cell",
+      header && "skc-table-cell--header",
+      align === "left" ? "skc-table-cell--left" : align === "right" ? "skc-table-cell--right" : "skc-table-cell--center",
+      className
+    ])
+  }, tdAttr);
+  const content = /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("div", { className: "skc-table-cell__content", children });
   return header ? /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("th", __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("td", __spreadProps(__spreadValues({}, props), { children: content }));
 }
 TableCell.displayName = "TableCell";

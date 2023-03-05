@@ -2587,7 +2587,7 @@ interface TableFootProps extends SKComponent {
  *
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5lm5awdc1t9l SKCom documentation}
  *
- * @param children Table Body has the same behaviour as `<tfoot>`.
+ * @param children Table Foot has the same behaviour as `<tfoot>`.
  */
 declare function TableFoot({ children, style, className }: TableFootProps): JSX.Element;
 declare namespace TableFoot {
@@ -2660,7 +2660,7 @@ interface TableCellProps extends SKComponent {
      *
      * - Optional.
      */
-    tdAttr?: JSX.IntrinsicElements["td"];
+    tdAttr?: JSX.IntrinsicElements["td" | "th"];
 }
 /**
  * A cell of a Table.

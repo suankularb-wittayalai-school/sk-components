@@ -5,4 +5,6 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation
 ////
 
-// Table Body has no styling
+.skc-table-body {
+  display: table-row-group;
+}
