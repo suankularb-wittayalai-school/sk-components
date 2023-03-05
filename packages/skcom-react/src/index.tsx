@@ -90,6 +90,7 @@ export { Switch, type SwitchProps } from "./components/Switch";
 
 export { Table, type TableProps } from "./components/Table";
 export { TableHead, type TableHeadProps } from "./components/TableHead";
+export { TableBody, type TableBodyProps } from "./components/TableBody";
 
 export { TextField, type TextFieldProps } from "./components/TextField";
 
