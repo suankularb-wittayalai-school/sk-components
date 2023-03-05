@@ -2547,7 +2547,7 @@ declare namespace TableHead {
 }
 
 /**
- * Props for {@link TableBody Table Head}.
+ * Props for {@link TableBody Table Body}.
  */
 interface TableBodyProps extends SKComponent {
     /**
@@ -2567,6 +2567,30 @@ interface TableBodyProps extends SKComponent {
  */
 declare function TableBody({ children, style, className }: TableBodyProps): JSX.Element;
 declare namespace TableBody {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TableFoot Table Foot}.
+ */
+interface TableFootProps extends SKComponent {
+    /**
+     * Table Foot has the same behaviour as `<tfoot>`.
+     *
+     * - Must consist of Table Rows, which must consist of Table Cells.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * The body area of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5lm5awdc1t9l SKCom documentation}
+ *
+ * @param children Table Body has the same behaviour as `<tfoot>`.
+ */
+declare function TableFoot({ children, style, className }: TableFootProps): JSX.Element;
+declare namespace TableFoot {
     var displayName: string;
 }
 
@@ -2780,4 +2804,4 @@ declare function useAnimationConfig(): {
     };
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableHead, TableHeadProps, TableProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };

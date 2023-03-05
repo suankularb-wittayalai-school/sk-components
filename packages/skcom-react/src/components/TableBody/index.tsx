@@ -11,7 +11,7 @@ import "@suankularb-components/css/dist/css/components/table-body.css";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link TableBody Table Head}.
+ * Props for {@link TableBody Table Body}.
  */
 export interface TableBodyProps extends SKComponent {
   /**
