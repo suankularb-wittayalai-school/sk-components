@@ -15,7 +15,8 @@
 
 .skc-table__content {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   text-indent: 0;
   background-color: var(--surface);
 }

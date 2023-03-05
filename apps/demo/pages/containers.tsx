@@ -237,7 +237,7 @@ const DialogSection: FC = () => {
                 label="Expectation"
                 behavior="textarea"
                 helperMsg="What you expected to have happened/think should be
-                implemented."
+                  implemented."
                 value={issueExpect}
                 onChange={setIssueExpect}
               />
@@ -383,7 +383,7 @@ const TableSection: FC = () => (
   <Section>
     <Header>Table</Header>
     <Table contentWidth={480}>
-      <TableHead fixed>
+      <TableHead>
         <TableRow>
           <TableCell header>Test date</TableCell>
           <TableCell header>Method</TableCell>

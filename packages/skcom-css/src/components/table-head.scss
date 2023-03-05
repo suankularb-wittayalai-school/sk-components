@@ -13,8 +13,4 @@
 .skc-table-head--fixed {
   position: sticky;
   inset: 0 0 auto 0;
-  // (@SiravitPhokeed)
-  // `border-bottom` is ignored when the Table Head is sticky, and there is no
-  // property for bottom `outline`, so `box-shadow` it is.
-  box-shadow: 0 1px var(--outline-variant);
 }

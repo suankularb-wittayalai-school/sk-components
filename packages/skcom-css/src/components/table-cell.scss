@@ -13,14 +13,15 @@
   @include type.font("body-medium");
   display: table-cell;
 
+  // Cell borders
+
   &:not(:last-child) {
     border-right: 1px solid var(--outline-variant);
   }
 
-  .skc-table-row:not(:first-child) &,
-  .skc-table-head ~ .skc-table-body &,
-  .skc-table-head ~ .skc-table-foot &,
-  .skc-table-body ~ .skc-table-foot & {
+  .skc-table-row:not(:last-child) &,
+  .skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child &,
+  .skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child & {
     border-bottom: 1px solid var(--outline-variant);
   }
 }
