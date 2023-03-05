@@ -5,7 +5,7 @@ import * as React from "react";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/actions.css";
+import "@suankularb-components/css/dist/css/components/table.css";
 
 // Utilities
 import { cn } from "../../utils/className";

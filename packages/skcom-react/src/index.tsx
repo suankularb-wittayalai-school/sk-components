@@ -88,6 +88,9 @@ export { Section, type SectionProps } from "./components/Section";
 
 export { Switch, type SwitchProps } from "./components/Switch";
 
+export { Table, type TableProps } from "./components/Table";
+export { TableHead, type TableHeadProps } from "./components/TableHead";
+
 export { TextField, type TextFieldProps } from "./components/TextField";
 
 export {
