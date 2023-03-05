@@ -9,6 +9,9 @@ import "@suankularb-components/css/dist/css/components/table-cell.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { MaterialIcon } from "../MaterialIcon";
+import { useRipple } from "../../utils/animation";
+import { motion } from "framer-motion";
 
 /**
  * Props for {@link TableCell Table Body}.
@@ -81,6 +84,10 @@ export function TableCell({
   style,
   className,
 }: TableCellProps) {
+  // Ripple setup
+  const toggleRef = React.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
+
   const props = {
     style,
     className: cn([
@@ -96,7 +103,29 @@ export function TableCell({
     ...tdAttr,
   } satisfies JSX.IntrinsicElements["td" | "th"];
 
-  const content = <div className="skc-table-cell__content">{children}</div>;
+  const content = onMenuToggle ? (
+    <>
+      <button
+        ref={toggleRef}
+        className="skc-table-cell__menu-toggle"
+        onClick={onMenuToggle}
+        {...rippleListeners}
+      >
+        <div className="skc-table-cell__content">{children}</div>
+        <MaterialIcon icon="arrow_drop_down" />
+        <motion.span
+          aria-hidden
+          initial={{ scale: 0, opacity: 0.36 }}
+          animate={rippleControls}
+          className="skc-table-cell__ripple"
+          style={rippleStyle}
+        />
+      </button>
+      {menu}
+    </>
+  ) : (
+    <div className="skc-table-cell__content">{children}</div>
+  );
 
   return header ? <th {...props}>{content}</th> : <td {...props}>{content}</td>;
 }

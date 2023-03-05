@@ -5,14 +5,13 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
 
 // Base Table Cell
 .skc-table-cell {
   @include type.font("body-medium");
   display: table-cell;
-  padding: 1rem 1.5rem;
-  text-align: center;
 
   &:not(:last-child) {
     border-right: 1px solid var(--outline-variant);
@@ -31,6 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem 1.5rem;
+  text-align: center;
 }
 
 // Header cell
@@ -60,5 +61,54 @@
 
   .skc-table-cell__content {
     justify-content: flex-end;
+  }
+}
+
+// Menu toggle
+.skc-table-cell__menu-toggle {
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-inline: 1.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  // Cell content
+  .skc-table-cell__content {
+    flex-grow: 1;
+    justify-content: flex-start;
+    padding-inline: 0;
+  }
+
+  // Ripple
+  .skc-table-cell__ripple {
+    @include mix.ripple();
+    background-color: var(--on-surface);
   }
 }

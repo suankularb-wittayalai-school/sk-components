@@ -375,7 +375,7 @@ const ProgressSection: FC = () => (
 const TableSection: FC = () => (
   <Section>
     <Header>Table</Header>
-    <Table contentWidth={480} height={120}>
+    <Table contentWidth={480}>
       <TableHead fixed>
         <TableRow>
           <TableCell header>Test date</TableCell>
