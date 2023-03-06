@@ -1,7 +1,6 @@
 // External libraries
-import PreviousRouteContext from "@/contexts/PreviousRouteContext";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Get the route of the previous page the user was in. This only tracks pages
@@ -60,50 +59,30 @@ type PageRelation = "parent" | "child" | "unrelated";
  * `previous` — How the previous page relates to the current;
  * `destination` — How the destination relates to the current.
  */
-export function usePageRelations(parentURL?: string, childURLs?: string[]) {
+export function useTransitionEvent(parentURL?: string, childURLs?: string[]) {
   const router = useRouter();
 
-  // Previous page relation
-  const [previous, setPrevious] = useState<PageRelation>();
-  const previousURL = useContext(PreviousRouteContext);
-  useEffect(() => {
-    if (!previousURL) return;
-    console.log(`found ${previousURL} as previous URL to ${router.pathname}`);
-    setPrevious(
-      parentURL === previousURL
-        ? "parent"
-        : previousURL && childURLs?.includes(previousURL)
-        ? "child"
-        : "unrelated"
-    );
-  }, [previousURL]);
-
   // Destination page relation
-  const [destination, setDestination] = useState<PageRelation>();
+  const [destination, setDestination] = useState<string>();
   useEffect(() => {
-    const handlePageChange = (destinationURL: string) =>
-      setDestination(
-        parentURL === destinationURL
-          ? "parent"
-          : childURLs?.includes(destinationURL)
-          ? "child"
-          : "unrelated"
-      );
-    router.events.on("routeChangeComplete", handlePageChange);
+    const handlePageChange = (url: string) => setDestination(url);
+    router.events.on("routeChangeStart", handlePageChange);
     return () => {
-      router.events.off("routeChangeComplete", handlePageChange);
+      router.events.off("routeChangeStart", handlePageChange);
     };
   }, []);
 
-  return {
-    /**
-     * How the previous page relates to the current.
-     */
-    previous,
+  const [transitionEvent, setTransitionEvent] = useState<PageRelation>();
+  useEffect(() => {
+    if (!destination) return;
+    setTransitionEvent(
+      parentURL === destination
+        ? "parent"
+        : childURLs?.includes(destination)
+        ? "child"
+        : "unrelated"
+    );
+  }, [destination]);
 
-    /**
-     * How the destination relates to the current.
-     */
-    destination,
-  };
+  return { transitionEvent };
 }

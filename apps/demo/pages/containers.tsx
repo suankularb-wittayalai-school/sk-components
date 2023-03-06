@@ -37,7 +37,7 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import { usePageRelations } from "@/utils/routing";
+import { useTransitionEvent } from "@/utils/routing";
 
 const AvatarSection: FC = () => (
   <Section>

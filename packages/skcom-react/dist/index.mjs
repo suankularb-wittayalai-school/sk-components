@@ -2155,65 +2155,18 @@ styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 
 import { jsx as jsx34 } from "react/jsx-runtime";
 function ContentLayout({
   children,
-  pageRelations,
   style,
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  const entranceVariants = {
-    // Transition from parent page
-    parent: {
-      initial: { opacity: 0, x: 60 },
-      animate: { opacity: 1, x: 0 }
-    },
-    // Transition from child page
-    child: {
-      initial: { opacity: 0, x: -60 },
-      animate: { opacity: 1, x: 0 }
-    },
-    // Transition from sibling page
-    sibling: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 }
-    },
-    // Transition from unrelated page
-    unrelated: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1 },
-      transition: transition(duration.short4, easing.standard)
-    }
-  };
-  const exitVariants = {
-    // Transition to parent page
-    parent: {
-      animate: { opacity: 1, x: 0 },
-      exit: { opacity: 0, x: -60 }
-    },
-    // Transition to child page
-    child: {
-      animate: { opacity: 1, x: 0 },
-      exit: { opacity: 0, x: 60 }
-    },
-    // Transition to sibling page
-    sibling: {
-      animate: { opacity: 1 },
-      exit: { opacity: 0 }
-    },
-    // Transition to unrelated page
-    unrelated: {
-      animate: { opacity: 1 },
-      exit: {
-        opacity: 0
-      }
-    }
-  };
+  const baseTransition = transition(duration.medium2, easing.standard);
   return /* @__PURE__ */ jsx34(
     motion16.main,
     {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
-      exit: { opacity: 0 },
-      transition: transition(duration.long4, easing.standard),
+      exit: { opacity: 0, transition: __spreadProps(__spreadValues({}, baseTransition), { delay: 0.15 }) },
+      transition: baseTransition,
       style,
       className: cn(["skc-content-layout", className]),
       children: /* @__PURE__ */ jsx34("div", { className: "skc-content-layout__content", children })
@@ -2233,7 +2186,7 @@ styleInject("body {\n  margin: 0;\n}\n.skc-root-layout {\n  font-size: var(--tex
 import { jsx as jsx35, jsxs as jsxs24 } from "react/jsx-runtime";
 function RootLayout({
   children,
-  pageRelations,
+  transitionEvent,
   className,
   style
 }) {
@@ -2245,61 +2198,35 @@ function RootLayout({
       content = child;
   });
   const { duration, easing } = useAnimationConfig();
-  const [animating, setAnimating] = React20.useState(false);
   const contentControls = useAnimationControls4();
-  function animateEntrance(entranceType) {
-    return __async(this, null, function* () {
-      console.log(`handling entrance with type ${entranceType}`);
-      setAnimating(true);
-      if (entranceType === "parent") {
-        contentControls.set({ x: 60 });
-        yield contentControls.start({ x: 0 });
-      } else if (entranceType === "child") {
-        contentControls.set({ x: -60 });
-        yield contentControls.start({ x: 0 });
-      } else if (entranceType === "sibling") {
-        contentControls.set({ x: "-100%" });
-        yield contentControls.start({ x: "0%" });
-      }
-    });
-  }
-  function animateExit(exitType) {
-    return __async(this, null, function* () {
-      console.log(`handling exit with type ${exitType}`);
-      setAnimating(true);
-      if (exitType === "parent") {
-        contentControls.set({ x: 0 });
-        yield contentControls.start({ x: 60 });
-      } else if (exitType === "child") {
-        contentControls.set({ x: 0 });
-        yield contentControls.start({ x: -60 });
-      } else if (exitType === "sibling") {
-        contentControls.set({ x: "0%" });
-        yield contentControls.start({ x: "100%" });
-      }
-    });
-  }
+  const enterTransition = transition(duration.medium2, easing.standard);
+  const exitTransition = transition(
+    duration.medium2,
+    easing.standardDecelerate
+  );
   React20.useEffect(() => {
-    const handleTransition = () => __async(this, null, function* () {
-      console.log("==========\nstart of transition handling");
-      console.log(pageRelations);
-      if (pageRelations && !pageRelations.previous) {
-        console.log("entrance requirements not met, ENDING");
-        return;
+    const startTransition = () => __async(this, null, function* () {
+      contentControls.set({ x: 0, opacity: 1 });
+      if (transitionEvent === "parent") {
+        yield contentControls.start({
+          x: 40,
+          opacity: 0,
+          transition: enterTransition
+        });
+        contentControls.set({ x: -40, opacity: 0 });
+        contentControls.start({ x: 0, opacity: 1, transition: exitTransition });
+      } else if (transitionEvent === "child") {
+        yield contentControls.start({
+          x: -40,
+          opacity: 0,
+          transition: enterTransition
+        });
+        contentControls.set({ x: 40, opacity: 0 });
+        contentControls.start({ x: 0, opacity: 1, transition: exitTransition });
       }
-      if (pageRelations == null ? void 0 : pageRelations.destination) {
-        const exitType = pageRelations.destination;
-        animateExit(exitType);
-      }
-      const entranceType = (pageRelations == null ? void 0 : pageRelations.previous) || "unrelated";
-      animateEntrance(entranceType);
-      console.log("transition complete, ENDING");
     });
-    if (animating)
-      return;
-    handleTransition();
-    setAnimating(false);
-  }, [pageRelations]);
+    startTransition();
+  }, [transitionEvent]);
   return /* @__PURE__ */ jsxs24("div", { style, className: cn(["skc-root-layout", className]), children: [
     persistentComponents,
     /* @__PURE__ */ jsx35(
@@ -2308,14 +2235,7 @@ function RootLayout({
         mode: "wait",
         initial: false,
         onExitComplete: () => window.scrollTo(0, 0),
-        children: /* @__PURE__ */ jsx35(
-          motion17.div,
-          {
-            animate: contentControls,
-            transition: transition(duration.long4, easing.standard),
-            children: content
-          }
-        )
+        children: /* @__PURE__ */ jsx35(motion17.div, { animate: contentControls, children: content })
       }
     )
   ] });

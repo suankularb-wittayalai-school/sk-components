@@ -23,7 +23,7 @@ import {
 import Favicon from "@/components/Favicon";
 
 // Utilities
-import { usePageIsLoading, usePageRelations } from "@/utils/routing";
+import { usePageIsLoading, useTransitionEvent } from "@/utils/routing";
 
 const Layout: FC<{
   children: ReactNode;
@@ -35,12 +35,15 @@ const Layout: FC<{
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
   const { pageIsLoading } = usePageIsLoading();
-  const pageRelations = usePageRelations(pageHeader?.parentURL, childURLs);
+  const { transitionEvent } = useTransitionEvent(
+    pageHeader?.parentURL,
+    childURLs
+  );
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
 
   return (
-    <RootLayout pageRelations={pageRelations}>
+    <RootLayout transitionEvent={transitionEvent}>
       {/* Navigation Drawer */}
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
         <NavDrawerSection
