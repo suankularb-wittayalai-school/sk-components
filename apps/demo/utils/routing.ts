@@ -46,18 +46,18 @@ export function usePageIsLoading() {
   return { pageIsLoading: loading };
 }
 
-type PageRelation = "parent" | "child" | "unrelated";
+type PageRelation = "parent" | "child" | "sibling" | "unrelated";
 
 /**
- * Get how the previous and destination pages relate to the current page. This
- * is useful for creating a spatially coherent system of page transitions.
+ * Get how the destination page relate to the current page. This is useful for
+ * creating a spatially coherent system of page transitions.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ix1wxffbs2kc Documention on transitionEvent with Root Layout}
  *
  * @param parentURL The URL of the parent page of the current.
  * @param childURLs A list of child URLs of the current page.
  *
- * @returns
- * `previous` — How the previous page relates to the current;
- * `destination` — How the destination relates to the current.
+ * @returns `transitionEvent` — How the destination page relates to the current.
  */
 export function useTransitionEvent(parentURL?: string, childURLs?: string[]) {
   const router = useRouter();

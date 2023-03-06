@@ -25,6 +25,29 @@ export interface RootLayoutProps extends SKComponent {
    */
   children: React.ReactNode;
 
+  /**
+   * The definition of `transitionEvent` will cause the current page to
+   * immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
+   * 
+   * - Defined when an animation to the next page is needed immediately.
+   * - How the next page is related to this page is passed in via this property.
+   *   - i.e. If the user is on the `/lookup` page and just clicked a link to
+   *     `/lookup/students`—a child page of `/lookup`—then `child` must
+   *     immediately passed in to `transitionEvent` to start the animation.
+   * 
+   * - If you are using
+   *   {@link https://github.com/suankularb-wittayalai-school/sk-nextjs-template Suankularb Next.js Template},
+   *   you can use the return value of `useTransitionEvent` hook (found in
+   *   `@/utils/routing.ts`) in combination with `CustomPage.childURLs` here.
+   *   - Find an example of `useTransitionEvent` in the Layout component of the
+   *     demo app.
+   *   - Find an example of `CustomPage.childURLs` in the index page of the
+   *     demo app.
+   *   - JSDoc available on all symbols referred to here.
+   * 
+   * - Must be a type of page relation: `parent`, `child`, `sibling`, or `unrelated`.
+   * - Optional.
+   */
   transitionEvent?: "parent" | "child" | "sibling" | "unrelated";
 }
 
@@ -45,6 +68,8 @@ export function RootLayout({
   className,
   style,
 }: RootLayoutProps) {
+  // Children
+
   // Seperate children into:
   // - Persistent components (like Navigation Bar and Page Header) that won’t animate, and
   // - Page content that will animate
@@ -54,74 +79,20 @@ export function RootLayout({
     else content = child;
   });
 
+  // Page transition
+
+  // Animation setup
   const { duration, easing } = useAnimationConfig();
-  // const [animating, setAnimating] = React.useState<boolean>(false);
   const contentControls = useAnimationControls();
 
-  // async function animateEntrance(entranceType: PageRelation) {
-  //   console.log(`handling entrance with type ${entranceType}`);
-  //   setAnimating(true);
-  //   if (entranceType === "parent") {
-  //     contentControls.set({ x: 60 });
-  //     await contentControls.start({ x: 0 });
-  //   } else if (entranceType === "child") {
-  //     contentControls.set({ x: -60 });
-  //     await contentControls.start({ x: 0 });
-  //   } else if (entranceType === "sibling") {
-  //     contentControls.set({ x: "-100%" });
-  //     await contentControls.start({ x: "0%" });
-  //   }
-  // }
-
-  // async function animateExit(exitType: PageRelation) {
-  //   console.log(`handling exit with type ${exitType}`);
-  //   setAnimating(true);
-  //   if (exitType === "parent") {
-  //     contentControls.set({ x: 0 });
-  //     await contentControls.start({ x: 60 });
-  //   } else if (exitType === "child") {
-  //     contentControls.set({ x: 0 });
-  //     await contentControls.start({ x: -60 });
-  //   } else if (exitType === "sibling") {
-  //     contentControls.set({ x: "0%" });
-  //     await contentControls.start({ x: "100%" });
-  //   }
-  // }
-
-  // React.useEffect(() => {
-  //   const handleTransition = async () => {
-  //     console.log("==========\nstart of transition handling");
-  //     console.log(pageRelations);
-
-  //     if (pageRelations && !pageRelations.previous) {
-  //       console.log("entrance requirements not met, ENDING");
-  //       return;
-  //     }
-
-  //     // Handle exit if destination defined
-  //     if (pageRelations?.destination) {
-  //       const exitType = pageRelations.destination;
-  //       animateExit(exitType);
-  //     }
-
-  //     // Handle entrance
-  //     const entranceType = pageRelations?.previous || "unrelated";
-  //     animateEntrance(entranceType);
-
-  //     console.log("transition complete, ENDING");
-  //   };
-
-  //   if (animating) return;
-  //   handleTransition();
-  //   setAnimating(false);
-  // }, [pageRelations]);
-
+  // Transition duration and easing
   const enterTransition = transition(duration.medium2, easing.standard);
   const exitTransition = transition(
     duration.medium2,
     easing.standardDecelerate
   );
 
+  // Transition execution
   React.useEffect(() => {
     const startTransition = async () => {
       contentControls.set({ x: 0, opacity: 1 });

@@ -2133,6 +2133,29 @@ interface RootLayoutProps extends SKComponent {
      * - Always required.
      */
     children: React.ReactNode;
+    /**
+     * The definition of `transitionEvent` will cause the current page to
+     * immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
+     *
+     * - Defined when an animation to the next page is needed immediately.
+     * - How the next page is related to this page is passed in via this property.
+     *   - i.e. If the user is on the `/lookup` page and just clicked a link to
+     *     `/lookup/students`—a child page of `/lookup`—then `child` must
+     *     immediately passed in to `transitionEvent` to start the animation.
+     *
+     * - If you are using
+     *   {@link https://github.com/suankularb-wittayalai-school/sk-nextjs-template Suankularb Next.js Template},
+     *   you can use the return value of `useTransitionEvent` hook (found in
+     *   `@/utils/routing.ts`) in combination with `CustomPage.childURLs` here.
+     *   - Find an example of `useTransitionEvent` in the Layout component of the
+     *     demo app.
+     *   - Find an example of `CustomPage.childURLs` in the index page of the
+     *     demo app.
+     *   - JSDoc available on all symbols referred to here.
+     *
+     * - Must be a type of page relation: `parent`, `child`, `sibling`, or `unrelated`.
+     * - Optional.
+     */
     transitionEvent?: "parent" | "child" | "sibling" | "unrelated";
 }
 /**
