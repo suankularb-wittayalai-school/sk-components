@@ -640,13 +640,13 @@ function ToggleButton({
 ToggleButton.displayName = "ToggleButton";
 
 // src/components/Card/index.tsx
+var import_framer_motion5 = require("framer-motion");
 var React4 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/card.css
 styleInject('.skc-card {\n  display: flex;\n  color: var(--on-surface);\n  border-radius: var(--rounded-md);\n}\n.skc-card.skc-card--outlined {\n  border: 1px solid var(--outline-variant);\n  background-color: var(--surface);\n}\n.skc-card.skc-card--elevated {\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-2);\n}\n.skc-card.skc-card--filled {\n  background-color: var(--surface-variant);\n}\n.skc-card.skc-card--filled.skc-card--row {\n  border: 1px solid var(--outline-variant);\n}\n.skc-card,\n.skc-card.skc-card--column {\n  flex-direction: column;\n}\n.skc-card.skc-card--row {\n  flex-direction: row;\n}\n.skc-card.skc-card--state-layer {\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n}\n.skc-card.skc-card--state-layer::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n}\n.skc-card.skc-card--state-layer:hover::before {\n  opacity: .08;\n}\n.skc-card.skc-card--state-layer:focus::before,\n.skc-card.skc-card--state-layer:active::before {\n  opacity: .12;\n}\n.skc-card.skc-card--state-layer.skc-card--outlined {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n}\n.skc-card.skc-card--state-layer.skc-card--outlined:focus {\n  border-color: var(--primary);\n}\n.skc-card.skc-card--state-layer .skc-card__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n}\n.skc-card.skc-card--state-layer::before,\n.skc-card.skc-card--state-layer .skc-card__ripple {\n  background-color: var(--primary);\n}\n.skc-card.skc-card--shadow {\n  transition: box-shadow var(--motion-short-4) var(--easing-standard);\n}\n.skc-card.skc-card--shadow.skc-card--outlined {\n  transition: border-color var(--motion-short-4) var(--easing-standard), box-shadow var(--motion-short-4) var(--easing-standard);\n}\n.skc-card.skc-card--shadow:hover {\n  box-shadow: var(--shadow-1);\n}\n.skc-card.skc-card--shadow:active {\n  box-shadow: none;\n}\n.skc-card.skc-card--shadow.skc-card--elevated.skc-card--shadow:hover {\n  box-shadow: var(--shadow-3);\n}\n.skc-card.skc-card--shadow.skc-card--elevated.skc-card--shadow:active {\n  box-shadow: var(--shadow-2);\n}\n');
 
 // src/components/Card/index.tsx
-var import_framer_motion5 = require("framer-motion");
 var import_jsx_runtime8 = require("react/jsx-runtime");
 function Card({
   children,
@@ -2611,7 +2611,7 @@ function Switch({
 Switch.displayName = "Switch";
 
 // ../skcom-css/dist/css/components/table.css
-styleInject(".skc-table {\n  overflow: auto;\n  border: 2px solid var(--outline-variant);\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-2);\n}\n.skc-table__content {\n  width: 100%;\n  border-collapse: separate;\n  border-spacing: 0;\n  text-indent: 0;\n  background-color: var(--surface);\n}\n");
+styleInject(".skc-table {\n  overflow: auto;\n  border: 2px solid var(--outline-variant);\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-2);\n}\n.skc-table__content {\n  width: 100%;\n  border-spacing: 0;\n  border-collapse: separate;\n  text-indent: 0;\n  background-color: var(--surface);\n}\n");
 
 // src/components/Table/index.tsx
 var import_jsx_runtime40 = require("react/jsx-runtime");
