@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { FC, forwardRef, ReactNode, useState } from "react";
+import { FC, forwardRef, ReactNode, useEffect, useState } from "react";
 
 // SK Components
 import {
@@ -23,7 +23,7 @@ import {
 import Favicon from "@/components/Favicon";
 
 // Utilities
-import { usePageIsLoading } from "@/utils/page-load";
+import { usePageIsLoading } from "@/utils/routing";
 
 const Layout: FC<{
   children: ReactNode;

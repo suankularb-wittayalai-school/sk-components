@@ -21,6 +21,8 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { useRouter } from "next/router";
+import { usePageRelation } from "@/utils/routing";
 
 const ButtonsSection: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -278,12 +280,15 @@ const ChipsSection: FC = () => {
 };
 
 const ActionsPage: CustomPage = () => {
+  const { previous, destination } = usePageRelation("/", []);
+
   return (
     <>
       <Head>
         <title>Actions - SK Components</title>
       </Head>
       <ContentLayout>
+        <p>{JSON.stringify({ previous, destination })}</p>
         <Section>
           <Header>Button</Header>
           <ButtonsSection />

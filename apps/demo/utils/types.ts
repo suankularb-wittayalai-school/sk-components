@@ -8,6 +8,7 @@ import { PageHeaderProps } from "@suankularb-components/react";
 export type CustomPage = NextPage & {
   fab?: JSX.Element;
   pageHeader?: Partial<PageHeaderProps>;
+  childURLs?: string[];
 };
 
 export type CustomAppProps = {
