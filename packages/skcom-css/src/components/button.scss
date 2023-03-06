@@ -383,7 +383,7 @@
   }
 
   // Disabled
-  [aria-disabled="true"] {
+  &[aria-disabled="true"] {
     &:not(.skc-button--loading) {
       opacity: 0.38;
       color: var(--on-surface);
