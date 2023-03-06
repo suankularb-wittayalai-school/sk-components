@@ -62,6 +62,13 @@ module.exports = {
       bold: "var(--font-bold)",
     },
 
+    // Breakpoints
+    screens: {
+      sm: "600px",
+      md: "905px",
+      lg: "1440px",
+    },
+
     // Colors
     extend: {
       colors: {
