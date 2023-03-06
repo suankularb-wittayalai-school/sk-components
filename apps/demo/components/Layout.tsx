@@ -45,9 +45,7 @@ const Layout: FC<{
           header={
             <div className="skc-title-large">
               <span>SK</span>
-              <span className="font-black text-blue-900 dark:text-blue-300">
-                Components
-              </span>
+              <span className="text-primary font-black">Components</span>
             </div>
           }
           alt="SK Components"
