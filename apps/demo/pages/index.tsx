@@ -89,7 +89,7 @@ const ResourcesSection: FC = () => (
       appearance="filled"
       stateLayerEffect
       href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
-      className="mx-4 justify-end self-stretch"
+      className="mx-4 justify-end self-stretch sm:mx-0"
     >
       <CardContent>
         <MaterialIcon icon="description" size={48} className="text-primary" />
@@ -100,7 +100,7 @@ const ResourcesSection: FC = () => (
       appearance="filled"
       stateLayerEffect
       href="https://github.com/suankularb-wittayalai-school/sk-components"
-      className="mx-4 justify-end self-stretch"
+      className="mx-4 justify-end self-stretch sm:mx-0"
     >
       <CardContent>
         <MaterialIcon icon="code" size={48} className="text-primary" />

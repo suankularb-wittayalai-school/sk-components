@@ -62,6 +62,12 @@ module.exports = {
       bold: "var(--font-bold)",
     },
 
+    // Font family
+    fontFamily: {
+      display: "var(--font-display)",
+      sans: "var(--font-body)",
+    },
+
     // Breakpoints
     screens: {
       sm: "600px",

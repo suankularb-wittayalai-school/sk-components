@@ -45,8 +45,8 @@ export default function App({ Component, pageProps }: CustomAppProps) {
     <>
       <style jsx global>{`
         :root {
-          --font-body: ${bodyFontEN.style.fontFamily},
-            ${bodyFontTH.style.fontFamily};
+          --font-body: -apple-system, BlinkMacSystemFont,
+            ${bodyFontEN.style.fontFamily}, ${bodyFontTH.style.fontFamily};
           --font-display: ${displayFontEN.style.fontFamily},
             ${displayFontTH.style.fontFamily};
         }
