@@ -60,11 +60,11 @@ type PageRelation = "parent" | "child" | "unrelated";
  * `previous` — How the previous page relates to the current;
  * `destination` — How the destination relates to the current.
  */
-export function usePageRelation(parentURL: string, childURLs: string[]) {
+export function usePageRelations(parentURL: string, childURLs: string[]) {
   const router = useRouter();
 
   // Previous page relation
-  const [previous, setPrevious] = useState<PageRelation>("unrelated");
+  const [previous, setPrevious] = useState<PageRelation>();
   const previousURL = useContext(PreviousRouteContext);
   useEffect(() => {
     setPrevious(
@@ -74,10 +74,10 @@ export function usePageRelation(parentURL: string, childURLs: string[]) {
         ? "child"
         : "unrelated"
     );
-  }, []);
+  }, [previousURL]);
 
   // Destination page relation
-  const [destination, setDestination] = useState<PageRelation>("unrelated");
+  const [destination, setDestination] = useState<PageRelation>();
   useEffect(() => {
     const handlePageChange = (destinationURL: string) =>
       setDestination(

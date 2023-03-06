@@ -30,7 +30,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFoot,
   TableHead,
   TableRow,
   TextField,
@@ -38,6 +37,7 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { usePageRelations } from "@/utils/routing";
 
 const AvatarSection: FC = () => (
   <Section>
@@ -412,12 +412,14 @@ const TableSection: FC = () => (
 );
 
 const ContainersPage: CustomPage = () => {
+  const pageRelations = usePageRelations("/", []);
+  
   return (
     <>
       <Head>
         <title>Containers - SK Components</title>
       </Head>
-      <ContentLayout>
+      <ContentLayout key="containers-page" pageRelations={pageRelations}>
         <AvatarSection />
         <CardSection />
         <ColumnsSection />

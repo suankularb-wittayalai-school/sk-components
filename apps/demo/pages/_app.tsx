@@ -39,7 +39,6 @@ const displayFontTH = IBM_Plex_Sans_Thai({
 
 export default function App({ Component, pageProps }: CustomAppProps) {
   const { fab, pageHeader, childURLs } = Component;
-
   const { previousPath } = usePreviousPath();
 
   return (
