@@ -65,7 +65,10 @@ export function useTransitionEvent(parentURL?: string, childURLs?: string[]) {
   // Destination page relation
   const [destination, setDestination] = useState<string>();
   useEffect(() => {
-    const handlePageChange = (url: string) => setDestination(url);
+    const handlePageChange = (url: string) => {
+      window.scrollTo(0, 0);
+      setDestination(url);
+    };
     router.events.on("routeChangeStart", handlePageChange);
     return () => {
       router.events.off("routeChangeStart", handlePageChange);

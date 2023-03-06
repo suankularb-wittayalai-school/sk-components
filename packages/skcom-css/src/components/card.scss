@@ -17,6 +17,7 @@
   display: flex;
   color: var(--on-surface);
   border-radius: var(--rounded-md);
+  -webkit-tap-highlight-color: transparent;
 }
 
 // Appearance
