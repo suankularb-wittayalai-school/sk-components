@@ -23,22 +23,24 @@ import {
 import Favicon from "@/components/Favicon";
 
 // Utilities
-import { usePageIsLoading } from "@/utils/routing";
+import { usePageIsLoading, usePageRelations } from "@/utils/routing";
 
 const Layout: FC<{
   children: ReactNode;
   fab?: JSX.Element;
   pageHeader?: Partial<PageHeaderProps>;
-}> = ({ children, fab, pageHeader }) => {
+  childURLs?: string[];
+}> = ({ children, fab, pageHeader, childURLs }) => {
   const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
   const { pageIsLoading } = usePageIsLoading();
+  const pageRelations = usePageRelations(pageHeader?.parentURL, childURLs);
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
 
   return (
-    <RootLayout>
+    <RootLayout pageRelations={pageRelations}>
       {/* Navigation Drawer */}
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
         <NavDrawerSection

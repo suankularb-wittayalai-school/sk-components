@@ -183,52 +183,26 @@ export function ContentLayout({
   //   animateEntrance(entranceType);
   // }, [pageRelations]);
 
-  React.useEffect(() => {
-    console.log({
-      ...pageRelations,
-      isRendered:
-        (!pageRelations || pageRelations.previous) &&
-        !(pageRelations && pageRelations.destination),
-    });
-  }, [pageRelations]);
+  // React.useEffect(() => {
+  //   console.log({
+  //     ...pageRelations,
+  //     isRendered:
+  //       (!pageRelations || pageRelations.previous) &&
+  //       !(pageRelations && pageRelations.destination),
+  //   });
+  // }, [pageRelations]);
 
   return (
-    <>
-      {
-        // If `pageRelations` is passed in, then we wait for `previous` to be
-        // defined to let the Content Layout render
-        (!pageRelations || pageRelations.previous) &&
-          // Immediately as `destination` is defined, remove the Content Layout
-          // !(pageRelations && pageRelations.destination) &&
-          (
-            <motion.main
-              initial={
-                entranceVariants[pageRelations?.previous || "unrelated"].initial
-              }
-              animate={
-                pageRelations?.destination
-                  ? exitVariants[pageRelations.destination].animate
-                  : entranceVariants[pageRelations?.previous || "unrelated"]
-                      .animate
-              }
-              exit={
-                exitVariants[pageRelations?.destination || "unrelated"].exit
-              }
-              transition={
-                pageRelations?.previous === "unrelated"
-                  ? transition(duration.short4, easing.standard)
-                  : transition(duration.long4, easing.standard)
-              }
-              // animate={mainControls}
-              // transition={transition(duration.long4, easing.standard)}
-              style={style}
-              className={cn(["skc-content-layout", className])}
-            >
-              <div className="skc-content-layout__content">{children}</div>
-            </motion.main>
-          )
-      }
-    </>
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={transition(duration.long4, easing.standard)}
+      style={style}
+      className={cn(["skc-content-layout", className])}
+    >
+      <div className="skc-content-layout__content">{children}</div>
+    </motion.main>
   );
 }
 

@@ -411,27 +411,23 @@ const TableSection: FC = () => (
   </Section>
 );
 
-const ContainersPage: CustomPage = () => {
-  const pageRelations = usePageRelations("/", []);
-  
-  return (
-    <>
-      <Head>
-        <title>Containers - SK Components</title>
-      </Head>
-      <ContentLayout key="containers-page" pageRelations={pageRelations}>
-        <AvatarSection />
-        <CardSection />
-        <ColumnsSection />
-        <DialogSection />
-        <HeaderSection />
-        <ListSection />
-        <ProgressSection />
-        <TableSection />
-      </ContentLayout>
-    </>
-  );
-};
+const ContainersPage: CustomPage = () => (
+  <>
+    <Head>
+      <title>Containers - SK Components</title>
+    </Head>
+    <ContentLayout key="containers-page">
+      <AvatarSection />
+      <CardSection />
+      <ColumnsSection />
+      <DialogSection />
+      <HeaderSection />
+      <ListSection />
+      <ProgressSection />
+      <TableSection />
+    </ContentLayout>
+  </>
+);
 
 ContainersPage.pageHeader = {
   title: "Containers",

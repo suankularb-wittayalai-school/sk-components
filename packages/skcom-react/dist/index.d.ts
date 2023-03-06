@@ -2099,7 +2099,7 @@ declare namespace FAB {
 /**
  * How 2 pages are related in the page hierarchy.
  */
-type PageRelation = "parent" | "child" | "sibling" | "unrelated";
+type PageRelation$1 = "parent" | "child" | "sibling" | "unrelated";
 /**
  * Props for {@link ContentLayout Content Layout}.
  */
@@ -2109,6 +2109,70 @@ interface ContentLayoutProps extends SKComponent {
      * Layout.
      *
      * - Must only have Sections.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * How this page relates to the previous page and the destination page.
+     * This is useful if you want your application to have a coherent spatial
+     * animation, i.e. a quick fade for top-level pages and forward-backward
+     * transitions for traversing up and down the page hierarchy.
+     *
+     * - Must be an object with 2 keys: `previous` and `destination`.
+     *   - `previous` refers to the relationship between the current page and the
+     *     page the user has just arrived from. This is used to create the
+     *     entrance animation of this page.
+     *   - `destination` refers to the relationship between the current page and
+     *     the page the user is going to, and is usually only defined after the
+     *     user just clicked a link to another page in your application. This is
+     *     used to create the exit animation of this page.
+     * - Each key can have either `parent`, `child`, `sibling`, or `unrelated` as
+     *   its value.
+     * - If you’re using the Suankularb Next.js Template, the `usePageRelations`
+     *   hook found in `@/utils/routing.ts` provides this property.
+     * - Optional but recommended.
+     */
+    pageRelations?: Partial<{
+        /**
+         * The relationship between the current page and the page the user has just
+         * arrived from. This is used to create the entrance animation of this
+         * page.
+         */
+        previous: PageRelation$1;
+        /**
+         * `destination` refers to the relationship between the current page and
+         * the page the user is going to, and is usually only defined after the
+         * user just clicked a link to another page in your application. This is
+         * used to create the exit animation of this page.
+         */
+        destination: PageRelation$1;
+    }>;
+}
+/**
+ * A simple width-clamped vertical flow of content with minimal default styling.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.gxd7ps11kchv SKCom documentation}
+ *
+ * @param children The main content of a page is grouped into Sections inside of a Content Layout.
+ */
+declare function ContentLayout({ children, pageRelations, style, className, }: ContentLayoutProps): JSX.Element;
+declare namespace ContentLayout {
+    var displayName: string;
+}
+
+/**
+ * How 2 pages are related in the page hierarchy.
+ */
+type PageRelation = "parent" | "child" | "sibling" | "unrelated";
+/**
+ * Props for {@link RootLayout Root Layout}.
+ */
+interface RootLayoutProps extends SKComponent {
+    /**
+     * Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can
+     * contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content
+     * Layout, and Vertical Split Layout only.
+     *
      * - Always required.
      */
     children: React.ReactNode;
@@ -2149,31 +2213,6 @@ interface ContentLayoutProps extends SKComponent {
     }>;
 }
 /**
- * A simple width-clamped vertical flow of content with minimal default styling.
- *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.gxd7ps11kchv SKCom documentation}
- *
- * @param children The main content of a page is grouped into Sections inside of a Content Layout.
- */
-declare function ContentLayout({ children, pageRelations, style, className, }: ContentLayoutProps): JSX.Element;
-declare namespace ContentLayout {
-    var displayName: string;
-}
-
-/**
- * Props for {@link RootLayout Root Layout}.
- */
-interface RootLayoutProps extends SKComponent {
-    /**
-     * Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can
-     * contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content
-     * Layout, and Vertical Split Layout only.
-     *
-     * - Always required.
-     */
-    children: React.ReactNode;
-}
-/**
  * The container of everything inside an application. Components which must
  * appear only once in like Navigation Drawer, Navigation Bar, FAB, and Page
  * Header only work optimally as direct descendants of Root Layout.
@@ -2184,7 +2223,7 @@ interface RootLayoutProps extends SKComponent {
  *
  * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
  */
-declare function RootLayout({ children, className, style }: RootLayoutProps): JSX.Element;
+declare function RootLayout({ children, pageRelations, className, style, }: RootLayoutProps): JSX.Element;
 declare namespace RootLayout {
     var displayName: string;
 }

@@ -241,24 +241,20 @@ const SwitchSection: FC = () => {
   );
 };
 
-const InputPage: CustomPage = () => {
-  const pageRelations = usePageRelations("/", []);
-
-  return (
-    <>
-      <Head>
-        <title>Input - SK Components</title>
-      </Head>
-      <ContentLayout key="input-page" pageRelations={pageRelations}>
-        <CheckboxSection />
-        <ChipFieldSection />
-        <TextFieldSection />
-        <RadioSection />
-        <SwitchSection />
-      </ContentLayout>
-    </>
-  );
-};
+const InputPage: CustomPage = () => (
+  <>
+    <Head>
+      <title>Input - SK Components</title>
+    </Head>
+    <ContentLayout key="input-page">
+      <CheckboxSection />
+      <ChipFieldSection />
+      <TextFieldSection />
+      <RadioSection />
+      <SwitchSection />
+    </ContentLayout>
+  </>
+);
 
 InputPage.pageHeader = {
   title: "Input",

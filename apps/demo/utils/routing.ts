@@ -60,17 +60,19 @@ type PageRelation = "parent" | "child" | "unrelated";
  * `previous` — How the previous page relates to the current;
  * `destination` — How the destination relates to the current.
  */
-export function usePageRelations(parentURL: string, childURLs: string[]) {
+export function usePageRelations(parentURL?: string, childURLs?: string[]) {
   const router = useRouter();
 
   // Previous page relation
   const [previous, setPrevious] = useState<PageRelation>();
   const previousURL = useContext(PreviousRouteContext);
   useEffect(() => {
+    if (!previousURL) return;
+    console.log(`found ${previousURL} as previous URL to ${router.pathname}`);
     setPrevious(
       parentURL === previousURL
         ? "parent"
-        : previousURL && childURLs.includes(previousURL)
+        : previousURL && childURLs?.includes(previousURL)
         ? "child"
         : "unrelated"
     );
@@ -83,13 +85,13 @@ export function usePageRelations(parentURL: string, childURLs: string[]) {
       setDestination(
         parentURL === destinationURL
           ? "parent"
-          : childURLs.includes(destinationURL)
+          : childURLs?.includes(destinationURL)
           ? "child"
           : "unrelated"
       );
-    router.events.on("routeChangeStart", handlePageChange);
+    router.events.on("routeChangeComplete", handlePageChange);
     return () => {
-      router.events.off("routeChangeStart", handlePageChange);
+      router.events.off("routeChangeComplete", handlePageChange);
     };
   }, []);
 

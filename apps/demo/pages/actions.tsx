@@ -278,27 +278,23 @@ const ChipsSection: FC = () => {
   );
 };
 
-const ActionsPage: CustomPage = () => {
-  const pageRelations = usePageRelations("/", []);
-
-  return (
-    <>
-      <Head>
-        <title>Actions - SK Components</title>
-      </Head>
-      <ContentLayout key="actions-page" pageRelations={pageRelations}>
-        <Section>
-          <Header>Button</Header>
-          <ButtonsSection />
-          <SegmentedButtonSection />
-          <ToggleButtonsSection />
-          <FABsSection />
-        </Section>
-        <ChipsSection />
-      </ContentLayout>
-    </>
-  );
-};
+const ActionsPage: CustomPage = () => (
+  <>
+    <Head>
+      <title>Actions - SK Components</title>
+    </Head>
+    <ContentLayout key="actions-page">
+      <Section>
+        <Header>Button</Header>
+        <ButtonsSection />
+        <SegmentedButtonSection />
+        <ToggleButtonsSection />
+        <FABsSection />
+      </Section>
+      <ChipsSection />
+    </ContentLayout>
+  </>
+);
 
 ActionsPage.pageHeader = {
   title: "Actions",
