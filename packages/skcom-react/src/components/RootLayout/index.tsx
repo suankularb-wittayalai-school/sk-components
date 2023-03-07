@@ -27,7 +27,9 @@ export interface RootLayoutProps extends SKComponent {
 
   /**
    * The definition of `transitionEvent` will cause the current page to
-   * immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
+   * immediately animate out and the next to animate in. The style in which
+   * this animation is according to the next page’s relation to the current
+   * according to the page hierarchy, which is passed in via this property.
    * 
    * - Defined when an animation to the next page is needed immediately.
    * - How the next page is related to this page is passed in via this property.
