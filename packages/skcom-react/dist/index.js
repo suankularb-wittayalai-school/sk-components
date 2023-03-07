@@ -2307,15 +2307,7 @@ function RootLayout({
   }, [transitionEvent]);
   return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { style, className: cn(["skc-root-layout", className]), children: [
     persistentComponents,
-    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
-      import_framer_motion18.AnimatePresence,
-      {
-        mode: "wait",
-        initial: false,
-        onExitComplete: () => window.scrollTo(0, 0),
-        children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_framer_motion18.motion.div, { animate: contentControls, children: content })
-      }
-    )
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_framer_motion18.AnimatePresence, { mode: "wait", initial: false, children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_framer_motion18.motion.div, { animate: contentControls, children: content }, "content") })
   ] });
 }
 RootLayout.displayName = "RootLayout";

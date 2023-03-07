@@ -30,13 +30,13 @@ export interface RootLayoutProps extends SKComponent {
    * immediately animate out and the next to animate in. The style in which
    * this animation is according to the next page’s relation to the current
    * according to the page hierarchy, which is passed in via this property.
-   * 
+   *
    * - Defined when an animation to the next page is needed immediately.
    * - How the next page is related to this page is passed in via this property.
    *   - i.e. If the user is on the `/lookup` page and just clicked a link to
    *     `/lookup/students`—a child page of `/lookup`—then `child` must
    *     immediately passed in to `transitionEvent` to start the animation.
-   * 
+   *
    * - If you are using
    *   {@link https://github.com/suankularb-wittayalai-school/sk-nextjs-template Suankularb Next.js Template},
    *   you can use the return value of `useTransitionEvent` hook (found in
@@ -46,7 +46,7 @@ export interface RootLayoutProps extends SKComponent {
    *   - Find an example of `CustomPage.childURLs` in the index page of the
    *     demo app.
    *   - JSDoc available on all symbols referred to here.
-   * 
+   *
    * - Must be a type of page relation: `parent`, `child`, `sibling`, or `unrelated`.
    * - Optional.
    */
@@ -63,6 +63,7 @@ export interface RootLayoutProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.q72flzs8g2k1 SKCom documentation}
  *
  * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
+ * @param transitionEvent The definition of `transitionEvent` will cause the current page to immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
  */
 export function RootLayout({
   children,
@@ -95,6 +96,15 @@ export function RootLayout({
   );
 
   // Transition execution
+
+  // (@SiravitPhokeed)
+  // KNOWN ISSUE (that I’m not gonna fix yet because I just can’t anymore):
+  // If the page takes more than like half a second to load then the old page
+  // is still visible even after the transition is done, then after a few
+  // seconds the new page fades in. It’s weird. We might need to check for page
+  // load completion (like `routeChangeComplete` in Next.js) before we go ahead
+  // with the enter animation.
+
   React.useEffect(() => {
     const startTransition = async () => {
       contentControls.set({ x: 0, opacity: 1 });
@@ -127,12 +137,10 @@ export function RootLayout({
   return (
     <div style={style} className={cn(["skc-root-layout", className])}>
       {persistentComponents}
-      <AnimatePresence
-        mode="wait"
-        initial={false}
-        onExitComplete={() => window.scrollTo(0, 0)}
-      >
-        <motion.div animate={contentControls}>{content}</motion.div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div key="content" animate={contentControls}>
+          {content}
+        </motion.div>
       </AnimatePresence>
     </div>
   );

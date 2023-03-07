@@ -2229,15 +2229,7 @@ function RootLayout({
   }, [transitionEvent]);
   return /* @__PURE__ */ jsxs24("div", { style, className: cn(["skc-root-layout", className]), children: [
     persistentComponents,
-    /* @__PURE__ */ jsx35(
-      AnimatePresence7,
-      {
-        mode: "wait",
-        initial: false,
-        onExitComplete: () => window.scrollTo(0, 0),
-        children: /* @__PURE__ */ jsx35(motion17.div, { animate: contentControls, children: content })
-      }
-    )
+    /* @__PURE__ */ jsx35(AnimatePresence7, { mode: "wait", initial: false, children: /* @__PURE__ */ jsx35(motion17.div, { animate: contentControls, children: content }, "content") })
   ] });
 }
 RootLayout.displayName = "RootLayout";

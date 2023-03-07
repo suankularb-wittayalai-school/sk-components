@@ -2135,7 +2135,9 @@ interface RootLayoutProps extends SKComponent {
     children: React.ReactNode;
     /**
      * The definition of `transitionEvent` will cause the current page to
-     * immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
+     * immediately animate out and the next to animate in. The style in which
+     * this animation is according to the next page’s relation to the current
+     * according to the page hierarchy, which is passed in via this property.
      *
      * - Defined when an animation to the next page is needed immediately.
      * - How the next page is related to this page is passed in via this property.
@@ -2168,6 +2170,7 @@ interface RootLayoutProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.q72flzs8g2k1 SKCom documentation}
  *
  * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
+ * @param transitionEvent The definition of `transitionEvent` will cause the current page to immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
  */
 declare function RootLayout({ children, transitionEvent, className, style, }: RootLayoutProps): JSX.Element;
 declare namespace RootLayout {
