@@ -1,6 +1,6 @@
 import * as React from 'react';
 import React__default from 'react';
-import { BezierDefinition } from 'framer-motion';
+import { BezierDefinition, Tween, AnimationControls, MotionStyle } from 'framer-motion';
 
 /**
  * Global attributes for all SK Components.
@@ -2133,6 +2133,32 @@ interface RootLayoutProps extends SKComponent {
      * - Always required.
      */
     children: React.ReactNode;
+    /**
+     * The definition of `transitionEvent` will cause the current page to
+     * immediately animate out and the next to animate in. The style in which
+     * this animation is according to the next page’s relation to the current
+     * according to the page hierarchy, which is passed in via this property.
+     *
+     * - Defined when an animation to the next page is needed immediately.
+     * - How the next page is related to this page is passed in via this property.
+     *   - i.e. If the user is on the `/lookup` page and just clicked a link to
+     *     `/lookup/students`—a child page of `/lookup`—then `child` must
+     *     immediately passed in to `transitionEvent` to start the animation.
+     *
+     * - If you are using
+     *   {@link https://github.com/suankularb-wittayalai-school/sk-nextjs-template Suankularb Next.js Template},
+     *   you can use the return value of `useTransitionEvent` hook (found in
+     *   `@/utils/routing.ts`) in combination with `CustomPage.childURLs` here.
+     *   - Find an example of `useTransitionEvent` in the Layout component of the
+     *     demo app.
+     *   - Find an example of `CustomPage.childURLs` in the index page of the
+     *     demo app.
+     *   - JSDoc available on all symbols referred to here.
+     *
+     * - Must be a type of page relation: `parent`, `child`, `sibling`, or `unrelated`.
+     * - Optional.
+     */
+    transitionEvent?: "parent" | "child" | "sibling" | "unrelated";
 }
 /**
  * The container of everything inside an application. Components which must
@@ -2144,8 +2170,9 @@ interface RootLayoutProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.q72flzs8g2k1 SKCom documentation}
  *
  * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
+ * @param transitionEvent The definition of `transitionEvent` will cause the current page to immediately animate out and the next to animate in. The style in which this animation is according to the next page’s relation to the current according to the page hierarchy, which is passed in via this property.
  */
-declare function RootLayout({ children, className, style }: RootLayoutProps): JSX.Element;
+declare function RootLayout({ children, transitionEvent, className, style, }: RootLayoutProps): JSX.Element;
 declare namespace RootLayout {
     var displayName: string;
 }
@@ -2888,5 +2915,49 @@ declare function useAnimationConfig(): {
         emphasizedDecelerate: BezierDefinition;
     };
 };
+/**
+ * Create a Framer Motion Tween object from a duration and an easing.
+ *
+ * @see {@link https://www.framer.com/motion/transition/#tween Framer Motion documentation}
+ *
+ * @param duration How long the transition takes. Use the `duration` key from {@link useAnimationConfig}.
+ * @param easing The easing definition. Use the `easing` key from {@link useAnimationConfig}.
+ *
+ * @returns A Framer Motion Tween object.
+ */
+declare function transition(duration: Tween["duration"], easing: Tween["ease"]): Tween;
+/**
+ * A hook to control a ripple element within a parent element.
+ *
+ * Example:
+ * ```tsx
+ * const { rippleHandles, rippleControls, rippleStyle }
+ *   = useRipple(buttonRef);
+ *
+ * return (
+ *   <button {...rippleHandles}>
+ *     <span>Button</button>
+ *     <motion.span
+ *       initial={{ scale: 0, opacity: 0.36 }}
+ *       animate={rippleControls}
+ *       className="skc-button__ripple"
+ *       style={rippleStyle}
+ *     />
+ *   </button>
+ * );
+ * ```
+ *
+ * @param parentRef The React Reference Object pointing to the parent element of the ripple.
+ * @returns Event listeners, animation controls, and styles to put on the ripple `motion` element.
+ */
+declare function useRipple(parentRef: React__default.MutableRefObject<any>): {
+    rippleListeners: {
+        onTouchStart: (event: React__default.TouchEvent) => void;
+        onMouseDown: (event: React__default.MouseEvent) => void;
+        onKeyDown: (event: React__default.KeyboardEvent) => void;
+    };
+    rippleControls: AnimationControls;
+    rippleStyle: MotionStyle;
+};
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useRipple };

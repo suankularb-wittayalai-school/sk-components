@@ -30,7 +30,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFoot,
   TableHead,
   TableRow,
   TextField,
@@ -38,6 +37,7 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { useTransitionEvent } from "@/utils/routing";
 
 const AvatarSection: FC = () => (
   <Section>
@@ -411,25 +411,23 @@ const TableSection: FC = () => (
   </Section>
 );
 
-const ContainersPage: CustomPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Containers - SK Components</title>
-      </Head>
-      <ContentLayout>
-        <AvatarSection />
-        <CardSection />
-        <ColumnsSection />
-        <DialogSection />
-        <HeaderSection />
-        <ListSection />
-        <ProgressSection />
-        <TableSection />
-      </ContentLayout>
-    </>
-  );
-};
+const ContainersPage: CustomPage = () => (
+  <>
+    <Head>
+      <title>Containers - SK Components</title>
+    </Head>
+    <ContentLayout key="containers-page">
+      <AvatarSection />
+      <CardSection />
+      <ColumnsSection />
+      <DialogSection />
+      <HeaderSection />
+      <ListSection />
+      <ProgressSection />
+      <TableSection />
+    </ContentLayout>
+  </>
+);
 
 ContainersPage.pageHeader = {
   title: "Containers",

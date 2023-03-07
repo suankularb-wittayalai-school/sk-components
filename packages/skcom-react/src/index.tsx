@@ -102,4 +102,4 @@ export {
   type ThemeProviderProps,
 } from "./components/ThemeProvider";
 
-export { useAnimationConfig } from "./utils/animation";
+export { useAnimationConfig, transition, useRipple } from "./utils/animation";

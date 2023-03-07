@@ -22,6 +22,7 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { useTransitionEvent } from "@/utils/routing";
 
 const CheckboxSection: FC = () => {
   const [termsAgreed, setTermsAgreed] = useState<boolean>(false);
@@ -245,7 +246,7 @@ const InputPage: CustomPage = () => (
     <Head>
       <title>Input - SK Components</title>
     </Head>
-    <ContentLayout>
+    <ContentLayout key="input-page">
       <CheckboxSection />
       <ChipFieldSection />
       <TextFieldSection />

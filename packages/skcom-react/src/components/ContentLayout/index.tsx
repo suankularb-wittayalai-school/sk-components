@@ -1,5 +1,5 @@
 // External libraries
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -40,12 +40,14 @@ export function ContentLayout({
 }: ContentLayoutProps) {
   const { duration, easing } = useAnimationConfig();
 
+  const baseTransition = transition(duration.medium2, easing.standard);
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={transition(duration.short4, easing.standard)}
+      exit={{ opacity: 0, transition: { ...baseTransition, delay: 0.15 } }}
+      transition={baseTransition}
       style={style}
       className={cn(["skc-content-layout", className])}
     >

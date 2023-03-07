@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { FC, forwardRef, ReactNode, useState } from "react";
+import { FC, forwardRef, ReactNode, useEffect, useState } from "react";
 
 // SK Components
 import {
@@ -23,31 +23,34 @@ import {
 import Favicon from "@/components/Favicon";
 
 // Utilities
-import { usePageIsLoading } from "@/utils/page-load";
+import { usePageIsLoading, useTransitionEvent } from "@/utils/routing";
 
 const Layout: FC<{
   children: ReactNode;
   fab?: JSX.Element;
   pageHeader?: Partial<PageHeaderProps>;
-}> = ({ children, fab, pageHeader }) => {
+  childURLs?: string[];
+}> = ({ children, fab, pageHeader, childURLs }) => {
   const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
   const { pageIsLoading } = usePageIsLoading();
+  const { transitionEvent } = useTransitionEvent(
+    pageHeader?.parentURL,
+    childURLs
+  );
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
 
   return (
-    <RootLayout>
+    <RootLayout transitionEvent={transitionEvent}>
       {/* Navigation Drawer */}
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
         <NavDrawerSection
           header={
             <div className="skc-title-large">
               <span>SK</span>
-              <span className="font-black text-blue-900 dark:text-blue-300">
-                Components
-              </span>
+              <span className="text-primary font-bold">Components</span>
             </div>
           }
           alt="SK Components"

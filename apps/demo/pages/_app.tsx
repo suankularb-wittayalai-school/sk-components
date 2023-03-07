@@ -13,11 +13,15 @@ import { ThemeProvider } from "@suankularb-components/react";
 // Internal components
 import Layout from "@/components/Layout";
 
+// Contexts
+import PreviousRouteContext from "@/contexts/PreviousRouteContext";
+
 // Styles
 import "@/styles/globals.css";
 
 // Utilities
 import { CustomAppProps } from "@/utils/types";
+import { usePreviousPath } from "@/utils/routing";
 
 // English fonts
 const bodyFontEN = Inter({ subsets: ["latin"] });
@@ -34,26 +38,29 @@ const displayFontTH = IBM_Plex_Sans_Thai({
 });
 
 export default function App({ Component, pageProps }: CustomAppProps) {
-  const { fab, pageHeader } = Component;
+  const { fab, pageHeader, childURLs } = Component;
+  const { previousPath } = usePreviousPath();
 
   return (
     <>
       <style jsx global>{`
         :root {
-          --font-body: ${bodyFontEN.style.fontFamily},
-            ${bodyFontTH.style.fontFamily};
+          --font-body: -apple-system, BlinkMacSystemFont,
+            ${bodyFontEN.style.fontFamily}, ${bodyFontTH.style.fontFamily};
           --font-display: ${displayFontEN.style.fontFamily},
             ${displayFontTH.style.fontFamily};
         }
       `}</style>
 
-      <MotionConfig reducedMotion="user">
-        <ThemeProvider>
-          <Layout {...{ fab, pageHeader }}>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
-      </MotionConfig>
+      <PreviousRouteContext.Provider value={previousPath}>
+        <MotionConfig reducedMotion="user">
+          <ThemeProvider>
+            <Layout {...{ fab, pageHeader, childURLs }}>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
+        </MotionConfig>
+      </PreviousRouteContext.Provider>
     </>
   );
 }

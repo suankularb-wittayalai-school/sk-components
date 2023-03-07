@@ -21,6 +21,7 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { useTransitionEvent } from "@/utils/routing";
 
 const ButtonsSection: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -255,7 +256,8 @@ const ChipsSection: FC = () => {
         </ChipSet>
         <div
           className="flex flex-row flex-wrap place-content-center gap-2
-          rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-900 py-8 px-4"
+            rounded-md bg-gradient-to-r from-primary-60 to-primary-30 py-8
+            px-4"
         >
           <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
             Turn on lights
@@ -277,25 +279,23 @@ const ChipsSection: FC = () => {
   );
 };
 
-const ActionsPage: CustomPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Actions - SK Components</title>
-      </Head>
-      <ContentLayout>
-        <Section>
-          <Header>Button</Header>
-          <ButtonsSection />
-          <SegmentedButtonSection />
-          <ToggleButtonsSection />
-          <FABsSection />
-        </Section>
-        <ChipsSection />
-      </ContentLayout>
-    </>
-  );
-};
+const ActionsPage: CustomPage = () => (
+  <>
+    <Head>
+      <title>Actions - SK Components</title>
+    </Head>
+    <ContentLayout key="actions-page">
+      <Section>
+        <Header>Button</Header>
+        <ButtonsSection />
+        <SegmentedButtonSection />
+        <ToggleButtonsSection />
+        <FABsSection />
+      </Section>
+      <ChipsSection />
+    </ContentLayout>
+  </>
+);
 
 ActionsPage.pageHeader = {
   title: "Actions",
