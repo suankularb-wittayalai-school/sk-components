@@ -291,13 +291,13 @@ const SplitLayoutSection: FC = () => (
     <SplitLayout ratio={[4, 8]}>
       <Card
         appearance="outlined"
-        className="skc-headline-large !grid place-content-center"
+        className="skc-headline-large !grid h-20 place-content-center"
       >
         Left
       </Card>
       <Card
         appearance="outlined"
-        className="skc-headline-large !grid place-content-center"
+        className="skc-headline-large place-content-center sm:!grid"
       >
         Right
       </Card>

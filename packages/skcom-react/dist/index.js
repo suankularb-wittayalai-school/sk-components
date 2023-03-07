@@ -2257,7 +2257,7 @@ function ContentLayout({
 ContentLayout.displayName = "ContentLayout";
 
 // ../skcom-css/dist/css/components/split-layout.css
-styleInject(".skc-split-layout {\n  display: grid;\n  height: calc(100vh - 9.25rem);\n  gap: .5rem 1.5rem;\n  grid-template-columns: 1fr;\n}\n.skc-split-layout :last-child {\n  display: none;\n}\n.skc-split-layout--list-detail {\n  grid-template-columns: 4fr;\n}\n@supports (height: 100dvh) {\n  .skc-split-layout {\n    height: calc(100dvh - 9.25rem);\n  }\n}\n@media only screen and (min-width: 600px) {\n  .skc-split-layout {\n    height: calc(100vh - 12rem);\n  }\n  .skc-split-layout :last-child {\n    display: block;\n  }\n  @supports (height: 100dvh) {\n    .skc-split-layout {\n      height: calc(100vh - 12rem);\n    }\n  }\n}\n");
+styleInject(".skc-split-layout {\n  display: grid;\n  gap: .5rem 1.5rem;\n  grid-template-columns: 1fr;\n}\n.skc-split-layout :last-child {\n  display: none;\n}\n.skc-split-layout--persist-right :last-child {\n  display: block;\n}\n@media only screen and (min-width: 600px) {\n  .skc-split-layout {\n    height: calc(100vh - 12rem);\n  }\n  .skc-split-layout :last-child {\n    display: block;\n  }\n  .skc-split-layout--list-detail {\n    grid-template-columns: 1fr 1fr;\n  }\n  .skc-split-layout--supporting-panel {\n    grid-template-columns: 5fr 3fr;\n  }\n  @supports (height: 100dvh) {\n    .skc-split-layout {\n      height: calc(100vh - 12rem);\n    }\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-split-layout--list-detail {\n    grid-template-columns: 1fr 2fr;\n  }\n  .skc-split-layout--supporting-panel {\n    grid-template-columns: 3fr 1fr;\n  }\n}\n");
 
 // src/components/SplitLayout/index.tsx
 var import_jsx_runtime35 = require("react/jsx-runtime");
@@ -2287,6 +2287,7 @@ function SplitLayout({
       }),
       className: cn([
         "skc-split-layout",
+        ratio === "list-detail" ? "skc-split-layout--list-detail" : ratio === "supporting-panel" ? "skc-split-layout--supporting-panel" : void 0,
         showRightOnMobile && "skc-split-layout--persist-right",
         className
       ]),

@@ -91,6 +91,11 @@ export function SplitLayout({
       }}
       className={cn([
         "skc-split-layout",
+        ratio === "list-detail"
+          ? "skc-split-layout--list-detail"
+          : ratio === "supporting-panel"
+          ? "skc-split-layout--supporting-panel"
+          : undefined,
         showRightOnMobile && "skc-split-layout--persist-right",
         className,
       ])}

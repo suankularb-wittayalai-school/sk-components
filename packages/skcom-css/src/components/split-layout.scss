@@ -18,7 +18,6 @@
 
 .skc-split-layout {
   display: grid;
-  height: calc(100vh - 9.25rem);
   gap: 0.5rem 1.5rem;
   grid-template-columns: 1fr;
 
@@ -27,14 +26,8 @@
   }
 }
 
-.skc-split-layout--list-detail {
-  grid-template-columns: 4fr;
-}
-
-@supports (height: 100dvh) {
-  .skc-split-layout {
-    height: calc(100dvh - 9.25rem);
-  }
+.skc-split-layout--persist-right :last-child {
+  display: block;
 }
 
 @include mix.breakpoint("sm") {
@@ -46,9 +39,27 @@
     }
   }
 
+  .skc-split-layout--list-detail {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .skc-split-layout--supporting-panel {
+    grid-template-columns: 5fr 3fr;
+  }
+
   @supports (height: 100dvh) {
     .skc-split-layout {
       height: calc(100vh - 12rem);
     }
+  }
+}
+
+@include mix.breakpoint("md") {
+  .skc-split-layout--list-detail {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .skc-split-layout--supporting-panel {
+    grid-template-columns: 3fr 1fr;
   }
 }
