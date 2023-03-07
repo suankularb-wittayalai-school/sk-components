@@ -25,13 +25,6 @@
     border-radius: inherit;
     object-fit: cover;
   }
-
-  .skc-icon {
-    @include ci.icon(0, 200, 0, 48);
-    position: absolute;
-    top: 0.25rem;
-    left: -0.25rem;
-  }
 }
 
 .skc-avatar__initials {
