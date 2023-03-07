@@ -50,7 +50,7 @@ const Layout: FC<{
           header={
             <div className="skc-title-large">
               <span>SK</span>
-              <span className="text-primary font-black">Components</span>
+              <span className="text-primary font-bold">Components</span>
             </div>
           }
           alt="SK Components"
