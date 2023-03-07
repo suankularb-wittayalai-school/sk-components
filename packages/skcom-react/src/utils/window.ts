@@ -65,7 +65,7 @@ const breakpoints = {
  * Watches the window for a change in breakpoint.
  * @returns `atBreakpoint` — The largest breakpoint the user window is at.
  */
-export function useBreakpoint() {
+export function useBreakpoint(): { atBreakpoint: keyof typeof breakpoints } {
   const { isMatch: isAtSm } = useMediaQuery(`(min-width: ${breakpoints.sm}px)`);
   const { isMatch: isAtMd } = useMediaQuery(`(min-width: ${breakpoints.md}px)`);
   const { isMatch: isAtLg } = useMediaQuery(`(min-width: ${breakpoints.lg}px)`);

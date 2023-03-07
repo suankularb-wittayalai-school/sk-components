@@ -2122,6 +2122,58 @@ declare namespace ContentLayout {
 }
 
 /**
+ * Props for {@link SplitLayout Split Layout}.
+ */
+interface SplitLayoutProps extends SKComponent {
+    /**
+     * The content should have 2 sides; each element entered corresponds to a
+     * side.
+     *
+     * - Must have 2 elements.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Choose from 2 presets or create your own. This uses the same grid system
+     * as Columns, so ensure each side of the ratio adds up to 12.
+     *
+     * - If you choose to use a preset: must be `list-detail` or
+     *   `supporting-panel`. Learn more about these Material Design’s
+     *   documentation.
+     * - If you choose to create a custom ratio: must be an array with 2
+     *   numbers, the first being the left and the last being the right.
+     * - Always required.
+     */
+    ratio: "list-detail" | "supporting-panel" | [number, number];
+    /**
+     * On mobile, there is not enough space 2 have to columns on screen at once,
+     * so the right side disappears by default. Enabling `showRightOnMobile`
+     * will show the right side below the left side.
+     *
+     * - Optional.
+     */
+    showRightOnMobile?: boolean;
+}
+/**
+ * List-detail views and supporting panel layouts can be created with Vertical
+ * Split Layout.
+ *
+ * In a list-detail view, the left side is a list and the right is the list’s
+ * detail. In a supporting panel layout, the main content takes focus with a
+ * small column set aside for supporting content.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iv2gnmudjnme SKCom documentation}
+ *
+ * @param children The content should have 2 sides; each element entered corresponds to a side.
+ * @param ratio Choose from 2 presets or create your own. This uses the same grid system as Columns, so ensure each side of the ratio adds up to 12.
+ * @param showRightOnMobile Show the right side below the left side instead of hiding it on mobile.
+ */
+declare function SplitLayout({ children, ratio, showRightOnMobile, style, className, }: SplitLayoutProps): JSX.Element;
+declare namespace SplitLayout {
+    var displayName: string;
+}
+
+/**
  * Props for {@link RootLayout Root Layout}.
  */
 interface RootLayoutProps extends SKComponent {
@@ -2960,4 +3012,4 @@ declare function useRipple(parentRef: React__default.MutableRefObject<any>): {
     rippleStyle: MotionStyle;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useRipple };

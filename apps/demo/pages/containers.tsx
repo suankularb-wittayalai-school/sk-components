@@ -27,6 +27,7 @@ import {
   Progress,
   Section,
   SegmentedButton,
+  SplitLayout,
   Table,
   TableBody,
   TableCell,
@@ -37,7 +38,7 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import { useTransitionEvent } from "@/utils/routing";
+import Link from "next/link";
 
 const AvatarSection: FC = () => (
   <Section>
@@ -284,6 +285,31 @@ const HeaderSection: FC = () => (
   </Section>
 );
 
+const SplitLayoutSection: FC = () => (
+  <Section>
+    <Header>Split Layout</Header>
+    <SplitLayout ratio={[4, 8]}>
+      <Card
+        appearance="outlined"
+        className="skc-headline-large !grid place-content-center"
+      >
+        Left
+      </Card>
+      <Card
+        appearance="outlined"
+        className="skc-headline-large !grid place-content-center"
+      >
+        Right
+      </Card>
+    </SplitLayout>
+    <Actions>
+      <Button appearance="outlined" href="/example/lookup" element={Link}>
+        See full demo
+      </Button>
+    </Actions>
+  </Section>
+);
+
 const ListSection: FC = () => {
   const [cart, setCart] = useState<string[]>(["fish-burger"]);
 
@@ -422,6 +448,7 @@ const ContainersPage: CustomPage = () => (
       <ColumnsSection />
       <DialogSection />
       <HeaderSection />
+      <SplitLayoutSection />
       <ListSection />
       <ProgressSection />
       <TableSection />
