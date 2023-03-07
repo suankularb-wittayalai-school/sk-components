@@ -1,6 +1,6 @@
 import * as React from 'react';
 import React__default from 'react';
-import { BezierDefinition } from 'framer-motion';
+import { BezierDefinition, Tween, AnimationControls, MotionStyle } from 'framer-motion';
 
 /**
  * Global attributes for all SK Components.
@@ -2915,5 +2915,49 @@ declare function useAnimationConfig(): {
         emphasizedDecelerate: BezierDefinition;
     };
 };
+/**
+ * Create a Framer Motion Tween object from a duration and an easing.
+ *
+ * @see {@link https://www.framer.com/motion/transition/#tween Framer Motion documentation}
+ *
+ * @param duration How long the transition takes. Use the `duration` key from {@link useAnimationConfig}.
+ * @param easing The easing definition. Use the `easing` key from {@link useAnimationConfig}.
+ *
+ * @returns A Framer Motion Tween object.
+ */
+declare function transition(duration: Tween["duration"], easing: Tween["ease"]): Tween;
+/**
+ * A hook to control a ripple element within a parent element.
+ *
+ * Example:
+ * ```tsx
+ * const { rippleHandles, rippleControls, rippleStyle }
+ *   = useRipple(buttonRef);
+ *
+ * return (
+ *   <button {...rippleHandles}>
+ *     <span>Button</button>
+ *     <motion.span
+ *       initial={{ scale: 0, opacity: 0.36 }}
+ *       animate={rippleControls}
+ *       className="skc-button__ripple"
+ *       style={rippleStyle}
+ *     />
+ *   </button>
+ * );
+ * ```
+ *
+ * @param parentRef The React Reference Object pointing to the parent element of the ripple.
+ * @returns Event listeners, animation controls, and styles to put on the ripple `motion` element.
+ */
+declare function useRipple(parentRef: React__default.MutableRefObject<any>): {
+    rippleListeners: {
+        onTouchStart: (event: React__default.TouchEvent) => void;
+        onMouseDown: (event: React__default.MouseEvent) => void;
+        onKeyDown: (event: React__default.KeyboardEvent) => void;
+    };
+    rippleControls: AnimationControls;
+    rippleStyle: MotionStyle;
+};
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, useAnimationConfig };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useRipple };

@@ -2919,5 +2919,7 @@ export {
   TextField,
   ThemeProvider,
   ToggleButton,
-  useAnimationConfig
+  transition,
+  useAnimationConfig,
+  useRipple
 };
