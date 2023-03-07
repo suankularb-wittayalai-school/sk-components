@@ -16,50 +16,86 @@
 
 @use "../abstracts/mixins.scss" as mix;
 
-.skc-split-layout {
+.skc-split-layout__content {
   display: grid;
-  gap: 0.5rem 1.5rem;
+  row-gap: 0.5rem;
   grid-template-columns: 1fr;
 
-  :last-child {
-    display: none;
-  }
-}
+  > * {
+    .skc-content-layout {
+      padding: 1rem 1.25rem;
+    }
 
-.skc-split-layout--persist-right :last-child {
-  display: block;
-}
-
-@include mix.breakpoint("sm") {
-  .skc-split-layout {
-    height: calc(100vh - 12rem);
-
-    :last-child {
-      display: block;
+    .skc-content-layout__content {
+      max-width: 0;
+      margin: 0;
     }
   }
 
-  .skc-split-layout--list-detail {
-    grid-template-columns: 1fr 1fr;
+  > :first-child {
+    padding-right: 0.75rem;
   }
 
-  .skc-split-layout--supporting-panel {
-    grid-template-columns: 5fr 3fr;
+  > :last-child {
+    display: none;
+    padding-left: 0.75rem;
+  }
+}
+
+.skc-root-layout,
+.skc-root-layout > * {
+  > .skc-split-layout > .skc-split-layout__content {
+    max-width: 70.5rem;
+    margin: 0 auto;
+
+    > * {
+      height: calc(100vh - 12rem);
+      padding-block: 1.5rem;
+      overflow-y: auto;
+    }
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-split-layout__content {
+    > :last-child {
+      display: block;
+    }
+
+    .skc-split-layout--list-detail & {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .skc-split-layout--supporting-panel & {
+      grid-template-columns: 5fr 3fr;
+    }
+  }
+
+  .skc-root-layout,
+  .skc-root-layout > * {
+    > .skc-split-layout > .skc-split-layout__content {
+      width: calc(100% - (10rem));
+    }
   }
 
   @supports (height: 100dvh) {
-    .skc-split-layout {
-      height: calc(100vh - 12rem);
+    .skc-root-layout,
+    .skc-root-layout > * {
+      > .skc-split-layout > .skc-split-layout__content {
+        width: calc(100% - (12rem));
+      }
     }
   }
 }
 
 @include mix.breakpoint("md") {
-  .skc-split-layout--list-detail {
-    grid-template-columns: 1fr 2fr;
-  }
+  .skc-split-layout__content {
+    .skc-split-layout--list-detail & {
+      grid-template-columns: 1fr 2fr;
+    }
 
-  .skc-split-layout--supporting-panel {
-    grid-template-columns: 3fr 1fr;
+    .skc-split-layout--supporting-panel & {
+      grid-template-columns: 3fr 1fr;
+    }
   }
 }

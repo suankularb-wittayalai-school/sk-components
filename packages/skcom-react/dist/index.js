@@ -2257,7 +2257,7 @@ function ContentLayout({
 ContentLayout.displayName = "ContentLayout";
 
 // ../skcom-css/dist/css/components/split-layout.css
-styleInject(".skc-split-layout {\n  display: grid;\n  gap: .5rem 1.5rem;\n  grid-template-columns: 1fr;\n}\n.skc-split-layout :last-child {\n  display: none;\n}\n.skc-split-layout--persist-right :last-child {\n  display: block;\n}\n@media only screen and (min-width: 600px) {\n  .skc-split-layout {\n    height: calc(100vh - 12rem);\n  }\n  .skc-split-layout :last-child {\n    display: block;\n  }\n  .skc-split-layout--list-detail {\n    grid-template-columns: 1fr 1fr;\n  }\n  .skc-split-layout--supporting-panel {\n    grid-template-columns: 5fr 3fr;\n  }\n  @supports (height: 100dvh) {\n    .skc-split-layout {\n      height: calc(100vh - 12rem);\n    }\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-split-layout--list-detail {\n    grid-template-columns: 1fr 2fr;\n  }\n  .skc-split-layout--supporting-panel {\n    grid-template-columns: 3fr 1fr;\n  }\n}\n");
+styleInject(".skc-split-layout__content {\n  display: grid;\n  row-gap: .5rem;\n  grid-template-columns: 1fr;\n}\n.skc-split-layout__content > * .skc-content-layout {\n  padding: 1rem 1.25rem;\n}\n.skc-split-layout__content > * .skc-content-layout__content {\n  max-width: 0;\n  margin: 0;\n}\n.skc-split-layout__content > :first-child {\n  padding-right: .75rem;\n}\n.skc-split-layout__content > :last-child {\n  display: none;\n  padding-left: .75rem;\n}\n.skc-root-layout > .skc-split-layout > .skc-split-layout__content,\n.skc-root-layout > * > .skc-split-layout > .skc-split-layout__content {\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-root-layout > .skc-split-layout > .skc-split-layout__content > *,\n.skc-root-layout > * > .skc-split-layout > .skc-split-layout__content > * {\n  height: calc(100vh - 12rem);\n  padding-block: 1.5rem;\n  overflow-y: auto;\n}\n@media only screen and (min-width: 600px) {\n  .skc-split-layout__content > :last-child {\n    display: block;\n  }\n  .skc-split-layout--list-detail .skc-split-layout__content {\n    grid-template-columns: 1fr 1fr;\n  }\n  .skc-split-layout--supporting-panel .skc-split-layout__content {\n    grid-template-columns: 5fr 3fr;\n  }\n  .skc-root-layout > .skc-split-layout > .skc-split-layout__content,\n  .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content {\n    width: calc(100% - 10rem);\n  }\n  @supports (height: 100dvh) {\n    .skc-root-layout > .skc-split-layout > .skc-split-layout__content,\n    .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content {\n      width: calc(100% - 12rem);\n    }\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-split-layout--list-detail .skc-split-layout__content {\n    grid-template-columns: 1fr 2fr;\n  }\n  .skc-split-layout--supporting-panel .skc-split-layout__content {\n    grid-template-columns: 3fr 1fr;\n  }\n}\n");
 
 // src/components/SplitLayout/index.tsx
 var import_jsx_runtime35 = require("react/jsx-runtime");
@@ -2269,7 +2269,7 @@ function SplitLayout({
   className
 }) {
   const { atBreakpoint } = useBreakpoint();
-  const responsiveColSpans = {
+  const colSpans = {
     lg: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     // 12 columns
     md: [2, 2, 4, 4, 6, 6, 6, 8, 8, 10, 10],
@@ -2280,18 +2280,23 @@ function SplitLayout({
   return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
     "section",
     {
-      style: __spreadProps(__spreadValues({}, style), {
-        gridTemplateColumns: typeof ratio !== "string" && atBreakpoint !== "base" ? ratio.map(
-          (size) => `${responsiveColSpans[atBreakpoint][size - 1]}fr`
-        ).join(" ") : void 0
-      }),
+      style,
       className: cn([
         "skc-split-layout",
         ratio === "list-detail" ? "skc-split-layout--list-detail" : ratio === "supporting-panel" ? "skc-split-layout--supporting-panel" : void 0,
         showRightOnMobile && "skc-split-layout--persist-right",
         className
       ]),
-      children
+      children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+        "div",
+        {
+          className: "skc-split-layout__content",
+          style: {
+            gridTemplateColumns: typeof ratio !== "string" && atBreakpoint !== "base" ? ratio.map((size) => `${colSpans[atBreakpoint][size - 1]}fr`).join(" ") : void 0
+          },
+          children
+        }
+      )
     }
   );
 }

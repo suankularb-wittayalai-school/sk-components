@@ -9,7 +9,7 @@ import "@suankularb-components/css/dist/css/components/split-layout.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { useBreakpoint } from "../../utils/window";
+import { useBreakpoint, useMediaQuery } from "../../utils/window";
 
 /**
  * Props for {@link SplitLayout Split Layout}.
@@ -69,8 +69,7 @@ export function SplitLayout({
   className,
 }: SplitLayoutProps) {
   const { atBreakpoint } = useBreakpoint();
-
-  const responsiveColSpans = {
+  const colSpans = {
     lg: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], // 12 columns
     md: [2, 2, 4, 4, 6, 6, 6, 8, 8, 10, 10], // 12 columns
     sm: [2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6], // 8 columns
@@ -78,17 +77,7 @@ export function SplitLayout({
 
   return (
     <section
-      style={{
-        ...style,
-        gridTemplateColumns:
-          typeof ratio !== "string" && atBreakpoint !== "base"
-            ? ratio
-                .map(
-                  (size) => `${responsiveColSpans[atBreakpoint][size - 1]}fr`
-                )
-                .join(" ")
-            : undefined,
-      }}
+      style={style}
       className={cn([
         "skc-split-layout",
         ratio === "list-detail"
@@ -100,7 +89,19 @@ export function SplitLayout({
         className,
       ])}
     >
-      {children}
+      <div
+        className="skc-split-layout__content"
+        style={{
+          gridTemplateColumns:
+            typeof ratio !== "string" && atBreakpoint !== "base"
+              ? ratio
+                  .map((size) => `${colSpans[atBreakpoint][size - 1]}fr`)
+                  .join(" ")
+              : undefined,
+        }}
+      >
+        {children}
+      </div>
     </section>
   );
 }

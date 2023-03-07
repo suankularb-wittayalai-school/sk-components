@@ -289,18 +289,22 @@ const SplitLayoutSection: FC = () => (
   <Section>
     <Header>Split Layout</Header>
     <SplitLayout ratio={[4, 8]}>
-      <Card
-        appearance="outlined"
-        className="skc-headline-large !grid h-20 place-content-center"
-      >
-        Left
-      </Card>
-      <Card
-        appearance="outlined"
-        className="skc-headline-large place-content-center sm:!grid"
-      >
-        Right
-      </Card>
+      <div>
+        <Card
+          appearance="outlined"
+          className="skc-headline-large !grid h-20 place-content-center"
+        >
+          Left
+        </Card>
+      </div>
+      <div>
+        <Card
+          appearance="outlined"
+          className="skc-headline-large h-20 place-content-center sm:!grid"
+        >
+          Right
+        </Card>
+      </div>
     </SplitLayout>
     <Actions>
       <Button appearance="outlined" href="/example/lookup" element={Link}>
