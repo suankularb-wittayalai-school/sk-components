@@ -51,7 +51,6 @@ const AboutSection: FC = () => (
 );
 
 const ResourcesSection: FC = () => (
-  // <Columns columns={4} className="mx-4 sm:mx-0">
   <Columns columns={4}>
     {/* Left side: text */}
     <Section className="mb-2 sm:col-span-2 md:mb-0">
