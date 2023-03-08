@@ -131,6 +131,10 @@
 
 .skc-page-header__related {
   display: contents;
+
+  > * {
+    margin-inline: 1rem;
+  }
 }
 
 .skc-page-header__icon {
@@ -196,6 +200,10 @@
     .skc-icon {
       font-size: 21rem;
     }
+  }
+
+  .skc-page-header__related > * {
+    margin-inline: 0;
   }
 
   .skc-page-header__replacement-color {
