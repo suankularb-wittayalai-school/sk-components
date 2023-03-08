@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { FC, forwardRef, ReactNode, useEffect, useState } from "react";
+import { FC, forwardRef, LegacyRef, ReactNode, useState } from "react";
 
 // SK Components
 import {
@@ -46,6 +46,7 @@ const Layout: FC<{
     <RootLayout transitionEvent={transitionEvent}>
       {/* Navigation Drawer */}
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
+        {/* Top-level pages */}
         <NavDrawerSection
           header={
             <div className="skc-title-large">
@@ -56,52 +57,77 @@ const Layout: FC<{
           alt="SK Components"
         >
           <NavDrawerItem
+            icon={<MaterialIcon icon="info" />}
+            label="About"
+            selected={router.pathname === "/"}
+            href="/"
+            element={Link}
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="widgets" />}
+            label="Components"
+            selected={router.pathname === "/components"}
+            href="/components"
+            element={Link}
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="capture" />}
+            label="Examples"
+            selected={getIsSelected(/^\/example/)}
+            href="/example"
+            element={Link}
+          />
+          <NavDrawerItem
+            icon={<MaterialIcon icon="description" />}
+            label="Docs"
+            href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+            element={forwardRef((props, ref) => (
+              <a
+                {...props}
+                ref={ref as LegacyRef<HTMLAnchorElement>}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {props.children}
+              </a>
+            ))}
+          />
+        </NavDrawerSection>
+
+        {/* Components */}
+        <NavDrawerSection header="Components">
+          <NavDrawerItem
             icon={<MaterialIcon icon="touch_app" />}
             label="Actions"
-            selected={getIsSelected(/\/actions$/)}
-            href="/actions"
+            selected={router.pathname === "/components/actions"}
+            href="/components/actions"
             element={Link}
           />
           <NavDrawerItem
             icon={<MaterialIcon icon="input" />}
             label="Input"
-            selected={getIsSelected(/\/input$/)}
-            href="/input"
+            selected={router.pathname === "/components/input"}
+            href="/components/input"
             element={Link}
           />
           <NavDrawerItem
-            icon={<MaterialIcon icon="subdirectory_arrow_right" />}
-            label="Navigation"
-            selected={getIsSelected(/\/navigation$/)}
-            href="/navigation"
+            icon={<MaterialIcon icon="swap_horizontal" />}
+            label="Communication"
+            selected={router.pathname === "/components/communication"}
+            href="/components/communication"
             element={Link}
           />
           <NavDrawerItem
             icon={<MaterialIcon icon="dashboard" />}
             label="Containers"
-            selected={getIsSelected(/\/containers$/)}
-            href="/containers"
+            selected={router.pathname === "/components/containers"}
+            href="/components/containers"
             element={Link}
           />
         </NavDrawerSection>
-        <NavDrawerSection header="About">
-          <NavDrawerItem
-            icon={<MaterialIcon icon="info" />}
-            label="About"
-            selected={getIsSelected(/^\/$/)}
-            href="/"
-            element={Link}
-          />
-          <NavDrawerItem
-            icon={<MaterialIcon icon="description" />}
-            label="Documentation"
-            href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
-            element={forwardRef((props, ref) => (
-              <a {...props} ref={ref} target="_blank" rel="noreferrer">
-                {props.children}
-              </a>
-            ))}
-          />
+
+        {/* Other */}
+        <NavDrawerSection header="Other">
           <NavDrawerItem
             icon={<MaterialIcon icon="handshake" />}
             label="Contribute"
@@ -130,32 +156,40 @@ const Layout: FC<{
         onNavToggle={() => setNavOpen(true)}
       >
         <NavBarItem
-          icon={<MaterialIcon icon="touch_app" />}
-          label="Actions"
-          selected={getIsSelected(/\/actions$/)}
-          href="/actions"
+          icon={<MaterialIcon icon="info" />}
+          label="About"
+          selected={getIsSelected(/^\/$/)}
+          href="/"
           element={Link}
         />
         <NavBarItem
-          icon={<MaterialIcon icon="input" />}
-          label="Input"
-          selected={getIsSelected(/\/input$/)}
-          href="/input"
+          icon={<MaterialIcon icon="widgets" />}
+          label="Components"
+          selected={getIsSelected(/^\/components/)}
+          href="/components"
           element={Link}
         />
         <NavBarItem
-          icon={<MaterialIcon icon="subdirectory_arrow_right" />}
-          label="Navigation"
-          selected={getIsSelected(/\/navigation$/)}
-          href="/navigation"
+          icon={<MaterialIcon icon="capture" />}
+          label="Examples"
+          selected={getIsSelected(/^\/example/)}
+          href="/example"
           element={Link}
         />
         <NavBarItem
-          icon={<MaterialIcon icon="dashboard" />}
-          label="Containers"
-          selected={getIsSelected(/\/containers$/)}
-          href="/containers"
-          element={Link}
+          icon={<MaterialIcon icon="description" />}
+          label="Docs"
+          href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+          element={forwardRef((props, ref) => (
+            <a
+              {...props}
+              ref={ref as LegacyRef<HTMLAnchorElement>}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {props.children}
+            </a>
+          ))}
         />
       </NavBar>
 

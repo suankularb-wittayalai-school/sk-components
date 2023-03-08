@@ -463,7 +463,7 @@ const ContainersPage: CustomPage = () => (
 ContainersPage.pageHeader = {
   title: "Containers",
   icon: <MaterialIcon icon="dashboard" />,
-  parentURL: "/",
+  parentURL: "/components",
 };
 
 export default ContainersPage;

@@ -21,7 +21,6 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import { useTransitionEvent } from "@/utils/routing";
 
 const ButtonsSection: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -300,7 +299,7 @@ const ActionsPage: CustomPage = () => (
 ActionsPage.pageHeader = {
   title: "Actions",
   icon: <MaterialIcon icon="touch_app" />,
-  parentURL: "/",
+  parentURL: "/components",
 };
 
 export default ActionsPage;
