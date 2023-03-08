@@ -1,5 +1,6 @@
 // External libraries
 import Head from "next/head";
+import Link from "next/link";
 import { FC } from "react";
 
 // SK Components
@@ -11,6 +12,7 @@ import {
   ChipSet,
   MaterialIcon,
   SplitLayout,
+  useBreakpoint,
 } from "@suankularb-components/react";
 
 // Internal components
@@ -18,58 +20,63 @@ import StudentDetails from "@/components/example/lookup/StudentDetails";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import Link from "next/link";
 
 // List side
 
-const ListSide: FC = () => (
-  <aside className="flex flex-col gap-6">
-    {/* Search */}
-    <div className="bg-surface-3 h-14 rounded-full" />
+const ListSide: FC = () => {
+  const { atBreakpoint } = useBreakpoint();
 
-    {/* Search results */}
-    <div className="flex flex-col gap-2">
-      <Card
-        appearance="filled"
-        direction="row"
-        stateLayerEffect
-        className="!border-0 !bg-transparent"
-      >
-        <CardHeader
-          avatar={<Avatar>SP</Avatar>}
-          title="Sirapop Prateeppavameta"
-          subtitle="M.505"
-        />
-      </Card>
-      <Card
-        appearance="filled"
-        direction="row"
-        stateLayerEffect
-        className="!bg-primary-container"
-        href="/example/lookup/details"
-        element={Link}
-      >
-        <CardHeader
-          avatar={<Avatar className="!bg-primary !text-on-primary">SP</Avatar>}
-          title="Siravit Phokeed"
-          subtitle="M.504"
-        />
-      </Card>
-      <Card
-        appearance="filled"
-        direction="row"
-        stateLayerEffect
-        className="!border-0 !bg-transparent"
-      >
-        <CardHeader
-          avatar={<Avatar>SS</Avatar>}
-          title="Sirawish Sukkee"
-          subtitle="M.504"
-        />
-      </Card>
-    </div>
-  </aside>
-);
+  return (
+    <aside className="flex flex-col gap-6">
+      {/* Search */}
+      <div className="bg-surface-3 h-14 rounded-full" />
+
+      {/* Search results */}
+      <div className="flex flex-col gap-2">
+        <Card
+          appearance="filled"
+          direction="row"
+          stateLayerEffect
+          className="!border-0 !bg-transparent"
+        >
+          <CardHeader
+            avatar={<Avatar>SP</Avatar>}
+            title="Sirapop Prateeppavameta"
+            subtitle="M.505"
+          />
+        </Card>
+        <Card
+          appearance="filled"
+          direction="row"
+          stateLayerEffect
+          className="!bg-primary-container"
+          href={atBreakpoint === "base" ? "/example/lookup/details" : undefined}
+          element={Link}
+        >
+          <CardHeader
+            avatar={
+              <Avatar className="!bg-primary !text-on-primary">SP</Avatar>
+            }
+            title="Siravit Phokeed"
+            subtitle="M.504"
+          />
+        </Card>
+        <Card
+          appearance="filled"
+          direction="row"
+          stateLayerEffect
+          className="!border-0 !bg-transparent"
+        >
+          <CardHeader
+            avatar={<Avatar>SS</Avatar>}
+            title="Sirawish Sukkee"
+            subtitle="M.504"
+          />
+        </Card>
+      </div>
+    </aside>
+  );
+};
 
 // Details side
 
