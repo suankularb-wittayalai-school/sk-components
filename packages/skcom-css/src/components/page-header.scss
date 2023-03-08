@@ -78,6 +78,7 @@
     @include type.font("display-medium");
     width: calc(100% - 2rem);
     margin-block: 0;
+    white-space: nowrap;
 
     &:not(:last-child) {
       margin-bottom: 0.75rem;
@@ -102,6 +103,7 @@
   }
 
   > h1 {
+    @include mix.truncate();
     @include type.font("title-large");
     flex-grow: 1;
     width: fit-content;
