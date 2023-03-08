@@ -24,7 +24,8 @@
   }
 
   &,
-  .skc-text-field--outlined .skc-text-field__label {
+  .skc-text-field--outlined .skc-text-field__label,
+  .skc-chip-field__label {
     background-color: var(--surface-3);
   }
 
