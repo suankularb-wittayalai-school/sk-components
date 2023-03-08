@@ -18,8 +18,8 @@
 
 .skc-split-layout__content {
   display: grid;
-  row-gap: 0.5rem;
   grid-template-columns: 1fr;
+  row-gap: 0.5rem;
 
   > * {
     .skc-content-layout {
@@ -44,9 +44,9 @@
     margin: 0 auto;
 
     > * {
+      overflow-y: auto;
       height: calc(100vh - 12rem);
       padding: 1.5rem 1rem;
-      overflow-y: auto;
     }
   }
 }
@@ -67,8 +67,8 @@
 
     .skc-columns {
       display: flex;
-      flex-direction: column;
       align-items: stretch;
+      flex-direction: column;
     }
   }
 
