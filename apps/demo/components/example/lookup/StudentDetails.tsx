@@ -14,6 +14,7 @@ import {
 
 // Components
 import ContactCard from "@/components/example/lookup/ContactCard";
+import MultilingualText from "@/components/example/lookup/MultilingualText";
 
 const StudentDetails: FC = () => (
   <ContentLayout>
@@ -28,8 +29,12 @@ const StudentDetails: FC = () => (
           <h4 id="info-full-name" className="skc-title-medium">
             Full name
           </h4>
-          <p>Mr. Siravit Phokeed</p>
-          <p>นายศิรวิทย์ โพธิ์ขีด</p>
+          <MultilingualText
+            text={{
+              th: "นายศิรวิทย์ โพธิ์ขีด",
+              "en-US": "Mr. Siravit Phokeed",
+            }}
+          />
         </section>
 
         {/* Nickname */}
@@ -37,8 +42,7 @@ const StudentDetails: FC = () => (
           <h4 id="info-nickname" className="skc-title-medium">
             Nickname
           </h4>
-          <p>Model</p>
-          <p>โมเดล</p>
+          <MultilingualText text={{ th: "โมเดล", "en-US": "Model" }} />
         </section>
 
         {/* Class */}
