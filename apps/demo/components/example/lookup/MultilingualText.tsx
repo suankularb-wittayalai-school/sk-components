@@ -1,4 +1,5 @@
-import { FC, ReactNode } from "react";
+// External libraries
+import { FC } from "react";
 
 const MultilingualText: FC<{ text: { th: string; "en-US"?: string } }> = ({
   text,
