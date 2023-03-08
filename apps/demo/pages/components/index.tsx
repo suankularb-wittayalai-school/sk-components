@@ -25,7 +25,7 @@ const ComponentsPage: CustomPage = () => (
     </Head>
     <ContentLayout key="components-page">
       <Section>
-        <Columns columns={2} className="!items-stretch sm:!gap-6">
+        <Columns columns={4}>
           {/* Actions */}
           <Card appearance="outlined">
             <CardHeader
@@ -37,7 +37,7 @@ const ComponentsPage: CustomPage = () => (
                 Actions, Button, Segmented Button, Toggle Button, Input Chip,
                 Assist Chip, Filter Chip, Suggestion Chip, Chip Set, FAB
               </p>
-              <Actions>
+              <Actions align="full">
                 <Button
                   appearance="tonal"
                   href="/components/actions"
@@ -52,11 +52,9 @@ const ComponentsPage: CustomPage = () => (
           {/* Input */}
           <Card appearance="outlined">
             <CardHeader icon={<MaterialIcon icon="input" />} title="Input" />
-            <CardContent className="flex-grow">
-              <p className="flex-grow">
-                Form Group, Form Item, Search, Select, Switch, Text Field
-              </p>
-              <Actions>
+            <CardContent>
+              <p>Form Group, Form Item, Search, Select, Switch, Text Field</p>
+              <Actions align="full">
                 <Button
                   appearance="tonal"
                   href="/components/input"
@@ -74,12 +72,12 @@ const ComponentsPage: CustomPage = () => (
               icon={<MaterialIcon icon="swap_horizaontal" />}
               title="Communication"
             />
-            <CardContent className="flex-grow">
-              <p className="flex-grow">
+            <CardContent>
+              <p>
                 Dialog, Dialog Header, Dialog Content, Full-screen Dialog,
                 Progress, Snackbar
               </p>
-              <Actions>
+              <Actions align="full">
                 <Button
                   appearance="tonal"
                   href="/components/input"
@@ -97,15 +95,15 @@ const ComponentsPage: CustomPage = () => (
               icon={<MaterialIcon icon="dashboard" />}
               title="Containers"
             />
-            <CardContent className="flex-grow">
-              <p className="flex-grow">
+            <CardContent>
+              <p>
                 Card, Card Header, Card Content, Columns, Data Table, Data Table
                 Search, Data Table Filters, Data Table Content, Data Table Head,
                 Data Table Body, Data Table Pagination, Divider, List, List
                 Item, List Item Content, Table, Table Head, Table Body, Table
                 Foot, Table Row, Table Cell
               </p>
-              <Actions>
+              <Actions align="full">
                 <Button
                   appearance="tonal"
                   href="/components/containers"
