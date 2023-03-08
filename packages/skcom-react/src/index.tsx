@@ -104,3 +104,4 @@ export {
 } from "./components/ThemeProvider";
 
 export { useAnimationConfig, transition, useRipple } from "./utils/animation";
+export { useBreakpoint } from "./utils/window";

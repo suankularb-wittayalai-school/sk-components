@@ -117,6 +117,7 @@ __export(src_exports, {
   ToggleButton: () => ToggleButton,
   transition: () => transition,
   useAnimationConfig: () => useAnimationConfig,
+  useBreakpoint: () => useBreakpoint,
   useRipple: () => useRipple
 });
 module.exports = __toCommonJS(src_exports);
@@ -3031,5 +3032,6 @@ ThemeProvider.displayName = "ThemeProvider";
   ToggleButton,
   transition,
   useAnimationConfig,
+  useBreakpoint,
   useRipple
 });

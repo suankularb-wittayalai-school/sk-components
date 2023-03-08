@@ -2958,5 +2958,6 @@ export {
   ToggleButton,
   transition,
   useAnimationConfig,
+  useBreakpoint,
   useRipple
 };

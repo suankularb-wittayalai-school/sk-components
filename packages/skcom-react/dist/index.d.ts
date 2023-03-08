@@ -3012,4 +3012,18 @@ declare function useRipple(parentRef: React__default.MutableRefObject<any>): {
     rippleStyle: MotionStyle;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useRipple };
+declare const breakpoints: {
+    base: number;
+    sm: number;
+    md: number;
+    lg: number;
+};
+/**
+ * Watches the window for a change in breakpoint.
+ * @returns `atBreakpoint` — The largest breakpoint the user window is at.
+ */
+declare function useBreakpoint(): {
+    atBreakpoint: keyof typeof breakpoints;
+};
+
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
