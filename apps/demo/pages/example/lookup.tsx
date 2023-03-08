@@ -5,8 +5,10 @@ import { FC } from "react";
 
 // SK Components
 import {
+  Actions,
   AssistChip,
   Avatar,
+  Button,
   Card,
   CardHeader,
   ChipSet,
@@ -93,8 +95,8 @@ const StudentDetailsHeader: FC = () => (
 
 /**
  * A contact Card.
- * 
- * @param type The medium in which you can contact this person, i.e. Facebook, e-mail, etc. 
+ *
+ * @param type The medium in which you can contact this person, i.e. Facebook, e-mail, etc.
  * @param label The text label on this contact.
  * @param href The link to this contact.
  */
@@ -136,6 +138,57 @@ const StudentDetails: FC = () => (
 
     {/* Details content */}
     <ContentLayout>
+      {/* General information section */}
+      <Section sectionAttr={{ "aria-label": "General information" }}>
+        <Header level={3} className="sr-only">
+          General information
+        </Header>
+        <Columns columns={4}>
+          {/* Full name */}
+          <section aria-labelledby="info-full-name" className="col-span-2">
+            <h4 id="info-full-name" className="skc-title-medium">
+              Full name
+            </h4>
+            <p>Mr. Siravit Phokeed</p>
+            <p>นายศิรวิทย์ โพธิ์ขีด</p>
+          </section>
+
+          {/* Nickname */}
+          <section aria-labelledby="info-nickname">
+            <h4 id="info-nickname" className="skc-title-medium">
+              Nickname
+            </h4>
+            <p>Model</p>
+            <p>โมเดล</p>
+          </section>
+
+          {/* Class */}
+          <section aria-labelledby="info-class">
+            <h4 id="info-class" className="skc-title-medium">
+              Class
+            </h4>
+            <p>M.504</p>
+            <p>No.12</p>
+          </section>
+
+          {/* Gender */}
+          <section aria-labelledby="info-gender">
+            <h4 id="info-gender" className="skc-title-medium">
+              Gender
+            </h4>
+            <p>Chose not to respond</p>
+          </section>
+
+          {/* Birthdate */}
+          <section aria-labelledby="info-birthdate">
+            <h4 id="info-birthdate" className="skc-title-medium">
+              Birthdate
+            </h4>
+            <p>Feb 1</p>
+          </section>
+        </Columns>
+      </Section>
+
       {/* Contacts section */}
       <Section>
         <Header level={3}>Contacts</Header>
@@ -174,6 +227,22 @@ const StudentDetails: FC = () => (
           {/* Telephone */}
           <ContactCard type="tel" label="012 345 6789" href="tel:0123456789" />
         </Columns>
+      </Section>
+
+      <Section sectionAttr={{ "aria-label": "Request private info" }}>
+        <p>
+          As a teacher, you can request access to various private information of
+          a student, from their citizen ID to their vaccination history.
+        </p>
+        <Actions>
+          <Button
+            appearance="outlined"
+            icon={<MaterialIcon icon="lock" />}
+            className="w-full"
+          >
+            Request private info
+          </Button>
+        </Actions>
       </Section>
     </ContentLayout>
   </Card>
