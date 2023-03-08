@@ -14,7 +14,6 @@ import {
   NavDrawerItem,
   NavDrawerSection,
   PageHeader,
-  PageHeaderProps,
   Progress,
   RootLayout,
 } from "@suankularb-components/react";
@@ -24,13 +23,11 @@ import Favicon from "@/components/Favicon";
 
 // Utilities
 import { usePageIsLoading, useTransitionEvent } from "@/utils/routing";
+import { CustomPage } from "@/utils/types";
 
-const Layout: FC<{
-  children: ReactNode;
-  fab?: JSX.Element;
-  pageHeader?: Partial<PageHeaderProps>;
-  childURLs?: string[];
-}> = ({ children, fab, pageHeader, childURLs }) => {
+const Layout: FC<
+  { children: ReactNode } & Pick<CustomPage, "fab" | "pageHeader" | "childURLs">
+> = ({ children, fab, pageHeader, childURLs }) => {
   const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
@@ -196,7 +193,6 @@ const Layout: FC<{
       {/* Page Header */}
       {pageHeader && (
         <PageHeader
-          title="SK Components Demo"
           brand={<Favicon />}
           homeURL="/"
           element={Link}
