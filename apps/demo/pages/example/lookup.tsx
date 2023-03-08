@@ -1,5 +1,6 @@
 // External libraries
 import Head from "next/head";
+import Image from "next/image";
 
 // SK Components
 import {
@@ -102,24 +103,75 @@ const LookupPage: CustomPage = () => (
 
           {/* Details content */}
           <ContentLayout>
+            {/* Contacts section */}
             <Section>
               <Header level={3}>Contacts</Header>
+
+              {/* Not free notice */}
+              <div
+                className="text-secondary flex flex-row items-center gap-2 px-2
+                  font-medium"
+              >
+                <MaterialIcon icon="info" />
+                <p>
+                  According to their schedule, Siravit is not free right now.
+                </p>
+              </div>
+
               <Columns columns={2}>
-                <Card appearance="outlined" direction="row" stateLayerEffect>
+                {/* Facebook */}
+                <Card
+                  appearance="outlined"
+                  direction="row"
+                  stateLayerEffect
+                  href="https://www.facebook.com/SKTechDev" // :)
+                >
                   <CardHeader
-                    avatar={<Avatar>FB</Avatar>}
+                    avatar={
+                      <Avatar>
+                        <Image
+                          src="/images/social/facebook.svg"
+                          width={40}
+                          height={40}
+                          alt=""
+                        />
+                      </Avatar>
+                    }
                     title="Siravit Phokeed"
                     subtitle="Facebook"
                   />
                 </Card>
-                <Card appearance="outlined" direction="row" stateLayerEffect>
+
+                {/* Line */}
+                <Card
+                  appearance="outlined"
+                  direction="row"
+                  stateLayerEffect
+                  href="https://line.me/ti/p/EXAMPLE1234"
+                >
                   <CardHeader
-                    avatar={<Avatar>LN</Avatar>}
+                    avatar={
+                      <Avatar>
+                        <Image
+                          src="/images/social/line.svg"
+                          width={40}
+                          height={40}
+                          alt=""
+                        />
+                      </Avatar>
+                    }
                     title="model-siravit-phokeed"
                     subtitle="Line"
                   />
                 </Card>
-                <Card appearance="outlined" direction="row" stateLayerEffect>
+
+                {/* E-mail */}
+                <Card
+                  appearance="outlined"
+                  direction="row"
+                  stateLayerEffect
+                  href="mailto:siravit.pho@student.sk.ac.th"
+                >
                   <CardHeader
                     avatar={
                       <Avatar>
@@ -127,10 +179,17 @@ const LookupPage: CustomPage = () => (
                       </Avatar>
                     }
                     title="siravit.pho@student.sk.ac.th"
-                    subtitle="Facebook"
+                    subtitle="E-mail"
                   />
                 </Card>
-                <Card appearance="outlined" direction="row" stateLayerEffect>
+
+                {/* Telephone */}
+                <Card
+                  appearance="outlined"
+                  direction="row"
+                  stateLayerEffect
+                  href="tel:0123456789"
+                >
                   <CardHeader
                     avatar={
                       <Avatar>
