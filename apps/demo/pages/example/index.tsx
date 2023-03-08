@@ -33,14 +33,11 @@ const ExamplePage: CustomPage = () => (
           </CardContent>
           <CardContent>
             <p>Lookup showcases the following components:</p>
-            <ul className="ml-6 list-disc">
-              <li>Split Layout</li>
-              <li>Card</li>
-              <li>Assist Chip</li>
-              <li>Dialog</li>
-              <li>Full-screen Dialog</li>
-              <li>Search</li>
-            </ul>
+            <p>
+              Card, Input Chip, Assist Chip, Filter Chip, Chip Field, Chip Set,
+              Dialog, Full-screen Dialog, Form Item, Content Layout, Vertical
+              Split Layout, Search
+            </p>
             <Actions>
               <Button appearance="filled" href="/example/lookup" element={Link}>
                 Visit
