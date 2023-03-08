@@ -1139,7 +1139,7 @@ function Dialog({
   React10.useEffect(() => {
     if (open) {
       const actions = document.querySelector(
-        ".skc-dialog .skc-actions"
+        ".skc-dialog > .skc-actions"
       );
       const buttons = actions == null ? void 0 : actions.querySelectorAll(".skc-button");
       if (buttons == null ? void 0 : buttons.length)
