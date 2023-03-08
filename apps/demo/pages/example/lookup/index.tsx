@@ -1,7 +1,7 @@
 // External libraries
 import Head from "next/head";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 // SK Components
 import {
@@ -20,6 +20,7 @@ import StudentDetails from "@/components/example/lookup/StudentDetails";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import ShareDialog from "@/components/example/lookup/ShareDialog";
 
 // List side
 
@@ -80,24 +81,36 @@ const ListSide: FC = () => {
 
 // Details side
 
-const StudentDetailsHeader: FC = () => (
-  <div className="bg-surface-2 flex flex-col gap-6 px-5 py-4 md:flex-row">
-    <div>
-      <Avatar className="!h-14 !w-14" />
+const StudentDetailsHeader: FC = () => {
+  const [showShare, setShowShare] = useState<boolean>(false);
+
+  return (
+    <div className="bg-surface-2 flex flex-col gap-6 px-5 py-4 md:flex-row">
+      <div>
+        <Avatar className="!h-14 !w-14" />
+      </div>
+      <div className="flex grow flex-col gap-2">
+        <h2 className="skc-display-small">Siravit Phokeed</h2>
+        <ChipSet>
+          <AssistChip icon={<MaterialIcon icon="chat" />}>Chat with</AssistChip>
+          <AssistChip icon={<MaterialIcon icon="groups" />}>
+            See class
+          </AssistChip>
+          <AssistChip icon={<MaterialIcon icon="dashboard" />}>
+            See schedule
+          </AssistChip>
+          <AssistChip
+            icon={<MaterialIcon icon="share" />}
+            onClick={() => setShowShare(true)}
+          >
+            Share
+          </AssistChip>
+          <ShareDialog open={showShare} onClose={() => setShowShare(false)} />
+        </ChipSet>
+      </div>
     </div>
-    <div className="flex grow flex-col gap-2">
-      <h2 className="skc-display-small">Siravit Phokeed</h2>
-      <ChipSet>
-        <AssistChip icon={<MaterialIcon icon="chat" />}>Chat with</AssistChip>
-        <AssistChip icon={<MaterialIcon icon="groups" />}>See class</AssistChip>
-        <AssistChip icon={<MaterialIcon icon="dashboard" />}>
-          See schedule
-        </AssistChip>
-        <AssistChip icon={<MaterialIcon icon="share" />}>Share</AssistChip>
-      </ChipSet>
-    </div>
-  </div>
-);
+  );
+};
 
 const LookupPage: CustomPage = () => (
   <>
