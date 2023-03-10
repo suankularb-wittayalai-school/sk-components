@@ -2,6 +2,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+
 import { FC } from "react";
 
 // SK Components
@@ -156,7 +157,7 @@ const DemoSection: FC = () => (
         element={Link}
       >
         <CardHeader
-          icon={<MaterialIcon icon="swap_horizaontal" />}
+          icon={<MaterialIcon icon="swap_horiz" />}
           title="Communication"
           subtitle="Dialog, snackbar"
         />
