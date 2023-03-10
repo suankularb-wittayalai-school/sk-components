@@ -28,11 +28,13 @@ import {
   Section,
   SegmentedButton,
   SplitLayout,
+  Tab,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  TabsContainer,
   TextField,
 } from "@suankularb-components/react";
 
@@ -441,6 +443,38 @@ const TableSection: FC = () => (
   </Section>
 );
 
+const TabSection: FC = () => {
+  const [view, setView] = useState<"overview" | "students" | "teachers">(
+    "overview"
+  );
+
+  return (
+    <Section>
+      <Header>Tab</Header>
+      <TabsContainer appearance="primary">
+        <Tab
+          icon={<MaterialIcon icon="info" />}
+          label="Overview"
+          selected={view === "overview"}
+          onClick={() => setView("overview")}
+        />
+        <Tab
+          icon={<MaterialIcon icon="groups" />}
+          label="Students"
+          selected={view === "students"}
+          onClick={() => setView("students")}
+        />
+        <Tab
+          icon={<MaterialIcon icon="group" />}
+          label="Teachers"
+          selected={view === "teachers"}
+          onClick={() => setView("teachers")}
+        />
+      </TabsContainer>
+    </Section>
+  );
+};
+
 const ContainersPage: CustomPage = () => (
   <>
     <Head>
@@ -456,6 +490,7 @@ const ContainersPage: CustomPage = () => (
       <ListSection />
       <ProgressSection />
       <TableSection />
+      <TabSection />
     </ContentLayout>
   </>
 );
