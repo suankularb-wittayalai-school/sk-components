@@ -42,8 +42,8 @@
     padding: 0.625rem 0 0.5rem;
 
     &.skc-tab--selected {
-      color: var(--primary);
       padding-bottom: 0;
+      color: var(--primary);
     }
   }
 
@@ -132,17 +132,17 @@
 
   .skc-tabs-container--secondary & {
     position: absolute;
-    height: 2px;
     inset: auto 0 0;
+    height: 2px;
   }
 }
 
 // Ripple
 .skc-tab__ripple-container {
   position: absolute;
-  pointer-events: none;
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .skc-tab__ripple {

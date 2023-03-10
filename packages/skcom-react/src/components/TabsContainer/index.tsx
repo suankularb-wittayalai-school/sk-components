@@ -1,6 +1,9 @@
 // External libraries
 import * as React from "react";
 
+// Internal components
+import { TabProps } from "../Tab";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -9,7 +12,6 @@ import "@suankularb-components/css/dist/css/components/tabs-container.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { TabProps } from "../Tab";
 import { kebabify } from "../../utils/format";
 
 /**

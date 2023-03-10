@@ -14,12 +14,12 @@
 .skc-tabs-container__content {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  max-width: 32rem;
   margin: 0;
+  margin-inline: auto;
   padding: 0;
   list-style: none;
-  max-width: 32rem;
-  width: 100%;
-  margin-inline: auto;
 
   > li {
     width: 100%;
