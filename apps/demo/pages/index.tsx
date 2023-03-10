@@ -128,7 +128,7 @@ const DemoSection: FC = () => (
       <Card
         appearance="outlined"
         stateLayerEffect
-        href="/actions"
+        href="/components/actions"
         element={Link}
       >
         <CardHeader
@@ -137,7 +137,12 @@ const DemoSection: FC = () => (
           subtitle="Buttons, chips"
         />
       </Card>
-      <Card appearance="outlined" stateLayerEffect href="/input" element={Link}>
+      <Card
+        appearance="outlined"
+        stateLayerEffect
+        href="/components/input"
+        element={Link}
+      >
         <CardHeader
           icon={<MaterialIcon icon="input" />}
           title="Input"
@@ -147,25 +152,25 @@ const DemoSection: FC = () => (
       <Card
         appearance="outlined"
         stateLayerEffect
-        href="/navigation"
+        href="/components/communication"
         element={Link}
       >
         <CardHeader
-          icon={<MaterialIcon icon="subdirectory_arrow_right" />}
-          title="Navigation"
-          subtitle="Nav bar/drawer, tabs"
+          icon={<MaterialIcon icon="swap_horizaontal" />}
+          title="Communication"
+          subtitle="Dialog, snackbar"
         />
       </Card>
       <Card
         appearance="outlined"
         stateLayerEffect
-        href="/containers"
+        href="/components/containers"
         element={Link}
       >
         <CardHeader
           icon={<MaterialIcon icon="dashboard" />}
           title="Containers"
-          subtitle="Cards, misc"
+          subtitle="Cards, layouts"
         />
       </Card>
     </Columns>
@@ -190,6 +195,11 @@ AboutPage.pageHeader = {
   icon: <MaterialIcon icon="info" />,
 };
 
-AboutPage.childURLs = ["/actions", "/input", "/navigation", "/containers"];
+AboutPage.childURLs = [
+  "/components/actions",
+  "/components/input",
+  "/components/navigation",
+  "/components/containers",
+];
 
 export default AboutPage;

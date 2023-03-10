@@ -15,6 +15,7 @@ import "@suankularb-components/css/dist/css/components/dialog.css";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
+
 /**
  * Props for {@link Dialog}.
  */
@@ -75,7 +76,7 @@ export function Dialog({
   React.useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-dialog .skc-actions"
+        ".skc-dialog > .skc-actions"
       );
 
       const buttons =

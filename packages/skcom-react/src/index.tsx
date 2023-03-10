@@ -76,6 +76,7 @@ export {
   ContentLayout,
   type ContentLayoutProps,
 } from "./components/ContentLayout";
+export { SplitLayout, type SplitLayoutProps } from "./components/SplitLayout";
 export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
@@ -103,3 +104,4 @@ export {
 } from "./components/ThemeProvider";
 
 export { useAnimationConfig, transition, useRipple } from "./utils/animation";
+export { useBreakpoint } from "./utils/window";

@@ -21,7 +21,6 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import { useTransitionEvent } from "@/utils/routing";
 
 const ButtonsSection: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -255,8 +254,8 @@ const ChipsSection: FC = () => {
           </AssistChip>
         </ChipSet>
         <div
-          className="flex flex-row flex-wrap place-content-center gap-2
-            rounded-md bg-gradient-to-r from-primary-60 to-primary-30 py-8
+          className="from-primary-60 to-primary-30 flex flex-row flex-wrap
+            place-content-center gap-2 rounded-md bg-gradient-to-r py-8
             px-4"
         >
           <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
@@ -300,7 +299,7 @@ const ActionsPage: CustomPage = () => (
 ActionsPage.pageHeader = {
   title: "Actions",
   icon: <MaterialIcon icon="touch_app" />,
-  parentURL: "/",
+  parentURL: "/components",
 };
 
 export default ActionsPage;

@@ -78,6 +78,7 @@
     @include type.font("display-medium");
     width: calc(100% - 2rem);
     margin-block: 0;
+    white-space: nowrap;
 
     &:not(:last-child) {
       margin-bottom: 0.75rem;
@@ -102,6 +103,7 @@
   }
 
   > h1 {
+    @include mix.truncate();
     @include type.font("title-large");
     flex-grow: 1;
     width: fit-content;
@@ -129,6 +131,10 @@
 
 .skc-page-header__related {
   display: contents;
+
+  > * {
+    margin-inline: 1rem;
+  }
 }
 
 .skc-page-header__icon {
@@ -194,6 +200,10 @@
     .skc-icon {
       font-size: 21rem;
     }
+  }
+
+  .skc-page-header__related > * {
+    margin-inline: 0;
   }
 
   .skc-page-header__replacement-color {

@@ -137,6 +137,7 @@
 ._skc-chip__label {
   @include type.font("label-large");
   font-family: var(--font-display);
+  white-space: nowrap;
 }
 
 // Icon

@@ -10,10 +10,6 @@
 
 .skc-content-layout {
   padding: 2rem 0 1rem;
-
-  p {
-    @include type.font("body-medium");
-  }
 }
 
 .skc-content-layout__content {

@@ -259,7 +259,7 @@ const InputPage: CustomPage = () => (
 InputPage.pageHeader = {
   title: "Input",
   icon: <MaterialIcon icon="input" />,
-  parentURL: "/",
+  parentURL: "/components",
 };
 
 export default InputPage;

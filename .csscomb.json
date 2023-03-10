@@ -82,6 +82,8 @@
       "place-content",
       "place-items",
       "place-self",
+      "grid-template-columns",
+      "grid-template-areas",
       "gap",
       "row-gap",
       "column-gap",
