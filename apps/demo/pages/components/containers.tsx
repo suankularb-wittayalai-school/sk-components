@@ -1,6 +1,8 @@
 // External libraries
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+
 import { FC, useState } from "react";
 
 // SK Components
@@ -40,7 +42,6 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import Link from "next/link";
 
 const AvatarSection: FC = () => (
   <Section>
@@ -59,7 +60,7 @@ const CardSection: FC = () => (
   <Section>
     <Header>Card</Header>
     <Columns columns={3}>
-      <Card appearance="elevated">
+      <Card appearance="outlined">
         <CardHeader
           icon={<MaterialIcon icon="person" />}
           title="Atipol Sukrisadanon"
