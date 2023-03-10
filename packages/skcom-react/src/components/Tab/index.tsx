@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,14 +9,13 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/tab.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 import {
   transition,
   useAnimationConfig,
   useRipple,
 } from "../../utils/animation";
-import { motion } from "framer-motion";
+import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link Tab}.
@@ -174,7 +174,7 @@ export function Tab({
             layoutId={containerID}
             transition={transition(duration.medium4, easing.standard)}
             className="skc-tab__indicator"
-          ></motion.span>
+          />
         )}
       </div>
       <div aria-hidden className="skc-tab__ripple-container">

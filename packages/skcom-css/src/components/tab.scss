@@ -15,7 +15,7 @@
 .skc-tab {
   position: relative;
   width: 100%;
-  padding: 0.625rem 0 0.5rem;
+  padding-block: 0.875rem;
   cursor: pointer;
   border: 0;
   background-color: transparent;
@@ -38,18 +38,23 @@
     }
   }
 
-  .skc-tabs-container--primary & {
-    padding: 0.625rem 0 0.5rem;
+  &:has(.skc-tab__icon) {
+    padding-block: 0.75rem;
+  }
 
-    &.skc-tab--selected {
+  .skc-tabs-container--primary & {
+    &:has(.skc-tab__icon):has(.skc-tab__label) {
+      padding-block: 0.625rem 0.5rem;
+    }
+
+    &.skc-tab--selected,
+    &.skc-tab--selected:has(.skc-tab__icon):has(.skc-tab__label) {
       padding-bottom: 0;
       color: var(--primary);
     }
   }
 
   .skc-tabs-container--secondary & {
-    padding: 1rem 0 0.75rem;
-
     &::before {
       color: var(--on-surface);
     }
@@ -122,8 +127,16 @@
 .skc-tab__indicator {
   display: block;
   width: 100%;
-  margin-top: 0.25rem;
+  margin-top: calc((0.875rem - 0.125rem) - 3px);
   background-color: var(--primary);
+
+  .skc-tab:has(.skc-tab__icon) & {
+    margin-top: calc((0.75rem - 0.125rem) - 3px);
+  }
+
+  .skc-tab:has(.skc-tab__icon):has(.skc-tab__label) & {
+    margin-top: calc((0.5rem - 0.125rem) - 3px);
+  }
 
   .skc-tabs-container--primary & {
     height: 3px;
