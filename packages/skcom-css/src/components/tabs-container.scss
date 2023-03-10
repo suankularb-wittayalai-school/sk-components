@@ -8,5 +8,24 @@
 ////
 
 .skc-tabs-container {
-  // TODO
+  border-bottom: 1px solid var(--surface-variant);
+}
+
+.skc-tabs-container__content {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 32rem;
+  width: 100%;
+  margin-inline: auto;
+
+  > li {
+    width: 100%;
+  }
+}
+
+.skc-section .skc-tabs-container {
+  margin-inline: 0;
 }

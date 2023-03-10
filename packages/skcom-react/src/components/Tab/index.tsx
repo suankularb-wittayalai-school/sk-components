@@ -10,7 +10,11 @@ import "@suankularb-components/css/dist/css/components/tab.css";
 // Utilities
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
-import { useRipple } from "../../utils/animation";
+import {
+  transition,
+  useAnimationConfig,
+  useRipple,
+} from "../../utils/animation";
 import { motion } from "framer-motion";
 
 /**
@@ -41,6 +45,11 @@ export interface TabProps extends SKComponent {
    *   significance for screen readers.
    */
   alt?: string;
+
+  /**
+   * @private
+   */
+  containerID?: string;
 
   /**
    * A message shown in a tooltip when the user hovers over the Tab.
@@ -121,6 +130,7 @@ export function Tab({
   icon,
   label,
   alt,
+  containerID,
   tooltip,
   selected,
   onClick,
@@ -129,6 +139,9 @@ export function Tab({
   style,
   className,
 }: TabProps) {
+  // Animation
+  const { duration, easing } = useAnimationConfig();
+
   // Ripple setup
   const tabRef: React.LegacyRef<any> = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(tabRef);
@@ -137,7 +150,9 @@ export function Tab({
 
   const props = {
     ref: tabRef,
+    role: "tab",
     "aria-labelledby": tabID,
+    "aria-selected": selected,
     title: tooltip,
     style,
     className: cn(["skc-tab", selected && "skc-tab--selected", className]),
@@ -146,43 +161,50 @@ export function Tab({
 
   const content = (
     <>
-      {icon && <div className="skc-tab__icon">{icon}</div>}
-      {label && (
-        <span id={tabID} className="skc-tab__label">
-          {label}
-        </span>
-      )}
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-tab__ripple"
-        style={rippleStyle}
-      />
+      <div className="skc-tab__content">
+        {icon && <div className="skc-tab__icon">{icon}</div>}
+        {label && (
+          <span id={tabID} className="skc-tab__label">
+            {label}
+          </span>
+        )}
+        {selected && (
+          <motion.span
+            aria-hidden
+            layoutId={containerID}
+            transition={transition(duration.medium4, easing.standard)}
+            className="skc-tab__indicator"
+          ></motion.span>
+        )}
+      </div>
+      <div aria-hidden className="skc-tab__ripple-container">
+        <motion.span
+          initial={{ scale: 0, opacity: 0.36 }}
+          animate={rippleControls}
+          className="skc-tab__ripple"
+          style={rippleStyle}
+        />
+      </div>
     </>
   );
 
   return (
-    <li aria-labelledby={tabID}>
-      {
-        // Render with `element` if defined
-        href && Element ? (
-          <Element {...props} href={href}>
-            {content}
-          </Element>
-        ) : // Render an `<a>` if link passed in
-        href ? (
-          <a {...props} href={href}>
-            {content}
-          </a>
-        ) : (
-          // Otherwise, render a `<button>`
-          <button {...{ ...props, onClick }} type="button">
-            {content}
-          </button>
-        )
-      }
-    </li>
+    // Render with `element` if defined
+    href && Element ? (
+      <Element {...props} href={href}>
+        {content}
+      </Element>
+    ) : // Render an `<a>` if link passed in
+    href ? (
+      <a {...props} href={href}>
+        {content}
+      </a>
+    ) : (
+      // Otherwise, render a `<button>`
+      <button {...{ ...props, onClick }} type="button">
+        {content}
+      </button>
+    )
   );
 }
 

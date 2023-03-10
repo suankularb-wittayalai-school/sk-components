@@ -5,10 +5,12 @@ import * as React from "react";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/tab.css";
+import "@suankularb-components/css/dist/css/components/tabs-container.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { TabProps } from "../Tab";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link TabsContainer Tabs Container}.
@@ -28,6 +30,14 @@ export interface TabsContainerProps extends SKComponent {
    * - Always required.
    */
   appearance: "primary" | "secondary";
+
+  /**
+   * A description of the Tabs Container for screen readers, similar to `alt`
+   * on `<img>`.
+   *
+   * - Always required.
+   */
+  alt: string;
 }
 
 /**
@@ -39,25 +49,38 @@ export interface TabsContainerProps extends SKComponent {
  *
  * @param children Tabs to select from.
  * @param type Where Tabs Container is placed affects its appearance. A Tabs Container responsible for the entire content pane (`primary`) has a different appearance as that for only a section (`secondary`).
+ * @param alt A description of the Tabs Container for screen readers, similar to `alt` on `<img>`.
  */
 export function TabsContainer({
   children,
   appearance,
+  alt,
   style,
   className,
 }: TabsContainerProps) {
+  const injectedChildren = React.Children.map(children, (child) =>
+    React.cloneElement(child as JSX.Element, {
+      containerID: `tabs-contaner-${kebabify(alt)}`,
+    } satisfies TabProps)
+  );
+
   return (
     <div
-      style={style}
       className={cn([
-        "skc-tab",
+        "skc-tabs-container",
         appearance === "primary"
-          ? "skc-button--primary"
-          : appearance === "secondary" && "skc-button--secondary",
-        className,
+          ? "skc-tabs-container--primary"
+          : appearance === "secondary" && "skc-tabs-container--secondary",
       ])}
     >
-      {children}
+      <div
+        role="tablist"
+        aria-label={alt}
+        style={style}
+        className={cn(["skc-tabs-container__content", className])}
+      >
+        {injectedChildren}
+      </div>
     </div>
   );
 }

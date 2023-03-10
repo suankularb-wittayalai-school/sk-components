@@ -7,6 +7,149 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.g56fs6ts5kqq SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
+// Base Tab
 .skc-tab {
-  // TODO
+  position: relative;
+  width: 100%;
+  padding: 0.625rem 0 0.5rem;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus-visible,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+
+  .skc-tabs-container--primary & {
+    padding: 0.625rem 0 0.5rem;
+
+    &.skc-tab--selected {
+      color: var(--primary);
+      padding-bottom: 0;
+    }
+  }
+
+  .skc-tabs-container--secondary & {
+    padding: 1rem 0 0.75rem;
+
+    &::before {
+      color: var(--on-surface);
+    }
+  }
+
+  &.skc-tab--selected::before {
+    background-color: var(--primary);
+  }
+}
+
+// Tab content (icon and label)
+.skc-tab__content {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-inline: auto;
+
+  .skc-tabs-container--primary & {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .skc-tabs-container--secondary & {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}
+
+// Tab icon
+.skc-tab__icon .skc-icon {
+  @include mix.transition(
+    font-variation-settings,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  @include ci.icon(0, 400, 0, 24);
+
+  // Hover: make icon bolder
+  .skc-tab:hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  // Active: make icon thinner
+  .skc-tab:active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
+
+  // Selected: make icon filled
+  .skc-tab--selected & {
+    @include ci.icon(1, 400, 0, 24);
+  }
+
+  // Selected hover: make icon bolder
+  .skc-tab--selected:hover & {
+    @include ci.icon(1, 600, 0, 24);
+  }
+
+  // Selected active: make icon thinner
+  .skc-tab--selected:active & {
+    @include ci.icon(1, 300, 0, 24);
+  }
+}
+
+// Tab label
+.skc-tab__label {
+  @include type.font("title-small");
+}
+
+// Activate tab indicator
+.skc-tab__indicator {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  background-color: var(--primary);
+
+  .skc-tabs-container--primary & {
+    height: 3px;
+    border-radius: var(--rounded-full) var(--rounded-full) 0 0;
+  }
+
+  .skc-tabs-container--secondary & {
+    position: absolute;
+    height: 2px;
+    inset: auto 0 0;
+  }
+}
+
+// Ripple
+.skc-tab__ripple-container {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  overflow: hidden;
+}
+
+.skc-tab__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+
+  .skc-tab--selected & {
+    background-color: var(--primary);
+  }
 }

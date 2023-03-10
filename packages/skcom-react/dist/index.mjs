@@ -2707,7 +2707,7 @@ TableCell.displayName = "TableCell";
 import * as React25 from "react";
 
 // ../skcom-css/dist/css/components/tab.css
-styleInject("");
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-tab {\n  position: relative;\n  width: 100%;\n  padding: .625rem 0 .5rem;\n  cursor: pointer;\n  border: 0;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-tab::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-tab:hover::before {\n  opacity: .08;\n}\n.skc-tab:focus-visible::before,\n.skc-tab:active::before {\n  opacity: .12;\n}\n.skc-tabs-container--primary .skc-tab {\n  padding: .625rem 0 .5rem;\n}\n.skc-tabs-container--primary .skc-tab.skc-tab--selected {\n  color: var(--primary);\n  padding-bottom: 0;\n}\n.skc-tabs-container--secondary .skc-tab {\n  padding: 1rem 0 .75rem;\n}\n.skc-tabs-container--secondary .skc-tab::before {\n  color: var(--on-surface);\n}\n.skc-tab.skc-tab--selected::before {\n  background-color: var(--primary);\n}\n.skc-tab__content {\n  display: flex;\n  align-items: center;\n  width: fit-content;\n  margin-inline: auto;\n}\n.skc-tabs-container--primary .skc-tab__content {\n  flex-direction: column;\n  gap: .125rem;\n}\n.skc-tabs-container--secondary .skc-tab__content {\n  flex-direction: row;\n  gap: .5rem;\n}\n.skc-tab__icon .skc-icon {\n  transition: font-variation-settings var(--motion-short-4) var(--easing-standard);\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab:hover .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab:active .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab--selected .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab--selected:hover .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab--selected:active .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab__label {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-tab__indicator {\n  display: block;\n  width: 100%;\n  margin-top: .25rem;\n  background-color: var(--primary);\n}\n.skc-tabs-container--primary .skc-tab__indicator {\n  height: 3px;\n  border-radius: var(--rounded-full) var(--rounded-full) 0 0;\n}\n.skc-tabs-container--secondary .skc-tab__indicator {\n  position: absolute;\n  height: 2px;\n  inset: auto 0 0;\n}\n.skc-tab__ripple-container {\n  position: absolute;\n  pointer-events: none;\n  inset: 0;\n  overflow: hidden;\n}\n.skc-tab__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-tab--selected .skc-tab__ripple {\n  background-color: var(--primary);\n}\n');
 
 // src/components/Tab/index.tsx
 import { motion as motion21 } from "framer-motion";
@@ -2716,6 +2716,7 @@ function Tab({
   icon,
   label,
   alt,
+  containerID,
   tooltip,
   selected,
   onClick,
@@ -2724,62 +2725,94 @@ function Tab({
   style,
   className
 }) {
+  const { duration, easing } = useAnimationConfig();
   const tabRef = React25.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(tabRef);
   const tabID = `tab-${kebabify(typeof label === "string" ? label : alt)}`;
   const props = __spreadValues({
     ref: tabRef,
+    role: "tab",
     "aria-labelledby": tabID,
+    "aria-selected": selected,
     title: tooltip,
     style,
     className: cn(["skc-tab", selected && "skc-tab--selected", className])
   }, rippleListeners);
   const content = /* @__PURE__ */ jsxs28(Fragment14, { children: [
-    icon && /* @__PURE__ */ jsx47("div", { className: "skc-tab__icon", children: icon }),
-    label && /* @__PURE__ */ jsx47("span", { id: tabID, className: "skc-tab__label", children: label }),
-    /* @__PURE__ */ jsx47(
+    /* @__PURE__ */ jsxs28("div", { className: "skc-tab__content", children: [
+      icon && /* @__PURE__ */ jsx47("div", { className: "skc-tab__icon", children: icon }),
+      label && /* @__PURE__ */ jsx47("span", { id: tabID, className: "skc-tab__label", children: label }),
+      selected && /* @__PURE__ */ jsx47(
+        motion21.span,
+        {
+          "aria-hidden": true,
+          layoutId: containerID,
+          transition: transition(duration.medium4, easing.standard),
+          className: "skc-tab__indicator"
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsx47("div", { "aria-hidden": true, className: "skc-tab__ripple-container", children: /* @__PURE__ */ jsx47(
       motion21.span,
       {
-        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-tab__ripple",
         style: rippleStyle
       }
-    )
+    ) })
   ] });
-  return /* @__PURE__ */ jsx47("li", {
-    "aria-labelledby": tabID,
+  return (
     // Render with `element` if defined
-    children: href && Element ? /* @__PURE__ */ jsx47(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+    href && Element ? /* @__PURE__ */ jsx47(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
       // Render an `<a>` if link passed in
       href ? /* @__PURE__ */ jsx47("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
         // Otherwise, render a `<button>`
         /* @__PURE__ */ jsx47("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
       )
     )
-  });
+  );
 }
 Tab.displayName = "Tab";
+
+// src/components/TabsContainer/index.tsx
+import * as React26 from "react";
+
+// ../skcom-css/dist/css/components/tabs-container.css
+styleInject(".skc-tabs-container {\n  border-bottom: 1px solid var(--surface-variant);\n}\n.skc-tabs-container__content {\n  display: flex;\n  flex-direction: row;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  max-width: 32rem;\n  width: 100%;\n  margin-inline: auto;\n}\n.skc-tabs-container__content > li {\n  width: 100%;\n}\n.skc-section .skc-tabs-container {\n  margin-inline: 0;\n}\n");
 
 // src/components/TabsContainer/index.tsx
 import { jsx as jsx48 } from "react/jsx-runtime";
 function TabsContainer({
   children,
   appearance,
+  alt,
   style,
   className
 }) {
+  const injectedChildren = React26.Children.map(
+    children,
+    (child) => React26.cloneElement(child, {
+      containerID: `tabs-contaner-${kebabify(alt)}`
+    })
+  );
   return /* @__PURE__ */ jsx48(
     "div",
     {
-      style,
       className: cn([
-        "skc-tab",
-        appearance === "primary" ? "skc-button--primary" : appearance === "secondary" && "skc-button--secondary",
-        className
+        "skc-tabs-container",
+        appearance === "primary" ? "skc-tabs-container--primary" : appearance === "secondary" && "skc-tabs-container--secondary"
       ]),
-      children
+      children: /* @__PURE__ */ jsx48(
+        "div",
+        {
+          role: "tablist",
+          "aria-label": alt,
+          style,
+          className: cn(["skc-tabs-container__content", className]),
+          children: injectedChildren
+        }
+      )
     }
   );
 }
@@ -2792,7 +2825,7 @@ import {
   motion as motion22,
   useAnimationControls as useAnimationControls6
 } from "framer-motion";
-import * as React26 from "react";
+import * as React27 from "react";
 
 // ../skcom-css/dist/css/components/text-field.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  margin: -1px;\n  border: 2px solid var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  position: absolute;\n  inset: 0;\n  content: "";\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  margin: -1px;\n  border: 2px solid var(--error);\n}\n.skc-text-field--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within {\n  margin: 0;\n  border: 1px solid var(--outline);\n}\n.skc-text-field--filled.skc-text-field--error {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--error);\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-text-field__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading .skc-button::before,\n.skc-text-field__trailing .skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n');
@@ -2821,10 +2854,10 @@ function TextField({
   const { duration, easing } = useAnimationConfig();
   const labelControls = useAnimationControls6();
   const trailingControls = useAnimationControls6();
-  const [minifyLabel, setMinifyLabel] = React26.useState();
-  const [neverResetLabel, setNeverMinifyLabel] = React26.useState(false);
+  const [minifyLabel, setMinifyLabel] = React27.useState();
+  const [neverResetLabel, setNeverMinifyLabel] = React27.useState(false);
   const fieldTransition = transition(duration.short4, easing.standard);
-  React26.useEffect(() => {
+  React27.useEffect(() => {
     if (value)
       setMinifyLabel(true);
   }, [value]);
@@ -2842,7 +2875,7 @@ function TextField({
   };
   const orgtrailingAnimState = { y: 0 };
   const focusedTrailingAnimState = { y: 8 };
-  React26.useEffect(() => {
+  React27.useEffect(() => {
     if ([
       "color",
       "date",
@@ -2855,7 +2888,7 @@ function TextField({
       setNeverMinifyLabel(true);
     }
   }, [appearance, inputAttr == null ? void 0 : inputAttr.type]);
-  React26.useEffect(() => {
+  React27.useEffect(() => {
     if (neverResetLabel || minifyLabel === void 0)
       return;
     if (minifyLabel) {
@@ -2876,7 +2909,7 @@ function TextField({
       transition: fieldTransition
     }));
   }, [minifyLabel]);
-  const textareaRef = React26.useRef(null);
+  const textareaRef = React27.useRef(null);
   const expandTextarea = () => {
     if (behavior !== "multi-line")
       return;
@@ -2886,9 +2919,9 @@ function TextField({
     textarea.style.height = "0";
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
-  React26.useEffect(() => expandTextarea, [value]);
-  const [error, setError] = React26.useState(false);
-  React26.useEffect(() => setError(Boolean(incError)), [incError]);
+  React27.useEffect(() => expandTextarea, [value]);
+  const [error, setError] = React27.useState(false);
+  React27.useEffect(() => setError(Boolean(incError)), [incError]);
   const fieldID = `field-${kebabify(
     typeof label === "string" ? label : alt
   )}`;

@@ -2785,6 +2785,10 @@ interface TabProps extends SKComponent {
      */
     alt?: string;
     /**
+     * @private
+     */
+    containerID?: string;
+    /**
      * A message shown in a tooltip when the user hovers over the Tab.
      *
      * - Optional.
@@ -2844,7 +2848,7 @@ interface TabProps extends SKComponent {
  * @param href The URL of the page this Tab leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function Tab({ icon, label, alt, tooltip, selected, onClick, href, element: Element, style, className, }: TabProps): JSX.Element;
+declare function Tab({ icon, label, alt, containerID, tooltip, selected, onClick, href, element: Element, style, className, }: TabProps): JSX.Element;
 declare namespace Tab {
     var displayName: string;
 }
@@ -2866,6 +2870,13 @@ interface TabsContainerProps extends SKComponent {
      * - Always required.
      */
     appearance: "primary" | "secondary";
+    /**
+     * A description of the Tabs Container for screen readers, similar to `alt`
+     * on `<img>`.
+     *
+     * - Always required.
+     */
+    alt: string;
 }
 /**
  * A group of Tabs. Tabs allow the user to switch between pages on the same
@@ -2876,8 +2887,9 @@ interface TabsContainerProps extends SKComponent {
  *
  * @param children Tabs to select from.
  * @param type Where Tabs Container is placed affects its appearance. A Tabs Container responsible for the entire content pane (`primary`) has a different appearance as that for only a section (`secondary`).
+ * @param alt A description of the Tabs Container for screen readers, similar to `alt` on `<img>`.
  */
-declare function TabsContainer({ children, appearance, style, className, }: TabsContainerProps): JSX.Element;
+declare function TabsContainer({ children, appearance, alt, style, className, }: TabsContainerProps): JSX.Element;
 declare namespace TabsContainer {
     var displayName: string;
 }
