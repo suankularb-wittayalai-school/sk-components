@@ -30,6 +30,12 @@
     }
   }
 
+  &:not(.skc-page-header--minimized):has(
+      .skc-page-header__related .skc-tabs-container:last-child
+    ) {
+    padding-bottom: 0;
+  }
+
   + .skc-progress {
     margin-bottom: -0.25rem;
   }
@@ -134,6 +140,15 @@
 
   > * {
     margin-inline: 1rem;
+  }
+
+  > .skc-tabs-container {
+    width: 100%;
+    margin-inline: 0;
+
+    &:only-child {
+      margin-top: -0.75rem;
+    }
   }
 }
 
