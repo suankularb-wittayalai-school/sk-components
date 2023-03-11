@@ -2260,6 +2260,12 @@ interface MenuProps extends SKComponent {
      * - Optional.
      */
     onBlur?: () => any;
+    /**
+     * Attributes for the underlying `<ul>` element.
+     *
+     * - Optional.
+     */
+    ulAttr?: JSX.IntrinsicElements["ul"];
 }
 /**
  * A list of actions/options on a temporary surface.
@@ -2270,8 +2276,9 @@ interface MenuProps extends SKComponent {
  * @param open If the Menu is open and shown.
  * @param density A lower number means a more dense interface. In this case, less height.
  * @param onBlur Triggers when the Menu loses focus.
+ * @param ulAttr Attributes for the underlying `<ul>` element.
  */
-declare function Menu({ children, open, density, onBlur, style, className, }: MenuProps): JSX.Element;
+declare function Menu({ children, open, density, onBlur, ulAttr, style, className, }: MenuProps): JSX.Element;
 declare namespace Menu {
     var displayName: string;
 }
@@ -2370,7 +2377,7 @@ interface MenuItemProps extends SKComponent {
  * @param href The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
  */
-declare function MenuItem({ children, icon, metadata, selected, disabled, value, onClick, href, element: Element, style, className, }: MenuItemProps): JSX.Element;
+declare function MenuItem({ children, icon, metadata, selected, disabled, onClick, href, element: Element, style, className, }: MenuItemProps): JSX.Element;
 declare namespace MenuItem {
     var displayName: string;
 }
@@ -2781,7 +2788,7 @@ declare namespace TextField {
 /**
  * Props for {@link Select}.
  */
-interface SelectProps extends Pick<TextFieldProps, "appearance" | "label" | "leading" | "helperMsg" | "required" | "error" | "className" | "style"> {
+interface SelectProps extends Pick<TextFieldProps, "appearance" | "label" | "alt" | "leading" | "helperMsg" | "required" | "error" | "className" | "style"> {
     children: React.ReactNode;
     locale?: "en-US" | "th";
     value?: any;
@@ -2797,6 +2804,7 @@ interface SelectProps extends Pick<TextFieldProps, "appearance" | "label" | "lea
  * @param children
  * @param appearance
  * @param label
+ * @param alt
  * @param leading
  * @param helperMsg
  * @param locale
@@ -2806,7 +2814,7 @@ interface SelectProps extends Pick<TextFieldProps, "appearance" | "label" | "lea
  * @param onChange
  * @param menuAttr
  */
-declare function Select({ children, appearance, label, leading, helperMsg, locale, required, error, value, onChange, menuAttr, style, className, }: SelectProps): JSX.Element;
+declare function Select({ children, appearance, label, alt, leading, helperMsg, locale, required, error, value, onChange, menuAttr, style, className, }: SelectProps): JSX.Element;
 declare namespace Select {
     var displayName: string;
 }

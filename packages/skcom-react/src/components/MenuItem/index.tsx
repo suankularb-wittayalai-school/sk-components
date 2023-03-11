@@ -131,7 +131,6 @@ export function MenuItem({
   metadata,
   selected,
   disabled,
-  value,
   onClick,
   href,
   element: Element,

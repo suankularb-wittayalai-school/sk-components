@@ -1,18 +1,20 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
-import { TextFieldProps } from "../TextField";
+import { MaterialIcon } from "../MaterialIcon";
 import { Menu, MenuProps } from "../Menu";
+import { TextFieldProps } from "../TextField";
 
 // Styles
 import "@suankularb-components/css/dist/css/components/select.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { MaterialIcon } from "../MaterialIcon";
-import { motion } from "framer-motion";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
+import { MenuItemProps } from "../MenuItem";
 
 /**
  * Props for {@link Select}.
@@ -22,6 +24,7 @@ export interface SelectProps
     TextFieldProps,
     | "appearance"
     | "label"
+    | "alt"
     | "leading"
     | "helperMsg"
     | "required"
@@ -45,6 +48,7 @@ export interface SelectProps
  * @param children
  * @param appearance
  * @param label
+ * @param alt
  * @param leading
  * @param helperMsg
  * @param locale
@@ -58,6 +62,7 @@ export function Select({
   children,
   appearance,
   label,
+  alt,
   leading,
   helperMsg,
   locale,
@@ -72,7 +77,7 @@ export function Select({
   const { duration, easing } = useAnimationConfig();
 
   // Handles toggling options
-  const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = React.useState<boolean>();
   const [options, setOptions] = React.useState<
     { value: any; label: React.ReactNode }[]
   >([]);
@@ -81,8 +86,8 @@ export function Select({
   React.useEffect(() => {
     setOptions(
       React.Children.map(children, (child) => ({
-        value: (child as JSX.Element).props.value,
-        label: (child as JSX.Element).props.children,
+        value: ((child as JSX.Element).props as MenuItemProps).value,
+        label: ((child as JSX.Element).props as MenuItemProps).children,
       })) || []
     );
   }, [children]);
@@ -92,10 +97,29 @@ export function Select({
     if (onChange && options?.length && !value) onChange(options[0].value);
   }, [options]);
 
+  // Accessibility
+  const toggleRef: React.LegacyRef<HTMLButtonElement> = React.createRef();
+  React.useEffect(() => {
+    // `undefined` means the user has not touched this Select yet
+    // `false` means the user has just collapsed this Select
+    if (menuOpen === false) toggleRef.current?.focus();
+  }, [menuOpen]);
+
+  // Generate the base ID for `<label>` and `aria-describedby`
+  const selectID = `select${kebabify(
+    (typeof label === "string" ? label : alt)!
+  )}`;
+
   return (
     <div className="skc-select__anchor">
       {/* Options toggle */}
       <button
+        ref={toggleRef}
+        role="combobox"
+        aria-controls={`${selectID}-options`}
+        aria-expanded={menuOpen}
+        aria-haspopup="listbox"
+        aria-labelledby={selectID}
         style={style}
         className={cn([
           "skc-select",
@@ -110,12 +134,18 @@ export function Select({
         {leading && <div className="skc-select__leading">{leading}</div>}
 
         {/* Label */}
-        <span className="skc-select__label">{label}</span>
+        <label id={selectID} className="skc-select__label">
+          {label}
+        </label>
 
         {/* Selected option */}
         <span className="skc-select__value">
-          {options.find((option) => value === option.value)?.label ||
-            options[0]?.label}
+          {
+            // Show the currently selected option
+            options.find((option) => value === option.value)?.label ||
+              // Show the first option as a fallback
+              options[0]?.label
+          }
         </span>
 
         {/* Dropdown icon */}
@@ -134,7 +164,16 @@ export function Select({
       </button>
 
       {/* Options */}
-      <Menu open={menuOpen} density={-4} {...menuAttr}>
+      <Menu
+        open={menuOpen}
+        density={-4}
+        ulAttr={{
+          id: `${selectID}-options`,
+          role: "listbox",
+          "aria-labelledby": selectID,
+        }}
+        {...menuAttr}
+      >
         {React.Children.map(children, (child) =>
           React.cloneElement(child as JSX.Element, {
             selected: value === (child as JSX.Element).props.value,

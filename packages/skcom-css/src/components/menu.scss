@@ -8,6 +8,7 @@
 // Base Menu
 .skc-menu {
   position: absolute;
+  z-index: 60;
   inset: 0 0 auto auto;
   display: flex;
   align-items: stretch;
@@ -19,7 +20,6 @@
   border-radius: var(--rounded-xs);
   background-color: var(--surface-2);
   box-shadow: var(--shadow-2);
-  z-index: 60;
 
   .skc-button ~ & {
     top: 2.5rem + 0.5rem;

@@ -46,6 +46,13 @@ export interface MenuProps extends SKComponent {
    * - Optional.
    */
   onBlur?: () => any;
+
+  /**
+   * Attributes for the underlying `<ul>` element.
+   *
+   * - Optional.
+   */
+  ulAttr?: JSX.IntrinsicElements["ul"];
 }
 
 /**
@@ -57,12 +64,14 @@ export interface MenuProps extends SKComponent {
  * @param open If the Menu is open and shown.
  * @param density A lower number means a more dense interface. In this case, less height.
  * @param onBlur Triggers when the Menu loses focus.
+ * @param ulAttr Attributes for the underlying `<ul>` element.
  */
 export function Menu({
   children,
   open,
   density,
   onBlur,
+  ulAttr,
   style,
   className,
 }: MenuProps) {
@@ -92,7 +101,7 @@ export function Menu({
               : density === -4 && "skc-menu--density-[-4]",
             className,
           ])}
-          {...{ style, onBlur }}
+          {...{ ulAttr, style, onBlur }}
         >
           {children}
         </motion.ul>

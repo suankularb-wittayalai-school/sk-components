@@ -2362,7 +2362,7 @@ RootLayout.displayName = "RootLayout";
 var import_framer_motion19 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/menu.css
-styleInject(".skc-menu {\n  position: absolute;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n  z-index: 60;\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n.skc-text-field ~ .skc-menu,\n.skc-select ~ .skc-menu {\n  top: 3.5rem;\n}\n.skc-menu--density-0 .skc-menu-item {\n  padding-block: .5rem;\n}\n.skc-menu--density-\\[-2\\] .skc-menu-item {\n  padding-block: .25rem;\n}\n.skc-menu--density-\\[-4\\] .skc-menu-item {\n  padding-block: 0;\n}\n");
+styleInject(".skc-menu {\n  position: absolute;\n  z-index: 60;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n.skc-text-field ~ .skc-menu,\n.skc-select ~ .skc-menu {\n  top: 3.5rem;\n}\n.skc-menu--density-0 .skc-menu-item {\n  padding-block: .5rem;\n}\n.skc-menu--density-\\[-2\\] .skc-menu-item {\n  padding-block: .25rem;\n}\n.skc-menu--density-\\[-4\\] .skc-menu-item {\n  padding-block: 0;\n}\n");
 
 // src/components/Menu/index.tsx
 var import_jsx_runtime37 = require("react/jsx-runtime");
@@ -2371,6 +2371,7 @@ function Menu({
   open,
   density,
   onBlur,
+  ulAttr,
   style,
   className
 }) {
@@ -2394,7 +2395,7 @@ function Menu({
         density === 0 ? "skc-menu--density-0" : density === -2 ? "skc-menu--density-[-2]" : density === -4 && "skc-menu--density-[-4]",
         className
       ])
-    }, { style, onBlur }), {
+    }, { ulAttr, style, onBlur }), {
       children
     })
   ) });
@@ -2416,7 +2417,6 @@ function MenuItem({
   metadata,
   selected,
   disabled,
-  value,
   onClick,
   href,
   element: Element,
@@ -2726,18 +2726,19 @@ function Section({
 Section.displayName = "Section";
 
 // src/components/Select/index.tsx
+var import_framer_motion23 = require("framer-motion");
 var React25 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/select.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label,\n.skc-text-field.skc-text-field--disabled:focus-within .skc-select__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error .skc-select__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-select__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg,\n.skc-text-field.skc-text-field--error .skc-select__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  margin: -1px;\n  border: 2px solid var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label,\n.skc-text-field--outlined .skc-select__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  position: absolute;\n  inset: 0;\n  content: "";\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  margin: -1px;\n  border: 2px solid var(--error);\n}\n.skc-text-field--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within {\n  margin: 0;\n  border: 1px solid var(--outline);\n}\n.skc-text-field--filled.skc-text-field--error {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--error);\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-select__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--multi-line .skc-select__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-select__leading,\n.skc-text-field--textarea .skc-text-field__trailing,\n.skc-text-field--textarea .skc-select__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing,\n.skc-text-field--right .skc-select__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label,\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label,\n.skc-text-field:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__label,\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-select__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__trailing,\n.skc-select__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-select__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-select__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon,\n.skc-select__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading .skc-button::before,\n.skc-select__leading .skc-button::before,\n.skc-text-field__trailing .skc-button::before,\n.skc-select__trailing .skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading,\n.skc-select__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing,\n.skc-select__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button,\n.skc-select__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing, .skc-select__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg,\n.skc-select__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n.skc-select__anchor {\n  position: relative;\n}\n.skc-select {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  width: 100%;\n  height: 3.5rem;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-select--outlined {\n  border: 1px solid var(--outline);\n  border-radius: var(--rounded-xs);\n}\n.skc-select--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-select--outlined:focus-within {\n  border: 2px solid var(--primary);\n}\n.skc-select--outlined .skc-select__label {\n  background-color: var(--background);\n  inset: -0.5rem auto auto .75rem;\n}\n.skc-select ~ .skc-menu {\n  inset: 3.5rem 0 auto 0;\n  width: 100%;\n}\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  font-family: var(--font-display);\n}\n.skc-select:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-select__value {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  text-align: left;\n  padding: 1rem;\n}\n.skc-select__helper-msg {\n  text-align: left;\n}\n.skc-select__blur-capture {\n  position: fixed;\n  inset: 0;\n  z-index: 10;\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label,\n.skc-text-field.skc-text-field--disabled:focus-within .skc-select__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error .skc-select__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-select__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg,\n.skc-text-field.skc-text-field--error .skc-select__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  margin: -1px;\n  border: 2px solid var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label,\n.skc-text-field--outlined .skc-select__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  position: absolute;\n  inset: 0;\n  content: "";\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  margin: -1px;\n  border: 2px solid var(--error);\n}\n.skc-text-field--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within {\n  margin: 0;\n  border: 1px solid var(--outline);\n}\n.skc-text-field--filled.skc-text-field--error {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--error);\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-select__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--multi-line .skc-select__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-select__leading,\n.skc-text-field--textarea .skc-text-field__trailing,\n.skc-text-field--textarea .skc-select__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing,\n.skc-text-field--right .skc-select__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label,\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label,\n.skc-text-field:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__label,\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-select__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__trailing,\n.skc-select__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-select__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-select__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon,\n.skc-select__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading .skc-button::before,\n.skc-select__leading .skc-button::before,\n.skc-text-field__trailing .skc-button::before,\n.skc-select__trailing .skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading,\n.skc-select__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing,\n.skc-select__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button,\n.skc-select__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing, .skc-select__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg,\n.skc-select__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n.skc-select__anchor {\n  position: relative;\n}\n.skc-select {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  width: 100%;\n  height: 3.5rem;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-select--outlined {\n  border: 1px solid var(--outline);\n  border-radius: var(--rounded-xs);\n}\n.skc-select--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-select--outlined:focus-within {\n  border: 2px solid var(--primary);\n}\n.skc-select--outlined .skc-select__label {\n  inset: -0.5rem auto auto .75rem;\n  background-color: var(--background);\n}\n.skc-select ~ .skc-menu {\n  inset: 3.5rem 0 auto 0;\n  width: 100%;\n}\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  font-family: var(--font-display);\n}\n.skc-select:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-select__value {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem;\n  text-align: left;\n}\n.skc-select__helper-msg {\n  cursor: default;\n  text-align: left;\n}\n.skc-select__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n');
 
 // src/components/Select/index.tsx
-var import_framer_motion23 = require("framer-motion");
 var import_jsx_runtime42 = require("react/jsx-runtime");
 function Select({
   children,
   appearance,
   label,
+  alt,
   leading,
   helperMsg,
   locale,
@@ -2751,7 +2752,7 @@ function Select({
 }) {
   var _a, _b;
   const { duration, easing } = useAnimationConfig();
-  const [menuOpen, setMenuOpen] = React25.useState(false);
+  const [menuOpen, setMenuOpen] = React25.useState();
   const [options, setOptions] = React25.useState([]);
   React25.useEffect(() => {
     setOptions(
@@ -2765,10 +2766,25 @@ function Select({
     if (onChange && (options == null ? void 0 : options.length) && !value)
       onChange(options[0].value);
   }, [options]);
+  const toggleRef = React25.createRef();
+  React25.useEffect(() => {
+    var _a2;
+    if (menuOpen === false)
+      (_a2 = toggleRef.current) == null ? void 0 : _a2.focus();
+  }, [menuOpen]);
+  const selectID = `select${kebabify(
+    typeof label === "string" ? label : alt
+  )}`;
   return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "skc-select__anchor", children: [
     /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(
       "button",
       {
+        ref: toggleRef,
+        role: "combobox",
+        "aria-controls": `${selectID}-options`,
+        "aria-expanded": menuOpen,
+        "aria-haspopup": "listbox",
+        "aria-labelledby": selectID,
         style,
         className: cn([
           "skc-select",
@@ -2778,8 +2794,13 @@ function Select({
         onClick: () => setMenuOpen(!menuOpen),
         children: [
           leading && /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { className: "skc-select__leading", children: leading }),
-          /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", { className: "skc-select__label", children: label }),
-          /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", { className: "skc-select__value", children: ((_a = options.find((option) => value === option.value)) == null ? void 0 : _a.label) || ((_b = options[0]) == null ? void 0 : _b.label) }),
+          /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("label", { id: selectID, className: "skc-select__label", children: label }),
+          /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", {
+            className: "skc-select__value",
+            // Show the currently selected option
+            children: ((_a = options.find((option) => value === option.value)) == null ? void 0 : _a.label) || // Show the first option as a fallback
+            ((_b = options[0]) == null ? void 0 : _b.label)
+          }),
           /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
             import_framer_motion23.motion.div,
             {
@@ -2793,20 +2814,33 @@ function Select({
         ]
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Menu, __spreadProps(__spreadValues({ open: menuOpen, density: -4 }, menuAttr), { children: React25.Children.map(
-      children,
-      (child) => React25.cloneElement(child, {
-        selected: value === child.props.value,
-        onClick: () => {
-          if (onChange)
-            onChange(child.props.value);
-          const { onClick } = child.props;
-          if (onClick)
-            onClick();
-          setMenuOpen(false);
+    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+      Menu,
+      __spreadProps(__spreadValues({
+        open: menuOpen,
+        density: -4,
+        ulAttr: {
+          id: `${selectID}-options`,
+          role: "listbox",
+          "aria-labelledby": selectID
         }
+      }, menuAttr), {
+        children: React25.Children.map(
+          children,
+          (child) => React25.cloneElement(child, {
+            selected: value === child.props.value,
+            onClick: () => {
+              if (onChange)
+                onChange(child.props.value);
+              const { onClick } = child.props;
+              if (onClick)
+                onClick();
+              setMenuOpen(false);
+            }
+          })
+        )
       })
-    ) })),
+    ),
     menuOpen && /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
       "div",
       {
