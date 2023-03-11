@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,9 +9,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/menu-item.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { useRipple } from "../../utils/animation";
-import { motion } from "framer-motion";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link MenuItem Menu Item}.
@@ -149,7 +149,11 @@ export function MenuItem({
     "aria-selected": selected,
     "aria-disabled": disabled,
     style,
-    className: cn(["skc-menu-item", className]),
+    className: cn([
+      "skc-menu-item",
+      selected && "skc-menu-item--selected",
+      className,
+    ]),
     ...rippleListeners,
   } satisfies JSX.IntrinsicElements["button" | "a"];
 
@@ -158,6 +162,7 @@ export function MenuItem({
     <>
       {icon && <div className="skc-menu-item__icon">{icon}</div>}
       <span className="skc-menu-item__label">{children}</span>
+      {metadata && <span className="skc-menu-item__metadata">{metadata}</span>}
       <motion.span
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
@@ -169,34 +174,24 @@ export function MenuItem({
 
   return (
     <li role="presentation">
-      <button
-        role="menuitem"
-        style={style}
-        className={cn(["skc-menu-item", className])}
-      >
-        {
-          // Ensure value isn’t specified
-          !value ? ( // Render with `element` if defined
-            href && Element ? (
-              <Element {...props} href={href}>
-                {content}
-              </Element>
-            ) : (
-              // Render an `<a>` if link passed in
-              href && (
-                <a {...props} href={href}>
-                  {content}
-                </a>
-              )
-            )
-          ) : (
-            // Otherwise, render a `<button>`
-            <button {...props} type="button">
-              {content}
-            </button>
-          )
-        }
-      </button>
+      {
+        // Render with `element` if defined
+        href && Element ? (
+          <Element {...props} href={href}>
+            {content}
+          </Element>
+        ) : // Render an `<a>` if link passed in
+        href ? (
+          <a {...props} href={href}>
+            {content}
+          </a>
+        ) : (
+          // Otherwise, render a `<button>`
+          <button {...props} type="button">
+            {content}
+          </button>
+        )
+      }
     </li>
   );
 }

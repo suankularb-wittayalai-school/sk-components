@@ -7,13 +7,23 @@
 
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
 
 .skc-menu-item {
-  // TODO
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  cursor: pointer;
 
   // State layer
   &::before {
     @include mix.state-layer();
+    background-color: var(--on-surface);
   }
 
   &:hover::before {
@@ -26,6 +36,34 @@
       opacity: 0.12;
     }
   }
+
+  &.skc-menu-item--selected::before {
+    opacity: 0.12;
+    background-color: var(--primary);
+  }
+}
+
+.skc-menu-item__icon .skc-icon {
+  @include ci.icon(0, 400, 0, 24);
+}
+
+.skc-menu-item__label {
+  @include type.font("body-large");
+  font-family: var(--font-display);
+  flex-grow: 1;
+  margin-block: 0.5rem;
+  text-align: left;
+  color: var(--on-surface);
+
+  &.skc-menu-item--selected {
+    color: var(--on-primary);
+  }
+}
+
+.skc-menu-item__metadata {
+  @include type.font("body-large");
+  text-align: right;
+  color: var(--on-surface-variant);
 }
 
 .skc-menu-item__ripple {
@@ -33,6 +71,6 @@
   background-color: var(--on-surface);
 
   .skc-menu-item--selected & {
-    background-color: var(--on-secondary-container);
+    background-color: var(--primary);
   }
 }

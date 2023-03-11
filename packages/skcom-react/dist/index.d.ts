@@ -2230,6 +2230,144 @@ declare namespace RootLayout {
 }
 
 /**
+ * Props for {@link Menu}.
+ */
+interface MenuProps extends SKComponent {
+    /**
+     * Actions/options inside a Menu.
+     *
+     * - Must consist of Menu Item(s).
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If the Menu is open and shown.
+     *
+     * - Optional.
+     */
+    open?: boolean;
+    /**
+     * Triggers when the Menu loses focus (as in the user clicking/tapping
+     * outside the Menu)
+     *
+     * - Optional.
+     */
+    onBlur?: () => any;
+}
+/**
+ * A list of actions/options on a temporary surface.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
+ *
+ * @param children Actions/options inside a Menu.
+ * @param open If the Menu is open and shown.
+ * @param onBlur Triggers when the Menu loses focus.
+ */
+declare function Menu({ children, open, onBlur, style, className }: MenuProps): JSX.Element;
+declare namespace Menu {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link MenuItem Menu Item}.
+ */
+interface MenuItemProps extends SKComponent {
+    /**
+     * The text displayed inside the Menu Item.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * An icon can appear before the text (`children`) in a Menu Item. In a long
+     * Menu, icons can quickly orient users.
+     *
+     * - If one Menu Item in a Menu has an icon, the rest should have one too.
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * A message shown in a tooltip when the user hovers over the Menu Item.
+     *
+     * - Optional.
+     */
+    metadata?: string | JSX.Element;
+    /**
+     * If this Menu Item is selected in a dropdown Menu.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * Turns the Menu Item text gray and block any action associated with it.
+     * `onClick` and `href` will have no effect.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * The value of a Select item, similar to `value` on `<option>`.
+     *
+     * - **Important**: this is intended to be used only when the Menu Item is
+     *   inside a Select. This prop is not functional otherwise.
+     * - Optional.
+     */
+    value?: any;
+    /**
+     * The function called when the user interacts with the Menu Item, similar
+     * to `onClick` on `<button>`.
+     *
+     * - Incompatible with `href`.
+     */
+    onClick?: () => any;
+    /**
+     * The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
+     *
+     * - Incompatible with `onClick`.
+     */
+    href?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Incompatible with `onClick`.
+     */
+    element?: ({ children, ref, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref: React.MutableRefObject<any>;
+        title?: string;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
+        onMouseDown: (event: React.MouseEvent) => void;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * An action/option inside a temporary list.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
+ *
+ * @param children The text displayed inside the Menu Item.
+ * @param icon An icon can appear before the text (`children`) in a Menu Item.
+ * @param metadata A message shown in a tooltip when the user hovers over the Menu Item.
+ * @param selected If this Menu Item is selected in a dropdown Menu.
+ * @param disabled Turns the Menu Item text gray and block any action associated with it.
+ * @param value The value of a Select item, similar to `value` on `<option>`.
+ * @param onClick The function called when the user interacts with the Menu Item, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function MenuItem({ children, icon, metadata, selected, disabled, value, onClick, href, element: Element, style, className, }: MenuItemProps): JSX.Element;
+declare namespace MenuItem {
+    var displayName: string;
+}
+
+/**
  * Props for {@link PageHeader Page Header}.
  */
 interface PageHeaderProps extends SKComponent {
@@ -3230,4 +3368,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

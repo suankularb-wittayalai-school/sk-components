@@ -14,6 +14,8 @@ import {
   Header,
   InputChip,
   MaterialIcon,
+  Menu,
+  MenuItem,
   Section,
   SegmentedButton,
   Snackbar,
@@ -295,6 +297,23 @@ const ChipsSection: FC = () => {
   );
 };
 
+const MenuSection: FC = () => (
+  <Section>
+    <Header>Menu</Header>
+    <Menu open>
+      <MenuItem icon={<MaterialIcon icon="content_cut" />} metadata="⌘X">
+        Cut
+      </MenuItem>
+      <MenuItem icon={<MaterialIcon icon="content_copy" />} metadata="⌘C">
+        Copy
+      </MenuItem>
+      <MenuItem icon={<MaterialIcon icon="content_paste" />} metadata="⌘V">
+        Paste
+      </MenuItem>
+    </Menu>
+  </Section>
+);
+
 const ActionsPage: CustomPage = () => (
   <>
     <Head>
@@ -309,6 +328,7 @@ const ActionsPage: CustomPage = () => (
         <FABsSection />
       </Section>
       <ChipsSection />
+      <MenuSection />
     </ContentLayout>
   </>
 );
