@@ -14,6 +14,8 @@ import {
   Header,
   InputChip,
   MaterialIcon,
+  Menu,
+  MenuItem,
   Section,
   SegmentedButton,
   Snackbar,
@@ -295,6 +297,46 @@ const ChipsSection: FC = () => {
   );
 };
 
+const MenuSection: FC = () => {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  return (
+    <Section>
+      <Header>Menu</Header>
+      <Actions>
+        <div className="relative w-fit">
+          <Button appearance="filled" onClick={() => setShowMenu(!showMenu)}>
+            Toggle Menu
+          </Button>
+          <Menu open={showMenu} onBlur={() => setShowMenu(false)}>
+            <MenuItem
+              icon={<MaterialIcon icon="content_cut" />}
+              metadata="⌘X"
+              onClick={() => setShowMenu(false)}
+            >
+              Cut
+            </MenuItem>
+            <MenuItem
+              icon={<MaterialIcon icon="content_copy" />}
+              metadata="⌘C"
+              onClick={() => setShowMenu(false)}
+            >
+              Copy
+            </MenuItem>
+            <MenuItem
+              icon={<MaterialIcon icon="content_paste" />}
+              metadata="⌘V"
+              onClick={() => setShowMenu(false)}
+            >
+              Paste
+            </MenuItem>
+          </Menu>
+        </div>
+      </Actions>
+    </Section>
+  );
+};
+
 const ActionsPage: CustomPage = () => (
   <>
     <Head>
@@ -309,6 +351,7 @@ const ActionsPage: CustomPage = () => (
         <FABsSection />
       </Section>
       <ChipsSection />
+      <MenuSection />
     </ContentLayout>
   </>
 );

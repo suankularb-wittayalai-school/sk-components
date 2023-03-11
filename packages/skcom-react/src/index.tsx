@@ -79,6 +79,9 @@ export {
 export { SplitLayout, type SplitLayoutProps } from "./components/SplitLayout";
 export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
+export { Menu, type MenuProps } from "./components/Menu";
+export { MenuItem, type MenuItemProps } from "./components/MenuItem";
+
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
 export { Progress, type ProgressProps } from "./components/Progress";
@@ -86,6 +89,8 @@ export { Progress, type ProgressProps } from "./components/Progress";
 export { Radio, type RadioProps } from "./components/Radio";
 
 export { Section, type SectionProps } from "./components/Section";
+
+export { Select, type SelectProps } from "./components/Select";
 
 export { Snackbar, type SnackbarProps } from "./components/Snackbar";
 

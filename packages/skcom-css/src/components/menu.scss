@@ -1,0 +1,47 @@
+////
+/// **Menu**
+/// A list of actions/options on a temporary surface.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation
+////
+
+// Base Menu
+.skc-menu {
+  position: absolute;
+  z-index: 60;
+  inset: 0 0 auto auto;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 0;
+  width: fit-content;
+  min-width: 12rem;
+  padding-block: 0.5rem;
+  border-radius: var(--rounded-xs);
+  background-color: var(--surface-2);
+  box-shadow: var(--shadow-2);
+
+  .skc-button ~ & {
+    top: 2.5rem + 0.5rem;
+  }
+
+  .skc-text-field ~ &,
+  .skc-select ~ & {
+    top: 3.5rem;
+  }
+}
+
+// Density
+.skc-menu-item {
+  .skc-menu--density-0 & {
+    padding-block: 0.5rem;
+  }
+
+  .skc-menu--density-\[-2\] & {
+    padding-block: 0.25rem;
+  }
+
+  .skc-menu--density-\[-4\] & {
+    padding-block: 0;
+  }
+}

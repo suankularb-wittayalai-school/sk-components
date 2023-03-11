@@ -14,8 +14,11 @@ import {
   Header,
   InputChip,
   MaterialIcon,
+  Menu,
+  MenuItem,
   Radio,
   Section,
+  Select,
   Switch,
   TextField,
 } from "@suankularb-components/react";
@@ -212,6 +215,33 @@ const RadioSection: FC = () => {
   );
 };
 
+const SelectSection: FC = () => {
+  const [frequency, setFrequency] = useState<
+    "one-off" | "daily" | "weekly" | "monthly" | "annually"
+  >();
+
+  return (
+    <Section>
+      <Header>Select</Header>
+      <Columns columns={3}>
+        <Select
+          appearance="outlined"
+          label="Frequency"
+          helperMsg="How often students must do this form"
+          value={frequency}
+          onChange={setFrequency}
+        >
+          <MenuItem value="one-off">One-off</MenuItem>
+          <MenuItem value="daily">Daily</MenuItem>
+          <MenuItem value="weekly">Weekly</MenuItem>
+          <MenuItem value="monthly">Monthly</MenuItem>
+          <MenuItem value="annually">Annually</MenuItem>
+        </Select>
+      </Columns>
+    </Section>
+  );
+};
+
 const SwitchSection: FC = () => {
   const [switchOn, setSwitchOn] = useState<boolean>(false);
   const [darkMode, setDarkMode] = useState<boolean>(true);
@@ -248,6 +278,7 @@ const InputPage: CustomPage = () => (
     <ContentLayout key="input-page">
       <CheckboxSection />
       <ChipFieldSection />
+      <SelectSection />
       <TextFieldSection />
       <RadioSection />
       <SwitchSection />

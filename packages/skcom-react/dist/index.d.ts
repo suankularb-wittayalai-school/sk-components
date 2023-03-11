@@ -2230,6 +2230,159 @@ declare namespace RootLayout {
 }
 
 /**
+ * Props for {@link Menu}.
+ */
+interface MenuProps extends SKComponent {
+    /**
+     * Actions/options inside a Menu.
+     *
+     * - Must consist of Menu Item(s).
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If the Menu is open and shown.
+     *
+     * - Optional.
+     */
+    open?: boolean;
+    /**
+     * A lower number means a more dense interface. In this case, less height.
+     *
+     * - Must be an integer: 0, -2, or -4.
+     * - Optional.
+     */
+    density?: 0 | -2 | -4;
+    /**
+     * Triggers when the Menu loses focus (as in the user clicking/tapping
+     * outside the Menu)
+     *
+     * - Optional.
+     */
+    onBlur?: () => any;
+    /**
+     * Attributes for the underlying `<ul>` element.
+     *
+     * - Optional.
+     */
+    ulAttr?: JSX.IntrinsicElements["ul"];
+}
+/**
+ * A list of actions/options on a temporary surface.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
+ *
+ * @param children Actions/options inside a Menu.
+ * @param open If the Menu is open and shown.
+ * @param density A lower number means a more dense interface. In this case, less height.
+ * @param onBlur Triggers when the Menu loses focus.
+ * @param ulAttr Attributes for the underlying `<ul>` element.
+ */
+declare function Menu({ children, open, density, onBlur, ulAttr, style, className, }: MenuProps): JSX.Element;
+declare namespace Menu {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link MenuItem Menu Item}.
+ */
+interface MenuItemProps extends SKComponent {
+    /**
+     * The text displayed inside the Menu Item.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * An icon can appear before the text (`children`) in a Menu Item. In a long
+     * Menu, icons can quickly orient users.
+     *
+     * - If one Menu Item in a Menu has an icon, the rest should have one too.
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * A message shown in a tooltip when the user hovers over the Menu Item.
+     *
+     * - Optional.
+     */
+    metadata?: string | JSX.Element;
+    /**
+     * If this Menu Item is selected in a dropdown Menu.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * Turns the Menu Item text gray and block any action associated with it.
+     * `onClick` and `href` will have no effect.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * The value of a Select item, similar to `value` on `<option>`.
+     *
+     * - **Important**: this is intended to be used only when the Menu Item is
+     *   inside a Select. This prop is not functional otherwise.
+     * - Optional.
+     */
+    value?: any;
+    /**
+     * The function called when the user interacts with the Menu Item, similar
+     * to `onClick` on `<button>`.
+     *
+     * - Incompatible with `href`.
+     */
+    onClick?: () => any;
+    /**
+     * The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
+     *
+     * - Incompatible with `onClick`.
+     */
+    href?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Incompatible with `onClick`.
+     */
+    element?: ({ children, ref, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref: React.MutableRefObject<any>;
+        title?: string;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
+        onMouseDown: (event: React.MouseEvent) => void;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * An action/option inside a temporary list.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
+ *
+ * @param children The text displayed inside the Menu Item.
+ * @param icon An icon can appear before the text (`children`) in a Menu Item.
+ * @param metadata A message shown in a tooltip when the user hovers over the Menu Item.
+ * @param selected If this Menu Item is selected in a dropdown Menu.
+ * @param disabled Turns the Menu Item text gray and block any action associated with it.
+ * @param value The value of a Select item, similar to `value` on `<option>`.
+ * @param onClick The function called when the user interacts with the Menu Item, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function MenuItem({ children, icon, metadata, selected, disabled, onClick, href, element: Element, style, className, }: MenuItemProps): JSX.Element;
+declare namespace MenuItem {
+    var displayName: string;
+}
+
+/**
  * Props for {@link PageHeader Page Header}.
  */
 interface PageHeaderProps extends SKComponent {
@@ -2480,6 +2633,189 @@ interface SectionProps extends SKComponent {
  */
 declare function Section({ children, sectionAttr, style, className, }: SectionProps): JSX.Element;
 declare namespace Section {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TextField Text Field}.
+ */
+interface TextFieldProps extends SKComponent {
+    /**
+     * How the Text Field looks. An outlined Text Field has a lower emphasis than
+     * filled, so it is great for a form with many fields.
+     *
+     * - Keep the appearance consistent across Text Fields. Separate different
+     *   appearances by region.
+     * - Must be `outlined` or `filled`.
+     * - Always required.
+     */
+    appearance: "outlined" | "filled";
+    /**
+     * The placeholder text (when not focused and no value) and the label text
+     * (when focused or has value).
+     *
+     * - Always required.
+     */
+    label: string | JSX.Element;
+    /**
+     * How the Text Field behaves if the field value exceeds the visual space.
+     *
+     * - Must be `single-line`, `multi-line`, or `textarea`.
+     * - A single line Text Field can only accompany 1 line of text. Field value
+     *   never wraps and instead scrolls.
+     * - A multi-line Text Field starts with just accompanying 1 line but
+     *   vertically extends to fit the field value as needed.
+     * - A text area Text Field has a fixed height and wraps text.
+     * - Optional.
+     */
+    behavior?: "single-line" | "multi-line" | "textarea";
+    /**
+     * The alignment of the input field.
+     *
+     * - This is useful if the input value should come immediately before the
+     *   trailing text, like the start of an email.
+     * - Optional.
+     */
+    align?: "left" | "right";
+    /**
+     * The leading text or icon, aligned to the left.
+     *
+     * - Optional.
+     */
+    leading?: string | JSX.Element;
+    /**
+     * The trailing text or icon, aligned to the right.
+     *
+     * - Incompatible with `canClear`, as that requires the space of the trailing
+     *   icon for the clear button.
+     * - Optional.
+     */
+    trailing?: string | JSX.Element;
+    /**
+     * A description of the Text Field for screen readers, similar to `alt` on `<img>`.
+     *
+     * - Required if `label` is a JSX Element, as it is used to generate the ID
+     *   crucial for accessibility.
+     */
+    alt?: string;
+    /**
+     * A short description of the Text Field, or an error message during an error state.
+     *
+     * - Optional but recommended during an error state.
+     */
+    helperMsg?: string | JSX.Element;
+    /**
+     * If the user has to enter text in this field for the form to be valid.
+     *
+     * - Activates the error state after the user exits the Text Field without
+     *   entering anything, even if `error` is false.
+     * - Optional.
+     */
+    required?: boolean;
+    /**
+     * Turns the Text Field gray and block user input. `onChange` will not fire.
+     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Allows the user to clear the field value with the clear button.
+     *
+     * - The clear button only appears if this is defined.
+     * - Incompatible with `trailing`, as that uses the space of the clear button
+     *   for the trailing icon.
+     * - Optional.
+     */
+    canClear?: boolean;
+    /**
+     * Tells Text Field that it contains an invalid value and activates the error
+     * state.
+     *
+     * - Optional.
+     */
+    error?: boolean;
+    /**
+     * The value inside the field. This is useful if you want a controlled input.
+     *
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: string;
+    /**
+     * This function triggers when the user make changes to the field value. The
+     * value is passed in via the function.
+     *
+     * - Optional.
+     *
+     * @param value
+     */
+    onChange?: (value: string) => any;
+    /**
+     * Attributes for the underlying `<input>` element used as the field.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * A place for users to enter text.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation}
+ *
+ * @param appearance How the Text Field looks.
+ * @param label The placeholder text and the label text.
+ * @param behavior How the Text Field behaves if the field value exceeds the visual space.
+ * @param align The alignment of the input field.
+ * @param leading The leading text or icon, aligned to the left.
+ * @param trailing The trailing text or icon, aligned to the right.
+ * @param alt A description of the Text Field for screen readers, similar to `alt` on `<img>`.
+ * @param helperMsg A short description of the Text Field, or an error message during an error state.
+ * @param required If the user has to enter text in this field for the form to be valid.
+ * @param disabled Turns the Text Field gray and block user input.
+ * @param canClear Allows the user to clear the field value with the clear button.
+ * @param error Tells Text Field that it contains an invalid value and activates the error state.
+ * @param value The value inside the field. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
+ */
+declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
+declare namespace TextField {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link Select}.
+ */
+interface SelectProps extends Pick<TextFieldProps, "appearance" | "label" | "alt" | "leading" | "helperMsg" | "required" | "error" | "className" | "style"> {
+    children?: React.ReactNode;
+    locale?: "en-US" | "th";
+    value?: any;
+    onChange?: (value: any) => any;
+    menuAttr?: Partial<MenuProps>;
+}
+/**
+ * Sometimes it’s impractical to show all options at a time with a radio group.
+ * Select allows the user to choose from options shown on a temporary surface.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.hh9ts22t8gjy SKCom documentation}
+ *
+ * @param children
+ * @param appearance
+ * @param label
+ * @param alt
+ * @param leading
+ * @param helperMsg
+ * @param locale
+ * @param required
+ * @param error
+ * @param value
+ * @param onChange
+ * @param menuAttr
+ */
+declare function Select({ children, appearance, label, alt, leading, helperMsg, locale, required, error, value, onChange, menuAttr, style, className, }: SelectProps): JSX.Element;
+declare namespace Select {
     var displayName: string;
 }
 
@@ -2963,155 +3299,6 @@ declare namespace TabsContainer {
 }
 
 /**
- * Props for {@link TextField Text Field}.
- */
-interface TextFieldProps extends SKComponent {
-    /**
-     * How the Text Field looks. An outlined Text Field has a lower emphasis than
-     * filled, so it is great for a form with many fields.
-     *
-     * - Keep the appearance consistent across Text Fields. Separate different
-     *   appearances by region.
-     * - Must be `outlined` or `filled`.
-     * - Always required.
-     */
-    appearance: "outlined" | "filled";
-    /**
-     * The placeholder text (when not focused and no value) and the label text
-     * (when focused or has value).
-     *
-     * - Always required.
-     */
-    label: string | JSX.Element;
-    /**
-     * How the Text Field behaves if the field value exceeds the visual space.
-     *
-     * - Must be `single-line`, `multi-line`, or `textarea`.
-     * - A single line Text Field can only accompany 1 line of text. Field value
-     *   never wraps and instead scrolls.
-     * - A multi-line Text Field starts with just accompanying 1 line but
-     *   vertically extends to fit the field value as needed.
-     * - A text area Text Field has a fixed height and wraps text.
-     * - Optional.
-     */
-    behavior?: "single-line" | "multi-line" | "textarea";
-    /**
-     * The alignment of the input field.
-     *
-     * - This is useful if the input value should come immediately before the
-     *   trailing text, like the start of an email.
-     * - Optional.
-     */
-    align?: "left" | "right";
-    /**
-     * The leading text or icon, aligned to the left.
-     *
-     * - Optional.
-     */
-    leading?: string | JSX.Element;
-    /**
-     * The trailing text or icon, aligned to the right.
-     *
-     * - Incompatible with `canClear`, as that requires the space of the trailing
-     *   icon for the clear button.
-     * - Optional.
-     */
-    trailing?: string | JSX.Element;
-    /**
-     * A description of the Text Field for screen readers, similar to `alt` on `<img>`.
-     *
-     * - Required if `label` is a JSX Element, as it is used to generate the ID
-     *   crucial for accessibility.
-     */
-    alt?: string;
-    /**
-     * A short description of the Text Field, or an error message during an error state.
-     *
-     * - Optional but recommended during an error state.
-     */
-    helperMsg?: string | JSX.Element;
-    /**
-     * If the user has to enter text in this field for the form to be valid.
-     *
-     * - Activates the error state after the user exits the Text Field without
-     *   entering anything, even if `error` is false.
-     * - Optional.
-     */
-    required?: boolean;
-    /**
-     * Turns the Text Field gray and block user input. `onChange` will not fire.
-     * {@link https://codium.one/index.php/en/blog/77-disabled-buttons-don-t-have-to-suck Learn when to disable something.}
-     *
-     * - Optional.
-     */
-    disabled?: boolean;
-    /**
-     * Allows the user to clear the field value with the clear button.
-     *
-     * - The clear button only appears if this is defined.
-     * - Incompatible with `trailing`, as that uses the space of the clear button
-     *   for the trailing icon.
-     * - Optional.
-     */
-    canClear?: boolean;
-    /**
-     * Tells Text Field that it contains an invalid value and activates the error
-     * state.
-     *
-     * - Optional.
-     */
-    error?: boolean;
-    /**
-     * The value inside the field. This is useful if you want a controlled input.
-     *
-     * - Optional.
-     *
-     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
-     */
-    value?: string;
-    /**
-     * This function triggers when the user make changes to the field value. The
-     * value is passed in via the function.
-     *
-     * - Optional.
-     *
-     * @param value
-     */
-    onChange?: (value: string) => any;
-    /**
-     * Attributes for the underlying `<input>` element used as the field.
-     *
-     * - Optional.
-     */
-    inputAttr?: JSX.IntrinsicElements["input"];
-}
-/**
- * A place for users to enter text.
- *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation}
- *
- * @param appearance How the Text Field looks.
- * @param label The placeholder text and the label text.
- * @param behavior How the Text Field behaves if the field value exceeds the visual space.
- * @param align The alignment of the input field.
- * @param leading The leading text or icon, aligned to the left.
- * @param trailing The trailing text or icon, aligned to the right.
- * @param alt A description of the Text Field for screen readers, similar to `alt` on `<img>`.
- * @param helperMsg A short description of the Text Field, or an error message during an error state.
- * @param required If the user has to enter text in this field for the form to be valid.
- * @param disabled Turns the Text Field gray and block user input.
- * @param canClear Allows the user to clear the field value with the clear button.
- * @param error Tells Text Field that it contains an invalid value and activates the error state.
- * @param value The value inside the field. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user make changes to the field value.
- * @param inputAttr Attributes for the underlying `<input>` element used as the field.
- */
-declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
-declare namespace TextField {
-    var displayName: string;
-}
-
-/**
  * Props for {@link ThemeProvider}.
  */
 interface ThemeProviderProps {
@@ -3230,4 +3417,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
