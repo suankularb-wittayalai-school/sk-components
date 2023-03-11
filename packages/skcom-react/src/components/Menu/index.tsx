@@ -1,5 +1,5 @@
 // External libraries
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -10,6 +10,7 @@ import "@suankularb-components/css/dist/css/components/menu.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { transition, useAnimationConfig } from "../../utils/animation";
 
 /**
  * Props for {@link Menu}.
@@ -49,17 +50,28 @@ export interface MenuProps extends SKComponent {
  * @param onBlur Triggers when the Menu loses focus.
  */
 export function Menu({ children, open, onBlur, style, className }: MenuProps) {
+  const { duration, easing } = useAnimationConfig();
+
   return (
     <AnimatePresence>
       {open && (
-        <ul
+        <motion.ul
           role="menu"
           aria-orientation="vertical"
+          initial={{ opacity: 0, y: "-10%", scale: 0.8 }}
+          animate={{ opacity: 1, y: "0%", scale: 1 }}
+          exit={{
+            opacity: 0,
+            y: "-10%",
+            scale: 0.8,
+            transition: transition(duration.short2, easing.standard),
+          }}
+          transition={transition(duration.short4, easing.standard)}
           className={cn(["skc-menu", className])}
           {...{ style, onBlur }}
         >
           {children}
-        </ul>
+        </motion.ul>
       )}
     </AnimatePresence>
   );

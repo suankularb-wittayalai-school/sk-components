@@ -6,6 +6,8 @@
 ////
 
 .skc-menu {
+  position: absolute;
+  inset: 0 0 auto auto;
   display: flex;
   align-items: stretch;
   flex-direction: column;
@@ -16,4 +18,9 @@
   border-radius: var(--rounded-xs);
   background-color: var(--surface-2);
   box-shadow: var(--shadow-2);
+  z-index: 60;
+
+  .skc-button ~ & {
+    top: 2.5rem + 0.5rem;
+  }
 }

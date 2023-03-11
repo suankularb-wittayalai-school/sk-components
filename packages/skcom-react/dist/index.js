@@ -2361,16 +2361,26 @@ RootLayout.displayName = "RootLayout";
 var import_framer_motion19 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/menu.css
-styleInject(".skc-menu {\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n}\n");
+styleInject(".skc-menu {\n  position: absolute;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n  z-index: 60;\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n");
 
 // src/components/Menu/index.tsx
 var import_jsx_runtime37 = require("react/jsx-runtime");
 function Menu({ children, open, onBlur, style, className }) {
+  const { duration, easing } = useAnimationConfig();
   return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(import_framer_motion19.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
-    "ul",
+    import_framer_motion19.motion.ul,
     __spreadProps(__spreadValues({
       role: "menu",
       "aria-orientation": "vertical",
+      initial: { opacity: 0, y: "-10%", scale: 0.8 },
+      animate: { opacity: 1, y: "0%", scale: 1 },
+      exit: {
+        opacity: 0,
+        y: "-10%",
+        scale: 0.8,
+        transition: transition(duration.short2, easing.standard)
+      },
+      transition: transition(duration.short4, easing.standard),
       className: cn(["skc-menu", className])
     }, { style, onBlur }), {
       children
@@ -2384,7 +2394,7 @@ var import_framer_motion20 = require("framer-motion");
 var React21 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/menu-item.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-menu-item {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  width: 100%;\n  padding: .5rem 1.5rem .5rem 1rem;\n  text-align: left;\n  cursor: pointer;\n}\n.skc-menu-item::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-menu-item:hover::before {\n  opacity: .08;\n}\n.skc-menu-item:focus::before,\n.skc-menu-item:active::before {\n  opacity: .12;\n}\n.skc-menu-item.skc-menu-item--selected::before {\n  opacity: .12;\n  background-color: var(--primary);\n}\n.skc-menu-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-menu-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  margin-block: .5rem;\n  color: var(--on-surface);\n  flex-grow: 1;\n}\n.skc-menu-item__label.skc-menu-item--selected {\n  color: var(--on-primary);\n}\n.skc-menu-item__metadata {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  color: var(--on-surface-variant);\n}\n.skc-menu-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-menu-item--selected .skc-menu-item__ripple {\n  background-color: var(--primary);\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-menu-item {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  width: 100%;\n  padding: .5rem 1.5rem .5rem 1rem;\n  cursor: pointer;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-menu-item::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-menu-item:hover::before {\n  opacity: .08;\n}\n.skc-menu-item:focus::before,\n.skc-menu-item:active::before {\n  opacity: .12;\n}\n.skc-menu-item.skc-menu-item--selected::before {\n  opacity: .12;\n  background-color: var(--primary);\n}\n.skc-menu-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-menu-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  margin-block: .5rem;\n  text-align: left;\n  color: var(--on-surface);\n}\n.skc-menu-item__label.skc-menu-item--selected {\n  color: var(--on-primary);\n}\n.skc-menu-item__metadata {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  text-align: right;\n  color: var(--on-surface-variant);\n}\n.skc-menu-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-menu-item--selected .skc-menu-item__ripple {\n  background-color: var(--primary);\n}\n');
 
 // src/components/MenuItem/index.tsx
 var import_jsx_runtime38 = require("react/jsx-runtime");
@@ -2432,11 +2442,11 @@ function MenuItem({
   return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("li", {
     role: "presentation",
     // Render with `element` if defined
-    children: href && Element ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+    children: href && Element ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
       )
     )
   });

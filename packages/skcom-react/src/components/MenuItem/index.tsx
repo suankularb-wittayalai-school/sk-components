@@ -177,17 +177,13 @@ export function MenuItem({
       {
         // Render with `element` if defined
         href && Element ? (
-          <Element {...props} href={href}>
-            {content}
-          </Element>
+          <Element {...{ ...props, href }}>{content}</Element>
         ) : // Render an `<a>` if link passed in
         href ? (
-          <a {...props} href={href}>
-            {content}
-          </a>
+          <a {...{ ...props, href }}>{content}</a>
         ) : (
           // Otherwise, render a `<button>`
-          <button {...props} type="button">
+          <button {...{ ...props, onClick }} type="button">
             {content}
           </button>
         )
