@@ -2789,7 +2789,7 @@ declare namespace TextField {
  * Props for {@link Select}.
  */
 interface SelectProps extends Pick<TextFieldProps, "appearance" | "label" | "alt" | "leading" | "helperMsg" | "required" | "error" | "className" | "style"> {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     locale?: "en-US" | "th";
     value?: any;
     onChange?: (value: any) => any;

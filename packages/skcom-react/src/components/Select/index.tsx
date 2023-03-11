@@ -5,6 +5,7 @@ import * as React from "react";
 // Internal components
 import { MaterialIcon } from "../MaterialIcon";
 import { Menu, MenuProps } from "../Menu";
+import { MenuItemProps } from "../MenuItem";
 import { TextFieldProps } from "../TextField";
 
 // Styles
@@ -14,7 +15,6 @@ import "@suankularb-components/css/dist/css/components/select.css";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
-import { MenuItemProps } from "../MenuItem";
 
 /**
  * Props for {@link Select}.
@@ -32,7 +32,7 @@ export interface SelectProps
     | "className"
     | "style"
   > {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   locale?: "en-US" | "th";
   value?: any;
   onChange?: (value: any) => any;
@@ -125,10 +125,11 @@ export function Select({
           "skc-select",
           appearance === "outlined"
             ? "skc-select--outlined"
-            : appearance === "filled" && "skc-selected--filled",
+            : appearance === "filled" && "skc-select--filled",
+          error && "skc-select--error",
           className,
         ])}
-        onClick={() => setMenuOpen(!menuOpen)}
+        onClick={() => options.length && setMenuOpen(!menuOpen)}
       >
         {/* Leading section */}
         {leading && <div className="skc-select__leading">{leading}</div>}
@@ -140,12 +141,15 @@ export function Select({
 
         {/* Selected option */}
         <span className="skc-select__value">
-          {
-            // Show the currently selected option
-            options.find((option) => value === option.value)?.label ||
+          {options.length
+            ? // Show the currently selected option
+              options.find((option) => value === option.value)?.label ||
               // Show the first option as a fallback
               options[0]?.label
-          }
+            : // No options
+            locale === "th"
+            ? "ไม่มีตัวเลือก"
+            : "No options"}
         </span>
 
         {/* Dropdown icon */}
