@@ -2658,7 +2658,6 @@ function Select({
   leading,
   helperMsg,
   locale,
-  required,
   error,
   value,
   onChange,

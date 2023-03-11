@@ -9,8 +9,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/menu.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link Menu}.
