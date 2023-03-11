@@ -199,6 +199,18 @@
   @extend ._skc-chip__ripple;
 }
 
+/// **Filter Chip**
+///
+/// A set of Filter Chips provide product-authored options to narrow down
+/// content. A Filter Chip should never appear alone and should be a child of
+/// Chip Set.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation
+
+.skc-filter-chip {
+  // TODO
+}
+
 /// **Input Chip**
 ///
 /// A Chip displaying a piece of information entered by the user is an Input

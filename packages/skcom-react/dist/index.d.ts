@@ -893,6 +893,91 @@ declare namespace AssistChip {
 }
 
 /**
+ * Props for {@link FilterChip Filter Chip}.
+ */
+interface FilterChipProps extends SKComponent {
+    /**
+     * The text displayed inside the chip.
+     *
+     * - Must be a string or a JSX Element.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * An icon can appear before all content in an Filter Chip. In a page with many cards, icons can quickly orient users.
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * A message shown in a tooltip when the user hovers over the Filter Chip.
+     *
+     * - Optional.
+     */
+    tooltip?: string;
+    /**
+     * Use elevation instead of an outline to signify the Filter Chip’s boundary.
+     *
+     * - Important: do not use this prop if you don’t have to. Only elevate an Filter Chip when its placement requires visual protection, such as on top of an image.
+     * - Optional.
+     */
+    elevated?: boolean;
+    /**
+     * If the Filter Chip is selected. `icon` is replaced with a checkmark if this is `true`.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * Turns the Filter Chip gray and block any action associated with it. `onToggle` and `onMenuToggle` will have no effect.
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Triggers when the user toggles the Filter Chip on or off.
+     *
+     * - Optional.
+     */
+    onToggle?: (state: boolean) => any;
+    /**
+     * Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
+     *
+     * - Optional.
+     */
+    onMenuToggle?: () => any;
+    /**
+     * Turns the Filter Chip into a dropdown, displaying a Menu underneath the chip.
+     *
+     * - Must be a Menu.
+     * - Optional.
+     */
+    menu?: JSX.Element;
+}
+/**
+ * A set of Filter Chips provide product-authored options to narrow down
+ * content. A Filter Chip should never appear alone and should be a child of
+ * Chip Set.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation}
+ *
+ * @param children The text displayed inside the chip.
+ * @param icon An icon can appear before all content in an Filter Chip.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Filter Chip.
+ * @param elevated Use elevation instead of an outline to signify the Filter Chip’s boundary.
+ * @param selected If the Filter Chip is selected.
+ * @param disabled Turns the Filter Chip gray and block any action associated with it.
+ * @param onToggle Triggers when the user toggles the Filter Chip on or off.
+ * @param onMenuToggle Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
+ * @param menu Turns the Filter Chip into a dropdown, displaying a Menu underneath the chip.
+ */
+declare function FilterChip({ children, style, className }: FilterChipProps): JSX.Element;
+declare namespace FilterChip {
+    var displayName: string;
+}
+
+/**
  * Props for {@link ChipField Chip Field}.
  */
 interface ChipFieldProps extends SKComponent {
@@ -3488,4 +3573,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
