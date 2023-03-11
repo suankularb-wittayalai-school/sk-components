@@ -3,7 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { FC, forwardRef, LegacyRef, ReactNode, useState } from "react";
+import {
+  FC,
+  forwardRef,
+  LegacyRef,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 // SK Components
 import {
@@ -16,10 +24,15 @@ import {
   PageHeader,
   Progress,
   RootLayout,
+  Snackbar,
+  SnackbarProps,
 } from "@suankularb-components/react";
 
 // Internal components
 import Favicon from "@/components/Favicon";
+
+// Contexts
+import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
 import { usePageIsLoading, useTransitionEvent } from "@/utils/routing";
@@ -28,16 +41,48 @@ import { CustomPage } from "@/utils/types";
 const Layout: FC<
   { children: ReactNode } & Pick<CustomPage, "fab" | "pageHeader" | "childURLs">
 > = ({ children, fab, pageHeader, childURLs }) => {
+  // Navigation Bar and Drawer
   const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
 
+  const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
+
+  // Root Layout
   const { pageIsLoading } = usePageIsLoading();
   const { transitionEvent } = useTransitionEvent(
     pageHeader?.parentURL,
     childURLs
   );
 
-  const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
+  // Snackbar
+  const { snackbar } = useContext(SnackbarContext);
+  const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+  const [snackbarProps, setSnackbarProps] = useState<SnackbarProps>();
+
+  const showSnackbarAndWait = () => {
+    setSnackbarProps(snackbar!.props);
+    setSnackbarOpen(true);
+    visabilityTimer = setTimeout(() => setSnackbarOpen(false), 6000);
+  };
+
+  let exitWait: NodeJS.Timeout;
+  let visabilityTimer: NodeJS.Timeout;
+  useEffect(() => {
+    if (!snackbar) return;
+
+    clearTimeout(exitWait);
+    clearTimeout(visabilityTimer);
+
+    if (snackbarOpen) {
+      setSnackbarOpen(false);
+      exitWait = setTimeout(showSnackbarAndWait, 200);
+    } else showSnackbarAndWait();
+
+    return () => {
+      clearTimeout(exitWait);
+      clearTimeout(visabilityTimer);
+    };
+  }, [snackbar]);
 
   return (
     <RootLayout transitionEvent={transitionEvent}>
@@ -206,6 +251,13 @@ const Layout: FC<
         appearance="linear"
         alt="Loading page…"
         visible={pageIsLoading}
+      />
+
+      {/* Snackbar */}
+      <Snackbar
+        open={snackbarOpen}
+        onClose={() => setSnackbarOpen(false)}
+        {...snackbarProps!}
       />
 
       {/* Content */}

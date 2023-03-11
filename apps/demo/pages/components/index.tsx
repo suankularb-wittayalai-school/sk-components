@@ -128,7 +128,7 @@ ComponentsPage.pageHeader = {
 ComponentsPage.childURLs = [
   "/components/actions",
   "/components/input",
-  "/components/navigation",
+  "/components/communication",
   "/components/containers",
 ];
 

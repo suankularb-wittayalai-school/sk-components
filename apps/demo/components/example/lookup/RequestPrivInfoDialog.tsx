@@ -1,5 +1,5 @@
 // External libraries
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 
 // SK Components
 import {
@@ -12,8 +12,12 @@ import {
   FullscreenDialog,
   FullscreenDialogProps,
   InputChip,
+  Snackbar,
   TextField,
 } from "@suankularb-components/react";
+
+// Contexts
+import SnackbarContext from "@/contexts/SnackbarContext";
 
 const RequestPrivInfoDialog: FC<
   Pick<FullscreenDialogProps, "open" | "onClose">
@@ -25,12 +29,20 @@ const RequestPrivInfoDialog: FC<
   });
   const [recipientField, setRecipientField] = useState<string>("");
 
+  const { setSnackbar } = useContext(SnackbarContext);
+
   return (
     <FullscreenDialog
       open={open}
       title="Request private info"
       action={
-        <Button appearance="text" onClick={onClose}>
+        <Button
+          appearance="text"
+          onClick={() => {
+            onClose();
+            setSnackbar(<Snackbar>Request sent</Snackbar>);
+          }}
+        >
           Request
         </Button>
       }
