@@ -1,6 +1,8 @@
 // External libraries
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+
 import { FC, useState } from "react";
 
 // SK Components
@@ -28,17 +30,18 @@ import {
   Section,
   SegmentedButton,
   SplitLayout,
+  Tab,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
+  TabsContainer,
   TextField,
 } from "@suankularb-components/react";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import Link from "next/link";
 
 const AvatarSection: FC = () => (
   <Section>
@@ -57,7 +60,7 @@ const CardSection: FC = () => (
   <Section>
     <Header>Card</Header>
     <Columns columns={3}>
-      <Card appearance="elevated">
+      <Card appearance="outlined">
         <CardHeader
           icon={<MaterialIcon icon="person" />}
           title="Atipol Sukrisadanon"
@@ -441,6 +444,55 @@ const TableSection: FC = () => (
   </Section>
 );
 
+const TabSection: FC = () => {
+  const [primaryView, setPrimaryView] = useState<
+    "overview" | "students" | "teachers"
+  >("overview");
+  const [secondaryView, setSecondaryView] = useState<"list" | "gallery">(
+    "list"
+  );
+
+  return (
+    <Section>
+      <Header>Tab</Header>
+      <TabsContainer appearance="primary" alt="Primary view">
+        <Tab
+          icon={<MaterialIcon icon="info" />}
+          label="Overview"
+          selected={primaryView === "overview"}
+          onClick={() => setPrimaryView("overview")}
+        />
+        <Tab
+          icon={<MaterialIcon icon="groups" />}
+          label="Students"
+          selected={primaryView === "students"}
+          onClick={() => setPrimaryView("students")}
+        />
+        <Tab
+          icon={<MaterialIcon icon="group" />}
+          label="Teachers"
+          selected={primaryView === "teachers"}
+          onClick={() => setPrimaryView("teachers")}
+        />
+      </TabsContainer>
+      <TabsContainer appearance="secondary" alt="Secondary view">
+        <Tab
+          icon={<MaterialIcon icon="list" />}
+          label="List"
+          selected={secondaryView === "list"}
+          onClick={() => setSecondaryView("list")}
+        />
+        <Tab
+          icon={<MaterialIcon icon="photo" />}
+          label="Gallery"
+          selected={secondaryView === "gallery"}
+          onClick={() => setSecondaryView("gallery")}
+        />
+      </TabsContainer>
+    </Section>
+  );
+};
+
 const ContainersPage: CustomPage = () => (
   <>
     <Head>
@@ -456,6 +508,7 @@ const ContainersPage: CustomPage = () => (
       <ListSection />
       <ProgressSection />
       <TableSection />
+      <TabSection />
     </ContentLayout>
   </>
 );

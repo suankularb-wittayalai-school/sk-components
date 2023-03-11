@@ -29,10 +29,7 @@ module.exports = {
       sm: "var(--rounded-sm)",
       md: "var(--rounded-md)",
       lg: "var(--rounded-lg)",
-      "lg-end": "var(--rounded-lg-end)",
-      "lg-top": "var(--rounded-lg-top)",
       xl: "var(--rounded-xl)",
-      "xl-top": "var(--rounded-xl-top)",
       full: "var(--rounded-full)",
     },
 

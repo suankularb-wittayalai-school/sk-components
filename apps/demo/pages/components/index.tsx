@@ -69,7 +69,7 @@ const ComponentsPage: CustomPage = () => (
           {/* Communication */}
           <Card appearance="outlined">
             <CardHeader
-              icon={<MaterialIcon icon="swap_horizaontal" />}
+              icon={<MaterialIcon icon="swap_horiz" />}
               title="Communication"
             />
             <CardContent>
@@ -80,7 +80,7 @@ const ComponentsPage: CustomPage = () => (
               <Actions align="full">
                 <Button
                   appearance="tonal"
-                  href="/components/input"
+                  href="/components/communication"
                   element={Link}
                 >
                   View showcase
