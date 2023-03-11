@@ -41,7 +41,16 @@ const ShareDialog: FC<Pick<DialogProps, "open" | "onClose">> = ({
           <Button
             appearance="outlined"
             icon={<MaterialIcon icon="link" />}
-            onClick={onClose}
+            onClick={async () => {
+              const shareData = {
+                title: "Siravit Phokeed - MySK",
+                url: window.location.href,
+              };
+              if (navigator.canShare && navigator.canShare(shareData))
+                await navigator.share(shareData);
+              else navigator.clipboard.writeText(window.location.href);
+              onClose();
+            }}
           >
             Copy link
           </Button>

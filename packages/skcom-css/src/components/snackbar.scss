@@ -1,0 +1,102 @@
+////
+/// **Snackbar**
+///
+/// Snackbar briefly shows low priority information that does not require
+/// action, as opposed to Dialog. It can inform the user about ongoing
+/// processes or an event that has just been completed.
+///
+/// Note that Snackbar, as per SKCom’s principles, does not do state management
+/// on its own. Use the `children`, `open`, `onClose`, and `onExitComplete`
+/// props with your own state management solution.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation
+////
+
+@use "sass:math";
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-snackbar {
+  // Navigation Bar: 5rem
+  // Padding: 0.5rem
+  inset: auto auto (5rem + 0.5rem) 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.25rem;
+  width: calc(100vw - (0.5rem * 2));
+  padding: 0.875rem 1rem;
+  border-radius: var(--rounded-xs);
+  background-color: var(--inverse-surface);
+  box-shadow: var(--shadow-3);
+
+  &:has(.skc-snackbar__action) {
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
+  }
+
+  .skc-root-layout > &,
+  .skc-root-layout > * > & {
+    position: fixed;
+    z-index: 80;
+  }
+
+  .skc-nav-bar:has(.skc-fab) ~ aside & {
+    // Navigation Bar: 5rem
+    // Standard FAB: 3.5rem
+    // Margin around FAB: 1rem
+    bottom: 5rem + 3.5rem + (1rem * 2);
+  }
+
+  .skc-nav-bar:has(.skc-fab--large) ~ aside & {
+    // Navigation Bar: 5rem
+    // Large FAB: 6rem
+    // Margin around FAB: 1rem
+    bottom: 5rem + 6rem + (1rem * 2);
+  }
+}
+
+.skc-snackbar--stacked {
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.skc-snackbar__label {
+  @include type.font("body-medium");
+  flex-grow: 1;
+  color: var(--inverse-on-surface);
+
+  .skc-snackbar:has(.skc-snackbar__action) & {
+    margin-block: 0.625rem;
+  }
+
+  .skc-snackbar--stacked & {
+    align-self: stretch;
+  }
+}
+
+.skc-snackbar__action {
+  &,
+  .skc-button {
+    color: var(--inverse-primary);
+    background-color: transparent;
+  }
+
+  .skc-button::before,
+  .skc-button .skc-button__ripple {
+    background-color: var(--inverse-primary);
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-snackbar {
+    inset: auto auto 1rem 1rem;
+    width: fit-content;
+    min-width: 20rem;
+    // Limit width to half of the screen
+    max-width: calc(math.div(100vw, 3) - 1rem);
+
+    .skc-nav-bar:has(.skc-fab, .skc-fab--large) ~ aside & {
+      bottom: 1rem;
+    }
+  }
+}

@@ -2484,6 +2484,74 @@ declare namespace Section {
 }
 
 /**
+ * Props for {@link Snackbar}.
+ */
+interface SnackbarProps extends SKComponent {
+    /**
+     * The message inside the Snackbar.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * A Snackbar can contain 1 action. Pressing this action closes the Snackbar.
+     *
+     * - Must contain 1 Button with text appearance.
+     * - Optional.
+     */
+    action?: JSX.Element;
+    /**
+     * Put the message (`children`) above the action (`action`).
+     *
+     * - This is useful if the action text is long.
+     * - Optional.
+     */
+    stacked?: boolean;
+    /**
+     * If the Snackbar is open and visible.
+     *
+     * - Optional.
+     */
+    open?: Boolean;
+    /**
+     * Triggers when the close Button is pressed.
+     *
+     * - `onClose` is not triggered when the Snackbar dismisses itself.
+     */
+    onClose?: () => any;
+    /**
+     * Triggers after the Snackbar has completely exited the screen.
+     *
+     * - Snackbar does not close on its own. This function triggers a few moments
+     *   after `open` is set to false when the exit animation ends.
+     * - Optional.
+     */
+    onExitComplete?: () => any;
+}
+/**
+ * Snackbar briefly shows low priority information that does not require
+ * action, as opposed to Dialog. It can inform the user about ongoing processes
+ * or an event that has just been completed.
+ *
+ * Note that Snackbar, as per SKCom’s principles, does not do state management
+ * on its own. Use the `children`, `open`, `onClose`, and `onExitComplete`
+ * props with your own state management solution.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation}
+ *
+ * @param children The message inside the Snackbar.
+ * @param action A Snackbar can contain 1 action. Pressing this action closes the Snackbar.
+ * @param stacked Put the message (`children`) above the action (`action`).
+ * @param open If the Snackbar is open and visible.
+ * @param onClose Triggers when the close Button is pressed.
+ * @param onExitComplete Triggers after the Snackbar has completely exited the screen.
+ */
+declare function Snackbar({ children, action, stacked, open, onClose, onExitComplete, style, className, }: SnackbarProps): JSX.Element;
+declare namespace Snackbar {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Switch}.
  */
 interface SwitchProps extends SKComponent {
@@ -3162,4 +3230,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

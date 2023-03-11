@@ -199,7 +199,7 @@ AboutPage.pageHeader = {
 AboutPage.childURLs = [
   "/components/actions",
   "/components/input",
-  "/components/navigation",
+  "/components/communication",
   "/components/containers",
 ];
 

@@ -382,36 +382,6 @@ const ListSection: FC = () => {
   );
 };
 
-const ProgressSection: FC = () => (
-  <Section>
-    <Header>Progress</Header>
-    <Columns columns={2}>
-      <Progress
-        appearance="linear"
-        alt="Linear determinate Progress demo"
-        value={70}
-        visible
-      />
-      <Progress
-        appearance="linear"
-        alt="Linear indeterminate Progress demo"
-        visible
-      />
-      <Progress
-        appearance="circular"
-        alt="Circular determinate Progress demo"
-        value={70}
-        visible
-      />
-      <Progress
-        appearance="circular"
-        alt="Circular indeterminate Progress demo"
-        visible
-      />
-    </Columns>
-  </Section>
-);
-
 const TableSection: FC = () => (
   <Section>
     <Header>Table</Header>
@@ -506,7 +476,6 @@ const ContainersPage: CustomPage = () => (
       <HeaderSection />
       <SplitLayoutSection />
       <ListSection />
-      <ProgressSection />
       <TableSection />
       <TabSection />
     </ContentLayout>
