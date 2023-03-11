@@ -80,7 +80,7 @@ const ComponentsPage: CustomPage = () => (
               <Actions align="full">
                 <Button
                   appearance="tonal"
-                  href="/components/input"
+                  href="/components/communication"
                   element={Link}
                 >
                   View showcase
@@ -128,7 +128,7 @@ ComponentsPage.pageHeader = {
 ComponentsPage.childURLs = [
   "/components/actions",
   "/components/input",
-  "/components/navigation",
+  "/components/communication",
   "/components/containers",
 ];
 

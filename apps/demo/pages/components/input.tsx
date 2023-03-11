@@ -22,7 +22,6 @@ import {
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import { useTransitionEvent } from "@/utils/routing";
 
 const CheckboxSection: FC = () => {
   const [termsAgreed, setTermsAgreed] = useState<boolean>(false);
