@@ -17,8 +17,6 @@
 @use "../abstracts/typography.scss" as type;
 
 .skc-snackbar {
-  position: fixed;
-  z-index: 80;
   // Navigation Bar: 5rem
   // Padding: 0.5rem
   inset: auto auto (5rem + 0.5rem) 0.5rem;
@@ -34,6 +32,12 @@
 
   &:has(.skc-snackbar__action) {
     padding: 0.25rem 0.5rem 0.25rem 1rem;
+  }
+
+  .skc-root-layout > &,
+  .skc-root-layout > * > & {
+    position: fixed;
+    z-index: 80;
   }
 
   .skc-nav-bar:has(.skc-fab) ~ aside & {
@@ -61,6 +65,10 @@
   flex-grow: 1;
   color: var(--inverse-on-surface);
 
+  .skc-snackbar:has(.skc-snackbar__action) & {
+    margin-block: 0.625rem;
+  }
+
   .skc-snackbar--stacked & {
     align-self: stretch;
   }
@@ -74,7 +82,7 @@
   }
 
   .skc-button::before,
-  .skc-button__ripple {
+  .skc-button .skc-button__ripple {
     background-color: var(--inverse-primary);
   }
 }

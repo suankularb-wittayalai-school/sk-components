@@ -5,9 +5,6 @@ import * as React from "react";
 // Types
 import { SKComponent } from "../../types";
 
-//
-import { ButtonProps } from "../Button";
-
 // Styles
 import "@suankularb-components/css/dist/css/components/snackbar.css";
 
