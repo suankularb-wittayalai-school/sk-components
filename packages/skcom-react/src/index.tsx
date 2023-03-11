@@ -87,6 +87,8 @@ export { Radio, type RadioProps } from "./components/Radio";
 
 export { Section, type SectionProps } from "./components/Section";
 
+export { Snackbar, type SnackbarProps } from "./components/Snackbar";
+
 export { Switch, type SwitchProps } from "./components/Switch";
 
 export { Table, type TableProps } from "./components/Table";

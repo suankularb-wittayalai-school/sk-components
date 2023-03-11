@@ -1,14 +1,17 @@
 // External libraries
 import { createContext } from "react";
 
-// TODO: Replace `any` with `SnackbarProps`
+// SK Components
+import { SnackbarProps } from "@suankularb-components/react";
 
 /**
  * A Context that provides the value and the setter for showing Snackbars.
  */
 const SnackbarContext = createContext<{
-  snackbar: any;
-  setSnackbar: (snackbar: any) => void;
+  snackbar: Omit<SnackbarProps, "open" | "onExitComplete"> | null;
+  setSnackbar: (
+    snackbar: Omit<SnackbarProps, "open" | "onExitComplete">
+  ) => void;
 }>({ snackbar: null, setSnackbar: (snackbar) => {} });
 
 export default SnackbarContext;

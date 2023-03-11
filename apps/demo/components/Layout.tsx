@@ -7,6 +7,7 @@ import { FC, forwardRef, LegacyRef, ReactNode, useState } from "react";
 
 // SK Components
 import {
+  Button,
   MaterialIcon,
   NavBar,
   NavBarItem,
@@ -16,6 +17,7 @@ import {
   PageHeader,
   Progress,
   RootLayout,
+  Snackbar,
 } from "@suankularb-components/react";
 
 // Internal components
@@ -207,6 +209,10 @@ const Layout: FC<
         alt="Loading page…"
         visible={pageIsLoading}
       />
+
+      <Snackbar action={<Button appearance="text">Undo</Button>} open>
+        Task failed successfully
+      </Snackbar>
 
       {/* Content */}
       {children}
