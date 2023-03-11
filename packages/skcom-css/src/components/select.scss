@@ -78,6 +78,11 @@
   @extend .skc-text-field__trailing;
 }
 
+.skc-select__helper-msg {
+  @extend .skc-text-field__helper-msg;
+  text-align: left;
+}
+
 .skc-select__blur-capture {
   position: fixed;
   inset: 0;

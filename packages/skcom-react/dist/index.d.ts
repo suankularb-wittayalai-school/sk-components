@@ -2247,6 +2247,13 @@ interface MenuProps extends SKComponent {
      */
     open?: boolean;
     /**
+     * A lower number means a more dense interface. In this case, less height.
+     *
+     * - Must be an integer: 0, -2, or -4.
+     * - Optional.
+     */
+    density?: 0 | -2 | -4;
+    /**
      * Triggers when the Menu loses focus (as in the user clicking/tapping
      * outside the Menu)
      *
@@ -2261,9 +2268,10 @@ interface MenuProps extends SKComponent {
  *
  * @param children Actions/options inside a Menu.
  * @param open If the Menu is open and shown.
+ * @param density A lower number means a more dense interface. In this case, less height.
  * @param onBlur Triggers when the Menu loses focus.
  */
-declare function Menu({ children, open, onBlur, style, className }: MenuProps): JSX.Element;
+declare function Menu({ children, open, density, onBlur, style, className, }: MenuProps): JSX.Element;
 declare namespace Menu {
     var displayName: string;
 }

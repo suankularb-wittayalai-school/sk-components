@@ -32,6 +32,14 @@ export interface MenuProps extends SKComponent {
   open?: boolean;
 
   /**
+   * A lower number means a more dense interface. In this case, less height.
+   *
+   * - Must be an integer: 0, -2, or -4.
+   * - Optional.
+   */
+  density?: 0 | -2 | -4;
+
+  /**
    * Triggers when the Menu loses focus (as in the user clicking/tapping
    * outside the Menu)
    *
@@ -47,9 +55,17 @@ export interface MenuProps extends SKComponent {
  *
  * @param children Actions/options inside a Menu.
  * @param open If the Menu is open and shown.
+ * @param density A lower number means a more dense interface. In this case, less height.
  * @param onBlur Triggers when the Menu loses focus.
  */
-export function Menu({ children, open, onBlur, style, className }: MenuProps) {
+export function Menu({
+  children,
+  open,
+  density,
+  onBlur,
+  style,
+  className,
+}: MenuProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -67,7 +83,15 @@ export function Menu({ children, open, onBlur, style, className }: MenuProps) {
             transition: transition(duration.short2, easing.standard),
           }}
           transition={transition(duration.short4, easing.standard)}
-          className={cn(["skc-menu", className])}
+          className={cn([
+            "skc-menu",
+            density === 0
+              ? "skc-menu--density-0"
+              : density === -2
+              ? "skc-menu--density-[-2]"
+              : density === -4 && "skc-menu--density-[-4]",
+            className,
+          ])}
           {...{ style, onBlur }}
         >
           {children}

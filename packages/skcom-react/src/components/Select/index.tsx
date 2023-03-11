@@ -108,10 +108,10 @@ export function Select({
       >
         {/* Leading section */}
         {leading && <div className="skc-select__leading">{leading}</div>}
-        
+
         {/* Label */}
         <span className="skc-select__label">{label}</span>
-        
+
         {/* Selected option */}
         <span className="skc-select__value">
           {options.find((option) => value === option.value)?.label ||
@@ -126,10 +126,15 @@ export function Select({
         >
           <MaterialIcon icon="arrow_drop_down" />
         </motion.div>
+
+        {/* Helper message */}
+        {helperMsg && (
+          <span className="skc-select__helper-msg">{helperMsg}</span>
+        )}
       </button>
 
       {/* Options */}
-      <Menu open={menuOpen} {...menuAttr}>
+      <Menu open={menuOpen} density={-4} {...menuAttr}>
         {React.Children.map(children, (child) =>
           React.cloneElement(child as JSX.Element, {
             selected: value === (child as JSX.Element).props.value,
