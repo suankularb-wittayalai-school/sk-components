@@ -51,8 +51,8 @@ const SnackbarSection: FC = () => (
   <Section>
     <Header>Snackbar</Header>
     <p>
-      You can find Snackbars fully working in Actions. Click/Tap in the
-      full-width “Add” Button.
+      You can find Snackbars fully working in Actions. Click/Tap the full-width
+      “Add” Button.
     </p>
     <Snackbar open>Task failed successfully</Snackbar>
     <Snackbar action={<Button appearance="text">Undo</Button>} open>
