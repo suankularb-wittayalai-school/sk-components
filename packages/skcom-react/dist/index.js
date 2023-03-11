@@ -493,7 +493,7 @@ function Button({
     ref: buttonRef,
     // We’re using `aria-disabled` instead of `disabled` because it does not
     // disable tabbing in, which is better for accessibility.
-    "aria-disabled": disabled || loading !== void 0,
+    "aria-disabled": disabled || loading === true || typeof loading === "number",
     "aria-selected": selected,
     "aria-label": alt,
     title: tooltip,
