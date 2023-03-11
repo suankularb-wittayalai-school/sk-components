@@ -35,6 +35,20 @@
   &:has(.skc-snackbar__action) {
     padding: 0.25rem 0.5rem 0.25rem 1rem;
   }
+
+  .skc-nav-bar:has(.skc-fab) ~ aside & {
+    // Navigation Bar: 5rem
+    // Standard FAB: 3.5rem
+    // Margin around FAB: 1rem
+    bottom: 5rem + 3.5rem + (1rem * 2);
+  }
+
+  .skc-nav-bar:has(.skc-fab--large) ~ aside & {
+    // Navigation Bar: 5rem
+    // Large FAB: 6rem
+    // Margin around FAB: 1rem
+    bottom: 5rem + 6rem + (1rem * 2);
+  }
 }
 
 .skc-snackbar--stacked {
@@ -72,5 +86,9 @@
     min-width: 20rem;
     // Limit width to half of the screen
     max-width: calc(math.div(100vw, 3) - 1rem);
+
+    .skc-nav-bar:has(.skc-fab, .skc-fab--large) ~ aside & {
+      bottom: 1rem;
+    }
   }
 }

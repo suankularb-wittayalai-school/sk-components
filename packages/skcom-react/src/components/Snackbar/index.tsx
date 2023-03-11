@@ -1,17 +1,19 @@
 // External libraries
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Types
 import { SKComponent } from "../../types";
 
+//
+import { ButtonProps } from "../Button";
+
 // Styles
 import "@suankularb-components/css/dist/css/components/snackbar.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { AnimatePresence, motion } from "framer-motion";
-import { ButtonProps } from "../Button";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link Snackbar}.
@@ -124,12 +126,11 @@ export function Snackbar({
               <div className="skc-snackbar__action">
                 {React.cloneElement(action as JSX.Element, {
                   onClick: () => {
-                    console.log("closing!");
                     if (onClose) onClose();
-                    const { onClick } = action.props as ButtonProps;
+                    const { onClick } = action.props;
                     if (onClick) onClick();
                   },
-                } satisfies Partial<ButtonProps>)}
+                })}
               </div>
             )}
           </motion.div>
