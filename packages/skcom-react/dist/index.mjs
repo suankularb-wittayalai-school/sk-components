@@ -2579,7 +2579,8 @@ function Snackbar({
       children: [
         /* @__PURE__ */ jsx40("span", { className: "skc-snackbar__label", children }),
         action && /* @__PURE__ */ jsx40("div", { className: "skc-snackbar__action", children: React24.cloneElement(action, {
-          onClose: () => {
+          onClick: () => {
+            console.log("closing!");
             if (onClose)
               onClose();
             const { onClick } = action.props;

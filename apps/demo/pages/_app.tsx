@@ -6,6 +6,7 @@ import {
   Sarabun,
   IBM_Plex_Sans_Thai,
 } from "next/font/google";
+import { useState } from "react";
 
 // SK Components
 import { ThemeProvider } from "@suankularb-components/react";
@@ -15,6 +16,7 @@ import Layout from "@/components/Layout";
 
 // Contexts
 import PreviousRouteContext from "@/contexts/PreviousRouteContext";
+import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Styles
 import "@/styles/globals.css";
@@ -40,6 +42,7 @@ const displayFontTH = IBM_Plex_Sans_Thai({
 export default function App({ Component, pageProps }: CustomAppProps) {
   const { fab, pageHeader, childURLs } = Component;
   const { previousPath } = usePreviousPath();
+  const [snackbar, setSnackbar] = useState<JSX.Element | null>(null);
 
   return (
     <>
@@ -53,13 +56,15 @@ export default function App({ Component, pageProps }: CustomAppProps) {
       `}</style>
 
       <PreviousRouteContext.Provider value={previousPath}>
-        <MotionConfig reducedMotion="user">
-          <ThemeProvider>
-            <Layout {...{ fab, pageHeader, childURLs }}>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </MotionConfig>
+        <SnackbarContext.Provider value={{ snackbar, setSnackbar }}>
+          <MotionConfig reducedMotion="user">
+            <ThemeProvider>
+              <Layout {...{ fab, pageHeader, childURLs }}>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          </MotionConfig>
+        </SnackbarContext.Provider>
       </PreviousRouteContext.Provider>
     </>
   );

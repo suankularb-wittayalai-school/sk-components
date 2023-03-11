@@ -1,6 +1,6 @@
 // External libraries
 import Head from "next/head";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 
 // SK Components
 import {
@@ -16,17 +16,31 @@ import {
   MaterialIcon,
   Section,
   SegmentedButton,
+  Snackbar,
   ToggleButton,
 } from "@suankularb-components/react";
+
+// Contexts
+import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
 
 const ButtonsSection: FC = () => {
+  const { setSnackbar } = useContext(SnackbarContext);
+
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     let loadingSim: NodeJS.Timeout;
-    if (loading) loadingSim = setTimeout(() => setLoading(false), 2000);
+    if (loading)
+      loadingSim = setTimeout(() => {
+        setLoading(false);
+        setSnackbar(
+          <Snackbar action={<Button appearance="text">Undo</Button>}>
+            Task failed successfully
+          </Snackbar>
+        );
+      }, 2000);
     return () => {
       if (loadingSim) clearTimeout(loadingSim);
     };
@@ -72,7 +86,10 @@ const ButtonsSection: FC = () => {
         <Button
           appearance="filled"
           icon={<MaterialIcon icon="add" />}
-          onClick={() => setLoading(true)}
+          onClick={() => {
+            setLoading(true);
+            setSnackbar(<Snackbar>Failing task…</Snackbar>);
+          }}
           loading={loading}
         >
           Add

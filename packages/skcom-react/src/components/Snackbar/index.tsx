@@ -123,12 +123,13 @@ export function Snackbar({
             {action && (
               <div className="skc-snackbar__action">
                 {React.cloneElement(action as JSX.Element, {
-                  onClose: () => {
+                  onClick: () => {
+                    console.log("closing!");
                     if (onClose) onClose();
                     const { onClick } = action.props as ButtonProps;
                     if (onClick) onClick();
                   },
-                })}
+                } satisfies Partial<ButtonProps>)}
               </div>
             )}
           </motion.div>
