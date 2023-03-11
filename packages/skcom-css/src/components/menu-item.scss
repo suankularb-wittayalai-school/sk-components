@@ -1,0 +1,38 @@
+////
+/// **Menu item**
+/// An action/option inside a temporary list.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-menu-item {
+  // TODO
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+}
+
+.skc-menu-item__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+
+  .skc-menu-item--selected & {
+    background-color: var(--on-secondary-container);
+  }
+}

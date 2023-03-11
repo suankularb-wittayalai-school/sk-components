@@ -79,6 +79,9 @@ export {
 export { SplitLayout, type SplitLayoutProps } from "./components/SplitLayout";
 export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
 
+export { Menu, type MenuProps } from "./components/Menu";
+export { MenuItem, type MenuItemProps } from "./components/MenuItem";
+
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
 export { Progress, type ProgressProps } from "./components/Progress";
