@@ -23,4 +23,9 @@
   .skc-button ~ & {
     top: 2.5rem + 0.5rem;
   }
+
+  .skc-text-field ~ &,
+  .skc-select ~ & {
+    top: 3.5rem;
+  }
 }
