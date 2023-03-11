@@ -36,7 +36,7 @@ const ExamplePage: CustomPage = () => (
             <p>
               Card, Input Chip, Assist Chip, Filter Chip, Chip Field, Chip Set,
               Dialog, Full-screen Dialog, Form Item, Content Layout, Vertical
-              Split Layout, Search
+              Split Layout, Search, Snackbar
             </p>
             <Actions>
               <Button appearance="filled" href="/example/lookup" element={Link}>
