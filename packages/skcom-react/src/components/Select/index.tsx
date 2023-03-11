@@ -179,7 +179,7 @@ export function Select({
   }, [menuOpen]);
 
   // Generate the base ID for `<label>` and `aria-describedby`
-  const selectID = `select${kebabify(
+  const selectID = `select-${kebabify(
     (typeof label === "string" ? label : alt)!
   )}`;
 

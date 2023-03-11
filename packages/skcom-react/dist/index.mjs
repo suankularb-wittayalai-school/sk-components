@@ -2307,7 +2307,7 @@ function Menu({
         density === 0 ? "skc-menu--density-0" : density === -2 ? "skc-menu--density-[-2]" : density === -4 && "skc-menu--density-[-4]",
         className
       ])
-    }, { ulAttr, style, onBlur }), {
+    }, __spreadProps(__spreadValues({}, ulAttr), { style, onBlur })), {
       children
     })
   ) });
@@ -2356,6 +2356,7 @@ function MenuItem({
     /* @__PURE__ */ jsx38(
       motion19.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-menu-item__ripple",
@@ -2687,7 +2688,7 @@ function Select({
     if (menuOpen === false)
       (_a2 = toggleRef.current) == null ? void 0 : _a2.focus();
   }, [menuOpen]);
-  const selectID = `select${kebabify(
+  const selectID = `select-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
   return /* @__PURE__ */ jsxs28("div", { className: "skc-select__anchor", children: [
