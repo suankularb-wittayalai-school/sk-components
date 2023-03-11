@@ -43,10 +43,7 @@ export interface NavBarProps extends SKComponent {
   /**
    * If a page includes a FAB, it is moved to the Navigation Rail in larger
    * screens to assert its dominance.
-   *
-   * - Ensure that the FAB is both in Page Layout and Navigation Bar’s `fab`
-   *   prop for both to work properly. The FAB in Page Layout disappears on
-   *   larger screens, and the one in `fab` disappears on smaller screens.
+   * 
    * - Optional.
    */
   fab?: JSX.Element;
