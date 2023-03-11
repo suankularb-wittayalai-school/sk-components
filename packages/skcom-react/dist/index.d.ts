@@ -2827,6 +2827,142 @@ declare namespace TableCell {
 }
 
 /**
+ * Props for {@link Tab}.
+ */
+interface TabProps extends SKComponent {
+    /**
+     * An icon appears before or above the label. Icons help users identify pages more quickly.
+     *
+     * - If the icon is sufficiently representative of the page, a label isn’t
+     *   needed.
+     * - Normally optional but required if `label` is not defined as a Tab cannot
+     *   be empty.
+     */
+    icon?: JSX.Element;
+    /**
+     * An additional text label next to or underneath the icon.
+     *
+     * - Required if `icon` is not defined as a Tab cannot be empty.
+     */
+    label?: string | JSX.Element;
+    /**
+     * A description of the Tab for screen readers, similar to `alt` on `<img>`.
+     *
+     * - Required if the Tab just includes `icon`, because an icon has no
+     *   significance for screen readers.
+     */
+    alt?: string;
+    /**
+     * @private
+     */
+    containerID?: string;
+    /**
+     * A message shown in a tooltip when the user hovers over the Tab.
+     *
+     * - Optional.
+     */
+    tooltip?: string;
+    /**
+     * Highlights the Tab. If the user is currently on this page, the Tab should
+     * be highlighted.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * The function called when the user interacts with the Tab, similar to
+     * `onClick` on `<button>`.
+     *
+     * - Incompatible with `href`.
+     */
+    onClick?: () => any;
+    /**
+     * The URL of the page this Tab leads to, similar to `href` on `<a>`.
+     *
+     * - Incompatible with `onClick`.
+     */
+    href?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Optional.
+     */
+    element?: ({ children, ref, title, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref: React.MutableRefObject<any>;
+        title?: string;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
+        onMouseDown: (event: React.MouseEvent) => void;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * Tabs allow the user to switch between pages on the same level of a page
+ * hierarchy. For example, an Overview, Students, and Teachers page of a class.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.g56fs6ts5kqq SKCom documentation}
+ *
+ * @param icon An icon appears before or above the label. Icons help users identify pages more quickly.
+ * @param label An additional text label next to or underneath the icon.
+ * @param alt A description of the Tab for screen readers, similar to `alt` on `<img>`.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Tab.
+ * @param selected Highlights the Tab. If the user is currently on this page, the Tab should be highlighted.
+ * @param onClick The function called when the user interacts with the Tab, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Tab leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function Tab({ icon, label, alt, containerID, tooltip, selected, onClick, href, element: Element, style, className, }: TabProps): JSX.Element;
+declare namespace Tab {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link TabsContainer Tabs Container}.
+ */
+interface TabsContainerProps extends SKComponent {
+    /**
+     * Tabs to select from.
+     */
+    children: React.ReactNode;
+    /**
+     * Where Tabs Container is placed affects its appearance. A Tabs Container
+     * responsible for the entire content pane (`primary`) has a different
+     * appearance as that for only a section (`secondary`).
+     *
+     * - Must be `primary` or `secondary`.
+     * - Always required.
+     */
+    appearance: "primary" | "secondary";
+    /**
+     * A description of the Tabs Container for screen readers, similar to `alt`
+     * on `<img>`.
+     *
+     * - Always required.
+     */
+    alt: string;
+}
+/**
+ * A group of Tabs. Tabs allow the user to switch between pages on the same
+ * level of a page hierarchy. For example, an Overview, Students, and Teachers
+ * page of a class.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.pfftt8s0sg20 SKCom documentation}
+ *
+ * @param children Tabs to select from.
+ * @param type Where Tabs Container is placed affects its appearance. A Tabs Container responsible for the entire content pane (`primary`) has a different appearance as that for only a section (`secondary`).
+ * @param alt A description of the Tabs Container for screen readers, similar to `alt` on `<img>`.
+ */
+declare function TabsContainer({ children, appearance, alt, style, className, }: TabsContainerProps): JSX.Element;
+declare namespace TabsContainer {
+    var displayName: string;
+}
+
+/**
  * Props for {@link TextField Text Field}.
  */
 interface TextFieldProps extends SKComponent {
@@ -3094,4 +3230,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

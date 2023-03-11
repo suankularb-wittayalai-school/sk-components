@@ -69,7 +69,7 @@ const ComponentsPage: CustomPage = () => (
           {/* Communication */}
           <Card appearance="outlined">
             <CardHeader
-              icon={<MaterialIcon icon="swap_horizaontal" />}
+              icon={<MaterialIcon icon="swap_horiz" />}
               title="Communication"
             />
             <CardContent>

@@ -98,6 +98,12 @@ export { TableFoot, type TableFootProps } from "./components/TableFoot";
 export { TableRow, type TableRowProps } from "./components/TableRow";
 export { TableCell, type TableCellProps } from "./components/TableCell";
 
+export { Tab, type TabProps } from "./components/Tab";
+export {
+  TabsContainer,
+  type TabsContainerProps,
+} from "./components/TabsContainer";
+
 export { TextField, type TextFieldProps } from "./components/TextField";
 
 export {

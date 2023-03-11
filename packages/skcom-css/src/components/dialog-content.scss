@@ -12,15 +12,7 @@
 }
 
 // Add padding to Dialog Header if Dialog Content exits
-.skc-dialog-content ~ .skc-dialog-header {
-  padding-bottom: 1.5rem;
-}
-
-// (@SiravitPhokeed)
-// This is one of those “I don’t know why but removing this breaks it” moments.
-
-// Fallback for when the sibling selector alone doesn’t work
-.skc-dialog-header:has(~ .skc-dialog-content) {
+.skc-dialog:has(.skc-dialog-content) .skc-dialog-header {
   padding-bottom: 1.5rem;
 }
 
