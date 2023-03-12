@@ -16,57 +16,77 @@ import { cn } from "../../utils/className";
 export interface SuggestionChipProps extends SKComponent {
   /**
    * The text shown inside the Suggestion Chip.
-Always required.
+   * 
+   * - Always required.
    */
   children?: any;
 
   /**
-   * An icon can appear before the text (`children`) in an Suggestion Chip. In a Chip Set with many chips, an icon can help the user find the right one more quickly.
-You are encouraged to use Material Icons as the value for `icon`.
-Optional.
+   * An icon can appear before the text (`children`) in an Suggestion Chip. In
+   * a Chip Set with many chips, an icon can help the user find the right one
+   * more quickly.
+   * 
+   * - You are encouraged to use Material Icons as the value for `icon`.
+   * - Optional.
    */
   icon?: any;
 
   /**
-   * A message shown in a tooltip when the user hovers over the Suggestion Chip.
-Optional.
+   * A message shown in a tooltip when the user hovers over the Suggestion
+   * Chip.
+   * 
+   * - Optional.
    */
   tooltip?: any;
 
   /**
-   * Use elevation instead of an outline to signify the Suggestion Chip’s boundary.
-Important: do not use this prop if you don’t have to. Only elevate an Suggestion Chip when its placement requires visual protection, such as on top of an image.
-Optional.
+   * Use elevation instead of an outline to signify the Suggestion Chip’s
+   * boundary.
+   * 
+   * - **Important**: do not use this prop if you don’t have to. Only elevate
+   *   an Suggestion Chip when its placement requires visual protection, such
+   *   as on top of an image.
+   * - Optional.
    */
   elevated?: any;
 
   /**
    * If the Suggestion Chip is selected.
-Optional.
+   * 
+   * - Optional.
    */
   selected?: any;
 
   /**
-   * Turns the Suggestion Chip gray and block any action associated with it. `onClick` and `href` will have no effect.
-Optional.
+   * Turns the Suggestion Chip gray and block any action associated with it.
+   * `onClick` and `href` will have no effect.
+   * 
+   * - Optional.
    */
   disabled?: any;
 
   /**
-   * The function called when the user interacts with the Suggestion Chip, similar to `onClick` on `<button>`.
-Incompatible with `href`.
+   * The function called when the user interacts with the Suggestion Chip,
+   * similar to `onClick` on `<button>`.
+   * 
+   * - Incompatible with `href`.
    */
   onClick?: any;
 
   /**
-   * The URL of the page this Suggestion Chip leads to, similar to `href` on `<a>`.
-Incompatible with `onClick`.
+   * The URL of the page this Suggestion Chip leads to, similar to `href` on
+   * `<a>`.
+   * 
+   * - Incompatible with `onClick`.
    */
   href?: any;
 
   /**
-   * Change the underlying element from `<a>` to a custom element. This is useful when a framework you’re using has a Link component for routing. An example is `next/link` from Next.js.
-Incompatible with `onClick`.
+   * Change the underlying element from `<a>` to a custom element. This is
+   * useful when a framework you’re using has a Link component for routing. An
+   * example is `next/link` from Next.js.
+   * 
+   * - Incompatible with `onClick`.
    */
   element?: any;
 }
