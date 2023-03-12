@@ -29,6 +29,7 @@ import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { toggleItem } from "@/utils/array";
 
 const ButtonsSection: FC = () => {
   const { setSnackbar } = useContext(SnackbarContext);
@@ -307,11 +308,7 @@ const FilterChipSection: FC = () => {
     useState<boolean>(false);
 
   const toggleFilter = (toToggle: FilterChipFilter) =>
-    setFilters(
-      filters.includes(toToggle)
-        ? filters.filter((item) => toToggle !== item)
-        : [...filters, toToggle]
-    );
+    setFilters(toggleItem(toToggle, filters));
 
   return (
     <Section>
