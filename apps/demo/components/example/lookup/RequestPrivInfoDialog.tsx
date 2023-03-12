@@ -8,6 +8,7 @@ import {
   ChipField,
   ChipSet,
   Columns,
+  FilterChip,
   FormItem,
   FullscreenDialog,
   FullscreenDialogProps,
@@ -49,7 +50,7 @@ const RequestPrivInfoDialog: FC<
       onClose={onClose}
       width={640}
     >
-      <Columns columns={2}>
+      <Columns columns={2} className="!gap-y-6">
         <div className="flex flex-col gap-4">
           <p id="dialog-request-private-info">
             As a teacher, you can ask Siravit Phokeed for more of their
@@ -92,7 +93,17 @@ const RequestPrivInfoDialog: FC<
             value={form.explaination}
             onChange={(value) => setForm({ ...form, explaination: value })}
           />
-          {/* TODO: Select information to request (demo Form Item, Chip Set, Filter Chip) */}
+          <FormItem label="Details to request">
+            <ChipSet>
+              <FilterChip selected>Citizen ID</FilterChip>
+              <FilterChip>Passport ID</FilterChip>
+              <FilterChip>Student ID</FilterChip>
+              <FilterChip>Age</FilterChip>
+              <FilterChip selected>ATK</FilterChip>
+              <FilterChip selected>Vaccination</FilterChip>
+              <FilterChip selected>Blood group</FilterChip>
+            </ChipSet>
+          </FormItem>
         </div>
       </Columns>
     </FullscreenDialog>
