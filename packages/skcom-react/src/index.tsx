@@ -23,6 +23,10 @@ export { Checkbox, type CheckboxProps } from "./components/Checkbox";
 export { InputChip, type InputChipProps } from "./components/InputChip";
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
 export { FilterChip, type FilterChipProps } from "./components/FilterChip";
+export {
+  SuggestionChip,
+  type SuggestionChipProps,
+} from "./components/SuggestionChip";
 export { ChipField, type ChipFieldProps } from "./components/ChipField";
 export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 

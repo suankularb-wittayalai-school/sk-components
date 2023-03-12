@@ -978,6 +978,107 @@ declare namespace FilterChip {
 }
 
 /**
+ * Props for {@link SuggestionChip Suggestion Chip}.
+ */
+interface SuggestionChipProps extends SKComponent {
+    /**
+     * The text shown inside the Suggestion Chip.
+     *
+     * - Always required.
+     */
+    children?: React.ReactNode;
+    /**
+     * An icon can appear before the text (`children`) in an Suggestion Chip. In
+     * a Chip Set with many chips, an icon can help the user find the right one
+     * more quickly.
+     *
+     * - You are encouraged to use Material Icons as the value for `icon`.
+     * - Optional.
+     */
+    icon?: JSX.Element;
+    /**
+     * A message shown in a tooltip when the user hovers over the Suggestion
+     * Chip.
+     *
+     * - Optional.
+     */
+    tooltip?: string;
+    /**
+     * Use elevation instead of an outline to signify the Suggestion Chip’s
+     * boundary.
+     *
+     * - **Important**: do not use this prop if you don’t have to. Only elevate
+     *   an Suggestion Chip when its placement requires visual protection, such
+     *   as on top of an image.
+     * - Optional.
+     */
+    elevated?: boolean;
+    /**
+     * If the Suggestion Chip is selected.
+     *
+     * - Optional.
+     */
+    selected?: boolean;
+    /**
+     * Turns the Suggestion Chip gray and block any action associated with it.
+     * `onClick` and `href` will have no effect.
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * The function called when the user interacts with the Suggestion Chip,
+     * similar to `onClick` on `<button>`.
+     *
+     * - Incompatible with `href`.
+     */
+    onClick?: () => any;
+    /**
+     * The URL of the page this Suggestion Chip leads to, similar to `href` on
+     * `<a>`.
+     *
+     * - Incompatible with `onClick`.
+     */
+    href?: string;
+    /**
+     * Change the underlying element from `<a>` to a custom element. This is
+     * useful when a framework you’re using has a Link component for routing. An
+     * example is `next/link` from Next.js.
+     *
+     * - Incompatible with `onClick`.
+     */
+    element?: ({ children, ref, style, className, href, onTouchStart, onMouseDown, onKeyDown, }: {
+        children: React.ReactNode;
+        ref: React.MutableRefObject<any>;
+        style?: React.CSSProperties;
+        className: any;
+        href: string;
+        onTouchStart: (event: React.TouchEvent) => void;
+        onMouseDown: (event: React.MouseEvent) => void;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+    }) => JSX.Element | null;
+}
+/**
+ * Dynamically generated suggestions, like quick-reply options, for instance.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.oxbjowubritq SKCom documentation}
+ *
+ * @param children The text shown inside the Suggestion Chip.
+ * @param icon An icon can appear before the text (`children`) in an Suggestion Chip.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Suggestion Chip.
+ * @param elevated Use elevation instead of an outline to signify the Suggestion Chip’s boundary.
+ * @param selected If the Suggestion Chip is selected.
+ * @param disabled Turns the Suggestion Chip gray and block any action associated with it.
+ * @param onClick The function called when the user interacts with the Suggestion Chip, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Suggestion Chip leads to, similar to `href` on `<a>`.
+ * @param element Change the underlying element from `<a>` to a custom element.
+ */
+declare function SuggestionChip({ children, icon, tooltip, elevated, selected, disabled, onClick, href, element: Element, style, className, }: SuggestionChipProps): JSX.Element;
+declare namespace SuggestionChip {
+    var displayName: string;
+}
+
+/**
  * Props for {@link ChipField Chip Field}.
  */
 interface ChipFieldProps extends SKComponent {
@@ -3573,4 +3674,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
