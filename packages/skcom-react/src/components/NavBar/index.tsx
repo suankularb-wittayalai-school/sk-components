@@ -43,7 +43,7 @@ export interface NavBarProps extends SKComponent {
   /**
    * If a page includes a FAB, it is moved to the Navigation Rail in larger
    * screens to assert its dominance.
-   * 
+   *
    * - Optional.
    */
   fab?: JSX.Element;
