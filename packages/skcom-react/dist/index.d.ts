@@ -940,7 +940,7 @@ interface FilterChipProps extends SKComponent {
      *
      * - Optional.
      */
-    onToggle?: (state: boolean) => any;
+    onClick?: (state: boolean) => any;
     /**
      * Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
      *
@@ -972,7 +972,7 @@ interface FilterChipProps extends SKComponent {
  * @param onMenuToggle Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
  * @param menu Turns the Filter Chip into a dropdown, displaying a Menu underneath the chip.
  */
-declare function FilterChip({ children, style, className }: FilterChipProps): JSX.Element;
+declare function FilterChip({ children, icon, tooltip, elevated, selected, disabled, onClick, onMenuToggle, menu, style, className, }: FilterChipProps): JSX.Element;
 declare namespace FilterChip {
     var displayName: string;
 }
