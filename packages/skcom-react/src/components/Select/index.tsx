@@ -6,10 +6,12 @@ import * as React from "react";
 import { MaterialIcon } from "../MaterialIcon";
 import { Menu, MenuProps } from "../Menu";
 import { MenuItemProps } from "../MenuItem";
-import { TextFieldProps } from "../TextField";
 
 // Styles
 import "@suankularb-components/css/dist/css/components/select.css";
+
+// Types
+import { SKComponent } from "../../types";
 
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
@@ -19,23 +21,96 @@ import { kebabify } from "../../utils/format";
 /**
  * Props for {@link Select}.
  */
-export interface SelectProps
-  extends Pick<
-    TextFieldProps,
-    | "appearance"
-    | "label"
-    | "alt"
-    | "leading"
-    | "helperMsg"
-    | "required"
-    | "error"
-    | "className"
-    | "style"
-  > {
+export interface SelectProps extends SKComponent {
+  /**
+   * The options to select from.
+   *
+   * - Must be Menu Items, each with `value` defined.
+   * - Always required.
+   */
   children?: React.ReactNode;
+
+  /**
+   * How the Select looks. An outlined Select has a lower emphasis than filled,
+   * so it is great for a form with many fields.
+   *
+   * - Keep the appearance consistent across Selects. Separate different
+   *   appearances by region.
+   * - Must be `outlined` or `filled`.
+   * - Always required.
+   */
+  appearance: "outlined" | "filled";
+
+  /**
+   * The placeholder text (when not focused and no value) and the label text
+   * (when focused or has value).
+   *
+   * - Always required.
+   */
+  label: string;
+
+  /**
+   * A description of the Select for screen readers, similar to `alt` on
+   * `<img>`.
+   *
+   * - Required if `<label>` is a JSX Element.
+   */
+  alt?: string;
+
+  /**
+   * The leading text or icon, aligned to the left.
+   *
+   * - Optional.
+   */
+  leading?: string | JSX.Element;
+
+  /**
+   * A short description of the Select, or an error message during an error
+   * state.
+   *
+   * - Optional but recommended during an error state.
+   */
+  helperMsg?: string | JSX.Element;
+
+  /**
+   * Allows for translation of the message shown when there are no options.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
+   * - Optional.
+   */
   locale?: "en-US" | "th";
+
+  /**
+   * Tells Select that it contains an invalid value and activates the error
+   * state.
+   *
+   * - Optional.
+   */
+  error?: boolean;
+
+  /**
+   * The value of the selected option. This is useful if you want a controlled
+   * input.
+   *
+   * - Must be one of the values entered via the `value` prop of the Menu Items.
+   * - Optional.
+   */
   value?: any;
+
+  /**
+   * This function triggers when the user chooses an option. The value is
+   * passed in via the function.
+   *
+   * - Optional.
+   */
   onChange?: (value: any) => any;
+
+  /**
+   * Attributes for the underlying Menu component.
+   *
+   * - Optional.
+   */
   menuAttr?: Partial<MenuProps>;
 }
 
@@ -45,18 +120,17 @@ export interface SelectProps
  *
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.hh9ts22t8gjy SKCom documentation}
  *
- * @param children
- * @param appearance
- * @param label
- * @param alt
- * @param leading
- * @param helperMsg
- * @param locale
- * @param required
- * @param error
- * @param value
- * @param onChange
- * @param menuAttr
+ * @param children The options to select from.
+ * @param appearance How the Select looks.
+ * @param label The label text.
+ * @param alt A description of the Select for screen readers, similar to `alt` on `<img>`.
+ * @param leading The leading text or icon, aligned to the left.
+ * @param helperMsg A short description of the Select, or an error message during an error state.
+ * @param locale Allows for translation of the message shown when there are no options.
+ * @param error Tells Select that it contains an invalid value and activates the error state.
+ * @param value The value of the selected option. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user chooses an option.
+ * @param menuAttr Attributes for the underlying Menu component.
  */
 export function Select({
   children,
@@ -66,7 +140,6 @@ export function Select({
   leading,
   helperMsg,
   locale,
-  required,
   error,
   value,
   onChange,
@@ -106,7 +179,7 @@ export function Select({
   }, [menuOpen]);
 
   // Generate the base ID for `<label>` and `aria-describedby`
-  const selectID = `select${kebabify(
+  const selectID = `select-${kebabify(
     (typeof label === "string" ? label : alt)!
   )}`;
 

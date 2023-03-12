@@ -163,6 +163,7 @@ export function MenuItem({
       <span className="skc-menu-item__label">{children}</span>
       {metadata && <span className="skc-menu-item__metadata">{metadata}</span>}
       <motion.span
+        aria-hidden
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
         className="skc-menu-item__ripple"

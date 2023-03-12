@@ -8,6 +8,7 @@ import {
   ChipField,
   ChipSet,
   Columns,
+  FilterChip,
   FormItem,
   FullscreenDialog,
   FullscreenDialogProps,
@@ -19,17 +20,33 @@ import {
 // Contexts
 import SnackbarContext from "@/contexts/SnackbarContext";
 
+// Utilities
+import { toggleItem } from "@/utils/array";
+
+type PrivateDetail =
+  | "citizen-id"
+  | "passport-id"
+  | "student-id"
+  | "age"
+  | "atk"
+  | "vaccination"
+  | "blood-group";
+
 const RequestPrivInfoDialog: FC<
   Pick<FullscreenDialogProps, "open" | "onClose">
 > = ({ open, onClose }) => {
   const [form, setForm] = useState({
     purpose: "",
-    recipients: [],
+    recipients: [] as string[],
     explaination: "",
+    details: [] as PrivateDetail[],
   });
   const [recipientField, setRecipientField] = useState<string>("");
 
   const { setSnackbar } = useContext(SnackbarContext);
+
+  const toggleDetail = (toToggle: PrivateDetail) =>
+    setForm({ ...form, details: toggleItem(toToggle, form.details) });
 
   return (
     <FullscreenDialog
@@ -49,7 +66,7 @@ const RequestPrivInfoDialog: FC<
       onClose={onClose}
       width={640}
     >
-      <Columns columns={2}>
+      <Columns columns={2} className="!gap-y-6">
         <div className="flex flex-col gap-4">
           <p id="dialog-request-private-info">
             As a teacher, you can ask Siravit Phokeed for more of their
@@ -92,7 +109,34 @@ const RequestPrivInfoDialog: FC<
             value={form.explaination}
             onChange={(value) => setForm({ ...form, explaination: value })}
           />
-          {/* TODO: Select information to request (demo Form Item, Chip Set, Filter Chip) */}
+          <FormItem label="Details to request">
+            <ChipSet>
+              {[
+                { value: "citizen-id", label: "Citizen ID" },
+                { value: "passport-id", label: "Passport ID" },
+                { value: "student-id", label: "Student ID" },
+                { value: "age", label: "Age" },
+                { value: "atk", label: "ATK" },
+                { value: "vaccination", label: "Vaccination" },
+                { value: "blood-group", label: "Blood group" },
+              ].map((detail) => (
+                <FilterChip
+                  key={detail.value}
+                  selected={form.details.includes(
+                    detail.value as PrivateDetail
+                  )}
+                  onClick={() =>
+                    setForm({
+                      ...form,
+                      details: toggleItem(detail.value, form.details),
+                    })
+                  }
+                >
+                  {detail.label}
+                </FilterChip>
+              ))}
+            </ChipSet>
+          </FormItem>
         </div>
       </Columns>
     </FullscreenDialog>

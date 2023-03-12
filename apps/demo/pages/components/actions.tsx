@@ -11,6 +11,7 @@ import {
   ChipSet,
   ContentLayout,
   FAB,
+  FilterChip,
   Header,
   InputChip,
   MaterialIcon,
@@ -19,6 +20,7 @@ import {
   Section,
   SegmentedButton,
   Snackbar,
+  SuggestionChip,
   ToggleButton,
 } from "@suankularb-components/react";
 
@@ -27,6 +29,7 @@ import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import { toggleItem } from "@/utils/array";
 
 const ButtonsSection: FC = () => {
   const { setSnackbar } = useContext(SnackbarContext);
@@ -229,73 +232,136 @@ const FABsSection: FC = () => (
   </Section>
 );
 
-const ChipsSection: FC = () => {
+const InputChipSection: FC = () => {
   const [chipValue, setChipValue] = useState<string>("siravit@yahoo.com");
 
   return (
     <Section>
-      <Header>Chips</Header>
-      <Section>
-        <Header level={3}>Input Chip</Header>
-        <ChipSet>
-          <InputChip onClick={() => {}}>Siravit Phokeed</InputChip>
-          <InputChip onDelete={() => {}}>Siravit Phokeed</InputChip>
-          <InputChip selected onDelete={() => {}}>
-            Siravit Phokeed
-          </InputChip>
-          <InputChip
-            avatar={<Avatar />}
-            editable
-            value={chipValue}
-            onChange={setChipValue}
-          >
-            Siravit Phokeed
-          </InputChip>
-          <InputChip avatar={<Avatar />} onDelete={() => {}}>
-            Siravit Phokeed
-          </InputChip>
-          <InputChip avatar={<Avatar />} selected onDelete={() => {}}>
-            Siravit Phokeed
-          </InputChip>
-        </ChipSet>
-      </Section>
-      <Section>
-        <Header level={3}>Assist Chip</Header>
-        <ChipSet>
-          <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
-            Turn on lights
-          </AssistChip>
-          <AssistChip icon={<MaterialIcon icon="block" />} dangerous>
-            Block number
-          </AssistChip>
-          <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
-            Turn on lights
-          </AssistChip>
-        </ChipSet>
-        <div
-          className="from-primary-60 to-primary-30 flex flex-row flex-wrap
-            place-content-center gap-2 rounded-md bg-gradient-to-r py-8
-            px-4"
+      <Header level={3}>Input Chip</Header>
+      <ChipSet>
+        <InputChip onClick={() => {}}>Siravit Phokeed</InputChip>
+        <InputChip onDelete={() => {}}>Siravit Phokeed</InputChip>
+        <InputChip selected onDelete={() => {}}>
+          Siravit Phokeed
+        </InputChip>
+        <InputChip
+          avatar={<Avatar />}
+          editable
+          value={chipValue}
+          onChange={setChipValue}
         >
-          <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
-            Turn on lights
-          </AssistChip>
-          <AssistChip icon={<MaterialIcon icon="block" />} elevated dangerous>
-            Block number
-          </AssistChip>
-          <AssistChip
-            icon={<MaterialIcon icon="lightbulb" />}
-            elevated
-            dangerous
-            disabled
-          >
-            Turn on lights
-          </AssistChip>
-        </div>
-      </Section>
+          Siravit Phokeed
+        </InputChip>
+        <InputChip avatar={<Avatar />} onDelete={() => {}}>
+          Siravit Phokeed
+        </InputChip>
+        <InputChip avatar={<Avatar />} selected onDelete={() => {}}>
+          Siravit Phokeed
+        </InputChip>
+      </ChipSet>
     </Section>
   );
 };
+
+const AssistChipSection: FC = () => (
+  <Section>
+    <Header level={3}>Assist Chip</Header>
+    <ChipSet>
+      <AssistChip icon={<MaterialIcon icon="lightbulb" />}>
+        Turn on lights
+      </AssistChip>
+      <AssistChip icon={<MaterialIcon icon="block" />} dangerous>
+        Block number
+      </AssistChip>
+      <AssistChip icon={<MaterialIcon icon="lightbulb" />} disabled>
+        Turn on lights
+      </AssistChip>
+    </ChipSet>
+    <div
+      className="from-primary-60 to-primary-30 flex flex-row flex-wrap
+    place-content-center gap-2 rounded-md bg-gradient-to-r py-8
+    px-4"
+    >
+      <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
+        Turn on lights
+      </AssistChip>
+      <AssistChip icon={<MaterialIcon icon="block" />} elevated dangerous>
+        Block number
+      </AssistChip>
+      <AssistChip
+        icon={<MaterialIcon icon="lightbulb" />}
+        elevated
+        dangerous
+        disabled
+      >
+        Turn on lights
+      </AssistChip>
+    </div>
+  </Section>
+);
+
+type FilterChipFilter = "students" | "teachers" | "parents";
+
+const FilterChipSection: FC = () => {
+  const [filters, setFilters] = useState<FilterChipFilter[]>(["students"]);
+  const [showStudentsOptions, setShowStudentsOptions] =
+    useState<boolean>(false);
+
+  const toggleFilter = (toToggle: FilterChipFilter) =>
+    setFilters(toggleItem(toToggle, filters));
+
+  return (
+    <Section>
+      <Header>Filter Chip</Header>
+      <ChipSet>
+        <FilterChip
+          selected={filters.includes("students")}
+          onClick={() => toggleFilter("students")}
+          onMenuToggle={() => setShowStudentsOptions(!showStudentsOptions)}
+          menu={
+            <Menu open={showStudentsOptions} density={-4}>
+              <MenuItem onClick={() => setShowStudentsOptions(false)} selected>
+                Juniors
+              </MenuItem>
+              <MenuItem onClick={() => setShowStudentsOptions(false)}>
+                Seniors
+              </MenuItem>
+            </Menu>
+          }
+        >
+          Students
+        </FilterChip>
+        <FilterChip
+          selected={filters.includes("teachers")}
+          onClick={() => toggleFilter("teachers")}
+        >
+          Teachers
+        </FilterChip>
+        <FilterChip
+          selected={filters.includes("parents")}
+          onClick={() => toggleFilter("parents")}
+        >
+          Parents
+        </FilterChip>
+      </ChipSet>
+    </Section>
+  );
+};
+
+const SuggestionChipSection: FC = () => (
+  <Section>
+    <Header>Suggestion Chip</Header>
+    <ChipSet>
+      <SuggestionChip>Looks good to me</SuggestionChip>
+      <SuggestionChip icon={<MaterialIcon icon="thumb_up" />}>
+        Looks good to me
+      </SuggestionChip>
+      <SuggestionChip icon={<MaterialIcon icon="thumb_up" />} disabled>
+        Looks good to me
+      </SuggestionChip>
+    </ChipSet>
+  </Section>
+);
 
 const MenuSection: FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -350,7 +416,13 @@ const ActionsPage: CustomPage = () => (
         <ToggleButtonsSection />
         <FABsSection />
       </Section>
-      <ChipsSection />
+      <Section>
+        <Header>Chips</Header>
+        <InputChipSection />
+        <AssistChipSection />
+        <FilterChipSection />
+        <SuggestionChipSection />
+      </Section>
       <MenuSection />
     </ContentLayout>
   </>

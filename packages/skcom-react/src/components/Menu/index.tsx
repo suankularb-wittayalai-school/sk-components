@@ -9,8 +9,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/menu.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { transition, useAnimationConfig } from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link Menu}.
@@ -101,7 +101,10 @@ export function Menu({
               : density === -4 && "skc-menu--density-[-4]",
             className,
           ])}
-          {...{ ulAttr, style, onBlur }}
+          // (@SiravitPhokeed)
+          // `motion.ul` is refusing to accept `JSX.IntrinsicElements["ul"]`
+          // for some reason…
+          {...{ ...(ulAttr as any), style, onBlur }}
         >
           {children}
         </motion.ul>
