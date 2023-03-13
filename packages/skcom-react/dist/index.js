@@ -1398,16 +1398,24 @@ function DataTableSearch({
 DataTableSearch.displayName = "DataTableSearch";
 
 // ../skcom-css/dist/css/components/data-table-content.css
-styleInject(".skc-data-table-content {\n  width: 100%;\n}\n");
+styleInject(".skc-data-table-content {\n  overflow-x: auto;\n  width: 100%;\n}\n.skc-data-table-content__content {\n  width: 100%;\n  border-spacing: 0;\n  border-collapse: separate;\n  text-indent: 0;\n}\n@media only screen and (min-width: 905px) {\n  .skc-data-table-content {\n    overflow-x: visible;\n  }\n}\n");
 
 // src/components/DataTableContent/index.tsx
 var import_jsx_runtime21 = require("react/jsx-runtime");
 function DataTableContent({
   children,
+  contentWidth,
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("table", { style, className: cn(["skc-data-table-content", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "skc-data-table-content", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    "table",
+    {
+      style: __spreadProps(__spreadValues({}, style), { minWidth: contentWidth }),
+      className: cn(["skc-data-table-content__content", className]),
+      children
+    }
+  ) });
 }
 DataTableContent.displayName = "DataTableContent";
 
@@ -1554,9 +1562,6 @@ TableBody.displayName = "TableBody";
 var import_framer_motion14 = require("framer-motion");
 var React13 = __toESM(require("react"));
 
-// ../skcom-css/dist/css/components/table-cell.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  position: relative;\n  display: table-cell;\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-block: .875rem;\n  padding-left: .75rem;\n}\n.skc-table-cell__content:has(.skc-input-chip, .skc-assist-chip, .skc-filter-chip, .skc-suggestion-chip) {\n  padding-block: .625rem;\n}\n.skc-table-cell__content .skc-icon {\n  margin-right: .25rem;\n  color: var(--outline);\n}\n.skc-table-cell__sort-indicator {\n  margin-right: .25rem;\n}\n.skc-table-cell__sort-indicator .skc-icon {\n  transition: color var(--motion-short-4) var(--easing-standard);\n  margin-right: 0;\n}\n.skc-table-cell--sortable:focus .skc-table-cell__sort-indicator .skc-icon {\n  color: var(--primary);\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--sortable,\n.skc-table-cell:has(.skc-table-cell__menu-toggle) {\n  cursor: pointer;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle)::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell--sortable:hover::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):hover::before {\n  opacity: .08;\n}\n.skc-table-cell--sortable:focus-within::before,\n.skc-table-cell--sortable:active::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):focus-within::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):active::before {\n  opacity: .12;\n}\n.skc-table-cell--sortable {\n  overflow: hidden;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell--sortable .skc-table-cell__ripple {\n  background-color: var(--primary);\n}\n.skc-table-cell--left .skc-table-cell__content {\n  justify-content: flex-start;\n  text-align: left;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  justify-content: center;\n  text-align: center;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  justify-content: flex-end;\n  text-align: right;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: 0;\n}\n.skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-table-cell .skc-menu {\n  inset: 0 0 auto 0;\n  width: 100%;\n}\n');
-
 // src/components/Menu/index.tsx
 var import_framer_motion13 = require("framer-motion");
 
@@ -1604,6 +1609,9 @@ function Menu({
 }
 Menu.displayName = "Menu";
 
+// ../skcom-css/dist/css/components/table-cell.css
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  position: relative;\n  display: table-cell;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-block: .875rem;\n  padding-left: .75rem;\n}\n.skc-table-cell__content:has(.skc-input-chip, .skc-assist-chip, .skc-filter-chip, .skc-suggestion-chip) {\n  padding-block: .625rem;\n}\n.skc-table-cell__content .skc-icon {\n  margin-right: .25rem;\n  color: var(--outline);\n}\n.skc-table-cell__sort-indicator {\n  margin-right: .25rem;\n}\n.skc-table-cell__sort-indicator .skc-icon {\n  transition: color var(--motion-short-4) var(--easing-standard);\n  margin-right: 0;\n}\n.skc-table-cell--sortable:focus .skc-table-cell__sort-indicator .skc-icon {\n  color: var(--primary);\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--sortable,\n.skc-table-cell:has(.skc-table-cell__menu-toggle) {\n  cursor: pointer;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle)::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell--sortable:hover::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):hover::before {\n  opacity: .08;\n}\n.skc-table-cell--sortable:focus-within::before,\n.skc-table-cell--sortable:active::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):focus-within::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):active::before {\n  opacity: .12;\n}\n.skc-table-cell--sortable {\n  overflow: hidden;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell--sortable .skc-table-cell__ripple {\n  background-color: var(--primary);\n}\n.skc-table-cell--left .skc-table-cell__content {\n  justify-content: flex-start;\n  text-align: left;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  justify-content: center;\n  text-align: center;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  justify-content: flex-end;\n  text-align: right;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: 0;\n}\n.skc-table-cell__ripple-container {\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n  pointer-events: none;\n}\n.skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-table-cell .skc-menu {\n  inset: 0 0 auto 0;\n  width: 100%;\n}\n');
+
 // src/components/TableCell/index.tsx
 var import_jsx_runtime27 = require("react/jsx-runtime");
 function TableCell({
@@ -1619,7 +1627,7 @@ function TableCell({
   const toggleRef = React13.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
   const [menuOpen, setMenuOpen] = React13.useState(false);
-  const props = __spreadValues({
+  const props = __spreadValues(__spreadValues({
     style,
     className: cn([
       "skc-table-cell",
@@ -1627,35 +1635,33 @@ function TableCell({
       align === "left" ? "skc-table-cell--left" : align === "right" ? "skc-table-cell--right" : "skc-table-cell--center",
       className
     ])
-  }, tdAttr);
+  }, rippleListeners), tdAttr);
   const content = menu ? /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(import_jsx_runtime27.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
       "button",
-      __spreadProps(__spreadValues({
+      {
         ref: toggleRef,
         className: "skc-table-cell__menu-toggle",
         onClick: () => {
           if (onMenuToggle)
             onMenuToggle();
           setMenuOpen(!menuOpen);
-        }
-      }, rippleListeners), {
+        },
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "skc-table-cell__content", children }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MaterialIcon, { icon: "arrow_drop_down" }),
-          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
-            import_framer_motion14.motion.span,
-            {
-              "aria-hidden": true,
-              initial: { scale: 0, opacity: 0.36 },
-              animate: rippleControls,
-              className: "skc-table-cell__ripple",
-              style: rippleStyle
-            }
-          )
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MaterialIcon, { icon: "arrow_drop_down" })
         ]
-      })
+      }
     ),
+    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { "aria-hidden": true, className: "skc-table-cell__ripple-container", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      import_framer_motion14.motion.span,
+      {
+        initial: { scale: 0, opacity: 0.36 },
+        animate: rippleControls,
+        className: "skc-table-cell__ripple",
+        style: rippleStyle
+      }
+    ) }),
     React13.cloneElement(
       /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Menu, { children: React13.Children.map(
         menu.props.children,

@@ -13,6 +13,7 @@
   @include type.font("body-medium");
   position: relative;
   display: table-cell;
+  -webkit-tap-highlight-color: transparent;
 
   // Cell borders
 
@@ -145,6 +146,7 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 
   // Cell content
   .skc-table-cell__content {
@@ -159,6 +161,13 @@
 }
 
 // Ripple
+.skc-table-cell__ripple-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .skc-table-cell__ripple {
   @include mix.ripple();
   background-color: var(--on-surface);

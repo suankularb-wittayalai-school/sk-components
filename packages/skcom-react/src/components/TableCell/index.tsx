@@ -4,6 +4,7 @@ import * as React from "react";
 
 // Internal components
 import { MaterialIcon } from "../MaterialIcon";
+import { Menu } from "../Menu";
 
 // Types
 import { SKComponent } from "../../types";
@@ -14,7 +15,6 @@ import "@suankularb-components/css/dist/css/components/table-cell.css";
 // Utilities
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { Menu } from "../Menu";
 
 /**
  * Props for {@link TableCell Table Body}.
@@ -106,6 +106,7 @@ export function TableCell({
         : "skc-table-cell--center",
       className,
     ]),
+    ...rippleListeners,
     ...tdAttr,
   } satisfies JSX.IntrinsicElements["td" | "th"];
 
@@ -118,18 +119,20 @@ export function TableCell({
           if (onMenuToggle) onMenuToggle();
           setMenuOpen(!menuOpen);
         }}
-        {...rippleListeners}
       >
         <div className="skc-table-cell__content">{children}</div>
         <MaterialIcon icon="arrow_drop_down" />
+      </button>
+
+      <div aria-hidden className="skc-table-cell__ripple-container">
         <motion.span
-          aria-hidden
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}
           className="skc-table-cell__ripple"
           style={rippleStyle}
         />
-      </button>
+      </div>
+
       {React.cloneElement(
         <Menu>
           {React.Children.map(menu.props.children, (menuItem) =>
