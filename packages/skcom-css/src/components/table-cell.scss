@@ -33,6 +33,15 @@
   justify-content: center;
   padding: 1rem 1.5rem;
   text-align: center;
+
+  &:has(.skc-icon:first-child) {
+    padding-left: 0.75rem;
+  }
+
+  .skc-icon {
+    margin-right: 0.25rem;
+    color: var(--outline);
+  }
 }
 
 // Header cell

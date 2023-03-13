@@ -3,6 +3,7 @@ import { flexRender, HeaderGroup } from "@tanstack/react-table";
 import * as React from "react";
 
 // Internal components
+import { MaterialIcon } from "../MaterialIcon";
 import { TableRow } from "../TableRow";
 import { TableCell } from "../TableCell";
 
@@ -45,8 +46,19 @@ export function DataTableHead({
             <TableCell
               key={header.id}
               header
+              tdAttr={{
+                onClick: header.column.getToggleSortingHandler(),
+                style: header.column.getCanSort()
+                  ? { cursor: "pointer" }
+                  : undefined,
+              }}
               {...(header.column.columnDef as DataTableColumnDef).thAttr}
             >
+              <MaterialIcon icon="arrow_upward" />
+              {{
+                asc: <MaterialIcon icon="arrow_upward" />,
+                desc: <MaterialIcon icon="arrow_downward" />,
+              }[header.column.getIsSorted() as string] ?? null}
               {flexRender(header.column.columnDef.header, header.getContext())}
             </TableCell>
           ))}

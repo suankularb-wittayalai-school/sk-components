@@ -9,6 +9,8 @@ import {
   useReactTable,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
+  SortingState,
 } from "@tanstack/react-table";
 
 // SK Components
@@ -119,6 +121,7 @@ const ColumnsSection: FC = () => (
 
 const DataTableSection: FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string>("");
+  const [sorting, setSorting] = useState<SortingState>([]);
   const data = useMemo(() => [], []);
   const columns = useMemo(
     () => [
@@ -133,10 +136,12 @@ const DataTableSection: FC = () => {
   const { getHeaderGroups, getRowModel } = useReactTable({
     data,
     columns,
-    state: { globalFilter },
+    state: { globalFilter, sorting },
     onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   const [showSearchOverflow, setShowSearchOverflow] = useState<boolean>(false);
