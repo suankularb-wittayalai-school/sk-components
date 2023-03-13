@@ -1281,6 +1281,7 @@ function DataTableSearch({
       "input",
       __spreadValues({
         type: "search",
+        "aria-label": locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search",
         className: "skc-data-table-search__input",
         value,
         onChange: (event) => onChange && onChange(event.target.value),
@@ -1293,6 +1294,7 @@ function DataTableSearch({
         {
           appearance: "text",
           icon: /* @__PURE__ */ jsx20(MaterialIcon, { icon: "more_vert" }),
+          alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21" : "Toggle overflow menu",
           onClick: onOverflowToggle
         }
       ),

@@ -113,6 +113,7 @@ export function DataTableSearch({
       {/* Search field */}
       <input
         type="search"
+        aria-label={locale === "th" ? "ค้นหา" : "Search"}
         className="skc-data-table-search__input"
         value={value}
         onChange={(event) => onChange && onChange(event.target.value)}
@@ -126,6 +127,7 @@ export function DataTableSearch({
           <Button
             appearance="text"
             icon={<MaterialIcon icon="more_vert" />}
+            alt={locale === "th" ? "เปิดเมนูเพิ่มเติม" : "Toggle overflow menu"}
             onClick={onOverflowToggle}
           />
           {overflow}
