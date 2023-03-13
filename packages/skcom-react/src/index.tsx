@@ -47,6 +47,10 @@ export {
   DataTableBody,
   type DataTableBodyProps,
 } from "./components/DataTableBody";
+export {
+  DataTablePagination,
+  type DataTablePaginationProps,
+} from "./components/DataTablePagination";
 
 export { Dialog, type DialogProps } from "./components/Dialog";
 export {

@@ -29,6 +29,7 @@ import {
   DataTableColumnDef,
   DataTableContent,
   DataTableHead,
+  DataTablePagination,
   DataTableSearch,
   Dialog,
   DialogContent,
@@ -254,6 +255,7 @@ const DataTableSection: FC = () => {
           <DataTableHead headerGroups={getHeaderGroups()} />
           <DataTableBody rowModel={getRowModel()} />
         </DataTableContent>
+        <DataTablePagination rowsPerPage={5} totalRows={data.length} />
       </DataTable>
     </Section>
   );

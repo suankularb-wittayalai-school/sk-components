@@ -42,7 +42,7 @@
 }
 
 .skc-data-table-search__input {
-  @include type.font("body-large");
+  @include type.font("body-medium");
   appearance: textfield;
   flex-grow: 1;
   padding-block: 1rem;

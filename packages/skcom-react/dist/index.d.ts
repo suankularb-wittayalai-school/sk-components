@@ -1487,6 +1487,63 @@ declare namespace DataTableBody {
 }
 
 /**
+ * Props for {@link DataTablePagination Data Table Pagination}.
+ */
+interface DataTablePaginationProps extends SKComponent {
+    /**
+     * The maximum number of rows shown on the Data Table at a time.
+     *
+     * - Must be a non-negative integer.
+     * - Always required.
+     */
+    rowsPerPage: number;
+    /**
+     * The total number of rows of data, including both those currently shown and
+     * not shown on the Data Table.
+     *
+     * - Must be a non-negative integer.
+     * - Always required.
+     */
+    totalRows: number;
+    /**
+     * Allows for translation of the page indicator and accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
+     * Triggers when the user changes the page.
+     *
+     * - The following is passed onto the function: the current page number, the
+     *   start index, and the end index.
+     * - Optional.
+     *
+     * @param page The current page number, starting from 1.
+     * @param start The start index of the range of data to pull from for this page.
+     * @param end The end index of the range of data to pull from for this page.
+     */
+    onChange?: (page: number, start: number, end: number) => any;
+}
+/**
+ * At the footer of a Data Table, Data Table Pagination provides controls for
+ * paginating the Data Table data, including the current rows and navigating to
+ * forward and backward on pages.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation}
+ *
+ * @param rowsPerPage The maximum number of rows shown on the Data Table at a time.
+ * @param totalRows The total number of rows of data, including both those currently shown and not shown on the Data Table.
+ * @param locale Allows for translation of the page indicator and accessibility labels.
+ * @param onChange Triggers when the user changes the page.
+ */
+declare function DataTablePagination({ rowsPerPage, totalRows, locale, onChange, style, className, }: DataTablePaginationProps): JSX.Element;
+declare namespace DataTablePagination {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Dialog}.
  */
 interface DialogProps extends SKComponent {
@@ -3883,4 +3940,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableBody, DataTableBodyProps, DataTableColumnDef, DataTableContent, DataTableContentProps, DataTableHead, DataTableHeadProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableBody, DataTableBodyProps, DataTableColumnDef, DataTableContent, DataTableContentProps, DataTableHead, DataTableHeadProps, DataTablePagination, DataTablePaginationProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

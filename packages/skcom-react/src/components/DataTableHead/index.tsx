@@ -119,7 +119,7 @@ export function DataTableHead({
                           )}
                           aria-label={
                             locale === "th"
-                              ? `คอลัมน์ที่เรียง, ${
+                              ? `คอลัมน์ที่เรียง ${
                                   header.column.getIsSorted() === "asc"
                                     ? "จากน้อยไปมาก"
                                     : "จากน้อยไปน้อย"
@@ -140,6 +140,7 @@ export function DataTableHead({
                     {/* Header cell content */}
                     <motion.span
                       layoutId={headerID}
+                      layout="position"
                       transition={transition(duration.short4, easing.standard)}
                     >
                       {flexRender(
