@@ -23,6 +23,10 @@
 
   .skc-table-row:not(:last-child) &,
   .skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child &,
+  .skc-data-table__content:has(.skc-table-body)
+    .skc-table-head
+    .skc-table-row:last-child
+    &,
   .skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child & {
     border-bottom: 1px solid var(--outline-variant);
   }
