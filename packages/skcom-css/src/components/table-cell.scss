@@ -60,13 +60,54 @@
   margin-right: 0.25rem;
 
   .skc-icon {
+    @include mix.transition(
+      color,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
     margin-right: 0;
+
+    .skc-table-cell--sortable:focus & {
+      color: var(--primary);
+    }
   }
 }
 
 // Header cell
 .skc-table-cell--header {
   @include type.font("title-small");
+}
+
+// Sortable header
+.skc-table-cell--sortable,
+.skc-table-cell:has(.skc-table-cell__menu-toggle) {
+  cursor: pointer;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus-within,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+}
+
+.skc-table-cell--sortable {
+  overflow: hidden;
+
+  &::before,
+  .skc-table-cell__ripple {
+    background-color: var(--primary);
+  }
 }
 
 // Alignment
@@ -105,23 +146,6 @@
   border: none;
   background-color: transparent;
 
-  // State layer
-  &::before {
-    @include mix.state-layer();
-    background-color: var(--on-surface);
-  }
-
-  &:hover::before {
-    opacity: 0.08;
-  }
-
-  &:focus,
-  &:active {
-    &::before {
-      opacity: 0.12;
-    }
-  }
-
   // Cell content
   .skc-table-cell__content {
     flex-grow: 1;
@@ -132,12 +156,12 @@
       padding-left: 0;
     }
   }
+}
 
-  // Ripple
-  .skc-table-cell__ripple {
-    @include mix.ripple();
-    background-color: var(--on-surface);
-  }
+// Ripple
+.skc-table-cell__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
 }
 
 // Options Menu

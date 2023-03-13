@@ -1,11 +1,12 @@
 // External libraries
 import { flexRender, HeaderGroup } from "@tanstack/react-table";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
 import { MaterialIcon } from "../MaterialIcon";
+import { TableHead } from "../TableHead";
 import { TableRow } from "../TableRow";
-import { TableCell } from "../TableCell";
 
 // Types
 import { DataTableColumnDef, SKComponent } from "../../types";
@@ -14,9 +15,12 @@ import { DataTableColumnDef, SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/table-head.css";
 
 // Utilities
-import { TableHead } from "../TableHead";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { transition, useAnimationConfig } from "../../utils/animation";
+import {
+  transition,
+  useAnimationConfig,
+  useRipple,
+} from "../../utils/animation";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link DataTableHead Table Head}.
@@ -52,62 +56,109 @@ export function DataTableHead({
   style,
   className,
 }: DataTableHeadProps) {
-  // TODO: Accessibility label for sorting arrow
   const { duration, easing } = useAnimationConfig();
 
   return (
     <TableHead {...{ style, className }}>
+      {/* For each Header Group, render a Table Row */}
       {headerGroups.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
+          {/* For each Header, define a header Table Cell */}
           {headerGroup.headers.map((header) => {
+            // Ripple setup
+            const toggleRef = React.useRef(null);
+            const { rippleListeners, rippleControls, rippleStyle } =
+              useRipple(toggleRef);
+
+            // Base ID for sorting animation
             const headerID = `table-header-${header.column.columnDef.header}`;
 
             return (
-              <TableCell
+              <th
                 key={header.id}
-                header
-                tdAttr={{
-                  onClick: header.column.getToggleSortingHandler(),
-                  style: header.column.getCanSort()
-                    ? { cursor: "pointer" }
-                    : undefined,
+                ref={toggleRef}
+                className={cn([
+                  "skc-table-cell",
+                  "skc-table-cell--header",
+                  header.column.getCanSort() && "skc-table-cell--sortable",
+                ])}
+                // Sort the column on click
+                onClick={header.column.getToggleSortingHandler()}
+                onKeyUp={(event) => {
+                  if (!["Enter", " "].includes(event.key)) return;
+                  event.preventDefault();
+                  const sortingHandler =
+                    header.column.getToggleSortingHandler();
+                  if (sortingHandler) sortingHandler(event);
                 }}
+                // Enable tabbing-in
+                tabIndex={0}
+                // Listeners for activating the ripple effect
+                {...rippleListeners}
+                // Additional attributes passed in via column
                 {...(header.column.columnDef as DataTableColumnDef).thAttr}
               >
-                <LayoutGroup>
-                  <AnimatePresence>
-                    {header.column.getIsSorted() && (
-                      <motion.div
-                        layoutId={`${headerID}-sort-indicator`}
-                        initial={{ scale: 0.4, opacity: 0 }}
-                        animate={{
-                          scale: 1,
-                          opacity: 1,
-                          rotate:
-                            header.column.getIsSorted() === "desc" ? 180 : 0,
-                        }}
-                        exit={{ scale: 0.4, opacity: 0 }}
-                        transition={transition(
-                          duration.short4,
-                          easing.standard
-                        )}
-                        className="skc-table-cell__sort-indicator"
-                      >
-                        <MaterialIcon icon="arrow_upward" />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  <motion.span
-                    layoutId={headerID}
-                    transition={transition(duration.short4, easing.standard)}
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                  </motion.span>
-                </LayoutGroup>
-              </TableCell>
+                <div aria-atomic className="skc-table-cell__content">
+                  <LayoutGroup>
+                    <AnimatePresence>
+                      {/* Sorting indicator */}
+                      {header.column.getIsSorted() && (
+                        <motion.div
+                          layoutId={`${headerID}-sort-indicator`}
+                          initial={{ scale: 0.4, opacity: 0 }}
+                          animate={{
+                            scale: 1,
+                            rotate:
+                              header.column.getIsSorted() === "desc" ? 180 : 0,
+                            opacity: 1,
+                          }}
+                          exit={{ scale: 0.4, opacity: 0 }}
+                          transition={transition(
+                            duration.short4,
+                            easing.standard
+                          )}
+                          aria-label={
+                            locale === "th"
+                              ? `คอลัมน์ที่เรียง, ${
+                                  header.column.getIsSorted() === "asc"
+                                    ? "จากน้อยไปมาก"
+                                    : "จากน้อยไปน้อย"
+                                }`
+                              : `Sorted column, ${
+                                  header.column.getIsSorted() === "asc"
+                                    ? "ascending"
+                                    : "descending"
+                                };`
+                          }
+                          className="skc-table-cell__sort-indicator"
+                        >
+                          <MaterialIcon icon="arrow_downward" />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Header cell content */}
+                    <motion.span
+                      layoutId={headerID}
+                      transition={transition(duration.short4, easing.standard)}
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </motion.span>
+                  </LayoutGroup>
+                </div>
+
+                {/* Ripple */}
+                <motion.span
+                  aria-hidden
+                  initial={{ scale: 0, opacity: 0.36 }}
+                  animate={rippleControls}
+                  className="skc-table-cell__ripple"
+                  style={rippleStyle}
+                />
+              </th>
             );
           })}
         </TableRow>
