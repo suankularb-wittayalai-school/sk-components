@@ -1218,6 +1218,65 @@ declare namespace ChipSet {
 }
 
 /**
+ * Props for {@link DataTable Data Table}.
+ */
+interface DataTableProps extends SKComponent {
+    /**
+     * There is a set of components especially designed to be used here: Data
+     * Table Search, Data Table Filters, Data Table Content, and Data Table
+     * Pagination.
+     *
+     * - A Data Table cannot have both Data Table Search and Data Table Filters.
+     * - A Data Table must have a Data Table Content.
+     * - If present, Data Table Search/Data Table Filters must be the first
+     *   component.
+     * - If present, Data Table Pagination must be the last component.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * A more rich Table with support for filtering, search, and pagination; and
+ * integrates directly with Tanstack Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cfjy3gpzsh75 SKCom documentation}
+ *
+ * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
+ */
+declare function DataTable({ children, style, className }: DataTableProps): JSX.Element;
+declare namespace DataTable {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableContent Data Table Content}.
+ */
+interface DataTableContentProps extends SKComponent {
+    /**
+     * A Data Table Content’s content depends on if you decide to use Tanstack
+     * Table or not.
+     *
+     * - If you opt in to Tanstack Table: must include both Data Table Head and
+     *   Data Table Body.
+     * - If you opt to use your own table solution: must include both Table Head
+     *   and Table Body.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * The main part of a Data Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7mq6ecmhpn8b SKCom documentation}
+ *
+ * @param children A Data Table Content’s content depends on if you decide to use Tanstack Table or not.
+ */
+declare function DataTableContent({ children, style, className, }: DataTableContentProps): JSX.Element;
+declare namespace DataTableContent {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Dialog}.
  */
 interface DialogProps extends SKComponent {
@@ -3674,4 +3733,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableContent, DataTableContentProps, DataTableProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

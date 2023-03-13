@@ -30,6 +30,12 @@ export {
 export { ChipField, type ChipFieldProps } from "./components/ChipField";
 export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 
+export { DataTable, type DataTableProps } from "./components/DataTable";
+export {
+  DataTableContent,
+  type DataTableContentProps,
+} from "./components/DataTableContent";
+
 export { Dialog, type DialogProps } from "./components/Dialog";
 export {
   DialogHeader,
