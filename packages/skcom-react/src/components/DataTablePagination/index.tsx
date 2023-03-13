@@ -1,6 +1,10 @@
 // External libraries
 import * as React from "react";
 
+// Internal components
+import { Button } from "../Button";
+import { MaterialIcon } from "../MaterialIcon";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -9,8 +13,6 @@ import "@suankularb-components/css/dist/css/components/data-table-pagination.css
 
 // Utilities
 import { cn } from "../../utils/className";
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
 
 /**
  * Props for {@link DataTablePagination Data Table Pagination}.
@@ -81,7 +83,18 @@ export function DataTablePagination({
 
   return (
     <div style={style} className={cn(["skc-data-table-pagination", className])}>
-      <span className="skc-data-table-pagination__label">
+      <span
+        aria-label={
+          locale === "th"
+            ? `แถวที่ ${page} ถึง ${
+                page + rowsPerPage - 1
+              } จากทั้งหมด ${totalRows} แถว`
+            : `Rows ${page} to ${
+                page + rowsPerPage - 1
+              }, from total of ${totalRows} rows`
+        }
+        className="skc-data-table-pagination__label"
+      >
         {`${page}-${page + rowsPerPage - 1} ${
           locale === "th" ? "จาก" : "of"
         } ${totalRows}`}
@@ -91,6 +104,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="first_page" />}
+          alt={locale === "th" ? "ไปหน้าแรก" : "Go to last page"}
           disabled={page === 1}
           onClick={() => setPage(1)}
         />
@@ -98,6 +112,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="chevron_left" />}
+          alt={locale === "th" ? "หน้าที่แล้ว" : "Previous page"}
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
         />
@@ -105,6 +120,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="chevron_right" />}
+          alt={locale === "th" ? "หน้าต่อไป" : "Next page"}
           disabled={page === maxPage}
           onClick={() => setPage(page + 1)}
         />
@@ -112,6 +128,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="last_page" />}
+          alt={locale === "th" ? "ไปหน้าสุดท้าย" : "Go to last page"}
           disabled={page === maxPage}
           onClick={() => setPage(maxPage)}
         />

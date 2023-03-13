@@ -1651,13 +1651,21 @@ function DataTablePagination({
   const [page, setPage] = React14.useState(1);
   const maxPage = Math.ceil(totalRows / rowsPerPage);
   return /* @__PURE__ */ jsxs16("div", { style, className: cn(["skc-data-table-pagination", className]), children: [
-    /* @__PURE__ */ jsx29("span", { className: "skc-data-table-pagination__label", children: `${page}-${page + rowsPerPage - 1} ${locale === "th" ? "\u0E08\u0E32\u0E01" : "of"} ${totalRows}` }),
+    /* @__PURE__ */ jsx29(
+      "span",
+      {
+        "aria-label": locale === "th" ? `\u0E41\u0E16\u0E27\u0E17\u0E35\u0E48 ${page} \u0E16\u0E36\u0E07 ${page + rowsPerPage - 1} \u0E08\u0E32\u0E01\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14 ${totalRows} \u0E41\u0E16\u0E27` : `Rows ${page} to ${page + rowsPerPage - 1}, from total of ${totalRows} rows`,
+        className: "skc-data-table-pagination__label",
+        children: `${page}-${page + rowsPerPage - 1} ${locale === "th" ? "\u0E08\u0E32\u0E01" : "of"} ${totalRows}`
+      }
+    ),
     /* @__PURE__ */ jsxs16("div", { className: "skc-data-table-pagination__controls", children: [
       /* @__PURE__ */ jsx29(
         Button,
         {
           appearance: "text",
           icon: /* @__PURE__ */ jsx29(MaterialIcon, { icon: "first_page" }),
+          alt: locale === "th" ? "\u0E44\u0E1B\u0E2B\u0E19\u0E49\u0E32\u0E41\u0E23\u0E01" : "Go to last page",
           disabled: page === 1,
           onClick: () => setPage(1)
         }
@@ -1667,6 +1675,7 @@ function DataTablePagination({
         {
           appearance: "text",
           icon: /* @__PURE__ */ jsx29(MaterialIcon, { icon: "chevron_left" }),
+          alt: locale === "th" ? "\u0E2B\u0E19\u0E49\u0E32\u0E17\u0E35\u0E48\u0E41\u0E25\u0E49\u0E27" : "Previous page",
           disabled: page === 1,
           onClick: () => setPage(page - 1)
         }
@@ -1676,6 +1685,7 @@ function DataTablePagination({
         {
           appearance: "text",
           icon: /* @__PURE__ */ jsx29(MaterialIcon, { icon: "chevron_right" }),
+          alt: locale === "th" ? "\u0E2B\u0E19\u0E49\u0E32\u0E15\u0E48\u0E2D\u0E44\u0E1B" : "Next page",
           disabled: page === maxPage,
           onClick: () => setPage(page + 1)
         }
@@ -1685,6 +1695,7 @@ function DataTablePagination({
         {
           appearance: "text",
           icon: /* @__PURE__ */ jsx29(MaterialIcon, { icon: "last_page" }),
+          alt: locale === "th" ? "\u0E44\u0E1B\u0E2B\u0E19\u0E49\u0E32\u0E2A\u0E38\u0E14\u0E17\u0E49\u0E32\u0E22" : "Go to last page",
           disabled: page === maxPage,
           onClick: () => setPage(maxPage)
         }
