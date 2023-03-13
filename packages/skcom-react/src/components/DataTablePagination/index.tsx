@@ -81,6 +81,13 @@ export function DataTablePagination({
   const [page, setPage] = React.useState<number>(1);
   const maxPage = Math.ceil(totalRows / rowsPerPage);
 
+  React.useEffect(
+    () =>
+      onChange &&
+      onChange(page, rowsPerPage * (page - 1), rowsPerPage * page - 1),
+    [page]
+  );
+
   return (
     <div style={style} className={cn(["skc-data-table-pagination", className])}>
       <span
