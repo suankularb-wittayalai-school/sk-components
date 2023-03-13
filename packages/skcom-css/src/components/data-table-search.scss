@@ -27,11 +27,11 @@
     background-color: var(--on-surface);
   }
 
-  &:hover::before {
+  &:has(.skc-data-table-search__input:hover)::before {
     opacity: 0.08;
   }
 
-  &:focus-within {
+  &:has(.skc-data-table-search__input:focus) {
     border-bottom: 2px solid var(--primary);
     margin-bottom: -0.75px;
   }

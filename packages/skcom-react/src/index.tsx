@@ -43,6 +43,10 @@ export {
   DataTableHead,
   type DataTableHeadProps,
 } from "./components/DataTableHead";
+export {
+  DataTableBody,
+  type DataTableBodyProps,
+} from "./components/DataTableBody";
 
 export { Dialog, type DialogProps } from "./components/Dialog";
 export {
@@ -137,3 +141,5 @@ export {
 
 export { useAnimationConfig, transition, useRipple } from "./utils/animation";
 export { useBreakpoint } from "./utils/window";
+
+export type { DataTableColumnDef } from "./types";

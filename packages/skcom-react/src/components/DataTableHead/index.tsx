@@ -14,7 +14,7 @@ import { DataTableColumnDef, SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/table-head.css";
 
 // Utilities
-import { cn } from "../../utils/className";
+import { TableHead } from "../TableHead";
 
 /**
  * Props for {@link DataTableHead Table Head}.
@@ -53,7 +53,7 @@ export function DataTableHead({
   // TODO: Accessibility label for sorting arrow
 
   return (
-    <thead style={style} className={cn(["skc-table-head", className])}>
+    <TableHead {...{ style, className }}>
       {headerGroups.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => (
@@ -77,7 +77,7 @@ export function DataTableHead({
           ))}
         </TableRow>
       ))}
-    </thead>
+    </TableHead>
   );
 }
 

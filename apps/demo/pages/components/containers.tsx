@@ -25,6 +25,8 @@ import {
   Columns,
   ContentLayout,
   DataTable,
+  DataTableBody,
+  DataTableColumnDef,
   DataTableContent,
   DataTableHead,
   DataTableSearch,
@@ -34,13 +36,13 @@ import {
   FormItem,
   FullscreenDialog,
   Header,
+  InputChip,
   List,
   ListItem,
   ListItemContent,
   MaterialIcon,
   Menu,
   MenuItem,
-  Progress,
   Section,
   SegmentedButton,
   SplitLayout,
@@ -119,16 +121,99 @@ const ColumnsSection: FC = () => (
   </Section>
 );
 
+type Task = {
+  task: string;
+  assignee?: string;
+  progress: "not-started" | "in-progress" | "completed" | "blocked";
+  dueDate?: Date;
+};
+
+const progressMap = {
+  "not-started": {
+    icon: <MaterialIcon icon="warning" className="!text-on-surface-variant" />,
+    label: "Not started",
+  },
+  "in-progress": {
+    icon: <MaterialIcon icon="pending" className="!text-primary" />,
+    label: "In progress",
+  },
+  completed: {
+    icon: <MaterialIcon icon="check_circle" className="!text-outline" />,
+    label: "Completed",
+  },
+  blocked: {
+    icon: <MaterialIcon icon="block" className="!text-error" />,
+    label: "Blocked",
+  },
+};
+
 const DataTableSection: FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [sorting, setSorting] = useState<SortingState>([]);
-  const data = useMemo(() => [], []);
-  const columns = useMemo(
+
+  const data = useMemo<Task[]>(
     () => [
-      { accessKey: "task", header: "Task" },
-      { accessKey: "assignee", header: "Assigned to" },
-      { accessKey: "progress", header: "Progress" },
-      { accessKey: "due-date", header: "Due date" },
+      {
+        task: "MySK Data API specification",
+        assignee: "Smart W.",
+        progress: "in-progress",
+        dueDate: new Date(2023, 1, 28),
+      },
+      {
+        task: "MySK Authentication API specification",
+        assignee: "Smart W.",
+        progress: "not-started",
+      },
+      { task: "MySK SDK specification", progress: "not-started" },
+      { task: "MySK Data API", progress: "blocked" },
+      { task: "MySK Authentication API", progress: "blocked" },
+    ],
+    []
+  );
+  const columns = useMemo<DataTableColumnDef<Task>[]>(
+    () => [
+      { accessorKey: "task", header: "Task" },
+      {
+        accessorKey: "assignee",
+        header: "Assigned to",
+        render: (task: Task) =>
+          task.assignee ? (
+            <InputChip avatar={<Avatar />}>{task.assignee}</InputChip>
+          ) : null,
+      },
+      {
+        accessorKey: "progress",
+        header: "Progress",
+        tdAttr: {
+          menu: (
+            <Menu>
+              {Object.keys(progressMap).map((level) => (
+                <MenuItem
+                  key={level}
+                  icon={progressMap[level as keyof typeof progressMap].icon}
+                >
+                  {progressMap[level as keyof typeof progressMap].label}
+                </MenuItem>
+              ))}
+            </Menu>
+          ),
+        },
+        render: (task: Task) => (
+          <>
+            {progressMap[task.progress].icon}
+            <span>{progressMap[task.progress].label}</span>
+          </>
+        ),
+      },
+      {
+        accessorKey: "dueDate",
+        header: "Due date",
+        render: (task: any) =>
+          (task.dueDate as Date)?.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          }),
+      },
     ],
     []
   );
@@ -147,26 +232,30 @@ const DataTableSection: FC = () => {
   const [showSearchOverflow, setShowSearchOverflow] = useState<boolean>(false);
 
   return (
-    <DataTable>
-      <DataTableSearch
-        value={globalFilter}
-        onChange={setGlobalFilter}
-        onOverflowToggle={() => setShowSearchOverflow(!showSearchOverflow)}
-        overflow={
-          <Menu open={showSearchOverflow}>
-            <MenuItem
-              icon={<MaterialIcon icon="help" />}
-              onClick={() => setShowSearchOverflow(false)}
-            >
-              Help
-            </MenuItem>
-          </Menu>
-        }
-      />
-      <DataTableContent>
-        <DataTableHead headerGroups={getHeaderGroups()} />
-      </DataTableContent>
-    </DataTable>
+    <Section>
+      <Header>Data Table</Header>
+      <DataTable>
+        <DataTableSearch
+          value={globalFilter}
+          onChange={setGlobalFilter}
+          onOverflowToggle={() => setShowSearchOverflow(!showSearchOverflow)}
+          overflow={
+            <Menu open={showSearchOverflow}>
+              <MenuItem
+                icon={<MaterialIcon icon="help" />}
+                onClick={() => setShowSearchOverflow(false)}
+              >
+                Help
+              </MenuItem>
+            </Menu>
+          }
+        />
+        <DataTableContent>
+          <DataTableHead headerGroups={getHeaderGroups()} />
+          <DataTableBody rowModel={getRowModel()} />
+        </DataTableContent>
+      </DataTable>
+    </Section>
   );
 };
 

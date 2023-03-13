@@ -1,6 +1,6 @@
 import * as React from 'react';
 import React__default from 'react';
-import { HeaderGroup } from '@tanstack/react-table';
+import { ColumnDef, HeaderGroup, RowModel } from '@tanstack/react-table';
 import { BezierDefinition, Tween, AnimationControls, MotionStyle } from 'framer-motion';
 
 /**
@@ -76,6 +76,12 @@ interface SKComponent {
      */
     style?: React__default.CSSProperties;
 }
+type DataTableColumnDef<T> = ColumnDef<T> & Partial<{
+    thAttr: Partial<TableCellProps>;
+    tdAttr: Partial<TableCellProps>;
+    render: (row: T) => string | JSX.Element | null;
+    noDataMsg: string | JSX.Element;
+}>;
 
 /**
  * Props for {@link Actions}.
@@ -1441,6 +1447,30 @@ interface DataTableHeadProps extends SKComponent {
  */
 declare function DataTableHead({ headerGroups, locale, style, className, }: DataTableHeadProps): JSX.Element;
 declare namespace DataTableHead {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableBody Data Table Body}.
+ */
+interface DataTableBodyProps extends SKComponent {
+    /**
+     * The return of `getRowModel`, one of the functions of the Tanstack Table
+     * instance.
+     *
+     * - Always required.
+     */
+    rowModel: RowModel<any>;
+}
+/**
+ * The body section of a Data Table specified via Tanstack Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kfe16c5emou5 SKCom documentation}
+ *
+ * @param children The return of `getRowModel`, one of the functions of the Tanstack Table instance.
+ */
+declare function DataTableBody({ rowModel, style, className, }: DataTableBodyProps): JSX.Element;
+declare namespace DataTableBody {
     var displayName: string;
 }
 
@@ -3841,4 +3871,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableContent, DataTableContentProps, DataTableHead, DataTableHeadProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableBody, DataTableBodyProps, DataTableColumnDef, DataTableContent, DataTableContentProps, DataTableHead, DataTableHeadProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

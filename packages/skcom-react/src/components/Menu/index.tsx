@@ -80,34 +80,39 @@ export function Menu({
   return (
     <AnimatePresence>
       {open && (
-        <motion.ul
-          role="menu"
-          aria-orientation="vertical"
-          initial={{ opacity: 0, y: "-10%", scale: 0.8 }}
-          animate={{ opacity: 1, y: "0%", scale: 1 }}
-          exit={{
-            opacity: 0,
-            y: "-10%",
-            scale: 0.8,
-            transition: transition(duration.short2, easing.standard),
-          }}
-          transition={transition(duration.short4, easing.standard)}
-          className={cn([
-            "skc-menu",
-            density === 0
-              ? "skc-menu--density-0"
-              : density === -2
-              ? "skc-menu--density-[-2]"
-              : density === -4 && "skc-menu--density-[-4]",
-            className,
-          ])}
-          // (@SiravitPhokeed)
-          // `motion.ul` is refusing to accept `JSX.IntrinsicElements["ul"]`
-          // for some reason…
-          {...{ ...(ulAttr as any), style, onBlur }}
-        >
-          {children}
-        </motion.ul>
+        <>
+          <motion.ul
+            role="menu"
+            aria-orientation="vertical"
+            initial={{ opacity: 0, y: "-10%", scale: 0.8 }}
+            animate={{ opacity: 1, y: "0%", scale: 1 }}
+            exit={{
+              opacity: 0,
+              y: "-10%",
+              scale: 0.8,
+              transition: transition(duration.short2, easing.standard),
+            }}
+            transition={transition(duration.short4, easing.standard)}
+            className={cn([
+              "skc-menu",
+              density === 0
+                ? "skc-menu--density-0"
+                : density === -2
+                ? "skc-menu--density-[-2]"
+                : density === -4 && "skc-menu--density-[-4]",
+              className,
+            ])}
+            // (@SiravitPhokeed)
+            // `motion.ul` is refusing to accept `JSX.IntrinsicElements["ul"]`
+            // for some reason…
+            {...{ ...(ulAttr as any), style }}
+          >
+            {children}
+          </motion.ul>
+          {onBlur && (
+            <div className="skc-menu__blur-capture" onClick={onBlur} />
+          )}
+        </>
       )}
     </AnimatePresence>
   );

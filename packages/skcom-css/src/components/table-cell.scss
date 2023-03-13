@@ -12,6 +12,7 @@
 .skc-table-cell {
   @include type.font("body-medium");
   display: table-cell;
+  position: relative;
 
   // Cell borders
 
@@ -36,6 +37,16 @@
 
   &:has(.skc-icon:first-child) {
     padding-left: 0.75rem;
+    padding-block: 0.875rem;
+  }
+
+  &:has(
+      .skc-input-chip,
+      .skc-assist-chip,
+      .skc-filter-chip,
+      .skc-suggestion-chip
+    ) {
+    padding-block: 0.625rem;
   }
 
   .skc-icon {
@@ -50,26 +61,19 @@
 }
 
 // Alignment
-.skc-table-cell--left {
-  text-align: left;
-
-  .skc-table-cell__content {
+.skc-table-cell__content {
+  .skc-table-cell--left & {
+    text-align: left;
     justify-content: flex-start;
   }
-}
 
-.skc-table-cell--center {
-  text-align: center;
-
-  .skc-table-cell__content {
+  .skc-table-cell--center & {
+    text-align: center;
     justify-content: center;
   }
-}
 
-.skc-table-cell--right {
-  text-align: right;
-
-  .skc-table-cell__content {
+  .skc-table-cell--right & {
+    text-align: right;
     justify-content: flex-end;
   }
 }
@@ -114,6 +118,10 @@
     flex-grow: 1;
     justify-content: flex-start;
     padding-inline: 0;
+
+    &:has(.skc-icon:first-child) {
+      padding-left: 0;
+    }
   }
 
   // Ripple
@@ -121,4 +129,10 @@
     @include mix.ripple();
     background-color: var(--on-surface);
   }
+}
+
+// Options Menu
+.skc-table-cell .skc-menu {
+  inset: 0 0 auto 0;
+  width: 100%;
 }

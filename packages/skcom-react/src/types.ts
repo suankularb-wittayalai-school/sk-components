@@ -20,10 +20,10 @@ export interface SKComponent {
   style?: React.CSSProperties;
 }
 
-export type DataTableColumnDef = ColumnDef<object> &
+export type DataTableColumnDef<T> = ColumnDef<T> &
   Partial<{
-    thAttr: TableCellProps;
-    tdAttr: TableCellProps;
-    render: (row: any) => JSX.Element;
+    thAttr: Partial<TableCellProps>;
+    tdAttr: Partial<TableCellProps>;
+    render: (row: T) => string | JSX.Element | null;
     noDataMsg: string | JSX.Element;
   }>;

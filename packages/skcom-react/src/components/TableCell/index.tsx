@@ -1,5 +1,9 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { MaterialIcon } from "../MaterialIcon";
 
 // Types
 import { SKComponent } from "../../types";
@@ -8,10 +12,9 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/table-cell.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { MaterialIcon } from "../MaterialIcon";
 import { useRipple } from "../../utils/animation";
-import { motion } from "framer-motion";
+import { cn } from "../../utils/className";
+import { Menu } from "../Menu";
 
 /**
  * Props for {@link TableCell Table Body}.
@@ -88,6 +91,9 @@ export function TableCell({
   const toggleRef = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
 
+  // Menu
+  const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
+
   const props = {
     style,
     className: cn([
@@ -103,12 +109,15 @@ export function TableCell({
     ...tdAttr,
   } satisfies JSX.IntrinsicElements["td" | "th"];
 
-  const content = onMenuToggle ? (
+  const content = menu ? (
     <>
       <button
         ref={toggleRef}
         className="skc-table-cell__menu-toggle"
-        onClick={onMenuToggle}
+        onClick={() => {
+          if (onMenuToggle) onMenuToggle();
+          setMenuOpen(!menuOpen);
+        }}
         {...rippleListeners}
       >
         <div className="skc-table-cell__content">{children}</div>
@@ -121,7 +130,23 @@ export function TableCell({
           style={rippleStyle}
         />
       </button>
-      {menu}
+      {React.cloneElement(
+        <Menu>
+          {React.Children.map(menu.props.children, (menuItem) =>
+            React.cloneElement(menuItem, {
+              onClick: () => {
+                const { onClick } = menuItem.props;
+                if (onClick) onClick();
+                setMenuOpen(false);
+              },
+            })
+          )}
+        </Menu>,
+        {
+          open: menuOpen,
+          onBlur: () => setMenuOpen(false),
+        }
+      )}
     </>
   ) : (
     <div className="skc-table-cell__content">{children}</div>

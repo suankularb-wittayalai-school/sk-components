@@ -244,6 +244,7 @@ export function Select({
       <Menu
         open={menuOpen}
         density={-4}
+        onBlur={() => setMenuOpen(false)}
         ulAttr={{
           id: `${selectID}-options`,
           role: "listbox",
@@ -263,14 +264,6 @@ export function Select({
           })
         )}
       </Menu>
-
-      {/* Blur capture area */}
-      {menuOpen && (
-        <div
-          className="skc-select__blur-capture"
-          onClick={() => setMenuOpen(false)}
-        />
-      )}
     </div>
   );
 }
