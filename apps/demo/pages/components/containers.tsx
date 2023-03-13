@@ -24,6 +24,7 @@ import {
   ContentLayout,
   DataTable,
   DataTableContent,
+  DataTableHead,
   DataTableSearch,
   Dialog,
   DialogContent,
@@ -119,7 +120,15 @@ const ColumnsSection: FC = () => (
 const DataTableSection: FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const data = useMemo(() => [], []);
-  const columns = useMemo(() => [], []);
+  const columns = useMemo(
+    () => [
+      { accessKey: "task", header: "Task" },
+      { accessKey: "assignee", header: "Assigned to" },
+      { accessKey: "progress", header: "Progress" },
+      { accessKey: "due-date", header: "Due date" },
+    ],
+    []
+  );
 
   const { getHeaderGroups, getRowModel } = useReactTable({
     data,
@@ -149,8 +158,9 @@ const DataTableSection: FC = () => {
           </Menu>
         }
       />
-      <div className="h-12" />
-      <DataTableContent>{}</DataTableContent>
+      <DataTableContent>
+        <DataTableHead headerGroups={getHeaderGroups()} />
+      </DataTableContent>
     </DataTable>
   );
 };

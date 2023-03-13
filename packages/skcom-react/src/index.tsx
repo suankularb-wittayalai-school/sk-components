@@ -39,6 +39,10 @@ export {
   DataTableContent,
   type DataTableContentProps,
 } from "./components/DataTableContent";
+export {
+  DataTableHead,
+  type DataTableHeadProps,
+} from "./components/DataTableHead";
 
 export { Dialog, type DialogProps } from "./components/Dialog";
 export {
