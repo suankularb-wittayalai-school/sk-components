@@ -20,7 +20,10 @@ export interface SKComponent {
   style?: React.CSSProperties;
 }
 
-export type DataTableColumnDef<T> = ColumnDef<T> &
+/**
+ * An extended version of Tanstack Table’s `ColumnDef`, used to define a column’s proper
+ */
+export type DataTableColumnDef<T = any> = ColumnDef<T> &
   Partial<{
     thAttr: Partial<TableCellProps>;
     tdAttr: Partial<TableCellProps>;

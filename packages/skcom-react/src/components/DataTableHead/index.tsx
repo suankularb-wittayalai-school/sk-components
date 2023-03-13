@@ -15,6 +15,8 @@ import "@suankularb-components/css/dist/css/components/table-head.css";
 
 // Utilities
 import { TableHead } from "../TableHead";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { transition, useAnimationConfig } from "../../utils/animation";
 
 /**
  * Props for {@link DataTableHead Table Head}.
@@ -51,30 +53,63 @@ export function DataTableHead({
   className,
 }: DataTableHeadProps) {
   // TODO: Accessibility label for sorting arrow
+  const { duration, easing } = useAnimationConfig();
 
   return (
     <TableHead {...{ style, className }}>
       {headerGroups.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
-          {headerGroup.headers.map((header) => (
-            <TableCell
-              key={header.id}
-              header
-              tdAttr={{
-                onClick: header.column.getToggleSortingHandler(),
-                style: header.column.getCanSort()
-                  ? { cursor: "pointer" }
-                  : undefined,
-              }}
-              {...(header.column.columnDef as DataTableColumnDef).thAttr}
-            >
-              {{
-                asc: <MaterialIcon icon="arrow_upward" />,
-                desc: <MaterialIcon icon="arrow_downward" />,
-              }[header.column.getIsSorted() as string] ?? null}
-              {flexRender(header.column.columnDef.header, header.getContext())}
-            </TableCell>
-          ))}
+          {headerGroup.headers.map((header) => {
+            const headerID = `table-header-${header.column.columnDef.header}`;
+
+            return (
+              <TableCell
+                key={header.id}
+                header
+                tdAttr={{
+                  onClick: header.column.getToggleSortingHandler(),
+                  style: header.column.getCanSort()
+                    ? { cursor: "pointer" }
+                    : undefined,
+                }}
+                {...(header.column.columnDef as DataTableColumnDef).thAttr}
+              >
+                <LayoutGroup>
+                  <AnimatePresence>
+                    {header.column.getIsSorted() && (
+                      <motion.div
+                        layoutId={`${headerID}-sort-indicator`}
+                        initial={{ scale: 0.4, opacity: 0 }}
+                        animate={{
+                          scale: 1,
+                          opacity: 1,
+                          rotate:
+                            header.column.getIsSorted() === "desc" ? 180 : 0,
+                        }}
+                        exit={{ scale: 0.4, opacity: 0 }}
+                        transition={transition(
+                          duration.short4,
+                          easing.standard
+                        )}
+                        className="skc-table-cell__sort-indicator"
+                      >
+                        <MaterialIcon icon="arrow_upward" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  <motion.span
+                    layoutId={headerID}
+                    transition={transition(duration.short4, easing.standard)}
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </motion.span>
+                </LayoutGroup>
+              </TableCell>
+            );
+          })}
         </TableRow>
       ))}
     </TableHead>

@@ -48,14 +48,14 @@ export function DataTableBody({
                 <TableCell
                   key={cell.id}
                   align="left"
-                  {...(cell.column.columnDef as DataTableColumnDef<any>).tdAttr}
+                  {...(cell.column.columnDef as DataTableColumnDef).tdAttr}
                 >
                   {
                     // Check if columnDef provides a custom render function
-                    (cell.column.columnDef as DataTableColumnDef<any>).render
+                    (cell.column.columnDef as DataTableColumnDef).render
                       ? // Use custom render function
                         (
-                          (cell.column.columnDef as DataTableColumnDef<any>)
+                          (cell.column.columnDef as DataTableColumnDef)
                             .render as Function
                         )(row.original)
                       : // Check if cell is not empty
@@ -66,8 +66,7 @@ export function DataTableBody({
                           cell.getContext()
                         )
                       : // (Cell is empty) Show no data message
-                        (cell.column.columnDef as DataTableColumnDef<any>)
-                          .noDataMsg
+                        (cell.column.columnDef as DataTableColumnDef).noDataMsg
                   }
                 </TableCell>
               );

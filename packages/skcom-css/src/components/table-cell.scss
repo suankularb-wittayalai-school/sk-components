@@ -55,6 +55,15 @@
   }
 }
 
+// Sort indicator
+.skc-table-cell__sort-indicator {
+  margin-right: 0.25rem;
+
+  .skc-icon {
+    margin-right: 0;
+  }
+}
+
 // Header cell
 .skc-table-cell--header {
   @include type.font("title-small");

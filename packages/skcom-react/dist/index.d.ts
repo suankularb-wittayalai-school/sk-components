@@ -76,7 +76,10 @@ interface SKComponent {
      */
     style?: React__default.CSSProperties;
 }
-type DataTableColumnDef<T> = ColumnDef<T> & Partial<{
+/**
+ * An extended version of Tanstack Table’s `ColumnDef`, used to define a column’s proper
+ */
+type DataTableColumnDef<T = any> = ColumnDef<T> & Partial<{
     thAttr: Partial<TableCellProps>;
     tdAttr: Partial<TableCellProps>;
     render: (row: T) => string | JSX.Element | null;

@@ -1334,7 +1334,7 @@ import { motion as motion12 } from "framer-motion";
 import * as React12 from "react";
 
 // ../skcom-css/dist/css/components/table-cell.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  display: table-cell;\n  position: relative;\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: .75rem;\n  padding-block: .875rem;\n}\n.skc-table-cell__content:has(.skc-input-chip, .skc-assist-chip, .skc-filter-chip, .skc-suggestion-chip) {\n  padding-block: .625rem;\n}\n.skc-table-cell__content .skc-icon {\n  margin-right: .25rem;\n  color: var(--outline);\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--left .skc-table-cell__content {\n  text-align: left;\n  justify-content: flex-start;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  text-align: center;\n  justify-content: center;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  text-align: right;\n  justify-content: flex-end;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell__menu-toggle:hover::before {\n  opacity: .08;\n}\n.skc-table-cell__menu-toggle:focus::before,\n.skc-table-cell__menu-toggle:active::before {\n  opacity: .12;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-table-cell .skc-menu {\n  inset: 0 0 auto 0;\n  width: 100%;\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  display: table-cell;\n  position: relative;\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: .75rem;\n  padding-block: .875rem;\n}\n.skc-table-cell__content:has(.skc-input-chip, .skc-assist-chip, .skc-filter-chip, .skc-suggestion-chip) {\n  padding-block: .625rem;\n}\n.skc-table-cell__content .skc-icon {\n  margin-right: .25rem;\n  color: var(--outline);\n}\n.skc-table-cell__sort-indicator {\n  margin-right: .25rem;\n}\n.skc-table-cell__sort-indicator .skc-icon {\n  margin-right: 0;\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--left .skc-table-cell__content {\n  text-align: left;\n  justify-content: flex-start;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  text-align: center;\n  justify-content: center;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  text-align: right;\n  justify-content: flex-end;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell__menu-toggle:hover::before {\n  opacity: .08;\n}\n.skc-table-cell__menu-toggle:focus::before,\n.skc-table-cell__menu-toggle:active::before {\n  opacity: .12;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-table-cell .skc-menu {\n  inset: 0 0 auto 0;\n  width: 100%;\n}\n');
 
 // src/components/Menu/index.tsx
 import { AnimatePresence as AnimatePresence2, motion as motion11 } from "framer-motion";
@@ -1484,6 +1484,7 @@ function TableHead({
 TableHead.displayName = "TableHead";
 
 // src/components/DataTableHead/index.tsx
+import { AnimatePresence as AnimatePresence3, LayoutGroup, motion as motion13 } from "framer-motion";
 import { jsx as jsx26, jsxs as jsxs15 } from "react/jsx-runtime";
 function DataTableHead({
   headerGroups,
@@ -1491,9 +1492,10 @@ function DataTableHead({
   style,
   className
 }) {
+  const { duration, easing } = useAnimationConfig();
   return /* @__PURE__ */ jsx26(TableHead, __spreadProps(__spreadValues({}, { style, className }), { children: headerGroups.map((headerGroup) => /* @__PURE__ */ jsx26(TableRow, { children: headerGroup.headers.map((header) => {
-    var _a;
-    return /* @__PURE__ */ jsxs15(
+    const headerID = `table-header-${header.column.columnDef.header}`;
+    return /* @__PURE__ */ jsx26(
       TableCell,
       __spreadProps(__spreadValues({
         header: true,
@@ -1502,13 +1504,38 @@ function DataTableHead({
           style: header.column.getCanSort() ? { cursor: "pointer" } : void 0
         }
       }, header.column.columnDef.thAttr), {
-        children: [
-          (_a = {
-            asc: /* @__PURE__ */ jsx26(MaterialIcon, { icon: "arrow_upward" }),
-            desc: /* @__PURE__ */ jsx26(MaterialIcon, { icon: "arrow_downward" })
-          }[header.column.getIsSorted()]) != null ? _a : null,
-          flexRender(header.column.columnDef.header, header.getContext())
-        ]
+        children: /* @__PURE__ */ jsxs15(LayoutGroup, { children: [
+          /* @__PURE__ */ jsx26(AnimatePresence3, { children: header.column.getIsSorted() && /* @__PURE__ */ jsx26(
+            motion13.div,
+            {
+              layoutId: `${headerID}-sort-indicator`,
+              initial: { scale: 0.4, opacity: 0 },
+              animate: {
+                scale: 1,
+                opacity: 1,
+                rotate: header.column.getIsSorted() === "desc" ? 180 : 0
+              },
+              exit: { scale: 0.4, opacity: 0 },
+              transition: transition(
+                duration.short4,
+                easing.standard
+              ),
+              className: "skc-table-cell__sort-indicator",
+              children: /* @__PURE__ */ jsx26(MaterialIcon, { icon: "arrow_upward" })
+            }
+          ) }),
+          /* @__PURE__ */ jsx26(
+            motion13.span,
+            {
+              layoutId: headerID,
+              transition: transition(duration.short4, easing.standard),
+              children: flexRender(
+                header.column.columnDef.header,
+                header.getContext()
+              )
+            }
+          )
+        ] })
       }),
       header.id
     );
@@ -1569,7 +1596,7 @@ function DataTableBody({
 DataTableBody.displayName = "DataTableBody";
 
 // src/components/Dialog/index.tsx
-import { AnimatePresence as AnimatePresence3, motion as motion13 } from "framer-motion";
+import { AnimatePresence as AnimatePresence4, motion as motion14 } from "framer-motion";
 import * as React13 from "react";
 
 // ../skcom-css/dist/css/components/dialog.css
@@ -1628,9 +1655,9 @@ function Dialog({
       )}`;
     }
   });
-  return /* @__PURE__ */ jsx29(AnimatePresence3, { children: open && /* @__PURE__ */ jsxs16(Fragment9, { children: [
+  return /* @__PURE__ */ jsx29(AnimatePresence4, { children: open && /* @__PURE__ */ jsxs16(Fragment9, { children: [
     /* @__PURE__ */ jsx29(
-      motion13.div,
+      motion14.div,
       {
         role: "alertdialog",
         "aria-modal": "true",
@@ -1654,7 +1681,7 @@ function Dialog({
       }
     ),
     /* @__PURE__ */ jsx29(
-      motion13.div,
+      motion14.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -1742,7 +1769,7 @@ function DialogContent({
 DialogContent.displayName = "DialogContent";
 
 // src/components/FullscreenDialog/index.tsx
-import { AnimatePresence as AnimatePresence4, motion as motion14 } from "framer-motion";
+import { AnimatePresence as AnimatePresence5, motion as motion15 } from "framer-motion";
 import * as React15 from "react";
 
 // ../skcom-css/dist/css/components/fullscreen-dialog.css
@@ -1867,9 +1894,9 @@ function FullscreenDialog({
     }
     return child;
   });
-  return /* @__PURE__ */ jsx32(AnimatePresence4, { children: open && /* @__PURE__ */ jsxs18(Fragment10, { children: [
+  return /* @__PURE__ */ jsx32(AnimatePresence5, { children: open && /* @__PURE__ */ jsxs18(Fragment10, { children: [
     /* @__PURE__ */ jsxs18(
-      motion14.div,
+      motion15.div,
       {
         role: "alertdialog",
         "aria-labelledby": `${dialogID}-title`,
@@ -1898,12 +1925,12 @@ function FullscreenDialog({
             /* @__PURE__ */ jsx32("h2", { id: `${dialogID}-title`, children: title }),
             action
           ] }),
-          /* @__PURE__ */ jsx32(motion14.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
+          /* @__PURE__ */ jsx32(motion15.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
         ]
       }
     ),
     /* @__PURE__ */ jsx32(
-      motion14.div,
+      motion15.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -2054,7 +2081,7 @@ function List({
 List.displayName = "List";
 
 // src/components/ListItem/index.tsx
-import { motion as motion15 } from "framer-motion";
+import { motion as motion16 } from "framer-motion";
 import * as React17 from "react";
 
 // ../skcom-css/dist/css/components/list-item.css
@@ -2099,7 +2126,7 @@ function ListItem({
   const content = /* @__PURE__ */ jsxs22(Fragment12, { children: [
     children,
     stateLayerEffect && /* @__PURE__ */ jsx38(
-      motion15.span,
+      motion16.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -2210,7 +2237,7 @@ function NavBar({
 NavBar.displayName = "NavBar";
 
 // src/components/NavBarItem/index.tsx
-import { AnimatePresence as AnimatePresence5, LayoutGroup, motion as motion16 } from "framer-motion";
+import { AnimatePresence as AnimatePresence6, LayoutGroup as LayoutGroup2, motion as motion17 } from "framer-motion";
 import * as React19 from "react";
 
 // ../skcom-css/dist/css/components/nav-bar-item.css
@@ -2260,8 +2287,8 @@ function NavBarItem({
   const content = /* @__PURE__ */ jsxs25(Fragment13, { children: [
     /* @__PURE__ */ jsxs25("div", { ref: iconRef, className: "skc-nav-bar-item__icon", children: [
       icon,
-      /* @__PURE__ */ jsx41(LayoutGroup, { children: /* @__PURE__ */ jsx41(AnimatePresence5, { children: badge !== void 0 && /* @__PURE__ */ jsx41(
-        motion16.div,
+      /* @__PURE__ */ jsx41(LayoutGroup2, { children: /* @__PURE__ */ jsx41(AnimatePresence6, { children: badge !== void 0 && /* @__PURE__ */ jsx41(
+        motion17.div,
         {
           initial: { scale: 0 },
           animate: { scale: 1 },
@@ -2273,7 +2300,7 @@ function NavBarItem({
         }
       ) }) }),
       /* @__PURE__ */ jsx41(
-        motion16.span,
+        motion17.span,
         {
           initial: { scale: 0, opacity: 0.36 },
           animate: rippleControls,
@@ -2295,7 +2322,7 @@ function NavBarItem({
 NavBarItem.displayName = "NavBarItem";
 
 // src/components/NavDrawer/index.tsx
-import { AnimatePresence as AnimatePresence6, motion as motion17 } from "framer-motion";
+import { AnimatePresence as AnimatePresence7, motion as motion18 } from "framer-motion";
 import * as React20 from "react";
 
 // ../skcom-css/dist/css/components/nav-drawer.css
@@ -2346,9 +2373,9 @@ function NavDrawer({
       })
     )
   );
-  return /* @__PURE__ */ jsx42(AnimatePresence6, { children: open && /* @__PURE__ */ jsxs26(Fragment14, { children: [
+  return /* @__PURE__ */ jsx42(AnimatePresence7, { children: open && /* @__PURE__ */ jsxs26(Fragment14, { children: [
     /* @__PURE__ */ jsx42(
-      motion17.aside,
+      motion18.aside,
       {
         initial: { scaleX: 0.2, x: "-100%" },
         animate: { scaleX: 1, x: "0%" },
@@ -2368,7 +2395,7 @@ function NavDrawer({
       }
     ),
     /* @__PURE__ */ jsx42(
-      motion17.div,
+      motion18.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -2430,7 +2457,7 @@ import * as React21 from "react";
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-nav-drawer-item {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .75rem;\n  padding: 1rem 1.5rem 1rem 1rem;\n  text-decoration: none;\n  color: var(--on-surface);\n  border-radius: var(--rounded-full);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-nav-drawer-item::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-nav-drawer-item:hover::before {\n  opacity: .08;\n}\n.skc-nav-drawer-item:focus-visible::before,\n.skc-nav-drawer-item:active::before {\n  opacity: .12;\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected {\n  color: var(--on-primary-container);\n  background-color: var(--primary-container);\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected::before,\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__ripple {\n  background-color: var(--on-primary-container);\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__label {\n  font-weight: var(--font-bold);\n}\n.skc-nav-drawer-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-drawer-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  flex-grow: 1;\n}\n.skc-nav-drawer-item__metadata {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-nav-drawer-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/NavDrawerItem/index.tsx
-import { motion as motion18 } from "framer-motion";
+import { motion as motion19 } from "framer-motion";
 import { Fragment as Fragment15, jsx as jsx44, jsxs as jsxs28 } from "react/jsx-runtime";
 function NavDrawerItem({
   icon,
@@ -2464,7 +2491,7 @@ function NavDrawerItem({
     /* @__PURE__ */ jsx44("span", { className: "skc-nav-drawer-item__label", children: label }),
     metadata && /* @__PURE__ */ jsx44("span", { className: "skc-nav-drawer-item__metadata", children: metadata }),
     /* @__PURE__ */ jsx44(
-      motion18.span,
+      motion19.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -2478,7 +2505,7 @@ function NavDrawerItem({
 NavDrawerItem.displayName = "NavDrawerItem";
 
 // src/components/FAB/index.tsx
-import { AnimatePresence as AnimatePresence7, motion as motion19 } from "framer-motion";
+import { AnimatePresence as AnimatePresence8, motion as motion20 } from "framer-motion";
 import * as React22 from "react";
 
 // ../skcom-css/dist/css/components/fab.css
@@ -2528,11 +2555,11 @@ function FAB({
     title: tooltip,
     className: "skc-fab__wrapper"
   }, rippleListeners);
-  const content = /* @__PURE__ */ jsx45(AnimatePresence7, {
+  const content = /* @__PURE__ */ jsx45(AnimatePresence8, {
     initial: false,
     // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
     children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ jsxs29(
-      motion19.div,
+      motion20.div,
       {
         ref: fabRef,
         initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
@@ -2560,7 +2587,7 @@ function FAB({
           // Hide the label on scroll if `stateOnScroll` set to `minimize`
           !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ jsx45("span", { className: "skc-fab__label", children }),
           /* @__PURE__ */ jsx45(
-            motion19.span,
+            motion20.span,
             {
               initial: { scale: 0, opacity: 0.36 },
               animate: rippleControls,
@@ -2586,7 +2613,7 @@ function FAB({
 FAB.displayName = "FAB";
 
 // src/components/ContentLayout/index.tsx
-import { motion as motion20 } from "framer-motion";
+import { motion as motion21 } from "framer-motion";
 
 // ../skcom-css/dist/css/components/content-layout.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > .skc-section > *,\n.skc-content-layout__content > .skc-columns > .skc-section > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > .skc-section > *,\n  .skc-content-layout__content > .skc-columns > .skc-section > * {\n    margin-inline: 0;\n  }\n}\n");
@@ -2601,7 +2628,7 @@ function ContentLayout({
   const { duration, easing } = useAnimationConfig();
   const baseTransition = transition(duration.medium2, easing.standard);
   return /* @__PURE__ */ jsx46(
-    motion20.main,
+    motion21.main,
     {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
@@ -2662,7 +2689,7 @@ function SplitLayout({
 SplitLayout.displayName = "SplitLayout";
 
 // src/components/RootLayout/index.tsx
-import { AnimatePresence as AnimatePresence8, motion as motion21, useAnimationControls as useAnimationControls4 } from "framer-motion";
+import { AnimatePresence as AnimatePresence9, motion as motion22, useAnimationControls as useAnimationControls4 } from "framer-motion";
 import * as React23 from "react";
 
 // ../skcom-css/dist/css/components/root-layout.css
@@ -2715,13 +2742,13 @@ function RootLayout({
   }, [transitionEvent]);
   return /* @__PURE__ */ jsxs30("div", { style, className: cn(["skc-root-layout", className]), children: [
     persistentComponents,
-    /* @__PURE__ */ jsx48(AnimatePresence8, { mode: "wait", initial: false, children: /* @__PURE__ */ jsx48(motion21.div, { animate: contentControls, children: content }, "content") })
+    /* @__PURE__ */ jsx48(AnimatePresence9, { mode: "wait", initial: false, children: /* @__PURE__ */ jsx48(motion22.div, { animate: contentControls, children: content }, "content") })
   ] });
 }
 RootLayout.displayName = "RootLayout";
 
 // src/components/MenuItem/index.tsx
-import { motion as motion22 } from "framer-motion";
+import { motion as motion23 } from "framer-motion";
 import * as React24 from "react";
 
 // ../skcom-css/dist/css/components/menu-item.css
@@ -2760,7 +2787,7 @@ function MenuItem({
     /* @__PURE__ */ jsx49("span", { className: "skc-menu-item__label", children }),
     metadata && /* @__PURE__ */ jsx49("span", { className: "skc-menu-item__metadata", children: metadata }),
     /* @__PURE__ */ jsx49(
-      motion22.span,
+      motion23.span,
       {
         "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
@@ -2786,8 +2813,8 @@ MenuItem.displayName = "MenuItem";
 
 // src/components/PageHeader/index.tsx
 import {
-  LayoutGroup as LayoutGroup2,
-  motion as motion23,
+  LayoutGroup as LayoutGroup3,
+  motion as motion24,
   useAnimationControls as useAnimationControls5
 } from "framer-motion";
 import * as React25 from "react";
@@ -2863,8 +2890,8 @@ function PageHeader({
         style: { height: minimized ? (_a = headerRef.current) == null ? void 0 : _a.clientHeight : 0 }
       }
     ),
-    /* @__PURE__ */ jsx50(LayoutGroup2, { children: /* @__PURE__ */ jsx50(
-      motion23.header,
+    /* @__PURE__ */ jsx50(LayoutGroup3, { children: /* @__PURE__ */ jsx50(
+      motion24.header,
       {
         ref: headerRef,
         layoutId: "page-header",
@@ -2877,7 +2904,7 @@ function PageHeader({
         ]),
         children: /* @__PURE__ */ jsxs32("div", { className: "skc-page-header__content", children: [
           icon && !children && /* @__PURE__ */ jsx50(
-            motion23.div,
+            motion24.div,
             {
               animate: iconControls,
               className: "skc-page-header__icon",
@@ -2885,7 +2912,7 @@ function PageHeader({
             }
           ),
           /* @__PURE__ */ jsxs32(
-            motion23.div,
+            motion24.div,
             {
               layoutId: "page-header-actions",
               transition: minimizeTransition,
@@ -2904,7 +2931,7 @@ function PageHeader({
                   }
                 ),
                 minimized && // Header (when minimized)
-                /* @__PURE__ */ jsx50(motion23.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+                /* @__PURE__ */ jsx50(motion24.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
                 /* @__PURE__ */ jsxs32("div", { className: "skc-page-header__trailing", children: [
                   homeURL && // Home Button
                   /* @__PURE__ */ jsx50(
@@ -2929,9 +2956,9 @@ function PageHeader({
             }
           ),
           !minimized && // Header (initial)
-          /* @__PURE__ */ jsx50(motion23.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+          /* @__PURE__ */ jsx50(motion24.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
           children && /* @__PURE__ */ jsx50(
-            motion23.div,
+            motion24.div,
             {
               animate: headerTextControls,
               className: "skc-page-header__related",
@@ -2952,7 +2979,7 @@ import * as React26 from "react";
 styleInject('.skc-radio {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-radio::before {\n  background-color: var(--on-surface);\n}\n.skc-radio:not(.skc-radio--disabled):hover::before,\n.skc-form-item:hover .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .08;\n}\n.skc-radio:not(.skc-radio--disabled):focus-within::before,\n.skc-radio:not(.skc-radio--disabled):active::before,\n.skc-form-item:focus-within .skc-radio:not(.skc-radio--disabled)::before,\n.skc-form-item:active .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .12;\n}\n.skc-radio::before,\n.skc-radio__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-radio__circle {\n  transition: border-color var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: 50%;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-radio__marker {\n  transition: transform var(--motion-short-2) var(--easing-standard);\n  box-sizing: border-box;\n  width: .625rem;\n  height: .625rem;\n  transform: scale(0);\n  border-radius: inherit;\n  background-color: var(--primary);\n}\n.skc-radio__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-radio__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-radio__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-radio:has(.skc-radio__input:checked)::before,\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__ripple {\n  background-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__circle {\n  border-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__marker {\n  transform: scale(1);\n}\n.skc-radio--disabled {\n  opacity: .38;\n}\n.skc-radio--disabled .skc-radio__circle {\n  cursor: default;\n}\n.skc-radio--disabled .skc-radio__marker {\n  background-color: var(--on-surface);\n}\n.skc-radio--disabled .skc-radio__ripple {\n  display: none;\n}\n.skc-radio--disabled .skc-radio__input:checked ~ .skc-radio__circle {\n  border-color: var(--on-surface);\n}\n');
 
 // src/components/Radio/index.tsx
-import { motion as motion24 } from "framer-motion";
+import { motion as motion25 } from "framer-motion";
 import { jsx as jsx51, jsxs as jsxs33 } from "react/jsx-runtime";
 function Radio({
   value,
@@ -2994,7 +3021,7 @@ function Radio({
             "aria-hidden": true,
             className: "skc-radio__ripple-parent",
             children: /* @__PURE__ */ jsx51(
-              motion24.span,
+              motion25.span,
               {
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
@@ -3049,7 +3076,7 @@ function Section({
 Section.displayName = "Section";
 
 // src/components/Select/index.tsx
-import { motion as motion25 } from "framer-motion";
+import { motion as motion26 } from "framer-motion";
 import * as React28 from "react";
 
 // ../skcom-css/dist/css/components/select.css
@@ -3127,7 +3154,7 @@ function Select({
             locale === "th" ? "\u0E44\u0E21\u0E48\u0E21\u0E35\u0E15\u0E31\u0E27\u0E40\u0E25\u0E37\u0E2D\u0E01" : "No options"
           ) }),
           /* @__PURE__ */ jsx53(
-            motion25.div,
+            motion26.div,
             {
               className: "skc-select__trailing",
               animate: { rotate: menuOpen ? 180 : 0 },
@@ -3172,7 +3199,7 @@ function Select({
 Select.displayName = "Select";
 
 // src/components/Snackbar/index.tsx
-import { AnimatePresence as AnimatePresence10, motion as motion26 } from "framer-motion";
+import { AnimatePresence as AnimatePresence11, motion as motion27 } from "framer-motion";
 import * as React29 from "react";
 
 // ../skcom-css/dist/css/components/snackbar.css
@@ -3191,8 +3218,8 @@ function Snackbar({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ jsx54("aside", { children: /* @__PURE__ */ jsx54(AnimatePresence10, __spreadProps(__spreadValues({}, { onExitComplete }), { children: open && /* @__PURE__ */ jsxs35(
-    motion26.div,
+  return /* @__PURE__ */ jsx54("aside", { children: /* @__PURE__ */ jsx54(AnimatePresence11, __spreadProps(__spreadValues({}, { onExitComplete }), { children: open && /* @__PURE__ */ jsxs35(
+    motion27.div,
     {
       role: "status",
       "aria-relevant": "additions",
@@ -3294,7 +3321,7 @@ function TableFoot({ children, style, className }) {
 TableFoot.displayName = "TableFoot";
 
 // src/components/Tab/index.tsx
-import { motion as motion27 } from "framer-motion";
+import { motion as motion28 } from "framer-motion";
 import * as React30 from "react";
 
 // ../skcom-css/dist/css/components/tab.css
@@ -3333,7 +3360,7 @@ function Tab({
       icon && /* @__PURE__ */ jsx58("div", { className: "skc-tab__icon", children: icon }),
       label && /* @__PURE__ */ jsx58("span", { id: tabID, className: "skc-tab__label", children: label }),
       selected && /* @__PURE__ */ jsx58(
-        motion27.span,
+        motion28.span,
         {
           "aria-hidden": true,
           layoutId: containerID,
@@ -3343,7 +3370,7 @@ function Tab({
       )
     ] }),
     /* @__PURE__ */ jsx58("div", { "aria-hidden": true, className: "skc-tab__ripple-container", children: /* @__PURE__ */ jsx58(
-      motion27.span,
+      motion28.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -3410,9 +3437,9 @@ TabsContainer.displayName = "TabsContainer";
 
 // src/components/TextField/index.tsx
 import {
-  AnimatePresence as AnimatePresence11,
-  LayoutGroup as LayoutGroup3,
-  motion as motion28,
+  AnimatePresence as AnimatePresence12,
+  LayoutGroup as LayoutGroup4,
+  motion as motion29,
   useAnimationControls as useAnimationControls6
 } from "framer-motion";
 import * as React32 from "react";
@@ -3554,7 +3581,7 @@ function TextField({
       ]),
       children: [
         /* @__PURE__ */ jsx60(
-          motion28.span,
+          motion29.span,
           {
             id: `${fieldID}-label`,
             animate: labelControls,
@@ -3562,11 +3589,11 @@ function TextField({
             children: label
           }
         ),
-        leading && /* @__PURE__ */ jsx60(motion28.div, { className: "skc-text-field__leading", children: leading }),
+        leading && /* @__PURE__ */ jsx60(motion29.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ jsx60("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ jsx60("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        /* @__PURE__ */ jsx60(LayoutGroup3, { children: /* @__PURE__ */ jsxs37(AnimatePresence11, { initial: false, children: [
+        /* @__PURE__ */ jsx60(LayoutGroup4, { children: /* @__PURE__ */ jsxs37(AnimatePresence12, { initial: false, children: [
           trailing && /* @__PURE__ */ jsx60(
-            motion28.div,
+            motion29.div,
             {
               animate: appearance === "filled" && typeof trailing === "string" ? trailingControls : void 0,
               layoutId: `${fieldID}-trailing`,
@@ -3576,7 +3603,7 @@ function TextField({
             }
           ),
           (canClear || error) && /* @__PURE__ */ jsx60(
-            motion28.div,
+            motion29.div,
             {
               initial: { scale: 0.6, opacity: 0 },
               animate: { scale: 1, opacity: 1 },
