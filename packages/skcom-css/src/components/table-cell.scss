@@ -11,8 +11,8 @@
 // Base Table Cell
 .skc-table-cell {
   @include type.font("body-medium");
-  display: table-cell;
   position: relative;
+  display: table-cell;
 
   // Cell borders
 
@@ -36,8 +36,8 @@
   text-align: center;
 
   &:has(.skc-icon:first-child) {
-    padding-left: 0.75rem;
     padding-block: 0.875rem;
+    padding-left: 0.75rem;
   }
 
   &:has(
@@ -72,18 +72,18 @@
 // Alignment
 .skc-table-cell__content {
   .skc-table-cell--left & {
-    text-align: left;
     justify-content: flex-start;
+    text-align: left;
   }
 
   .skc-table-cell--center & {
-    text-align: center;
     justify-content: center;
+    text-align: center;
   }
 
   .skc-table-cell--right & {
-    text-align: right;
     justify-content: flex-end;
+    text-align: right;
   }
 }
 

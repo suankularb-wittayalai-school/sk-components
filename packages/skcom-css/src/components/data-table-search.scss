@@ -14,13 +14,13 @@
     var(--motion-short-4),
     var(--easing-standard)
   );
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-  background-color: var(--surface);
-  border-bottom: 1px solid var(--outline-variant);
   position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  border-bottom: 1px solid var(--outline-variant);
+  background-color: var(--surface);
 
   &::before {
     @include mix.state-layer();
@@ -32,8 +32,8 @@
   }
 
   &:has(.skc-data-table-search__input:focus) {
-    border-bottom: 2px solid var(--primary);
     margin-bottom: -0.75px;
+    border-bottom: 2px solid var(--primary);
   }
 }
 
@@ -43,13 +43,12 @@
 
 .skc-data-table-search__input {
   @include type.font("body-large");
-  padding-block: 1rem;
-  flex-grow: 1;
-  background-color: transparent;
-  border: 0;
   appearance: textfield;
-  -webkit-appearance: textfield;
+  flex-grow: 1;
+  padding-block: 1rem;
+  border: 0;
   outline-offset: -2px;
+  background-color: transparent;
 
   &:focus {
     outline: none;

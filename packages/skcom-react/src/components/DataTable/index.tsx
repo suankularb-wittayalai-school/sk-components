@@ -18,7 +18,7 @@ export interface DataTableProps extends SKComponent {
    * There is a set of components especially designed to be used here: Data
    * Table Search, Data Table Filters, Data Table Content, and Data Table
    * Pagination.
-   * 
+   *
    * - A Data Table cannot have both Data Table Search and Data Table Filters.
    * - A Data Table must have a Data Table Content.
    * - If present, Data Table Search/Data Table Filters must be the first
