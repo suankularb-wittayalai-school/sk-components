@@ -3,7 +3,13 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
+
+import {
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+} from "@tanstack/react-table";
 
 // SK Components
 import {
@@ -16,6 +22,9 @@ import {
   Checkbox,
   Columns,
   ContentLayout,
+  DataTable,
+  DataTableContent,
+  DataTableSearch,
   Dialog,
   DialogContent,
   DialogHeader,
@@ -26,6 +35,8 @@ import {
   ListItem,
   ListItemContent,
   MaterialIcon,
+  Menu,
+  MenuItem,
   Progress,
   Section,
   SegmentedButton,
@@ -104,6 +115,45 @@ const ColumnsSection: FC = () => (
     </Columns>
   </Section>
 );
+
+const DataTableSection: FC = () => {
+  const [globalFilter, setGlobalFilter] = useState<string>("");
+  const data = useMemo(() => [], []);
+  const columns = useMemo(() => [], []);
+
+  const { getHeaderGroups, getRowModel } = useReactTable({
+    data,
+    columns,
+    state: { globalFilter },
+    onGlobalFilterChange: setGlobalFilter,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+  });
+
+  const [showSearchOverflow, setShowSearchOverflow] = useState<boolean>(false);
+
+  return (
+    <DataTable>
+      <DataTableSearch
+        value={globalFilter}
+        onChange={setGlobalFilter}
+        onOverflowToggle={() => setShowSearchOverflow(!showSearchOverflow)}
+        overflow={
+          <Menu open={showSearchOverflow}>
+            <MenuItem
+              icon={<MaterialIcon icon="help" />}
+              onClick={() => setShowSearchOverflow(false)}
+            >
+              Help
+            </MenuItem>
+          </Menu>
+        }
+      />
+      <div className="h-12" />
+      <DataTableContent>{}</DataTableContent>
+    </DataTable>
+  );
+};
 
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
@@ -472,6 +522,7 @@ const ContainersPage: CustomPage = () => (
       <AvatarSection />
       <CardSection />
       <ColumnsSection />
+      <DataTableSection />
       <DialogSection />
       <HeaderSection />
       <SplitLayoutSection />

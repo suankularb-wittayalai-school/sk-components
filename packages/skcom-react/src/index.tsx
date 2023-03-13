@@ -32,6 +32,10 @@ export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 
 export { DataTable, type DataTableProps } from "./components/DataTable";
 export {
+  DataTableSearch,
+  type DataTableSearchProps,
+} from "./components/DataTableSearch";
+export {
   DataTableContent,
   type DataTableContentProps,
 } from "./components/DataTableContent";

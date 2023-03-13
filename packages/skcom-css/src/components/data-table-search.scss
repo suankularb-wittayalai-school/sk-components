@@ -5,6 +5,72 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
 .skc-data-table-search {
-  // TODO
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--outline-variant);
+  position: relative;
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus-within {
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: -0.75px;
+  }
+}
+
+.skc-data-table-search__icon {
+  margin-left: 1.5rem;
+}
+
+.skc-data-table-search__input {
+  @include type.font("body-large");
+  padding-block: 1rem;
+  flex-grow: 1;
+  background-color: transparent;
+  border: 0;
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    font-family: var(--font-display);
+    color: var(--on-surface-variant);
+  }
+}
+
+.skc-data-table-search__overflow {
+  position: relative;
+
+  .skc-button {
+    margin-right: 1rem;
+    color: var(--on-surface);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-surface);
+    }
+  }
 }

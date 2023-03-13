@@ -7,5 +7,16 @@
 ////
 
 .skc-data-table {
-  // TODO
+  border: 2px solid var(--outline-variant);
+  border-radius: 1.25rem;
+}
+
+$content-rounded: calc(1.25rem - 2px);
+
+.skc-data-table > :first-child {
+  border-radius: $content-rounded $content-rounded 0 0;
+}
+
+.skc-data-table > :last-child {
+  border-radius: 0 0 $content-rounded $content-rounded;
 }
