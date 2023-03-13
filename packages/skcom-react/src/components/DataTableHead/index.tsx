@@ -82,6 +82,13 @@ export function DataTableHead({
                   "skc-table-cell--header",
                   header.column.getCanSort() && "skc-table-cell--sortable",
                 ])}
+                title={
+                  header.column.getCanSort()
+                    ? locale === "th"
+                      ? "คลิกเพื่อเรียง"
+                      : "Click to toggle sort"
+                    : undefined
+                }
                 // Sort the column on click
                 onClick={header.column.getToggleSortingHandler()}
                 onKeyUp={(event) => {
