@@ -1417,7 +1417,18 @@ declare namespace DataTableContent {
  * Props for {@link DataTableHead Table Head}.
  */
 interface DataTableHeadProps extends SKComponent {
+    /**
+     * The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+     *
+     * - Always required.
+     */
     headerGroups: HeaderGroup<any>[];
+    /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Optional.
+     */
     locale?: "en-US" | "th";
 }
 /**
@@ -1425,8 +1436,8 @@ interface DataTableHeadProps extends SKComponent {
  *
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
  *
- * @param headerGroups
- * @param locale
+ * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+ * @param locale Allows for translation of the accessibility labels.
  */
 declare function DataTableHead({ headerGroups, locale, style, className, }: DataTableHeadProps): JSX.Element;
 declare namespace DataTableHead {

@@ -20,7 +20,19 @@ import { cn } from "../../utils/className";
  * Props for {@link DataTableHead Table Head}.
  */
 export interface DataTableHeadProps extends SKComponent {
+  /**
+   * The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+   *
+   * - Always required.
+   */
   headerGroups: HeaderGroup<any>[];
+
+  /**
+   * Allows for translation of the accessibility labels.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+   * - Optional.
+   */
   locale?: "en-US" | "th";
 }
 
@@ -29,8 +41,8 @@ export interface DataTableHeadProps extends SKComponent {
  *
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
  *
- * @param headerGroups
- * @param locale
+ * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+ * @param locale Allows for translation of the accessibility labels.
  */
 export function DataTableHead({
   headerGroups,
@@ -38,6 +50,8 @@ export function DataTableHead({
   style,
   className,
 }: DataTableHeadProps) {
+  // TODO: Accessibility label for sorting arrow
+
   return (
     <thead style={style} className={cn(["skc-table-head", className])}>
       {headerGroups.map((headerGroup) => (
@@ -54,7 +68,6 @@ export function DataTableHead({
               }}
               {...(header.column.columnDef as DataTableColumnDef).thAttr}
             >
-              <MaterialIcon icon="arrow_upward" />
               {{
                 asc: <MaterialIcon icon="arrow_upward" />,
                 desc: <MaterialIcon icon="arrow_downward" />,

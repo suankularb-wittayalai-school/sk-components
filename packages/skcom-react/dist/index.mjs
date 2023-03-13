@@ -1412,7 +1412,6 @@ function DataTableHead({
         }
       }, header.column.columnDef.thAttr), {
         children: [
-          /* @__PURE__ */ jsx24(MaterialIcon, { icon: "arrow_upward" }),
           (_a = {
             asc: /* @__PURE__ */ jsx24(MaterialIcon, { icon: "arrow_upward" }),
             desc: /* @__PURE__ */ jsx24(MaterialIcon, { icon: "arrow_downward" })
