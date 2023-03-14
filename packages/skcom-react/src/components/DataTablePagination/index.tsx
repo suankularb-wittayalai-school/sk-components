@@ -81,6 +81,11 @@ export function DataTablePagination({
   const [page, setPage] = React.useState<number>(1);
   const maxPage = Math.ceil(totalRows / rowsPerPage);
 
+  const range = {
+    start: rowsPerPage * (page - 1) + 1,
+    end: rowsPerPage * page,
+  };
+
   React.useEffect(
     () =>
       onChange &&
@@ -93,16 +98,12 @@ export function DataTablePagination({
       <span
         aria-label={
           locale === "th"
-            ? `แถวที่ ${page} ถึง ${
-                page + rowsPerPage - 1
-              } จากทั้งหมด ${totalRows} แถว`
-            : `Rows ${page} to ${
-                page + rowsPerPage - 1
-              }, from total of ${totalRows} rows`
+            ? `แถวที่ ${range.start} ถึง ${range.end} จากทั้งหมด ${totalRows} แถว`
+            : `Rows ${range.start} to ${range.end}, from total of ${totalRows} rows`
         }
         className="skc-data-table-pagination__label"
       >
-        {`${page}-${page + rowsPerPage - 1} ${
+        {`${range.start}-${range.end} ${
           locale === "th" ? "จาก" : "of"
         } ${totalRows}`}
       </span>

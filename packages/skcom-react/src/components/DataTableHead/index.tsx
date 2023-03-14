@@ -77,10 +77,14 @@ export function DataTableHead({
               <th
                 key={header.id}
                 ref={toggleRef}
+                // Additional attributes passed in via column
+                {...(header.column.columnDef as DataTableColumnDef).thAttr}
                 className={cn([
                   "skc-table-cell",
                   "skc-table-cell--header",
                   header.column.getCanSort() && "skc-table-cell--sortable",
+                  (header.column.columnDef as DataTableColumnDef).thAttr
+                    ?.className,
                 ])}
                 title={
                   header.column.getCanSort()
@@ -102,8 +106,6 @@ export function DataTableHead({
                 tabIndex={0}
                 // Listeners for activating the ripple effect
                 {...rippleListeners}
-                // Additional attributes passed in via column
-                {...(header.column.columnDef as DataTableColumnDef).thAttr}
               >
                 <div aria-atomic className="skc-table-cell__content">
                   <LayoutGroup>

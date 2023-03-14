@@ -11,6 +11,8 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   SortingState,
+  getPaginationRowModel,
+  PaginationState,
 } from "@tanstack/react-table";
 
 // SK Components
@@ -151,6 +153,10 @@ const progressMap = {
 const DataTableSection: FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 5,
+  });
 
   const data = useMemo<Task[]>(
     () => [
@@ -168,15 +174,27 @@ const DataTableSection: FC = () => {
       { task: "MySK SDK specification", progress: "not-started" },
       { task: "MySK Data API", progress: "blocked" },
       { task: "MySK Authentication API", progress: "blocked" },
+      { task: "Lorem ipsum dolor sit amet", progress: "completed" },
+      { task: "Eaque animi dolore illo rem", progress: "completed" },
+      { task: "Unde ad reiciendis", progress: "blocked" },
+      { task: "Excepturi perferendis", progress: "blocked" },
+      { task: "Ducimus voluptatibus", progress: "not-started" },
+      { task: "Vero repellendus nisi", progress: "completed" },
+      { task: "Consequuntur voluptatibus", progress: "completed" },
+      { task: "Asperiores, quas quos", progress: "not-started" },
+      { task: "Suscipit itaque necessitati", progress: "completed" },
+      { task: "Veniam voluptatem ipsam", progress: "completed" },
     ],
     []
   );
+
   const columns = useMemo<DataTableColumnDef<Task>[]>(
     () => [
-      { accessorKey: "task", header: "Task" },
+      { accessorKey: "task", header: "Task", thAttr: { className: "w-5/12" } },
       {
         accessorKey: "assignee",
         header: "Assigned to",
+        thAttr: { className: "w-2/12" },
         render: (task: Task) =>
           task.assignee ? (
             <InputChip avatar={<Avatar />}>{task.assignee}</InputChip>
@@ -185,6 +203,7 @@ const DataTableSection: FC = () => {
       {
         accessorKey: "progress",
         header: "Progress",
+        thAttr: { className: "w-3/12" },
         tdAttr: {
           menu: (
             <Menu>
@@ -209,6 +228,7 @@ const DataTableSection: FC = () => {
       {
         accessorKey: "dueDate",
         header: "Due date",
+        thAttr: { className: "w-2/12" },
         render: (task: any) =>
           (task.dueDate as Date)?.toLocaleDateString("en-US", {
             month: "short",
@@ -219,15 +239,17 @@ const DataTableSection: FC = () => {
     []
   );
 
-  const { getHeaderGroups, getRowModel } = useReactTable({
+  const { getHeaderGroups, getRowModel, setPageIndex } = useReactTable({
     data,
     columns,
-    state: { globalFilter, sorting },
+    state: { globalFilter, sorting, pagination },
     onGlobalFilterChange: setGlobalFilter,
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   const [showSearchOverflow, setShowSearchOverflow] = useState<boolean>(false);
@@ -251,11 +273,15 @@ const DataTableSection: FC = () => {
             </Menu>
           }
         />
-        <DataTableContent>
+        <DataTableContent contentWidth={720}>
           <DataTableHead headerGroups={getHeaderGroups()} />
           <DataTableBody rowModel={getRowModel()} />
         </DataTableContent>
-        <DataTablePagination rowsPerPage={5} totalRows={data.length} />
+        <DataTablePagination
+          rowsPerPage={5}
+          totalRows={data.length}
+          onChange={(page) => setPageIndex(page - 1)}
+        />
       </DataTable>
     </Section>
   );

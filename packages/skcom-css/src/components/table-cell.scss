@@ -87,6 +87,7 @@
 .skc-table-cell--sortable,
 .skc-table-cell:has(.skc-table-cell__menu-toggle) {
   cursor: pointer;
+  user-select: none;
 
   // State layer
   &::before {
