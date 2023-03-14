@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,6 +9,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/data-table.css";
 
 // Utilities
+import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -38,10 +40,17 @@ export interface DataTableProps extends SKComponent {
  * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
  */
 export function DataTable({ children, style, className }: DataTableProps) {
+  const { duration, easing } = useAnimationConfig();
+
   return (
-    <figure style={style} className={cn(["skc-data-table", className])}>
+    <motion.figure
+      layout
+      transition={transition(duration.medium4, easing.standard)}
+      style={style}
+      className={cn(["skc-data-table", className])}
+    >
       {children}
-    </figure>
+    </motion.figure>
   );
 }
 

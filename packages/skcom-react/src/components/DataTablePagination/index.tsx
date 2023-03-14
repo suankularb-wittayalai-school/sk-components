@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -12,6 +13,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/data-table-pagination.css";
 
 // Utilities
+import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -78,6 +80,8 @@ export function DataTablePagination({
   style,
   className,
 }: DataTablePaginationProps) {
+  const { duration, easing } = useAnimationConfig();
+
   const [page, setPage] = React.useState<number>(1);
   const maxPage = Math.ceil(totalRows / rowsPerPage);
 
@@ -94,7 +98,12 @@ export function DataTablePagination({
   );
 
   return (
-    <div style={style} className={cn(["skc-data-table-pagination", className])}>
+    <motion.div
+      layout
+      transition={transition(duration.medium4, easing.standard)}
+      style={style}
+      className={cn(["skc-data-table-pagination", className])}
+    >
       <span
         aria-label={
           locale === "th"
@@ -141,7 +150,7 @@ export function DataTablePagination({
           onClick={() => setPage(maxPage)}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

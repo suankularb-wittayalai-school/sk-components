@@ -4,14 +4,14 @@ import * as React from "react";
 
 // Internal components
 import { TableBody } from "../TableBody";
+import { TableCell } from "../TableCell";
+import { TableRow } from "../TableRow";
 
 // Types
 import { DataTableColumnDef, SKComponent } from "../../types";
 
 // Styles
 import "@suankularb-components/css/dist/css/components/table-body.css";
-import { TableRow } from "../TableRow";
-import { TableCell } from "../TableCell";
 
 /**
  * Props for {@link DataTableBody Data Table Body}.
@@ -44,20 +44,21 @@ export function DataTableBody({
         return (
           <TableRow key={row.id}>
             {row.getVisibleCells().map((cell) => {
+              const columnDef = cell.column.columnDef as DataTableColumnDef;
+
               return (
                 <TableCell
                   key={cell.id}
                   align="left"
-                  {...(cell.column.columnDef as DataTableColumnDef).tdAttr}
+                  {...(typeof columnDef.tdAttr === "function"
+                    ? columnDef.tdAttr(row.original)
+                    : columnDef.tdAttr)}
                 >
                   {
                     // Check if columnDef provides a custom render function
-                    (cell.column.columnDef as DataTableColumnDef).render
+                    columnDef.render
                       ? // Use custom render function
-                        (
-                          (cell.column.columnDef as DataTableColumnDef)
-                            .render as Function
-                        )(row.original)
+                        (columnDef.render as Function)(row.original)
                       : // Check if cell is not empty
                       cell.getValue()
                       ? // Render cell normally
@@ -66,7 +67,7 @@ export function DataTableBody({
                           cell.getContext()
                         )
                       : // (Cell is empty) Show no data message
-                        (cell.column.columnDef as DataTableColumnDef).noDataMsg
+                        columnDef.noDataMsg
                   }
                 </TableCell>
               );

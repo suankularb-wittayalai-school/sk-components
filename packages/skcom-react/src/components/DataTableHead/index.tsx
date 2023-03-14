@@ -5,7 +5,6 @@ import * as React from "react";
 
 // Internal components
 import { MaterialIcon } from "../MaterialIcon";
-import { TableHead } from "../TableHead";
 import { TableRow } from "../TableRow";
 
 // Types
@@ -59,12 +58,19 @@ export function DataTableHead({
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <TableHead {...{ style, className }}>
+    <motion.thead
+      layout
+      transition={transition(duration.medium4, easing.standard)}
+      style={style}
+      className={cn(["skc-table-head", className])}
+    >
       {/* For each Header Group, render a Table Row */}
       {headerGroups.map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {/* For each Header, define a header Table Cell */}
           {headerGroup.headers.map((header) => {
+            const columnDef = header.column.columnDef as DataTableColumnDef;
+
             // Ripple setup
             const toggleRef = React.useRef(null);
             const { rippleListeners, rippleControls, rippleStyle } =
@@ -78,13 +84,12 @@ export function DataTableHead({
                 key={header.id}
                 ref={toggleRef}
                 // Additional attributes passed in via column
-                {...(header.column.columnDef as DataTableColumnDef).thAttr}
+                {...columnDef.thAttr}
                 className={cn([
                   "skc-table-cell",
                   "skc-table-cell--header",
                   header.column.getCanSort() && "skc-table-cell--sortable",
-                  (header.column.columnDef as DataTableColumnDef).thAttr
-                    ?.className,
+                  columnDef.thAttr?.className,
                 ])}
                 title={
                   header.column.getCanSort()
@@ -152,10 +157,7 @@ export function DataTableHead({
                       layout="position"
                       transition={transition(duration.short4, easing.standard)}
                     >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      {flexRender(columnDef.header, header.getContext())}
                     </motion.span>
                   </LayoutGroup>
                 </div>
@@ -173,7 +175,7 @@ export function DataTableHead({
           })}
         </TableRow>
       ))}
-    </TableHead>
+    </motion.thead>
   );
 }
 

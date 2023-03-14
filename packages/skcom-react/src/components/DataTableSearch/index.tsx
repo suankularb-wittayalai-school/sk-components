@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -12,6 +13,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/data-table-search.css";
 
 // Utilities
+import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -103,8 +105,15 @@ export function DataTableSearch({
   style,
   className,
 }: DataTableSearchProps) {
+  const { duration, easing } = useAnimationConfig();
+
   return (
-    <div style={style} className={cn(["skc-data-table-search", className])}>
+    <motion.div
+      layout
+      transition={transition(duration.medium4, easing.standard)}
+      style={style}
+      className={cn(["skc-data-table-search", className])}
+    >
       {/* Icon */}
       <div className="skc-data-table-search__icon">
         <MaterialIcon icon="search" />
@@ -133,7 +142,7 @@ export function DataTableSearch({
           {overflow}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

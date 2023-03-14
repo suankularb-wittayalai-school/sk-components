@@ -190,12 +190,12 @@ const DataTableSection: FC = () => {
 
   const columns = useMemo<DataTableColumnDef<Task>[]>(
     () => [
-      { accessorKey: "task", header: "Task", thAttr: { className: "w-5/12" } },
+      { accessorKey: "task", header: "Task", thAttr: { className: "w-4/12" } },
       {
         accessorKey: "assignee",
         header: "Assigned to",
-        thAttr: { className: "w-2/12" },
-        render: (task: Task) =>
+        thAttr: { className: "w-3/12" },
+        render: (task) =>
           task.assignee ? (
             <InputChip avatar={<Avatar />}>{task.assignee}</InputChip>
           ) : null,
@@ -204,21 +204,22 @@ const DataTableSection: FC = () => {
         accessorKey: "progress",
         header: "Progress",
         thAttr: { className: "w-3/12" },
-        tdAttr: {
+        tdAttr: (task) => ({
           menu: (
             <Menu>
               {Object.keys(progressMap).map((level) => (
                 <MenuItem
                   key={level}
                   icon={progressMap[level as keyof typeof progressMap].icon}
+                  selected={task.progress === level}
                 >
                   {progressMap[level as keyof typeof progressMap].label}
                 </MenuItem>
               ))}
             </Menu>
           ),
-        },
-        render: (task: Task) => (
+        }),
+        render: (task) => (
           <>
             {progressMap[task.progress].icon}
             <span>{progressMap[task.progress].label}</span>
