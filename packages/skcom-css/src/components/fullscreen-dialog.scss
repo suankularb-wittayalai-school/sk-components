@@ -130,4 +130,18 @@
       max-height: calc(100dvh - (4rem + 2rem));
     }
   }
+
+  @media (prefers-color-scheme: light) {
+    .skc-fullscreen-dialog {
+      .skc-input-chip--selected,
+      .skc-filter-chip--selected {
+        background-color: var(--secondary);
+        color: var(--on-secondary);
+
+        .skc-icon {
+          color: var(--on-secondary);
+        }
+      }
+    }
+  }
 }
