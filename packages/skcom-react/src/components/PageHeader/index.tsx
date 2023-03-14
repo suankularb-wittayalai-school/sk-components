@@ -1,6 +1,5 @@
 // External libraries
 import {
-  AnimatePresence,
   HTMLMotionProps,
   LayoutGroup,
   motion,

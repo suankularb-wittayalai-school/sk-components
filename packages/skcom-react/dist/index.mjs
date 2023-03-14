@@ -3405,7 +3405,7 @@ function Select({
 Select.displayName = "Select";
 
 // src/components/Snackbar/index.tsx
-import { AnimatePresence as AnimatePresence11, motion as motion31 } from "framer-motion";
+import { AnimatePresence as AnimatePresence10, motion as motion31 } from "framer-motion";
 import * as React31 from "react";
 
 // ../skcom-css/dist/css/components/snackbar.css
@@ -3424,7 +3424,7 @@ function Snackbar({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ jsx55("aside", { children: /* @__PURE__ */ jsx55(AnimatePresence11, __spreadProps(__spreadValues({}, { onExitComplete }), { children: open && /* @__PURE__ */ jsxs37(
+  return /* @__PURE__ */ jsx55("aside", { children: /* @__PURE__ */ jsx55(AnimatePresence10, __spreadProps(__spreadValues({}, { onExitComplete }), { children: open && /* @__PURE__ */ jsxs37(
     motion31.div,
     {
       role: "status",
@@ -3666,7 +3666,7 @@ TabsContainer.displayName = "TabsContainer";
 
 // src/components/TextField/index.tsx
 import {
-  AnimatePresence as AnimatePresence12,
+  AnimatePresence as AnimatePresence11,
   LayoutGroup as LayoutGroup4,
   motion as motion33,
   useAnimationControls as useAnimationControls6
@@ -3820,7 +3820,7 @@ function TextField({
         ),
         leading && /* @__PURE__ */ jsx62(motion33.div, { className: "skc-text-field__leading", children: leading }),
         behavior === "single-line" ? /* @__PURE__ */ jsx62("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ jsx62("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        /* @__PURE__ */ jsx62(LayoutGroup4, { children: /* @__PURE__ */ jsxs39(AnimatePresence12, { initial: false, children: [
+        /* @__PURE__ */ jsx62(LayoutGroup4, { children: /* @__PURE__ */ jsxs39(AnimatePresence11, { initial: false, children: [
           trailing && /* @__PURE__ */ jsx62(
             motion33.div,
             {
