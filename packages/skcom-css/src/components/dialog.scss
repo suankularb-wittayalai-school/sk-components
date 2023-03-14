@@ -46,8 +46,8 @@
   .skc-dialog {
     .skc-input-chip--selected,
     .skc-filter-chip--selected {
-      background-color: var(--secondary);
       color: var(--on-secondary);
+      background-color: var(--secondary);
 
       .skc-icon {
         color: var(--on-secondary);

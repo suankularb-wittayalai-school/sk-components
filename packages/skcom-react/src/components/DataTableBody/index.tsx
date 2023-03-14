@@ -45,7 +45,6 @@ export function DataTableBody({
           <TableRow key={row.id}>
             {row.getVisibleCells().map((cell) => {
               const columnDef = cell.column.columnDef as DataTableColumnDef;
-
               return (
                 <TableCell
                   key={cell.id}
