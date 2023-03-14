@@ -3,7 +3,17 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
+
+import {
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  SortingState,
+  getPaginationRowModel,
+  PaginationState,
+} from "@tanstack/react-table";
 
 // SK Components
 import {
@@ -16,17 +26,26 @@ import {
   Checkbox,
   Columns,
   ContentLayout,
+  DataTable,
+  DataTableBody,
+  DataTableColumnDef,
+  DataTableContent,
+  DataTableHead,
+  DataTablePagination,
+  DataTableSearch,
   Dialog,
   DialogContent,
   DialogHeader,
   FormItem,
   FullscreenDialog,
   Header,
+  InputChip,
   List,
   ListItem,
   ListItemContent,
   MaterialIcon,
-  Progress,
+  Menu,
+  MenuItem,
   Section,
   SegmentedButton,
   SplitLayout,
@@ -65,6 +84,14 @@ const CardSection: FC = () => (
           icon={<MaterialIcon icon="person" />}
           title="Atipol Sukrisadanon"
           subtitle="Foreign Languages teacher"
+          overflow={
+            <Menu>
+              <MenuItem icon={<MaterialIcon icon="share" />}>Share</MenuItem>
+              <MenuItem icon={<MaterialIcon icon="visibility_off" />}>
+                Hide
+              </MenuItem>
+            </Menu>
+          }
         />
         <Image
           src="/images/atipol.jpg"
@@ -104,6 +131,175 @@ const ColumnsSection: FC = () => (
     </Columns>
   </Section>
 );
+
+type Task = {
+  task: string;
+  assignee?: string;
+  progress: "not-started" | "in-progress" | "completed" | "blocked";
+  dueDate?: Date;
+};
+
+const progressMap = {
+  "not-started": {
+    icon: <MaterialIcon icon="warning" className="!text-on-surface-variant" />,
+    label: "Not started",
+  },
+  "in-progress": {
+    icon: <MaterialIcon icon="pending" className="!text-primary" />,
+    label: "In progress",
+  },
+  completed: {
+    icon: <MaterialIcon icon="check_circle" className="!text-outline" />,
+    label: "Completed",
+  },
+  blocked: {
+    icon: <MaterialIcon icon="block" className="!text-error" />,
+    label: "Blocked",
+  },
+};
+
+const DataTableSection: FC = () => {
+  const [globalFilter, setGlobalFilter] = useState<string>("");
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 5,
+  });
+
+  const data = useMemo<Task[]>(
+    () => [
+      {
+        task: "MySK Data API specification",
+        assignee: "Smart W.",
+        progress: "in-progress",
+        dueDate: new Date(2023, 1, 28),
+      },
+      {
+        task: "MySK Authentication API specification",
+        assignee: "Smart W.",
+        progress: "not-started",
+      },
+      { task: "MySK SDK specification", progress: "not-started" },
+      { task: "MySK Data API", progress: "blocked" },
+      { task: "MySK Authentication API", progress: "blocked" },
+      { task: "Lorem ipsum dolor sit amet", progress: "completed" },
+      { task: "Eaque animi dolore illo rem", progress: "completed" },
+      { task: "Unde ad reiciendis", progress: "blocked" },
+      { task: "Excepturi perferendis", progress: "blocked" },
+      { task: "Ducimus voluptatibus", progress: "not-started" },
+      { task: "Vero repellendus nisi", progress: "completed" },
+      { task: "Consequuntur voluptatibus", progress: "completed" },
+      { task: "Asperiores, quas quos", progress: "not-started" },
+      { task: "Suscipit itaque necessitati", progress: "completed" },
+      { task: "Veniam voluptatem ipsam", progress: "completed" },
+    ],
+    []
+  );
+
+  const columns = useMemo<DataTableColumnDef<Task>[]>(
+    () => [
+      { accessorKey: "task", header: "Task", thAttr: { className: "w-4/12" } },
+      {
+        accessorKey: "assignee",
+        header: "Assigned to",
+        thAttr: { className: "w-3/12" },
+        render: (task) =>
+          task.assignee ? (
+            <InputChip avatar={<Avatar />}>{task.assignee}</InputChip>
+          ) : null,
+      },
+      {
+        accessorKey: "progress",
+        header: "Progress",
+        thAttr: { className: "w-3/12" },
+        tdAttr: (task) => ({
+          menu: (
+            <Menu>
+              {Object.keys(progressMap).map((level) => (
+                <MenuItem
+                  key={level}
+                  icon={progressMap[level as keyof typeof progressMap].icon}
+                  selected={task.progress === level}
+                >
+                  {progressMap[level as keyof typeof progressMap].label}
+                </MenuItem>
+              ))}
+            </Menu>
+          ),
+        }),
+        render: (task) => (
+          <>
+            {progressMap[task.progress].icon}
+            <span>{progressMap[task.progress].label}</span>
+          </>
+        ),
+      },
+      {
+        accessorKey: "dueDate",
+        header: "Due date",
+        thAttr: { className: "w-2/12" },
+        render: (task: any) =>
+          (task.dueDate as Date)?.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          }),
+      },
+    ],
+    []
+  );
+
+  const {
+    getHeaderGroups,
+    getRowModel,
+    getPrePaginationRowModel,
+    setPageIndex,
+  } = useReactTable({
+    data,
+    columns,
+    state: { globalFilter, sorting, pagination },
+    onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: setSorting,
+    onPaginationChange: setPagination,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  });
+
+  const [showSearchOverflow, setShowSearchOverflow] = useState<boolean>(false);
+
+  return (
+    <Section>
+      <Header>Data Table</Header>
+      <DataTable>
+        <DataTableSearch
+          value={globalFilter}
+          onChange={setGlobalFilter}
+          onOverflowToggle={() => setShowSearchOverflow(!showSearchOverflow)}
+          overflow={
+            <Menu open={showSearchOverflow}>
+              <MenuItem
+                icon={<MaterialIcon icon="help" />}
+                onClick={() => setShowSearchOverflow(false)}
+              >
+                Help
+              </MenuItem>
+            </Menu>
+          }
+        />
+        <DataTableContent contentWidth={720}>
+          <DataTableHead headerGroups={getHeaderGroups()} />
+          <DataTableBody rowModel={getRowModel()} />
+        </DataTableContent>
+        <DataTablePagination
+          rowsPerPage={5}
+          totalRows={getPrePaginationRowModel().rows.length}
+          onChange={(page) => setPageIndex(page - 1)}
+        />
+      </DataTable>
+    </Section>
+  );
+};
 
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
@@ -472,6 +668,7 @@ const ContainersPage: CustomPage = () => (
       <AvatarSection />
       <CardSection />
       <ColumnsSection />
+      <DataTableSection />
       <DialogSection />
       <HeaderSection />
       <SplitLayoutSection />

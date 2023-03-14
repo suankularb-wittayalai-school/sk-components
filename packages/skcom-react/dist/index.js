@@ -79,6 +79,13 @@ __export(src_exports, {
   ChipSet: () => ChipSet,
   Columns: () => Columns,
   ContentLayout: () => ContentLayout,
+  DataTable: () => DataTable,
+  DataTableBody: () => DataTableBody,
+  DataTableContent: () => DataTableContent,
+  DataTableFilters: () => DataTableFilters,
+  DataTableHead: () => DataTableHead,
+  DataTablePagination: () => DataTablePagination,
+  DataTableSearch: () => DataTableSearch,
   Dialog: () => Dialog,
   DialogContent: () => DialogContent,
   DialogHeader: () => DialogHeader,
@@ -716,10 +723,57 @@ Card.displayName = "Card";
 var React5 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/card-header.css
-styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-card-header {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  padding: .75rem .25rem .75rem 1rem;\n}\n.skc-card-header__content {\n  flex-grow: 1;\n}\n.skc-card-header__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-card-header__title {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n  margin-block: 0;\n}\n.skc-card-header__subtitle {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  font-family: var(--font-display);\n  margin-block: 0;\n}\n.skc-card-header__overflow {\n  padding: .25rem;\n}\n.skc-card-header__overflow .skc-button {\n  color: var(--outline);\n}\n.skc-card-header__overflow .skc-button::before,\n.skc-card-header__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface-variant);\n}\n");
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-card-header {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  padding: .75rem .25rem .75rem 1rem;\n}\n.skc-card-header__content {\n  flex-grow: 1;\n}\n.skc-card-header__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-card-header__title {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n  margin-block: 0;\n}\n.skc-card-header__subtitle {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  font-family: var(--font-display);\n  margin-block: 0;\n}\n.skc-card-header__overflow {\n  padding: .25rem;\n  position: relative;\n}\n.skc-card-header__overflow .skc-button {\n  color: var(--outline);\n}\n.skc-card-header__overflow .skc-button::before,\n.skc-card-header__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface-variant);\n}\n.skc-card-header__overflow .skc-menu {\n  right: .25rem;\n}\n");
+
+// src/components/Menu/index.tsx
+var import_framer_motion6 = require("framer-motion");
+
+// ../skcom-css/dist/css/components/menu.css
+styleInject(".skc-menu {\n  position: absolute;\n  z-index: 60;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n.skc-text-field ~ .skc-menu,\n.skc-select ~ .skc-menu {\n  top: 3.5rem;\n}\n.skc-menu__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n.skc-menu--density-0 .skc-menu-item {\n  padding-block: .5rem;\n}\n.skc-menu--density-\\[-2\\] .skc-menu-item {\n  padding-block: .25rem;\n}\n.skc-menu--density-\\[-4\\] .skc-menu-item {\n  padding-block: 0;\n}\n");
+
+// src/components/Menu/index.tsx
+var import_jsx_runtime9 = require("react/jsx-runtime");
+function Menu({
+  children,
+  open,
+  density,
+  onBlur,
+  ulAttr,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_framer_motion6.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_jsx_runtime9.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+      import_framer_motion6.motion.ul,
+      __spreadProps(__spreadValues({
+        role: "menu",
+        "aria-orientation": "vertical",
+        initial: { opacity: 0, y: "-10%", scale: 0.8 },
+        animate: { opacity: 1, y: "0%", scale: 1 },
+        exit: {
+          opacity: 0,
+          y: "-10%",
+          scale: 0.8,
+          transition: transition(duration.short2, easing.standard)
+        },
+        transition: transition(duration.short4, easing.standard),
+        className: cn([
+          "skc-menu",
+          density === 0 ? "skc-menu--density-0" : density === -2 ? "skc-menu--density-[-2]" : density === -4 && "skc-menu--density-[-4]",
+          className
+        ])
+      }, __spreadProps(__spreadValues({}, ulAttr), { style })), {
+        children
+      })
+    ),
+    onBlur && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "skc-menu__blur-capture", onClick: onBlur })
+  ] }) });
+}
+Menu.displayName = "Menu";
 
 // src/components/CardHeader/index.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function CardHeader({
   avatar,
   icon,
@@ -730,23 +784,41 @@ function CardHeader({
   className
 }) {
   const [showOverflow, setShowOverflow] = React5.useState(false);
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { style, className: cn(["skc-card-header", className]), children: [
-    avatar && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "skc-card-header__avatar", children: avatar }),
-    icon && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "skc-card-header__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "skc-card-header__content", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "skc-card-header__title", children: title }),
-      subtitle && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "skc-card-header__subtitle", children: subtitle })
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { style, className: cn(["skc-card-header", className]), children: [
+    avatar && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "skc-card-header__avatar", children: avatar }),
+    icon && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "skc-card-header__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "skc-card-header__content", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "skc-card-header__title", children: title }),
+      subtitle && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "skc-card-header__subtitle", children: subtitle })
     ] }),
-    overflow && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "skc-card-header__overflow", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    overflow && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "skc-card-header__overflow", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
         Button,
         {
           appearance: "text",
-          icon: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(MaterialIcon, { icon: "more_vert" }),
+          icon: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(MaterialIcon, { icon: "more_vert" }),
           onClick: () => setShowOverflow(!showOverflow)
         }
       ),
-      overflow
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        Menu,
+        __spreadProps(__spreadValues({
+          open: showOverflow,
+          onBlur: () => setShowOverflow(false)
+        }, overflow.props), {
+          children: React5.Children.map(
+            overflow.props.children,
+            (child) => React5.cloneElement(child, {
+              onClick: () => {
+                const { onClick } = child.props;
+                if (onClick)
+                  onClick();
+                setShowOverflow(false);
+              }
+            })
+          )
+        })
+      )
     ] })
   ] });
 }
@@ -756,9 +828,9 @@ CardHeader.displayName = "CardHeader";
 styleInject(".skc-card-content {\n  display: flex;\n  flex-direction: column;\n  gap: .75rem;\n  padding: 1rem;\n}\n.skc-card-content p {\n  margin-block: 0;\n}\n.skc-card-content > .skc-actions {\n  margin-top: 1.25rem;\n}\n");
 
 // src/components/CardContent/index.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function CardContent({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { style, className: cn(["skc-card-content", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { style, className: cn(["skc-card-content", className]), children });
 }
 CardContent.displayName = "CardContent";
 
@@ -766,9 +838,9 @@ CardContent.displayName = "CardContent";
 styleInject(".skc-columns {\n  display: grid;\n  align-items: start;\n  gap: .5rem 1.5rem;\n}\n.skc-columns--2 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.skc-columns--3 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--3 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n.skc-columns--4 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--4 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--4 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--4 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n.skc-columns--6 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--6 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--6 {\n    grid-template-columns: repeat(6, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--6 {\n    grid-template-columns: repeat(6, minmax(0, 1fr));\n  }\n}\n.skc-columns--12 {\n  grid-template-columns: repeat(4, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--12 {\n    grid-template-columns: repeat(8, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--12 {\n    grid-template-columns: repeat(12, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--12 {\n    grid-template-columns: repeat(12, minmax(0, 1fr));\n  }\n}\n");
 
 // src/components/Columns/index.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_jsx_runtime12 = require("react/jsx-runtime");
 function Columns({ children, columns, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
     "div",
     {
       style,
@@ -784,14 +856,14 @@ function Columns({ children, columns, style, className }) {
 Columns.displayName = "Columns";
 
 // src/components/Checkbox/index.tsx
-var import_framer_motion6 = require("framer-motion");
+var import_framer_motion7 = require("framer-motion");
 var React6 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/checkbox.css
 styleInject('.skc-checkbox {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox::before {\n  background-color: var(--on-surface);\n}\n.skc-checkbox:not(.skc-checkbox--disabled):hover::before,\n.skc-form-item:hover .skc-checkbox:not(.skc-checkbox--disabled)::before {\n  opacity: .08;\n}\n.skc-checkbox:not(.skc-checkbox--disabled):focus-within::before,\n.skc-checkbox:not(.skc-checkbox--disabled):active::before,\n.skc-form-item:focus-within .skc-checkbox:not(.skc-checkbox--disabled)::before,\n.skc-form-item:active .skc-checkbox:not(.skc-checkbox--disabled)::before {\n  opacity: .12;\n}\n.skc-checkbox::before,\n.skc-checkbox__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-checkbox__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-checkbox__box {\n  transition: background-color var(--motion-short-2) var(--easing-standard), transform var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: .125rem;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox:active .skc-checkbox__box,\n.skc-form-item:active .skc-checkbox__box {\n  transform: scale(0.9);\n}\n.skc-checkbox__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-checkbox__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-checkbox:has(.skc-checkbox__input:checked)::before,\n.skc-checkbox:has(.skc-checkbox__input:checked) .skc-checkbox__ripple,\n.skc-checkbox--indeterminate::before,\n.skc-checkbox--indeterminate .skc-checkbox__ripple {\n  background-color: var(--primary);\n}\n.skc-checkbox__input:checked ~ .skc-checkbox__box,\n.skc-checkbox--indeterminate .skc-checkbox__box {\n  border-color: var(--primary);\n  background-color: var(--primary);\n}\n.skc-checkbox__icon {\n  color: var(--on-primary);\n}\n.skc-checkbox--disabled {\n  opacity: .38;\n}\n.skc-checkbox--disabled .skc-checkbox__box {\n  cursor: default;\n}\n.skc-checkbox--disabled:active .skc-checkbox__box {\n  transform: scale(1);\n}\n.skc-checkbox--disabled .skc-checkbox__icon {\n  color: var(--surface);\n}\n.skc-checkbox--disabled .skc-checkbox__ripple {\n  display: none;\n}\n.skc-checkbox--disabled .skc-checkbox__input:checked ~ .skc-checkbox__box {\n  border-color: var(--on-surface);\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/Checkbox/index.tsx
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function Checkbox({
   value,
   onChange,
@@ -803,7 +875,7 @@ function Checkbox({
 }) {
   const rippleParentRef = React6.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(rippleParentRef);
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
     "label",
     __spreadProps(__spreadValues({
       style,
@@ -816,7 +888,7 @@ function Checkbox({
       ])
     }, rippleListeners), {
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           "input",
           __spreadValues({
             "aria-checked": value === null ? "mixed" : value,
@@ -827,15 +899,15 @@ function Checkbox({
             onChange: (event) => onChange && !disabled && onChange(event.target.checked)
           }, inputAttr)
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { "aria-hidden": true, className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { "aria-hidden": true, className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           "div",
           {
             ref: rippleParentRef,
             "aria-hidden": true,
             className: "skc-checkbox__ripple-parent",
-            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
-              import_framer_motion6.motion.span,
+            children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+              import_framer_motion7.motion.span,
               {
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
@@ -855,11 +927,11 @@ Checkbox.displayName = "Checkbox";
 var React7 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/chip.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n._skc-chip,\n.skc-input-chip,\n.skc-suggestion-chip,\n.skc-filter-chip,\n.skc-assist-chip {\n  transition: border-color var(--motion-short-4) var(--easing-standard), background-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  justify-content: center;\n  gap: .5rem;\n  padding: .375rem 1rem;\n  cursor: pointer;\n  color: var(--on-surface);\n  border: 1px solid var(--outline);\n  border-radius: .5rem;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n._skc-chip::before,\n.skc-input-chip::before,\n.skc-suggestion-chip::before,\n.skc-filter-chip::before,\n.skc-assist-chip::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface-variant);\n}\n._skc-chip:hover::before,\n.skc-input-chip:hover::before,\n.skc-suggestion-chip:hover::before,\n.skc-filter-chip:hover::before,\n.skc-assist-chip:hover::before {\n  opacity: .08;\n}\n._skc-chip:focus::before,\n.skc-input-chip:focus::before,\n.skc-suggestion-chip:focus::before,\n.skc-filter-chip:focus::before,\n.skc-assist-chip:focus::before,\n._skc-chip:active::before,\n.skc-input-chip:active::before,\n.skc-suggestion-chip:active::before,\n.skc-filter-chip:active::before,\n.skc-assist-chip:active::before {\n  opacity: .12;\n}\n._skc-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-input-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-suggestion-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-filter-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-assist-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n._skc-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-input-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-suggestion-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-filter-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-assist-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child) {\n  padding-right: .5rem;\n}\n._skc-chip[aria-disabled=true],\n[aria-disabled=true].skc-input-chip,\n[aria-disabled=true].skc-suggestion-chip,\n[aria-disabled=true].skc-filter-chip,\n[aria-disabled=true].skc-assist-chip {\n  cursor: default;\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n  overflow: visible;\n}\n._skc-chip[aria-disabled=true]::before,\n[aria-disabled=true].skc-input-chip::before,\n[aria-disabled=true].skc-suggestion-chip::before,\n[aria-disabled=true].skc-filter-chip::before,\n[aria-disabled=true].skc-assist-chip::before {\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  inset: -1px;\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__ripple,\n._skc-chip[aria-disabled=true] button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip ._skc-chip[aria-disabled=true] .skc-input-chip__ripple,\n[aria-disabled=true].skc-input-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-input-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-input-chip .skc-input-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-suggestion-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-suggestion-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-filter-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-filter-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-filter-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-filter-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-filter-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-assist-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-assist-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-assist-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-assist-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__ripple {\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-input-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-suggestion-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-filter-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__icon .skc-icon {\n  color: var(--on-surface);\n}\n._skc-chip--elevated,\n.skc-suggestion-chip.skc-suggestion-chip--elevated,\n.skc-filter-chip.skc-filter-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated {\n  border: none;\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-1);\n}\n._skc-chip--elevated._skc-chip--selected,\n._skc-chip--elevated.skc-input-chip--selected,\n._skc-chip--selected.skc-suggestion-chip.skc-suggestion-chip--elevated,\n.skc-suggestion-chip.skc-suggestion-chip--elevated.skc-input-chip--selected,\n._skc-chip--elevated.skc-filter-chip--selected,\n.skc-filter-chip--selected.skc-suggestion-chip.skc-suggestion-chip--elevated,\n._skc-chip--selected.skc-filter-chip.skc-filter-chip--elevated,\n.skc-filter-chip.skc-filter-chip--elevated.skc-input-chip--selected,\n.skc-filter-chip.skc-filter-chip--elevated.skc-filter-chip--selected,\n._skc-chip--selected.skc-assist-chip.skc-assist-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated.skc-input-chip--selected,\n.skc-assist-chip.skc-assist-chip--elevated.skc-filter-chip--selected {\n  background-color: var(--secondary-container);\n}\n._skc-chip--elevated[aria-disabled=true],\n[aria-disabled=true].skc-suggestion-chip.skc-suggestion-chip--elevated,\n[aria-disabled=true].skc-filter-chip.skc-filter-chip--elevated,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated {\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n  box-shadow: none;\n}\n._skc-chip--elevated[aria-disabled=true]::before,\n[aria-disabled=true].skc-suggestion-chip.skc-suggestion-chip--elevated::before,\n[aria-disabled=true].skc-filter-chip.skc-filter-chip--elevated::before,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated::before {\n  border: none;\n  background-color: var(--on-surface);\n}\n._skc-chip--dangerous ._skc-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-input-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-suggestion-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-filter-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-assist-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous ._skc-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-input-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-suggestion-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-filter-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-assist-chip__icon .skc-icon {\n  color: var(--error);\n}\n._skc-chip--selected,\n.skc-input-chip--selected,\n.skc-filter-chip--selected {\n  color: var(--on-secondary-container);\n  border-color: rgba(0, 0, 0, 0);\n  background-color: var(--secondary-container);\n}\n._skc-chip__label,\n.skc-input-chip__label,\n.skc-suggestion-chip__label,\n.skc-filter-chip__label,\n.skc-assist-chip__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  font-family: var(--font-display);\n  white-space: nowrap;\n}\n._skc-chip__icon,\n.skc-input-chip__icon,\n.skc-suggestion-chip__icon,\n.skc-filter-chip__icon,\n.skc-assist-chip__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n  color: var(--primary);\n}\n._skc-chip__icon .skc-icon,\n.skc-input-chip__icon .skc-icon,\n.skc-suggestion-chip__icon .skc-icon,\n.skc-filter-chip__icon .skc-icon,\n.skc-assist-chip__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)),\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) {\n  padding: .1875rem;\n  color: var(--on-surface);\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon {\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n._skc-chip__ripple,\nbutton.skc-input-chip .skc-input-chip__ripple,\n.skc-suggestion-chip__ripple,\n.skc-filter-chip__ripple,\n.skc-assist-chip__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface-variant);\n}\n.skc-assist-chip:has(.skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-filter-chip:has(.skc-filter-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-filter-chip:has(.skc-button) {\n  padding-block: 0;\n  padding-right: .25rem;\n}\n.skc-filter-chip:has(.skc-button) .skc-filter-chip__label {\n  padding-block: .375rem;\n}\n.skc-filter-chip__anchor {\n  position: relative;\n}\n.skc-filter-chip__anchor .skc-menu {\n  inset: 2.125rem 0 auto 0;\n}\n.skc-filter-chip--selected .skc-filter-chip__icon .skc-icon {\n  color: var(--on-secondary-container);\n}\n.skc-suggestion-chip:has(.skc-suggestion-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip {\n  cursor: initial;\n}\n.skc-input-chip::before {\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child) {\n  padding-block: .25rem;\n  padding-left: .25rem;\n  border-radius: var(--rounded-full);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child):has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip:has(.skc-input-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip:has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip__avatar {\n  width: 1.5rem;\n  height: 1.5rem;\n}\n.skc-input-chip__avatar .skc-avatar {\n  width: 100%;\n  height: 100%;\n}\n.skc-input-chip__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  padding-block: .375rem;\n  outline: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip--selected .skc-input-chip__avatar {\n  color: var(--on-secondary);\n  border-radius: var(--rounded-full);\n  background-color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button {\n  color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button::before,\n.skc-input-chip--selected .skc-button .skc-button__ripple {\n  background-color: var(--on-secondary-container);\n}\nbutton.skc-input-chip {\n  cursor: pointer;\n}\nbutton.skc-input-chip::before {\n  background-color: var(--on-surface);\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n._skc-chip,\n.skc-input-chip,\n.skc-suggestion-chip,\n.skc-filter-chip,\n.skc-assist-chip {\n  transition: border-color var(--motion-short-4) var(--easing-standard), background-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  justify-content: center;\n  gap: .5rem;\n  padding: .375rem 1rem;\n  cursor: pointer;\n  color: var(--on-surface);\n  border: 1px solid var(--outline);\n  border-radius: .5rem;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n._skc-chip::before,\n.skc-input-chip::before,\n.skc-suggestion-chip::before,\n.skc-filter-chip::before,\n.skc-assist-chip::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface-variant);\n}\n._skc-chip:hover::before,\n.skc-input-chip:hover::before,\n.skc-suggestion-chip:hover::before,\n.skc-filter-chip:hover::before,\n.skc-assist-chip:hover::before {\n  opacity: .08;\n}\n._skc-chip:focus::before,\n.skc-input-chip:focus::before,\n.skc-suggestion-chip:focus::before,\n.skc-filter-chip:focus::before,\n.skc-assist-chip:focus::before,\n._skc-chip:active::before,\n.skc-input-chip:active::before,\n.skc-suggestion-chip:active::before,\n.skc-filter-chip:active::before,\n.skc-assist-chip:active::before {\n  opacity: .12;\n}\n._skc-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-input-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-suggestion-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-filter-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-assist-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n._skc-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-input-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-suggestion-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-filter-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-assist-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child) {\n  padding-right: .5rem;\n}\n._skc-chip[aria-disabled=true],\n[aria-disabled=true].skc-input-chip,\n[aria-disabled=true].skc-suggestion-chip,\n[aria-disabled=true].skc-filter-chip,\n[aria-disabled=true].skc-assist-chip {\n  overflow: visible;\n  cursor: default;\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true]::before,\n[aria-disabled=true].skc-input-chip::before,\n[aria-disabled=true].skc-suggestion-chip::before,\n[aria-disabled=true].skc-filter-chip::before,\n[aria-disabled=true].skc-assist-chip::before {\n  inset: -1px;\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__ripple,\n._skc-chip[aria-disabled=true] button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip ._skc-chip[aria-disabled=true] .skc-input-chip__ripple,\n[aria-disabled=true].skc-input-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-input-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-input-chip .skc-input-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-suggestion-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-suggestion-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-filter-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-filter-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-filter-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-filter-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-filter-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-assist-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-assist-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-assist-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-assist-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__ripple {\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-input-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-suggestion-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-filter-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__icon .skc-icon {\n  color: var(--on-surface);\n}\n._skc-chip--elevated,\n.skc-suggestion-chip.skc-suggestion-chip--elevated,\n.skc-filter-chip.skc-filter-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated {\n  border: none;\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-1);\n}\n._skc-chip--elevated._skc-chip--selected,\n._skc-chip--elevated.skc-input-chip--selected,\n._skc-chip--selected.skc-suggestion-chip.skc-suggestion-chip--elevated,\n.skc-suggestion-chip.skc-suggestion-chip--elevated.skc-input-chip--selected,\n._skc-chip--elevated.skc-filter-chip--selected,\n.skc-filter-chip--selected.skc-suggestion-chip.skc-suggestion-chip--elevated,\n._skc-chip--selected.skc-filter-chip.skc-filter-chip--elevated,\n.skc-filter-chip.skc-filter-chip--elevated.skc-input-chip--selected,\n.skc-filter-chip.skc-filter-chip--elevated.skc-filter-chip--selected,\n._skc-chip--selected.skc-assist-chip.skc-assist-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated.skc-input-chip--selected,\n.skc-assist-chip.skc-assist-chip--elevated.skc-filter-chip--selected {\n  background-color: var(--secondary-container);\n}\n._skc-chip--elevated[aria-disabled=true],\n[aria-disabled=true].skc-suggestion-chip.skc-suggestion-chip--elevated,\n[aria-disabled=true].skc-filter-chip.skc-filter-chip--elevated,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated {\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n  box-shadow: none;\n}\n._skc-chip--elevated[aria-disabled=true]::before,\n[aria-disabled=true].skc-suggestion-chip.skc-suggestion-chip--elevated::before,\n[aria-disabled=true].skc-filter-chip.skc-filter-chip--elevated::before,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated::before {\n  border: none;\n  background-color: var(--on-surface);\n}\n._skc-chip--dangerous ._skc-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-input-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-suggestion-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-filter-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-assist-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous ._skc-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-input-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-suggestion-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-filter-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-assist-chip__icon .skc-icon {\n  color: var(--error);\n}\n._skc-chip--selected,\n.skc-input-chip--selected,\n.skc-filter-chip--selected {\n  color: var(--on-secondary-container);\n  border-color: rgba(0, 0, 0, 0);\n  background-color: var(--secondary-container);\n}\n._skc-chip__label,\n.skc-input-chip__label,\n.skc-suggestion-chip__label,\n.skc-filter-chip__label,\n.skc-assist-chip__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  font-family: var(--font-display);\n  white-space: nowrap;\n}\n._skc-chip__icon,\n.skc-input-chip__icon,\n.skc-suggestion-chip__icon,\n.skc-filter-chip__icon,\n.skc-assist-chip__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n  color: var(--primary);\n}\n._skc-chip__icon .skc-icon,\n.skc-input-chip__icon .skc-icon,\n.skc-suggestion-chip__icon .skc-icon,\n.skc-filter-chip__icon .skc-icon,\n.skc-assist-chip__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)),\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) {\n  padding: .1875rem;\n  color: var(--on-surface);\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon {\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n._skc-chip__ripple,\nbutton.skc-input-chip .skc-input-chip__ripple,\n.skc-suggestion-chip__ripple,\n.skc-filter-chip__ripple,\n.skc-assist-chip__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface-variant);\n}\n.skc-assist-chip:has(.skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-filter-chip:has(.skc-filter-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-filter-chip:has(.skc-button) {\n  padding-block: 0;\n  padding-right: .25rem;\n}\n.skc-filter-chip:has(.skc-button) .skc-filter-chip__label {\n  padding-block: .375rem;\n}\n.skc-filter-chip__anchor {\n  position: relative;\n}\n.skc-filter-chip__anchor .skc-menu {\n  inset: 2.125rem 0 auto 0;\n}\n.skc-filter-chip--selected .skc-filter-chip__icon .skc-icon {\n  color: var(--on-secondary-container);\n}\n.skc-suggestion-chip:has(.skc-suggestion-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip {\n  cursor: initial;\n}\n.skc-input-chip::before {\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child) {\n  padding-block: .25rem;\n  padding-left: .25rem;\n  border-radius: var(--rounded-full);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child):has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip:has(.skc-input-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip:has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip__avatar {\n  width: 1.5rem;\n  height: 1.5rem;\n}\n.skc-input-chip__avatar .skc-avatar {\n  width: 100%;\n  height: 100%;\n}\n.skc-input-chip__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  padding-block: .375rem;\n  outline: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip--selected .skc-input-chip__avatar {\n  color: var(--on-secondary);\n  border-radius: var(--rounded-full);\n  background-color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button {\n  color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button::before,\n.skc-input-chip--selected .skc-button .skc-button__ripple {\n  background-color: var(--on-secondary-container);\n}\nbutton.skc-input-chip {\n  cursor: pointer;\n}\nbutton.skc-input-chip::before {\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/InputChip/index.tsx
-var import_framer_motion7 = require("framer-motion");
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var import_framer_motion8 = require("framer-motion");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 function InputChip({
   children,
   avatar,
@@ -910,23 +982,23 @@ function InputChip({
         setEditing(true);
     }
   }), rippleListeners);
-  const divContent = /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
-    avatar && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "skc-input-chip__avatar", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "done" }) : avatar }),
-    icon && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "skc-input-chip__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "skc-input-chip__label", children }),
-    onDelete && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+  const divContent = /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
+    avatar && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "skc-input-chip__avatar", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(MaterialIcon, { icon: "done" }) : avatar }),
+    icon && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "skc-input-chip__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "skc-input-chip__label", children }),
+    onDelete && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
       Button,
       {
         appearance: "text",
-        icon: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "close" }),
+        icon: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(MaterialIcon, { icon: "close" }),
         onClick: onDelete
       }
     )
   ] });
-  const buttonContent = /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
+  const buttonContent = /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
     divContent,
-    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
-      import_framer_motion7.motion.span,
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+      import_framer_motion8.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -935,7 +1007,7 @@ function InputChip({
       }
     )
   ] });
-  return editing ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+  return editing ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
     "input",
     {
       ref: inputRef,
@@ -953,14 +1025,14 @@ function InputChip({
           setEditing(false);
       }
     }
-  ) : editable || onClick ? layoutID ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(import_framer_motion7.motion.button, __spreadProps(__spreadValues({ layoutId: layoutID }, buttonProps), { children: buttonContent })) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("button", __spreadProps(__spreadValues({}, buttonProps), { children: buttonContent })) : layoutID ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(import_framer_motion7.motion.div, __spreadProps(__spreadValues({ layoutId: layoutID }, divProps), { children: divContent })) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", __spreadProps(__spreadValues({}, divProps), { children: divContent }));
+  ) : editable || onClick ? layoutID ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_framer_motion8.motion.button, __spreadProps(__spreadValues({ layoutId: layoutID }, buttonProps), { children: buttonContent })) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("button", __spreadProps(__spreadValues({}, buttonProps), { children: buttonContent })) : layoutID ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_framer_motion8.motion.div, __spreadProps(__spreadValues({ layoutId: layoutID }, divProps), { children: divContent })) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", __spreadProps(__spreadValues({}, divProps), { children: divContent }));
 }
 InputChip.displayName = "InputChip";
 
 // src/components/AssistChip/index.tsx
-var import_framer_motion8 = require("framer-motion");
+var import_framer_motion9 = require("framer-motion");
 var React8 = __toESM(require("react"));
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 function AssistChip({
   children,
   icon,
@@ -993,11 +1065,11 @@ function AssistChip({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "skc-assist-chip__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "skc-assist-chip__label", children }),
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
-      import_framer_motion8.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(import_jsx_runtime15.Fragment, { children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "skc-assist-chip__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "skc-assist-chip__label", children }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+      import_framer_motion9.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1008,11 +1080,11 @@ function AssistChip({
   ] });
   return (
     // Render with `element` if defined
-    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
       )
     )
   );
@@ -1020,9 +1092,9 @@ function AssistChip({
 AssistChip.displayName = "AssistChip";
 
 // src/components/FilterChip/index.tsx
-var import_framer_motion9 = require("framer-motion");
+var import_framer_motion10 = require("framer-motion");
 var React9 = __toESM(require("react"));
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 function FilterChip({
   children,
   icon,
@@ -1050,9 +1122,9 @@ function FilterChip({
       className
     ])
   };
-  const content = /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(import_jsx_runtime15.Fragment, { children: [
-    (icon || selected) && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "skc-filter-chip__icon", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(MaterialIcon, { icon: "done" }) : icon }),
-    onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  const content = /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
+    (icon || selected) && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "skc-filter-chip__icon", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(MaterialIcon, { icon: "done" }) : icon }),
+    onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
       "button",
       __spreadProps(__spreadValues({
         className: "skc-filter-chip__label",
@@ -1060,17 +1132,17 @@ function FilterChip({
       }, rippleListeners), {
         children
       })
-    ) : /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "skc-filter-chip__label", children }),
-    onMenuToggle && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+    ) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "skc-filter-chip__label", children }),
+    onMenuToggle && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
       Button,
       {
         appearance: "text",
-        icon: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(MaterialIcon, { icon: "arrow_drop_down" }),
+        icon: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(MaterialIcon, { icon: "arrow_drop_down" }),
         onClick: onMenuToggle
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
-      import_framer_motion9.motion.span,
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+      import_framer_motion10.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1079,10 +1151,10 @@ function FilterChip({
       }
     )
   ] });
-  return onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "skc-filter-chip__anchor", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", __spreadProps(__spreadValues({}, props), { children: content })),
+  return onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "skc-filter-chip__anchor", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", __spreadProps(__spreadValues({}, props), { children: content })),
     menu
-  ] }) : /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  ] }) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
     "button",
     __spreadProps(__spreadValues(__spreadProps(__spreadValues({}, props), {
       onClick: () => onClick && onClick(!selected)
@@ -1094,9 +1166,9 @@ function FilterChip({
 FilterChip.displayName = "FilterChip";
 
 // src/components/SuggestionChip/index.tsx
-var import_framer_motion10 = require("framer-motion");
+var import_framer_motion11 = require("framer-motion");
 var React10 = __toESM(require("react"));
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 function SuggestionChip({
   children,
   icon,
@@ -1124,11 +1196,11 @@ function SuggestionChip({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "skc-suggestion-chip__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "skc-suggestion-chip__label", children }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
-      import_framer_motion10.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(import_jsx_runtime17.Fragment, { children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "skc-suggestion-chip__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "skc-suggestion-chip__label", children }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+      import_framer_motion11.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1139,11 +1211,11 @@ function SuggestionChip({
   ] });
   return (
     // Render with `element` if defined
-    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
+    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
       )
     )
   );
@@ -1151,14 +1223,14 @@ function SuggestionChip({
 SuggestionChip.displayName = "SuggestionChip";
 
 // src/components/ChipField/index.tsx
-var import_framer_motion11 = require("framer-motion");
+var import_framer_motion12 = require("framer-motion");
 var React11 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/chip-set.css
 styleInject(".skc-chip-set {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: .5rem;\n}\n.skc-chip-set__wrapper {\n  overflow-x: auto;\n}\n.skc-chip-set__wrapper .skc-chip-set {\n  flex-wrap: nowrap;\n  width: fit-content;\n}\n");
 
 // src/components/ChipSet/index.tsx
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_jsx_runtime18 = require("react/jsx-runtime");
 function ChipSet({
   children,
   scrollable,
@@ -1166,7 +1238,7 @@ function ChipSet({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
     "div",
     __spreadProps(__spreadValues({
       style,
@@ -1175,7 +1247,7 @@ function ChipSet({
         className
       ])
     }, !scrollable ? divAttr : null), {
-      children: scrollable ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", __spreadProps(__spreadValues({ className: "skc-chip-set" }, scrollable ? divAttr : null), { children })) : children
+      children: scrollable ? /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", __spreadProps(__spreadValues({ className: "skc-chip-set" }, scrollable ? divAttr : null), { children })) : children
     })
   );
 }
@@ -1190,7 +1262,7 @@ function kebabify(string) {
 }
 
 // src/components/ChipField/index.tsx
-var import_jsx_runtime18 = require("react/jsx-runtime");
+var import_jsx_runtime19 = require("react/jsx-runtime");
 function ChipField({
   children,
   label,
@@ -1216,7 +1288,7 @@ function ChipField({
     [children]
   );
   const { duration, easing } = useAnimationConfig();
-  const labelControls = (0, import_framer_motion11.useAnimationControls)();
+  const labelControls = (0, import_framer_motion12.useAnimationControls)();
   const [minifyLabel, setMinifyLabel] = React11.useState();
   const [neverResetLabel, setNeverResetLabel] = React11.useState(false);
   const labelTransition = transition(duration.short4, easing.standard);
@@ -1295,9 +1367,9 @@ function ChipField({
   const fieldID = `chip-field-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { style, className: cn(["skc-chip-field", className]), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
-      import_framer_motion11.motion.label,
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { style, className: cn(["skc-chip-field", className]), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+      import_framer_motion12.motion.label,
       {
         htmlFor: fieldID,
         animate: labelControls,
@@ -1305,8 +1377,8 @@ function ChipField({
         children: label
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "skc-chip-field__content", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ChipSet, { divAttr: { "aria-live": "polite", "aria-relevant": "all" }, children: React11.Children.map(
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "skc-chip-field__content", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(ChipSet, { divAttr: { "aria-live": "polite", "aria-relevant": "all" }, children: React11.Children.map(
         React11.Children.only(children).props.children,
         (child, idx) => {
           if (!lastSelected)
@@ -1318,7 +1390,7 @@ function ChipField({
           return child;
         }
       ) }),
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
         "input",
         __spreadValues({
           id: fieldID,
@@ -1339,15 +1411,510 @@ function ChipField({
 }
 ChipField.displayName = "ChipField";
 
-// src/components/Dialog/index.tsx
-var import_framer_motion12 = require("framer-motion");
+// src/components/DataTable/index.tsx
+var import_framer_motion13 = require("framer-motion");
+
+// ../skcom-css/dist/css/components/data-table.css
+styleInject(".skc-data-table {\n  border: 2px solid var(--outline-variant);\n  border-radius: 1.25rem;\n  background-color: var(--surface-1);\n}\n.skc-data-table > :first-child {\n  border-radius: calc(1.25rem - 2px) calc(1.25rem - 2px) 0 0;\n}\n.skc-data-table > :last-child {\n  border-radius: 0 0 calc(1.25rem - 2px) calc(1.25rem - 2px);\n}\n");
+
+// src/components/DataTable/index.tsx
+var import_jsx_runtime20 = require("react/jsx-runtime");
+function DataTable({ children, style, className }) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    import_framer_motion13.motion.figure,
+    {
+      layout: true,
+      transition: transition(duration.medium4, easing.standard),
+      style,
+      className: cn(["skc-data-table", className]),
+      children
+    }
+  );
+}
+DataTable.displayName = "DataTable";
+
+// src/components/DataTableSearch/index.tsx
+var import_framer_motion14 = require("framer-motion");
+
+// ../skcom-css/dist/css/components/data-table-search.css
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-data-table-search {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  border-bottom: 1px solid var(--outline-variant);\n  background-color: var(--surface);\n}\n.skc-data-table-search::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-data-table-search:has(.skc-data-table-search__input:hover)::before {\n  opacity: .08;\n}\n.skc-data-table-search:has(.skc-data-table-search__input:focus) {\n  margin-bottom: -0.75px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-data-table-search__icon {\n  margin-left: 1.5rem;\n}\n.skc-data-table-search__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  appearance: textfield;\n  flex-grow: 1;\n  padding-block: 1rem;\n  border: 0;\n  outline-offset: -2px;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-data-table-search__input:focus {\n  outline: none;\n}\n.skc-data-table-search__input::placeholder {\n  font-family: var(--font-display);\n  color: var(--on-surface-variant);\n}\n.skc-data-table-search__overflow {\n  position: relative;\n}\n.skc-data-table-search__overflow .skc-button {\n  margin-right: 1rem;\n  color: var(--on-surface);\n}\n.skc-data-table-search__overflow .skc-button::before,\n.skc-data-table-search__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n');
+
+// src/components/DataTableSearch/index.tsx
+var import_jsx_runtime21 = require("react/jsx-runtime");
+function DataTableSearch({
+  value,
+  locale,
+  onChange,
+  placeholder,
+  onOverflowToggle,
+  overflow,
+  inputAttr,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
+    import_framer_motion14.motion.div,
+    {
+      layout: true,
+      transition: transition(duration.medium4, easing.standard),
+      style,
+      className: cn(["skc-data-table-search", className]),
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "skc-data-table-search__icon", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MaterialIcon, { icon: "search" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+          "input",
+          __spreadValues({
+            type: "search",
+            "aria-label": locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search",
+            className: "skc-data-table-search__input",
+            value,
+            onChange: (event) => onChange && onChange(event.target.value),
+            placeholder: placeholder || (locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search")
+          }, inputAttr)
+        ),
+        onOverflowToggle && /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "skc-data-table-search__overflow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+            Button,
+            {
+              appearance: "text",
+              icon: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MaterialIcon, { icon: "more_vert" }),
+              alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21" : "Toggle overflow menu",
+              onClick: onOverflowToggle
+            }
+          ),
+          overflow
+        ] })
+      ]
+    }
+  );
+}
+DataTableSearch.displayName = "DataTableSearch";
+
+// src/components/DataTableFilters/index.tsx
+var import_framer_motion15 = require("framer-motion");
+
+// ../skcom-css/dist/css/components/data-table-filters.css
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-data-table-search,\n.skc-data-table-filters {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  border-bottom: 1px solid var(--outline-variant);\n  background-color: var(--surface);\n}\n.skc-data-table-search::before,\n.skc-data-table-filters::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-data-table-search:has(.skc-data-table-search__input:hover)::before,\n.skc-data-table-filters:has(.skc-data-table-search__input:hover)::before {\n  opacity: .08;\n}\n.skc-data-table-search:has(.skc-data-table-search__input:focus),\n.skc-data-table-filters:has(.skc-data-table-search__input:focus) {\n  margin-bottom: -0.75px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-data-table-search__icon,\n.skc-data-table-filters__icon {\n  margin-left: 1.5rem;\n}\n.skc-data-table-search__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  appearance: textfield;\n  flex-grow: 1;\n  padding-block: 1rem;\n  border: 0;\n  outline-offset: -2px;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-data-table-search__input:focus {\n  outline: none;\n}\n.skc-data-table-search__input::placeholder {\n  font-family: var(--font-display);\n  color: var(--on-surface-variant);\n}\n.skc-data-table-search__overflow,\n.skc-data-table-filters__overflow {\n  position: relative;\n}\n.skc-data-table-search__overflow .skc-button,\n.skc-data-table-filters__overflow .skc-button {\n  margin-right: 1rem;\n  color: var(--on-surface);\n}\n.skc-data-table-search__overflow .skc-button::before,\n.skc-data-table-filters__overflow .skc-button::before,\n.skc-data-table-search__overflow .skc-button .skc-button__ripple,\n.skc-data-table-filters__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-data-table-filters .skc-chip-set {\n  padding-block: .625rem;\n  flex-grow: 1;\n}\n');
+
+// src/components/DataTableFilters/index.tsx
+var import_jsx_runtime22 = require("react/jsx-runtime");
+function DataTableFilters({
+  children,
+  locale,
+  onOverflowToggle,
+  overflow,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+    import_framer_motion15.motion.div,
+    {
+      layout: true,
+      transition: transition(duration.medium4, easing.standard),
+      style,
+      className: cn(["skc-data-table-filters", className]),
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "skc-data-table-filters__icon", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MaterialIcon, { icon: "filter_list" }) }),
+        children,
+        onOverflowToggle && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "skc-data-table-filters__overflow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+            Button,
+            {
+              appearance: "text",
+              icon: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MaterialIcon, { icon: "more_vert" }),
+              alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21" : "Toggle overflow menu",
+              onClick: onOverflowToggle
+            }
+          ),
+          overflow
+        ] })
+      ]
+    }
+  );
+}
+DataTableFilters.displayName = "DataTableFilters";
+
+// ../skcom-css/dist/css/components/data-table-content.css
+styleInject(".skc-data-table-content {\n  overflow-x: auto;\n  width: 100%;\n  background-color: var(--surface);\n}\n.skc-data-table-content__content {\n  width: 100%;\n  border-spacing: 0;\n  border-collapse: separate;\n  text-indent: 0;\n}\n@media only screen and (min-width: 905px) {\n  .skc-data-table-content {\n    overflow-x: visible;\n  }\n}\n");
+
+// src/components/DataTableContent/index.tsx
+var import_jsx_runtime23 = require("react/jsx-runtime");
+function DataTableContent({
+  children,
+  contentWidth,
+  style,
+  className
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "skc-data-table-content", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+    "table",
+    {
+      style: __spreadProps(__spreadValues({}, style), { minWidth: contentWidth }),
+      className: cn(["skc-data-table-content__content", className]),
+      children
+    }
+  ) });
+}
+DataTableContent.displayName = "DataTableContent";
+
+// src/components/DataTableHead/index.tsx
+var import_react_table = require("@tanstack/react-table");
+var import_framer_motion16 = require("framer-motion");
 var React12 = __toESM(require("react"));
 
-// ../skcom-css/dist/css/components/dialog.css
-styleInject(".skc-dialog {\n  position: fixed;\n  z-index: 90;\n  inset: 50% auto auto 50%;\n  width: 22.5rem;\n  max-width: calc(100vw - 3rem);\n  margin: 0 !important;\n  transform: translate(-50%, -50%);\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-3);\n}\n.skc-dialog > .skc-actions {\n  padding: 1.5rem 1.5rem 1.5rem 1rem;\n}\n.skc-dialog,\n.skc-dialog .skc-text-field--outlined .skc-text-field__label,\n.skc-dialog .skc-chip-field__label {\n  background-color: var(--surface-3);\n}\n.skc-dialog .skc-text-field--filled {\n  background-color: var(--surface-1);\n}\n.skc-dialog .skc-text-field--filled::before {\n  background-color: var(--outline);\n}\n.skc-dialog ~ .skc-scrim {\n  margin: 0 !important;\n}\n");
+// ../skcom-css/dist/css/components/table-row.css
+styleInject(".skc-table-row {\n  display: table-row;\n}\n");
+
+// src/components/TableRow/index.tsx
+var import_jsx_runtime24 = require("react/jsx-runtime");
+function TableRow({ children, style, className }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("tr", { style, className: cn(["skc-table-row", className]), children });
+}
+TableRow.displayName = "TableRow";
+
+// ../skcom-css/dist/css/components/table-head.css
+styleInject(".skc-table-head {\n  display: table-header-group;\n  background-color: var(--surface-1);\n}\n.skc-table-head--fixed {\n  position: sticky;\n  inset: 0 0 auto 0;\n}\n");
+
+// src/components/DataTableHead/index.tsx
+var import_jsx_runtime25 = require("react/jsx-runtime");
+function DataTableHead({
+  headerGroups,
+  locale,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+    import_framer_motion16.motion.thead,
+    {
+      layout: true,
+      transition: transition(duration.medium4, easing.standard),
+      style,
+      className: cn(["skc-table-head", className]),
+      children: headerGroups.map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
+        var _a;
+        const columnDef = header.column.columnDef;
+        const toggleRef = React12.useRef(null);
+        const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
+        const headerID = `table-header-${header.column.columnDef.header}`;
+        return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
+          "th",
+          __spreadProps(__spreadValues(__spreadProps(__spreadValues({
+            ref: toggleRef
+          }, columnDef.thAttr), {
+            className: cn([
+              "skc-table-cell",
+              "skc-table-cell--header",
+              header.column.getCanSort() && "skc-table-cell--sortable",
+              (_a = columnDef.thAttr) == null ? void 0 : _a.className
+            ]),
+            title: header.column.getCanSort() ? locale === "th" ? "\u0E04\u0E25\u0E34\u0E01\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E40\u0E23\u0E35\u0E22\u0E07" : "Click to toggle sort" : void 0,
+            onClick: header.column.getToggleSortingHandler(),
+            onKeyUp: (event) => {
+              if (!["Enter", " "].includes(event.key))
+                return;
+              event.preventDefault();
+              const sortingHandler = header.column.getToggleSortingHandler();
+              if (sortingHandler)
+                sortingHandler(event);
+            },
+            tabIndex: 0
+          }), rippleListeners), {
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { "aria-atomic": true, className: "skc-table-cell__content", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(import_framer_motion16.LayoutGroup, { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(import_framer_motion16.AnimatePresence, { children: header.column.getIsSorted() && /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+                  import_framer_motion16.motion.div,
+                  {
+                    layoutId: `${headerID}-sort-indicator`,
+                    initial: { scale: 0.4, opacity: 0 },
+                    animate: {
+                      scale: 1,
+                      rotate: header.column.getIsSorted() === "desc" ? 180 : 0,
+                      opacity: 1
+                    },
+                    exit: { scale: 0.4, opacity: 0 },
+                    transition: transition(
+                      duration.short4,
+                      easing.standard
+                    ),
+                    "aria-label": locale === "th" ? `\u0E04\u0E2D\u0E25\u0E31\u0E21\u0E19\u0E4C\u0E17\u0E35\u0E48\u0E40\u0E23\u0E35\u0E22\u0E07 ${header.column.getIsSorted() === "asc" ? "\u0E08\u0E32\u0E01\u0E19\u0E49\u0E2D\u0E22\u0E44\u0E1B\u0E21\u0E32\u0E01" : "\u0E08\u0E32\u0E01\u0E19\u0E49\u0E2D\u0E22\u0E44\u0E1B\u0E19\u0E49\u0E2D\u0E22"}` : `Sorted column, ${header.column.getIsSorted() === "asc" ? "ascending" : "descending"};`,
+                    className: "skc-table-cell__sort-indicator",
+                    children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(MaterialIcon, { icon: "arrow_downward" })
+                  }
+                ) }),
+                /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+                  import_framer_motion16.motion.span,
+                  {
+                    layoutId: headerID,
+                    layout: "position",
+                    transition: transition(duration.short4, easing.standard),
+                    children: (0, import_react_table.flexRender)(columnDef.header, header.getContext())
+                  }
+                )
+              ] }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+                import_framer_motion16.motion.span,
+                {
+                  "aria-hidden": true,
+                  initial: { scale: 0, opacity: 0.36 },
+                  animate: rippleControls,
+                  className: "skc-table-cell__ripple",
+                  style: rippleStyle
+                }
+              )
+            ]
+          }),
+          header.id
+        );
+      }) }, headerGroup.id))
+    }
+  );
+}
+DataTableHead.displayName = "TableHead";
+
+// src/components/DataTableBody/index.tsx
+var import_react_table2 = require("@tanstack/react-table");
+
+// ../skcom-css/dist/css/components/table-body.css
+styleInject(".skc-table-body {\n  display: table-row-group;\n}\n");
+
+// src/components/TableBody/index.tsx
+var import_jsx_runtime26 = require("react/jsx-runtime");
+function TableBody({ children, style, className }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("tbody", { style, className: cn(["skc-table-body", className]), children });
+}
+TableBody.displayName = "TableBody";
+
+// src/components/TableCell/index.tsx
+var import_framer_motion17 = require("framer-motion");
+var React13 = __toESM(require("react"));
+
+// ../skcom-css/dist/css/components/table-cell.css
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  position: relative;\n  display: table-cell;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-data-table__content:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-block: .875rem;\n  padding-left: .75rem;\n}\n.skc-table-cell__content:has(.skc-input-chip, .skc-assist-chip, .skc-filter-chip, .skc-suggestion-chip) {\n  padding-block: .625rem;\n}\n.skc-table-cell__content .skc-icon {\n  margin-right: .25rem;\n  color: var(--outline);\n}\n.skc-table-cell__sort-indicator {\n  margin-right: .25rem;\n}\n.skc-table-cell__sort-indicator .skc-icon {\n  transition: color var(--motion-short-4) var(--easing-standard);\n  margin-right: 0;\n}\n.skc-table-cell--sortable:focus .skc-table-cell__sort-indicator .skc-icon {\n  color: var(--primary);\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--sortable,\n.skc-table-cell:has(.skc-table-cell__menu-toggle) {\n  cursor: pointer;\n  user-select: none;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle)::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell--sortable:hover::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):hover::before {\n  opacity: .08;\n}\n.skc-table-cell--sortable:focus-within::before,\n.skc-table-cell--sortable:active::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):focus-within::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):active::before {\n  opacity: .12;\n}\n.skc-table-cell--sortable {\n  overflow: hidden;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell--sortable .skc-table-cell__ripple {\n  background-color: var(--primary);\n}\n.skc-table-cell--left .skc-table-cell__content {\n  justify-content: flex-start;\n  text-align: left;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  justify-content: center;\n  text-align: center;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  justify-content: flex-end;\n  text-align: right;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: 0;\n}\n.skc-table-cell__ripple-container {\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n  pointer-events: none;\n}\n.skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-table-cell .skc-menu {\n  inset: 0 0 auto 0;\n  width: 100%;\n}\n');
+
+// src/components/TableCell/index.tsx
+var import_jsx_runtime27 = require("react/jsx-runtime");
+function TableCell({
+  children,
+  header,
+  align,
+  menu,
+  onMenuToggle,
+  tdAttr,
+  style,
+  className
+}) {
+  const toggleRef = React13.useRef(null);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
+  const [menuOpen, setMenuOpen] = React13.useState(false);
+  const props = __spreadValues(__spreadValues({
+    style,
+    className: cn([
+      "skc-table-cell",
+      header && "skc-table-cell--header",
+      align === "left" ? "skc-table-cell--left" : align === "right" ? "skc-table-cell--right" : "skc-table-cell--center",
+      className
+    ])
+  }, rippleListeners), tdAttr);
+  const content = menu ? /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(import_jsx_runtime27.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(
+      "button",
+      {
+        ref: toggleRef,
+        className: "skc-table-cell__menu-toggle",
+        onClick: () => {
+          if (onMenuToggle)
+            onMenuToggle();
+          setMenuOpen(!menuOpen);
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "skc-table-cell__content", children }),
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(MaterialIcon, { icon: "arrow_drop_down" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { "aria-hidden": true, className: "skc-table-cell__ripple-container", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+      import_framer_motion17.motion.span,
+      {
+        initial: { scale: 0, opacity: 0.36 },
+        animate: rippleControls,
+        className: "skc-table-cell__ripple",
+        style: rippleStyle
+      }
+    ) }),
+    React13.cloneElement(
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Menu, { children: React13.Children.map(
+        menu.props.children,
+        (menuItem) => React13.cloneElement(menuItem, {
+          onClick: () => {
+            const { onClick } = menuItem.props;
+            if (onClick)
+              onClick();
+            setMenuOpen(false);
+          }
+        })
+      ) }),
+      {
+        open: menuOpen,
+        onBlur: () => setMenuOpen(false)
+      }
+    )
+  ] }) : /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "skc-table-cell__content", children });
+  return header ? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("th", __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("td", __spreadProps(__spreadValues({}, props), { children: content }));
+}
+TableCell.displayName = "TableCell";
+
+// src/components/DataTableBody/index.tsx
+var import_jsx_runtime28 = require("react/jsx-runtime");
+function DataTableBody({
+  rowModel,
+  style,
+  className
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(TableBody, __spreadProps(__spreadValues({}, { style, className }), { children: rowModel.rows.map((row) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(TableRow, { children: row.getVisibleCells().map((cell) => {
+      const columnDef = cell.column.columnDef;
+      return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
+        TableCell,
+        __spreadProps(__spreadValues({
+          align: "left"
+        }, typeof columnDef.tdAttr === "function" ? columnDef.tdAttr(row.original) : columnDef.tdAttr), {
+          // Check if columnDef provides a custom render function
+          children: columnDef.render ? (
+            // Use custom render function
+            columnDef.render(row.original)
+          ) : (
+            // Check if cell is not empty
+            cell.getValue() ? (
+              // Render cell normally
+              (0, import_react_table2.flexRender)(
+                cell.column.columnDef.cell,
+                cell.getContext()
+              )
+            ) : (
+              // (Cell is empty) Show no data message
+              columnDef.noDataMsg
+            )
+          )
+        }),
+        cell.id
+      );
+    }) }, row.id);
+  }) }));
+}
+DataTableBody.displayName = "DataTableBody";
+
+// src/components/DataTablePagination/index.tsx
+var import_framer_motion18 = require("framer-motion");
+var React14 = __toESM(require("react"));
+
+// ../skcom-css/dist/css/components/data-table-pagination.css
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-data-table-pagination {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  justify-content: flex-end;\n  gap: 2rem;\n  padding: .375rem 1.5rem;\n  border-top: 1px solid var(--outline-variant);\n  background-color: var(--surface-1);\n}\n.skc-data-table-pagination__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  font-family: var(--font-display);\n}\n.skc-data-table-pagination__controls {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 0;\n}\n.skc-data-table-pagination__controls .skc-button {\n  margin-right: -0.5rem;\n  color: var(--on-surface);\n}\n.skc-data-table-pagination__controls .skc-button::before,\n.skc-data-table-pagination__controls .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n");
+
+// src/components/DataTablePagination/index.tsx
+var import_jsx_runtime29 = require("react/jsx-runtime");
+function DataTablePagination({
+  rowsPerPage,
+  totalRows,
+  locale,
+  onChange,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  const [page, setPage] = React14.useState(1);
+  const [maxPage, setMaxPage] = React14.useState(
+    Math.ceil(totalRows / rowsPerPage)
+  );
+  React14.useEffect(() => {
+    const newMaxPage = Math.ceil(totalRows / rowsPerPage);
+    setMaxPage(newMaxPage);
+    if (newMaxPage < page)
+      setPage(Math.max(newMaxPage, 1));
+  }, [totalRows, rowsPerPage]);
+  const range = {
+    start: totalRows ? rowsPerPage * (page - 1) + 1 : 0,
+    end: Math.min(rowsPerPage * page, totalRows)
+  };
+  React14.useEffect(
+    () => onChange && onChange(page, range.start - 1, range.end - 1),
+    [page]
+  );
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(
+    import_framer_motion18.motion.div,
+    {
+      layout: true,
+      transition: transition(duration.medium4, easing.standard),
+      style,
+      className: cn(["skc-data-table-pagination", className]),
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+          "span",
+          {
+            "aria-label": locale === "th" ? `\u0E41\u0E16\u0E27\u0E17\u0E35\u0E48 ${range.start} \u0E16\u0E36\u0E07 ${range.end} \u0E08\u0E32\u0E01\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14 ${totalRows} \u0E41\u0E16\u0E27` : `Rows ${range.start} to ${range.end}, from a total of ${totalRows} rows`,
+            className: "skc-data-table-pagination__label",
+            children: `${range.start}-${range.end} ${locale === "th" ? "\u0E08\u0E32\u0E01" : "of"} ${totalRows}`
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { className: "skc-data-table-pagination__controls", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+            Button,
+            {
+              appearance: "text",
+              icon: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MaterialIcon, { icon: "first_page" }),
+              alt: locale === "th" ? "\u0E44\u0E1B\u0E2B\u0E19\u0E49\u0E32\u0E41\u0E23\u0E01" : "Go to last page",
+              disabled: page === 1,
+              onClick: () => setPage(1)
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+            Button,
+            {
+              appearance: "text",
+              icon: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MaterialIcon, { icon: "chevron_left" }),
+              alt: locale === "th" ? "\u0E2B\u0E19\u0E49\u0E32\u0E17\u0E35\u0E48\u0E41\u0E25\u0E49\u0E27" : "Previous page",
+              disabled: page === 1,
+              onClick: () => setPage(page - 1)
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+            Button,
+            {
+              appearance: "text",
+              icon: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MaterialIcon, { icon: "chevron_right" }),
+              alt: locale === "th" ? "\u0E2B\u0E19\u0E49\u0E32\u0E15\u0E48\u0E2D\u0E44\u0E1B" : "Next page",
+              disabled: page === maxPage,
+              onClick: () => setPage(page + 1)
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+            Button,
+            {
+              appearance: "text",
+              icon: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(MaterialIcon, { icon: "last_page" }),
+              alt: locale === "th" ? "\u0E44\u0E1B\u0E2B\u0E19\u0E49\u0E32\u0E2A\u0E38\u0E14\u0E17\u0E49\u0E32\u0E22" : "Go to last page",
+              disabled: page === maxPage,
+              onClick: () => setPage(maxPage)
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+DataTablePagination.displayName = "DataTablePagination";
 
 // src/components/Dialog/index.tsx
-var import_jsx_runtime19 = require("react/jsx-runtime");
+var import_framer_motion19 = require("framer-motion");
+var React15 = __toESM(require("react"));
+
+// ../skcom-css/dist/css/components/dialog.css
+styleInject(".skc-dialog {\n  position: fixed;\n  z-index: 90;\n  inset: 50% auto auto 50%;\n  width: 22.5rem;\n  max-width: calc(100vw - 3rem);\n  margin: 0 !important;\n  transform: translate(-50%, -50%);\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-3);\n}\n.skc-dialog > .skc-actions {\n  padding: 1.5rem 1.5rem 1.5rem 1rem;\n}\n.skc-dialog,\n.skc-dialog .skc-text-field--outlined .skc-text-field__label,\n.skc-dialog .skc-chip-field__label {\n  background-color: var(--surface-3);\n}\n.skc-dialog .skc-text-field--filled {\n  background-color: var(--surface-1);\n}\n.skc-dialog .skc-text-field--filled::before {\n  background-color: var(--outline);\n}\n.skc-dialog ~ .skc-scrim {\n  margin: 0 !important;\n}\n@media (prefers-color-scheme: light) {\n  .skc-dialog .skc-input-chip--selected,\n  .skc-dialog .skc-filter-chip--selected {\n    background-color: var(--secondary);\n    color: var(--on-secondary);\n  }\n  .skc-dialog .skc-input-chip--selected .skc-icon,\n  .skc-dialog .skc-filter-chip--selected .skc-icon {\n    color: var(--on-secondary);\n  }\n}\n");
+
+// src/components/Dialog/index.tsx
+var import_jsx_runtime30 = require("react/jsx-runtime");
 function Dialog({
   children,
   open,
@@ -1357,7 +1924,7 @@ function Dialog({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  React12.useEffect(() => {
+  React15.useEffect(() => {
     if (open) {
       const actions = document.querySelector(
         ".skc-dialog > .skc-actions"
@@ -1367,7 +1934,7 @@ function Dialog({
         buttons[buttons.length - 1].focus();
     }
   }, [open]);
-  React12.useEffect(() => {
+  React15.useEffect(() => {
     const handleKeyUp = (event) => {
       if (event.key === "Escape")
         onClose();
@@ -1378,7 +1945,7 @@ function Dialog({
     };
   }, []);
   let dialogID;
-  React12.Children.forEach(children, (child) => {
+  React15.Children.forEach(children, (child) => {
     if (child.type.displayName === "DialogHeader") {
       const { title, desc, alt } = child.props;
       dialogID = `dialog-${kebabify(
@@ -1399,9 +1966,9 @@ function Dialog({
       )}`;
     }
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_framer_motion12.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(import_jsx_runtime19.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
-      import_framer_motion12.motion.div,
+  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(import_framer_motion19.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(import_jsx_runtime30.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+      import_framer_motion19.motion.div,
       {
         role: "alertdialog",
         "aria-modal": "true",
@@ -1424,8 +1991,8 @@ function Dialog({
         children
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
-      import_framer_motion12.motion.div,
+    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+      import_framer_motion19.motion.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -1446,7 +2013,7 @@ Dialog.displayName = "Dialog";
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-dialog-header {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  padding: 1.5rem 1.5rem 0;\n}\n.skc-dialog-header h2 {\n  font-family: var(--font-display);\n  font-size: var(--text-3xl);\n  font-weight: var(--font-regular);\n  line-height: 2rem;\n  letter-spacing: 0px;\n  margin-block: 0;\n  color: var(--on-surface);\n}\n.skc-dialog-header p {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  margin-block: 0;\n  color: var(--on-surface-variant);\n}\n");
 
 // src/components/DialogHeader/index.tsx
-var import_jsx_runtime20 = require("react/jsx-runtime");
+var import_jsx_runtime31 = require("react/jsx-runtime");
 function DialogHeader({
   icon,
   title,
@@ -1471,10 +2038,10 @@ function DialogHeader({
       )
     )
   )}`;
-  return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { style, className: cn(["skc-dialog-header", className]), children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "skc-dialog-header__icon", children: icon }),
-    title && /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("h2", { "aria-label": alt, id: `${dialogID}-title`, children: title }),
-    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { style, className: cn(["skc-dialog-header", className]), children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "skc-dialog-header__icon", children: icon }),
+    title && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("h2", { "aria-label": alt, id: `${dialogID}-title`, children: title }),
+    /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
       "p",
       {
         "aria-label": !title ? alt : void 0,
@@ -1490,14 +2057,14 @@ DialogHeader.displayName = "DialogHeader";
 styleInject(".skc-dialog-content > .skc-list > .skc-list-item {\n  padding-inline: 1.5rem 2rem;\n}\n.skc-dialog:has(.skc-dialog-content) .skc-dialog-header {\n  padding-bottom: 1.5rem;\n}\n.skc-dialog-content.skc-dialog-content--scrollable {\n  overflow-y: auto;\n  border-top: 1px solid var(--outline);\n  border-bottom: 1px solid var(--outline);\n}\n");
 
 // src/components/DialogContent/index.tsx
-var import_jsx_runtime21 = require("react/jsx-runtime");
+var import_jsx_runtime32 = require("react/jsx-runtime");
 function DialogContent({
   children,
   height,
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
     "div",
     {
       style: __spreadProps(__spreadValues({}, style), { height }),
@@ -1513,11 +2080,11 @@ function DialogContent({
 DialogContent.displayName = "DialogContent";
 
 // src/components/FullscreenDialog/index.tsx
-var import_framer_motion13 = require("framer-motion");
-var React14 = __toESM(require("react"));
+var import_framer_motion20 = require("framer-motion");
+var React17 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/fullscreen-dialog.css
-styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-fullscreen-dialog {\n  position: fixed;\n  z-index: 90;\n  inset: 0;\n  overflow-y: auto;\n  height: 100vh;\n  margin: 0 !important;\n  background-color: var(--surface);\n}\n.skc-fullscreen-dialog__top-app-bar {\n  position: fixed;\n  z-index: 90;\n  inset: 0 0 auto;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  padding: .75rem .5rem;\n  background-color: var(--surface);\n}\n.skc-fullscreen-dialog__top-app-bar > .skc-button:not(:has(.skc-button__label)) {\n  color: var(--on-surface);\n}\n.skc-fullscreen-dialog__top-app-bar > .skc-button:not(:has(.skc-button__label))::before,\n.skc-fullscreen-dialog__top-app-bar > .skc-button:not(:has(.skc-button__label)) .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-fullscreen-dialog__top-app-bar > h2 {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n  flex-grow: 1;\n  margin-block: 0;\n}\n.skc-fullscreen-dialog__content {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  padding-block: 5rem 6rem;\n}\n.skc-fullscreen-dialog__content p {\n  margin-block: 0;\n}\n.skc-fullscreen-dialog__content > * {\n  margin-inline: 1rem;\n}\n.skc-fullscreen-dialog ~ .skc-scrim {\n  margin: 0 !important;\n}\n@supports (height: 100dvh) {\n  .skc-fullscreen-dialog {\n    height: 100dvh;\n  }\n}\n@media only screen and (min-width: 600px) {\n  .skc-fullscreen-dialog {\n    inset: 50% auto auto 50%;\n    width: 22.5rem;\n    max-width: calc(100vw - 3rem);\n    height: initial;\n    transform: translate(-50%, -50%);\n    border-radius: var(--rounded-xl);\n    background-color: var(--surface-3);\n  }\n  .skc-fullscreen-dialog,\n  .skc-fullscreen-dialog .skc-text-field--outlined .skc-text-field__label,\n  .skc-fullscreen-dialog .skc-chip-field__label {\n    background-color: var(--surface-3);\n  }\n  .skc-fullscreen-dialog .skc-text-field--filled {\n    background-color: var(--surface-1);\n  }\n  .skc-fullscreen-dialog .skc-text-field--filled::before {\n    background-color: var(--outline);\n  }\n  .skc-fullscreen-dialog__top-app-bar {\n    position: static;\n    padding-inline: .75rem;\n    background-color: var(--surface-3);\n  }\n  .skc-fullscreen-dialog__content {\n    overflow-y: auto;\n    box-sizing: border-box;\n    max-height: calc(100vh - 6rem);\n    padding: 1.5rem;\n    border-top: 1px solid var(--outline);\n  }\n  .skc-fullscreen-dialog__content > * {\n    margin-inline: 0;\n  }\n  @supports (height: 100dvh) {\n    .skc-fullscreen-dialog__content {\n      max-height: calc(100dvh - 6rem);\n    }\n  }\n}\n");
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-fullscreen-dialog {\n  position: fixed;\n  z-index: 90;\n  inset: 0;\n  overflow-y: auto;\n  height: 100vh;\n  margin: 0 !important;\n  background-color: var(--surface);\n}\n.skc-fullscreen-dialog__top-app-bar {\n  position: fixed;\n  z-index: 90;\n  inset: 0 0 auto;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  padding: .75rem .5rem;\n  background-color: var(--surface);\n}\n.skc-fullscreen-dialog__top-app-bar > .skc-button:not(:has(.skc-button__label)) {\n  color: var(--on-surface);\n}\n.skc-fullscreen-dialog__top-app-bar > .skc-button:not(:has(.skc-button__label))::before,\n.skc-fullscreen-dialog__top-app-bar > .skc-button:not(:has(.skc-button__label)) .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-fullscreen-dialog__top-app-bar > h2 {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n  flex-grow: 1;\n  margin-block: 0;\n}\n.skc-fullscreen-dialog__content {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  padding-block: 5rem 6rem;\n}\n.skc-fullscreen-dialog__content p {\n  margin-block: 0;\n}\n.skc-fullscreen-dialog__content > * {\n  margin-inline: 1rem;\n}\n.skc-fullscreen-dialog ~ .skc-scrim {\n  margin: 0 !important;\n}\n@supports (height: 100dvh) {\n  .skc-fullscreen-dialog {\n    height: 100dvh;\n  }\n}\n@media only screen and (min-width: 600px) {\n  .skc-fullscreen-dialog {\n    inset: 50% auto auto 50%;\n    width: 22.5rem;\n    max-width: calc(100vw - 3rem);\n    height: initial;\n    transform: translate(-50%, -50%);\n    border-radius: var(--rounded-xl);\n    background-color: var(--surface-3);\n  }\n  .skc-fullscreen-dialog,\n  .skc-fullscreen-dialog .skc-text-field--outlined .skc-text-field__label,\n  .skc-fullscreen-dialog .skc-chip-field__label {\n    background-color: var(--surface-3);\n  }\n  .skc-fullscreen-dialog .skc-text-field--filled {\n    background-color: var(--surface-1);\n  }\n  .skc-fullscreen-dialog .skc-text-field--filled::before {\n    background-color: var(--outline);\n  }\n  .skc-fullscreen-dialog__top-app-bar {\n    position: static;\n    padding-inline: .75rem;\n    background-color: var(--surface-3);\n  }\n  .skc-fullscreen-dialog__content {\n    overflow-y: auto;\n    box-sizing: border-box;\n    max-height: calc(100vh - 6rem);\n    padding: 1.5rem;\n    border-top: 1px solid var(--outline);\n  }\n  .skc-fullscreen-dialog__content > * {\n    margin-inline: 0;\n  }\n  @supports (height: 100dvh) {\n    .skc-fullscreen-dialog__content {\n      max-height: calc(100dvh - 6rem);\n    }\n  }\n}\n@media only screen and (min-width: 600px)and (prefers-color-scheme: light) {\n  .skc-fullscreen-dialog .skc-input-chip--selected,\n  .skc-fullscreen-dialog .skc-filter-chip--selected {\n    background-color: var(--secondary);\n    color: var(--on-secondary);\n  }\n  .skc-fullscreen-dialog .skc-input-chip--selected .skc-icon,\n  .skc-fullscreen-dialog .skc-filter-chip--selected .skc-icon {\n    color: var(--on-secondary);\n  }\n}\n");
 
 // src/utils/window.ts
 var import_react2 = __toESM(require("react"));
@@ -1569,7 +2136,7 @@ function useBreakpoint() {
 }
 
 // src/components/FullscreenDialog/index.tsx
-var import_jsx_runtime22 = require("react/jsx-runtime");
+var import_jsx_runtime33 = require("react/jsx-runtime");
 function FullscreenDialog({
   children,
   open,
@@ -1603,7 +2170,7 @@ function FullscreenDialog({
       transition: transition(duration.short2, easing.standardAccelerate)
     }
   };
-  React14.useEffect(() => {
+  React17.useEffect(() => {
     if (open) {
       const actions = document.querySelector(
         ".skc-fullscreen-dialog__top-app-bar"
@@ -1613,7 +2180,7 @@ function FullscreenDialog({
         buttons[buttons.length - 1].focus();
     }
   }, [open]);
-  React14.useEffect(() => {
+  React17.useEffect(() => {
     const handleKeyUp = (event) => {
       if (event.key === "Escape")
         onClose();
@@ -1627,20 +2194,20 @@ function FullscreenDialog({
     typeof title === "string" ? title : alt
   )}`;
   let pIsInjected = false;
-  const injectedChildren = React14.Children.map(children, (child) => {
+  const injectedChildren = React17.Children.map(children, (child) => {
     if (child.type === "p") {
       if (pIsInjected)
         return child;
       pIsInjected = true;
-      return React14.cloneElement(child, {
+      return React17.cloneElement(child, {
         id: `${dialogID}-desc`
       });
     }
     return child;
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_framer_motion13.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
-      import_framer_motion13.motion.div,
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_framer_motion20.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(import_jsx_runtime33.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(
+      import_framer_motion20.motion.div,
       {
         role: "alertdialog",
         "aria-labelledby": `${dialogID}-title`,
@@ -1656,25 +2223,25 @@ function FullscreenDialog({
         }),
         className: cn(["skc-fullscreen-dialog", className]),
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "skc-fullscreen-dialog__top-app-bar", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)("div", { className: "skc-fullscreen-dialog__top-app-bar", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
               Button,
               {
                 appearance: "text",
-                icon: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MaterialIcon, { icon: "close" }),
+                icon: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(MaterialIcon, { icon: "close" }),
                 alt: locale === "th" ? "\u0E1B\u0E34\u0E14\u0E2B\u0E19\u0E49\u0E32\u0E15\u0E48\u0E32\u0E07" : "Close",
                 onClick: onClose
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("h2", { id: `${dialogID}-title`, children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("h2", { id: `${dialogID}-title`, children: title }),
             action
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_framer_motion13.motion.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
+          /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_framer_motion20.motion.div, { className: "skc-fullscreen-dialog__content", children: injectedChildren })
         ]
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
-      import_framer_motion13.motion.div,
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
+      import_framer_motion20.motion.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -1695,9 +2262,9 @@ FullscreenDialog.displayName = "FullscreenDialog";
 styleInject(".skc-divider {\n  border: none;\n  border-top: 1px solid var(--outline-variant);\n}\n");
 
 // src/components/Divider/index.tsx
-var import_jsx_runtime23 = require("react/jsx-runtime");
+var import_jsx_runtime34 = require("react/jsx-runtime");
 function Divider({ style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("hr", { style, className: cn(["skc-divider", className]) });
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("hr", { style, className: cn(["skc-divider", className]) });
 }
 Divider.displayName = "Divider";
 
@@ -1705,7 +2272,7 @@ Divider.displayName = "Divider";
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-form-group {\n  display: flex;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n  border: none;\n}\n.skc-form-group .skc-form-item {\n  padding-left: .55rem;\n}\n.skc-form-group .skc-form-item .skc-checkbox,\n.skc-form-group .skc-form-item .skc-radio {\n  padding-block: .5rem;\n}\n.skc-form-group .skc-form-item .skc-form-item__label {\n  padding-block: .4375rem;\n}\n.skc-form-group__label {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  padding-block: .5rem;\n}\n");
 
 // src/components/FormGroup/index.tsx
-var import_jsx_runtime24 = require("react/jsx-runtime");
+var import_jsx_runtime35 = require("react/jsx-runtime");
 function FormGroup({
   children,
   label,
@@ -1714,14 +2281,14 @@ function FormGroup({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(
     "fieldset",
     {
       "aria-label": alt,
       style,
       className: cn(["skc-form-group", className]),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("legend", __spreadProps(__spreadValues({ className: "skc-form-group__label" }, legendAttr), { children: label })),
+        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("legend", __spreadProps(__spreadValues({ className: "skc-form-group__label" }, legendAttr), { children: label })),
         children
       ]
     }
@@ -1730,13 +2297,13 @@ function FormGroup({
 FormGroup.displayName = "FormGroup";
 
 // src/components/FormItem/index.tsx
-var React15 = __toESM(require("react"));
+var React18 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/form-item.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-form-item {\n  display: flex;\n  align-items: flex-start;\n  flex-direction: row;\n  gap: 1rem;\n}\n.skc-form-item:has(.skc-chip-set) {\n  flex-direction: column-reverse;\n  gap: .5rem;\n}\n.skc-form-item .skc-checkbox,\n.skc-form-item .skc-radio {\n  padding-block: .0625rem;\n}\n.skc-form-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  cursor: pointer;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-form-item:has(.skc-chip-set) .skc-form-item__label {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n");
 
 // src/components/FormItem/index.tsx
-var import_jsx_runtime25 = require("react/jsx-runtime");
+var import_jsx_runtime36 = require("react/jsx-runtime");
 function FormItem({
   children,
   label,
@@ -1748,11 +2315,11 @@ function FormItem({
   const formItemID = `form-item-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
-  const injectedChildren = React15.cloneElement(
-    React15.Children.only(children),
+  const injectedChildren = React18.cloneElement(
+    React18.Children.only(children),
     { inputAttr: { id: formItemID } }
   );
-  return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(
     "div",
     {
       "aria-label": alt,
@@ -1760,7 +2327,7 @@ function FormItem({
       className: cn(["skc-form-item", className]),
       children: [
         injectedChildren,
-        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
           "label",
           __spreadProps(__spreadValues({
             htmlFor: formItemID,
@@ -1779,7 +2346,7 @@ FormItem.displayName = "FormItem";
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-header {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .75rem;\n  margin-block: 0;\n}\nh2.skc-header,\nh2.skc-header__text {\n  font-family: var(--font-display);\n  font-size: var(--text-6xl);\n  font-weight: var(--font-regular);\n  line-height: 2.75rem;\n  letter-spacing: 0px;\n}\nh2 .skc-header__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2.5rem;\n}\nh3.skc-header,\nh3.skc-header__text {\n  font-family: var(--font-display);\n  font-size: var(--text-5xl);\n  font-weight: var(--font-regular);\n  line-height: 2.5rem;\n  letter-spacing: 0px;\n}\nh3 .skc-header__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2.375rem;\n}\nh4.skc-header,\nh4.skc-header__text {\n  font-family: var(--font-display);\n  font-size: var(--text-4xl);\n  font-weight: var(--font-regular);\n  line-height: 2.25rem;\n  letter-spacing: 0px;\n}\nh4 .skc-header__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2.25rem;\n}\nh5.skc-header,\nh5.skc-header__text {\n  font-family: var(--font-display);\n  font-size: var(--text-3xl);\n  font-weight: var(--font-regular);\n  line-height: 2rem;\n  letter-spacing: 0px;\n}\nh5 .skc-header__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2rem;\n}\nh6.skc-header,\nh6.skc-header__text {\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n}\nh6 .skc-header__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 1.75rem;\n}\n.skc-header__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  color: var(--on-surface-variant);\n}\n');
 
 // src/components/Header/index.tsx
-var import_jsx_runtime26 = require("react/jsx-runtime");
+var import_jsx_runtime37 = require("react/jsx-runtime");
 function Header({
   children,
   level,
@@ -1792,11 +2359,11 @@ function Header({
     style,
     className: cn(["skc-header", className])
   }, hAttr);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "skc-header__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("span", { className: "skc-header__text", children })
+  const content = /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("span", { className: "skc-header__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("span", { className: "skc-header__text", children })
   ] });
-  return level === 6 ? /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h6", __spreadProps(__spreadValues({}, props), { children: content })) : level === 5 ? /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h5", __spreadProps(__spreadValues({}, props), { children: content })) : level === 4 ? /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h4", __spreadProps(__spreadValues({}, props), { children: content })) : level === 3 ? /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h3", __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("h2", __spreadProps(__spreadValues({}, props), { children: content }));
+  return level === 6 ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h6", __spreadProps(__spreadValues({}, props), { children: content })) : level === 5 ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h5", __spreadProps(__spreadValues({}, props), { children: content })) : level === 4 ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h4", __spreadProps(__spreadValues({}, props), { children: content })) : level === 3 ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h3", __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h2", __spreadProps(__spreadValues({}, props), { children: content }));
 }
 Header.displayName = "Header";
 
@@ -1804,7 +2371,7 @@ Header.displayName = "Header";
 styleInject(".skc-list {\n  display: flex;\n  flex-direction: column;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.skc-list--divided > :not(:last-child) {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-content-layout__content > .skc-section > .skc-list {\n  margin-inline: 0;\n}\n");
 
 // src/components/List/index.tsx
-var import_jsx_runtime27 = require("react/jsx-runtime");
+var import_jsx_runtime38 = require("react/jsx-runtime");
 function List({
   children,
   columns,
@@ -1812,27 +2379,27 @@ function List({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
     "ul",
     {
       role: "list",
       style,
       className: cn(["skc-list", divided && "skc-list--divided", className]),
-      children: columns ? /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Columns, { columns, children }) : children
+      children: columns ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Columns, { columns, children }) : children
     }
   );
 }
 List.displayName = "List";
 
 // src/components/ListItem/index.tsx
-var import_framer_motion14 = require("framer-motion");
-var React16 = __toESM(require("react"));
+var import_framer_motion21 = require("framer-motion");
+var React19 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/list-item.css
 styleInject('.skc-list-item {\n  display: flex;\n  overflow: hidden;\n  flex-direction: row;\n  gap: 1rem;\n  box-sizing: border-box;\n  width: 100%;\n  padding: .5rem 2rem .5rem 1rem;\n  text-decoration: none;\n  border: 0;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-list-item.skc-list-item--top {\n  align-items: flex-start;\n}\n.skc-list-item.skc-list-item--center {\n  align-items: center;\n}\n.skc-list-item.skc-list-item--bottom {\n  align-items: flex-end;\n}\n.skc-list-item.skc-list-item--3-lines {\n  padding-block: .75rem;\n}\n.skc-list-item.skc-list-item--state-layer {\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n}\n.skc-list-item.skc-list-item--state-layer::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-list-item.skc-list-item--state-layer:hover::before {\n  opacity: .08;\n}\n.skc-list-item.skc-list-item--state-layer:focus::before,\n.skc-list-item.skc-list-item--state-layer:active::before {\n  opacity: .12;\n}\n.skc-list-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-list-item > img {\n  width: 3.5rem;\n  height: 3.5rem;\n  background-color: var(--surface-variant);\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns .skc-list-item.skc-list-item--state-layer {\n    border-radius: var(--rounded-md);\n  }\n}\n');
 
 // src/components/ListItem/index.tsx
-var import_jsx_runtime28 = require("react/jsx-runtime");
+var import_jsx_runtime39 = require("react/jsx-runtime");
 function ListItem({
   children,
   align,
@@ -1844,10 +2411,10 @@ function ListItem({
   style,
   className
 }) {
-  const itemRef = React16.useRef(null);
+  const itemRef = React19.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(itemRef);
   let itemID;
-  React16.Children.forEach(children, (child) => {
+  React19.Children.forEach(children, (child) => {
     if (child.type.displayName === "ListItemContent") {
       const { title, alt } = child.props;
       itemID = `list-item-${kebabify(
@@ -1867,10 +2434,10 @@ function ListItem({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(import_jsx_runtime28.Fragment, { children: [
+  const content = /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)(import_jsx_runtime39.Fragment, { children: [
     children,
-    stateLayerEffect && /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
-      import_framer_motion14.motion.span,
+    stateLayerEffect && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
+      import_framer_motion21.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1881,19 +2448,19 @@ function ListItem({
   ] });
   return (
     // Render with `element`, `<a>`, or `<button>` if functionality passed in
-    href || onClick || stateLayerEffect ? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", {
+    href || onClick || stateLayerEffect ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("li", {
       "aria-labelledby": itemID,
       // Render with `element` if defined
-      children: href && Element ? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      children: href && Element ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
         // Render an `<a>` if link passed in
-        href ? /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+        href ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
           // Otherwise, render a `<button>`
-          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
+          /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
         )
       )
     }) : (
       // If this Item has no functionality, just render a `<li>`
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", __spreadProps(__spreadValues({}, props), { children: content }))
+      /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("li", __spreadProps(__spreadValues({}, props), { children: content }))
     )
   );
 }
@@ -1903,7 +2470,7 @@ ListItem.displayName = "ListItem";
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-list-item-content {\n  display: flex;\n  flex-direction: column;\n  flex-grow: 1;\n  text-align: left;\n}\n.skc-list-item-content__overline {\n  font-family: var(--font-body);\n  font-size: var(--text-xs);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  color: var(--on-surface-variant);\n}\n.skc-list-item-content__title {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  color: var(--on-surface);\n}\n.skc-list-item-content__desc {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  color: var(--on-surface-variant);\n}\n");
 
 // src/components/ListItemContent/index.tsx
-var import_jsx_runtime29 = require("react/jsx-runtime");
+var import_jsx_runtime40 = require("react/jsx-runtime");
 function ListItemContent({
   overline,
   title,
@@ -1912,9 +2479,9 @@ function ListItemContent({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)("div", { style, className: cn(["skc-list-item-content", className]), children: [
-    overline && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "skc-list-item-content__overline", children: overline }),
-    /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { style, className: cn(["skc-list-item-content", className]), children: [
+    overline && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("span", { className: "skc-list-item-content__overline", children: overline }),
+    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
       "span",
       {
         id: `list-item-${kebabify(typeof title === "string" ? title : alt)}`,
@@ -1923,19 +2490,19 @@ function ListItemContent({
         children: title
       }
     ),
-    desc && /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("span", { className: "skc-list-item-content__desc", children: desc })
+    desc && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("span", { className: "skc-list-item-content__desc", children: desc })
   ] });
 }
 ListItemContent.displayName = "ListItemContent";
 
 // src/components/NavBar/index.tsx
-var React17 = __toESM(require("react"));
+var React20 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/nav-bar.css
 styleInject('.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-nav-bar {\n  overflow-x: auto;\n  width: 100vw;\n  background-color: var(--surface-2);\n}\n.skc-nav-bar__toggle-and-fab {\n  height: 0;\n}\n.skc-nav-bar__toggle-and-fab .skc-button,\n.skc-nav-bar__brand,\n.skc-nav-bar__end {\n  display: none;\n}\n.skc-nav-bar__destinations {\n  display: flex;\n  flex-direction: row;\n  gap: .5rem;\n  box-sizing: border-box;\n  width: 100%;\n  max-width: 32rem;\n  margin: 0 auto;\n  padding: 0 .5rem;\n}\n.skc-nav-bar__destinations .skc-nav-bar-item {\n  width: 100%;\n}\n@media only screen and (min-width: 600px) {\n  .skc-nav-bar {\n    display: flex;\n    overflow: hidden auto;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: 2.5rem;\n    width: 5rem;\n    height: 100vh;\n    padding: 2.75rem 0 3.5rem;\n    background-color: var(--surface);\n  }\n  @supports (height: 100dvh) {\n    .skc-nav-bar {\n      height: 100dvh;\n    }\n  }\n  .skc-nav-bar__main {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: 2.5rem;\n  }\n  .skc-nav-bar__toggle-and-fab {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: .25rem;\n    height: fit-content;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-button {\n    display: flex;\n    color: var(--on-surface);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-button::before,\n  .skc-nav-bar__toggle-and-fab .skc-button .skc-button__ripple {\n    background-color: var(--on-surface);\n  }\n  .skc-nav-bar__toggle-and-fab .skc-nav-bar__brand {\n    display: block;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-nav-bar__brand:not(:last-child) {\n    margin-bottom: .75rem;\n  }\n  .skc-nav-bar__toggle-and-fab .skc-fab {\n    box-shadow: none;\n  }\n  .skc-nav-bar__destinations,\n  .skc-nav-bar__end {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n    justify-content: space-between;\n    gap: .25rem;\n    margin: 0;\n    padding: .3125rem;\n  }\n}\n');
 
 // src/components/NavBar/index.tsx
-var import_jsx_runtime30 = require("react/jsx-runtime");
+var import_jsx_runtime41 = require("react/jsx-runtime");
 function NavBar({
   children,
   brand,
@@ -1947,10 +2514,10 @@ function NavBar({
   className
 }) {
   const { atBreakpoint } = useBreakpoint();
-  const navRailFab = React17.Children.map(fab, (child) => {
+  const navRailFab = React20.Children.map(fab, (child) => {
     var _a;
     if (((_a = child.type) == null ? void 0 : _a.displayName) === "FAB") {
-      return React17.cloneElement(child, {
+      return React20.cloneElement(child, {
         children: void 0,
         size: "standard",
         stateOnScroll: void 0
@@ -1958,37 +2525,37 @@ function NavBar({
     }
     return child;
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("nav", { style, className: cn(["skc-nav-bar", className]), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "skc-nav-bar__main", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("section", { className: "skc-nav-bar__toggle-and-fab", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("nav", { style, className: cn(["skc-nav-bar", className]), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "skc-nav-bar__main", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("section", { className: "skc-nav-bar__toggle-and-fab", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
           Button,
           {
             appearance: "text",
-            icon: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(MaterialIcon, { icon: "menu" }),
+            icon: /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(MaterialIcon, { icon: "menu" }),
             alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39" : "Toggle Navigation Drawer",
             onClick: onNavToggle
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "skc-nav-bar__brand", children: brand }),
+        /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "skc-nav-bar__brand", children: brand }),
         atBreakpoint === "base" ? fab : navRailFab
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("section", { className: "skc-nav-bar__destinations", children })
+      /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("section", { className: "skc-nav-bar__destinations", children })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("section", { className: "skc-nav-bar__end", children: end })
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("section", { className: "skc-nav-bar__end", children: end })
   ] });
 }
 NavBar.displayName = "NavBar";
 
 // src/components/NavBarItem/index.tsx
-var import_framer_motion15 = require("framer-motion");
-var React18 = __toESM(require("react"));
+var import_framer_motion22 = require("framer-motion");
+var React21 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/nav-bar-item.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-nav-bar-item {\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  justify-content: center;\n  gap: .25rem;\n  padding: .75rem 0 1rem;\n  text-decoration: none;\n  color: var(--on-surface);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-nav-bar-item.skc-nav-bar-item--selected .skc-nav-bar-item__icon {\n  color: var(--on-primary-container);\n  background-color: var(--primary-container);\n}\n.skc-nav-bar-item.skc-nav-bar-item--selected::before,\n.skc-nav-bar-item.skc-nav-bar-item--selected .skc-nav-bar-item__ripple {\n  background-color: var(--on-primary-container);\n}\n.skc-nav-bar-item.skc-nav-bar-item--rail-only {\n  display: none;\n}\n.skc-nav-bar-item__icon {\n  transition: background-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  justify-content: center;\n  padding: .25rem 1.25rem;\n  border-radius: var(--rounded-full);\n}\n.skc-nav-bar-item__icon::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-nav-bar-item:hover .skc-nav-bar-item__icon::before {\n  opacity: .08;\n}\n.skc-nav-bar-item:focus .skc-nav-bar-item__icon::before,\n.skc-nav-bar-item:active .skc-nav-bar-item__icon::before {\n  opacity: .12;\n}\n.skc-nav-bar-item__icon .skc-icon {\n  transition: font-variation-settings var(--motion-short-4) var(--easing-standard);\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-bar-item:hover .skc-nav-bar-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-bar-item:active .skc-nav-bar-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-bar-item.skc-nav-bar-item--selected .skc-nav-bar-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-bar-item.skc-nav-bar-item--selected:hover .skc-nav-bar-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-bar-item.skc-nav-bar-item--selected:active .skc-nav-bar-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-bar-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n  transition: font-weight var(--motion-short-4) var(--easing-standard), letter-spacing var(--motion-short-4) var(--easing-standard);\n  font-family: var(--font-display);\n  text-align: center;\n}\n.skc-nav-bar-item:hover .skc-nav-bar-item__label {\n  font-weight: var(--font-bold);\n  letter-spacing: .75px;\n}\n.skc-nav-bar-item:active .skc-nav-bar-item__label {\n  font-weight: var(--font-regular);\n  letter-spacing: .375px;\n}\n.skc-nav-bar-item.skc-nav-bar-item--selected .skc-nav-bar-item__label {\n  font-weight: var(--font-bold);\n  color: var(--on-primary-container);\n}\n.skc-nav-bar-item__badge {\n  font-family: var(--font-body);\n  font-size: var(--text-xs);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n  position: absolute;\n  top: .125rem;\n  right: 1rem;\n  min-width: 1rem;\n  min-height: 1rem;\n  padding: 0 .25rem;\n  color: var(--on-error);\n  border-radius: var(--rounded-full);\n  background-color: var(--error);\n}\n.skc-nav-bar-item__badge:empty {\n  top: .375rem;\n  right: 1.25rem;\n  width: .375rem;\n  min-width: initial;\n  height: .375rem;\n  min-height: initial;\n}\n.skc-nav-bar-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n@media only screen and (min-width: 600px) {\n  .skc-nav-bar-item {\n    padding: 0 0 .25rem;\n  }\n  .skc-nav-bar-item.skc-nav-bar-item--rail-only {\n    display: flex;\n  }\n  .skc-nav-bar-item__icon {\n    padding: .25rem 1rem;\n  }\n  .skc-nav-bar-item__badge {\n    right: .75rem;\n  }\n  .skc-nav-bar-item__badge:empty {\n    right: 1rem;\n  }\n  .skc-nav-bar-item:hover .skc-nav-bar-item__label,\n  .skc-nav-bar-item:active .skc-nav-bar-item__label {\n    font-weight: var(--font-medium);\n    letter-spacing: .5px;\n  }\n}\n');
 
 // src/components/NavBarItem/index.tsx
-var import_jsx_runtime31 = require("react/jsx-runtime");
+var import_jsx_runtime42 = require("react/jsx-runtime");
 function NavBarItem({
   icon,
   label,
@@ -2003,9 +2570,9 @@ function NavBarItem({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  const iconRef = React18.useRef(null);
-  const [clientHeight, setClientHeight] = React18.useState(1080);
-  React18.useEffect(() => {
+  const iconRef = React21.useRef(null);
+  const [clientHeight, setClientHeight] = React21.useState(1080);
+  React21.useEffect(() => {
     if (window.innerWidth <= 600)
       setClientHeight(window.innerHeight);
     else
@@ -2028,11 +2595,11 @@ function NavBarItem({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(import_jsx_runtime31.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { ref: iconRef, className: "skc-nav-bar-item__icon", children: [
+  const content = /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(import_jsx_runtime42.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { ref: iconRef, className: "skc-nav-bar-item__icon", children: [
       icon,
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(import_framer_motion15.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(import_framer_motion15.AnimatePresence, { children: badge !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
-        import_framer_motion15.motion.div,
+      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(import_framer_motion22.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(import_framer_motion22.AnimatePresence, { children: badge !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+        import_framer_motion22.motion.div,
         {
           initial: { scale: 0 },
           animate: { scale: 1 },
@@ -2043,8 +2610,8 @@ function NavBarItem({
           children: badge !== null ? badge > 99 ? "99+" : badge : null
         }
       ) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
-        import_framer_motion15.motion.span,
+      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+        import_framer_motion22.motion.span,
         {
           initial: { scale: 0, opacity: 0.36 },
           animate: rippleControls,
@@ -2053,27 +2620,27 @@ function NavBarItem({
         }
       )
     ] }),
-    label && /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { id: navID, className: "skc-nav-bar-item__label", children: label })
+    label && /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("span", { id: navID, className: "skc-nav-bar-item__label", children: label })
   ] });
   return (
     // Render with `element` if defined
-    Element ? /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(Element, __spreadProps(__spreadValues({}, props), { children: content })) : (
+    Element ? /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Element, __spreadProps(__spreadValues({}, props), { children: content })) : (
       // Otherwise, render an `<a>`
-      /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("a", __spreadProps(__spreadValues({}, props), { children: content }))
+      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("a", __spreadProps(__spreadValues({}, props), { children: content }))
     )
   );
 }
 NavBarItem.displayName = "NavBarItem";
 
 // src/components/NavDrawer/index.tsx
-var import_framer_motion16 = require("framer-motion");
-var React19 = __toESM(require("react"));
+var import_framer_motion23 = require("framer-motion");
+var React22 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/nav-drawer.css
 styleInject('.skc-nav-drawer {\n  display: flex;\n  overflow-y: auto;\n  flex-direction: column;\n  width: calc(100% - 4rem);\n  max-width: 22.5rem;\n  height: 100vh;\n  padding: .75rem;\n  border-radius: var(--rounded-lg-end);\n  background-color: var(--surface-1);\n}\n.skc-nav-drawer .skc-nav-drawer-section:not(:last-child)::after {\n  width: calc(100% - 2rem);\n  height: 1px;\n  margin-left: 1rem;\n  content: "";\n  background-color: var(--outline-variant);\n}\n@supports (height: 100dvh) {\n  .skc-nav-drawer {\n    height: 100dvh;\n  }\n}\n');
 
 // src/components/NavDrawer/index.tsx
-var import_jsx_runtime32 = require("react/jsx-runtime");
+var import_jsx_runtime43 = require("react/jsx-runtime");
 function NavDrawer({
   children,
   open,
@@ -2082,7 +2649,7 @@ function NavDrawer({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  React19.useEffect(() => {
+  React22.useEffect(() => {
     const handleKeyUp = (event) => {
       if (event.key === "Escape")
         onClose();
@@ -2092,7 +2659,7 @@ function NavDrawer({
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
-  React19.useEffect(() => {
+  React22.useEffect(() => {
     if (open) {
       const navDrawerItem = document.querySelector(
         ".skc-nav-drawer-item"
@@ -2102,24 +2669,24 @@ function NavDrawer({
   }, [open]);
   const injectedChildren = (
     // For each Navigation Drawer Section
-    React19.Children.map(
+    React22.Children.map(
       children,
-      (section) => React19.cloneElement(section, {
+      (section) => React22.cloneElement(section, {
         children: (
           // For each Navigation Drawer Item
-          React19.Children.map(
+          React22.Children.map(
             section.props.children,
             // Inject `onClick`, where the Navigation Drawer will close when a
             // Navigation Drawer Item is clicked
-            (item) => React19.cloneElement(item, { onClick: onClose })
+            (item) => React22.cloneElement(item, { onClick: onClose })
           )
         )
       })
     )
   );
-  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(import_framer_motion16.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(import_jsx_runtime32.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
-      import_framer_motion16.motion.aside,
+  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(import_framer_motion23.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(import_jsx_runtime43.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+      import_framer_motion23.motion.aside,
       {
         initial: { scaleX: 0.2, x: "-100%" },
         animate: { scaleX: 1, x: "0%" },
@@ -2135,11 +2702,11 @@ function NavDrawer({
         "aria-modal": true,
         style,
         className: cn(["skc-nav-drawer", className]),
-        children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("nav", { children: injectedChildren })
+        children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("nav", { children: injectedChildren })
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
-      import_framer_motion16.motion.div,
+    /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+      import_framer_motion23.motion.div,
       {
         initial: { opacity: 0 },
         animate: { opacity: 0.5 },
@@ -2160,7 +2727,7 @@ NavDrawer.displayName = "NavDrawer";
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-nav-drawer-section {\n  display: flex;\n  flex-direction: column;\n}\n.skc-nav-drawer-section ul {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n.skc-nav-drawer-section__header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  margin-block: 0;\n  padding: 1.125rem 1rem;\n}\n");
 
 // src/components/NavDrawerSection/index.tsx
-var import_jsx_runtime33 = require("react/jsx-runtime");
+var import_jsx_runtime44 = require("react/jsx-runtime");
 function NavDrawerSection({
   children,
   header,
@@ -2171,14 +2738,14 @@ function NavDrawerSection({
   const sectionID = `nav-section-${kebabify(
     typeof header === "string" ? header : alt
   )}`;
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
     "section",
     {
       "aria-labelledby": sectionID,
       style,
       className: cn(["skc-nav-drawer-section", className]),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
           "h2",
           {
             id: sectionID,
@@ -2187,7 +2754,7 @@ function NavDrawerSection({
             children: header
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("ul", { role: "list", children })
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("ul", { role: "list", children })
       ]
     }
   );
@@ -2195,14 +2762,14 @@ function NavDrawerSection({
 NavDrawerSection.displayName = "NavDrawerSection";
 
 // src/components/NavDrawerItem/index.tsx
-var React20 = __toESM(require("react"));
+var React23 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/nav-drawer-item.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-nav-drawer-item {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .75rem;\n  padding: 1rem 1.5rem 1rem 1rem;\n  text-decoration: none;\n  color: var(--on-surface);\n  border-radius: var(--rounded-full);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-nav-drawer-item::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-nav-drawer-item:hover::before {\n  opacity: .08;\n}\n.skc-nav-drawer-item:focus-visible::before,\n.skc-nav-drawer-item:active::before {\n  opacity: .12;\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected {\n  color: var(--on-primary-container);\n  background-color: var(--primary-container);\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected::before,\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__ripple {\n  background-color: var(--on-primary-container);\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__label {\n  font-weight: var(--font-bold);\n}\n.skc-nav-drawer-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-drawer-item.skc-nav-drawer-item--selected .skc-nav-drawer-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-nav-drawer-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  flex-grow: 1;\n}\n.skc-nav-drawer-item__metadata {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-nav-drawer-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/NavDrawerItem/index.tsx
-var import_framer_motion17 = require("framer-motion");
-var import_jsx_runtime34 = require("react/jsx-runtime");
+var import_framer_motion24 = require("framer-motion");
+var import_jsx_runtime45 = require("react/jsx-runtime");
 function NavDrawerItem({
   icon,
   label,
@@ -2215,7 +2782,7 @@ function NavDrawerItem({
   style,
   className
 }) {
-  const linkRef = React20.useRef(null);
+  const linkRef = React23.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(linkRef);
   const props = __spreadValues({
     ref: linkRef,
@@ -2230,12 +2797,12 @@ function NavDrawerItem({
     href,
     onClick
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(import_jsx_runtime34.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "skc-nav-drawer-item__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "skc-nav-drawer-item__label", children: label }),
-    metadata && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "skc-nav-drawer-item__metadata", children: metadata }),
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(
-      import_framer_motion17.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(import_jsx_runtime45.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("div", { className: "skc-nav-drawer-item__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { className: "skc-nav-drawer-item__label", children: label }),
+    metadata && /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { className: "skc-nav-drawer-item__metadata", children: metadata }),
+    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+      import_framer_motion24.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -2244,19 +2811,19 @@ function NavDrawerItem({
       }
     )
   ] });
-  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("li", { children: Element ? /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Element, __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("a", __spreadProps(__spreadValues({}, props), { children: content })) });
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("li", { children: Element ? /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(Element, __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("a", __spreadProps(__spreadValues({}, props), { children: content })) });
 }
 NavDrawerItem.displayName = "NavDrawerItem";
 
 // src/components/FAB/index.tsx
-var import_framer_motion18 = require("framer-motion");
-var React21 = __toESM(require("react"));
+var import_framer_motion25 = require("framer-motion");
+var React24 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/fab.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-fab {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  justify-content: center;\n  gap: .75rem;\n  padding: 1rem;\n  border-radius: 1rem;\n  box-shadow: var(--shadow-3);\n}\n.skc-fab::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n}\n.skc-fab:has(.skc-fab__label) {\n  padding: 1rem 1.5rem;\n}\n.skc-fab:has(.skc-fab__label):has(.skc-fab__icon:first-child) {\n  padding-left: 1rem;\n}\n.skc-fab__wrapper {\n  padding: 0;\n  cursor: pointer;\n  text-decoration: none;\n  border: 0;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-fab__wrapper:hover .skc-fab::before,\n.skc-fab:hover::before {\n  opacity: .08;\n}\n.skc-fab__wrapper:focus .skc-fab::before,\n.skc-fab__wrapper:active .skc-fab::before,\n.skc-fab:focus::before,\n.skc-fab:active::before {\n  opacity: .12;\n}\n.skc-fab__wrapper {\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-fab__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n}\n.skc-fab__icon .skc-icon {\n  transition: font-variation-settings var(--motion-short-4) var(--easing-standard);\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-fab__wrapper:hover .skc-fab__icon .skc-icon,\n.skc-fab:hover .skc-fab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-fab__wrapper:active .skc-fab__icon .skc-icon,\n.skc-fab:active .skc-fab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-fab__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  font-family: var(--font-display);\n}\n.skc-fab.skc-fab--small {\n  padding: .5rem;\n  border-radius: var(--rounded-md);\n}\n.skc-fab.skc-fab--standard {\n  padding: 1rem;\n  border-radius: var(--rounded-lg);\n}\n.skc-fab.skc-fab--large {\n  padding: 1.875rem;\n  border-radius: var(--rounded-xl);\n}\n.skc-fab.skc-fab--large .skc-fab__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2.25rem;\n}\n.skc-fab__wrapper:hover .skc-fab.skc-fab--large .skc-fab__icon .skc-icon,\n.skc-fab:hover .skc-fab.skc-fab--large .skc-fab__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2.25rem;\n}\n.skc-fab__wrapper:active .skc-fab.skc-fab--large .skc-fab__icon .skc-icon,\n.skc-fab:active .skc-fab.skc-fab--large .skc-fab__icon .skc-icon {\n  font-size: 40px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 40;\n  font-size: 2.25rem;\n}\n.skc-fab.skc-fab--surface {\n  color: var(--primary);\n  background-color: var(--surface-3);\n}\n.skc-fab.skc-fab--surface::before,\n.skc-fab.skc-fab--surface .skc-fab__ripple {\n  background-color: var(--primary);\n}\n.skc-fab.skc-fab--primary {\n  color: var(--on-primary-container);\n  background-color: var(--primary-container);\n}\n.skc-fab.skc-fab--primary::before,\n.skc-fab.skc-fab--primary .skc-fab__ripple {\n  background-color: var(--on-primary-container);\n}\n.skc-fab.skc-fab--secondary {\n  color: var(--on-secondary-container);\n  background-color: var(--secondary-container);\n}\n.skc-fab.skc-fab--secondary::before,\n.skc-fab.skc-fab--secondary .skc-fab__ripple {\n  background-color: var(--on-secondary-container);\n}\n.skc-fab.skc-fab--tertiary {\n  color: var(--on-tertiary-container);\n  background-color: var(--tertiary-container);\n}\n.skc-fab.skc-fab--tertiary::before,\n.skc-fab.skc-fab--tertiary .skc-fab__ripple {\n  background-color: var(--on-tertiary-container);\n}\n');
 
 // src/components/FAB/index.tsx
-var import_jsx_runtime35 = require("react/jsx-runtime");
+var import_jsx_runtime46 = require("react/jsx-runtime");
 function FAB({
   children,
   color,
@@ -2272,11 +2839,11 @@ function FAB({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  const fabRef = React21.useRef(null);
+  const fabRef = React24.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(fabRef);
   const { scrollDir } = useScrollDirection();
-  const [canHide, setCanHide] = React21.useState(false);
-  React21.useEffect(() => {
+  const [canHide, setCanHide] = React24.useState(false);
+  React24.useEffect(() => {
     if (stateOnScroll) {
       if (/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         setCanHide(false);
@@ -2299,11 +2866,11 @@ function FAB({
     title: tooltip,
     className: "skc-fab__wrapper"
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_framer_motion18.AnimatePresence, {
+  const content = /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_framer_motion25.AnimatePresence, {
     initial: false,
     // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
-    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(
-      import_framer_motion18.motion.div,
+    children: !(stateOnScroll === "disappear" && canHide && scrollDir === "down") && /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(
+      import_framer_motion25.motion.div,
       {
         ref: fabRef,
         initial: { scale: 0.4, x: 20, y: 20, opacity: 0 },
@@ -2327,11 +2894,11 @@ function FAB({
           className
         ]),
         children: [
-          icon && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "skc-fab__icon", children: icon }),
+          icon && /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: "skc-fab__icon", children: icon }),
           // Hide the label on scroll if `stateOnScroll` set to `minimize`
-          !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("span", { className: "skc-fab__label", children }),
-          /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
-            import_framer_motion18.motion.span,
+          !(stateOnScroll === "minimize" && !(scrollDir === "up")) && children && /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "skc-fab__label", children }),
+          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
+            import_framer_motion25.motion.span,
             {
               initial: { scale: 0, opacity: 0.36 },
               animate: rippleControls,
@@ -2345,11 +2912,11 @@ function FAB({
   });
   return (
     // Render with `element` if defined
-    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("a", __spreadProps(__spreadValues({ href }, props), { children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("a", __spreadProps(__spreadValues({ href }, props), { children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("button", __spreadProps(__spreadValues({ type: "button", onClick }, props), { children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("button", __spreadProps(__spreadValues({ type: "button", onClick }, props), { children: content }))
       )
     )
   );
@@ -2357,13 +2924,13 @@ function FAB({
 FAB.displayName = "FAB";
 
 // src/components/ContentLayout/index.tsx
-var import_framer_motion19 = require("framer-motion");
+var import_framer_motion26 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/content-layout.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-content-layout {\n  padding: 2rem 0 1rem;\n}\n.skc-content-layout__content {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-content-layout__content > .skc-section > *,\n.skc-content-layout__content > .skc-columns > .skc-section > * {\n  margin-inline: 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-content-layout {\n    padding: 2rem;\n  }\n  .skc-content-layout__content {\n    width: calc(100% - 10rem);\n  }\n  .skc-content-layout__content > .skc-section > *,\n  .skc-content-layout__content > .skc-columns > .skc-section > * {\n    margin-inline: 0;\n  }\n}\n");
 
 // src/components/ContentLayout/index.tsx
-var import_jsx_runtime36 = require("react/jsx-runtime");
+var import_jsx_runtime47 = require("react/jsx-runtime");
 function ContentLayout({
   children,
   style,
@@ -2371,8 +2938,8 @@ function ContentLayout({
 }) {
   const { duration, easing } = useAnimationConfig();
   const baseTransition = transition(duration.medium2, easing.standard);
-  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
-    import_framer_motion19.motion.main,
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+    import_framer_motion26.motion.main,
     {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
@@ -2380,7 +2947,7 @@ function ContentLayout({
       transition: baseTransition,
       style,
       className: cn(["skc-content-layout", className]),
-      children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "skc-content-layout__content", children })
+      children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "skc-content-layout__content", children })
     }
   );
 }
@@ -2390,7 +2957,7 @@ ContentLayout.displayName = "ContentLayout";
 styleInject(".skc-split-layout__content {\n  display: grid;\n  grid-template-columns: 1fr;\n  row-gap: .5rem;\n}\n.skc-split-layout__content > * .skc-content-layout {\n  padding: 1rem 1.25rem;\n}\n.skc-split-layout__content > * .skc-content-layout__content {\n  width: 100%;\n  margin: 0;\n}\n.skc-root-layout > .skc-split-layout > .skc-split-layout__content,\n.skc-root-layout > * > .skc-split-layout > .skc-split-layout__content {\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-root-layout > .skc-split-layout > .skc-split-layout__content > *,\n.skc-root-layout > * > .skc-split-layout > .skc-split-layout__content > * {\n  overflow-y: auto;\n  height: calc(100vh - 12rem);\n  padding: 1.5rem 1rem;\n}\n@media only screen and (min-width: 600px) {\n  .skc-split-layout__content > :last-child {\n    display: block;\n  }\n  .skc-split-layout--list-detail .skc-split-layout__content {\n    grid-template-columns: 1fr 1fr;\n  }\n  .skc-split-layout--supporting-panel .skc-split-layout__content {\n    grid-template-columns: 5fr 3fr;\n  }\n  .skc-split-layout__content .skc-columns {\n    display: flex;\n    align-items: stretch;\n    flex-direction: column;\n  }\n  .skc-root-layout > .skc-split-layout > .skc-split-layout__content,\n  .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content {\n    width: calc(100% - 12rem);\n  }\n  .skc-root-layout > .skc-split-layout > .skc-split-layout__content > *,\n  .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content > * {\n    padding-inline: 0;\n  }\n  .skc-root-layout > .skc-split-layout > .skc-split-layout__content > :first-child,\n  .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content > :first-child {\n    padding-right: .75rem;\n  }\n  .skc-root-layout > .skc-split-layout > .skc-split-layout__content > :last-child,\n  .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content > :last-child {\n    padding-left: .75rem;\n  }\n  @supports (height: 100dvh) {\n    .skc-root-layout > .skc-split-layout > .skc-split-layout__content,\n    .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content {\n      width: calc(100% - 12rem);\n    }\n    .skc-root-layout > .skc-split-layout > .skc-split-layout__content > *,\n    .skc-root-layout > * > .skc-split-layout > .skc-split-layout__content > * {\n      height: calc(100dvh - 12rem);\n    }\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-split-layout__content .skc-columns {\n    display: grid;\n    align-items: start;\n  }\n  .skc-split-layout--list-detail .skc-split-layout__content {\n    grid-template-columns: 1fr 2fr;\n  }\n  .skc-split-layout--supporting-panel .skc-split-layout__content {\n    grid-template-columns: 3fr 1fr;\n  }\n}\n");
 
 // src/components/SplitLayout/index.tsx
-var import_jsx_runtime37 = require("react/jsx-runtime");
+var import_jsx_runtime48 = require("react/jsx-runtime");
 function SplitLayout({
   children,
   ratio,
@@ -2407,7 +2974,7 @@ function SplitLayout({
     sm: [2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6]
     // 8 columns
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(
     "section",
     {
       style,
@@ -2417,7 +2984,7 @@ function SplitLayout({
         showRightOnMobile && "skc-split-layout--persist-right",
         className
       ]),
-      children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(
         "div",
         {
           className: "skc-split-layout__content",
@@ -2433,14 +3000,14 @@ function SplitLayout({
 SplitLayout.displayName = "SplitLayout";
 
 // src/components/RootLayout/index.tsx
-var import_framer_motion20 = require("framer-motion");
-var React22 = __toESM(require("react"));
+var import_framer_motion27 = require("framer-motion");
+var React25 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/root-layout.css
 styleInject("body {\n  margin: 0;\n}\n.skc-root-layout {\n  font-size: var(--text-base);\n  overflow-x: hidden;\n  padding-bottom: 5rem;\n}\n.skc-root-layout > .skc-nav-bar {\n  position: fixed;\n  z-index: 70;\n  bottom: 0;\n  left: 0;\n}\n.skc-root-layout > .skc-nav-bar .skc-fab {\n  position: fixed;\n  right: 1rem;\n  bottom: 6rem;\n}\n.skc-root-layout > .skc-nav-drawer {\n  position: fixed;\n  z-index: 85;\n  top: 0;\n  left: 0;\n}\n.skc-scrim {\n  position: fixed;\n  z-index: 80;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  opacity: .5;\n  background-color: var(--black);\n}\n@media only screen and (min-width: 600px) {\n  .skc-root-layout {\n    padding-bottom: 0;\n  }\n  .skc-root-layout > .skc-nav-bar {\n    top: 0;\n    bottom: initial;\n  }\n  .skc-root-layout > .skc-nav-bar .skc-fab {\n    position: relative;\n    right: 0;\n    bottom: 0;\n  }\n}\n");
 
 // src/components/RootLayout/index.tsx
-var import_jsx_runtime38 = require("react/jsx-runtime");
+var import_jsx_runtime49 = require("react/jsx-runtime");
 function RootLayout({
   children,
   transitionEvent,
@@ -2448,20 +3015,20 @@ function RootLayout({
   style
 }) {
   let content;
-  const persistentComponents = React22.Children.map(children, (child) => {
+  const persistentComponents = React25.Children.map(children, (child) => {
     if (child == null ? void 0 : child.type.displayName)
       return child;
     else
       content = child;
   });
   const { duration, easing } = useAnimationConfig();
-  const contentControls = (0, import_framer_motion20.useAnimationControls)();
+  const contentControls = (0, import_framer_motion27.useAnimationControls)();
   const enterTransition = transition(duration.medium2, easing.standard);
   const exitTransition = transition(
     duration.medium2,
     easing.standardDecelerate
   );
-  React22.useEffect(() => {
+  React25.useEffect(() => {
     const startTransition = () => __async(this, null, function* () {
       contentControls.set({ x: 0, opacity: 1 });
       if (transitionEvent === "parent") {
@@ -2484,66 +3051,22 @@ function RootLayout({
     });
     startTransition();
   }, [transitionEvent]);
-  return /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { style, className: cn(["skc-root-layout", className]), children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { style, className: cn(["skc-root-layout", className]), children: [
     persistentComponents,
-    /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_framer_motion20.AnimatePresence, { mode: "wait", initial: false, children: /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_framer_motion20.motion.div, { animate: contentControls, children: content }, "content") })
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_framer_motion27.AnimatePresence, { mode: "wait", initial: false, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_framer_motion27.motion.div, { animate: contentControls, children: content }, "content") })
   ] });
 }
 RootLayout.displayName = "RootLayout";
 
-// src/components/Menu/index.tsx
-var import_framer_motion21 = require("framer-motion");
-
-// ../skcom-css/dist/css/components/menu.css
-styleInject(".skc-menu {\n  position: absolute;\n  z-index: 60;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n.skc-text-field ~ .skc-menu,\n.skc-select ~ .skc-menu {\n  top: 3.5rem;\n}\n.skc-menu--density-0 .skc-menu-item {\n  padding-block: .5rem;\n}\n.skc-menu--density-\\[-2\\] .skc-menu-item {\n  padding-block: .25rem;\n}\n.skc-menu--density-\\[-4\\] .skc-menu-item {\n  padding-block: 0;\n}\n");
-
-// src/components/Menu/index.tsx
-var import_jsx_runtime39 = require("react/jsx-runtime");
-function Menu({
-  children,
-  open,
-  density,
-  onBlur,
-  ulAttr,
-  style,
-  className
-}) {
-  const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(import_framer_motion21.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
-    import_framer_motion21.motion.ul,
-    __spreadProps(__spreadValues({
-      role: "menu",
-      "aria-orientation": "vertical",
-      initial: { opacity: 0, y: "-10%", scale: 0.8 },
-      animate: { opacity: 1, y: "0%", scale: 1 },
-      exit: {
-        opacity: 0,
-        y: "-10%",
-        scale: 0.8,
-        transition: transition(duration.short2, easing.standard)
-      },
-      transition: transition(duration.short4, easing.standard),
-      className: cn([
-        "skc-menu",
-        density === 0 ? "skc-menu--density-0" : density === -2 ? "skc-menu--density-[-2]" : density === -4 && "skc-menu--density-[-4]",
-        className
-      ])
-    }, __spreadProps(__spreadValues({}, ulAttr), { style, onBlur })), {
-      children
-    })
-  ) });
-}
-Menu.displayName = "Menu";
-
 // src/components/MenuItem/index.tsx
-var import_framer_motion22 = require("framer-motion");
-var React23 = __toESM(require("react"));
+var import_framer_motion28 = require("framer-motion");
+var React26 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/menu-item.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-menu-item {\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  width: 100%;\n  padding: .5rem 1.5rem .5rem 1rem;\n  cursor: pointer;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-menu-item::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-menu-item:hover::before {\n  opacity: .08;\n}\n.skc-menu-item:focus::before,\n.skc-menu-item:active::before {\n  opacity: .12;\n}\n.skc-menu-item.skc-menu-item--selected::before {\n  opacity: .12;\n  background-color: var(--primary);\n}\n.skc-menu-item__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-menu-item__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  margin-block: .5rem;\n  text-align: left;\n  color: var(--on-surface);\n}\n.skc-menu-item__label.skc-menu-item--selected {\n  color: var(--on-primary);\n}\n.skc-menu-item__metadata {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  text-align: right;\n  color: var(--on-surface-variant);\n}\n.skc-menu-item__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-menu-item--selected .skc-menu-item__ripple {\n  background-color: var(--primary);\n}\n');
 
 // src/components/MenuItem/index.tsx
-var import_jsx_runtime40 = require("react/jsx-runtime");
+var import_jsx_runtime50 = require("react/jsx-runtime");
 function MenuItem({
   children,
   icon,
@@ -2556,7 +3079,7 @@ function MenuItem({
   style,
   className
 }) {
-  const itemRef = React23.useRef(null);
+  const itemRef = React26.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(itemRef);
   const props = __spreadValues({
     ref: itemRef,
@@ -2570,12 +3093,12 @@ function MenuItem({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)(import_jsx_runtime40.Fragment, { children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { className: "skc-menu-item__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("span", { className: "skc-menu-item__label", children }),
-    metadata && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("span", { className: "skc-menu-item__metadata", children: metadata }),
-    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
-      import_framer_motion22.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime50.Fragment, { children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "skc-menu-item__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "skc-menu-item__label", children }),
+    metadata && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { className: "skc-menu-item__metadata", children: metadata }),
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
+      import_framer_motion28.motion.span,
       {
         "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
@@ -2585,14 +3108,14 @@ function MenuItem({
       }
     )
   ] });
-  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("li", {
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("li", {
     role: "presentation",
     // Render with `element` if defined
-    children: href && Element ? /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
+    children: href && Element ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
       )
     )
   });
@@ -2600,14 +3123,14 @@ function MenuItem({
 MenuItem.displayName = "MenuItem";
 
 // src/components/PageHeader/index.tsx
-var import_framer_motion23 = require("framer-motion");
-var React24 = __toESM(require("react"));
+var import_framer_motion29 = require("framer-motion");
+var React27 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/page-header.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-page-header {\n  position: relative;\n  z-index: 65;\n  overflow: hidden;\n  padding: 1rem 0 1.75rem;\n}\n.skc-page-header,\n.skc-page-header .skc-text-field--outlined .skc-text-field__label {\n  background-color: var(--surface-5);\n}\n.skc-page-header .skc-text-field--filled {\n  background-color: var(--surface-1);\n}\n.skc-page-header .skc-text-field--filled::before {\n  background-color: var(--outline);\n}\n.skc-page-header:not(.skc-page-header--minimized):has(.skc-page-header__related .skc-tabs-container:last-child) {\n  padding-bottom: 0;\n}\n.skc-page-header + .skc-progress {\n  margin-bottom: -0.25rem;\n}\n.skc-page-header.skc-page-header--minimized {\n  position: fixed;\n  inset: 0 0 auto;\n  padding: .75rem .5rem;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions {\n  gap: .5rem;\n  width: calc(100% - 1rem);\n  margin: 0;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions .skc-button {\n  left: 0;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions .skc-button[aria-disabled=true] {\n  display: none;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__actions .skc-button[aria-disabled=true] ~ h1 {\n  margin-left: .75rem;\n}\n.skc-page-header.skc-page-header--minimized .skc-page-header__icon,\n.skc-page-header.skc-page-header--minimized .skc-page-header__related {\n  display: none;\n}\n.skc-page-header.skc-page-header--minimized + .skc-progress {\n  position: fixed;\n  inset: 4rem 0 auto 0;\n}\n.skc-page-header__content {\n  position: relative;\n  display: flex;\n  align-items: flex-start;\n  flex-direction: column;\n  gap: .75rem;\n  max-width: 70.5rem;\n  margin: 0 auto;\n}\n.skc-page-header__content > * {\n  margin-inline: 1rem;\n}\n.skc-page-header__content > h1 {\n  font-family: var(--font-display);\n  font-size: var(--text-7xl);\n  font-weight: var(--font-regular);\n  line-height: 3.25rem;\n  letter-spacing: 0px;\n  width: calc(100% - 2rem);\n  margin-block: 0;\n  white-space: nowrap;\n}\n.skc-page-header__content > h1:not(:last-child) {\n  margin-bottom: .75rem;\n}\n.skc-page-header__content:has(.skc-page-header__related) {\n  position: static;\n}\n.skc-page-header__actions {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  justify-content: space-between;\n  width: calc(100% - 2rem);\n}\n.skc-page-header__actions > .skc-button {\n  position: relative;\n  left: -0.5rem;\n}\n.skc-page-header__actions > h1 {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n  flex-grow: 1;\n  width: fit-content;\n  margin-block: .375rem;\n}\n.skc-page-header__trailing {\n  display: flex;\n  flex-direction: row;\n  gap: .5rem;\n}\n.skc-page-header__actions .skc-button,\n.skc-page-header__trailing .skc-button {\n  color: var(--on-surface);\n}\n.skc-page-header__actions .skc-button::before,\n.skc-page-header__actions .skc-button .skc-button__ripple,\n.skc-page-header__trailing .skc-button::before,\n.skc-page-header__trailing .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-page-header__related {\n  display: contents;\n}\n.skc-page-header__related > * {\n  margin-inline: 1rem;\n}\n.skc-page-header__related > .skc-tabs-container {\n  width: 100%;\n  margin-inline: 0;\n}\n.skc-page-header__related > .skc-tabs-container:only-child {\n  margin-top: -0.75rem;\n}\n.skc-page-header__icon {\n  position: absolute;\n  top: 50%;\n  right: -1.375rem;\n  transform: translateY(-50%);\n  pointer-events: none;\n  opacity: .12;\n  color: var(--primary);\n}\n.skc-page-header__icon .skc-icon {\n  font-size: 48px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 48;\n  font-size: 14.375rem;\n}\n.skc-page-header__replacement-color {\n  position: absolute;\n  z-index: 60;\n  inset: 0 0 auto;\n  height: 9.25rem;\n  background-color: var(--surface-5);\n}\n@media only screen and (min-width: 600px) {\n  .skc-page-header {\n    padding: 2.75rem 1.5rem 2rem;\n  }\n  .skc-page-header + .skc-progress {\n    margin-left: 5rem;\n  }\n  .skc-page-header__content {\n    width: calc(100% - 11rem);\n  }\n  .skc-page-header__content > * {\n    margin-inline: 0;\n  }\n  .skc-page-header__content > h1 {\n    font-family: var(--font-display);\n    font-size: var(--text-8xl);\n    line-height: 4rem;\n    letter-spacing: -0.25px;\n    width: fit-content;\n  }\n  .skc-page-header__actions {\n    justify-content: flex-start;\n  }\n  .skc-page-header__actions > h1 {\n    flex-grow: 0;\n  }\n  .skc-page-header__trailing {\n    display: none;\n  }\n  .skc-page-header__icon {\n    right: 0rem;\n  }\n  .skc-page-header__icon .skc-icon {\n    font-size: 21rem;\n  }\n  .skc-page-header__related > * {\n    margin-inline: 0;\n  }\n  .skc-page-header__replacement-color {\n    height: 9.5rem;\n  }\n}\n');
 
 // src/components/PageHeader/index.tsx
-var import_jsx_runtime41 = require("react/jsx-runtime");
+var import_jsx_runtime51 = require("react/jsx-runtime");
 function PageHeader({
   children,
   title,
@@ -2624,9 +3147,9 @@ function PageHeader({
   className
 }) {
   var _a;
-  const headerRef = React24.useRef(null);
-  const [minimized, setMinimized] = React24.useState(false);
-  React24.useEffect(() => {
+  const headerRef = React27.useRef(null);
+  const [minimized, setMinimized] = React27.useState(false);
+  React27.useEffect(() => {
     const header = headerRef.current;
     if (!header)
       return;
@@ -2640,8 +3163,8 @@ function PageHeader({
   }, []);
   const { duration, easing } = useAnimationConfig();
   const minimizeTransition = transition(duration.short4, easing.standard);
-  const headerTextControls = (0, import_framer_motion23.useAnimationControls)();
-  React24.useEffect(() => {
+  const headerTextControls = (0, import_framer_motion29.useAnimationControls)();
+  React27.useEffect(() => {
     headerTextControls.set({ opacity: 0, scale: 0.8, y: 10 });
     headerTextControls.start({
       opacity: 1,
@@ -2655,8 +3178,8 @@ function PageHeader({
     animate: headerTextControls,
     transition: minimizeTransition
   };
-  const iconControls = (0, import_framer_motion23.useAnimationControls)();
-  React24.useEffect(() => {
+  const iconControls = (0, import_framer_motion29.useAnimationControls)();
+  React27.useEffect(() => {
     if (icon || !minimized) {
       iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
       iconControls.start({
@@ -2666,16 +3189,16 @@ function PageHeader({
       });
     }
   }, [icon, minimized]);
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)(import_jsx_runtime41.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "skc-page-header__replacement-color" }),
-    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)(import_jsx_runtime51.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("div", { className: "skc-page-header__replacement-color" }),
+    /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
       "div",
       {
         style: { height: minimized ? (_a = headerRef.current) == null ? void 0 : _a.clientHeight : 0 }
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_framer_motion23.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
-      import_framer_motion23.motion.header,
+    /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(import_framer_motion29.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+      import_framer_motion29.motion.header,
       {
         ref: headerRef,
         layoutId: "page-header",
@@ -2686,27 +3209,27 @@ function PageHeader({
           minimized && "skc-page-header--minimized",
           className
         ]),
-        children: /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "skc-page-header__content", children: [
-          icon && !children && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
-            import_framer_motion23.motion.div,
+        children: /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("div", { className: "skc-page-header__content", children: [
+          icon && !children && /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+            import_framer_motion29.motion.div,
             {
               animate: iconControls,
               className: "skc-page-header__icon",
               children: icon
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)(
-            import_framer_motion23.motion.div,
+          /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)(
+            import_framer_motion29.motion.div,
             {
               layoutId: "page-header-actions",
               transition: minimizeTransition,
               className: "skc-page-header__actions",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
                   Button,
                   {
                     appearance: "text",
-                    icon: /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(MaterialIcon, { icon: "arrow_backward" }),
+                    icon: /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(MaterialIcon, { icon: "arrow_backward" }),
                     alt: locale === "th" ? "\u0E01\u0E25\u0E31\u0E1A" : "Back",
                     onClick: onBack,
                     href: parentURL,
@@ -2715,23 +3238,23 @@ function PageHeader({
                   }
                 ),
                 minimized && // Header (when minimized)
-                /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_framer_motion23.motion.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
-                /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "skc-page-header__trailing", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(import_framer_motion29.motion.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+                /* @__PURE__ */ (0, import_jsx_runtime51.jsxs)("div", { className: "skc-page-header__trailing", children: [
                   homeURL && // Home Button
-                  /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
                     Button,
                     __spreadValues({
                       appearance: "text",
-                      icon: brand || /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(MaterialIcon, { icon: "home" }),
+                      icon: brand || /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(MaterialIcon, { icon: "home" }),
                       href: homeURL,
                       element
                     }, backAttr)
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
                     Button,
                     {
                       appearance: "text",
-                      icon: /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(MaterialIcon, { icon: "menu" }),
+                      icon: /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(MaterialIcon, { icon: "menu" }),
                       onClick: onNavToggle
                     }
                   )
@@ -2740,9 +3263,9 @@ function PageHeader({
             }
           ),
           !minimized && // Header (initial)
-          /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(import_framer_motion23.motion.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
-          children && /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
-            import_framer_motion23.motion.div,
+          /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(import_framer_motion29.motion.h1, __spreadProps(__spreadValues({}, headerTextProps), { children: title })),
+          children && /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+            import_framer_motion29.motion.div,
             {
               animate: headerTextControls,
               className: "skc-page-header__related",
@@ -2757,14 +3280,14 @@ function PageHeader({
 PageHeader.displayName = "PageHeader";
 
 // src/components/Radio/index.tsx
-var React25 = __toESM(require("react"));
+var React28 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/radio.css
 styleInject('.skc-radio {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-radio::before {\n  background-color: var(--on-surface);\n}\n.skc-radio:not(.skc-radio--disabled):hover::before,\n.skc-form-item:hover .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .08;\n}\n.skc-radio:not(.skc-radio--disabled):focus-within::before,\n.skc-radio:not(.skc-radio--disabled):active::before,\n.skc-form-item:focus-within .skc-radio:not(.skc-radio--disabled)::before,\n.skc-form-item:active .skc-radio:not(.skc-radio--disabled)::before {\n  opacity: .12;\n}\n.skc-radio::before,\n.skc-radio__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-radio__circle {\n  transition: border-color var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: 50%;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-radio__marker {\n  transition: transform var(--motion-short-2) var(--easing-standard);\n  box-sizing: border-box;\n  width: .625rem;\n  height: .625rem;\n  transform: scale(0);\n  border-radius: inherit;\n  background-color: var(--primary);\n}\n.skc-radio__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-radio__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-radio__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-radio:has(.skc-radio__input:checked)::before,\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__ripple {\n  background-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__circle {\n  border-color: var(--primary);\n}\n.skc-radio:has(.skc-radio__input:checked) .skc-radio__marker {\n  transform: scale(1);\n}\n.skc-radio--disabled {\n  opacity: .38;\n}\n.skc-radio--disabled .skc-radio__circle {\n  cursor: default;\n}\n.skc-radio--disabled .skc-radio__marker {\n  background-color: var(--on-surface);\n}\n.skc-radio--disabled .skc-radio__ripple {\n  display: none;\n}\n.skc-radio--disabled .skc-radio__input:checked ~ .skc-radio__circle {\n  border-color: var(--on-surface);\n}\n');
 
 // src/components/Radio/index.tsx
-var import_framer_motion24 = require("framer-motion");
-var import_jsx_runtime42 = require("react/jsx-runtime");
+var import_framer_motion30 = require("framer-motion");
+var import_jsx_runtime52 = require("react/jsx-runtime");
 function Radio({
   value,
   onChange,
@@ -2773,9 +3296,9 @@ function Radio({
   style,
   className
 }) {
-  const rippleParentRef = React25.useRef(null);
+  const rippleParentRef = React28.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(rippleParentRef);
-  return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(
     "label",
     __spreadProps(__spreadValues({
       style,
@@ -2786,7 +3309,7 @@ function Radio({
       ])
     }, rippleListeners), {
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
           "input",
           __spreadValues({
             "aria-checked": value,
@@ -2797,15 +3320,15 @@ function Radio({
             onChange: (event) => onChange && !disabled && onChange(event.target.checked)
           }, inputAttr)
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { "aria-hidden": true, className: "skc-radio__circle", children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { className: "skc-radio__marker" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { "aria-hidden": true, className: "skc-radio__circle", children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "skc-radio__marker" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
           "div",
           {
             ref: rippleParentRef,
             "aria-hidden": true,
             className: "skc-radio__ripple-parent",
-            children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
-              import_framer_motion24.motion.span,
+            children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+              import_framer_motion30.motion.span,
               {
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
@@ -2822,13 +3345,13 @@ function Radio({
 Radio.displayName = "Radio";
 
 // src/components/Section/index.tsx
-var React26 = __toESM(require("react"));
+var React29 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/section.css
 styleInject(".skc-section {\n  display: flex;\n  flex-direction: column;\n  gap: .75rem;\n}\n.skc-section:has(.skc-section) {\n  gap: 1.25rem;\n}\n");
 
 // src/components/Section/index.tsx
-var import_jsx_runtime43 = require("react/jsx-runtime");
+var import_jsx_runtime53 = require("react/jsx-runtime");
 function Section({
   children,
   sectionAttr,
@@ -2838,17 +3361,17 @@ function Section({
   let headerID;
   const modifiedChildren = (
     // For each child in `children`
-    React26.Children.map(children, (child) => {
+    React29.Children.map(children, (child) => {
       if (child.type.displayName === "Header") {
         headerID = `header-${kebabify(child.props.children)}`;
-        return React26.cloneElement(child, {
+        return React29.cloneElement(child, {
           hAttr: { id: headerID }
         });
       } else
         return child;
     })
   );
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
     "section",
     __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, sectionAttr), { style })), {
       "aria-labelledby": headerID,
@@ -2860,14 +3383,14 @@ function Section({
 Section.displayName = "Section";
 
 // src/components/Select/index.tsx
-var import_framer_motion25 = require("framer-motion");
-var React27 = __toESM(require("react"));
+var import_framer_motion31 = require("framer-motion");
+var React30 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/select.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label,\n.skc-text-field.skc-text-field--disabled:focus-within .skc-select__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error .skc-select__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-select__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg,\n.skc-text-field.skc-text-field--error .skc-select__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  margin: -1px;\n  border: 2px solid var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label,\n.skc-text-field--outlined .skc-select__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  position: absolute;\n  inset: 0;\n  content: "";\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  margin: -1px;\n  border: 2px solid var(--error);\n}\n.skc-text-field--filled,\n.skc-select--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before,\n.skc-select--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before,\n.skc-select--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within,\n.skc-select--filled:focus-within {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input,\n.skc-select--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled,\n.skc-text-field--disabled.skc-select--filled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before,\n.skc-text-field--disabled.skc-select--filled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within,\n.skc-text-field--disabled.skc-select--filled:focus-within {\n  margin: 0;\n  border: 1px solid var(--outline);\n}\n.skc-text-field--filled.skc-text-field--error,\n.skc-text-field--error.skc-select--filled {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--error);\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-select__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--multi-line .skc-select__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-select__leading,\n.skc-text-field--textarea .skc-text-field__trailing,\n.skc-text-field--textarea .skc-select__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing,\n.skc-text-field--right .skc-select__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label,\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label,\n.skc-text-field:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__label,\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-select__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__trailing,\n.skc-select__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-select__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-select__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon,\n.skc-select__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading .skc-button::before,\n.skc-select__leading .skc-button::before,\n.skc-text-field__trailing .skc-button::before,\n.skc-select__trailing .skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading,\n.skc-select__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing,\n.skc-select__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button,\n.skc-select__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing, .skc-select__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg,\n.skc-select__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n.skc-select__anchor {\n  position: relative;\n}\n.skc-select {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  width: 100%;\n  height: 3.5rem;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-select.skc-select--error,\n.skc-select.skc-select--error:hover,\n.skc-select.skc-select--error:focus-within {\n  border-color: var(--error);\n}\n.skc-select.skc-select--error .skc-select__label,\n.skc-select.skc-select--error:hover .skc-select__label,\n.skc-select.skc-select--error:focus-within .skc-select__label {\n  color: var(--error);\n}\n.skc-select.skc-select--error .skc-select__helper-msg {\n  color: var(--error);\n}\n.skc-select--outlined {\n  border: 1px solid var(--outline);\n  border-radius: var(--rounded-xs);\n}\n.skc-select--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-select--outlined:focus-within {\n  border: 2px solid var(--primary);\n}\n.skc-select--outlined .skc-select__label {\n  inset: -0.5rem auto auto .75rem;\n  background-color: var(--background);\n}\n.skc-select--outlined.skc-select--error {\n  border: 2px solid var(--error);\n}\n.skc-select--filled .skc-select__value {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-select--filled .skc-select__label {\n  inset: .5rem auto auto .75rem;\n}\n.skc-select--filled.skc-select--error {\n  border-bottom: 2px solid var(--error);\n}\n.skc-select ~ .skc-menu {\n  inset: 3.5rem 0 auto 0;\n  width: 100%;\n}\n.skc-select--error ~ .skc-menu .skc-menu-item--selected::before {\n  background-color: var(--error);\n}\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  font-family: var(--font-display);\n}\n.skc-select:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-select__value {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem;\n  text-align: left;\n}\n.skc-select__helper-msg {\n  cursor: default;\n  text-align: left;\n}\n.skc-select__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label,\n.skc-text-field.skc-text-field--disabled:focus-within .skc-select__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error .skc-select__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-select__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg,\n.skc-text-field.skc-text-field--error .skc-select__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  margin: -1px;\n  border: 2px solid var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label,\n.skc-text-field--outlined .skc-select__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  position: absolute;\n  inset: 0;\n  content: "";\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  margin: -1px;\n  border: 2px solid var(--error);\n}\n.skc-text-field--filled,\n.skc-select--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before,\n.skc-select--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before,\n.skc-select--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within,\n.skc-select--filled:focus-within {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input,\n.skc-select--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled,\n.skc-text-field--disabled.skc-select--filled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before,\n.skc-text-field--disabled.skc-select--filled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within,\n.skc-text-field--disabled.skc-select--filled:focus-within {\n  margin: 0;\n  border: 1px solid var(--outline);\n}\n.skc-text-field--filled.skc-text-field--error,\n.skc-text-field--error.skc-select--filled {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--error);\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-select__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--multi-line .skc-select__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-select__leading,\n.skc-text-field--textarea .skc-text-field__trailing,\n.skc-text-field--textarea .skc-select__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing,\n.skc-text-field--right .skc-select__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label,\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label,\n.skc-text-field:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__label,\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-select__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__trailing,\n.skc-select__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-select__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-select__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-select__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon,\n.skc-select__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading .skc-button::before,\n.skc-select__leading .skc-button::before,\n.skc-text-field__trailing .skc-button::before,\n.skc-select__trailing .skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading,\n.skc-select__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing,\n.skc-select__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button,\n.skc-select__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading, .skc-select__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing, .skc-select__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg,\n.skc-select__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n.skc-select__anchor {\n  position: relative;\n}\n.skc-select {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  width: 100%;\n  height: 3.5rem;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-select.skc-select--error,\n.skc-select.skc-select--error:hover,\n.skc-select.skc-select--error:focus-within {\n  border-color: var(--error);\n}\n.skc-select.skc-select--error .skc-select__label,\n.skc-select.skc-select--error:hover .skc-select__label,\n.skc-select.skc-select--error:focus-within .skc-select__label {\n  color: var(--error);\n}\n.skc-select.skc-select--error .skc-select__helper-msg {\n  color: var(--error);\n}\n.skc-select--outlined {\n  border: 1px solid var(--outline);\n  border-radius: var(--rounded-xs);\n}\n.skc-select--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-select--outlined:focus-within {\n  border: 2px solid var(--primary);\n}\n.skc-select--outlined .skc-select__label {\n  inset: -0.5rem auto auto .75rem;\n  background-color: var(--background);\n}\n.skc-select--outlined.skc-select--error {\n  border: 2px solid var(--error);\n}\n.skc-select--filled .skc-select__value {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-select--filled .skc-select__label {\n  inset: .5rem auto auto .75rem;\n}\n.skc-select--filled.skc-select--error {\n  border-bottom: 2px solid var(--error);\n}\n.skc-select ~ .skc-menu {\n  inset: 3.5rem 0 auto 0;\n  width: 100%;\n}\n.skc-select--error ~ .skc-menu .skc-menu-item--selected::before {\n  background-color: var(--error);\n}\n.skc-select__label {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  font-family: var(--font-display);\n}\n.skc-select:focus-within .skc-select__label {\n  color: var(--primary);\n}\n.skc-select__value {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem;\n  text-align: left;\n}\n.skc-select__helper-msg {\n  cursor: default;\n  text-align: left;\n}\n');
 
 // src/components/Select/index.tsx
-var import_jsx_runtime44 = require("react/jsx-runtime");
+var import_jsx_runtime54 = require("react/jsx-runtime");
 function Select({
   children,
   appearance,
@@ -2885,22 +3408,22 @@ function Select({
 }) {
   var _a, _b;
   const { duration, easing } = useAnimationConfig();
-  const [menuOpen, setMenuOpen] = React27.useState();
-  const [options, setOptions] = React27.useState([]);
-  React27.useEffect(() => {
+  const [menuOpen, setMenuOpen] = React30.useState();
+  const [options, setOptions] = React30.useState([]);
+  React30.useEffect(() => {
     setOptions(
-      React27.Children.map(children, (child) => ({
+      React30.Children.map(children, (child) => ({
         value: child.props.value,
         label: child.props.children
       })) || []
     );
   }, [children]);
-  React27.useEffect(() => {
+  React30.useEffect(() => {
     if (onChange && (options == null ? void 0 : options.length) && !value)
       onChange(options[0].value);
   }, [options]);
-  const toggleRef = React27.createRef();
-  React27.useEffect(() => {
+  const toggleRef = React30.createRef();
+  React30.useEffect(() => {
     var _a2;
     if (menuOpen === false)
       (_a2 = toggleRef.current) == null ? void 0 : _a2.focus();
@@ -2908,8 +3431,8 @@ function Select({
   const selectID = `select-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)("div", { className: "skc-select__anchor", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "skc-select__anchor", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(
       "button",
       {
         ref: toggleRef,
@@ -2927,9 +3450,9 @@ function Select({
         ]),
         onClick: () => options.length && setMenuOpen(!menuOpen),
         children: [
-          leading && /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("div", { className: "skc-select__leading", children: leading }),
-          /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("label", { id: selectID, className: "skc-select__label", children: label }),
-          /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("span", { className: "skc-select__value", children: options.length ? (
+          leading && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "skc-select__leading", children: leading }),
+          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("label", { id: selectID, className: "skc-select__label", children: label }),
+          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "skc-select__value", children: options.length ? (
             // Show the currently selected option
             ((_a = options.find((option) => value === option.value)) == null ? void 0 : _a.label) || // Show the first option as a fallback
             ((_b = options[0]) == null ? void 0 : _b.label)
@@ -2937,33 +3460,34 @@ function Select({
             // No options
             locale === "th" ? "\u0E44\u0E21\u0E48\u0E21\u0E35\u0E15\u0E31\u0E27\u0E40\u0E25\u0E37\u0E2D\u0E01" : "No options"
           ) }),
-          /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
-            import_framer_motion25.motion.div,
+          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+            import_framer_motion31.motion.div,
             {
               className: "skc-select__trailing",
               animate: { rotate: menuOpen ? 180 : 0 },
               transition: transition(duration.short4, easing.standard),
-              children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(MaterialIcon, { icon: "arrow_drop_down" })
+              children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(MaterialIcon, { icon: "arrow_drop_down" })
             }
           ),
-          helperMsg && /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("span", { className: "skc-select__helper-msg", children: helperMsg })
+          helperMsg && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "skc-select__helper-msg", children: helperMsg })
         ]
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
       Menu,
       __spreadProps(__spreadValues({
         open: menuOpen,
         density: -4,
+        onBlur: () => setMenuOpen(false),
         ulAttr: {
           id: `${selectID}-options`,
           role: "listbox",
           "aria-labelledby": selectID
         }
       }, menuAttr), {
-        children: React27.Children.map(
+        children: React30.Children.map(
           children,
-          (child) => React27.cloneElement(child, {
+          (child) => React30.cloneElement(child, {
             selected: value === child.props.value,
             onClick: () => {
               if (onChange)
@@ -2976,27 +3500,20 @@ function Select({
           })
         )
       })
-    ),
-    menuOpen && /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
-      "div",
-      {
-        className: "skc-select__blur-capture",
-        onClick: () => setMenuOpen(false)
-      }
     )
   ] });
 }
 Select.displayName = "Select";
 
 // src/components/Snackbar/index.tsx
-var import_framer_motion26 = require("framer-motion");
-var React28 = __toESM(require("react"));
+var import_framer_motion32 = require("framer-motion");
+var React31 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/snackbar.css
 styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-snackbar {\n  inset: auto auto 5.5rem .5rem;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .25rem;\n  width: calc(100vw - 1rem);\n  padding: .875rem 1rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--inverse-surface);\n  box-shadow: var(--shadow-3);\n}\n.skc-snackbar:has(.skc-snackbar__action) {\n  padding: .25rem .5rem .25rem 1rem;\n}\n.skc-root-layout > .skc-snackbar,\n.skc-root-layout > * > .skc-snackbar {\n  position: fixed;\n  z-index: 80;\n}\n.skc-nav-bar:has(.skc-fab) ~ aside .skc-snackbar {\n  bottom: 10.5rem;\n}\n.skc-nav-bar:has(.skc-fab--large) ~ aside .skc-snackbar {\n  bottom: 13rem;\n}\n.skc-snackbar--stacked {\n  align-items: flex-end;\n  flex-direction: column;\n}\n.skc-snackbar__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  flex-grow: 1;\n  color: var(--inverse-on-surface);\n}\n.skc-snackbar:has(.skc-snackbar__action) .skc-snackbar__label {\n  margin-block: .625rem;\n}\n.skc-snackbar--stacked .skc-snackbar__label {\n  align-self: stretch;\n}\n.skc-snackbar__action,\n.skc-snackbar__action .skc-button {\n  color: var(--inverse-primary);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-snackbar__action .skc-button::before,\n.skc-snackbar__action .skc-button .skc-button__ripple {\n  background-color: var(--inverse-primary);\n}\n@media only screen and (min-width: 600px) {\n  .skc-snackbar {\n    inset: auto auto 1rem 1rem;\n    width: fit-content;\n    min-width: 20rem;\n    max-width: calc(33.3333333333vw - 1rem);\n  }\n  .skc-nav-bar:has(.skc-fab, .skc-fab--large) ~ aside .skc-snackbar {\n    bottom: 1rem;\n  }\n}\n");
 
 // src/components/Snackbar/index.tsx
-var import_jsx_runtime45 = require("react/jsx-runtime");
+var import_jsx_runtime55 = require("react/jsx-runtime");
 function Snackbar({
   children,
   action,
@@ -3008,8 +3525,8 @@ function Snackbar({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("aside", { children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(import_framer_motion26.AnimatePresence, __spreadProps(__spreadValues({}, { onExitComplete }), { children: open && /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(
-    import_framer_motion26.motion.div,
+  return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("aside", { children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_framer_motion32.AnimatePresence, __spreadProps(__spreadValues({}, { onExitComplete }), { children: open && /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(
+    import_framer_motion32.motion.div,
     {
       role: "status",
       "aria-relevant": "additions",
@@ -3031,8 +3548,8 @@ function Snackbar({
         className
       ]),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("span", { className: "skc-snackbar__label", children }),
-        action && /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("div", { className: "skc-snackbar__action", children: React28.cloneElement(action, {
+        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("span", { className: "skc-snackbar__label", children }),
+        action && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("div", { className: "skc-snackbar__action", children: React31.cloneElement(action, {
           onClick: () => {
             if (onClose)
               onClose();
@@ -3051,7 +3568,7 @@ Snackbar.displayName = "Snackbar";
 styleInject('.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-switch {\n  transition: background-color var(--motion-short-4) var(--easing-standard), border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  width: 3.25rem;\n  height: 2rem;\n  cursor: pointer;\n  border: 2px solid var(--outline);\n  border-radius: var(--rounded-full);\n  outline: none;\n  background-color: var(--surface-variant);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-switch:not([aria-disabled=true]):active > .skc-switch__handle {\n  inset: 0 auto auto 0;\n  width: 1.75rem;\n  height: 1.75rem;\n}\n.skc-switch:not([aria-disabled=true]):hover > .skc-switch__handle,\n.skc-switch:not([aria-disabled=true]):focus > .skc-switch__handle,\n.skc-switch:not([aria-disabled=true]):active > .skc-switch__handle {\n  background-color: var(--on-surface-variant);\n}\n.skc-switch[aria-disabled=true] {\n  cursor: default;\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-switch[aria-disabled=true]::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: -2px;\n  opacity: .3157894737;\n  border: 2px solid var(--on-surface);\n}\n.skc-switch--selected {\n  border-color: var(--primary);\n  background-color: var(--primary);\n}\n.skc-switch--selected > .skc-switch__handle {\n  inset: calc(.25rem - 2px) auto auto calc(1.5rem - 2px);\n  width: 1.5rem;\n  height: 1.5rem;\n  color: var(--on-primary-container);\n  stroke: var(--on-primary-container);\n  fill: var(--on-primary-container);\n  background-color: var(--on-primary);\n}\n.skc-switch--selected:not([aria-disabled=true]) > .skc-switch__handle::before {\n  background-color: var(--primary);\n}\n.skc-switch--selected:not([aria-disabled=true]):active > .skc-switch__handle {\n  inset: 0 auto auto 1.25rem;\n  width: 1.75rem;\n  height: 1.75rem;\n}\n.skc-switch--selected:not([aria-disabled=true]):hover > .skc-switch__handle,\n.skc-switch--selected:not([aria-disabled=true]):focus > .skc-switch__handle,\n.skc-switch--selected:not([aria-disabled=true]):active > .skc-switch__handle {\n  background-color: var(--primary-container);\n}\n.skc-switch--selected[aria-disabled=true] {\n  cursor: default;\n  opacity: .12;\n  border-color: var(--on-surface);\n  background-color: var(--on-surface);\n}\n.skc-switch--selected[aria-disabled=true]::before {\n  display: none;\n}\n.skc-switch--selected[aria-disabled=true] > .skc-switch__handle {\n  color: var(--on-surface);\n  background-color: var(--surface);\n}\n.skc-switch__handle {\n  transition:\n    inset var(--motion-short-4) var(--easing-standard),\n    width var(--motion-short-4) var(--easing-standard),\n    height var(--motion-short-4) var(--easing-standard),\n    background-color var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  inset: calc(.5rem - 2px) auto auto calc(.5rem - 2px);\n  display: grid;\n  place-content: center;\n  width: 1rem;\n  height: 1rem;\n  color: var(--surface-variant);\n  stroke: var(--surface-variant);\n  border-radius: var(--rounded-full);\n  outline: none;\n  fill: var(--surface-variant);\n  background-color: var(--outline);\n}\n.skc-switch__handle:has(*) {\n  inset: calc(.25rem - 2px) auto auto calc(.25rem - 2px);\n  width: 1.5rem;\n  height: 1.5rem;\n}\n.skc-switch__handle::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  background-color: var(--on-surface);\n}\n.skc-switch:not([aria-disabled=true]):hover .skc-switch__handle::before {\n  opacity: .08;\n}\n.skc-switch:not([aria-disabled=true]):focus .skc-switch__handle::before,\n.skc-switch:not([aria-disabled=true]):active .skc-switch__handle::before {\n  opacity: .12;\n}\n.skc-switch__handle > .skc-icon {\n  font-size: 20px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 20;\n  font-size: 1rem;\n}\n');
 
 // src/components/Switch/index.tsx
-var import_jsx_runtime46 = require("react/jsx-runtime");
+var import_jsx_runtime56 = require("react/jsx-runtime");
 function Switch({
   value,
   onChange,
@@ -3062,7 +3579,7 @@ function Switch({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(
     "button",
     __spreadProps(__spreadValues({
       "aria-disabled": disabled,
@@ -3071,17 +3588,17 @@ function Switch({
       className: cn(["skc-switch", value && "skc-switch--selected", className]),
       onClick: () => onChange && onChange(!value)
     }, buttonAttr), {
-      children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("div", { className: "skc-switch__handle", children: value ? onIcon : offIcon })
+      children: /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", { className: "skc-switch__handle", children: value ? onIcon : offIcon })
     })
   );
 }
 Switch.displayName = "Switch";
 
 // ../skcom-css/dist/css/components/table.css
-styleInject(".skc-table {\n  overflow: auto;\n  border: 2px solid var(--outline-variant);\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-2);\n}\n.skc-table__content {\n  width: 100%;\n  border-spacing: 0;\n  border-collapse: separate;\n  text-indent: 0;\n  background-color: var(--surface);\n}\n");
+styleInject(".skc-table {\n  overflow: auto;\n  border: 2px solid var(--outline-variant);\n  border-radius: 1.25rem;\n  background-color: var(--surface-2);\n}\n.skc-table__content {\n  width: 100%;\n  border-spacing: 0;\n  border-collapse: separate;\n  text-indent: 0;\n  background-color: var(--surface);\n}\n");
 
 // src/components/Table/index.tsx
-var import_jsx_runtime47 = require("react/jsx-runtime");
+var import_jsx_runtime57 = require("react/jsx-runtime");
 function Table({
   children,
   contentWidth,
@@ -3089,29 +3606,26 @@ function Table({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(
     "div",
     {
       style: __spreadProps(__spreadValues({}, style), { maxHeight: height }),
       className: cn(["skc-table", className]),
-      children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("table", { style: { minWidth: contentWidth }, className: "skc-table__content", children })
+      children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("table", { style: { minWidth: contentWidth }, className: "skc-table__content", children })
     }
   );
 }
 Table.displayName = "Table";
 
-// ../skcom-css/dist/css/components/table-head.css
-styleInject(".skc-table-head {\n  display: table-header-group;\n  background-color: var(--surface-1);\n}\n.skc-table-head--fixed {\n  position: sticky;\n  inset: 0 0 auto 0;\n}\n");
-
 // src/components/TableHead/index.tsx
-var import_jsx_runtime48 = require("react/jsx-runtime");
+var import_jsx_runtime58 = require("react/jsx-runtime");
 function TableHead({
   children,
   fixed,
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
     "thead",
     {
       style,
@@ -3126,105 +3640,25 @@ function TableHead({
 }
 TableHead.displayName = "TableHead";
 
-// ../skcom-css/dist/css/components/table-body.css
-styleInject(".skc-table-body {\n  display: table-row-group;\n}\n");
-
-// src/components/TableBody/index.tsx
-var import_jsx_runtime49 = require("react/jsx-runtime");
-function TableBody({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("tbody", { style, className: cn(["skc-table-body", className]), children });
-}
-TableBody.displayName = "TableBody";
-
 // ../skcom-css/dist/css/components/table-foot.css
 styleInject(".skc-table-foot {\n  display: table-footer-group;\n  background-color: var(--surface-1);\n}\n");
 
 // src/components/TableFoot/index.tsx
-var import_jsx_runtime50 = require("react/jsx-runtime");
+var import_jsx_runtime59 = require("react/jsx-runtime");
 function TableFoot({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("tfoot", { style, className: cn(["skc-table-foot", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("tfoot", { style, className: cn(["skc-table-foot", className]), children });
 }
 TableFoot.displayName = "TableFoot";
 
-// ../skcom-css/dist/css/components/table-row.css
-styleInject(".skc-table-row {\n  display: table-row;\n}\n");
-
-// src/components/TableRow/index.tsx
-var import_jsx_runtime51 = require("react/jsx-runtime");
-function TableRow({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("tr", { style, className: cn(["skc-table-row", className]), children });
-}
-TableRow.displayName = "TableRow";
-
-// src/components/TableCell/index.tsx
-var React29 = __toESM(require("react"));
-
-// ../skcom-css/dist/css/components/table-cell.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  display: table-cell;\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--left {\n  text-align: left;\n}\n.skc-table-cell--left .skc-table-cell__content {\n  justify-content: flex-start;\n}\n.skc-table-cell--center {\n  text-align: center;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  justify-content: center;\n}\n.skc-table-cell--right {\n  text-align: right;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  justify-content: flex-end;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell__menu-toggle:hover::before {\n  opacity: .08;\n}\n.skc-table-cell__menu-toggle:focus::before,\n.skc-table-cell__menu-toggle:active::before {\n  opacity: .12;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n');
-
-// src/components/TableCell/index.tsx
-var import_framer_motion27 = require("framer-motion");
-var import_jsx_runtime52 = require("react/jsx-runtime");
-function TableCell({
-  children,
-  header,
-  align,
-  menu,
-  onMenuToggle,
-  tdAttr,
-  style,
-  className
-}) {
-  const toggleRef = React29.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
-  const props = __spreadValues({
-    style,
-    className: cn([
-      "skc-table-cell",
-      header && "skc-table-cell--header",
-      align === "left" ? "skc-table-cell--left" : align === "right" ? "skc-table-cell--right" : "skc-table-cell--center",
-      className
-    ])
-  }, tdAttr);
-  const content = onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(import_jsx_runtime52.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(
-      "button",
-      __spreadProps(__spreadValues({
-        ref: toggleRef,
-        className: "skc-table-cell__menu-toggle",
-        onClick: onMenuToggle
-      }, rippleListeners), {
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "skc-table-cell__content", children }),
-          /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(MaterialIcon, { icon: "arrow_drop_down" }),
-          /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
-            import_framer_motion27.motion.span,
-            {
-              "aria-hidden": true,
-              initial: { scale: 0, opacity: 0.36 },
-              animate: rippleControls,
-              className: "skc-table-cell__ripple",
-              style: rippleStyle
-            }
-          )
-        ]
-      })
-    ),
-    menu
-  ] }) : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "skc-table-cell__content", children });
-  return header ? /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("th", __spreadProps(__spreadValues({}, props), { children: content })) : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("td", __spreadProps(__spreadValues({}, props), { children: content }));
-}
-TableCell.displayName = "TableCell";
-
 // src/components/Tab/index.tsx
-var import_framer_motion28 = require("framer-motion");
-var React30 = __toESM(require("react"));
+var import_framer_motion33 = require("framer-motion");
+var React32 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/tab.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n.skc-tab {\n  position: relative;\n  width: 100%;\n  padding-block: .875rem;\n  cursor: pointer;\n  border: 0;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-tab::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-tab:hover::before {\n  opacity: .08;\n}\n.skc-tab:focus-visible::before,\n.skc-tab:active::before {\n  opacity: .12;\n}\n.skc-tab:has(.skc-tab__icon) {\n  padding-block: .75rem;\n}\n.skc-tabs-container--primary .skc-tab:has(.skc-tab__icon):has(.skc-tab__label) {\n  padding-block: .625rem .5rem;\n}\n.skc-tabs-container--primary .skc-tab.skc-tab--selected,\n.skc-tabs-container--primary .skc-tab.skc-tab--selected:has(.skc-tab__icon):has(.skc-tab__label) {\n  padding-bottom: 0;\n  color: var(--primary);\n}\n.skc-tabs-container--secondary .skc-tab::before {\n  color: var(--on-surface);\n}\n.skc-tab.skc-tab--selected::before {\n  background-color: var(--primary);\n}\n.skc-tab__content {\n  display: flex;\n  align-items: center;\n  width: fit-content;\n  margin-inline: auto;\n}\n.skc-tabs-container--primary .skc-tab__content {\n  flex-direction: column;\n  gap: .125rem;\n}\n.skc-tabs-container--secondary .skc-tab__content {\n  flex-direction: row;\n  gap: .5rem;\n}\n.skc-tab__icon .skc-icon {\n  transition: font-variation-settings var(--motion-short-4) var(--easing-standard);\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab:hover .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab:active .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab--selected .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab--selected:hover .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 600,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab--selected:active .skc-tab__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 300,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-tab__label {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-tab__indicator {\n  display: block;\n  width: 100%;\n  margin-top: calc(.75rem - 3px);\n  background-color: var(--primary);\n}\n.skc-tab:has(.skc-tab__icon) .skc-tab__indicator {\n  margin-top: calc(.625rem - 3px);\n}\n.skc-tab:has(.skc-tab__icon):has(.skc-tab__label) .skc-tab__indicator {\n  margin-top: calc(.375rem - 3px);\n}\n.skc-tabs-container--primary .skc-tab__indicator {\n  height: 3px;\n  border-radius: var(--rounded-full) var(--rounded-full) 0 0;\n}\n.skc-tabs-container--secondary .skc-tab__indicator {\n  position: absolute;\n  inset: auto 0 0;\n  height: 2px;\n}\n.skc-tab__ripple-container {\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n  pointer-events: none;\n}\n.skc-tab__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-tab--selected .skc-tab__ripple {\n  background-color: var(--primary);\n}\n');
 
 // src/components/Tab/index.tsx
-var import_jsx_runtime53 = require("react/jsx-runtime");
+var import_jsx_runtime60 = require("react/jsx-runtime");
 function Tab({
   icon,
   label,
@@ -3239,7 +3673,7 @@ function Tab({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  const tabRef = React30.useRef(null);
+  const tabRef = React32.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(tabRef);
   const tabID = `tab-${kebabify(typeof label === "string" ? label : alt)}`;
   const props = __spreadValues({
@@ -3251,12 +3685,12 @@ function Tab({
     style,
     className: cn(["skc-tab", selected && "skc-tab--selected", className])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(import_jsx_runtime53.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("div", { className: "skc-tab__content", children: [
-      icon && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "skc-tab__icon", children: icon }),
-      label && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { id: tabID, className: "skc-tab__label", children: label }),
-      selected && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
-        import_framer_motion28.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(import_jsx_runtime60.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)("div", { className: "skc-tab__content", children: [
+      icon && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "skc-tab__icon", children: icon }),
+      label && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { id: tabID, className: "skc-tab__label", children: label }),
+      selected && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+        import_framer_motion33.motion.span,
         {
           "aria-hidden": true,
           layoutId: containerID,
@@ -3265,8 +3699,8 @@ function Tab({
         }
       )
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { "aria-hidden": true, className: "skc-tab__ripple-container", children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
-      import_framer_motion28.motion.span,
+    /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { "aria-hidden": true, className: "skc-tab__ripple-container", children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+      import_framer_motion33.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -3277,11 +3711,11 @@ function Tab({
   ] });
   return (
     // Render with `element` if defined
-    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
       )
     )
   );
@@ -3289,13 +3723,13 @@ function Tab({
 Tab.displayName = "Tab";
 
 // src/components/TabsContainer/index.tsx
-var React31 = __toESM(require("react"));
+var React33 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/tabs-container.css
 styleInject(".skc-tabs-container {\n  border-bottom: 1px solid var(--surface-variant);\n}\n.skc-tabs-container__content {\n  display: flex;\n  align-items: flex-end;\n  flex-direction: row;\n  width: 100%;\n  max-width: 32rem;\n  margin: 0;\n  margin-inline: auto;\n  padding: 0;\n  list-style: none;\n}\n.skc-tabs-container__content > li {\n  width: 100%;\n}\n.skc-section .skc-tabs-container {\n  margin-inline: 0;\n}\n");
 
 // src/components/TabsContainer/index.tsx
-var import_jsx_runtime54 = require("react/jsx-runtime");
+var import_jsx_runtime61 = require("react/jsx-runtime");
 function TabsContainer({
   children,
   appearance,
@@ -3303,20 +3737,20 @@ function TabsContainer({
   style,
   className
 }) {
-  const injectedChildren = React31.Children.map(
+  const injectedChildren = React33.Children.map(
     children,
-    (child) => React31.cloneElement(child, {
+    (child) => React33.cloneElement(child, {
       containerID: `tabs-contaner-${kebabify(alt)}`
     })
   );
-  return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
     "div",
     {
       className: cn([
         "skc-tabs-container",
         appearance === "primary" ? "skc-tabs-container--primary" : appearance === "secondary" && "skc-tabs-container--secondary"
       ]),
-      children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
         "div",
         {
           role: "tablist",
@@ -3332,14 +3766,14 @@ function TabsContainer({
 TabsContainer.displayName = "TabsContainer";
 
 // src/components/TextField/index.tsx
-var import_framer_motion29 = require("framer-motion");
-var React32 = __toESM(require("react"));
+var import_framer_motion34 = require("framer-motion");
+var React34 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/text-field.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-text-field {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  min-height: 3.5rem;\n}\n.skc-text-field .skc-text-field__input {\n  box-sizing: border-box;\n  border: none;\n}\n.skc-text-field.skc-text-field--disabled:focus-within .skc-text-field__label {\n  color: var(--on-surface-variant);\n}\n.skc-text-field.skc-text-field--disabled .skc-button[aria-disabled=true] {\n  opacity: 1;\n}\n.skc-text-field.skc-text-field--error,\n.skc-text-field.skc-text-field--error:hover,\n.skc-text-field.skc-text-field--error:focus-within {\n  border-color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__label,\n.skc-text-field.skc-text-field--error:hover .skc-text-field__label,\n.skc-text-field.skc-text-field--error:focus-within .skc-text-field__label {\n  color: var(--error);\n}\n.skc-text-field.skc-text-field--error .skc-text-field__trailing .skc-icon,\n.skc-text-field.skc-text-field--error .skc-text-field__helper-msg {\n  color: var(--error);\n}\n.skc-text-field--outlined {\n  border: 1px solid var(--outline);\n  border-radius: .25rem;\n}\n.skc-text-field--outlined:hover {\n  border-color: var(--on-surface);\n}\n.skc-text-field--outlined:focus-within {\n  margin: -1px;\n  border: 2px solid var(--primary);\n}\n.skc-text-field--outlined .skc-text-field__label {\n  background-color: var(--background);\n}\n.skc-text-field--outlined .skc-text-field__input {\n  padding: 1rem;\n}\n.skc-text-field--outlined.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--outlined.skc-text-field--disabled::before {\n  position: absolute;\n  inset: 0;\n  content: "";\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  border-radius: inherit;\n}\n.skc-text-field--outlined.skc-text-field--error {\n  margin: -1px;\n  border: 2px solid var(--error);\n}\n.skc-text-field--filled {\n  border-bottom: 1px solid var(--outline);\n  border-radius: .25rem .25rem 0 0;\n  background-color: var(--surface-variant);\n}\n.skc-text-field--filled::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled:hover::before {\n  opacity: .08;\n}\n.skc-text-field--filled:focus-within {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-text-field--filled .skc-text-field__input {\n  padding: 1.5rem 1rem .5rem;\n}\n.skc-text-field--filled.skc-text-field--disabled {\n  opacity: .38;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field--filled.skc-text-field--disabled::before {\n  opacity: .1052631579;\n  background-color: var(--on-surface);\n}\n.skc-text-field--filled.skc-text-field--disabled:focus-within {\n  margin: 0;\n  border: 1px solid var(--outline);\n}\n.skc-text-field--filled.skc-text-field--error {\n  margin-bottom: -1px;\n  border-bottom: 2px solid var(--error);\n}\n.skc-text-field--single-line .skc-text-field__input,\n.skc-text-field--multi-line .skc-text-field__input {\n  height: 3.5rem;\n  resize: none;\n}\n.skc-text-field--textarea .skc-text-field__input {\n  height: 6.5rem;\n  resize: vertical;\n}\n.skc-text-field--multi-line .skc-text-field__leading,\n.skc-text-field--multi-line .skc-text-field__trailing,\n.skc-text-field--textarea .skc-text-field__leading,\n.skc-text-field--textarea .skc-text-field__trailing {\n  display: flex;\n  align-items: center;\n  align-self: flex-start;\n  height: 3.5rem;\n}\n.skc-text-field--left .skc-text-field__input {\n  text-align: left;\n}\n.skc-text-field--right .skc-text-field__input {\n  text-align: right;\n}\n.skc-text-field--right .skc-text-field__trailing {\n  margin-left: 0;\n}\n.skc-text-field__label {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  font-family: var(--font-display);\n  position: absolute;\n  z-index: 10;\n  inset: 1rem auto auto .75rem;\n  padding-inline: .25rem;\n  pointer-events: none;\n  color: var(--on-surface-variant);\n}\n.skc-text-field:focus-within .skc-text-field__label {\n  color: var(--primary);\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__label {\n  left: 2.75rem;\n}\n.skc-text-field__leading,\n.skc-text-field__trailing {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-text-field__leading,\n.skc-text-field__leading .skc-button__icon .skc-icon,\n.skc-text-field__trailing,\n.skc-text-field__trailing .skc-button__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-text-field__leading .skc-button::before,\n.skc-text-field__trailing .skc-button::before {\n  background-color: var(--on-surface-variant);\n}\n.skc-text-field__leading {\n  margin-inline: 1rem .5rem;\n}\n.skc-text-field__trailing {\n  margin-inline: .5rem 1rem;\n}\n.skc-text-field__trailing .skc-button {\n  margin-right: -0.5rem;\n}\n.skc-text-field__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  width: 100%;\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-text-field__input:focus {\n  outline: none;\n}\n.skc-text-field:has(.skc-text-field__leading) .skc-text-field__input {\n  padding-left: 0;\n}\n.skc-text-field:has(.skc-text-field__trailing) .skc-text-field__input {\n  padding-right: 0;\n}\n.skc-text-field__helper-msg {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n  position: absolute;\n  inset: auto 0 -2.25rem 1rem;\n  height: 2rem;\n  color: var(--on-surface-variant);\n}\n');
 
 // src/components/TextField/index.tsx
-var import_jsx_runtime55 = require("react/jsx-runtime");
+var import_jsx_runtime62 = require("react/jsx-runtime");
 function TextField({
   appearance,
   label,
@@ -3360,12 +3794,12 @@ function TextField({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  const labelControls = (0, import_framer_motion29.useAnimationControls)();
-  const trailingControls = (0, import_framer_motion29.useAnimationControls)();
-  const [minifyLabel, setMinifyLabel] = React32.useState();
-  const [neverResetLabel, setNeverMinifyLabel] = React32.useState(false);
+  const labelControls = (0, import_framer_motion34.useAnimationControls)();
+  const trailingControls = (0, import_framer_motion34.useAnimationControls)();
+  const [minifyLabel, setMinifyLabel] = React34.useState();
+  const [neverResetLabel, setNeverMinifyLabel] = React34.useState(false);
   const fieldTransition = transition(duration.short4, easing.standard);
-  React32.useEffect(() => {
+  React34.useEffect(() => {
     if (value)
       setMinifyLabel(true);
   }, [value]);
@@ -3383,7 +3817,7 @@ function TextField({
   };
   const orgtrailingAnimState = { y: 0 };
   const focusedTrailingAnimState = { y: 8 };
-  React32.useEffect(() => {
+  React34.useEffect(() => {
     if ([
       "color",
       "date",
@@ -3396,7 +3830,7 @@ function TextField({
       setNeverMinifyLabel(true);
     }
   }, [appearance, inputAttr == null ? void 0 : inputAttr.type]);
-  React32.useEffect(() => {
+  React34.useEffect(() => {
     if (neverResetLabel || minifyLabel === void 0)
       return;
     if (minifyLabel) {
@@ -3417,7 +3851,7 @@ function TextField({
       transition: fieldTransition
     }));
   }, [minifyLabel]);
-  const textareaRef = React32.useRef(null);
+  const textareaRef = React34.useRef(null);
   const expandTextarea = () => {
     if (behavior !== "multi-line")
       return;
@@ -3427,9 +3861,9 @@ function TextField({
     textarea.style.height = "0";
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
-  React32.useEffect(() => expandTextarea, [value]);
-  const [error, setError] = React32.useState(false);
-  React32.useEffect(() => setError(Boolean(incError)), [incError]);
+  React34.useEffect(() => expandTextarea, [value]);
+  const [error, setError] = React34.useState(false);
+  React34.useEffect(() => setError(Boolean(incError)), [incError]);
   const fieldID = `field-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
@@ -3457,7 +3891,7 @@ function TextField({
     },
     className: "skc-text-field__input"
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
     "label",
     {
       style,
@@ -3471,8 +3905,8 @@ function TextField({
         className
       ]),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
-          import_framer_motion29.motion.span,
+        /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+          import_framer_motion34.motion.span,
           {
             id: `${fieldID}-label`,
             animate: labelControls,
@@ -3480,11 +3914,11 @@ function TextField({
             children: label
           }
         ),
-        leading && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_framer_motion29.motion.div, { className: "skc-text-field__leading", children: leading }),
-        behavior === "single-line" ? /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_framer_motion29.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(import_framer_motion29.AnimatePresence, { initial: false, children: [
-          trailing && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
-            import_framer_motion29.motion.div,
+        leading && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(import_framer_motion34.motion.div, { className: "skc-text-field__leading", children: leading }),
+        behavior === "single-line" ? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("input", __spreadValues(__spreadValues({}, inputProps), inputAttr)) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("textarea", __spreadValues({ ref: textareaRef }, inputProps)),
+        /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(import_framer_motion34.LayoutGroup, { children: /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(import_framer_motion34.AnimatePresence, { initial: false, children: [
+          trailing && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+            import_framer_motion34.motion.div,
             {
               animate: appearance === "filled" && typeof trailing === "string" ? trailingControls : void 0,
               layoutId: `${fieldID}-trailing`,
@@ -3493,8 +3927,8 @@ function TextField({
               children: trailing
             }
           ),
-          (canClear || error) && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
-            import_framer_motion29.motion.div,
+          (canClear || error) && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+            import_framer_motion34.motion.div,
             {
               initial: { scale: 0.6, opacity: 0 },
               animate: { scale: 1, opacity: 1 },
@@ -3502,19 +3936,19 @@ function TextField({
               layoutId: `${fieldID}-button-or-icon`,
               transition: fieldTransition,
               className: "skc-text-field__trailing",
-              children: canClear ? /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+              children: canClear ? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
                 Button,
                 {
                   appearance: "text",
-                  icon: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(MaterialIcon, { icon: "cancel" }),
+                  icon: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(MaterialIcon, { icon: "cancel" }),
                   disabled,
                   onClick: () => onChange && onChange("")
                 }
-              ) : error ? /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(MaterialIcon, { icon: "error", fill: true }) : null
+              ) : error ? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(MaterialIcon, { icon: "error", fill: true }) : null
             }
           )
         ] }) }),
-        helperMsg && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("span", { id: `${fieldID}-helper`, className: "skc-text-field__helper-msg", children: helperMsg })
+        helperMsg && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { id: `${fieldID}-helper`, className: "skc-text-field__helper-msg", children: helperMsg })
       ]
     }
   );
@@ -3525,9 +3959,9 @@ TextField.displayName = "TextField";
 styleInject(":root {\n  --motion-short-1: 50ms;\n  --motion-short-2: 100ms;\n  --motion-short-3: 150ms;\n  --motion-short-4: 200ms;\n  --motion-medium-1: 250ms;\n  --motion-medium-2: 300ms;\n  --motion-medium-3: 350ms;\n  --motion-medium-4: 400ms;\n  --motion-long-1: 450ms;\n  --motion-long-2: 500ms;\n  --motion-long-3: 550ms;\n  --motion-long-4: 600ms;\n  --motion-extra-long-1: 700ms;\n  --motion-extra-long-2: 800ms;\n  --motion-extra-long-3: 900ms;\n  --motion-extra-long-4: 1000ms;\n  --easing-standard: cubic-bezier(0.2, 0, 0, 1);\n  --easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);\n  --easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);\n  --easing-emphasized: var(--easing-standard);\n  --easing-emphasized-accelerate: cubic-bezier(0.05, 0.7, 0.1, 1);\n  --easing-emphasized-decelerate: cubic-bezier(0.3, 0, 0.8, 0.15);\n}\n:root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n:root {\n  --white: #ffffff;\n  --black: #000000;\n  --primary-100: #ffffff;\n  --primary-99: #fafcff;\n  --primary-95: #e4f3ff;\n  --primary-90: #c5e7ff;\n  --primary-80: #80cfff;\n  --primary-70: #20b6f9;\n  --primary-60: #009ad8;\n  --primary-50: #007fb3;\n  --primary-40: #00658f;\n  --primary-30: #004c6d;\n  --primary-20: #00344c;\n  --primary-10: #001e2e;\n  --primary-0: #000000;\n  --secondary-100: #ffffff;\n  --secondary-99: #fcfcfc;\n  --secondary-95: #ffecf3;\n  --secondary-90: #ffd8e8;\n  --secondary-80: #ffafd5;\n  --secondary-70: #ff80c3;\n  --secondary-60: #ff3fb4;\n  --secondary-50: #e20098;\n  --secondary-40: #b50077;\n  --secondary-30: #8b005a;\n  --secondary-20: #62003e;\n  --secondary-10: #3d0025;\n  --secondary-0: #000000;\n  --tertiary-100: #ffffff;\n  --tertiary-99: #fffbf7;\n  --tertiary-95: #fff1b4;\n  --tertiary-90: #ffe24c;\n  --tertiary-80: #e4c521;\n  --tertiary-70: #c7aa00;\n  --tertiary-60: #a98f00;\n  --tertiary-50: #8c7600;\n  --tertiary-40: #6f5d00;\n  --tertiary-30: #544600;\n  --tertiary-20: #3a3000;\n  --tertiary-10: #221b00;\n  --tertiary-0: #000000;\n  --neutral-100: #ffffff;\n  --neutral-99: #fbfcff;\n  --neutral-95: #f0f1f4;\n  --neutral-90: #e1e2e5;\n  --neutral-80: #c5c6c9;\n  --neutral-70: #aaabad;\n  --neutral-60: #909194;\n  --neutral-50: #75777a;\n  --neutral-40: #5c5e61;\n  --neutral-30: #454749;\n  --neutral-20: #2e3133;\n  --neutral-10: #191c1e;\n  --neutral-0: #000000;\n  --neutral-variant-100: #ffffff;\n  --neutral-variant-99: #fafcff;\n  --neutral-variant-95: #ebf1f8;\n  --neutral-variant-90: #dde3ea;\n  --neutral-variant-80: #c1c7ce;\n  --neutral-variant-70: #a6acb2;\n  --neutral-variant-60: #8b9197;\n  --neutral-variant-50: #71787e;\n  --neutral-variant-40: #595f65;\n  --neutral-variant-30: #41484d;\n  --neutral-variant-20: #2b3136;\n  --neutral-variant-10: #161c21;\n  --neutral-variant-0: #000000;\n  --error-100: #ffffff;\n  --error-99: #fcfcfc;\n  --error-95: #ffede9;\n  --error-90: #ffdad4;\n  --error-80: #ffb4a9;\n  --error-70: #ff897a;\n  --error-60: #ff5449;\n  --error-50: #dd3730;\n  --error-40: #ba1b1b;\n  --error-30: #930006;\n  --error-20: #680003;\n  --error-10: #410001;\n  --error-0: #000000;\n  --shadow-text: 0 1px 2px #0000004d, 0 2px 6px #00000026;\n  --rounded-xs: 0.25rem;\n  --rounded-sm: 0.5rem;\n  --rounded-md: 0.75rem;\n  --rounded-lg: 1rem;\n  --rounded-lg-end: 0 var(--rounded-lg) var(--rounded-lg) 0;\n  --rounded-lg-top: var(--rounded-lg) var(--rounded-lg) 0 0;\n  --rounded-xl: 1.75rem;\n  --rounded-xl-top: var(--rounded-xl) var(--rounded-xl) 0 0;\n  --rounded-full: 100px;\n}\n@media (prefers-color-scheme: light) {\n  :root {\n    --primary: #00658f;\n    --on-primary: #ffffff;\n    --primary-container: #c5e7ff;\n    --on-primary-container: #001c38;\n    --inverse-primary: #80cfff;\n    --secondary: #b50077;\n    --on-secondary: #ffffff;\n    --secondary-container: #ffd8e8;\n    --on-secondary-container: #3d0025;\n    --tertiary: #6f5d00;\n    --on-tertiary: #ffffff;\n    --tertiary-container: #ffe24c;\n    --on-tertiary-container: #221b00;\n    --error: #ba1b1b;\n    --on-error: #ffffff;\n    --error-container: #ffdfd4;\n    --on-error-container: #410001;\n    --surface: #fbfcff;\n    --on-surface: #191c1e;\n    --surface-variant: #dde3ea;\n    --on-surface-variant: #41484d;\n    --inverse-on-surface: #f0f1f4;\n    --inverse-surface: #2e3133;\n    --surface-1: #eef4f9;\n    --surface-2: #e7f0f6;\n    --surface-3: #dfebf3;\n    --surface-4: #ddeaf2;\n    --surface-5: #d8e7ef;\n    --background: #fbfcff;\n    --on-background: #191c1e;\n    --outline: #73777f;\n    --outline-variant: #c1c7ce;\n    --shadow-1: 0 1px 2px #0000004d, 0 1px 3px 1px #00000026;\n    --shadow-2: 0 1px 2px #0000004d, 0 2px 6px 2px #00000026;\n    --shadow-3: 0 4px 8px 3px #00000026, 0 1px 3px #0000004d;\n    --shadow-4: 0 6px 10px 4px #00000026, 0 2px 3px #0000004d;\n    --shadow-5: 0 8px 12px 6px #00000026, 0 4px 4px #0000004d;\n  }\n}\n@media (prefers-color-scheme: dark) {\n  :root {\n    --primary: #80cfff;\n    --on-primary: #00344c;\n    --primary-container: #004c6d;\n    --on-primary-container: #c5e7ff;\n    --inverse-primary: #00658e;\n    --secondary: #ffafd5;\n    --on-secondary: #62003e;\n    --secondary-container: #8b005a;\n    --on-secondary-container: #ffd8e8;\n    --tertiary: #e4c521;\n    --on-tertiary: #3a3000;\n    --tertiary-container: #544600;\n    --on-tertiary-container: #ffe24c;\n    --error: #ffb4a9;\n    --on-error: #680003;\n    --error-container: #930006;\n    --on-error-container: #ffdad4;\n    --surface: #191c1e;\n    --on-surface: #e1e2e5;\n    --surface-variant: #41484d;\n    --on-surface-variant: #c1c7ce;\n    --inverse-on-surface: #191c1e;\n    --inverse-surface: #e1e2e5;\n    --surface-1: #1e2529;\n    --surface-2: #212a30;\n    --surface-3: #243037;\n    --surface-4: #253139;\n    --surface-5: #27353d;\n    --background: #191c1e;\n    --on-background: #e1e2e5;\n    --outline: #8b9197;\n    --outline-variant: #41484d;\n    --shadow-1: 0 1px 3px 1px #00000026, 0 1px 2px #0000004d;\n    --shadow-2: 0 2px 6px 2px #00000026, 0 1px 2px #0000004d;\n    --shadow-3: 0 4px 8px 3px #00000026, 0 1px 3px #0000004d;\n    --shadow-4: 0 6px 10px 4px #00000026, 0 2px 3px #0000004d;\n    --shadow-5: 0 8px 12px 6px #00000026, 0 4px 4px #0000004d;\n  }\n}\n.light {\n  --primary: #00658f;\n  --on-primary: #ffffff;\n  --primary-container: #c5e7ff;\n  --on-primary-container: #001c38;\n  --inverse-primary: #80cfff;\n  --secondary: #b50077;\n  --on-secondary: #ffffff;\n  --secondary-container: #ffd8e8;\n  --on-secondary-container: #3d0025;\n  --tertiary: #6f5d00;\n  --on-tertiary: #ffffff;\n  --tertiary-container: #ffe24c;\n  --on-tertiary-container: #221b00;\n  --error: #ba1b1b;\n  --on-error: #ffffff;\n  --error-container: #ffdfd4;\n  --on-error-container: #410001;\n  --surface: #fbfcff;\n  --on-surface: #191c1e;\n  --surface-variant: #dde3ea;\n  --on-surface-variant: #41484d;\n  --inverse-on-surface: #f0f1f4;\n  --inverse-surface: #2e3133;\n  --surface-1: #eef4f9;\n  --surface-2: #e7f0f6;\n  --surface-3: #dfebf3;\n  --surface-4: #ddeaf2;\n  --surface-5: #d8e7ef;\n  --background: #fbfcff;\n  --on-background: #191c1e;\n  --outline: #73777f;\n  --outline-variant: #c1c7ce;\n  --shadow-1: 0 1px 2px #0000004d, 0 1px 3px 1px #00000026;\n  --shadow-2: 0 1px 2px #0000004d, 0 2px 6px 2px #00000026;\n  --shadow-3: 0 4px 8px 3px #00000026, 0 1px 3px #0000004d;\n  --shadow-4: 0 6px 10px 4px #00000026, 0 2px 3px #0000004d;\n  --shadow-5: 0 8px 12px 6px #00000026, 0 4px 4px #0000004d;\n}\n.dark {\n  --primary: #80cfff;\n  --on-primary: #00344c;\n  --primary-container: #004c6d;\n  --on-primary-container: #c5e7ff;\n  --inverse-primary: #00658e;\n  --secondary: #ffafd5;\n  --on-secondary: #62003e;\n  --secondary-container: #8b005a;\n  --on-secondary-container: #ffd8e8;\n  --tertiary: #e4c521;\n  --on-tertiary: #3a3000;\n  --tertiary-container: #544600;\n  --on-tertiary-container: #ffe24c;\n  --error: #ffb4a9;\n  --on-error: #680003;\n  --error-container: #930006;\n  --on-error-container: #ffdad4;\n  --surface: #191c1e;\n  --on-surface: #e1e2e5;\n  --surface-variant: #41484d;\n  --on-surface-variant: #c1c7ce;\n  --inverse-on-surface: #191c1e;\n  --inverse-surface: #e1e2e5;\n  --surface-1: #1e2529;\n  --surface-2: #212a30;\n  --surface-3: #243037;\n  --surface-4: #253139;\n  --surface-5: #27353d;\n  --background: #191c1e;\n  --on-background: #e1e2e5;\n  --outline: #8b9197;\n  --outline-variant: #41484d;\n  --shadow-1: 0 1px 3px 1px #00000026, 0 1px 2px #0000004d;\n  --shadow-2: 0 2px 6px 2px #00000026, 0 1px 2px #0000004d;\n  --shadow-3: 0 4px 8px 3px #00000026, 0 1px 3px #0000004d;\n  --shadow-4: 0 6px 10px 4px #00000026, 0 2px 3px #0000004d;\n  --shadow-5: 0 8px 12px 6px #00000026, 0 4px 4px #0000004d;\n}\n.skc-display-large {\n  font-family: var(--font-display);\n  font-size: var(--text-8xl);\n  line-height: 4rem;\n  letter-spacing: -0.25px;\n}\n.skc-display-medium {\n  font-family: var(--font-display);\n  font-size: var(--text-7xl);\n  font-weight: var(--font-regular);\n  line-height: 3.25rem;\n  letter-spacing: 0px;\n}\n.skc-display-small {\n  font-family: var(--font-display);\n  font-size: var(--text-6xl);\n  font-weight: var(--font-regular);\n  line-height: 2.75rem;\n  letter-spacing: 0px;\n}\n.skc-headline-large {\n  font-family: var(--font-display);\n  font-size: var(--text-5xl);\n  font-weight: var(--font-regular);\n  line-height: 2.5rem;\n  letter-spacing: 0px;\n}\n.skc-headline-medium {\n  font-family: var(--font-display);\n  font-size: var(--text-4xl);\n  font-weight: var(--font-regular);\n  line-height: 2.25rem;\n  letter-spacing: 0px;\n}\n.skc-headline-small {\n  font-family: var(--font-display);\n  font-size: var(--text-3xl);\n  font-weight: var(--font-regular);\n  line-height: 2rem;\n  letter-spacing: 0px;\n}\n.skc-title-large {\n  font-family: var(--font-display);\n  font-size: var(--text-2xl);\n  font-weight: var(--font-regular);\n  line-height: 1.75rem;\n  letter-spacing: 0px;\n}\n.skc-title-medium {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n}\n.skc-title-small {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-label-large {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-label-medium {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n}\n.skc-label-small {\n  font-family: var(--font-body);\n  font-size: var(--text-xs);\n  font-weight: var(--font-medium);\n  line-height: 1rem;\n  letter-spacing: .5px;\n}\n.skc-body-large {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n}\n.skc-body-medium {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n}\n.skc-body-small {\n  font-family: var(--font-body);\n  font-size: var(--text-sm);\n  font-weight: var(--font-regular);\n  line-height: 1rem;\n  letter-spacing: .4px;\n}\n");
 
 // src/components/ThemeProvider/index.tsx
-var import_jsx_runtime56 = require("react/jsx-runtime");
+var import_jsx_runtime63 = require("react/jsx-runtime");
 function ThemeProvider({ children }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_jsx_runtime56.Fragment, { children });
+  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(import_jsx_runtime63.Fragment, { children });
 }
 ThemeProvider.displayName = "ThemeProvider";
 // Annotate the CommonJS export names for ESM import in node:
@@ -3544,6 +3978,13 @@ ThemeProvider.displayName = "ThemeProvider";
   ChipSet,
   Columns,
   ContentLayout,
+  DataTable,
+  DataTableBody,
+  DataTableContent,
+  DataTableFilters,
+  DataTableHead,
+  DataTablePagination,
+  DataTableSearch,
   Dialog,
   DialogContent,
   DialogHeader,

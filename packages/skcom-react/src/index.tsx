@@ -30,6 +30,32 @@ export {
 export { ChipField, type ChipFieldProps } from "./components/ChipField";
 export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 
+export { DataTable, type DataTableProps } from "./components/DataTable";
+export {
+  DataTableSearch,
+  type DataTableSearchProps,
+} from "./components/DataTableSearch";
+export {
+  DataTableFilters,
+  type DataTableFiltersProps,
+} from "./components/DataTableFilters";
+export {
+  DataTableContent,
+  type DataTableContentProps,
+} from "./components/DataTableContent";
+export {
+  DataTableHead,
+  type DataTableHeadProps,
+} from "./components/DataTableHead";
+export {
+  DataTableBody,
+  type DataTableBodyProps,
+} from "./components/DataTableBody";
+export {
+  DataTablePagination,
+  type DataTablePaginationProps,
+} from "./components/DataTablePagination";
+
 export { Dialog, type DialogProps } from "./components/Dialog";
 export {
   DialogHeader,
@@ -123,3 +149,5 @@ export {
 
 export { useAnimationConfig, transition, useRipple } from "./utils/animation";
 export { useBreakpoint } from "./utils/window";
+
+export type { DataTableColumnDef } from "./types";

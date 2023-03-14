@@ -1,6 +1,67 @@
 import * as React from 'react';
 import React__default from 'react';
+import { ColumnDef, HeaderGroup, RowModel } from '@tanstack/react-table';
 import { BezierDefinition, Tween, AnimationControls, MotionStyle } from 'framer-motion';
+
+/**
+ * Props for {@link TableCell Table Body}.
+ */
+interface TableCellProps extends SKComponent {
+    /**
+     * The content of the cell.
+     *
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
+     *
+     * - Optional.
+     */
+    header?: boolean;
+    /**
+     * How the Buttons should be positioned. It can be aligned to the left, the
+     * center (default), or the right.
+     *
+     * - Must be `left`, `center`, `right`.
+     * - Optional.
+     */
+    align?: "left" | "center" | "right";
+    /**
+     * An inline menu. This is useful for editable tables.
+     *
+     * - Optional.
+     */
+    menu?: JSX.Element;
+    /**
+     * Triggers on click if defined.
+     * - If this is defined, a dropdown button appears.
+     * - Optional.
+     */
+    onMenuToggle?: () => any;
+    /**
+     * Attributes for the underlying `<td>` element.
+     *
+     * - Optional.
+     */
+    tdAttr?: JSX.IntrinsicElements["td" | "th"];
+}
+/**
+ * A cell of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation}
+ *
+ * @param children The content of the cell.
+ * @param header If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
+ * @param align How the Buttons should be positioned. It can be aligned to the left, the center (default), or the right.
+ * @param menu An inline menu. This is useful for editable tables.
+ * @param onMenuToggle Triggers on click if defined.
+ * @param tdAttr Attributes for the underlying `<td>` element.
+ */
+declare function TableCell({ children, header, align, menu, onMenuToggle, tdAttr, style, className, }: TableCellProps): JSX.Element;
+declare namespace TableCell {
+    var displayName: string;
+}
 
 /**
  * Global attributes for all SK Components.
@@ -15,6 +76,35 @@ interface SKComponent {
      */
     style?: React__default.CSSProperties;
 }
+/**
+ * An extended version of Tanstack Table’s `ColumnDef`, used to define a
+ * column’s properties.
+ */
+type DataTableColumnDef<T = any> = ColumnDef<T> & Partial<{
+    /**
+     * Props for the header Table Cell.
+     *
+     * @see {@link TableCell}
+     */
+    thAttr: Partial<TableCellProps>;
+    /**
+     * Props for the content Table Cell.
+     *
+     * @see {@link TableCell}
+     */
+    tdAttr: Partial<TableCellProps> | ((row: T) => Partial<TableCellProps>);
+    /**
+     * A custom render function.
+     *
+     * @param row The data passed in for each row.
+     * @returns The Table Cell content, replaces the default.
+     */
+    render: (row: T) => string | JSX.Element | null;
+    /**
+     * The message shown when there is no data for a Table Cell.
+     */
+    noDataMsg: string | JSX.Element;
+}>;
 
 /**
  * Props for {@link Actions}.
@@ -1214,6 +1304,313 @@ interface ChipSetProps extends SKComponent {
  */
 declare function ChipSet({ children, scrollable, divAttr, style, className, }: ChipSetProps): JSX.Element;
 declare namespace ChipSet {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTable Data Table}.
+ */
+interface DataTableProps extends SKComponent {
+    /**
+     * There is a set of components especially designed to be used here: Data
+     * Table Search, Data Table Filters, Data Table Content, and Data Table
+     * Pagination.
+     *
+     * - A Data Table cannot have both Data Table Search and Data Table Filters.
+     * - A Data Table must have a Data Table Content.
+     * - If present, Data Table Search/Data Table Filters must be the first
+     *   component.
+     * - If present, Data Table Pagination must be the last component.
+     * - Always required.
+     */
+    children: React.ReactNode;
+}
+/**
+ * A more rich Table with support for filtering, search, and pagination; and
+ * integrates directly with Tanstack Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cfjy3gpzsh75 SKCom documentation}
+ *
+ * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
+ */
+declare function DataTable({ children, style, className }: DataTableProps): JSX.Element;
+declare namespace DataTable {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableSearch Data Table Search}.
+ */
+interface DataTableSearchProps extends SKComponent {
+    /**
+     * The value inside the search field. This is useful if you want a
+     * controlled input.
+     *
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: string;
+    /**
+     * Allows for translation of the default placeholder message.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
+     * This function triggers when the user make changes to the field value. The
+     * value is passed in via the function.
+     *
+     * - With {@link https://tanstack.com/table/ Tanstack Table}, this function
+     *   can be hooked up to
+     *   {@link https://tanstack.com/table/v8/docs/api/features/filters#setglobalfilter setGlobalFitler}.
+     *   {@link https://tanstack.com/table/v8/docs/examples/react/filters See an example.}
+     * - Optional.
+     */
+    onChange?: (value: string) => any;
+    /**
+     * A faint text displayed inside the field guiding the user.
+     *
+     * - Optional.
+     */
+    placeholder?: string;
+    /**
+     * Triggers when the overflow icon is clicked. If defined, an overflow icon appears on the right.
+     *
+     * - Optional.
+     */
+    onOverflowToggle?: () => any;
+    /**
+     * The overflow Menu of the parent Data Table. The value of `overflow` is shown on click.
+     *
+     * - Must be a Menu.
+     * - Optional.
+     */
+    overflow?: JSX.Element;
+    /**
+     * Attributes for the underlying `<input>` element used as the field.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * Allows the user to filter the Data Table’s content using a text query.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation}
+ *
+ * @param value The value inside the search field. This is useful if you want a controlled input.
+ * @param locale Allows for translation of the default placeholder message.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param placeholder A faint text displayed inside the field guiding the user.
+ * @param onOverflowToggle Triggers when the overflow icon is clicked. If defined, an overflow icon appears on the right.
+ * @param overflow The overflow Menu of the parent Data Table.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
+ */
+declare function DataTableSearch({ value, locale, onChange, placeholder, onOverflowToggle, overflow, inputAttr, style, className, }: DataTableSearchProps): JSX.Element;
+declare namespace DataTableSearch {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableFilters Table Body}.
+ */
+interface DataTableFiltersProps extends SKComponent {
+    /**
+     * A set of Filter Chips responsible for filterring the Data Table.
+     *
+     * - Must be a Chip Set, which must consist of Filter Chips.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
+     * Triggers when the overflow icon is clicked. If defined, an overflow icon
+     * appears on the right.
+     *
+     * - Optional.
+     */
+    onOverflowToggle?: () => any;
+    /**
+     * The overflow Menu of the parent Data Table. The value of `overflow` is
+     * shown on click.
+     *
+     * - Must be a Menu.
+     * - Optional.
+     */
+    overflow?: JSX.Element;
+}
+/**
+ * Allows the user to filter the Data Table’s content by selecting from a list
+ * of filters.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ujyeoxol3cjz SKCom documentation}
+ *
+ * @param children A set of Filter Chips responsible for filterring the Data Table.
+ * @param locale Allows for translation of the accessibility labels.
+ * @param onOverflowToggle Triggers when the overflow icon is clicked.
+ * @param overflow The overflow Menu of the parent Data Table.
+ */
+declare function DataTableFilters({ children, locale, onOverflowToggle, overflow, style, className, }: DataTableFiltersProps): JSX.Element;
+declare namespace DataTableFilters {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableContent Data Table Content}.
+ */
+interface DataTableContentProps extends SKComponent {
+    /**
+     * A Data Table Content’s content depends on if you decide to use Tanstack
+     * Table or not.
+     *
+     * - If you opt in to Tanstack Table: must include both Data Table Head and
+     *   Data Table Body.
+     * - If you opt to use your own table solution: must include both Table Head
+     *   and Table Body.
+     * - Always required.
+     */
+    children: React.ReactNode;
+    /**
+     * The minimum width of the content. When the table’s width is lower than
+     * this value, it becomes scrollable. Otherwise, the content fills the width
+     * of the Data Table.
+     *
+     * - Optional.
+     */
+    contentWidth?: number;
+}
+/**
+ * The main part of a Data Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7mq6ecmhpn8b SKCom documentation}
+ *
+ * @param children A Data Table Content’s content depends on if you decide to use Tanstack Table or not.
+ * @param contentWidth The minimum width of the content.
+ */
+declare function DataTableContent({ children, contentWidth, style, className, }: DataTableContentProps): JSX.Element;
+declare namespace DataTableContent {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableHead Table Head}.
+ */
+interface DataTableHeadProps extends SKComponent {
+    /**
+     * The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+     *
+     * - Always required.
+     */
+    headerGroups: HeaderGroup<any>[];
+    /**
+     * Allows for translation of the accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+}
+/**
+ * The head area of a Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
+ *
+ * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+ * @param locale Allows for translation of the accessibility labels.
+ */
+declare function DataTableHead({ headerGroups, locale, style, className, }: DataTableHeadProps): JSX.Element;
+declare namespace DataTableHead {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTableBody Data Table Body}.
+ */
+interface DataTableBodyProps extends SKComponent {
+    /**
+     * The return of `getRowModel`, one of the functions of the Tanstack Table
+     * instance.
+     *
+     * - Always required.
+     */
+    rowModel: RowModel<any>;
+}
+/**
+ * The body section of a Data Table specified via Tanstack Table.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kfe16c5emou5 SKCom documentation}
+ *
+ * @param children The return of `getRowModel`, one of the functions of the Tanstack Table instance.
+ */
+declare function DataTableBody({ rowModel, style, className, }: DataTableBodyProps): JSX.Element;
+declare namespace DataTableBody {
+    var displayName: string;
+}
+
+/**
+ * Props for {@link DataTablePagination Data Table Pagination}.
+ */
+interface DataTablePaginationProps extends SKComponent {
+    /**
+     * The maximum number of rows shown on the Data Table at a time.
+     *
+     * - Must be a non-negative integer.
+     * - Always required.
+     */
+    rowsPerPage: number;
+    /**
+     * The total number of rows of data, including both those currently shown and
+     * not shown on the Data Table.
+     *
+     * - Must be a non-negative integer.
+     * - Always required.
+     */
+    totalRows: number;
+    /**
+     * Allows for translation of the page indicator and accessibility labels.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
+     * Triggers when the user changes the page.
+     *
+     * - The following is passed onto the function: the current page number, the
+     *   start index, and the end index.
+     * - Optional.
+     *
+     * @param page The current page number, starting from 1.
+     * @param start The start index of the range of data to pull from for this page.
+     * @param end The end index of the range of data to pull from for this page.
+     */
+    onChange?: (page: number, start: number, end: number) => any;
+}
+/**
+ * At the footer of a Data Table, Data Table Pagination provides controls for
+ * paginating the Data Table data, including the current rows and navigating to
+ * forward and backward on pages.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation}
+ *
+ * @param rowsPerPage The maximum number of rows shown on the Data Table at a time.
+ * @param totalRows The total number of rows of data, including both those currently shown and not shown on the Data Table.
+ * @param locale Allows for translation of the page indicator and accessibility labels.
+ * @param onChange Triggers when the user changes the page.
+ */
+declare function DataTablePagination({ rowsPerPage, totalRows, locale, onChange, style, className, }: DataTablePaginationProps): JSX.Element;
+declare namespace DataTablePagination {
     var displayName: string;
 }
 
@@ -3211,66 +3608,6 @@ declare namespace TableRow {
 }
 
 /**
- * Props for {@link TableCell Table Body}.
- */
-interface TableCellProps extends SKComponent {
-    /**
-     * The content of the cell.
-     *
-     * - Always required.
-     */
-    children: React.ReactNode;
-    /**
-     * If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
-     *
-     * - Optional.
-     */
-    header?: boolean;
-    /**
-     * How the Buttons should be positioned. It can be aligned to the left, the
-     * center (default), or the right.
-     *
-     * - Must be `left`, `center`, `right`.
-     * - Optional.
-     */
-    align?: "left" | "center" | "right";
-    /**
-     * An inline menu. This is useful for editable tables.
-     *
-     * - Optional.
-     */
-    menu?: JSX.Element;
-    /**
-     * Triggers on click if defined.
-     * - If this is defined, a dropdown button appears.
-     * - Optional.
-     */
-    onMenuToggle?: () => any;
-    /**
-     * Attributes for the underlying `<td>` element.
-     *
-     * - Optional.
-     */
-    tdAttr?: JSX.IntrinsicElements["td" | "th"];
-}
-/**
- * A cell of a Table.
- *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation}
- *
- * @param children The content of the cell.
- * @param header If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
- * @param align How the Buttons should be positioned. It can be aligned to the left, the center (default), or the right.
- * @param menu An inline menu. This is useful for editable tables.
- * @param onMenuToggle Triggers on click if defined.
- * @param tdAttr Attributes for the underlying `<td>` element.
- */
-declare function TableCell({ children, header, align, menu, onMenuToggle, tdAttr, style, className, }: TableCellProps): JSX.Element;
-declare namespace TableCell {
-    var displayName: string;
-}
-
-/**
  * Props for {@link Tab}.
  */
 interface TabProps extends SKComponent {
@@ -3674,4 +4011,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableBody, DataTableBodyProps, DataTableColumnDef, DataTableContent, DataTableContentProps, DataTableFilters, DataTableFiltersProps, DataTableHead, DataTableHeadProps, DataTablePagination, DataTablePaginationProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

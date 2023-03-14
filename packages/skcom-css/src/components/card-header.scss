@@ -35,6 +35,7 @@
 }
 
 .skc-card-header__overflow {
+  position: relative;
   padding: 0.25rem;
 
   .skc-button {
@@ -44,5 +45,9 @@
     .skc-button__ripple {
       background-color: var(--on-surface-variant);
     }
+  }
+
+  .skc-menu {
+    right: 0.25rem;
   }
 }

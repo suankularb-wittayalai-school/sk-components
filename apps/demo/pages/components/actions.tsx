@@ -28,8 +28,8 @@ import {
 import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
-import { CustomPage } from "@/utils/types";
 import { toggleItem } from "@/utils/array";
+import { CustomPage } from "@/utils/types";
 
 const ButtonsSection: FC = () => {
   const { setSnackbar } = useContext(SnackbarContext);
@@ -279,8 +279,8 @@ const AssistChipSection: FC = () => (
     </ChipSet>
     <div
       className="from-primary-60 to-primary-30 flex flex-row flex-wrap
-    place-content-center gap-2 rounded-md bg-gradient-to-r py-8
-    px-4"
+        place-content-center gap-2 rounded-md bg-gradient-to-r py-8
+        px-4"
     >
       <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
         Turn on lights

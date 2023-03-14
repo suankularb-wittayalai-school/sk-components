@@ -1,0 +1,26 @@
+////
+/// **Data Table Filters**
+/// Allows the user to filter the Data Table’s content by selecting from a list
+/// of filters.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ujyeoxol3cjz SKCom documentation
+////
+
+@use "../components/data-table-search.scss";
+
+.skc-data-table-filters {
+  @extend .skc-data-table-search;
+
+  .skc-chip-set {
+    flex-grow: 1;
+    padding-block: 0.625rem;
+  }
+}
+
+.skc-data-table-filters__icon {
+  @extend .skc-data-table-search__icon;
+}
+
+.skc-data-table-filters__overflow {
+  @extend .skc-data-table-search__overflow;
+}
