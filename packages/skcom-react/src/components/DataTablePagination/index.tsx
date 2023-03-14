@@ -108,7 +108,7 @@ export function DataTablePagination({
         aria-label={
           locale === "th"
             ? `แถวที่ ${range.start} ถึง ${range.end} จากทั้งหมด ${totalRows} แถว`
-            : `Rows ${range.start} to ${range.end}, from total of ${totalRows} rows`
+            : `Rows ${range.start} to ${range.end}, from a total of ${totalRows} rows`
         }
         className="skc-data-table-pagination__label"
       >

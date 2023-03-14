@@ -36,6 +36,10 @@ export {
   type DataTableSearchProps,
 } from "./components/DataTableSearch";
 export {
+  DataTableFilters,
+  type DataTableFiltersProps,
+} from "./components/DataTableFilters";
+export {
   DataTableContent,
   type DataTableContentProps,
 } from "./components/DataTableContent";
