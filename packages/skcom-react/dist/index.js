@@ -1825,13 +1825,21 @@ function DataTablePagination({
 }) {
   const { duration, easing } = useAnimationConfig();
   const [page, setPage] = React14.useState(1);
-  const maxPage = Math.ceil(totalRows / rowsPerPage);
+  const [maxPage, setMaxPage] = React14.useState(
+    Math.ceil(totalRows / rowsPerPage)
+  );
+  React14.useEffect(() => {
+    const newMaxPage = Math.ceil(totalRows / rowsPerPage);
+    setMaxPage(newMaxPage);
+    if (newMaxPage < page)
+      setPage(Math.max(newMaxPage, 1));
+  }, [totalRows, rowsPerPage]);
   const range = {
-    start: rowsPerPage * (page - 1) + 1,
-    end: rowsPerPage * page
+    start: totalRows ? rowsPerPage * (page - 1) + 1 : 0,
+    end: Math.min(rowsPerPage * page, totalRows)
   };
   React14.useEffect(
-    () => onChange && onChange(page, rowsPerPage * (page - 1), rowsPerPage * page - 1),
+    () => onChange && onChange(page, range.start - 1, range.end - 1),
     [page]
   );
   return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(

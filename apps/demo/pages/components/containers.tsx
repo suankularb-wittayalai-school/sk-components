@@ -86,9 +86,7 @@ const CardSection: FC = () => (
           subtitle="Foreign Languages teacher"
           overflow={
             <Menu>
-              <MenuItem icon={<MaterialIcon icon="share" />}>
-                Share
-              </MenuItem>
+              <MenuItem icon={<MaterialIcon icon="share" />}>Share</MenuItem>
               <MenuItem icon={<MaterialIcon icon="visibility_off" />}>
                 Hide
               </MenuItem>
@@ -250,7 +248,12 @@ const DataTableSection: FC = () => {
     []
   );
 
-  const { getHeaderGroups, getRowModel, setPageIndex } = useReactTable({
+  const {
+    getHeaderGroups,
+    getRowModel,
+    getPrePaginationRowModel,
+    setPageIndex,
+  } = useReactTable({
     data,
     columns,
     state: { globalFilter, sorting, pagination },
@@ -290,7 +293,7 @@ const DataTableSection: FC = () => {
         </DataTableContent>
         <DataTablePagination
           rowsPerPage={5}
-          totalRows={data.length}
+          totalRows={getPrePaginationRowModel().rows.length}
           onChange={(page) => setPageIndex(page - 1)}
         />
       </DataTable>
