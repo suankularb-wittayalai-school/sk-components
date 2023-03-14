@@ -723,10 +723,57 @@ Card.displayName = "Card";
 var React5 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/card-header.css
-styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-card-header {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  padding: .75rem .25rem .75rem 1rem;\n}\n.skc-card-header__content {\n  flex-grow: 1;\n}\n.skc-card-header__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-card-header__title {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n  margin-block: 0;\n}\n.skc-card-header__subtitle {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  font-family: var(--font-display);\n  margin-block: 0;\n}\n.skc-card-header__overflow {\n  padding: .25rem;\n}\n.skc-card-header__overflow .skc-button {\n  color: var(--outline);\n}\n.skc-card-header__overflow .skc-button::before,\n.skc-card-header__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface-variant);\n}\n");
+styleInject(":root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-card-header {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  padding: .75rem .25rem .75rem 1rem;\n}\n.skc-card-header__content {\n  flex-grow: 1;\n}\n.skc-card-header__icon .skc-icon {\n  color: var(--on-surface-variant);\n}\n.skc-card-header__title {\n  font-family: var(--font-display);\n  font-size: var(--text-lg);\n  font-weight: var(--font-medium);\n  line-height: 1.5rem;\n  letter-spacing: .1px;\n  margin-block: 0;\n}\n.skc-card-header__subtitle {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  font-family: var(--font-display);\n  margin-block: 0;\n}\n.skc-card-header__overflow {\n  padding: .25rem;\n  position: relative;\n}\n.skc-card-header__overflow .skc-button {\n  color: var(--outline);\n}\n.skc-card-header__overflow .skc-button::before,\n.skc-card-header__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface-variant);\n}\n.skc-card-header__overflow .skc-menu {\n  right: .25rem;\n}\n");
+
+// src/components/Menu/index.tsx
+var import_framer_motion6 = require("framer-motion");
+
+// ../skcom-css/dist/css/components/menu.css
+styleInject(".skc-menu {\n  position: absolute;\n  z-index: 60;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n.skc-text-field ~ .skc-menu,\n.skc-select ~ .skc-menu {\n  top: 3.5rem;\n}\n.skc-menu__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n.skc-menu--density-0 .skc-menu-item {\n  padding-block: .5rem;\n}\n.skc-menu--density-\\[-2\\] .skc-menu-item {\n  padding-block: .25rem;\n}\n.skc-menu--density-\\[-4\\] .skc-menu-item {\n  padding-block: 0;\n}\n");
+
+// src/components/Menu/index.tsx
+var import_jsx_runtime9 = require("react/jsx-runtime");
+function Menu({
+  children,
+  open,
+  density,
+  onBlur,
+  ulAttr,
+  style,
+  className
+}) {
+  const { duration, easing } = useAnimationConfig();
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_framer_motion6.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_jsx_runtime9.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+      import_framer_motion6.motion.ul,
+      __spreadProps(__spreadValues({
+        role: "menu",
+        "aria-orientation": "vertical",
+        initial: { opacity: 0, y: "-10%", scale: 0.8 },
+        animate: { opacity: 1, y: "0%", scale: 1 },
+        exit: {
+          opacity: 0,
+          y: "-10%",
+          scale: 0.8,
+          transition: transition(duration.short2, easing.standard)
+        },
+        transition: transition(duration.short4, easing.standard),
+        className: cn([
+          "skc-menu",
+          density === 0 ? "skc-menu--density-0" : density === -2 ? "skc-menu--density-[-2]" : density === -4 && "skc-menu--density-[-4]",
+          className
+        ])
+      }, __spreadProps(__spreadValues({}, ulAttr), { style })), {
+        children
+      })
+    ),
+    onBlur && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "skc-menu__blur-capture", onClick: onBlur })
+  ] }) });
+}
+Menu.displayName = "Menu";
 
 // src/components/CardHeader/index.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function CardHeader({
   avatar,
   icon,
@@ -737,23 +784,41 @@ function CardHeader({
   className
 }) {
   const [showOverflow, setShowOverflow] = React5.useState(false);
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { style, className: cn(["skc-card-header", className]), children: [
-    avatar && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "skc-card-header__avatar", children: avatar }),
-    icon && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "skc-card-header__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "skc-card-header__content", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "skc-card-header__title", children: title }),
-      subtitle && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "skc-card-header__subtitle", children: subtitle })
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { style, className: cn(["skc-card-header", className]), children: [
+    avatar && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "skc-card-header__avatar", children: avatar }),
+    icon && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "skc-card-header__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "skc-card-header__content", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "skc-card-header__title", children: title }),
+      subtitle && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "skc-card-header__subtitle", children: subtitle })
     ] }),
-    overflow && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "skc-card-header__overflow", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    overflow && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "skc-card-header__overflow", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
         Button,
         {
           appearance: "text",
-          icon: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(MaterialIcon, { icon: "more_vert" }),
+          icon: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(MaterialIcon, { icon: "more_vert" }),
           onClick: () => setShowOverflow(!showOverflow)
         }
       ),
-      overflow
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+        Menu,
+        __spreadProps(__spreadValues({
+          open: showOverflow,
+          onBlur: () => setShowOverflow(false)
+        }, overflow.props), {
+          children: React5.Children.map(
+            overflow.props.children,
+            (child) => React5.cloneElement(child, {
+              onClick: () => {
+                const { onClick } = child.props;
+                if (onClick)
+                  onClick();
+                setShowOverflow(false);
+              }
+            })
+          )
+        })
+      )
     ] })
   ] });
 }
@@ -763,9 +828,9 @@ CardHeader.displayName = "CardHeader";
 styleInject(".skc-card-content {\n  display: flex;\n  flex-direction: column;\n  gap: .75rem;\n  padding: 1rem;\n}\n.skc-card-content p {\n  margin-block: 0;\n}\n.skc-card-content > .skc-actions {\n  margin-top: 1.25rem;\n}\n");
 
 // src/components/CardContent/index.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function CardContent({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { style, className: cn(["skc-card-content", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { style, className: cn(["skc-card-content", className]), children });
 }
 CardContent.displayName = "CardContent";
 
@@ -773,9 +838,9 @@ CardContent.displayName = "CardContent";
 styleInject(".skc-columns {\n  display: grid;\n  align-items: start;\n  gap: .5rem 1.5rem;\n}\n.skc-columns--2 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--2 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n.skc-columns--3 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--3 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--3 {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}\n.skc-columns--4 {\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--4 {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--4 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--4 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n.skc-columns--6 {\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--6 {\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--6 {\n    grid-template-columns: repeat(6, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--6 {\n    grid-template-columns: repeat(6, minmax(0, 1fr));\n  }\n}\n.skc-columns--12 {\n  grid-template-columns: repeat(4, minmax(0, 1fr));\n}\n@media only screen and (min-width: 600px) {\n  .skc-columns--12 {\n    grid-template-columns: repeat(8, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 905px) {\n  .skc-columns--12 {\n    grid-template-columns: repeat(12, minmax(0, 1fr));\n  }\n}\n@media only screen and (min-width: 1440px) {\n  .skc-columns--12 {\n    grid-template-columns: repeat(12, minmax(0, 1fr));\n  }\n}\n");
 
 // src/components/Columns/index.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_jsx_runtime12 = require("react/jsx-runtime");
 function Columns({ children, columns, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
     "div",
     {
       style,
@@ -791,14 +856,14 @@ function Columns({ children, columns, style, className }) {
 Columns.displayName = "Columns";
 
 // src/components/Checkbox/index.tsx
-var import_framer_motion6 = require("framer-motion");
+var import_framer_motion7 = require("framer-motion");
 var React6 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/checkbox.css
 styleInject('.skc-checkbox {\n  position: relative;\n  width: fit-content;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox::before {\n  background-color: var(--on-surface);\n}\n.skc-checkbox:not(.skc-checkbox--disabled):hover::before,\n.skc-form-item:hover .skc-checkbox:not(.skc-checkbox--disabled)::before {\n  opacity: .08;\n}\n.skc-checkbox:not(.skc-checkbox--disabled):focus-within::before,\n.skc-checkbox:not(.skc-checkbox--disabled):active::before,\n.skc-form-item:focus-within .skc-checkbox:not(.skc-checkbox--disabled)::before,\n.skc-form-item:active .skc-checkbox:not(.skc-checkbox--disabled)::before {\n  opacity: .12;\n}\n.skc-checkbox::before,\n.skc-checkbox__ripple-parent {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  inset: 50% auto auto 50%;\n  width: 2.5rem;\n  height: 2.5rem;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.skc-checkbox__input {\n  position: absolute;\n  width: 0;\n  height: 0;\n  opacity: 0;\n}\n.skc-checkbox__box {\n  transition: background-color var(--motion-short-2) var(--easing-standard), transform var(--motion-short-2) var(--easing-standard);\n  display: grid;\n  place-content: center;\n  box-sizing: border-box;\n  width: 1.125rem;\n  height: 1.125rem;\n  cursor: pointer;\n  transform: scale(1);\n  border: 2px solid var(--on-surface-variant);\n  border-radius: .125rem;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-checkbox:active .skc-checkbox__box,\n.skc-form-item:active .skc-checkbox__box {\n  transform: scale(0.9);\n}\n.skc-checkbox__ripple-parent {\n  overflow: hidden;\n  transition: none;\n  opacity: 1;\n}\n.skc-checkbox__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-checkbox:has(.skc-checkbox__input:checked)::before,\n.skc-checkbox:has(.skc-checkbox__input:checked) .skc-checkbox__ripple,\n.skc-checkbox--indeterminate::before,\n.skc-checkbox--indeterminate .skc-checkbox__ripple {\n  background-color: var(--primary);\n}\n.skc-checkbox__input:checked ~ .skc-checkbox__box,\n.skc-checkbox--indeterminate .skc-checkbox__box {\n  border-color: var(--primary);\n  background-color: var(--primary);\n}\n.skc-checkbox__icon {\n  color: var(--on-primary);\n}\n.skc-checkbox--disabled {\n  opacity: .38;\n}\n.skc-checkbox--disabled .skc-checkbox__box {\n  cursor: default;\n}\n.skc-checkbox--disabled:active .skc-checkbox__box {\n  transform: scale(1);\n}\n.skc-checkbox--disabled .skc-checkbox__icon {\n  color: var(--surface);\n}\n.skc-checkbox--disabled .skc-checkbox__ripple {\n  display: none;\n}\n.skc-checkbox--disabled .skc-checkbox__input:checked ~ .skc-checkbox__box {\n  border-color: var(--on-surface);\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/Checkbox/index.tsx
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function Checkbox({
   value,
   onChange,
@@ -810,7 +875,7 @@ function Checkbox({
 }) {
   const rippleParentRef = React6.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(rippleParentRef);
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
     "label",
     __spreadProps(__spreadValues({
       style,
@@ -823,7 +888,7 @@ function Checkbox({
       ])
     }, rippleListeners), {
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           "input",
           __spreadValues({
             "aria-checked": value === null ? "mixed" : value,
@@ -834,15 +899,15 @@ function Checkbox({
             onChange: (event) => onChange && !disabled && onChange(event.target.checked)
           }, inputAttr)
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { "aria-hidden": true, className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { "aria-hidden": true, className: "skc-checkbox__box", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "skc-checkbox__icon", children: value === true ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "check_small" }) : value === null && tristate && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "check_indeterminate_small" }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           "div",
           {
             ref: rippleParentRef,
             "aria-hidden": true,
             className: "skc-checkbox__ripple-parent",
-            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
-              import_framer_motion6.motion.span,
+            children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+              import_framer_motion7.motion.span,
               {
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
@@ -865,8 +930,8 @@ var React7 = __toESM(require("react"));
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-icon {\n  font-family: "Material Symbols Outlined";\n  font-size: 24px;\n  font-weight: normal;\n  font-style: normal;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  -webkit-font-smoothing: antialiased;\n  line-height: 1;\n  display: block;\n  overflow: hidden;\n  width: 1em;\n  min-width: 1em;\n  user-select: none;\n  direction: ltr;\n  white-space: nowrap;\n  letter-spacing: normal;\n  text-transform: none;\n  word-wrap: normal;\n}\n.skc-icon--outlined {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n.skc-icon--filled {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 1,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n}\n@media (prefers-color-scheme: dark) {\n  .skc-icon {\n    font-size: 24px;\n    font-variation-settings:\n      "FILL" 0,\n      "wght" 400,\n      "GRAD" -25,\n      "opsz" 24;\n  }\n}\n._skc-chip,\n.skc-input-chip,\n.skc-suggestion-chip,\n.skc-filter-chip,\n.skc-assist-chip {\n  transition: border-color var(--motion-short-4) var(--easing-standard), background-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  justify-content: center;\n  gap: .5rem;\n  padding: .375rem 1rem;\n  cursor: pointer;\n  color: var(--on-surface);\n  border: 1px solid var(--outline);\n  border-radius: .5rem;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n._skc-chip::before,\n.skc-input-chip::before,\n.skc-suggestion-chip::before,\n.skc-filter-chip::before,\n.skc-assist-chip::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface-variant);\n}\n._skc-chip:hover::before,\n.skc-input-chip:hover::before,\n.skc-suggestion-chip:hover::before,\n.skc-filter-chip:hover::before,\n.skc-assist-chip:hover::before {\n  opacity: .08;\n}\n._skc-chip:focus::before,\n.skc-input-chip:focus::before,\n.skc-suggestion-chip:focus::before,\n.skc-filter-chip:focus::before,\n.skc-assist-chip:focus::before,\n._skc-chip:active::before,\n.skc-input-chip:active::before,\n.skc-suggestion-chip:active::before,\n.skc-filter-chip:active::before,\n.skc-assist-chip:active::before {\n  opacity: .12;\n}\n._skc-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-input-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-suggestion-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-filter-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child),\n.skc-assist-chip:has(._skc-chip__icon:first-child, .skc-input-chip__icon:first-child, .skc-suggestion-chip__icon:first-child, .skc-filter-chip__icon:first-child, .skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n._skc-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-input-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-suggestion-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-filter-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child),\n.skc-assist-chip:has(._skc-chip__icon:last-child, .skc-input-chip__icon:last-child, .skc-suggestion-chip__icon:last-child, .skc-filter-chip__icon:last-child, .skc-assist-chip__icon:last-child) {\n  padding-right: .5rem;\n}\n._skc-chip[aria-disabled=true],\n[aria-disabled=true].skc-input-chip,\n[aria-disabled=true].skc-suggestion-chip,\n[aria-disabled=true].skc-filter-chip,\n[aria-disabled=true].skc-assist-chip {\n  overflow: visible;\n  cursor: default;\n  opacity: .38;\n  color: var(--on-surface);\n  border-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true]::before,\n[aria-disabled=true].skc-input-chip::before,\n[aria-disabled=true].skc-suggestion-chip::before,\n[aria-disabled=true].skc-filter-chip::before,\n[aria-disabled=true].skc-assist-chip::before {\n  inset: -1px;\n  opacity: .3157894737;\n  border: 1px solid var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__ripple,\n._skc-chip[aria-disabled=true] button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip ._skc-chip[aria-disabled=true] .skc-input-chip__ripple,\n[aria-disabled=true].skc-input-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-input-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-input-chip .skc-input-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-suggestion-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-suggestion-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-filter-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-filter-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-filter-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-filter-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-filter-chip__ripple,\n._skc-chip[aria-disabled=true] .skc-assist-chip__ripple,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-suggestion-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-filter-chip .skc-assist-chip__ripple,\n[aria-disabled=true].skc-assist-chip ._skc-chip__ripple,\n[aria-disabled=true].skc-assist-chip button.skc-input-chip .skc-input-chip__ripple,\nbutton.skc-input-chip [aria-disabled=true].skc-assist-chip .skc-input-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-suggestion-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-filter-chip__ripple,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__ripple {\n  background-color: rgba(0, 0, 0, 0);\n}\n._skc-chip[aria-disabled=true] ._skc-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-input-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-suggestion-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-filter-chip__icon .skc-icon,\n._skc-chip[aria-disabled=true] .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-input-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-suggestion-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-filter-chip .skc-assist-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip ._skc-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-input-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-suggestion-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-filter-chip__icon .skc-icon,\n[aria-disabled=true].skc-assist-chip .skc-assist-chip__icon .skc-icon {\n  color: var(--on-surface);\n}\n._skc-chip--elevated,\n.skc-suggestion-chip.skc-suggestion-chip--elevated,\n.skc-filter-chip.skc-filter-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated {\n  border: none;\n  background-color: var(--surface-1);\n  box-shadow: var(--shadow-1);\n}\n._skc-chip--elevated._skc-chip--selected,\n._skc-chip--elevated.skc-input-chip--selected,\n._skc-chip--selected.skc-suggestion-chip.skc-suggestion-chip--elevated,\n.skc-suggestion-chip.skc-suggestion-chip--elevated.skc-input-chip--selected,\n._skc-chip--elevated.skc-filter-chip--selected,\n.skc-filter-chip--selected.skc-suggestion-chip.skc-suggestion-chip--elevated,\n._skc-chip--selected.skc-filter-chip.skc-filter-chip--elevated,\n.skc-filter-chip.skc-filter-chip--elevated.skc-input-chip--selected,\n.skc-filter-chip.skc-filter-chip--elevated.skc-filter-chip--selected,\n._skc-chip--selected.skc-assist-chip.skc-assist-chip--elevated,\n.skc-assist-chip.skc-assist-chip--elevated.skc-input-chip--selected,\n.skc-assist-chip.skc-assist-chip--elevated.skc-filter-chip--selected {\n  background-color: var(--secondary-container);\n}\n._skc-chip--elevated[aria-disabled=true],\n[aria-disabled=true].skc-suggestion-chip.skc-suggestion-chip--elevated,\n[aria-disabled=true].skc-filter-chip.skc-filter-chip--elevated,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated {\n  color: var(--on-surface);\n  background-color: rgba(0, 0, 0, 0);\n  box-shadow: none;\n}\n._skc-chip--elevated[aria-disabled=true]::before,\n[aria-disabled=true].skc-suggestion-chip.skc-suggestion-chip--elevated::before,\n[aria-disabled=true].skc-filter-chip.skc-filter-chip--elevated::before,\n[aria-disabled=true].skc-assist-chip.skc-assist-chip--elevated::before {\n  border: none;\n  background-color: var(--on-surface);\n}\n._skc-chip--dangerous ._skc-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-input-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-suggestion-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-filter-chip__icon .skc-icon,\n._skc-chip--dangerous .skc-assist-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous ._skc-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-input-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-suggestion-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-filter-chip__icon .skc-icon,\n.skc-assist-chip:not([aria-disabled=true]).skc-assist-chip--dangerous .skc-assist-chip__icon .skc-icon {\n  color: var(--error);\n}\n._skc-chip--selected,\n.skc-input-chip--selected,\n.skc-filter-chip--selected {\n  color: var(--on-secondary-container);\n  border-color: rgba(0, 0, 0, 0);\n  background-color: var(--secondary-container);\n}\n._skc-chip__label,\n.skc-input-chip__label,\n.skc-suggestion-chip__label,\n.skc-filter-chip__label,\n.skc-assist-chip__label {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  font-family: var(--font-display);\n  white-space: nowrap;\n}\n._skc-chip__icon,\n.skc-input-chip__icon,\n.skc-suggestion-chip__icon,\n.skc-filter-chip__icon,\n.skc-assist-chip__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n  color: var(--primary);\n}\n._skc-chip__icon .skc-icon,\n.skc-input-chip__icon .skc-icon,\n.skc-suggestion-chip__icon .skc-icon,\n.skc-filter-chip__icon .skc-icon,\n.skc-assist-chip__icon .skc-icon {\n  font-size: 24px;\n  font-variation-settings:\n    "FILL" 0,\n    "wght" 400,\n    "GRAD" 0,\n    "opsz" 24;\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)),\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) {\n  padding: .1875rem;\n  color: var(--on-surface);\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon {\n  width: 1.125rem;\n  height: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__icon .skc-icon {\n  font-size: 1.125rem;\n}\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label))::before,\n.skc-input-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple,\n.skc-filter-chip .skc-button:has(.skc-button__icon):not(:has(.skc-button__label)) .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n._skc-chip__ripple,\nbutton.skc-input-chip .skc-input-chip__ripple,\n.skc-suggestion-chip__ripple,\n.skc-filter-chip__ripple,\n.skc-assist-chip__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface-variant);\n}\n.skc-assist-chip:has(.skc-assist-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-filter-chip:has(.skc-filter-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-filter-chip:has(.skc-button) {\n  padding-block: 0;\n  padding-right: .25rem;\n}\n.skc-filter-chip:has(.skc-button) .skc-filter-chip__label {\n  padding-block: .375rem;\n}\n.skc-filter-chip__anchor {\n  position: relative;\n}\n.skc-filter-chip__anchor .skc-menu {\n  inset: 2.125rem 0 auto 0;\n}\n.skc-filter-chip--selected .skc-filter-chip__icon .skc-icon {\n  color: var(--on-secondary-container);\n}\n.skc-suggestion-chip:has(.skc-suggestion-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip {\n  cursor: initial;\n}\n.skc-input-chip::before {\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child) {\n  padding-block: .25rem;\n  padding-left: .25rem;\n  border-radius: var(--rounded-full);\n}\n.skc-input-chip:has(.skc-input-chip__avatar:first-child):has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip:has(.skc-input-chip__icon:first-child) {\n  padding-left: .5rem;\n}\n.skc-input-chip:has(.skc-button:last-child) {\n  padding-block: .25rem;\n  padding-right: .25rem;\n}\n.skc-input-chip__avatar {\n  width: 1.5rem;\n  height: 1.5rem;\n}\n.skc-input-chip__avatar .skc-avatar {\n  width: 100%;\n  height: 100%;\n}\n.skc-input-chip__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n  padding-block: .375rem;\n  outline: none;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-input-chip--selected .skc-input-chip__avatar {\n  color: var(--on-secondary);\n  border-radius: var(--rounded-full);\n  background-color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button {\n  color: var(--on-secondary-container);\n}\n.skc-input-chip--selected .skc-button::before,\n.skc-input-chip--selected .skc-button .skc-button__ripple {\n  background-color: var(--on-secondary-container);\n}\nbutton.skc-input-chip {\n  cursor: pointer;\n}\nbutton.skc-input-chip::before {\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/InputChip/index.tsx
-var import_framer_motion7 = require("framer-motion");
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var import_framer_motion8 = require("framer-motion");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 function InputChip({
   children,
   avatar,
@@ -917,23 +982,23 @@ function InputChip({
         setEditing(true);
     }
   }), rippleListeners);
-  const divContent = /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
-    avatar && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "skc-input-chip__avatar", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "done" }) : avatar }),
-    icon && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "skc-input-chip__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "skc-input-chip__label", children }),
-    onDelete && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+  const divContent = /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
+    avatar && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "skc-input-chip__avatar", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(MaterialIcon, { icon: "done" }) : avatar }),
+    icon && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "skc-input-chip__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "skc-input-chip__label", children }),
+    onDelete && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
       Button,
       {
         appearance: "text",
-        icon: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(MaterialIcon, { icon: "close" }),
+        icon: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(MaterialIcon, { icon: "close" }),
         onClick: onDelete
       }
     )
   ] });
-  const buttonContent = /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
+  const buttonContent = /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
     divContent,
-    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
-      import_framer_motion7.motion.span,
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+      import_framer_motion8.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -942,7 +1007,7 @@ function InputChip({
       }
     )
   ] });
-  return editing ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+  return editing ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
     "input",
     {
       ref: inputRef,
@@ -960,14 +1025,14 @@ function InputChip({
           setEditing(false);
       }
     }
-  ) : editable || onClick ? layoutID ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(import_framer_motion7.motion.button, __spreadProps(__spreadValues({ layoutId: layoutID }, buttonProps), { children: buttonContent })) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("button", __spreadProps(__spreadValues({}, buttonProps), { children: buttonContent })) : layoutID ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(import_framer_motion7.motion.div, __spreadProps(__spreadValues({ layoutId: layoutID }, divProps), { children: divContent })) : /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", __spreadProps(__spreadValues({}, divProps), { children: divContent }));
+  ) : editable || onClick ? layoutID ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_framer_motion8.motion.button, __spreadProps(__spreadValues({ layoutId: layoutID }, buttonProps), { children: buttonContent })) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("button", __spreadProps(__spreadValues({}, buttonProps), { children: buttonContent })) : layoutID ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_framer_motion8.motion.div, __spreadProps(__spreadValues({ layoutId: layoutID }, divProps), { children: divContent })) : /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", __spreadProps(__spreadValues({}, divProps), { children: divContent }));
 }
 InputChip.displayName = "InputChip";
 
 // src/components/AssistChip/index.tsx
-var import_framer_motion8 = require("framer-motion");
+var import_framer_motion9 = require("framer-motion");
 var React8 = __toESM(require("react"));
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 function AssistChip({
   children,
   icon,
@@ -1000,11 +1065,11 @@ function AssistChip({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "skc-assist-chip__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "skc-assist-chip__label", children }),
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
-      import_framer_motion8.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(import_jsx_runtime15.Fragment, { children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "skc-assist-chip__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "skc-assist-chip__label", children }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+      import_framer_motion9.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1015,11 +1080,11 @@ function AssistChip({
   ] });
   return (
     // Render with `element` if defined
-    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Element, __spreadProps(__spreadValues({}, props), { href, children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("a", __spreadProps(__spreadValues({}, props), { href, children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("button", __spreadProps(__spreadValues({}, props), { type: "button", children: content }))
       )
     )
   );
@@ -1027,9 +1092,9 @@ function AssistChip({
 AssistChip.displayName = "AssistChip";
 
 // src/components/FilterChip/index.tsx
-var import_framer_motion9 = require("framer-motion");
+var import_framer_motion10 = require("framer-motion");
 var React9 = __toESM(require("react"));
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 function FilterChip({
   children,
   icon,
@@ -1057,9 +1122,9 @@ function FilterChip({
       className
     ])
   };
-  const content = /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(import_jsx_runtime15.Fragment, { children: [
-    (icon || selected) && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "skc-filter-chip__icon", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(MaterialIcon, { icon: "done" }) : icon }),
-    onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  const content = /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
+    (icon || selected) && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "skc-filter-chip__icon", children: selected ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(MaterialIcon, { icon: "done" }) : icon }),
+    onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
       "button",
       __spreadProps(__spreadValues({
         className: "skc-filter-chip__label",
@@ -1067,17 +1132,17 @@ function FilterChip({
       }, rippleListeners), {
         children
       })
-    ) : /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "skc-filter-chip__label", children }),
-    onMenuToggle && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+    ) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "skc-filter-chip__label", children }),
+    onMenuToggle && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
       Button,
       {
         appearance: "text",
-        icon: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(MaterialIcon, { icon: "arrow_drop_down" }),
+        icon: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(MaterialIcon, { icon: "arrow_drop_down" }),
         onClick: onMenuToggle
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
-      import_framer_motion9.motion.span,
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+      import_framer_motion10.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1086,10 +1151,10 @@ function FilterChip({
       }
     )
   ] });
-  return onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "skc-filter-chip__anchor", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", __spreadProps(__spreadValues({}, props), { children: content })),
+  return onMenuToggle ? /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "skc-filter-chip__anchor", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", __spreadProps(__spreadValues({}, props), { children: content })),
     menu
-  ] }) : /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  ] }) : /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
     "button",
     __spreadProps(__spreadValues(__spreadProps(__spreadValues({}, props), {
       onClick: () => onClick && onClick(!selected)
@@ -1101,9 +1166,9 @@ function FilterChip({
 FilterChip.displayName = "FilterChip";
 
 // src/components/SuggestionChip/index.tsx
-var import_framer_motion10 = require("framer-motion");
+var import_framer_motion11 = require("framer-motion");
 var React10 = __toESM(require("react"));
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 function SuggestionChip({
   children,
   icon,
@@ -1131,11 +1196,11 @@ function SuggestionChip({
       className
     ])
   }, rippleListeners);
-  const content = /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
-    icon && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "skc-suggestion-chip__icon", children: icon }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "skc-suggestion-chip__label", children }),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
-      import_framer_motion10.motion.span,
+  const content = /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(import_jsx_runtime17.Fragment, { children: [
+    icon && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "skc-suggestion-chip__icon", children: icon }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { className: "skc-suggestion-chip__label", children }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+      import_framer_motion11.motion.span,
       {
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
@@ -1146,11 +1211,11 @@ function SuggestionChip({
   ] });
   return (
     // Render with `element` if defined
-    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
+    href && Element ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Element, __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
       // Render an `<a>` if link passed in
-      href ? /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
+      href ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("a", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { href })), { children: content })) : (
         // Otherwise, render a `<button>`
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("button", __spreadProps(__spreadValues({}, __spreadProps(__spreadValues({}, props), { onClick })), { type: "button", children: content }))
       )
     )
   );
@@ -1158,14 +1223,14 @@ function SuggestionChip({
 SuggestionChip.displayName = "SuggestionChip";
 
 // src/components/ChipField/index.tsx
-var import_framer_motion11 = require("framer-motion");
+var import_framer_motion12 = require("framer-motion");
 var React11 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/chip-set.css
 styleInject(".skc-chip-set {\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: .5rem;\n}\n.skc-chip-set__wrapper {\n  overflow-x: auto;\n}\n.skc-chip-set__wrapper .skc-chip-set {\n  flex-wrap: nowrap;\n  width: fit-content;\n}\n");
 
 // src/components/ChipSet/index.tsx
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_jsx_runtime18 = require("react/jsx-runtime");
 function ChipSet({
   children,
   scrollable,
@@ -1173,7 +1238,7 @@ function ChipSet({
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
     "div",
     __spreadProps(__spreadValues({
       style,
@@ -1182,7 +1247,7 @@ function ChipSet({
         className
       ])
     }, !scrollable ? divAttr : null), {
-      children: scrollable ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", __spreadProps(__spreadValues({ className: "skc-chip-set" }, scrollable ? divAttr : null), { children })) : children
+      children: scrollable ? /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", __spreadProps(__spreadValues({ className: "skc-chip-set" }, scrollable ? divAttr : null), { children })) : children
     })
   );
 }
@@ -1197,7 +1262,7 @@ function kebabify(string) {
 }
 
 // src/components/ChipField/index.tsx
-var import_jsx_runtime18 = require("react/jsx-runtime");
+var import_jsx_runtime19 = require("react/jsx-runtime");
 function ChipField({
   children,
   label,
@@ -1223,7 +1288,7 @@ function ChipField({
     [children]
   );
   const { duration, easing } = useAnimationConfig();
-  const labelControls = (0, import_framer_motion11.useAnimationControls)();
+  const labelControls = (0, import_framer_motion12.useAnimationControls)();
   const [minifyLabel, setMinifyLabel] = React11.useState();
   const [neverResetLabel, setNeverResetLabel] = React11.useState(false);
   const labelTransition = transition(duration.short4, easing.standard);
@@ -1302,9 +1367,9 @@ function ChipField({
   const fieldID = `chip-field-${kebabify(
     typeof label === "string" ? label : alt
   )}`;
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { style, className: cn(["skc-chip-field", className]), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
-      import_framer_motion11.motion.label,
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { style, className: cn(["skc-chip-field", className]), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+      import_framer_motion12.motion.label,
       {
         htmlFor: fieldID,
         animate: labelControls,
@@ -1312,8 +1377,8 @@ function ChipField({
         children: label
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "skc-chip-field__content", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ChipSet, { divAttr: { "aria-live": "polite", "aria-relevant": "all" }, children: React11.Children.map(
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "skc-chip-field__scrollable", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "skc-chip-field__content", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(ChipSet, { divAttr: { "aria-live": "polite", "aria-relevant": "all" }, children: React11.Children.map(
         React11.Children.only(children).props.children,
         (child, idx) => {
           if (!lastSelected)
@@ -1325,7 +1390,7 @@ function ChipField({
           return child;
         }
       ) }),
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
         "input",
         __spreadValues({
           id: fieldID,
@@ -1347,17 +1412,17 @@ function ChipField({
 ChipField.displayName = "ChipField";
 
 // src/components/DataTable/index.tsx
-var import_framer_motion12 = require("framer-motion");
+var import_framer_motion13 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/data-table.css
 styleInject(".skc-data-table {\n  border: 2px solid var(--outline-variant);\n  border-radius: 1.25rem;\n  background-color: var(--surface-1);\n}\n.skc-data-table > :first-child {\n  border-radius: calc(1.25rem - 2px) calc(1.25rem - 2px) 0 0;\n}\n.skc-data-table > :last-child {\n  border-radius: 0 0 calc(1.25rem - 2px) calc(1.25rem - 2px);\n}\n");
 
 // src/components/DataTable/index.tsx
-var import_jsx_runtime19 = require("react/jsx-runtime");
+var import_jsx_runtime20 = require("react/jsx-runtime");
 function DataTable({ children, style, className }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
-    import_framer_motion12.motion.figure,
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+    import_framer_motion13.motion.figure,
     {
       layout: true,
       transition: transition(duration.medium4, easing.standard),
@@ -1370,13 +1435,13 @@ function DataTable({ children, style, className }) {
 DataTable.displayName = "DataTable";
 
 // src/components/DataTableSearch/index.tsx
-var import_framer_motion13 = require("framer-motion");
+var import_framer_motion14 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/data-table-search.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-data-table-search {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  border-bottom: 1px solid var(--outline-variant);\n  background-color: var(--surface);\n}\n.skc-data-table-search::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-data-table-search:has(.skc-data-table-search__input:hover)::before {\n  opacity: .08;\n}\n.skc-data-table-search:has(.skc-data-table-search__input:focus) {\n  margin-bottom: -0.75px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-data-table-search__icon {\n  margin-left: 1.5rem;\n}\n.skc-data-table-search__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  appearance: textfield;\n  flex-grow: 1;\n  padding-block: 1rem;\n  border: 0;\n  outline-offset: -2px;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-data-table-search__input:focus {\n  outline: none;\n}\n.skc-data-table-search__input::placeholder {\n  font-family: var(--font-display);\n  color: var(--on-surface-variant);\n}\n.skc-data-table-search__overflow {\n  position: relative;\n}\n.skc-data-table-search__overflow .skc-button {\n  margin-right: 1rem;\n  color: var(--on-surface);\n}\n.skc-data-table-search__overflow .skc-button::before,\n.skc-data-table-search__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n');
 
 // src/components/DataTableSearch/index.tsx
-var import_jsx_runtime20 = require("react/jsx-runtime");
+var import_jsx_runtime21 = require("react/jsx-runtime");
 function DataTableSearch({
   value,
   locale,
@@ -1389,16 +1454,16 @@ function DataTableSearch({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
-    import_framer_motion13.motion.div,
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
+    import_framer_motion14.motion.div,
     {
       layout: true,
       transition: transition(duration.medium4, easing.standard),
       style,
       className: cn(["skc-data-table-search", className]),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "skc-data-table-search__icon", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(MaterialIcon, { icon: "search" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "skc-data-table-search__icon", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MaterialIcon, { icon: "search" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
           "input",
           __spreadValues({
             type: "search",
@@ -1409,12 +1474,12 @@ function DataTableSearch({
             placeholder: placeholder || (locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search")
           }, inputAttr)
         ),
-        onOverflowToggle && /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "skc-data-table-search__overflow", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
+        onOverflowToggle && /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "skc-data-table-search__overflow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
             Button,
             {
               appearance: "text",
-              icon: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(MaterialIcon, { icon: "more_vert" }),
+              icon: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MaterialIcon, { icon: "more_vert" }),
               alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21" : "Toggle overflow menu",
               onClick: onOverflowToggle
             }
@@ -1428,13 +1493,13 @@ function DataTableSearch({
 DataTableSearch.displayName = "DataTableSearch";
 
 // src/components/DataTableFilters/index.tsx
-var import_framer_motion14 = require("framer-motion");
+var import_framer_motion15 = require("framer-motion");
 
 // ../skcom-css/dist/css/components/data-table-filters.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-data-table-search,\n.skc-data-table-filters {\n  transition: border-color var(--motion-short-4) var(--easing-standard);\n  position: relative;\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: 1rem;\n  border-bottom: 1px solid var(--outline-variant);\n  background-color: var(--surface);\n}\n.skc-data-table-search::before,\n.skc-data-table-filters::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-data-table-search:has(.skc-data-table-search__input:hover)::before,\n.skc-data-table-filters:has(.skc-data-table-search__input:hover)::before {\n  opacity: .08;\n}\n.skc-data-table-search:has(.skc-data-table-search__input:focus),\n.skc-data-table-filters:has(.skc-data-table-search__input:focus) {\n  margin-bottom: -0.75px;\n  border-bottom: 2px solid var(--primary);\n}\n.skc-data-table-search__icon,\n.skc-data-table-filters__icon {\n  margin-left: 1.5rem;\n}\n.skc-data-table-search__input {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  appearance: textfield;\n  flex-grow: 1;\n  padding-block: 1rem;\n  border: 0;\n  outline-offset: -2px;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-data-table-search__input:focus {\n  outline: none;\n}\n.skc-data-table-search__input::placeholder {\n  font-family: var(--font-display);\n  color: var(--on-surface-variant);\n}\n.skc-data-table-search__overflow,\n.skc-data-table-filters__overflow {\n  position: relative;\n}\n.skc-data-table-search__overflow .skc-button,\n.skc-data-table-filters__overflow .skc-button {\n  margin-right: 1rem;\n  color: var(--on-surface);\n}\n.skc-data-table-search__overflow .skc-button::before,\n.skc-data-table-filters__overflow .skc-button::before,\n.skc-data-table-search__overflow .skc-button .skc-button__ripple,\n.skc-data-table-filters__overflow .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-data-table-filters .skc-chip-set {\n  padding-block: .625rem;\n  flex-grow: 1;\n}\n');
 
 // src/components/DataTableFilters/index.tsx
-var import_jsx_runtime21 = require("react/jsx-runtime");
+var import_jsx_runtime22 = require("react/jsx-runtime");
 function DataTableFilters({
   children,
   locale,
@@ -1444,22 +1509,22 @@ function DataTableFilters({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(
-    import_framer_motion14.motion.div,
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(
+    import_framer_motion15.motion.div,
     {
       layout: true,
       transition: transition(duration.medium4, easing.standard),
       style,
       className: cn(["skc-data-table-filters", className]),
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "skc-data-table-filters__icon", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MaterialIcon, { icon: "filter_list" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "skc-data-table-filters__icon", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MaterialIcon, { icon: "filter_list" }) }),
         children,
-        onOverflowToggle && /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "skc-data-table-filters__overflow", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+        onOverflowToggle && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "skc-data-table-filters__overflow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
             Button,
             {
               appearance: "text",
-              icon: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(MaterialIcon, { icon: "more_vert" }),
+              icon: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(MaterialIcon, { icon: "more_vert" }),
               alt: locale === "th" ? "\u0E40\u0E1B\u0E34\u0E14\u0E40\u0E21\u0E19\u0E39\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E15\u0E34\u0E21" : "Toggle overflow menu",
               onClick: onOverflowToggle
             }
@@ -1476,14 +1541,14 @@ DataTableFilters.displayName = "DataTableFilters";
 styleInject(".skc-data-table-content {\n  overflow-x: auto;\n  width: 100%;\n  background-color: var(--surface);\n}\n.skc-data-table-content__content {\n  width: 100%;\n  border-spacing: 0;\n  border-collapse: separate;\n  text-indent: 0;\n}\n@media only screen and (min-width: 905px) {\n  .skc-data-table-content {\n    overflow-x: visible;\n  }\n}\n");
 
 // src/components/DataTableContent/index.tsx
-var import_jsx_runtime22 = require("react/jsx-runtime");
+var import_jsx_runtime23 = require("react/jsx-runtime");
 function DataTableContent({
   children,
   contentWidth,
   style,
   className
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "skc-data-table-content", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "skc-data-table-content", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
     "table",
     {
       style: __spreadProps(__spreadValues({}, style), { minWidth: contentWidth }),
@@ -1496,16 +1561,16 @@ DataTableContent.displayName = "DataTableContent";
 
 // src/components/DataTableHead/index.tsx
 var import_react_table = require("@tanstack/react-table");
-var import_framer_motion15 = require("framer-motion");
+var import_framer_motion16 = require("framer-motion");
 var React12 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/table-row.css
 styleInject(".skc-table-row {\n  display: table-row;\n}\n");
 
 // src/components/TableRow/index.tsx
-var import_jsx_runtime23 = require("react/jsx-runtime");
+var import_jsx_runtime24 = require("react/jsx-runtime");
 function TableRow({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("tr", { style, className: cn(["skc-table-row", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("tr", { style, className: cn(["skc-table-row", className]), children });
 }
 TableRow.displayName = "TableRow";
 
@@ -1513,7 +1578,7 @@ TableRow.displayName = "TableRow";
 styleInject(".skc-table-head {\n  display: table-header-group;\n  background-color: var(--surface-1);\n}\n.skc-table-head--fixed {\n  position: sticky;\n  inset: 0 0 auto 0;\n}\n");
 
 // src/components/DataTableHead/index.tsx
-var import_jsx_runtime24 = require("react/jsx-runtime");
+var import_jsx_runtime25 = require("react/jsx-runtime");
 function DataTableHead({
   headerGroups,
   locale,
@@ -1521,20 +1586,20 @@ function DataTableHead({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
-    import_framer_motion15.motion.thead,
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+    import_framer_motion16.motion.thead,
     {
       layout: true,
       transition: transition(duration.medium4, easing.standard),
       style,
       className: cn(["skc-table-head", className]),
-      children: headerGroups.map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
+      children: headerGroups.map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
         var _a;
         const columnDef = header.column.columnDef;
         const toggleRef = React12.useRef(null);
         const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
         const headerID = `table-header-${header.column.columnDef.header}`;
-        return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
+        return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
           "th",
           __spreadProps(__spreadValues(__spreadProps(__spreadValues({
             ref: toggleRef
@@ -1558,9 +1623,9 @@ function DataTableHead({
             tabIndex: 0
           }), rippleListeners), {
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { "aria-atomic": true, className: "skc-table-cell__content", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_framer_motion15.LayoutGroup, { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_framer_motion15.AnimatePresence, { children: header.column.getIsSorted() && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
-                  import_framer_motion15.motion.div,
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { "aria-atomic": true, className: "skc-table-cell__content", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(import_framer_motion16.LayoutGroup, { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(import_framer_motion16.AnimatePresence, { children: header.column.getIsSorted() && /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+                  import_framer_motion16.motion.div,
                   {
                     layoutId: `${headerID}-sort-indicator`,
                     initial: { scale: 0.4, opacity: 0 },
@@ -1576,11 +1641,11 @@ function DataTableHead({
                     ),
                     "aria-label": locale === "th" ? `\u0E04\u0E2D\u0E25\u0E31\u0E21\u0E19\u0E4C\u0E17\u0E35\u0E48\u0E40\u0E23\u0E35\u0E22\u0E07 ${header.column.getIsSorted() === "asc" ? "\u0E08\u0E32\u0E01\u0E19\u0E49\u0E2D\u0E22\u0E44\u0E1B\u0E21\u0E32\u0E01" : "\u0E08\u0E32\u0E01\u0E19\u0E49\u0E2D\u0E22\u0E44\u0E1B\u0E19\u0E49\u0E2D\u0E22"}` : `Sorted column, ${header.column.getIsSorted() === "asc" ? "ascending" : "descending"};`,
                     className: "skc-table-cell__sort-indicator",
-                    children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(MaterialIcon, { icon: "arrow_downward" })
+                    children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(MaterialIcon, { icon: "arrow_downward" })
                   }
                 ) }),
-                /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
-                  import_framer_motion15.motion.span,
+                /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+                  import_framer_motion16.motion.span,
                   {
                     layoutId: headerID,
                     layout: "position",
@@ -1589,8 +1654,8 @@ function DataTableHead({
                   }
                 )
               ] }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
-                import_framer_motion15.motion.span,
+              /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
+                import_framer_motion16.motion.span,
                 {
                   "aria-hidden": true,
                   initial: { scale: 0, opacity: 0.36 },
@@ -1616,62 +1681,15 @@ var import_react_table2 = require("@tanstack/react-table");
 styleInject(".skc-table-body {\n  display: table-row-group;\n}\n");
 
 // src/components/TableBody/index.tsx
-var import_jsx_runtime25 = require("react/jsx-runtime");
+var import_jsx_runtime26 = require("react/jsx-runtime");
 function TableBody({ children, style, className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("tbody", { style, className: cn(["skc-table-body", className]), children });
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("tbody", { style, className: cn(["skc-table-body", className]), children });
 }
 TableBody.displayName = "TableBody";
 
 // src/components/TableCell/index.tsx
 var import_framer_motion17 = require("framer-motion");
 var React13 = __toESM(require("react"));
-
-// src/components/Menu/index.tsx
-var import_framer_motion16 = require("framer-motion");
-
-// ../skcom-css/dist/css/components/menu.css
-styleInject(".skc-menu {\n  position: absolute;\n  z-index: 60;\n  inset: 0 0 auto auto;\n  display: flex;\n  align-items: stretch;\n  flex-direction: column;\n  gap: 0;\n  width: fit-content;\n  min-width: 12rem;\n  padding-block: .5rem;\n  border-radius: var(--rounded-xs);\n  background-color: var(--surface-2);\n  box-shadow: var(--shadow-2);\n}\n.skc-button ~ .skc-menu {\n  top: 3rem;\n}\n.skc-text-field ~ .skc-menu,\n.skc-select ~ .skc-menu {\n  top: 3.5rem;\n}\n.skc-menu__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n.skc-menu--density-0 .skc-menu-item {\n  padding-block: .5rem;\n}\n.skc-menu--density-\\[-2\\] .skc-menu-item {\n  padding-block: .25rem;\n}\n.skc-menu--density-\\[-4\\] .skc-menu-item {\n  padding-block: 0;\n}\n");
-
-// src/components/Menu/index.tsx
-var import_jsx_runtime26 = require("react/jsx-runtime");
-function Menu({
-  children,
-  open,
-  density,
-  onBlur,
-  ulAttr,
-  style,
-  className
-}) {
-  const { duration, easing } = useAnimationConfig();
-  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(import_framer_motion16.AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
-      import_framer_motion16.motion.ul,
-      __spreadProps(__spreadValues({
-        role: "menu",
-        "aria-orientation": "vertical",
-        initial: { opacity: 0, y: "-10%", scale: 0.8 },
-        animate: { opacity: 1, y: "0%", scale: 1 },
-        exit: {
-          opacity: 0,
-          y: "-10%",
-          scale: 0.8,
-          transition: transition(duration.short2, easing.standard)
-        },
-        transition: transition(duration.short4, easing.standard),
-        className: cn([
-          "skc-menu",
-          density === 0 ? "skc-menu--density-0" : density === -2 ? "skc-menu--density-[-2]" : density === -4 && "skc-menu--density-[-4]",
-          className
-        ])
-      }, __spreadProps(__spreadValues({}, ulAttr), { style })), {
-        children
-      })
-    ),
-    onBlur && /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "skc-menu__blur-capture", onClick: onBlur })
-  ] }) });
-}
-Menu.displayName = "Menu";
 
 // ../skcom-css/dist/css/components/table-cell.css
 styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-table-cell {\n  font-family: var(--font-body);\n  font-size: var(--text-base);\n  font-weight: var(--font-regular);\n  line-height: 1.25rem;\n  letter-spacing: .25px;\n  position: relative;\n  display: table-cell;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell:not(:last-child) {\n  border-right: 1px solid var(--outline-variant);\n}\n.skc-table-row:not(:last-child) .skc-table-cell,\n.skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-data-table__content:has(.skc-table-body) .skc-table-head .skc-table-row:last-child .skc-table-cell,\n.skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child .skc-table-cell {\n  border-bottom: 1px solid var(--outline-variant);\n}\n.skc-table-cell__content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem 1.5rem;\n  text-align: center;\n}\n.skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-block: .875rem;\n  padding-left: .75rem;\n}\n.skc-table-cell__content:has(.skc-input-chip, .skc-assist-chip, .skc-filter-chip, .skc-suggestion-chip) {\n  padding-block: .625rem;\n}\n.skc-table-cell__content .skc-icon {\n  margin-right: .25rem;\n  color: var(--outline);\n}\n.skc-table-cell__sort-indicator {\n  margin-right: .25rem;\n}\n.skc-table-cell__sort-indicator .skc-icon {\n  transition: color var(--motion-short-4) var(--easing-standard);\n  margin-right: 0;\n}\n.skc-table-cell--sortable:focus .skc-table-cell__sort-indicator .skc-icon {\n  color: var(--primary);\n}\n.skc-table-cell--header {\n  font-family: var(--font-display);\n  font-size: var(--text-base);\n  font-weight: var(--font-medium);\n  line-height: 1.25rem;\n  letter-spacing: .1px;\n}\n.skc-table-cell--sortable,\n.skc-table-cell:has(.skc-table-cell__menu-toggle) {\n  cursor: pointer;\n  user-select: none;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle)::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-table-cell--sortable:hover::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):hover::before {\n  opacity: .08;\n}\n.skc-table-cell--sortable:focus-within::before,\n.skc-table-cell--sortable:active::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):focus-within::before,\n.skc-table-cell:has(.skc-table-cell__menu-toggle):active::before {\n  opacity: .12;\n}\n.skc-table-cell--sortable {\n  overflow: hidden;\n}\n.skc-table-cell--sortable::before,\n.skc-table-cell--sortable .skc-table-cell__ripple {\n  background-color: var(--primary);\n}\n.skc-table-cell--left .skc-table-cell__content {\n  justify-content: flex-start;\n  text-align: left;\n}\n.skc-table-cell--center .skc-table-cell__content {\n  justify-content: center;\n  text-align: center;\n}\n.skc-table-cell--right .skc-table-cell__content {\n  justify-content: flex-end;\n  text-align: right;\n}\n.skc-table-cell__menu-toggle {\n  font-family: inherit;\n  font-size: inherit;\n  position: relative;\n  display: flex;\n  overflow: hidden;\n  align-items: center;\n  flex-direction: row;\n  gap: .5rem;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  padding-inline: 1.5rem 1rem;\n  cursor: pointer;\n  border: none;\n  background-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content {\n  flex-grow: 1;\n  justify-content: flex-start;\n  padding-inline: 0;\n}\n.skc-table-cell__menu-toggle .skc-table-cell__content:has(.skc-icon:first-child) {\n  padding-left: 0;\n}\n.skc-table-cell__ripple-container {\n  position: absolute;\n  inset: 0;\n  overflow: hidden;\n  pointer-events: none;\n}\n.skc-table-cell__ripple {\n  position: absolute;\n  content: "";\n  transform: scale(0);\n  filter: blur(16px);\n  pointer-events: none;\n  opacity: .36;\n  border-radius: 50%;\n  background-color: var(--on-surface);\n}\n.skc-table-cell .skc-menu {\n  inset: 0 0 auto 0;\n  width: 100%;\n}\n');

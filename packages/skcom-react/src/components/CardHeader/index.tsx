@@ -13,6 +13,7 @@ import "@suankularb-components/css/dist/css/components/card-header.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { Menu } from "../Menu";
 
 /**
  * Props for {@link CardHeader Card Header}.
@@ -101,7 +102,6 @@ export function CardHeader({
       </div>
 
       {/* Overflow */}
-      {/* TODO: Overflow Menu functionality */}
       {overflow && (
         <div className="skc-card-header__overflow">
           <Button
@@ -109,7 +109,23 @@ export function CardHeader({
             icon={<MaterialIcon icon="more_vert" />}
             onClick={() => setShowOverflow(!showOverflow)}
           />
-          {overflow}
+          {
+            <Menu
+              open={showOverflow}
+              onBlur={() => setShowOverflow(false)}
+              {...overflow.props}
+            >
+              {React.Children.map(overflow.props.children, (child) =>
+                React.cloneElement(child, {
+                  onClick: () => {
+                    const { onClick } = child.props;
+                    if (onClick) onClick();
+                    setShowOverflow(false);
+                  },
+                })
+              )}
+            </Menu>
+          }
         </div>
       )}
     </div>

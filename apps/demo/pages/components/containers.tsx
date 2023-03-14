@@ -24,21 +24,18 @@ import {
   CardContent,
   CardHeader,
   Checkbox,
-  ChipSet,
   Columns,
   ContentLayout,
   DataTable,
   DataTableBody,
   DataTableColumnDef,
   DataTableContent,
-  DataTableFilters,
   DataTableHead,
   DataTablePagination,
   DataTableSearch,
   Dialog,
   DialogContent,
   DialogHeader,
-  FilterChip,
   FormItem,
   FullscreenDialog,
   Header,
@@ -87,6 +84,16 @@ const CardSection: FC = () => (
           icon={<MaterialIcon icon="person" />}
           title="Atipol Sukrisadanon"
           subtitle="Foreign Languages teacher"
+          overflow={
+            <Menu>
+              <MenuItem icon={<MaterialIcon icon="share" />}>
+                Share
+              </MenuItem>
+              <MenuItem icon={<MaterialIcon icon="visibility_off" />}>
+                Hide
+              </MenuItem>
+            </Menu>
+          }
         />
         <Image
           src="/images/atipol.jpg"
