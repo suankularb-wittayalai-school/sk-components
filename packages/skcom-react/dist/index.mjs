@@ -3343,11 +3343,11 @@ function Search({
           /* @__PURE__ */ jsx53(
             motion30.div,
             {
-              initial: { y: "-30%", scaleY: 0.4, opacity: 0 },
+              initial: { y: "-50%", scaleY: 0, opacity: 0 },
               animate: { y: "0%", scaleY: 1, opacity: 1 },
               exit: {
-                y: "-30%",
-                scaleY: 0.4,
+                y: "-50%",
+                scaleY: 0,
                 opacity: 0,
                 transition: transition(
                   duration.short3,
