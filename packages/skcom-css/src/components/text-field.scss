@@ -28,6 +28,13 @@
   }
 
   // Hide native file input
+
+  // (@SiravitPhokeed)
+  // Fun fact: originally I was going to just hide the native “Attach file”
+  // button and leave the file name as is because the file name was all that
+  // was needed. Safari wanted to be different and decides to hide everything,
+  // so decided against that and made a custom replica of the file name display
+  // on normal browsers.
   input[type="file"] {
     display: none;
   }
