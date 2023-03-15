@@ -16,6 +16,7 @@ import "@suankularb-components/css/dist/css/components/search.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link Search}.
@@ -28,6 +29,14 @@ export interface SearchProps extends SKComponent {
    * - Optional.
    */
   children?: React.ReactNode;
+
+  /**
+   * A description of the Search for screen readers, similar to `alt` on
+   * `<img>`.
+   *
+   * - Always required.
+   */
+  alt: string;
 
   /**
    * The value inside the field. This is useful if you want a controlled input.
@@ -91,6 +100,7 @@ export interface SearchProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
  *
  * @param children Some useful search results that appear underneath the field.
+ * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.
  * @param value The value inside the field. This is useful if you want a controlled input.
  * @param locale Allows for translation of the default placeholder message.
  * @param onChange This function triggers when the user make changes to the field value.
@@ -101,6 +111,7 @@ export interface SearchProps extends SKComponent {
  */
 export function Search({
   children,
+  alt,
   value,
   locale,
   onChange,
@@ -112,22 +123,16 @@ export function Search({
   className,
 }: SearchProps) {
   const { duration, easing } = useAnimationConfig();
+
+  const inputRef: React.LegacyRef<HTMLInputElement> = React.createRef();
+
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
   const [exitComplete, setExitComplete] = React.useState<boolean>(true);
   React.useEffect(() => {
     if (showSuggestions) setExitComplete(false);
   }, [showSuggestions]);
 
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.createRef();
-
-  const searchID = `search-students`;
-
-  React.useEffect(() => {
-    if (children && React.Children.count(children) === 1)
-      console.log(
-        (React.Children.only(children) as JSX.Element)?.type.displayName
-      );
-  }, [value]);
+  const searchID = `search-${kebabify(alt)}`;
 
   return (
     <div
@@ -151,6 +156,7 @@ export function Search({
       {/* Search button */}
       <Button
         appearance="text"
+        alt={locale === "th" ? "ค้นหา" : "Search"}
         icon={<MaterialIcon icon="search" />}
         onClick={() => {
           if (!showSuggestions && exitComplete) inputRef.current?.focus();
@@ -165,6 +171,7 @@ export function Search({
       <input
         ref={inputRef}
         aria-controls={`${searchID}-list`}
+        aria-label={alt}
         aria-disabled={disabled}
         type="search"
         id={searchID}

@@ -3262,6 +3262,7 @@ styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 
 import { Fragment as Fragment18, jsx as jsx53, jsxs as jsxs36 } from "react/jsx-runtime";
 function Search({
   children,
+  alt,
   value,
   locale,
   onChange,
@@ -3273,21 +3274,14 @@ function Search({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
+  const inputRef = React29.createRef();
   const [showSuggestions, setShowSuggestions] = React29.useState(false);
   const [exitComplete, setExitComplete] = React29.useState(true);
   React29.useEffect(() => {
     if (showSuggestions)
       setExitComplete(false);
   }, [showSuggestions]);
-  const inputRef = React29.createRef();
-  const searchID = `search-students`;
-  React29.useEffect(() => {
-    var _a;
-    if (children && React29.Children.count(children) === 1)
-      console.log(
-        (_a = React29.Children.only(children)) == null ? void 0 : _a.type.displayName
-      );
-  }, [value]);
+  const searchID = `search-${kebabify(alt)}`;
   return /* @__PURE__ */ jsxs36(
     "div",
     {
@@ -3304,6 +3298,7 @@ function Search({
           Button,
           {
             appearance: "text",
+            alt: locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search",
             icon: /* @__PURE__ */ jsx53(MaterialIcon, { icon: "search" }),
             onClick: () => {
               var _a;
@@ -3322,6 +3317,7 @@ function Search({
           __spreadValues({
             ref: inputRef,
             "aria-controls": `${searchID}-list`,
+            "aria-label": alt,
             "aria-disabled": disabled,
             type: "search",
             id: searchID,

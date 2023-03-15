@@ -226,7 +226,7 @@ const SearchSection: FC = () => {
     <Section>
       <Header>Search</Header>
       <Columns columns={3}>
-        <Search value={value} onChange={setValue}>
+        <Search alt="Search students" value={value} onChange={setValue}>
           {value.toLowerCase().startsWith("si") && (
             <List>
               <ListItem align="center" lines={2} stateLayerEffect>

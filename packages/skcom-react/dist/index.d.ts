@@ -3197,6 +3197,13 @@ interface SearchProps extends SKComponent {
      */
     children?: React.ReactNode;
     /**
+     * A description of the Search for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Always required.
+     */
+    alt: string;
+    /**
      * The value inside the field. This is useful if you want a controlled input.
      *
      * - Optional.
@@ -3251,6 +3258,7 @@ interface SearchProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
  *
  * @param children Some useful search results that appear underneath the field.
+ * @param search A description of the Search for screen readers, similar to `alt` on `<img>`.
  * @param value The value inside the field. This is useful if you want a controlled input.
  * @param locale Allows for translation of the default placeholder message.
  * @param onChange This function triggers when the user make changes to the field value.
@@ -3259,7 +3267,7 @@ interface SearchProps extends SKComponent {
  * @param disabled Turns the Search gray and block any action associated with it.
  * @param inputAttr Attributes for the underlying `<input>` element.
  */
-declare function Search({ children, value, locale, onChange, onSearch, placeholder, disabled, inputAttr, style, className, }: SearchProps): JSX.Element;
+declare function Search({ children, alt, value, locale, onChange, onSearch, placeholder, disabled, inputAttr, style, className, }: SearchProps): JSX.Element;
 declare namespace Search {
     var displayName: string;
 }
