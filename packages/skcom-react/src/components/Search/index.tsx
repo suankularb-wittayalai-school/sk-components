@@ -113,7 +113,10 @@ export function Search({
 }: SearchProps) {
   const { duration, easing } = useAnimationConfig();
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
-  const [exitComplete, setExitComplete] = React.useState<boolean>(false);
+  const [exitComplete, setExitComplete] = React.useState<boolean>(true);
+  React.useEffect(() => {
+    if (showSuggestions) setExitComplete(false);
+  }, [showSuggestions]);
 
   const inputRef: React.LegacyRef<HTMLInputElement> = React.createRef();
 
@@ -127,7 +130,24 @@ export function Search({
   }, [value]);
 
   return (
-    <div style={style} className={cn(["skc-search", className])}>
+    <div
+      style={{
+        ...style,
+        ...(showSuggestions
+          ? {
+              borderBottom: "1px solid var(--outline)",
+              marginBottom: "-0.75px",
+            }
+          : {
+              borderBottom: "none",
+              marginBottom: 0,
+            }),
+        ...(exitComplete
+          ? { borderRadius: "var(--rounded-xl)" }
+          : { borderRadius: "var(--rounded-xl) var(--rounded-xl) 0 0" }),
+      }}
+      className={cn(["skc-search", className])}
+    >
       {/* Search button */}
       <Button
         appearance="text"

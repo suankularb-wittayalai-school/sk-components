@@ -3350,7 +3350,7 @@ var import_framer_motion31 = require("framer-motion");
 var React29 = __toESM(require("react"));
 
 // ../skcom-css/dist/css/components/search.css
-styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-search {\n  transition: border-color var(--motion-medium-4) var(--easing-standard), border-radius var(--motion-medium-4) var(--easing-standard);\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .25rem;\n  padding-inline: .5rem;\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-3);\n  position: relative;\n}\n.skc-search::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-search:has(.skc-search__input:hover)::before {\n  opacity: .08;\n}\n.skc-search:has(.skc-search__input:focus) {\n  border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;\n  border-bottom: 1px solid var(--outline);\n  margin-bottom: -0.75px;\n}\n.skc-search .skc-button {\n  z-index: 20;\n}\n.skc-search .skc-button .skc-button__icon .skc-icon {\n  color: var(--on-surface);\n}\n.skc-search .skc-button::before,\n.skc-search .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-search__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem 0 1rem 1rem;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-search__input::-webkit-search-decoration,\n.skc-search__input::-webkit-search-cancel-button,\n.skc-search__input::-webkit-search-results-button,\n.skc-search__input::-webkit-search-results-decoration {\n  -webkit-appearance: none;\n}\n.skc-search__input:focus {\n  outline: none;\n  z-index: 20;\n}\n.skc-search__input::placeholder {\n  font-family: var(--font-display);\n}\n.skc-button ~ .skc-search__input {\n  padding-left: 0rem;\n}\n.skc-search__list {\n  position: absolute;\n  inset: calc(3.5rem + 1px) 0 auto 0;\n  min-height: 4.5rem;\n  border-radius: 0 0 var(--rounded-xl) var(--rounded-xl);\n  background-color: var(--surface-3);\n  z-index: 20;\n  padding-block: .5rem;\n  overflow: hidden;\n}\n.skc-search__list .skc-list {\n  gap: .25rem;\n}\n.skc-search__list .skc-list-item.skc-list-item--state-layer {\n  border-radius: 0;\n}\n.skc-search__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n');
+styleInject(':root {\n  font-size: 16px;\n  --text-xs: 0.6875rem;\n  --text-sm: 0.75rem;\n  --text-base: 0.875rem;\n  --text-lg: 1rem;\n  --text-xl: 1.125rem;\n  --text-2xl: 1.375rem;\n  --text-3xl: 1.5rem;\n  --text-4xl: 1.75rem;\n  --text-5xl: 2rem;\n  --text-6xl: 2.25rem;\n  --text-7xl: 2.8125rem;\n  --text-8xl: 3.5625rem;\n  --text-9xl: 4rem;\n  --font-thin: 100;\n  --font-light: 300;\n  --font-regular: 400;\n  --font-medium: 500;\n  --font-bold: 700;\n}\n.skc-search {\n  transition: border-radius var(--motion-short-2) var(--easing-standard);\n  display: flex;\n  align-items: center;\n  flex-direction: row;\n  gap: .25rem;\n  padding-inline: .5rem;\n  border-radius: var(--rounded-xl);\n  background-color: var(--surface-3);\n  position: relative;\n}\n.skc-search::before {\n  transition: opacity var(--motion-short-4) var(--easing-standard);\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  content: "";\n  pointer-events: none;\n  opacity: 0;\n  border-radius: inherit;\n  background-color: var(--on-surface);\n}\n.skc-search:has(.skc-search__input:hover)::before {\n  transition: border-radius var(--motion-medium-4) var(--easing-standard);\n}\n.skc-search:has(.skc-search__input:focus) {\n  border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;\n  border-bottom: 1px solid var(--outline);\n  margin-bottom: -0.75px;\n}\n.skc-search .skc-button {\n  z-index: 20;\n}\n.skc-search .skc-button .skc-button__icon .skc-icon {\n  color: var(--on-surface);\n}\n.skc-search .skc-button::before,\n.skc-search .skc-button .skc-button__ripple {\n  background-color: var(--on-surface);\n}\n.skc-search__input {\n  font-family: var(--font-body);\n  font-size: var(--text-lg);\n  font-weight: var(--font-regular);\n  line-height: 1.5rem;\n  letter-spacing: .5px;\n  flex-grow: 1;\n  padding: 1rem 0 1rem 1rem;\n  background-color: rgba(0, 0, 0, 0);\n}\n.skc-search__input::-webkit-search-decoration,\n.skc-search__input::-webkit-search-cancel-button,\n.skc-search__input::-webkit-search-results-button,\n.skc-search__input::-webkit-search-results-decoration {\n  -webkit-appearance: none;\n}\n.skc-search__input:focus {\n  outline: none;\n  z-index: 20;\n}\n.skc-search__input::placeholder {\n  font-family: var(--font-display);\n}\n.skc-button ~ .skc-search__input {\n  padding-left: 0rem;\n}\n.skc-search__list {\n  position: absolute;\n  inset: calc(3.5rem + 1px) 0 auto 0;\n  min-height: 4.5rem;\n  border-radius: 0 0 var(--rounded-xl) var(--rounded-xl);\n  background-color: var(--surface-3);\n  z-index: 20;\n  padding-block: .5rem;\n  overflow: hidden;\n}\n.skc-search__list .skc-list {\n  gap: .25rem;\n}\n.skc-search__list .skc-list-item.skc-list-item--state-layer {\n  border-radius: 0;\n}\n.skc-search__blur-capture {\n  position: fixed;\n  z-index: 10;\n  inset: 0;\n}\n');
 
 // src/components/Search/index.tsx
 var import_jsx_runtime53 = require("react/jsx-runtime");
@@ -3368,7 +3368,11 @@ function Search({
 }) {
   const { duration, easing } = useAnimationConfig();
   const [showSuggestions, setShowSuggestions] = React29.useState(false);
-  const [exitComplete, setExitComplete] = React29.useState(false);
+  const [exitComplete, setExitComplete] = React29.useState(true);
+  React29.useEffect(() => {
+    if (showSuggestions)
+      setExitComplete(false);
+  }, [showSuggestions]);
   const inputRef = React29.createRef();
   const searchID = `search-students`;
   React29.useEffect(() => {
@@ -3378,88 +3382,101 @@ function Search({
         (_a = React29.Children.only(children)) == null ? void 0 : _a.type.displayName
       );
   }, [value]);
-  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("div", { style, className: cn(["skc-search", className]), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
-      Button,
-      {
-        appearance: "text",
-        icon: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(MaterialIcon, { icon: "search" }),
-        onClick: () => {
-          var _a;
-          if (!showSuggestions && exitComplete)
-            (_a = inputRef.current) == null ? void 0 : _a.focus();
-          else {
-            setShowSuggestions(false);
-            if (onSearch)
-              onSearch();
-          }
-        }
-      }
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
-      "input",
-      __spreadValues({
-        ref: inputRef,
-        "aria-controls": `${searchID}-list`,
-        "aria-disabled": disabled,
-        type: "search",
-        id: searchID,
-        name: searchID,
-        enterKeyHint: "search",
-        placeholder: placeholder || (locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search"),
-        className: "skc-search__input",
-        value,
-        onChange: (event) => onChange && onChange(event.target.value),
-        onFocus: () => setShowSuggestions(true),
-        onKeyUp: (event) => {
-          if (onSearch && event.key === "Enter")
-            onSearch();
-        }
-      }, inputAttr)
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_framer_motion31.AnimatePresence, { onExitComplete: () => setExitComplete(true), children: showSuggestions && /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(import_jsx_runtime53.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
-        import_framer_motion31.motion.div,
-        {
-          initial: { y: "-30%", scaleY: 0.4, opacity: 0 },
-          animate: { y: "0%", scaleY: 1, opacity: 1 },
-          exit: {
-            y: "-30%",
-            scaleY: 0.4,
-            opacity: 0,
-            transition: transition(
-              duration.short3,
-              easing.standardAccelerate
-            )
-          },
-          transition: transition(
-            duration.medium2,
-            easing.standardDecelerate
-          ),
-          className: "skc-search__list",
-          onClick: () => setShowSuggestions(false),
-          children: children && React29.Children.count(children) === 1 && React29.Children.only(children).type.displayName === "List" ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(List, __spreadProps(__spreadValues({}, children.props), { children: React29.Children.map(
-            children.props.children,
-            (child) => React29.cloneElement(child, {
-              onClick: () => {
-                const { onClick } = child.props;
-                if (onClick)
-                  onClick();
+  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(
+    "div",
+    {
+      style: __spreadValues(__spreadValues(__spreadValues({}, style), showSuggestions ? {
+        borderBottom: "1px solid var(--outline)",
+        marginBottom: "-0.75px"
+      } : {
+        borderBottom: "none",
+        marginBottom: 0
+      }), exitComplete ? { borderRadius: "var(--rounded-xl)" } : { borderRadius: "var(--rounded-xl) var(--rounded-xl) 0 0" }),
+      className: cn(["skc-search", className]),
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+          Button,
+          {
+            appearance: "text",
+            icon: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(MaterialIcon, { icon: "search" }),
+            onClick: () => {
+              var _a;
+              if (!showSuggestions && exitComplete)
+                (_a = inputRef.current) == null ? void 0 : _a.focus();
+              else {
                 setShowSuggestions(false);
+                if (onSearch)
+                  onSearch();
               }
-            })
-          ) })) : children
-        }
-      ),
-      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
-        "div",
-        {
-          className: "skc-search__blur-capture",
-          onClick: () => setShowSuggestions(false)
-        }
-      )
-    ] }) })
-  ] });
+            }
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+          "input",
+          __spreadValues({
+            ref: inputRef,
+            "aria-controls": `${searchID}-list`,
+            "aria-disabled": disabled,
+            type: "search",
+            id: searchID,
+            name: searchID,
+            enterKeyHint: "search",
+            placeholder: placeholder || (locale === "th" ? "\u0E04\u0E49\u0E19\u0E2B\u0E32" : "Search"),
+            className: "skc-search__input",
+            value,
+            onChange: (event) => onChange && onChange(event.target.value),
+            onFocus: () => setShowSuggestions(true),
+            onKeyUp: (event) => {
+              if (onSearch && event.key === "Enter")
+                onSearch();
+            }
+          }, inputAttr)
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_framer_motion31.AnimatePresence, { onExitComplete: () => setExitComplete(true), children: showSuggestions && /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(import_jsx_runtime53.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+            import_framer_motion31.motion.div,
+            {
+              initial: { y: "-30%", scaleY: 0.4, opacity: 0 },
+              animate: { y: "0%", scaleY: 1, opacity: 1 },
+              exit: {
+                y: "-30%",
+                scaleY: 0.4,
+                opacity: 0,
+                transition: transition(
+                  duration.short3,
+                  easing.standardAccelerate
+                )
+              },
+              transition: transition(
+                duration.medium2,
+                easing.standardDecelerate
+              ),
+              className: "skc-search__list",
+              onClick: () => setShowSuggestions(false),
+              children: children && React29.Children.count(children) === 1 && React29.Children.only(children).type.displayName === "List" ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(List, __spreadProps(__spreadValues({}, children.props), { children: React29.Children.map(
+                children.props.children,
+                (child) => React29.cloneElement(child, {
+                  onClick: () => {
+                    const { onClick } = child.props;
+                    if (onClick)
+                      onClick();
+                    setShowSuggestions(false);
+                  }
+                })
+              ) })) : children
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+            "div",
+            {
+              className: "skc-search__blur-capture",
+              onClick: () => setShowSuggestions(false)
+            }
+          )
+        ] }) })
+      ]
+    }
+  );
 }
 Search.displayName = "Search";
 

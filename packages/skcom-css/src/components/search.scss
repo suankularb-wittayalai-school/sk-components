@@ -12,7 +12,7 @@
 .skc-search {
   @include mix.transition(
     border-radius,
-    var(--motion-medium-4),
+    var(--motion-short-2),
     var(--easing-standard)
   );
   display: flex;
@@ -30,7 +30,11 @@
   }
 
   &:has(.skc-search__input:hover)::before {
-    opacity: 0.08;
+    @include mix.transition(
+      border-radius,
+      var(--motion-medium-4),
+      var(--easing-standard)
+    );
   }
 
   &:has(.skc-search__input:focus) {
