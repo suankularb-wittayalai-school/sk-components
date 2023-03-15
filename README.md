@@ -1,94 +1,91 @@
-| [Read in English](#suankularb-components) | [อ่านในภาษาไทย](#ระบบ-ui-สวนกุหลาบ) |
-| ----------------------------------------- | ----------------------------------- |
-
 # Suankularb Components
 
-This repository is aimed at creating a consistent design system and experience across all Suankularb features and applications.
+<picture>
+  <source
+    srcset="https://user-images.githubusercontent.com/26425747/225400385-795cd491-f678-4344-8e69-a887540932d8.png"
+    media="(prefers-color-scheme: dark)"
+  >
+  <img src="https://user-images.githubusercontent.com/26425747/225400369-823cb553-b18b-49f8-9d3d-96302332b78b.png">
+</picture>
 
-## Development
+<br>
 
-If you want to help us develop SK Components, please read carefully below:
+SK Components is a design system consisting of tokens and components created with the goal of a consistent and harmonious experience across all Suankularb features and applications.
 
-- Every directory nested inside of the `scss` directory must have a `_all.scss` file, which must have `@use` for every file inside that directory.
-- The file `core.scss` must have `@use` for every `_all.scss` file.
-- Compile SCSS to CSS continuously with:
-  ```bat
-  npm run dev
-  ```
-  This will create the `dist\css\style.css` file, which can be used in an HTML file for testing.
+This repository is a monorepo consisting of the SKCom libraries and a demo application. You can find those in the directories listed below:
 
-## Installation
+| Library/Application | Location               |
+| ------------------- | ---------------------- |
+| Demo application    | `apps\demo`            |
+| SKCom Styles (CSS)  | `packages\skcom-css`   |
+| ReSKCom (React)     | `packages\skcom-react` |
 
-### CSS
+## Table of Contents
 
-Copy and paste the following code into your project’s `<head>` tag:
+- [Resources](#resources)
+- [Using SKCom](#using-skcom)
+- [Developing SKCom](#developing-skcom)
 
-```html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css"
-  crossorigin="anonymous"
-/>
+## Resources
+
+> ภาษาไทย (Thai): ในตอนนี้ยังไม่มีเอกสารในภาษาไทย แต่เราวางแผนที่จะจัดทำในอนาคต
+
+- [The full documentation on design and implementation for SKCom](https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing).
+- [The full API reference for ReSKCom](https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.hkwxehfhlxn0).
+- Interact with the examples from the documentation with the [demo app](#the-demo-application).
+
+## Using SKCom
+
+> **Note**: SKCom Styles is not designed to be installed in apps. Below is how you can use ReSKCom in a React project.
+
+> **Tip**: If you’re using the [Suankularb Next.js Template](https://github.com/suankularb-wittayalai-school/sk-nextjs-template), ReSKCom is already installed and set up.
+
+### Installation
+
+You can install ReSKCom in a React project with the following:
+
+```
+npm i @suankularb-components/react
 ```
 
-### NPM
+### Set up
 
-Run the following command in your project’s root directory:
+ReSKCom comes with no palette by default. To use the default palette, wrap your app with the `ThemeProvider` component. Ensure the component wraps all parts of the app that uses SKCom.
 
-```bat
-npm install --save @suankularb-components/css
+In a Next.js app, wrap `<Component {...pageProps} />` with `ThemeProvider`, like so:
+
+```tsx
+import { AppProps } from "next/app";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
 ```
 
-### Yarn
+If you wish to create your own palette, study the [`_palette.scss` file](https://github.com/suankularb-wittayalai-school/sk-components/blob/main/packages/skcom-css/src/abstracts/_palette.scss) and declare variables in the same manner in a CSS file, then import it to your app.
 
-Run the following command in your project’s root directory:
+### Complete
 
-```bat
-yarn add @suankularb-components/css
+You can now use ReSKCom in your React project.
+
+## Developing SKCom
+
+Run the following at the project root to start the development server.
+
+```
+npm run dev
 ```
 
-# ระบบ UI สวนกุหลาบวิทยาลัย
+[Learn more](https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.2vpcu3kzzncl).
 
-Repository นี้มีไว้เพื่อเป็นเครื่องมือที่จะช่วยเราสร้างระบบ UI ที่เข้าใจง่ายและสม่ำเสมอ ตลอดภายในแอพพลิเคชั่นทั้งหมดจากโรงเรียนสวนกุหลาบวิทยาลัย
+### The Demo Application
 
-## การช่วยพัฒนา
+![A screenshot of the About page of the demo application.](https://user-images.githubusercontent.com/26425747/225408232-bb851e65-fd14-42d7-af33-10fdca8d3ebb.png)
 
-หากต้องการช่วยพัฒนา SK Components กรุณาอ่านข้อมูลต่อไปนี้
+After starting the development server, you can access the demo application locally. Go to [`http://localhost:3000/`](http://localhost:3000/).
 
-- ในทุกโฟลเดอร์ภายในโฟลเดอร์ `scss` ต้องมีไฟล์ `_all.scss` ซึ่งมี `@use` สำหรับทุกไฟล์ภายในโฟลเดอร์นั้นๆ
-- ในไฟล์ `core.scss` ต้องมี `@use` สำหรับทุกไฟล์ `_all.scss`
-- compile SCSS ไปยัง CSS อย่างต่อเนื่องด้วยคำสั่ง
-  ```bat
-  npm run dev
-  ```
-  จะสร้างไฟล์ `dist\css\style.css` ซึ่งสามารถนำไปใช้ในไฟล์ HTML เพื่อทดสอบได้
-
-## การติดตั้ง
-
-### CSS
-
-คัดลอกส่วนของ CSS ที่ต้องการจากภายในส่วนนี้ไปยังตำแหน่งที่ต้องการ
-
-```html
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@suankularb-components/css@latest/dist/css/suankularb-components.min.css"
-  crossorigin="anonymous"
-/>
-```
-
-### NPM
-
-ใช้คำสั่งต่อไปนี้ใน root directory ของโปรเจกต์
-
-```bat
-npm install -s @suankularb-components/css@latest
-```
-
-### Yarn
-
-ใช้คำสั่งต่อไปนี้ใน root directory ของโปรเจกต์
-
-```bat
-yarn add @suankularb-components/css@latest
-```
+You can interact with the examples in the documentation here, or dive deeper into how the examples are created by studying `apps\demo`.
