@@ -27,6 +27,11 @@
     border: none;
   }
 
+  // Hide native file input
+  input[type="file"] {
+    display: none;
+  }
+
   // Disabled
 
   // (@SiravitPhokeed)
@@ -260,6 +265,12 @@
 
   &:focus {
     outline: none;
+  }
+
+  input[type="file"] ~ & {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .skc-text-field:has(.skc-text-field__leading) & {

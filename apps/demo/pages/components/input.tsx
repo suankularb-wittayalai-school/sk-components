@@ -98,6 +98,7 @@ const TextFieldSection: FC = () => {
   const [phone, setPhone] = useState<string>("");
   const [weight, setWeight] = useState<string>("");
   const [birthdate, setBirthdate] = useState<string>("");
+  const [document, setDocument] = useState<File>();
   const [policies, setPolicies] = useState<string>("");
 
   useEffect(() => setEmail(email.split("@student.sk.ac.th")[0]), [email]);
@@ -115,7 +116,7 @@ const TextFieldSection: FC = () => {
             helperMsg="Full name and surname of candidate"
             required
             value={name}
-            onChange={setName}
+            onChange={(value) => setName(value as string)}
           />
           <TextField
             appearance="outlined"
@@ -127,7 +128,7 @@ const TextFieldSection: FC = () => {
             required
             error={email.includes("@")}
             value={email}
-            onChange={setEmail}
+            onChange={(value) => setEmail(value as string)}
             inputAttr={{ autoCorrect: "off", autoCapitalize: "none" }}
           />
           <TextField
@@ -137,7 +138,7 @@ const TextFieldSection: FC = () => {
             leading={<MaterialIcon icon="phone" />}
             canClear
             value={phone}
-            onChange={setPhone}
+            onChange={(value) => setPhone(value as string)}
             inputAttr={{ type: "tel" }}
           />
           <TextField
@@ -156,7 +157,7 @@ const TextFieldSection: FC = () => {
             trailing="kg"
             error={Number.isNaN(Number(weight)) || Number(weight) < 0}
             value={weight}
-            onChange={setWeight}
+            onChange={(value) => setWeight(value as string)}
             inputAttr={{ type: "number", step: 0.5, min: 0 }}
           />
           <TextField
@@ -165,8 +166,21 @@ const TextFieldSection: FC = () => {
             behavior="single-line"
             leading={<MaterialIcon icon="cake" />}
             value={birthdate}
-            onChange={setBirthdate}
+            onChange={(value) => setBirthdate(value as string)}
             inputAttr={{ type: "date" }}
+          />
+          <TextField
+            appearance="outlined"
+            label="Founding document"
+            leading={<MaterialIcon icon="attach_file" />}
+            onChange={(value) => setDocument(value as File)}
+            inputAttr={{
+              type: "file",
+              accept:
+                "application/msword, \
+                application/vnd.openxmlformats-officedocument.wordprocessingml.document, \
+                application/pdf",
+            }}
           />
         </Columns>
         <TextField
@@ -176,7 +190,7 @@ const TextFieldSection: FC = () => {
           leading={<MaterialIcon icon="groups" />}
           helperMsg="Full name and surname of Kornor candidates"
           value={partyList}
-          onChange={setPartyList}
+          onChange={(value) => setPartyList(value as string)}
         />
         <TextField
           appearance="outlined"
@@ -184,7 +198,7 @@ const TextFieldSection: FC = () => {
           behavior="textarea"
           helperMsg="A full list of this party’s policies"
           value={policies}
-          onChange={setPolicies}
+          onChange={(value) => setPolicies(value as string)}
         />
       </div>
     </Section>

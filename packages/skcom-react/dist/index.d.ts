@@ -3944,9 +3944,19 @@ interface TextFieldProps extends SKComponent {
      *
      * - Optional.
      *
-     * @param value
+     * @param value The value of the field.
      */
-    onChange?: (value: string) => any;
+    onChange?: (value: string | File) => any;
+    /**
+     * Allows for translation of the “No files attached” text, which is put in
+     * place of the file name when no files have been attached yet.
+     *
+     * - Only valid if `inputAttr.type` is `file`.
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
     /**
      * Attributes for the underlying `<input>` element used as the field.
      *
@@ -3973,9 +3983,10 @@ interface TextFieldProps extends SKComponent {
  * @param error Tells Text Field that it contains an invalid value and activates the error state.
  * @param value The value inside the field. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user make changes to the field value.
+ * @param locale Allows for translation of the “No files attached” text.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
+declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, locale, inputAttr, style, className, }: TextFieldProps): JSX.Element;
 declare namespace TextField {
     var displayName: string;
 }
