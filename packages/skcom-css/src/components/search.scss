@@ -29,7 +29,7 @@
     background-color: var(--on-surface);
   }
 
-  &:has(.skc-search__input:hover)::before {
+  &:has(.skc-search__input:hover) {
     @include mix.transition(
       border-radius,
       var(--motion-medium-4),

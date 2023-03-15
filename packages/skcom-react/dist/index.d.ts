@@ -3220,7 +3220,8 @@ interface SearchProps extends SKComponent {
      */
     locale?: "en-US" | "th";
     /**
-     * This function triggers when the user make changes to the field value. The value is passed in via the function.
+     * This function triggers when the user make changes to the field value. The
+     * value is passed in via the function.
      *
      * - Optional.
      */
@@ -3258,7 +3259,7 @@ interface SearchProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
  *
  * @param children Some useful search results that appear underneath the field.
- * @param search A description of the Search for screen readers, similar to `alt` on `<img>`.
+ * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.
  * @param value The value inside the field. This is useful if you want a controlled input.
  * @param locale Allows for translation of the default placeholder message.
  * @param onChange This function triggers when the user make changes to the field value.

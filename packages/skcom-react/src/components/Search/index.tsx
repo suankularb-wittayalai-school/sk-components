@@ -57,7 +57,8 @@ export interface SearchProps extends SKComponent {
   locale?: "en-US" | "th";
 
   /**
-   * This function triggers when the user make changes to the field value. The value is passed in via the function.
+   * This function triggers when the user make changes to the field value. The
+   * value is passed in via the function.
    *
    * - Optional.
    */
@@ -183,7 +184,11 @@ export function Search({
         onChange={(event) => onChange && onChange(event.target.value)}
         onFocus={() => setShowSuggestions(true)}
         onKeyUp={(event) => {
-          if (onSearch && event.key === "Enter") onSearch();
+          if (event.key === "Enter") {
+            setShowSuggestions(false);
+            inputRef.current?.blur();
+            if (onSearch) onSearch();
+          }
         }}
         {...inputAttr}
       />
