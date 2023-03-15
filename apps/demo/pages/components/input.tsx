@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 
 // SK Components
 import {
+  Avatar,
   Checkbox,
   ChipField,
   ChipSet,
@@ -13,10 +14,13 @@ import {
   FormItem,
   Header,
   InputChip,
+  List,
+  ListItem,
+  ListItemContent,
   MaterialIcon,
-  Menu,
   MenuItem,
   Radio,
+  Search,
   Section,
   Select,
   Switch,
@@ -215,6 +219,36 @@ const RadioSection: FC = () => {
   );
 };
 
+const SearchSection: FC = () => {
+  const [value, setValue] = useState<string>("");
+
+  return (
+    <Section>
+      <Header>Search</Header>
+      <Columns columns={3}>
+        <Search value={value} onChange={setValue}>
+          {value.toLowerCase().startsWith("si") && (
+            <List>
+              <ListItem align="center" lines={2} stateLayerEffect>
+                <Avatar>SP</Avatar>
+                <ListItemContent title="Sirapop Prateeppavameta" desc="M.505" />
+              </ListItem>
+              <ListItem align="center" lines={2} stateLayerEffect>
+                <Avatar>SP</Avatar>
+                <ListItemContent title="Siravit Phokeed" desc="M.504" />
+              </ListItem>
+              <ListItem align="center" lines={2} stateLayerEffect>
+                <Avatar>SS</Avatar>
+                <ListItemContent title="Sirawish Sukee" desc="M.505" />
+              </ListItem>
+            </List>
+          )}
+        </Search>
+      </Columns>
+    </Section>
+  );
+};
+
 const SelectSection: FC = () => {
   const [frequency, setFrequency] = useState<
     "one-off" | "daily" | "weekly" | "monthly" | "annually"
@@ -278,6 +312,7 @@ const InputPage: CustomPage = () => (
     <ContentLayout key="input-page">
       <CheckboxSection />
       <ChipFieldSection />
+      <SearchSection />
       <SelectSection />
       <TextFieldSection />
       <RadioSection />

@@ -76,7 +76,7 @@
 }
 
 @include mix.breakpoint("sm") {
-  .skc-columns .skc-list-item.skc-list-item--state-layer {
+  .skc-columns > .skc-list-item.skc-list-item--state-layer {
     border-radius: var(--rounded-md);
   }
 }
