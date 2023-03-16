@@ -1,0 +1,25 @@
+////
+/// **Navigation Drawer Section**
+/// A group of destinations within a Navigation Drawer.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.mte2ti4fbps0 SKCom documentation
+////
+
+@use "../abstracts/typography.scss" as type;
+
+.skc-nav-drawer-section {
+  display: flex;
+  flex-direction: column;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.skc-nav-drawer-section__header {
+  @include type.font("title-small");
+  margin-block: 0;
+  padding: 1.125rem 1rem;
+}

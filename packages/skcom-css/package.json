@@ -1,42 +1,33 @@
 {
-    "name": "@suankularb-components/css",
-    "version": "2.8.0",
-    "description": "A design system for all Suankularb applications",
-    "module": "dist\\js\\suankularb-components.esm.js",
-    "browser": "dist\\js\\suankularb-components.umd.min.js",
-    "main": "dist/js/suankularb-components.esm.min.js",
-    "style": "dist\\css\\suankularb-components.min.css",
-    "scss": "src\\scss\\core.scss",
-    "sideEffects": false,
-    "scripts": {
-        "build": "rimraf dist && rollup -c",
-        "dev": "rollup -c -w",
-        "clean": "rimraf .turbo && rimraf dist"
+  "name": "@suankularb-components/css",
+  "version": "3.0.0",
+  "description": "Styling for Suankularb Components, the base of all Suankularb Components implementations",
+  "main": "dist/js/index.js",
+  "style": "dist\\css\\index.css",
+  "devDependencies": {
+    "configs": "*",
+    "sass": "1.57.1"
+  },
+  "scripts": {
+    "build": "sass src:dist/css --style compressed",
+    "dev": "sass --watch src:dist/css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
+  },
+  "contributors": [
+    {
+      "name": "Siravit Phokeed"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
-    },
-    "keywords": [
-        "css",
-        "component",
-        "suankularb"
-    ],
-    "author": "Suankularb Wittayalai School",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
-    },
-    "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
-    "devDependencies": {
-        "rollup": "^2.66.1",
-        "rollup-plugin-scss": "^3.0.0",
-        "rollup-plugin-terser": "^7.0.2"
-    },
-    "dependencies": {
-        "sass": "^1.49.0"
-    },
-    "publishConfig": {
-        "access": "public"
+    {
+      "name": "Smart Wattanapornmongkol",
+      "website": "https://smartwatt.me/"
     }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
+  },
+  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme"
 }

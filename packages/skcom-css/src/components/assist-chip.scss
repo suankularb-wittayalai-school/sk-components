@@ -1,0 +1,40 @@
+////
+/// **Assist Chip**
+/// Assist Chips are similar to Buttons in that it helps users take action. The
+/// difference is a Button is persistent (doesn’t change) and an Assist Chip is
+/// dynamic and contextual (changes according to the context).
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.6b3bv92d22u9 SKCom documentation
+////
+
+@use "./chip.scss";
+
+.skc-assist-chip {
+  @extend .skc-chip;
+
+  // With icon padding
+  &:has(.skc-assist-chip__icon:first-child) {
+    padding-left: 0.5rem;
+  }
+
+  // Dangerous
+  &:not([aria-disabled="true"]).skc-assist-chip--dangerous {
+    @extend .skc-chip--dangerous;
+  }
+}
+
+.skc-assist-chip.skc-assist-chip--elevated {
+  @extend .skc-chip--elevated;
+}
+
+.skc-assist-chip__label {
+  @extend .skc-chip__label;
+}
+
+.skc-assist-chip__icon {
+  @extend .skc-chip__icon;
+}
+
+.skc-assist-chip__ripple {
+  @extend .skc-chip__ripple;
+}

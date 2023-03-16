@@ -1,0 +1,75 @@
+////
+/// **Data Table Search**
+/// Allows the user to filter the Data Table’s content using a text query.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-data-table-search {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  border-bottom: 1px solid var(--outline-variant);
+  background-color: var(--surface);
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:has(.skc-data-table-search__input:hover)::before {
+    opacity: 0.08;
+  }
+
+  &:has(.skc-data-table-search__input:focus) {
+    margin-bottom: -0.75px;
+    border-bottom: 2px solid var(--primary);
+  }
+}
+
+.skc-data-table-search__icon {
+  margin-left: 1.5rem;
+}
+
+.skc-data-table-search__input {
+  @include type.font("body-medium");
+  appearance: textfield;
+  flex-grow: 1;
+  padding-block: 1rem;
+  border: 0;
+  outline-offset: -2px;
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    font-family: var(--font-display);
+    color: var(--on-surface-variant);
+  }
+}
+
+.skc-data-table-search__overflow {
+  position: relative;
+
+  .skc-button {
+    margin-right: 1rem;
+    color: var(--on-surface);
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-surface);
+    }
+  }
+}

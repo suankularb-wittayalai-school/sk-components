@@ -1,0 +1,33 @@
+////
+/// **Avatar**
+/// An avatar represents the user, whether by their initials or their picture.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.csw1mxghdgpu SKCom documentation
+////
+
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
+.skc-avatar {
+  position: relative;
+  display: grid;
+  place-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary);
+  border-radius: 50%;
+  background-color: var(--primary-container);
+
+  img,
+  svg {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+  }
+}
+
+.skc-avatar__initials {
+  @include type.font("title-medium");
+  user-select: none;
+}

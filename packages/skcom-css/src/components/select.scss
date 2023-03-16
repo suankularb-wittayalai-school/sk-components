@@ -1,0 +1,138 @@
+////
+/// **Select**
+/// Sometimes it’s impractical to show all options at a time with a radio
+/// group. Select allows the user to choose from options shown on a temporary
+/// surface.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.hh9ts22t8gjy SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+@use "../components/text-field.scss";
+
+// Wrapper for Select to ensure Menu is anchored to the toggle button
+.skc-select__anchor {
+  position: relative;
+}
+
+// Base Select
+.skc-select {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 3.5rem;
+  -webkit-tap-highlight-color: transparent;
+
+  // Error
+  &.skc-select--error {
+    &,
+    &:hover,
+    &:focus-within {
+      border-color: var(--error);
+
+      .skc-select__label {
+        color: var(--error);
+      }
+    }
+
+    .skc-select__helper-msg {
+      color: var(--error);
+    }
+  }
+}
+
+// Outlined Select
+.skc-select--outlined {
+  border: 1px solid var(--outline);
+  border-radius: var(--rounded-xs);
+
+  &:hover {
+    border-color: var(--on-surface);
+  }
+
+  &:focus-within {
+    border: 2px solid var(--primary);
+  }
+
+  .skc-select__label {
+    inset: -0.5rem auto auto 0.75rem;
+    background-color: var(--background);
+  }
+
+  // Error
+  &.skc-select--error {
+    border: 2px solid var(--error);
+  }
+}
+
+// Filled Select
+.skc-select--filled {
+  @extend .skc-text-field--filled;
+
+  .skc-select__value {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+
+  .skc-select__label {
+    inset: 0.5rem auto auto 0.75rem;
+  }
+
+  // Error
+  &.skc-select--error {
+    border-bottom: 2px solid var(--error);
+  }
+}
+
+// Options Menu
+.skc-select ~ .skc-menu {
+  inset: 3.5rem 0 auto 0;
+  width: 100%;
+}
+
+.skc-select--error ~ .skc-menu .skc-menu-item--selected::before {
+  background-color: var(--error);
+}
+
+// Label
+.skc-select__label {
+  @extend .skc-text-field__label;
+  @include type.font("body-small");
+  font-family: var(--font-display);
+
+  .skc-select:focus-within & {
+    color: var(--primary);
+  }
+}
+
+// Selected option
+.skc-select__value {
+  @include type.font("body-large");
+  flex-grow: 1;
+  padding: 1rem;
+  text-align: left;
+}
+
+// Leading section
+.skc-select__leading {
+  @extend .skc-text-field__leading;
+}
+
+// Dropdown icon
+.skc-select__trailing {
+  @extend .skc-text-field__trailing;
+}
+
+// Helper message
+.skc-select__helper-msg {
+  @extend .skc-text-field__helper-msg;
+  cursor: default;
+  text-align: left;
+}

@@ -1,0 +1,95 @@
+////
+/// **Chip Field**
+/// A combination of Input Chips and a Text Field. Users can simply start
+/// typing into the Chip Field; their input is converted into an Input Chip on spacebar press.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-chip-field {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  height: 3.5rem;
+  border: 1px solid var(--outline);
+  border-radius: 0.25rem;
+
+  &:hover {
+    border-color: var(--on-surface);
+  }
+
+  &:focus-within {
+    border: 2px solid var(--primary);
+  }
+}
+
+.skc-chip-field__scrollable {
+  overflow-x: auto;
+}
+
+.skc-chip-field__content {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 0.5rem;
+  width: fit-content;
+  min-width: 100%;
+  padding-inline: 0.75rem;
+}
+
+.skc-chip-field .skc-chip-set {
+  flex-wrap: nowrap;
+  padding-block: 0.5rem;
+
+  &:empty {
+    display: none;
+
+    & ~ .skc-chip-field__input {
+      padding-left: 0.25rem;
+
+      &::placeholder {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.skc-chip-field__label {
+  @include type.font("body-large");
+  font-family: var(--font-display);
+  position: absolute;
+  z-index: 10;
+  inset: 1rem auto auto 0.75rem;
+  padding-inline: 0.25rem;
+  pointer-events: none;
+  color: var(--on-surface-variant);
+  background-color: var(--background);
+
+  .skc-chip-field:focus-within & {
+    color: var(--primary);
+  }
+}
+
+.skc-chip-field__input {
+  @include type.font("body-large");
+  flex-grow: 1;
+  box-sizing: border-box;
+  min-width: 1rem;
+  padding-block: 1rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  &::placeholder {
+    @include type.font("body-large");
+    font-family: var(--font-display);
+    padding-left: 0.25rem;
+    color: var(--outline);
+  }
+}

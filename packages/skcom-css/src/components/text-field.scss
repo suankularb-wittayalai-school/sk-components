@@ -1,0 +1,299 @@
+////
+/// **Text Field**
+/// A place for users to enter text.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation
+////
+
+@use "sass:math";
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+// Base Text Field
+.skc-text-field {
+  @include mix.transition(
+    border-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  min-height: 3.5rem;
+
+  .skc-text-field__input {
+    box-sizing: border-box;
+    border: none;
+  }
+
+  // Hide native file input
+
+  // (@SiravitPhokeed)
+  // Fun fact: originally I was going to just hide the native “Attach file”
+  // button and leave the file name as is because the file name was all that
+  // was needed. Safari wanted to be different and decides to hide everything,
+  // so I decided against that and made a custom replica of the file name
+  // display on normal browsers.
+  input[type="file"] {
+    display: none;
+  }
+
+  // Disabled
+
+  // (@SiravitPhokeed)
+  // We’re not using `[aria-disabled="true"]` here because the `aria-disabled`
+  // attribute is on the underlying `<input>`, not `.skc-text-field`, which
+  // makes using it in this case a pain in the hindquarters.
+  &.skc-text-field--disabled {
+    &:focus-within .skc-text-field__label {
+      color: var(--on-surface-variant);
+    }
+
+    // (@SiravitPhokeed)
+    // A disabled Button already looks disabled, and we’re putting more
+    // disabled styles on top of that. That’s way too disabled.
+    // We’re overriding the disabled-ness of Button so we can apply the
+    // disabled styling on the whole Text Field, including the Button.
+    // I hope that makes sense.
+    .skc-button[aria-disabled="true"] {
+      opacity: 1;
+    }
+  }
+
+  // Error
+  &.skc-text-field--error {
+    &,
+    &:hover,
+    &:focus-within {
+      border-color: var(--error);
+      .skc-text-field__label {
+        color: var(--error);
+      }
+    }
+
+    .skc-text-field__trailing .skc-icon,
+    .skc-text-field__helper-msg {
+      color: var(--error);
+    }
+  }
+}
+
+// Appearance
+.skc-text-field--outlined {
+  border: 1px solid var(--outline);
+  border-radius: 0.25rem;
+
+  &:hover {
+    border-color: var(--on-surface);
+  }
+
+  &:focus-within {
+    margin: -1px;
+    border: 2px solid var(--primary);
+  }
+
+  .skc-text-field__label {
+    background-color: var(--background);
+  }
+
+  .skc-text-field__input {
+    padding: 1rem;
+  }
+
+  // Disabled
+  &.skc-text-field--disabled {
+    opacity: 0.38;
+    color: var(--on-surface);
+    border-color: transparent;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      opacity: math.div(0.12, 0.38);
+      border: 1px solid var(--on-surface);
+      border-radius: inherit;
+    }
+  }
+
+  // Error
+  &.skc-text-field--error {
+    margin: -1px;
+    border: 2px solid var(--error);
+  }
+}
+
+.skc-text-field--filled {
+  border-bottom: 1px solid var(--outline);
+  border-radius: 0.25rem 0.25rem 0 0;
+  background-color: var(--surface-variant);
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus-within {
+    margin-bottom: -1px;
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .skc-text-field__input {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+
+  // Disabled
+  &.skc-text-field--disabled {
+    opacity: 0.38;
+    color: var(--on-surface);
+    background-color: transparent;
+
+    &::before {
+      opacity: math.div(0.04, 0.38);
+      background-color: var(--on-surface);
+    }
+
+    &:focus-within {
+      margin: 0;
+      border: 1px solid var(--outline);
+    }
+  }
+
+  // Error
+  &.skc-text-field--error {
+    margin-bottom: -1px;
+    border-bottom: 2px solid var(--error);
+  }
+}
+
+// Behavior
+.skc-text-field--single-line,
+.skc-text-field--multi-line {
+  .skc-text-field__input {
+    height: 3.5rem;
+    resize: none;
+  }
+}
+
+.skc-text-field--textarea {
+  .skc-text-field__input {
+    height: 6.5rem;
+    resize: vertical;
+  }
+}
+
+.skc-text-field--multi-line,
+.skc-text-field--textarea {
+  .skc-text-field__leading,
+  .skc-text-field__trailing {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    height: 3.5rem;
+  }
+}
+
+// Alignment
+.skc-text-field--left .skc-text-field__input {
+  text-align: left;
+}
+
+.skc-text-field--right {
+  .skc-text-field__input {
+    text-align: right;
+  }
+
+  .skc-text-field__trailing {
+    margin-left: 0;
+  }
+}
+
+// Label text
+.skc-text-field__label {
+  @include type.font("body-large");
+  font-family: var(--font-display);
+  position: absolute;
+  z-index: 10;
+  inset: 1rem auto auto 0.75rem;
+  padding-inline: 0.25rem;
+  pointer-events: none;
+  color: var(--on-surface-variant);
+
+  .skc-text-field:focus-within & {
+    color: var(--primary);
+  }
+
+  .skc-text-field:has(.skc-text-field__leading) & {
+    left: 2.75rem;
+  }
+}
+
+// Leading and trailing sections
+.skc-text-field__leading,
+.skc-text-field__trailing {
+  @include type.font("body-large");
+
+  &,
+  .skc-button__icon .skc-icon {
+    color: var(--on-surface-variant);
+  }
+
+  .skc-button::before {
+    background-color: var(--on-surface-variant);
+  }
+}
+
+.skc-text-field__leading {
+  margin-inline: 1rem 0.5rem;
+}
+
+.skc-text-field__trailing {
+  margin-inline: 0.5rem 1rem;
+
+  .skc-button {
+    margin-right: -0.5rem;
+  }
+}
+
+// Input element
+.skc-text-field__input {
+  @include type.font("body-large");
+  // (@SiravitPhokeed)
+  // For some reason `flex-grow` doesn’t work when inside Columns. The magic of
+  // CSS.
+  width: 100%;
+  color: var(--on-surface);
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  input[type="file"] ~ & {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .skc-text-field:has(.skc-text-field__leading) & {
+    padding-left: 0;
+  }
+
+  .skc-text-field:has(.skc-text-field__trailing) & {
+    padding-right: 0;
+  }
+}
+
+// Helper/error message
+.skc-text-field__helper-msg {
+  @include type.font("body-small");
+  position: absolute;
+  inset: auto 0 -2.25rem 1rem;
+  height: 2rem;
+  color: var(--on-surface-variant);
+}

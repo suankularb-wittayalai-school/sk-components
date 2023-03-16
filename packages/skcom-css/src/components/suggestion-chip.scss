@@ -1,0 +1,34 @@
+////
+/// **Suggestion Chip**
+///
+/// Dynamically generated suggestions, like quick-reply options, for instance.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.oxbjowubritq SKCom documentation
+////
+
+@use "./chip.scss";
+
+.skc-suggestion-chip {
+  @extend .skc-chip;
+
+  // With icon padding
+  &:has(.skc-suggestion-chip__icon:first-child) {
+    padding-left: 0.5rem;
+  }
+}
+
+.skc-suggestion-chip.skc-suggestion-chip--elevated {
+  @extend .skc-chip--elevated;
+}
+
+.skc-suggestion-chip__label {
+  @extend .skc-chip__label;
+}
+
+.skc-suggestion-chip__icon {
+  @extend .skc-chip__icon;
+}
+
+.skc-suggestion-chip__ripple {
+  @extend .skc-chip__ripple;
+}

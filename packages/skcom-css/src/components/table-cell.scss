@@ -1,0 +1,185 @@
+////
+/// **Table Cell**
+/// A cell of a Table.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+// Base Table Cell
+.skc-table-cell {
+  @include type.font("body-medium");
+  position: relative;
+  display: table-cell;
+  -webkit-tap-highlight-color: transparent;
+
+  // Cell borders
+
+  &:not(:last-child) {
+    border-right: 1px solid var(--outline-variant);
+  }
+
+  .skc-table-row:not(:last-child) &,
+  .skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child &,
+  .skc-data-table__content:has(.skc-table-body)
+    .skc-table-head
+    .skc-table-row:last-child
+    &,
+  .skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child & {
+    border-bottom: 1px solid var(--outline-variant);
+  }
+}
+
+// Cell content
+.skc-table-cell__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  text-align: center;
+
+  &:has(.skc-icon:first-child) {
+    padding-block: 0.875rem;
+    padding-left: 0.75rem;
+  }
+
+  &:has(
+      .skc-input-chip,
+      .skc-assist-chip,
+      .skc-filter-chip,
+      .skc-suggestion-chip
+    ) {
+    padding-block: 0.625rem;
+  }
+
+  .skc-icon {
+    margin-right: 0.25rem;
+    color: var(--outline);
+  }
+}
+
+// Sort indicator
+.skc-table-cell__sort-indicator {
+  margin-right: 0.25rem;
+
+  .skc-icon {
+    @include mix.transition(
+      color,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
+    margin-right: 0;
+
+    .skc-table-cell--sortable:focus & {
+      color: var(--primary);
+    }
+  }
+}
+
+// Header cell
+.skc-table-cell--header {
+  @include type.font("title-small");
+}
+
+// Sortable header
+.skc-table-cell--sortable,
+.skc-table-cell:has(.skc-table-cell__menu-toggle) {
+  cursor: pointer;
+  user-select: none;
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus-within,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+}
+
+.skc-table-cell--sortable {
+  overflow: hidden;
+
+  &::before,
+  .skc-table-cell__ripple {
+    background-color: var(--primary);
+  }
+}
+
+// Alignment
+.skc-table-cell__content {
+  .skc-table-cell--left & {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .skc-table-cell--center & {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .skc-table-cell--right & {
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+// Menu toggle
+.skc-table-cell__menu-toggle {
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-inline: 1.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+
+  // Cell content
+  .skc-table-cell__content {
+    flex-grow: 1;
+    justify-content: flex-start;
+    padding-inline: 0;
+
+    &:has(.skc-icon:first-child) {
+      padding-left: 0;
+    }
+  }
+}
+
+// Ripple
+.skc-table-cell__ripple-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.skc-table-cell__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+}
+
+// Options Menu
+.skc-table-cell .skc-menu {
+  inset: 0 0 auto 0;
+  width: 100%;
+}

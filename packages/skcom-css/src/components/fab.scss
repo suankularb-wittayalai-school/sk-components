@@ -1,0 +1,186 @@
+////
+/// **FAB**
+/// The Floating Action Button or FAB is the main action of a page.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
+.skc-fab {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-3);
+
+  // State layer
+  &::before {
+    @include mix.state-layer();
+  }
+
+  // With label padding
+  &:has(.skc-fab__label) {
+    padding: 1rem 1.5rem;
+
+    // With icom padding
+    &:has(.skc-fab__icon:first-child) {
+      padding-left: 1rem;
+    }
+  }
+}
+
+.skc-fab__wrapper {
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+  background-color: transparent;
+}
+
+// Hover effect on state layer
+.skc-fab__wrapper:hover .skc-fab,
+.skc-fab:hover {
+  &::before {
+    opacity: 0.08;
+  }
+}
+
+// Focus and active effect on state layer
+.skc-fab__wrapper:focus .skc-fab,
+.skc-fab__wrapper:active .skc-fab,
+.skc-fab:focus,
+.skc-fab:active {
+  &::before {
+    opacity: 0.12;
+  }
+}
+
+.skc-fab__wrapper {
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Ripple
+.skc-fab__ripple {
+  @include mix.ripple();
+}
+
+// Icon
+.skc-fab__icon .skc-icon {
+  @include mix.transition(
+    font-variation-settings,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  @include ci.icon(0, 400, 0, 24);
+
+  // Hover: make icon bolder
+  .skc-fab__wrapper:hover &,
+  .skc-fab:hover & {
+    @include ci.icon(0, 600, 0, 24);
+  }
+
+  // Active: make icon thinner
+  .skc-fab__wrapper:active &,
+  .skc-fab:active & {
+    @include ci.icon(0, 300, 0, 24);
+  }
+}
+
+// Label
+.skc-fab__label {
+  @include type.font("label-large");
+  font-family: var(--font-display);
+}
+
+// Sizes
+
+// Small FAB
+.skc-fab.skc-fab--small {
+  padding: 0.5rem;
+  border-radius: var(--rounded-md);
+}
+
+// Standard FAB
+.skc-fab.skc-fab--standard {
+  padding: 1rem;
+  border-radius: var(--rounded-lg);
+}
+
+// Large FAB
+.skc-fab.skc-fab--large {
+  padding: 1.875rem;
+  border-radius: var(--rounded-xl);
+
+  .skc-fab__icon .skc-icon {
+    @include ci.icon(0, 400, 0, 40);
+    font-size: 2.25rem;
+
+    // Hover: make icon bolder
+    .skc-fab__wrapper:hover &,
+    .skc-fab:hover & {
+      @include ci.icon(0, 600, 0, 40);
+      font-size: 2.25rem;
+    }
+
+    // Active: make icon thinner
+    .skc-fab__wrapper:active &,
+    .skc-fab:active & {
+      @include ci.icon(0, 300, 0, 40);
+      font-size: 2.25rem;
+    }
+  }
+}
+
+// Colors
+
+// Surface FAB
+.skc-fab.skc-fab--surface {
+  color: var(--primary);
+  background-color: var(--surface-3);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--primary);
+  }
+}
+
+// Primary FAB
+.skc-fab.skc-fab--primary {
+  color: var(--on-primary-container);
+  background-color: var(--primary-container);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--on-primary-container);
+  }
+}
+
+// Secondary FAB
+.skc-fab.skc-fab--secondary {
+  color: var(--on-secondary-container);
+  background-color: var(--secondary-container);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--on-secondary-container);
+  }
+}
+
+// Tertiary FAB
+.skc-fab.skc-fab--tertiary {
+  color: var(--on-tertiary-container);
+  background-color: var(--tertiary-container);
+
+  &::before,
+  .skc-fab__ripple {
+    background-color: var(--on-tertiary-container);
+  }
+}

@@ -1,0 +1,41 @@
+////
+/// **Data Table Content**
+/// The main part of a Data Table.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7mq6ecmhpn8b SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+.skc-data-table-content {
+  // (@SiravitPhokeed)
+  //
+  // Fun fact: the W3C spec forces `overflow-y` to always be `auto` when
+  // `overflow-x` is `auto`. This causes the Data Table Content to scroll
+  // vertically when a Menu is opened and there is no way to prevent it (unless
+  // you hack some JS solution up I guess).
+  //
+  // The compromise here is that a Data Table is only scrollable from `base` to
+  // `sm` (mobile to portrait tablet), where it is more important for it to be
+  // scrollable then for Menu to behave a little weird. On larger screens,
+  // scroll is disabled because the Menu is more important.
+  //
+  // Relevant StackOverflow answer:
+  // https://stackoverflow.com/a/6433475/6433475
+  overflow-x: auto;
+  width: 100%;
+  background-color: var(--surface);
+}
+
+.skc-data-table-content__content {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: separate;
+  text-indent: 0;
+}
+
+@include mix.breakpoint("md") {
+  .skc-data-table-content {
+    overflow-x: visible;
+  }
+}

@@ -1,0 +1,119 @@
+////
+/// **Vertical Split Layout**
+///
+/// List-detail views and supporting panel layouts can be created with Vertical
+/// Split Layout.
+///
+/// In a list-detail view, the left side is a list and the right is the list’s
+/// detail. In a supporting panel layout, the main content takes focus with a
+/// small column set aside for supporting content.
+///
+/// @link https://m3.material.io/foundations/adaptive-design/canonical-layouts#709b81d6-07a0-41f2-87c1-eb172e04a01d Material Design on list-detail view
+/// @link https://m3.material.io/foundations/adaptive-design/canonical-layouts#4e86e13d-cea9-4b5d-8301-8905a50e43f9 Material Design on supporting panel view
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iv2gnmudjnme SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+.skc-split-layout__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 0.5rem;
+
+  > * {
+    .skc-content-layout {
+      padding: 1rem 1.25rem;
+    }
+
+    .skc-content-layout__content {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.skc-root-layout,
+.skc-root-layout > * {
+  > .skc-split-layout > .skc-split-layout__content {
+    max-width: 70.5rem;
+    margin: 0 auto;
+
+    > * {
+      overflow-y: auto;
+      height: calc(100vh - 12rem);
+      padding: 1.5rem 1rem;
+    }
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-split-layout__content {
+    > :last-child {
+      display: block;
+    }
+
+    .skc-split-layout--list-detail & {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .skc-split-layout--supporting-panel & {
+      grid-template-columns: 5fr 3fr;
+    }
+
+    .skc-columns {
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  .skc-root-layout,
+  .skc-root-layout > * {
+    > .skc-split-layout > .skc-split-layout__content {
+      width: calc(100% - (12rem));
+
+      > * {
+        padding-inline: 0;
+      }
+
+      > :first-child {
+        padding-right: 0.75rem;
+      }
+
+      > :last-child {
+        padding-left: 0.75rem;
+      }
+    }
+  }
+
+  @supports (height: 100dvh) {
+    .skc-root-layout,
+    .skc-root-layout > * {
+      > .skc-split-layout > .skc-split-layout__content {
+        width: calc(100% - (12rem));
+
+        > * {
+          height: calc(100dvh - 12rem);
+        }
+      }
+    }
+  }
+}
+
+@include mix.breakpoint("md") {
+  .skc-split-layout__content {
+    .skc-columns {
+      display: grid;
+      align-items: start;
+    }
+
+    .skc-split-layout--list-detail & {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    .skc-split-layout--supporting-panel & {
+      grid-template-columns: 3fr 1fr;
+    }
+  }
+}

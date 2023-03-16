@@ -1,0 +1,36 @@
+////
+/// **Form Item**
+/// A wrapper for form control components like Checkbox, Radio, and Switch with
+/// a label.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation
+////
+
+@use "../abstracts/typography.scss" as type;
+
+.skc-form-item {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+
+  &:has(.skc-chip-set) {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .skc-checkbox,
+  .skc-radio {
+    padding-block: 0.0625rem;
+  }
+}
+
+.skc-form-item__label {
+  @include type.font("body-medium");
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  .skc-form-item:has(.skc-chip-set) & {
+    @include type.font("title-small");
+  }
+}

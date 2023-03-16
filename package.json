@@ -1,24 +1,28 @@
 {
+  "name": "sk-components",
+  "version": "3.0.0",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --no-cache --parallel --continue",
+    "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "clean": "rimraf node_modules && turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "turbo run build --filter=docs^... && changeset publish"
+    "format": "csscomb packages && csscomb apps && prettier --write \"**/*.{scss,ts,tsx,md}\""
   },
   "devDependencies": {
-    "@changesets/cli": "^2.22.0",
-    "eslint": "^8.15.0",
-    "eslint-config-acme": "*",
-    "prettier": "^2.5.1",
+    "@types/react": "^18.0.26",
+    "csscomb": "^3.1.8",
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "prettier-plugin-tailwindcss": "^0.2.3",
+    "react": "^18.2.0",
     "turbo": "latest"
-  }
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "npm@8.19.3"
 }

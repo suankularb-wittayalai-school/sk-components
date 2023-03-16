@@ -1,0 +1,23 @@
+////
+/// **Data Table**
+/// A more rich Table with support for filtering, search, and pagination; and
+/// integrates directly with Tanstack Table.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cfjy3gpzsh75 SKCom documentation
+////
+
+.skc-data-table {
+  border: 2px solid var(--outline-variant);
+  border-radius: 1.25rem;
+  background-color: var(--surface-1);
+}
+
+$content-rounded: calc(1.25rem - 2px);
+
+.skc-data-table > :first-child {
+  border-radius: $content-rounded $content-rounded 0 0;
+}
+
+.skc-data-table > :last-child {
+  border-radius: 0 0 $content-rounded $content-rounded;
+}

@@ -1,0 +1,36 @@
+////
+/// **Actions**
+/// A row of Buttons. Actions handles spacing and overflow.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation
+////
+
+.skc-actions {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.skc-actions.skc-actions--left {
+  justify-content: flex-start;
+}
+
+.skc-actions.skc-actions--center {
+  justify-content: center;
+}
+
+.skc-actions.skc-actions--right {
+  justify-content: flex-end;
+}
+
+.skc-actions.skc-actions--full {
+  flex-wrap: nowrap;
+
+  > .skc-button,
+  > .skc-toggle-button {
+    width: 100% !important;
+  }
+}

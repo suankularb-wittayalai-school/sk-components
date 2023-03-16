@@ -1,0 +1,190 @@
+////
+/// **Navigation Bar Item**
+/// One of the destinations in a Navigation Bar/Rail.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s8z7t3ulnwdb SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+@use "../components/icon.scss" as ci;
+
+// Base Navigation Bar Item
+.skc-nav-bar-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0 1rem;
+  text-decoration: none;
+  color: var(--on-surface);
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Selected
+.skc-nav-bar-item.skc-nav-bar-item--selected {
+  .skc-nav-bar-item__icon {
+    color: var(--on-primary-container);
+    background-color: var(--primary-container);
+  }
+
+  &::before,
+  .skc-nav-bar-item__ripple {
+    background-color: var(--on-primary-container);
+  }
+}
+
+.skc-nav-bar-item.skc-nav-bar-item--rail-only {
+  display: none;
+}
+
+// Icon
+.skc-nav-bar-item__icon {
+  @include mix.transition(
+    background-color,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0.25rem 1.25rem;
+  border-radius: var(--rounded-full);
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+
+    .skc-nav-bar-item:hover & {
+      opacity: 0.08;
+    }
+
+    .skc-nav-bar-item:focus &,
+    .skc-nav-bar-item:active & {
+      opacity: 0.12;
+    }
+  }
+
+  .skc-icon {
+    @include mix.transition(
+      font-variation-settings,
+      var(--motion-short-4),
+      var(--easing-standard)
+    );
+    @include ci.icon(0, 400, 0, 24);
+
+    // Hover: make icon bolder
+    .skc-nav-bar-item:hover & {
+      @include ci.icon(0, 600, 0, 24);
+    }
+
+    // Active: make icon thinner
+    .skc-nav-bar-item:active & {
+      @include ci.icon(0, 300, 0, 24);
+    }
+
+    // Selected: make icon filled
+    .skc-nav-bar-item.skc-nav-bar-item--selected & {
+      @include ci.icon(1, 400, 0, 24);
+    }
+
+    // Selected hover: make icon bolder
+    .skc-nav-bar-item.skc-nav-bar-item--selected:hover & {
+      @include ci.icon(1, 600, 0, 24);
+    }
+
+    // Selected active: make icon thinner
+    .skc-nav-bar-item.skc-nav-bar-item--selected:active & {
+      @include ci.icon(1, 300, 0, 24);
+    }
+  }
+}
+
+// Label
+.skc-nav-bar-item__label {
+  @include type.font("label-medium");
+  @include mix.transition(
+    font-weight letter-spacing,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  font-family: var(--font-display);
+  text-align: center;
+
+  .skc-nav-bar-item:hover & {
+    font-weight: var(--font-bold);
+    letter-spacing: 0.75px;
+  }
+
+  .skc-nav-bar-item:active & {
+    font-weight: var(--font-regular);
+    letter-spacing: 0.375px;
+  }
+
+  .skc-nav-bar-item.skc-nav-bar-item--selected & {
+    font-weight: var(--font-bold);
+    color: var(--on-primary-container);
+  }
+}
+
+.skc-nav-bar-item__badge {
+  @include type.font("label-small");
+  position: absolute;
+  top: 0.125rem;
+  right: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  padding: 0 0.25rem;
+  color: var(--on-error);
+  border-radius: var(--rounded-full);
+  background-color: var(--error);
+
+  &:empty {
+    top: 0.125rem + 0.25rem;
+    right: 1rem + 0.25rem;
+    width: 0.375rem;
+    min-width: initial;
+    height: 0.375rem;
+    min-height: initial;
+  }
+}
+
+// Ripple
+.skc-nav-bar-item__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+}
+
+@include mix.breakpoint("sm") {
+  .skc-nav-bar-item {
+    padding: 0 0 0.25rem;
+  }
+
+  .skc-nav-bar-item.skc-nav-bar-item--rail-only {
+    display: flex;
+  }
+
+  .skc-nav-bar-item__icon {
+    padding: 0.25rem 1rem;
+  }
+
+  .skc-nav-bar-item__badge {
+    right: 0.75rem;
+
+    &:empty {
+      right: 0.75rem + 0.25rem;
+    }
+  }
+
+  .skc-nav-bar-item__label {
+    .skc-nav-bar-item:hover &,
+    .skc-nav-bar-item:active & {
+      font-weight: var(--font-medium);
+      letter-spacing: 0.5px;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+.skc-data-table{border:2px solid var(--outline-variant);border-radius:1.25rem;background-color:var(--surface-1)}.skc-data-table>:first-child{border-radius:calc(1.25rem - 2px) calc(1.25rem - 2px) 0 0}.skc-data-table>:last-child{border-radius:0 0 calc(1.25rem - 2px) calc(1.25rem - 2px)}/*# sourceMappingURL=data-table.css.map */

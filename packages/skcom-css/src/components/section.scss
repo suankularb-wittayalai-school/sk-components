@@ -1,0 +1,16 @@
+////
+/// **Section**
+/// Section is a way to group content under one Header.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.cpfnymlipawc SKCom documentation
+////
+
+.skc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skc-section:has(.skc-section) {
+  gap: 1.25rem;
+}

@@ -1,0 +1,16 @@
+////
+/// **Table Head**
+/// The head area of a Table.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation
+////
+
+.skc-table-head {
+  display: table-header-group;
+  background-color: var(--surface-1);
+}
+
+.skc-table-head--fixed {
+  position: sticky;
+  inset: 0 0 auto 0;
+}
