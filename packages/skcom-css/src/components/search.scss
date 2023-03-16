@@ -1,0 +1,112 @@
+////
+/// **Search**
+/// Search allows the user to quickly find something using a query. It can also
+/// immediately show some useful results as the user is typing, utilizing List.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+@use "../abstracts/typography.scss" as type;
+
+.skc-search {
+  @include mix.transition(
+    border-radius,
+    var(--motion-short-2),
+    var(--easing-standard)
+  );
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.25rem;
+  padding-inline: 0.5rem;
+  border-radius: var(--rounded-xl);
+  background-color: var(--surface-3);
+  position: relative;
+
+  &::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:has(.skc-search__input:hover) {
+    @include mix.transition(
+      border-radius,
+      var(--motion-medium-4),
+      var(--easing-standard)
+    );
+  }
+
+  &:has(.skc-search__input:focus) {
+    border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;
+    border-bottom: 1px solid var(--outline);
+    margin-bottom: -0.75px;
+  }
+
+  .skc-button {
+    z-index: 20;
+
+    .skc-button__icon .skc-icon {
+      color: var(--on-surface);
+    }
+
+    &::before,
+    .skc-button__ripple {
+      background-color: var(--on-surface);
+    }
+  }
+}
+
+.skc-search__input {
+  @include type.font("body-large");
+  flex-grow: 1;
+  padding: 1rem 0 1rem 1rem;
+  background-color: transparent;
+
+  // Remove default clear button
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    outline: none;
+    z-index: 20;
+  }
+
+  &::placeholder {
+    font-family: var(--font-display);
+  }
+
+  .skc-button ~ & {
+    padding-left: 0rem;
+  }
+}
+
+.skc-search__list {
+  position: absolute;
+  inset: calc(3.5rem + 1px) 0 auto 0;
+  min-height: 4.5rem;
+  border-radius: 0 0 var(--rounded-xl) var(--rounded-xl);
+  background-color: var(--surface-3);
+  z-index: 20;
+  padding-block: 0.5rem;
+  overflow: hidden;
+
+  .skc-list {
+    gap: 0.25rem;
+  }
+
+  .skc-list-item.skc-list-item--state-layer {
+    border-radius: 0;
+  }
+}
+
+// Blur capture
+.skc-search__blur-capture {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+}

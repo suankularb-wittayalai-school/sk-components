@@ -3186,6 +3186,94 @@ declare namespace Radio {
 }
 
 /**
+ * Props for {@link Search}.
+ */
+interface SearchProps extends SKComponent {
+    /**
+     * Some useful search results that appear underneath the field.
+     *
+     * - You are encouraged to use {@link List} here.
+     * - Optional.
+     */
+    children?: React.ReactNode;
+    /**
+     * A description of the Search for screen readers, similar to `alt` on
+     * `<img>`.
+     *
+     * - Always required.
+     */
+    alt: string;
+    /**
+     * The value inside the field. This is useful if you want a controlled input.
+     *
+     * - Optional.
+     *
+     * @see {@link https://reactjs.org/docs/forms.html#controlled-components React documention on controlled input}
+     */
+    value?: string;
+    /**
+     * Allows for translation of the default placeholder message.
+     *
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
+    /**
+     * This function triggers when the user make changes to the field value. The
+     * value is passed in via the function.
+     *
+     * - Optional.
+     */
+    onChange?: (value: string) => any;
+    /**
+     * This function triggers when the search button is clicked.
+     *
+     * - Optional.
+     */
+    onSearch?: () => any;
+    /**
+     * A faint text displayed inside the field guiding the user.
+     *
+     * - Optional.
+     */
+    placeholder?: string;
+    /**
+     * Turns the Search gray and block any action associated with it. The user
+     * will not be able to type in the field or click the search button.
+     *
+     * - Optional.
+     */
+    disabled?: boolean;
+    /**
+     * Attributes for the underlying `<input>` element.
+     *
+     * - Optional.
+     */
+    inputAttr?: JSX.IntrinsicElements["input"];
+}
+/**
+ * Search allows the user to quickly find something using a query. It can also
+ * immediately show some useful results as the user is typing, utilizing List.
+ *
+ * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
+ *
+ * @param children Some useful search results that appear underneath the field.
+ * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.
+ * @param value The value inside the field. This is useful if you want a controlled input.
+ * @param locale Allows for translation of the default placeholder message.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param onSearch This function triggers when the search button is clicked.
+ * @param placeholder A faint text displayed inside the field guiding the user.
+ * @param disabled Turns the Search gray and block any action associated with it.
+ * @param inputAttr Attributes for the underlying `<input>` element.
+ */
+declare function Search({ children, alt, value, locale, onChange, onSearch, placeholder, disabled, inputAttr, style, className, }: SearchProps): JSX.Element;
+declare namespace Search {
+    var displayName: string;
+}
+
+/**
  * Props for {@link Section}.
  */
 interface SectionProps extends SKComponent {
@@ -3856,9 +3944,19 @@ interface TextFieldProps extends SKComponent {
      *
      * - Optional.
      *
-     * @param value
+     * @param value The value of the field.
      */
-    onChange?: (value: string) => any;
+    onChange?: (value: string | File) => any;
+    /**
+     * Allows for translation of the “No files attached” text, which is put in
+     * place of the file name when no files have been attached yet.
+     *
+     * - Only valid if `inputAttr.type` is `file`.
+     * - Must be `th` or `en-US`, as SKCom currently only support those 2
+     *   languages.
+     * - Optional.
+     */
+    locale?: "en-US" | "th";
     /**
      * Attributes for the underlying `<input>` element used as the field.
      *
@@ -3885,9 +3983,10 @@ interface TextFieldProps extends SKComponent {
  * @param error Tells Text Field that it contains an invalid value and activates the error state.
  * @param value The value inside the field. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user make changes to the field value.
+ * @param locale Allows for translation of the “No files attached” text.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, inputAttr, style, className, }: TextFieldProps): JSX.Element;
+declare function TextField({ appearance, label, behavior, align, leading, trailing, alt, helperMsg, required, disabled, canClear, error: incError, value, onChange, locale, inputAttr, style, className, }: TextFieldProps): JSX.Element;
 declare namespace TextField {
     var displayName: string;
 }
@@ -4011,4 +4110,4 @@ declare function useBreakpoint(): {
     atBreakpoint: keyof typeof breakpoints;
 };
 
-export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableBody, DataTableBodyProps, DataTableColumnDef, DataTableContent, DataTableContentProps, DataTableFilters, DataTableFiltersProps, DataTableHead, DataTableHeadProps, DataTablePagination, DataTablePaginationProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };
+export { Actions, ActionsProps, AssistChip, AssistChipProps, Avatar, AvatarProps, Button, ButtonProps, Card, CardContent, CardContentProps, CardHeader, CardHeaderProps, CardProps, Checkbox, CheckboxProps, ChipField, ChipFieldProps, ChipSet, ChipSetProps, Columns, ColumnsProps, ContentLayout, ContentLayoutProps, DataTable, DataTableBody, DataTableBodyProps, DataTableColumnDef, DataTableContent, DataTableContentProps, DataTableFilters, DataTableFiltersProps, DataTableHead, DataTableHeadProps, DataTablePagination, DataTablePaginationProps, DataTableProps, DataTableSearch, DataTableSearchProps, Dialog, DialogContent, DialogContentProps, DialogHeader, DialogHeaderProps, DialogProps, Divider, DividerProps, FAB, FABProps, FilterChip, FilterChipProps, FormGroup, FormGroupProps, FormItem, FormItemProps, FullscreenDialog, FullscreenDialogProps, Header, HeaderProps, InputChip, InputChipProps, List, ListItem, ListItemContent, ListItemContentProps, ListItemProps, ListProps, MaterialIcon, MaterialIconProps, Menu, MenuItem, MenuItemProps, MenuProps, NavBar, NavBarItem, NavBarItemProps, NavBarProps, NavDrawer, NavDrawerItem, NavDrawerItemProps, NavDrawerProps, NavDrawerSection, NavDrawerSectionProps, PageHeader, PageHeaderProps, Progress, ProgressProps, Radio, RadioProps, RootLayout, RootLayoutProps, Search, SearchProps, Section, SectionProps, SegmentedButton, SegmentedButtonProps, Select, SelectProps, Snackbar, SnackbarProps, SplitLayout, SplitLayoutProps, SuggestionChip, SuggestionChipProps, Switch, SwitchProps, Tab, TabProps, Table, TableBody, TableBodyProps, TableCell, TableCellProps, TableFoot, TableFootProps, TableHead, TableHeadProps, TableProps, TableRow, TableRowProps, TabsContainer, TabsContainerProps, TextField, TextFieldProps, ThemeProvider, ThemeProviderProps, ToggleButton, ToggleButtonProps, transition, useAnimationConfig, useBreakpoint, useRipple };

@@ -119,6 +119,8 @@ export { Progress, type ProgressProps } from "./components/Progress";
 
 export { Radio, type RadioProps } from "./components/Radio";
 
+export { Search, type SearchProps } from "./components/Search";
+
 export { Section, type SectionProps } from "./components/Section";
 
 export { Select, type SelectProps } from "./components/Select";

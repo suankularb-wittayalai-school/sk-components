@@ -148,9 +148,20 @@ export interface TextFieldProps extends SKComponent {
    *
    * - Optional.
    *
-   * @param value
+   * @param value The value of the field.
    */
-  onChange?: (value: string) => any;
+  onChange?: (value: string | File) => any;
+
+  /**
+   * Allows for translation of the “No files attached” text, which is put in
+   * place of the file name when no files have been attached yet.
+   *
+   * - Only valid if `inputAttr.type` is `file`.
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
+   * - Optional.
+   */
+  locale?: "en-US" | "th";
 
   /**
    * Attributes for the underlying `<input>` element used as the field.
@@ -179,6 +190,7 @@ export interface TextFieldProps extends SKComponent {
  * @param error Tells Text Field that it contains an invalid value and activates the error state.
  * @param value The value inside the field. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user make changes to the field value.
+ * @param locale Allows for translation of the “No files attached” text.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
 export function TextField({
@@ -196,10 +208,14 @@ export function TextField({
   error: incError,
   value,
   onChange,
+  locale,
   inputAttr,
   style,
   className,
 }: TextFieldProps) {
+  // Support for file input
+  const [file, setFile] = React.useState<File | null>(null);
+
   // Animation
   const { duration, easing } = useAnimationConfig();
   const labelControls = useAnimationControls();
@@ -243,6 +259,7 @@ export function TextField({
           "color",
           "date",
           "datetime-local",
+          "file",
           "month",
           "time",
           "week",
@@ -320,7 +337,7 @@ export function TextField({
     "aria-describedby": `${fieldID}-helper`,
     "aria-disabled": disabled,
     "aria-invalid": incError,
-    value,
+    value: typeof value === "string" ? value : undefined,
     required,
     readOnly: disabled,
     onFocus: !disabled ? () => setMinifyLabel(true) : undefined,
@@ -332,7 +349,14 @@ export function TextField({
     onChange: (
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-      if (onChange) onChange(e.target.value);
+      if (inputAttr?.type === "file")
+        setFile(
+          (e.target as HTMLInputElement).files?.length
+            ? (e.target as HTMLInputElement).files![0]
+            : null
+        );
+      if (onChange) onChange(file || e.target.value);
+
       if (value === undefined) expandTextarea();
     },
     className: "skc-text-field__input",
@@ -374,10 +398,21 @@ export function TextField({
       )}
 
       {/* Input */}
-      {behavior === "single-line" ? (
+      {!behavior || behavior === "single-line" ? (
         <input {...inputProps} {...inputAttr} />
       ) : (
         <textarea ref={textareaRef} {...inputProps} />
+      )}
+
+      {/* File name */}
+      {inputAttr?.type === "file" && (
+        <div className="skc-text-field__input">
+          {file
+            ? file.name
+            : locale === "th"
+            ? "ยังไม่ได้แนบไฟล์"
+            : "No files attached"}
+        </div>
       )}
 
       {/* Trailing section */}

@@ -27,6 +27,18 @@
     border: none;
   }
 
+  // Hide native file input
+
+  // (@SiravitPhokeed)
+  // Fun fact: originally I was going to just hide the native “Attach file”
+  // button and leave the file name as is because the file name was all that
+  // was needed. Safari wanted to be different and decides to hide everything,
+  // so I decided against that and made a custom replica of the file name
+  // display on normal browsers.
+  input[type="file"] {
+    display: none;
+  }
+
   // Disabled
 
   // (@SiravitPhokeed)
@@ -260,6 +272,12 @@
 
   &:focus {
     outline: none;
+  }
+
+  input[type="file"] ~ & {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .skc-text-field:has(.skc-text-field__leading) & {
