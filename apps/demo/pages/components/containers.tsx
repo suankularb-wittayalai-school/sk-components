@@ -1,10 +1,4 @@
 // External libraries
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-
-import { FC, useMemo, useState } from "react";
-
 import {
   useReactTable,
   getCoreRowModel,
@@ -14,6 +8,12 @@ import {
   getPaginationRowModel,
   PaginationState,
 } from "@tanstack/react-table";
+
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+
+import { FC, useMemo, useState } from "react";
 
 // SK Components
 import {
@@ -393,7 +393,7 @@ const DialogSection: FC = () => {
             </p>
             <FormItem
               label="I have already queried the issues page and cannot find my
-              issue."
+                issue."
             >
               <Checkbox value={understood} onChange={setUnderstood} />
             </FormItem>
@@ -422,7 +422,7 @@ const DialogSection: FC = () => {
                 behavior="single-line"
                 helperMsg="What is your issue?"
                 value={issueTitle}
-                onChange={setIssueTitle}
+                onChange={(value) => setIssueTitle(value as string)}
               />
               <TextField
                 appearance="outlined"
@@ -430,7 +430,7 @@ const DialogSection: FC = () => {
                 behavior="textarea"
                 helperMsg="A clear and concise description."
                 value={issueDesc}
-                onChange={setIssueDesc}
+                onChange={(value) => setIssueDesc(value as string)}
               />
               <TextField
                 appearance="outlined"
@@ -439,7 +439,7 @@ const DialogSection: FC = () => {
                 helperMsg="What you expected to have happened/think should be
                   implemented."
                 value={issueExpect}
-                onChange={setIssueExpect}
+                onChange={(value) => setIssueExpect(value as string)}
               />
             </div>
           </div>

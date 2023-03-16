@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,9 +9,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/nav-drawer-item.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { useRipple } from "../../utils/animation";
-import { motion } from "framer-motion";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link NavDrawerItem Navigation Drawer Item}.

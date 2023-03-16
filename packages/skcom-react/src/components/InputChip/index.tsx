@@ -1,5 +1,10 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { Button } from "../Button";
+import { MaterialIcon } from "../MaterialIcon";
 
 // Types
 import { SKComponent } from "../../types";
@@ -8,11 +13,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/chip.css";
 
 // Utilities
-import { cn } from "../../utils/className";
-import { motion } from "framer-motion";
 import { useRipple } from "../../utils/animation";
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link InputChip Input Chip}.

@@ -29,7 +29,8 @@ export interface FilterChipProps extends SKComponent {
   children: React.ReactNode;
 
   /**
-   * An icon can appear before all content in an Filter Chip. In a page with many cards, icons can quickly orient users.
+   * An icon can appear before all content in an Filter Chip. In a page with
+   * many cards, icons can quickly orient users.
    *
    * - You are encouraged to use Material Icons as the value for `icon`.
    * - Optional.
@@ -46,20 +47,24 @@ export interface FilterChipProps extends SKComponent {
   /**
    * Use elevation instead of an outline to signify the Filter Chip’s boundary.
    *
-   * - Important: do not use this prop if you don’t have to. Only elevate an Filter Chip when its placement requires visual protection, such as on top of an image.
+   * - Important: do not use this prop if you don’t have to. Only elevate an
+   *   Filter Chip when its placement requires visual protection, such as on
+   *   top of an image.
    * - Optional.
    */
   elevated?: boolean;
 
   /**
-   * If the Filter Chip is selected. `icon` is replaced with a checkmark if this is `true`.
+   * If the Filter Chip is selected. `icon` is replaced with a checkmark if
+   * this is `true`.
    *
    * - Optional.
    */
   selected?: boolean;
 
   /**
-   * Turns the Filter Chip gray and block any action associated with it. `onToggle` and `onMenuToggle` will have no effect.
+   * Turns the Filter Chip gray and block any action associated with it.
+   * `onToggle` and `onMenuToggle` will have no effect.
    *
    * - Optional.
    */
@@ -73,14 +78,16 @@ export interface FilterChipProps extends SKComponent {
   onClick?: (state: boolean) => any;
 
   /**
-   * Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
+   * Triggers when the user toggles the Menu by clicking the trailing dropdown
+   * icon on the Filter Chip.
    *
    * - Optional.
    */
   onMenuToggle?: () => any;
 
   /**
-   * Turns the Filter Chip into a dropdown, displaying a Menu underneath the chip.
+   * Turns the Filter Chip into a dropdown, displaying a Menu underneath the
+   * chip.
    *
    * - Must be a Menu.
    * - Optional.

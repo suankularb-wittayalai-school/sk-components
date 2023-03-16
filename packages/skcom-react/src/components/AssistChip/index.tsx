@@ -13,7 +13,7 @@ import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link AssistChip}.
+ * Props for {@link AssistChip Assist Chip}.
  */
 export interface AssistChipProps extends SKComponent {
   /**
