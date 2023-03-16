@@ -124,7 +124,8 @@ const ResourcesSection: FC = () => (
 );
 
 const DemoSection: FC = () => (
-  <Section sectionAttr={{ "aria-label": "Let’s start! Choose a page:" }}>
+  <Section>
+    <Header className="sr-only">Let’s start! Choose a page:</Header>
     <Columns columns={4}>
       <Card
         appearance="outlined"
