@@ -3302,7 +3302,7 @@ function Search({
   className
 }) {
   const { duration, easing } = useAnimationConfig();
-  const inputRef = React29.createRef();
+  const inputRef = React29.useRef(null);
   const [showSuggestions, setShowSuggestions] = React29.useState(false);
   const [exitComplete, setExitComplete] = React29.useState(true);
   React29.useEffect(() => {
@@ -3493,7 +3493,7 @@ function Select({
     if (onChange && (options == null ? void 0 : options.length) && !value)
       onChange(options[0].value);
   }, [options]);
-  const toggleRef = React31.createRef();
+  const toggleRef = React31.useRef(null);
   React31.useEffect(() => {
     var _a2;
     if (menuOpen === false)

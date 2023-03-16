@@ -171,7 +171,7 @@ export function Select({
   }, [options]);
 
   // Accessibility
-  const toggleRef: React.LegacyRef<HTMLButtonElement> = React.createRef();
+  const toggleRef: React.LegacyRef<HTMLButtonElement> = React.useRef(null);
   React.useEffect(() => {
     // `undefined` means the user has not touched this Select yet
     // `false` means the user has just collapsed this Select

@@ -125,7 +125,7 @@ export function Search({
 }: SearchProps) {
   const { duration, easing } = useAnimationConfig();
 
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.createRef();
+  const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
 
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
   const [exitComplete, setExitComplete] = React.useState<boolean>(true);
