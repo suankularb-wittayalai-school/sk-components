@@ -12,6 +12,7 @@ import {
   CardHeader,
   ChipSet,
   MaterialIcon,
+  Search,
   SplitLayout,
   useBreakpoint,
 } from "@suankularb-components/react";
@@ -31,7 +32,7 @@ const ListSide: FC = () => {
   return (
     <aside className="flex flex-col gap-6">
       {/* Search */}
-      <div className="bg-surface-3 h-14 rounded-full" />
+      <Search alt="Search students" />
 
       {/* Search results */}
       <div className="flex flex-col gap-2">
