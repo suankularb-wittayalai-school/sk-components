@@ -33,11 +33,6 @@ import {
   DataTableHead,
   DataTablePagination,
   DataTableSearch,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  FormItem,
-  FullscreenDialog,
   Header,
   InputChip,
   List,
@@ -47,7 +42,6 @@ import {
   Menu,
   MenuItem,
   Section,
-  SegmentedButton,
   SplitLayout,
   Tab,
   Table,
@@ -56,7 +50,6 @@ import {
   TableHead,
   TableRow,
   TabsContainer,
-  TextField,
 } from "@suankularb-components/react";
 
 // Utilities
@@ -301,154 +294,6 @@ const DataTableSection: FC = () => {
   );
 };
 
-const DialogSection: FC = () => {
-  const [showRemStudents, setShowRemStudents] = useState<boolean>(false);
-  const [showReport, setShowReport] = useState<boolean>(false);
-  const [understood, setUnderstood] = useState<boolean>(false);
-
-  const [view, setView] = useState<"bug-report" | "feature-request">(
-    "bug-report"
-  );
-  const [issueTitle, setIssueTitle] = useState<string>("");
-  const [issueDesc, setIssueDesc] = useState<string>("");
-  const [issueExpect, setIssueExpect] = useState<string>("");
-
-  return (
-    <Section>
-      <Header>Dialog</Header>
-
-      {/* Dialog triggers */}
-      <Actions align="left">
-        <Button
-          appearance="filled"
-          icon={<MaterialIcon icon="delete" />}
-          dangerous
-          onClick={() => setShowRemStudents(true)}
-        >
-          Remove students
-        </Button>
-        <Button
-          appearance="outlined"
-          icon={<MaterialIcon icon="bug_report" />}
-          onClick={() => setShowReport(true)}
-        >
-          Report issue
-        </Button>
-      </Actions>
-
-      {/* Remove students Dialog */}
-      <Dialog open={showRemStudents} onClose={() => setShowRemStudents(false)}>
-        <DialogHeader
-          title="Remove students?"
-          desc="The following students will no longer have access to the
-            organization “Kornor.”"
-        />
-        <DialogContent>
-          <List divided>
-            <ListItem align="center" lines={1}>
-              <Avatar>ST</Avatar>
-              <ListItemContent title="Sadudee Theparree" />
-            </ListItem>
-            <ListItem align="center" lines={1}>
-              <Avatar>TL</Avatar>
-              <ListItemContent title="Tempoom Leelacharoen" />
-            </ListItem>
-          </List>
-        </DialogContent>
-        <Actions>
-          <Button appearance="text" onClick={() => setShowRemStudents(false)}>
-            Cancel
-          </Button>
-          <Button appearance="text" onClick={() => setShowRemStudents(false)}>
-            Remove
-          </Button>
-        </Actions>
-      </Dialog>
-
-      {/* Report issue Full-screen Dialog */}
-      <FullscreenDialog
-        open={showReport}
-        title="Report an issue"
-        action={
-          <Button appearance="text" onClick={() => setShowReport(false)}>
-            Submit
-          </Button>
-        }
-        width={820}
-        onClose={() => setShowReport(false)}
-      >
-        <Columns columns={2}>
-          <div className="flex flex-col gap-4">
-            <p id="dialog-report-an-issue">
-              If you have a GitHub account, please consider reporting issues on
-              our{" "}
-              <a
-                href="https://github.com/suankularb-wittayalai-school/mysk-frontend"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub repository
-              </a>
-              . Thank you!
-            </p>
-            <FormItem
-              label="I have already queried the issues page and cannot find my
-                issue."
-            >
-              <Checkbox value={understood} onChange={setUnderstood} />
-            </FormItem>
-            <SegmentedButton alt="View" full className="pb-4">
-              <Button
-                appearance="outlined"
-                selected={view === "bug-report"}
-                onClick={() => setView("bug-report")}
-              >
-                Bug report
-              </Button>
-              <Button
-                appearance="outlined"
-                selected={view === "feature-request"}
-                onClick={() => setView("feature-request")}
-              >
-                Feature request
-              </Button>
-            </SegmentedButton>
-          </div>
-          <div>
-            <div className="flex flex-col gap-12 pb-12">
-              <TextField
-                appearance="outlined"
-                label="Title"
-                behavior="single-line"
-                helperMsg="What is your issue?"
-                value={issueTitle}
-                onChange={(value) => setIssueTitle(value as string)}
-              />
-              <TextField
-                appearance="outlined"
-                label="Description"
-                behavior="textarea"
-                helperMsg="A clear and concise description."
-                value={issueDesc}
-                onChange={(value) => setIssueDesc(value as string)}
-              />
-              <TextField
-                appearance="outlined"
-                label="Expectation"
-                behavior="textarea"
-                helperMsg="What you expected to have happened/think should be
-                  implemented."
-                value={issueExpect}
-                onChange={(value) => setIssueExpect(value as string)}
-              />
-            </div>
-          </div>
-        </Columns>
-      </FullscreenDialog>
-    </Section>
-  );
-};
-
 const HeaderSection: FC = () => (
   <Section>
     <Header level={2} icon={<MaterialIcon icon="assignment" />}>
@@ -669,7 +514,6 @@ const ContainersPage: CustomPage = () => (
       <CardSection />
       <ColumnsSection />
       <DataTableSection />
-      <DialogSection />
       <HeaderSection />
       <SplitLayoutSection />
       <ListSection />
