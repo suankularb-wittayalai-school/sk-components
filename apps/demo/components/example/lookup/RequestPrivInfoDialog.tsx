@@ -88,7 +88,7 @@ const RequestPrivInfoDialog: FC<
             behavior="single-line"
             required
             value={form.purpose}
-            onChange={(value) => setForm({ ...form, purpose: value })}
+            onChange={(value) => setForm({ ...form, purpose: value as string })}
           />
           <ChipField
             label="Send request to"
@@ -107,7 +107,9 @@ const RequestPrivInfoDialog: FC<
             label="Explaination"
             behavior="multi-line"
             value={form.explaination}
-            onChange={(value) => setForm({ ...form, explaination: value })}
+            onChange={(value) =>
+              setForm({ ...form, explaination: value as string })
+            }
           />
           <FormItem label="Details to request">
             <ChipSet>
