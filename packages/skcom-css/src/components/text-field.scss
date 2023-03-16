@@ -276,8 +276,8 @@
 
   input[type="file"] ~ & {
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .skc-text-field:has(.skc-text-field__leading) & {

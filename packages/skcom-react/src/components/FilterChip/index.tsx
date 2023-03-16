@@ -10,7 +10,7 @@ import { MaterialIcon } from "../MaterialIcon";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/chip.css";
+import "@suankularb-components/css/dist/css/components/filter-chip.css";
 
 // Utilities
 import { useRipple } from "../../utils/animation";

@@ -15,6 +15,7 @@
     var(--motion-short-2),
     var(--easing-standard)
   );
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -22,7 +23,6 @@
   padding-inline: 0.5rem;
   border-radius: var(--rounded-xl);
   background-color: var(--surface-3);
-  position: relative;
 
   &::before {
     @include mix.state-layer();
@@ -38,9 +38,9 @@
   }
 
   &:has(.skc-search__input:focus) {
-    border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;
-    border-bottom: 1px solid var(--outline);
     margin-bottom: -0.75px;
+    border-bottom: 1px solid var(--outline);
+    border-radius: var(--rounded-xl) var(--rounded-xl) 0 0;
   }
 
   .skc-button {
@@ -72,8 +72,8 @@
   }
 
   &:focus {
-    outline: none;
     z-index: 20;
+    outline: none;
   }
 
   &::placeholder {
@@ -87,13 +87,13 @@
 
 .skc-search__list {
   position: absolute;
+  z-index: 20;
   inset: calc(3.5rem + 1px) 0 auto 0;
+  overflow: hidden;
   min-height: 4.5rem;
+  padding-block: 0.5rem;
   border-radius: 0 0 var(--rounded-xl) var(--rounded-xl);
   background-color: var(--surface-3);
-  z-index: 20;
-  padding-block: 0.5rem;
-  overflow: hidden;
 
   .skc-list {
     gap: 0.25rem;

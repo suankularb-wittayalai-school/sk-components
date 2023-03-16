@@ -6,7 +6,7 @@ import * as React from "react";
 import { SKComponent } from "../../types";
 
 // Styles
-import "@suankularb-components/css/dist/css/components/chip.css";
+import "@suankularb-components/css/dist/css/components/suggestion-chip.css";
 
 // Utilities
 import { useRipple } from "../../utils/animation";
