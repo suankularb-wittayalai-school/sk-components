@@ -540,6 +540,7 @@ function Button({
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
       import_framer_motion3.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-button__ripple",
@@ -637,6 +638,7 @@ function ToggleButton({
         /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
           import_framer_motion4.motion.span,
           {
+            "aria-hidden": true,
             initial: { scale: 0, opacity: 0.36 },
             animate: rippleControls,
             className: "skc-toggle-button__ripple",
@@ -690,6 +692,7 @@ function Card({
     stateLayerEffect && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
       import_framer_motion5.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-card__ripple",
@@ -910,6 +913,7 @@ function Checkbox({
             children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
               import_framer_motion7.motion.span,
               {
+                "aria-hidden": true,
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
                 className: "skc-checkbox__ripple",
@@ -1001,6 +1005,7 @@ function InputChip({
     /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
       import_framer_motion8.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-input-chip__ripple",
@@ -1077,6 +1082,7 @@ function AssistChip({
     /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
       import_framer_motion9.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-assist-chip__ripple",
@@ -1155,6 +1161,7 @@ function FilterChip({
     /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
       import_framer_motion10.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-filter-chip__ripple",
@@ -1218,6 +1225,7 @@ function SuggestionChip({
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
       import_framer_motion11.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-suggestion-chip__ripple",
@@ -2455,6 +2463,7 @@ function ListItem({
     stateLayerEffect && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
       import_framer_motion21.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-list-item__ripple",
@@ -2629,6 +2638,7 @@ function NavBarItem({
       /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
         import_framer_motion22.motion.span,
         {
+          "aria-hidden": true,
           initial: { scale: 0, opacity: 0.36 },
           animate: rippleControls,
           className: "skc-nav-bar-item__ripple",
@@ -2820,6 +2830,7 @@ function NavDrawerItem({
     /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
       import_framer_motion24.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-nav-drawer-item__ripple",
@@ -2916,6 +2927,7 @@ function FAB({
           /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
             import_framer_motion25.motion.span,
             {
+              "aria-hidden": true,
               initial: { scale: 0, opacity: 0.36 },
               animate: rippleControls,
               className: "skc-fab__ripple",
@@ -3346,6 +3358,7 @@ function Radio({
             children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
               import_framer_motion30.motion.span,
               {
+                "aria-hidden": true,
                 initial: { scale: 0, opacity: 0.36 },
                 animate: rippleControls,
                 className: "skc-radio__ripple",
@@ -3854,6 +3867,7 @@ function Tab({
     /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("div", { "aria-hidden": true, className: "skc-tab__ripple-container", children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
       import_framer_motion34.motion.span,
       {
+        "aria-hidden": true,
         initial: { scale: 0, opacity: 0.36 },
         animate: rippleControls,
         className: "skc-tab__ripple",

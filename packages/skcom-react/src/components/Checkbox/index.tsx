@@ -134,6 +134,7 @@ export function Checkbox({
         className="skc-checkbox__ripple-parent"
       >
         <motion.span
+          aria-hidden
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}
           className="skc-checkbox__ripple"

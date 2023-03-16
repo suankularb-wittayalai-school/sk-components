@@ -246,6 +246,7 @@ export function FAB({
                 children && <span className="skc-fab__label">{children}</span>
             }
             <motion.span
+              aria-hidden
               initial={{ scale: 0, opacity: 0.36 }}
               animate={rippleControls}
               className="skc-fab__ripple"

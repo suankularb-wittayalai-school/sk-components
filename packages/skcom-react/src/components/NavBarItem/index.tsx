@@ -200,6 +200,7 @@ export function NavBarItem({
           </AnimatePresence>
         </LayoutGroup>
         <motion.span
+          aria-hidden
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}
           className="skc-nav-bar-item__ripple"

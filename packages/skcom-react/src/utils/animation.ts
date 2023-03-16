@@ -85,6 +85,7 @@ export function transition(
  *   <button {...rippleHandles}>
  *     <span>Button</button>
  *     <motion.span
+ *       aria-hidden
  *       initial={{ scale: 0, opacity: 0.36 }}
  *       animate={rippleControls}
  *       className="skc-button__ripple"

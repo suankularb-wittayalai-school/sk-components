@@ -162,6 +162,7 @@ export function SuggestionChip({
       {icon && <div className="skc-suggestion-chip__icon">{icon}</div>}
       <span className="skc-suggestion-chip__label">{children}</span>
       <motion.span
+        aria-hidden
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
         className="skc-suggestion-chip__ripple"

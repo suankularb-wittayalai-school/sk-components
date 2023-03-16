@@ -112,6 +112,7 @@ export function Radio({
         className="skc-radio__ripple-parent"
       >
         <motion.span
+          aria-hidden
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}
           className="skc-radio__ripple"

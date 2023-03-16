@@ -223,6 +223,7 @@ export function InputChip({
     <>
       {divContent}
       <motion.span
+        aria-hidden
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
         className="skc-input-chip__ripple"

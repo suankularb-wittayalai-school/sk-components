@@ -149,6 +149,7 @@ export function NavDrawerItem({
         <span className="skc-nav-drawer-item__metadata">{metadata}</span>
       )}
       <motion.span
+        aria-hidden
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
         className="skc-nav-drawer-item__ripple"

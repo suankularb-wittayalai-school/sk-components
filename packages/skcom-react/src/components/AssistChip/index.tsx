@@ -182,6 +182,7 @@ export function AssistChip({
       {icon && <div className="skc-assist-chip__icon">{icon}</div>}
       <span className="skc-assist-chip__label">{children}</span>
       <motion.span
+        aria-hidden
         initial={{ scale: 0, opacity: 0.36 }}
         animate={rippleControls}
         className="skc-assist-chip__ripple"

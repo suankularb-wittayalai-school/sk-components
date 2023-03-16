@@ -179,6 +179,7 @@ export function Tab({
       </div>
       <div aria-hidden className="skc-tab__ripple-container">
         <motion.span
+          aria-hidden
           initial={{ scale: 0, opacity: 0.36 }}
           animate={rippleControls}
           className="skc-tab__ripple"
