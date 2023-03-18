@@ -9,7 +9,6 @@
 
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 // Base Tab
 .skc-tab {
@@ -90,31 +89,31 @@
     var(--motion-short-4),
     var(--easing-standard)
   );
-  @include ci.icon(0, 400, 0, 24);
+  @include mix.icon(0, 400, 0, 24);
 
   // Hover: make icon bolder
   .skc-tab:hover & {
-    @include ci.icon(0, 600, 0, 24);
+    @include mix.icon(0, 600, 0, 24);
   }
 
   // Active: make icon thinner
   .skc-tab:active & {
-    @include ci.icon(0, 300, 0, 24);
+    @include mix.icon(0, 300, 0, 24);
   }
 
   // Selected: make icon filled
   .skc-tab--selected & {
-    @include ci.icon(1, 400, 0, 24);
+    @include mix.icon(1, 400, 0, 24);
   }
 
   // Selected hover: make icon bolder
   .skc-tab--selected:hover & {
-    @include ci.icon(1, 600, 0, 24);
+    @include mix.icon(1, 600, 0, 24);
   }
 
   // Selected active: make icon thinner
   .skc-tab--selected:active & {
-    @include ci.icon(1, 300, 0, 24);
+    @include mix.icon(1, 300, 0, 24);
   }
 }
 

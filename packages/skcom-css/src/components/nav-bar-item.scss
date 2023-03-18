@@ -7,7 +7,6 @@
 
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 // Base Navigation Bar Item
 .skc-nav-bar-item {
@@ -75,31 +74,31 @@
       var(--motion-short-4),
       var(--easing-standard)
     );
-    @include ci.icon(0, 400, 0, 24);
+    @include mix.icon(0, 400, 0, 24);
 
     // Hover: make icon bolder
     .skc-nav-bar-item:hover & {
-      @include ci.icon(0, 600, 0, 24);
+      @include mix.icon(0, 600, 0, 24);
     }
 
     // Active: make icon thinner
     .skc-nav-bar-item:active & {
-      @include ci.icon(0, 300, 0, 24);
+      @include mix.icon(0, 300, 0, 24);
     }
 
     // Selected: make icon filled
     .skc-nav-bar-item.skc-nav-bar-item--selected & {
-      @include ci.icon(1, 400, 0, 24);
+      @include mix.icon(1, 400, 0, 24);
     }
 
     // Selected hover: make icon bolder
     .skc-nav-bar-item.skc-nav-bar-item--selected:hover & {
-      @include ci.icon(1, 600, 0, 24);
+      @include mix.icon(1, 600, 0, 24);
     }
 
     // Selected active: make icon thinner
     .skc-nav-bar-item.skc-nav-bar-item--selected:active & {
-      @include ci.icon(1, 300, 0, 24);
+      @include mix.icon(1, 300, 0, 24);
     }
   }
 }

@@ -7,7 +7,6 @@
 
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
-@use "../components/icon.scss" as ci;
 
 // Base Toggle Button
 .skc-toggle-button {
@@ -71,22 +70,22 @@
       var(--motion-short-4),
       var(--easing-standard)
     );
-    @include ci.icon(0, 400, 0, 24);
+    @include mix.icon(0, 400, 0, 24);
   }
 
   // Hover: make icon bolder
   .skc-toggle-button:not([aria-disabled="true"]):hover & {
-    @include ci.icon(0, 600, 0, 24);
+    @include mix.icon(0, 600, 0, 24);
   }
 
   // Active: make icon thinner
   .skc-toggle-button:not([aria-disabled="true"]):active & {
-    @include ci.icon(0, 300, 0, 24);
+    @include mix.icon(0, 300, 0, 24);
   }
 
   // Selected: make icon filled
   .skc-toggle-button.skc-toggle-button--selected & {
-    @include ci.icon(1, 400, 0, 24);
+    @include mix.icon(1, 400, 0, 24);
   }
 
   // Selected hover: make icon bolder
@@ -94,7 +93,7 @@
       [aria-disabled="true"]
     ):hover
     & {
-    @include ci.icon(1, 600, 0, 24);
+    @include mix.icon(1, 600, 0, 24);
   }
 
   // Selected active: make icon thinner
@@ -102,7 +101,7 @@
       [aria-disabled="true"]
     ):active
     & {
-    @include ci.icon(1, 300, 0, 24);
+    @include mix.icon(1, 300, 0, 24);
   }
 }
 

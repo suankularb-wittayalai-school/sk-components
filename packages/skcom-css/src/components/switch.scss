@@ -9,7 +9,6 @@
 
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
-@use "../components/icon.scss" as ci;
 
 // (@SiravitPhokeed)
 // I wrote the majority of this code for an unreleased version of SKCom Styles
@@ -164,7 +163,7 @@
   }
 
   > .skc-icon {
-    @include ci.icon(0, 400, 0, 20);
+    @include mix.icon(0, 400, 0, 20);
     font-size: 1rem;
   }
 }
