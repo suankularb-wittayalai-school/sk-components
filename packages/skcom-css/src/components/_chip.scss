@@ -11,7 +11,6 @@
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 // Base Chip
 .skc-chip {
@@ -137,7 +136,7 @@
   color: var(--primary);
 
   .skc-icon {
-    @include ci.icon(0, 400, 0, 24);
+    @include mix.icon(0, 400, 0, 24);
     font-size: 1.125rem;
   }
 }

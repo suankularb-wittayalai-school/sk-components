@@ -7,7 +7,6 @@
 
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 .skc-menu-item {
   position: relative;
@@ -45,7 +44,7 @@
 }
 
 .skc-menu-item__icon .skc-icon {
-  @include ci.icon(0, 400, 0, 24);
+  @include mix.icon(0, 400, 0, 24);
 }
 
 .skc-menu-item__label {

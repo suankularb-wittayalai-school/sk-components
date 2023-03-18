@@ -9,7 +9,6 @@
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 // Base Button
 .skc-button {
@@ -38,7 +37,7 @@
       &:focus,
       &:active {
         > .skc-button__icon > .skc-icon {
-          @include ci.icon(0, 400, 0, 24);
+          @include mix.icon(0, 400, 0, 24);
         }
       }
     }
@@ -92,7 +91,7 @@
   }
 
   .skc-icon {
-    @include ci.icon(0, 400, 0, 20);
+    @include mix.icon(0, 400, 0, 20);
 
     .skc-button:not(:has(.skc-button__label)) & {
       @include mix.transition(
@@ -100,17 +99,17 @@
         var(--motion-short-4),
         var(--easing-standard)
       );
-      @include ci.icon(0, 400, 0, 24);
+      @include mix.icon(0, 400, 0, 24);
     }
 
     // Hover: make icon bolder
     .skc-button:not(:has(.skc-button__label)):hover & {
-      @include ci.icon(0, 600, 0, 24);
+      @include mix.icon(0, 600, 0, 24);
     }
 
     // Active: make icon thinner
     .skc-button:not(:has(.skc-button__label)):active & {
-      @include ci.icon(0, 300, 0, 24);
+      @include mix.icon(0, 300, 0, 24);
     }
   }
 }

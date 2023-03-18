@@ -1,3 +1,10 @@
+// Icon variants
+@mixin icon($fill, $weight, $grade, $size) {
+  font-size: #{$size}px;
+  font-variation-settings: "FILL" $fill, "wght" $weight, "GRAD" $grade,
+    "opsz" $size;
+}
+
 // Truncate text content
 @mixin truncate($lines: 1, $word-wrap: break-word) {
   @if $lines == 1 {

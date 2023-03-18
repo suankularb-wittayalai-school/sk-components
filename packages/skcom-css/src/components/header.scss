@@ -5,8 +5,8 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 .skc-header {
   display: flex;
@@ -47,13 +47,13 @@ $header-levels: (
     }
 
     .skc-header__icon .skc-icon {
-      @include ci.icon(0, 400, 0, 40);
+      @include mix.icon(0, 400, 0, 40);
       font-size: map-get($style, "icon-size");
     }
   }
 }
 
 .skc-header__icon .skc-icon {
-  @include ci.icon(0, 400, 0, 40);
+  @include mix.icon(0, 400, 0, 40);
   color: var(--on-surface-variant);
 }

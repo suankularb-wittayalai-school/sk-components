@@ -1,3 +1,12 @@
+////
+/// **Material Icon**
+/// Icons are essential to any web design. They orient the users, help user
+/// navigate, save space. Material Icon uses the “Material Symbol” icon font
+/// from Google.
+///
+/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation
+////
+
 @use "../abstracts/mixins.scss" as mix;
 
 // Base Icon
@@ -21,22 +30,16 @@
   word-wrap: normal;
 }
 
-@mixin icon($fill, $weight, $grade, $size) {
-  font-size: #{$size}px;
-  font-variation-settings: "FILL" $fill, "wght" $weight, "GRAD" $grade,
-    "opsz" $size;
-}
-
 .skc-icon--outlined {
-  @include icon(0, 400, 0, 24);
+  @include mix.icon(0, 400, 0, 24);
 }
 
 .skc-icon--filled {
-  @include icon(1, 400, 0, 24);
+  @include mix.icon(1, 400, 0, 24);
 }
 
 @include mix.scheme("dark") {
   .skc-icon {
-    @include icon(0, 400, -25, 24);
+    @include mix.icon(0, 400, -25, 24);
   }
 }

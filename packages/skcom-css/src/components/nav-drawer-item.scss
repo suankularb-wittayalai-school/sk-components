@@ -8,7 +8,6 @@
 
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
-@use "../components/icon.scss" as ci;
 
 .skc-nav-drawer-item {
   position: relative;
@@ -56,10 +55,10 @@
 }
 
 .skc-nav-drawer-item__icon .skc-icon {
-  @include ci.icon(0, 400, 0, 24);
+  @include mix.icon(0, 400, 0, 24);
 
   .skc-nav-drawer-item.skc-nav-drawer-item--selected & {
-    @include ci.icon(1, 400, 0, 24);
+    @include mix.icon(1, 400, 0, 24);
   }
 }
 
