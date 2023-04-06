@@ -28,6 +28,10 @@
   &:focus-within {
     margin: -1px;
     border: 2px solid var(--primary);
+
+    .skc-section > & {
+      margin-inline: calc(1rem - 1px);
+    }
   }
 }
 
@@ -62,6 +66,11 @@
   }
 }
 
+.skc-chip-field .skc-progress {
+  position: absolute;
+  inset: auto 0 0;
+}
+
 .skc-chip-field__label {
   @include type.font("body-large");
   font-family: var(--font-display);
@@ -93,5 +102,11 @@
     font-family: var(--font-display);
     padding-left: 0.25rem;
     color: var(--outline);
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-section > .skc-chip-field:focus-within {
+    margin-inline: -1px;
   }
 }
