@@ -16,11 +16,11 @@ module.exports = {
     },
     dropShadow: {
       text: "var(--shadow-text)",
-      1: "var(--shadow-1)",
-      2: "var(--shadow-2)",
-      3: "var(--shadow-3)",
-      4: "var(--shadow-4)",
-      5: "var(--shadow-5)",
+      1: "var(--drop-shadow-1)",
+      2: "var(--drop-shadow-2)",
+      3: "var(--drop-shadow-3)",
+      4: "var(--drop-shadow-4)",
+      5: "var(--drop-shadow-5)",
     },
 
     // Rounded corners
