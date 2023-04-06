@@ -191,7 +191,20 @@ export function FullscreenDialog({
     <AnimatePresence>
       {open && (
         <>
-          {/* Dialog/Full-screen Dialog */}
+          {/* Scrim */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{
+              opacity: 0,
+              transition: transition(duration.short4, easing.standard),
+            }}
+            transition={transition(duration.medium4, easing.standard)}
+            className="skc-scrim"
+            onClick={onClose}
+          />
+
+          {/* Full-screen Dialog */}
           <motion.div
             // `alertdialog` is a type of `dialog` for interrupting the user
             // flow.
@@ -231,19 +244,6 @@ export function FullscreenDialog({
               {injectedChildren}
             </motion.div>
           </motion.div>
-
-          {/* Scrim */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{
-              opacity: 0,
-              transition: transition(duration.short4, easing.standard),
-            }}
-            transition={transition(duration.medium4, easing.standard)}
-            className="skc-scrim"
-            onClick={onClose}
-          />
         </>
       )}
     </AnimatePresence>

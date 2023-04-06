@@ -128,6 +128,21 @@ export function Dialog({
     <AnimatePresence>
       {open && (
         <>
+          {/* Scrim */}
+          <motion.div
+            aria-hidden
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{
+              opacity: 0,
+              transition: transition(duration.short4, easing.standard),
+            }}
+            transition={transition(duration.medium4, easing.standard)}
+            className="skc-scrim"
+            onClick={onClose}
+          />
+
+          {/* Dialog */}
           <motion.div
             // `alertdialog` is a type of `dialog` for interrupting the user flow.
             role="alertdialog"
@@ -151,17 +166,6 @@ export function Dialog({
           >
             {children}
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{
-              opacity: 0,
-              transition: transition(duration.short4, easing.standard),
-            }}
-            transition={transition(duration.medium4, easing.standard)}
-            className="skc-scrim"
-            onClick={onClose}
-          />
         </>
       )}
     </AnimatePresence>
