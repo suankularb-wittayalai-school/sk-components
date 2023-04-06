@@ -24,7 +24,7 @@ const ComponentsPage: CustomPage = () => (
       <title>Components - SK Components</title>
     </Head>
     <ContentLayout key="components-page">
-      <Section>
+      <Section className="h-[96rem]">
         <Columns columns={4}>
           {/* Actions */}
           <Card appearance="outlined">

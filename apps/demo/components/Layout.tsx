@@ -48,11 +48,8 @@ const Layout: FC<
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
 
   // Root Layout
-  const { pageIsLoading } = usePageIsLoading();
-  const { transitionEvent } = useTransitionEvent(
-    pageHeader?.parentURL,
-    childURLs
-  );
+  const pageIsLoading = usePageIsLoading();
+  const transitionEvent = useTransitionEvent(pageHeader?.parentURL, childURLs);
 
   // Snackbar
   const { snackbar } = useContext(SnackbarContext);
