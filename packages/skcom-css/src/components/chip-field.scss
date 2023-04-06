@@ -26,8 +26,8 @@
   }
 
   &:focus-within {
-    border: 2px solid var(--primary);
     margin: -1px;
+    border: 2px solid var(--primary);
   }
 }
 

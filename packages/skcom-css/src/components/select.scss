@@ -60,8 +60,8 @@
   }
 
   &:focus-within {
-    border: 2px solid var(--primary);
     margin: -1px;
+    border: 2px solid var(--primary);
   }
 
   .skc-select__label {
@@ -71,8 +71,8 @@
 
   // Error
   &.skc-select--error {
-    border: 2px solid var(--error);
     margin: -1px;
+    border: 2px solid var(--error);
   }
 }
 
@@ -90,8 +90,8 @@
 
   // Error
   &.skc-select--error {
-    border-bottom: 2px solid var(--error);
     margin-bottom: -1px;
+    border-bottom: 2px solid var(--error);
   }
 }
 
