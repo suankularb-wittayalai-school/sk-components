@@ -16,6 +16,7 @@
     var(--easing-standard)
   );
   position: relative;
+  box-sizing: content-box;
   height: 3.5rem;
   border: 1px solid var(--outline);
   border-radius: 0.25rem;
@@ -26,6 +27,7 @@
 
   &:focus-within {
     border: 2px solid var(--primary);
+    margin: -1px;
   }
 }
 

@@ -224,7 +224,11 @@
     box-shadow: none;
   }
 
-  .skc-page-header__minimized-content > .skc-button[aria-disabled="true"] + h1 {
-    margin-left: 0;
+  .skc-page-header__minimized-content > .skc-button {
+    margin-left: -0.5rem;
+
+    &[aria-disabled="true"] + h1 {
+      margin-left: 0;
+    }
   }
 }

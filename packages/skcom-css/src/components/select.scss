@@ -27,6 +27,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  box-sizing: content-box;
   width: 100%;
   height: 3.5rem;
   -webkit-tap-highlight-color: transparent;
@@ -60,6 +61,7 @@
 
   &:focus-within {
     border: 2px solid var(--primary);
+    margin: -1px;
   }
 
   .skc-select__label {
@@ -70,6 +72,7 @@
   // Error
   &.skc-select--error {
     border: 2px solid var(--error);
+    margin: -1px;
   }
 }
 
@@ -88,6 +91,7 @@
   // Error
   &.skc-select--error {
     border-bottom: 2px solid var(--error);
+    margin-bottom: -1px;
   }
 }
 
@@ -114,9 +118,10 @@
 
 // Selected option
 .skc-select__value {
+  @include mix.truncate(1, break-all);
   @include type.font("body-large");
   flex-grow: 1;
-  padding: 1rem;
+  padding: 1rem 0 1rem 1rem;
   text-align: left;
 }
 
