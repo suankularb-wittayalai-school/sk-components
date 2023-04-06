@@ -68,15 +68,9 @@
   width: 1.125rem;
   height: 1.125rem;
   cursor: pointer;
-  transform: scale(1);
   border: 2px solid var(--on-surface-variant);
   border-radius: 0.125rem;
   background-color: transparent;
-
-  .skc-checkbox:active &,
-  .skc-form-item:active & {
-    transform: scale(0.9);
-  }
 }
 
 .skc-checkbox__ripple-parent {
@@ -122,10 +116,6 @@
 
   .skc-checkbox__box {
     cursor: default;
-  }
-
-  &:active .skc-checkbox__box {
-    transform: scale(1);
   }
 
   .skc-checkbox__icon {
