@@ -120,14 +120,14 @@ export interface CardProps extends SKComponent {
 
   /**
    * Attributes for the underlying `<button>` element.
-   * 
+   *
    * - Optional.
    */
   buttonAttr?: AdaptToMotionProps<React.ComponentProps<"button">>;
 
   /**
    * Attributes for the underlying `<a>` element.
-   * 
+   *
    * - Optional.
    */
   aAttr?: AdaptToMotionProps<React.ComponentProps<"a">>;
