@@ -14,6 +14,7 @@ import "@suankularb-components/css/dist/css/components/dialog.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 import { kebabify } from "../../utils/format";
 
 /**
@@ -100,7 +101,7 @@ export function Dialog({
   let dialogID: string | undefined;
   React.Children.forEach(children, (child) => {
     // Find the Dialog Header
-    if ((child as JSX.Element).type.displayName === "DialogHeader") {
+    if (matchDisplayName(child, "DialogHeader")) {
       // Grab `title`, `desc`, and `alt`
       const { title, desc, alt } = (child as JSX.Element)
         .props as DialogHeaderProps;

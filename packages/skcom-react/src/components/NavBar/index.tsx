@@ -13,6 +13,7 @@ import "@suankularb-components/css/dist/css/components/nav-bar.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 import { useBreakpoint } from "../../utils/window";
 
 /**
@@ -95,7 +96,7 @@ export function NavBar({
 }: NavBarProps) {
   const { atBreakpoint } = useBreakpoint();
   const navRailFab = React.Children.map(fab, (child) => {
-    if ((child as JSX.Element).type?.displayName === "FAB") {
+    if (matchDisplayName(child, "FAB")) {
       return React.cloneElement(child as JSX.Element, {
         children: undefined,
         size: "standard",

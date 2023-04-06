@@ -16,6 +16,7 @@ import "@suankularb-components/css/dist/css/components/search.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 import { kebabify } from "../../utils/format";
 
 /**
@@ -220,8 +221,7 @@ export function Search({
                   suggestions on click */}
               {children &&
               React.Children.count(children) === 1 &&
-              (React.Children.only(children) as JSX.Element).type
-                .displayName === "List" ? (
+              matchDisplayName(React.Children.only(children), "List") ? (
                 <List {...(children as JSX.Element).props}>
                   {React.Children.map(
                     (children as JSX.Element).props.children,
