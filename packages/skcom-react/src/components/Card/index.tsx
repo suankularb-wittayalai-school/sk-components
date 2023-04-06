@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
-import { SKComponent } from "../../types";
+import { AdaptToMotionProps, SKComponent } from "../../types";
 
 // Styles
 import "@suankularb-components/css/dist/css/components/card.css";
@@ -117,6 +117,20 @@ export interface CardProps extends SKComponent {
     onMouseDown?: (event: React.MouseEvent) => void;
     onKeyDown?: (event: React.KeyboardEvent) => void;
   }) => JSX.Element | null;
+
+  /**
+   * Attributes for the underlying `<button>` element.
+   * 
+   * - Optional.
+   */
+  buttonAttr?: AdaptToMotionProps<React.ComponentProps<"button">>;
+
+  /**
+   * Attributes for the underlying `<a>` element.
+   * 
+   * - Optional.
+   */
+  aAttr?: AdaptToMotionProps<React.ComponentProps<"a">>;
 }
 
 /**
@@ -128,7 +142,7 @@ export interface CardProps extends SKComponent {
  *
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation}
  *
- * @param children Card must contain at least 1 JSX element
+ * @param children Card must contain at least 1 JSX element.
  * @param appearance The appearance of the Card. Each appearance puts different amounts of emphasis on the subject.
  * @param direction The flow of the Card’s content, like the CSS property `flex-direction`.
  * @param stateLayerEffect The state layer reacts to changes to the state to signify its interactivity. This effect can be enabled on Card as well.
@@ -137,6 +151,8 @@ export interface CardProps extends SKComponent {
  * @param onClick The function called when the user interacts with the Card, similar to `onClick` on `<button>`.
  * @param href The URL of the page this Card leads to, similar to `href` on `<a>`.
  * @param element Change the underlying element from `<a>` to a custom element.
+ * @param buttonAttr Attributes for the underlying `<button>` element.
+ * @param aAttr Attributes for the underlying `<a>` element.
  */
 export function Card({
   children,
@@ -149,6 +165,8 @@ export function Card({
   onClick,
   href,
   element: Element,
+  buttonAttr,
+  aAttr,
   className,
 }: CardProps) {
   // Ripple setup
@@ -199,11 +217,11 @@ export function Card({
     ) : // Render an `<a>` if link passed in
     href ? (
       layoutID ? (
-        <motion.a {...props} layoutId={layoutID}>
+        <motion.a {...props} layoutId={layoutID} {...aAttr}>
           {content}
         </motion.a>
       ) : (
-        <a {...props} href={href}>
+        <a {...props} href={href} {...aAttr}>
           {content}
         </a>
       )
@@ -214,11 +232,12 @@ export function Card({
           {...{ ...props, onClick }}
           layoutId={layoutID}
           type="button"
+          {...buttonAttr}
         >
           {content}
         </motion.button>
       ) : (
-        <button {...{ ...props, onClick }} type="button">
+        <button {...{ ...props, onClick }} type="button" {...buttonAttr}>
           {content}
         </button>
       )
