@@ -9,7 +9,6 @@
 @mixin truncate($lines: 1, $word-wrap: break-word) {
   @if $lines == 1 {
     overflow: hidden;
-
     white-space: nowrap;
     text-overflow: ellipsis;
   } @else {
