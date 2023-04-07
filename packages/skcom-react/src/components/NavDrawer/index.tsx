@@ -111,6 +111,20 @@ export function NavDrawer({
     <AnimatePresence>
       {open && (
         <>
+          {/* Scrim */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{
+              opacity: 0,
+              transition: transition(duration.short4, easing.standard),
+            }}
+            transition={transition(duration.medium4, easing.standard)}
+            onClick={onClose}
+            className="skc-scrim"
+          />
+
+          {/* Navigation Drawer */}
           <motion.aside
             initial={{ scaleX: 0.2, x: "-100%" }}
             animate={{ scaleX: 1, x: "0%" }}
@@ -129,17 +143,6 @@ export function NavDrawer({
           >
             <nav>{injectedChildren}</nav>
           </motion.aside>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{
-              opacity: 0,
-              transition: transition(duration.short4, easing.standard),
-            }}
-            transition={transition(duration.medium4, easing.standard)}
-            onClick={onClose}
-            className="skc-scrim"
-          />
         </>
       )}
     </AnimatePresence>

@@ -37,6 +37,7 @@
   // State layer
   &::before {
     @include mix.state-layer();
+    inset: -1px;
     background-color: var(--on-surface-variant);
   }
 
@@ -120,6 +121,24 @@
   color: var(--on-secondary-container);
   border-color: transparent;
   background-color: var(--secondary-container);
+
+  .skc-chip__icon .skc-icon {
+    color: var(--on-secondary-container);
+  }
+}
+
+// Contextual adaptations
+.skc-dialog,
+.skc-page-header,
+.skc-card--filled {
+  .skc-chip--selected {
+    color: var(--on-surface);
+    background-color: var(--surface);
+
+    &::before {
+      background-color: var(--on-surface);
+    }
+  }
 }
 
 // Label
@@ -167,4 +186,15 @@
 .skc-chip__ripple {
   @include mix.ripple();
   background-color: var(--on-surface-variant);
+}
+
+@include mix.breakpoint("sm") {
+  .skc-fullscreen-dialog .skc-chip--selected {
+    color: var(--on-surface);
+    background-color: var(--surface);
+
+    &::before {
+      background-color: var(--on-surface);
+    }
+  }
 }
