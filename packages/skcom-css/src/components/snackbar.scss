@@ -17,9 +17,7 @@
 @use "../abstracts/typography.scss" as type;
 
 .skc-snackbar {
-  // Navigation Bar: 5rem
-  // Padding: 0.5rem
-  inset: auto auto (5rem + 0.5rem) 0.5rem;
+  inset: auto auto 0.5rem 0.5rem;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -37,7 +35,13 @@
   .skc-root-layout > &,
   .skc-root-layout > * > & {
     position: fixed;
-    z-index: 80;
+    z-index: 90;
+  }
+
+  .skc-nav-bar ~ aside & {
+    // Navigation Bar: 5rem
+    // Padding: 0.5rem
+    bottom: 5rem + 0.5rem;
   }
 
   .skc-nav-bar:has(.skc-fab) ~ aside & {
@@ -52,6 +56,12 @@
     // Large FAB: 6rem
     // Margin around FAB: 1rem
     bottom: 5rem + 6rem + (1rem * 2);
+  }
+}
+
+@supports (width: 100dvw) {
+  .skc-snackbar {
+    width: calc(100dvw - (0.5rem * 2));
   }
 }
 
@@ -96,6 +106,10 @@
     max-width: calc(math.div(100vw, 3) - 1rem);
 
     .skc-nav-bar:has(.skc-fab, .skc-fab--large) ~ aside & {
+      bottom: 1rem;
+    }
+
+    .skc-nav-bar ~ aside & {
       bottom: 1rem;
     }
   }

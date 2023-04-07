@@ -10,6 +10,7 @@
 
 @use "./chip.scss";
 
+// Base Filter Chip
 .skc-filter-chip {
   @extend .skc-chip;
 
@@ -34,10 +35,17 @@
   }
 }
 
+// Elevated Filter Chip
 .skc-filter-chip.skc-filter-chip--elevated {
   @extend .skc-chip--elevated;
 }
 
+// Selected Filter Chip
+.skc-filter-chip--selected {
+  @extend .skc-chip--selected;
+}
+
+// Anchor for Menu
 .skc-filter-chip__anchor {
   position: relative;
 
@@ -46,22 +54,17 @@
   }
 }
 
+// Label
 .skc-filter-chip__label {
   @extend .skc-chip__label;
 }
 
+// Icon
 .skc-filter-chip__icon {
   @extend .skc-chip__icon;
 }
 
+// Ripple
 .skc-filter-chip__ripple {
   @extend .skc-chip__ripple;
-}
-
-.skc-filter-chip--selected {
-  @extend .skc-chip--selected;
-
-  .skc-filter-chip__icon .skc-icon {
-    color: var(--on-secondary-container);
-  }
 }

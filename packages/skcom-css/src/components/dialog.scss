@@ -41,17 +41,3 @@
 .skc-dialog ~ .skc-scrim {
   margin: 0 !important;
 }
-
-@media (prefers-color-scheme: light) {
-  .skc-dialog {
-    .skc-input-chip--selected,
-    .skc-filter-chip--selected {
-      color: var(--on-secondary);
-      background-color: var(--secondary);
-
-      .skc-icon {
-        color: var(--on-secondary);
-      }
-    }
-  }
-}

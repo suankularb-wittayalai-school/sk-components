@@ -1,8 +1,9 @@
 {
   "exclude": [
     ".git/**",
-    "node_modules/**",
-    "bower_components/**",
+    "**/.next/**",
+    "**/node_modules/**",
+    "**/bower_components/**",
     "**/dist/**",
     "**/abstracts/**"
   ],
