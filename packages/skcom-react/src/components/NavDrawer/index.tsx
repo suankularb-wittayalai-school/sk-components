@@ -14,6 +14,7 @@ import "@suankularb-components/css/dist/css/components/nav-drawer.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 
 /**
  * Props for {@link NavDrawer}.
@@ -86,23 +87,44 @@ export function NavDrawer({
   const injectedChildren =
     // For each Navigation Drawer Section
     React.Children.map(children, (section) =>
-      React.cloneElement(section as JSX.Element, {
-        children:
-          // For each Navigation Drawer Item
-          React.Children.map(
-            ((section as JSX.Element).props as NavDrawerSectionProps).children,
-            // Inject `onClick`, where the Navigation Drawer will close when a
-            // Navigation Drawer Item is clicked
-            (item) =>
-              React.cloneElement(item as JSX.Element, { onClick: onClose })
-          ),
-      })
+      matchDisplayName(section, "NavDrawerSection")
+        ? React.cloneElement(section as JSX.Element, {
+            children:
+              // For each Navigation Drawer Item
+              React.Children.map(
+                ((section as JSX.Element).props as NavDrawerSectionProps)
+                  .children,
+                // Inject `onClick`, where the Navigation Drawer will close when a
+                // Navigation Drawer Item is clicked
+                (item) =>
+                  matchDisplayName(item, "NavDrawerItem")
+                    ? React.cloneElement(item as JSX.Element, {
+                        onClick: onClose,
+                      })
+                    : item
+              ),
+          })
+        : section
     );
 
   return (
     <AnimatePresence>
       {open && (
         <>
+          {/* Scrim */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{
+              opacity: 0,
+              transition: transition(duration.short4, easing.standard),
+            }}
+            transition={transition(duration.medium4, easing.standard)}
+            onClick={onClose}
+            className="skc-scrim"
+          />
+
+          {/* Navigation Drawer */}
           <motion.aside
             initial={{ scaleX: 0.2, x: "-100%" }}
             animate={{ scaleX: 1, x: "0%" }}
@@ -121,17 +143,6 @@ export function NavDrawer({
           >
             <nav>{injectedChildren}</nav>
           </motion.aside>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{
-              opacity: 0,
-              transition: transition(duration.short4, easing.standard),
-            }}
-            transition={transition(duration.medium4, easing.standard)}
-            onClick={onClose}
-            className="skc-scrim"
-          />
         </>
       )}
     </AnimatePresence>

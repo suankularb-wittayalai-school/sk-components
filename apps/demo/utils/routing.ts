@@ -25,7 +25,7 @@ export function usePreviousPath() {
 /**
  * Watches for page load.
  *
- * @returns `pageIsLoading` — A boolean representing if a new page is being loaded or not.
+ * @returns A boolean representing if a new page is being loaded or not.
  */
 export function usePageIsLoading() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export function usePageIsLoading() {
     };
   });
 
-  return { pageIsLoading: loading };
+  return loading;
 }
 
 type PageRelation = "parent" | "child" | "sibling" | "unrelated";
@@ -57,7 +57,7 @@ type PageRelation = "parent" | "child" | "sibling" | "unrelated";
  * @param parentURL The URL of the parent page of the current.
  * @param childURLs A list of child URLs of the current page.
  *
- * @returns `transitionEvent` — How the destination page relates to the current.
+ * @returns How the destination page relates to the current.
  */
 export function useTransitionEvent(parentURL?: string, childURLs?: string[]) {
   const router = useRouter();
@@ -87,5 +87,5 @@ export function useTransitionEvent(parentURL?: string, childURLs?: string[]) {
     );
   }, [destination]);
 
-  return { transitionEvent };
+  return transitionEvent;
 }

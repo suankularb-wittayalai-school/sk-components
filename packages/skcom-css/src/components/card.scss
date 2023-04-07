@@ -126,3 +126,18 @@
     }
   }
 }
+
+// Contextual adaptations
+.skc-dialog,
+.skc-page-header,
+.skc-card--filled {
+  .skc-card.skc-card--filled {
+    background-color: var(--surface);
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-fullscreen-dialog .skc-card.skc-card--filled {
+    background-color: var(--surface);
+  }
+}

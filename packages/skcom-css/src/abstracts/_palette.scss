@@ -183,12 +183,24 @@
     --outline: #73777f;
     --outline-variant: #c1c7ce;
 
-    // Shadow
+    // Box shadow
     --shadow-1: 0 1px 2px #0000004d, 0 1px 3px 1px #00000026;
     --shadow-2: 0 1px 2px #0000004d, 0 2px 6px 2px #00000026;
     --shadow-3: 0 4px 8px 3px #00000026, 0 1px 3px #0000004d;
     --shadow-4: 0 6px 10px 4px #00000026, 0 2px 3px #0000004d;
     --shadow-5: 0 8px 12px 6px #00000026, 0 4px 4px #0000004d;
+
+    // Drop shadow
+    --drop-shadow-1: dropShadow(0 1px 2px #0000004d),
+      dropShadow(0 1px 3px #00000026);
+    --drop-shadow-2: dropShadow(0 1px 2px #0000004d),
+      dropShadow(0 2px 6px #00000026);
+    --drop-shadow-3: dropShadow(0 4px 8px #00000026),
+      dropShadow(0 1px 3px #0000004d);
+    --drop-shadow-4: dropShadow(0 6px 10px #00000026),
+      dropShadow(0 2px 3px #0000004d);
+    --drop-shadow-5: dropShadow(0 8px 12px #00000026),
+      dropShadow(0 4px 4px #0000004d);
   }
 
   // Dark mode
@@ -239,12 +251,24 @@
     --outline: #8b9197;
     --outline-variant: #41484d;
 
-    // Shadow
+    // Box shadow
     --shadow-1: 0 1px 3px 1px #00000026, 0 1px 2px #0000004d;
     --shadow-2: 0 2px 6px 2px #00000026, 0 1px 2px #0000004d;
     --shadow-3: 0 4px 8px 3px #00000026, 0 1px 3px #0000004d;
     --shadow-4: 0 6px 10px 4px #00000026, 0 2px 3px #0000004d;
     --shadow-5: 0 8px 12px 6px #00000026, 0 4px 4px #0000004d;
+
+    // Drop shadow
+    --drop-shadow-1: dropShadow(0 1px 3px #00000026),
+      dropShadow(0 1px 2px #0000004d);
+    --drop-shadow-2: dropShadow(0 2px 6px #00000026),
+      dropShadow(0 1px 2px #0000004d);
+    --drop-shadow-3: dropShadow(0 4px 8px #00000026),
+      dropShadow(0 1px 3px #0000004d);
+    --drop-shadow-4: dropShadow(0 6px 10px #00000026),
+      dropShadow(0 2px 3px #0000004d);
+    --drop-shadow-5: dropShadow(0 8px 12px #00000026),
+      dropShadow(0 4px 4px #0000004d);
   }
 }
 

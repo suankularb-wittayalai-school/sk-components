@@ -54,6 +54,11 @@ export interface FormItemProps extends SKComponent {
 }
 
 /**
+ * Props of components allowed to be the child of {@link FormItem Form Item}.
+ */
+type InputProps = CheckboxProps | RadioProps;
+
+/**
  * A wrapper for form control components like Checkbox, Radio, and Switch with
  * a label.
  *
@@ -78,7 +83,18 @@ export function FormItem({
 
   const injectedChildren = React.cloneElement(
     React.Children.only(children) as JSX.Element,
-    { inputAttr: { id: formItemID } } satisfies CheckboxProps | RadioProps
+    {
+      inputAttr: {
+        id:
+          // Attempt to use existing ID
+          ((children as JSX.Element).props as InputProps).inputAttr?.id ||
+          // Use label’s `htmlFor` if specified so label still points to the
+          // right element (see #104)
+          labelAttr?.htmlFor ||
+          // Otherwise, use the default
+          formItemID,
+      },
+    } satisfies InputProps
   );
 
   return (

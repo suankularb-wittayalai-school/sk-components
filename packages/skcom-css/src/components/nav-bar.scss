@@ -96,6 +96,19 @@
     .skc-fab {
       box-shadow: none;
     }
+
+    // Limit the effect of FAB suddenly changing to a standard FAB
+    .skc-fab__wrapper {
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+
+      > .skc-fab {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
   }
 
   .skc-nav-bar__destinations,

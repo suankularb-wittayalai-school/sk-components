@@ -3,31 +3,30 @@ import React from "react";
 
 /**
  * Watches user scrolls for a change in direction.
- * @returns `scrollDir` — The direction the user is scrolling.
+ * @returns The direction the user is scrolling.
  */
 export function useScrollDirection() {
   const [direction, setDirection] = React.useState<"up" | "down">("up");
 
   React.useEffect(() => {
-    let prevScrollY = 0;
+    let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       // Compare to previous position and set the direction
       const { scrollY } = window;
-      const direction = prevScrollY < scrollY ? "down" : "up";
-      prevScrollY = scrollY;
-      setDirection(direction);
+      if (scrollY > lastScrollY) setDirection("down");
+      else if (scrollY < lastScrollY) setDirection("up");
+
+      // Mobile/horizontal scrolling handling
+      lastScrollY = scrollY <= 0 ? 0 : scrollY;
     };
 
+    // Set/clear event listeners
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
-  return { scrollDir: direction };
+  return direction;
 }
 
 /**

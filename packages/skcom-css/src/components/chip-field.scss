@@ -9,6 +9,7 @@
 @use "../abstracts/mixins.scss" as mix;
 @use "../abstracts/typography.scss" as type;
 
+// Base Chip Field
 .skc-chip-field {
   @include mix.transition(
     border-color,
@@ -16,6 +17,7 @@
     var(--easing-standard)
   );
   position: relative;
+  box-sizing: content-box;
   height: 3.5rem;
   border: 1px solid var(--outline);
   border-radius: 0.25rem;
@@ -25,14 +27,46 @@
   }
 
   &:focus-within {
+    margin: -1px;
     border: 2px solid var(--primary);
+
+    .skc-section > & {
+      margin-inline: calc(1rem - 1px);
+    }
   }
 }
 
+// Contextual adaptations
+.skc-dialog,
+.skc-full-screen-dialog,
+.skc-page-header,
+.skc-card--filled {
+  .skc-chip-field__label {
+    background-color: var(--surface-5);
+  }
+}
+
+// Contextual adaptations
+.skc-chip-field__label {
+  .skc-dialog & {
+    background-color: var(--surface-3);
+  }
+
+  .skc-page-header & {
+    background-color: var(--surface-5);
+  }
+
+  .skc-card--filled & {
+    background-color: var(--surface-variant);
+  }
+}
+
+// Scrollable area
 .skc-chip-field__scrollable {
   overflow-x: auto;
 }
 
+// Chip Set and input field
 .skc-chip-field__content {
   display: flex;
   align-items: center;
@@ -43,6 +77,7 @@
   padding-inline: 0.75rem;
 }
 
+// Chip Set
 .skc-chip-field .skc-chip-set {
   flex-wrap: nowrap;
   padding-block: 0.5rem;
@@ -60,6 +95,13 @@
   }
 }
 
+// Linear Progress
+.skc-chip-field .skc-progress {
+  position: absolute;
+  inset: auto 0 0;
+}
+
+// Label
 .skc-chip-field__label {
   @include type.font("body-large");
   font-family: var(--font-display);
@@ -76,6 +118,7 @@
   }
 }
 
+// Input field
 .skc-chip-field__input {
   @include type.font("body-large");
   flex-grow: 1;
@@ -91,5 +134,15 @@
     font-family: var(--font-display);
     padding-left: 0.25rem;
     color: var(--outline);
+  }
+}
+
+@include mix.breakpoint("sm") {
+  .skc-section > .skc-chip-field:focus-within {
+    margin-inline: -1px;
+  }
+
+  .skc-fullscreen-dialog .skc-chip-field__label {
+    background-color: var(--surface-3);
   }
 }

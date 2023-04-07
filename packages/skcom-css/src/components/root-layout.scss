@@ -13,12 +13,12 @@
 @use "../abstracts/mixins.scss" as mix;
 
 body {
+  overflow-x: hidden;
   margin: 0;
 }
 
 .skc-root-layout {
   font-size: var(--text-base);
-  overflow-x: hidden;
   padding-bottom: 5rem;
 }
 
@@ -37,9 +37,13 @@ body {
 
 .skc-root-layout > .skc-nav-drawer {
   position: fixed;
-  z-index: 85;
+  z-index: 80;
   top: 0;
   left: 0;
+}
+
+.skc-root-layout > .skc-progress {
+  margin-bottom: -0.25rem;
 }
 
 .skc-scrim {
@@ -61,6 +65,10 @@ body {
   .skc-root-layout > .skc-nav-bar {
     top: 0;
     bottom: initial;
+
+    ~ .skc-progress {
+      margin-left: 5rem;
+    }
 
     .skc-fab {
       position: relative;

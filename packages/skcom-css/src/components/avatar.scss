@@ -6,6 +6,7 @@
 ////
 
 @use "../abstracts/typography.scss" as type;
+@use "../abstracts/mixins.scss" as mix;
 
 .skc-avatar {
   position: relative;
@@ -17,6 +18,10 @@
   border-radius: 50%;
   background-color: var(--primary-container);
 
+  &:has(img) {
+    background-color: var(--surface-3);
+  }
+
   img,
   svg {
     width: 100%;
@@ -26,7 +31,21 @@
   }
 }
 
+.skc-dialog,
+.skc-page-header,
+.skc-card--filled {
+  .skc-avatar:has(img) {
+    background-color: var(--surface);
+  }
+}
+
 .skc-avatar__initials {
   @include type.font("title-medium");
   user-select: none;
+}
+
+@include mix.breakpoint("sm") {
+  .skc-fullscreen-dialog .skc-avatar:has(img) {
+    background-color: var(--surface);
+  }
 }

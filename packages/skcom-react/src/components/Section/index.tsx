@@ -13,6 +13,7 @@ import "@suankularb-components/css/dist/css/components/section.css";
 // Utilities
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
+import { matchDisplayName } from "../../utils/displayName";
 
 /**
  * Props for {@link Section}.
@@ -63,7 +64,7 @@ export function Section({
       // Header to include the ID with the `id` attribute. This ID will be
       // referred to by Section.
 
-      if ((child as JSX.Element).type.displayName === "Header") {
+      if (matchDisplayName(child, "Header")) {
         // Generate the ID
         headerID = `header-${kebabify((child as JSX.Element).props.children)}`;
 

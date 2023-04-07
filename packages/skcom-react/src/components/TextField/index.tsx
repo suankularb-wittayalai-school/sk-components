@@ -25,7 +25,8 @@ import { kebabify } from "../../utils/format";
 /**
  * Props for {@link TextField Text Field}.
  */
-export interface TextFieldProps extends SKComponent {
+export interface TextFieldProps<FieldValue extends string | File>
+  extends SKComponent {
   /**
    * How the Text Field looks. An outlined Text Field has a lower emphasis than
    * filled, so it is great for a form with many fields.
@@ -150,7 +151,7 @@ export interface TextFieldProps extends SKComponent {
    *
    * @param value The value of the field.
    */
-  onChange?: (value: string | File) => any;
+  onChange?: (value: FieldValue) => any;
 
   /**
    * Allows for translation of the “No files attached” text, which is put in
@@ -170,6 +171,8 @@ export interface TextFieldProps extends SKComponent {
    */
   inputAttr?: JSX.IntrinsicElements["input"];
 }
+
+type ThisIsATest = string | File;
 
 /**
  * A place for users to enter text.
@@ -193,7 +196,7 @@ export interface TextFieldProps extends SKComponent {
  * @param locale Allows for translation of the “No files attached” text.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-export function TextField({
+export function TextField<Value extends string | File>({
   appearance,
   label,
   behavior,
@@ -212,7 +215,7 @@ export function TextField({
   inputAttr,
   style,
   className,
-}: TextFieldProps) {
+}: TextFieldProps<Value>) {
   // Support for file input
   const [file, setFile] = React.useState<File | null>(null);
 
@@ -355,7 +358,7 @@ export function TextField({
             ? (e.target as HTMLInputElement).files![0]
             : null
         );
-      if (onChange) onChange(file || e.target.value);
+      if (onChange) onChange((file || e.target.value) as Value);
 
       if (value === undefined) expandTextarea();
     },
@@ -448,7 +451,7 @@ export function TextField({
                   appearance="text"
                   icon={<MaterialIcon icon="cancel" />}
                   disabled={disabled}
-                  onClick={() => onChange && onChange("")}
+                  onClick={() => onChange && onChange("" as Value)}
                 />
               ) : error ? (
                 <MaterialIcon icon="error" fill />

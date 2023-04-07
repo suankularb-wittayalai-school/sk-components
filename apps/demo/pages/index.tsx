@@ -102,6 +102,7 @@ const ResourcesSection: FC = () => (
       appearance="filled"
       stateLayerEffect
       href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+      aAttr={{ target: "_blank", rel: "noreferrer" }}
       className="mx-4 justify-end self-stretch sm:mx-0"
     >
       <CardContent>
@@ -113,6 +114,7 @@ const ResourcesSection: FC = () => (
       appearance="filled"
       stateLayerEffect
       href="https://github.com/suankularb-wittayalai-school/sk-components"
+      aAttr={{ target: "_blank", rel: "noreferrer" }}
       className="mx-4 justify-end self-stretch sm:mx-0"
     >
       <CardContent>
