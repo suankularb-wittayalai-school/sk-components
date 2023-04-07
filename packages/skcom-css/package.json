@@ -12,6 +12,9 @@
     "build": "sass src:dist/css --style compressed",
     "dev": "sass --watch src:dist/css --style compressed"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
