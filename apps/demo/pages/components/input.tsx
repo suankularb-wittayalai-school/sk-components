@@ -60,6 +60,8 @@ const ChipFieldSection: FC = () => {
   const [value, setValue] = useState<string>("");
   const [classes, setClasses] = useState<number[]>([501, 502, 504]);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   return (
     <Section>
       <Header>Chip Field</Header>
@@ -68,11 +70,16 @@ const ChipFieldSection: FC = () => {
         value={value}
         onChange={setValue}
         onNewEntry={(value) => {
-          if (/[1-6](0[1-9]|1[0-9])/.test(value))
-            setClasses([...classes, Number(value)]);
+          setLoading(true);
+          setTimeout(() => {
+            if (/[1-6](0[1-9]|1[0-9])/.test(value))
+              setClasses([...classes, Number(value)]);
+            setLoading(false);
+          }, 500);
         }}
         onDeleteLast={() => setClasses(classes.slice(0, -1))}
         placeholder="Enter class number"
+        loading={loading}
       >
         <ChipSet>
           {classes.map((classItem) => (

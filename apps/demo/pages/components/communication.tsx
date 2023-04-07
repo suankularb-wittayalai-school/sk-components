@@ -41,6 +41,7 @@ const DialogSection: FC = () => {
   const [issueTitle, setIssueTitle] = useState<string>("");
   const [issueDesc, setIssueDesc] = useState<string>("");
   const [issueExpect, setIssueExpect] = useState<string>("");
+  const [showDiscard, setShowDiscard] = useState<boolean>(false);
 
   return (
     <Section>
@@ -104,7 +105,7 @@ const DialogSection: FC = () => {
           </Button>
         }
         width={820}
-        onClose={() => setShowReport(false)}
+        onClose={() => setShowDiscard(true)}
       >
         <Columns columns={2}>
           <div className="flex flex-col gap-4">
@@ -174,6 +175,29 @@ const DialogSection: FC = () => {
           </div>
         </Columns>
       </FullscreenDialog>
+
+      <Dialog
+        open={showDiscard}
+        width={270}
+        onClose={() => setShowDiscard(false)}
+      >
+        <DialogHeader desc="Discard draft?" />
+        <Actions>
+          <Button appearance="text" onClick={() => setShowDiscard(false)}>
+            Keep editing
+          </Button>
+          <Button
+            appearance="text"
+            dangerous
+            onClick={() => {
+              setShowDiscard(false);
+              setShowReport(false);
+            }}
+          >
+            Discard
+          </Button>
+        </Actions>
+      </Dialog>
     </Section>
   );
 };

@@ -15,4 +15,3 @@ export const tsup: Options = {
   injectStyle: true,
   external: ["react"],
 };
-

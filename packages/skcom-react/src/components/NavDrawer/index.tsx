@@ -14,6 +14,7 @@ import "@suankularb-components/css/dist/css/components/nav-drawer.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 
 /**
  * Props for {@link NavDrawer}.
@@ -86,17 +87,24 @@ export function NavDrawer({
   const injectedChildren =
     // For each Navigation Drawer Section
     React.Children.map(children, (section) =>
-      React.cloneElement(section as JSX.Element, {
-        children:
-          // For each Navigation Drawer Item
-          React.Children.map(
-            ((section as JSX.Element).props as NavDrawerSectionProps).children,
-            // Inject `onClick`, where the Navigation Drawer will close when a
-            // Navigation Drawer Item is clicked
-            (item) =>
-              React.cloneElement(item as JSX.Element, { onClick: onClose })
-          ),
-      })
+      matchDisplayName(section, "NavDrawerSection")
+        ? React.cloneElement(section as JSX.Element, {
+            children:
+              // For each Navigation Drawer Item
+              React.Children.map(
+                ((section as JSX.Element).props as NavDrawerSectionProps)
+                  .children,
+                // Inject `onClick`, where the Navigation Drawer will close when a
+                // Navigation Drawer Item is clicked
+                (item) =>
+                  matchDisplayName(item, "NavDrawerItem")
+                    ? React.cloneElement(item as JSX.Element, {
+                        onClick: onClose,
+                      })
+                    : item
+              ),
+          })
+        : section
     );
 
   return (

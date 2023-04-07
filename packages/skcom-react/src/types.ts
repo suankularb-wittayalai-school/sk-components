@@ -53,3 +53,8 @@ export type DataTableColumnDef<T = any> = ColumnDef<T> &
      */
     noDataMsg: string | JSX.Element;
   }>;
+
+export type AdaptToMotionProps<T extends object> = Omit<
+  T,
+  "onAnimationStart" | "onDragStart" | "onDragEnd" | "onDrag" | "ref"
+>;

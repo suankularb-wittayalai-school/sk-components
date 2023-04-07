@@ -15,6 +15,7 @@ import "@suankularb-components/css/dist/css/components/chip-field.css";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
+import { Progress } from "../Progress";
 
 /**
  * Props for {@link ChipField Chip Field}.
@@ -87,11 +88,28 @@ export interface ChipFieldProps extends SKComponent {
   placeholder?: string;
 
   /**
+   * Disable the Chip Field and add a Progress linear beneath the component to
+   * signify loading status. `onClick` and `href` will have no effect.
+   *
+   * - Optional.
+   */
+  loading?: boolean | number;
+
+  /**
    * The field cannot be edited.
    *
    * - Optional.
    */
   disabled?: boolean;
+
+  /**
+   * Allows for translation of the accessibility labels.
+   * 
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
+   * - Optional.
+   */
+  locale?: "en-US" | "th";
 
   /**
    * Attributes for the underlying `<input>` element used as the field.
@@ -116,7 +134,9 @@ export interface ChipFieldProps extends SKComponent {
  * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
  * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
  * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
+ * @param loading TODO
  * @param disabled The field cannot be edited.
+ * @param locale Allows for translation of the accessibility labels.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
 export function ChipField({
@@ -128,7 +148,9 @@ export function ChipField({
   onNewEntry,
   onDeleteLast,
   placeholder,
+  loading,
   disabled,
+  locale,
   inputAttr,
   style,
   className,
@@ -320,6 +342,14 @@ export function ChipField({
           />
         </div>
       </div>
+
+      {/* Linear progress for i.e. fetching a Chip from user data */}
+      <Progress
+        appearance="linear"
+        alt={locale === "th" ? "กำลังโหลด" : "Loading…"}
+        value={typeof loading === "number" ? loading : undefined}
+        visible={typeof loading === "number" || loading}
+      />
     </div>
   );
 }

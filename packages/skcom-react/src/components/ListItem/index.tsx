@@ -14,6 +14,7 @@ import "@suankularb-components/css/dist/css/components/list-item.css";
 // Utilities
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 import { kebabify } from "../../utils/format";
 
 /**
@@ -141,7 +142,7 @@ export function ListItem({
   let itemID: string | undefined;
   React.Children.forEach(children, (child) => {
     // Find the List Item Content (if exists)
-    if ((child as JSX.Element).type.displayName === "ListItemContent") {
+    if (matchDisplayName(child, "ListItemContent")) {
       // Grab `title` and `alt`
       const { title, alt } = (child as JSX.Element)
         .props as ListItemContentProps;
