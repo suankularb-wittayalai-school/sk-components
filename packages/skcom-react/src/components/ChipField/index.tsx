@@ -4,6 +4,7 @@ import * as React from "react";
 
 // Internal components
 import { ChipSet } from "../ChipSet";
+import { Progress } from "../Progress";
 
 // Types
 import { SKComponent } from "../../types";
@@ -15,7 +16,6 @@ import "@suankularb-components/css/dist/css/components/chip-field.css";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
-import { Progress } from "../Progress";
 
 /**
  * Props for {@link ChipField Chip Field}.
@@ -134,7 +134,7 @@ export interface ChipFieldProps extends SKComponent {
  * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
  * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
  * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
- * @param loading TODO
+ * @param loading Disable the Chip Field and add a Progress linear beneath the component to signify loading status.
  * @param disabled The field cannot be edited.
  * @param locale Allows for translation of the accessibility labels.
  * @param inputAttr Attributes for the underlying `<input>` element used as the field.
