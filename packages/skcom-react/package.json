@@ -6,6 +6,10 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
+  "dependencies": {
+    "@tanstack/react-table": "^8.7.9",
+    "framer-motion": "^9.0.3"
+  },
   "devDependencies": {
     "@suankularb-components/css": "*",
     "@types/react": "^18.0.9",
@@ -21,6 +25,9 @@
     "dev": "tsup --watch",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\""
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suankularb-wittayalai-school/sk-components.git"
@@ -38,10 +45,5 @@
   "bugs": {
     "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
   },
-  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
-  "dependencies": {
-    "@tanstack/react-table": "^8.7.9",
-    "framer-motion": "^9.0.3"
-  }
+  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme"
 }
-
