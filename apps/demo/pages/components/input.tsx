@@ -115,7 +115,7 @@ const TextFieldSection: FC = () => {
       <Header>Text Field</Header>
       <div className="flex flex-col gap-8 pb-8">
         <Columns columns={3} className="!gap-y-8">
-          <TextField
+          <TextField<string>
             appearance="outlined"
             label="Candidate name"
             behavior="single-line"
@@ -123,9 +123,9 @@ const TextFieldSection: FC = () => {
             helperMsg="Full name and surname of candidate"
             required
             value={name}
-            onChange={(value) => setName(value as string)}
+            onChange={setName}
           />
-          <TextField
+          <TextField<string>
             appearance="outlined"
             label="Email"
             behavior="single-line"
@@ -135,20 +135,20 @@ const TextFieldSection: FC = () => {
             required
             error={email.includes("@")}
             value={email}
-            onChange={(value) => setEmail(value as string)}
+            onChange={setEmail}
             inputAttr={{ autoCorrect: "off", autoCapitalize: "none" }}
           />
-          <TextField
+          <TextField<string>
             appearance="outlined"
             label="Tel."
             behavior="single-line"
             leading={<MaterialIcon icon="phone" />}
             canClear
             value={phone}
-            onChange={(value) => setPhone(value as string)}
+            onChange={setPhone}
             inputAttr={{ type: "tel" }}
           />
-          <TextField
+          <TextField<string>
             appearance="outlined"
             label="Facebook"
             behavior="single-line"
@@ -156,7 +156,7 @@ const TextFieldSection: FC = () => {
             canClear
             disabled
           />
-          <TextField
+          <TextField<string>
             appearance="outlined"
             label="Candidate weight"
             behavior="single-line"
@@ -164,10 +164,10 @@ const TextFieldSection: FC = () => {
             trailing="kg"
             error={Number.isNaN(Number(weight)) || Number(weight) < 0}
             value={weight}
-            onChange={(value) => setWeight(value as string)}
+            onChange={setWeight}
             inputAttr={{ type: "number", step: 0.5, min: 0 }}
           />
-          <TextField
+          <TextField<string>
             appearance="outlined"
             label="Birthdate"
             behavior="single-line"
@@ -176,11 +176,11 @@ const TextFieldSection: FC = () => {
             onChange={(value) => setBirthdate(value as string)}
             inputAttr={{ type: "date" }}
           />
-          <TextField
+          <TextField<File>
             appearance="outlined"
             label="Founding document"
             leading={<MaterialIcon icon="attach_file" />}
-            onChange={(value) => setDocument(value as File)}
+            onChange={setDocument}
             inputAttr={{
               type: "file",
               accept:
