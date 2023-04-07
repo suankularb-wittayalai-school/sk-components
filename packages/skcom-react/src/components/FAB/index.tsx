@@ -178,6 +178,7 @@ export function FAB({
         !(stateOnScroll === "disappear" && scrollDir === "down") && (
           <motion.div
             ref={fabRef}
+            layout="position"
             initial={{ scale: 0.4, x: 20, y: 20, opacity: 0 }}
             animate={{ scale: 1, x: 0, y: 0, opacity: 1 }}
             exit={{
@@ -211,12 +212,37 @@ export function FAB({
               className,
             ])}
           >
-            {icon && <div className="skc-fab__icon">{icon}</div>}
-            {
-              // Hide the label on scroll if `stateOnScroll` set to `minimize`
-              !(stateOnScroll === "minimize" && !(scrollDir === "up")) &&
-                children && <span className="skc-fab__label">{children}</span>
-            }
+            {icon && (
+              <motion.div layout="position" className="skc-fab__icon">
+                {icon}
+              </motion.div>
+            )}
+            <AnimatePresence initial={false}>
+              {
+                // Hide the label on scroll if `stateOnScroll` set to `minimize`
+                !(stateOnScroll === "minimize" && scrollDir === "down") &&
+                  children && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{
+                        opacity: 0,
+                        transition: transition(
+                          duration.short2,
+                          easing.standardAccelerate
+                        ),
+                      }}
+                      transition={transition(
+                        duration.medium1,
+                        easing.standardDecelerate
+                      )}
+                      className="skc-fab__label"
+                    >
+                      {children}
+                    </motion.span>
+                  )
+              }
+            </AnimatePresence>
             <motion.span
               aria-hidden
               initial={{ scale: 0, opacity: 0.36 }}
