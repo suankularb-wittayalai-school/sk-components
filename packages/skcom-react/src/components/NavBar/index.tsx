@@ -122,7 +122,6 @@ export function NavBar({
 
   return (
     <motion.nav
-      layout="position"
       layoutRoot
       style={style}
       className={cn(["skc-nav-bar", className])}
