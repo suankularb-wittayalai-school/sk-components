@@ -52,6 +52,9 @@ import {
   TabsContainer,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Utilities
 import { CustomPage } from "@/utils/types";
 
@@ -509,6 +512,11 @@ const ContainersPage: CustomPage = () => (
     <Head>
       <title>Containers - SK Components</title>
     </Head>
+    <PageHeader
+      title="Containers"
+      icon={<MaterialIcon icon="dashboard" />}
+      parentURL="/components"
+    />
     <ContentLayout key="containers-page">
       <AvatarSection />
       <CardSection />
@@ -523,10 +531,6 @@ const ContainersPage: CustomPage = () => (
   </>
 );
 
-ContainersPage.pageHeader = {
-  title: "Containers",
-  icon: <MaterialIcon icon="dashboard" />,
-  parentURL: "/components",
-};
+ContainersPage.parentURL = "/components";
 
 export default ContainersPage;

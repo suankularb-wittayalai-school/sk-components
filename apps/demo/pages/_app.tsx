@@ -6,7 +6,7 @@ import {
   Sarabun,
   IBM_Plex_Sans_Thai,
 } from "next/font/google";
-import { useState } from "react";
+import { FC, ReactNode, useState } from "react";
 
 // SK Components
 import { ThemeProvider } from "@suankularb-components/react";
@@ -15,6 +15,7 @@ import { ThemeProvider } from "@suankularb-components/react";
 import Layout from "@/components/Layout";
 
 // Contexts
+import NavDrawerContext from "@/contexts/NavDrawerContext";
 import PreviousRouteContext from "@/contexts/PreviousRouteContext";
 import SnackbarContext from "@/contexts/SnackbarContext";
 
@@ -39,10 +40,24 @@ const displayFontTH = IBM_Plex_Sans_Thai({
   subsets: ["thai"],
 });
 
-export default function App({ Component, pageProps }: CustomAppProps) {
-  const { fab, pageHeader, childURLs } = Component;
+const Contexts: FC<{ children: ReactNode }> = ({ children }) => {
   const { previousPath } = usePreviousPath();
   const [snackbar, setSnackbar] = useState<JSX.Element | null>(null);
+  const [navOpen, setNavOpen] = useState<boolean>(false);
+
+  return (
+    <PreviousRouteContext.Provider value={previousPath}>
+      <SnackbarContext.Provider value={{ snackbar, setSnackbar }}>
+        <NavDrawerContext.Provider value={{ navOpen, setNavOpen }}>
+          {children}
+        </NavDrawerContext.Provider>
+      </SnackbarContext.Provider>
+    </PreviousRouteContext.Provider>
+  );
+};
+
+export default function App({ Component, pageProps }: CustomAppProps) {
+  const { fab, parentURL, childURLs } = Component;
 
   return (
     <>
@@ -55,17 +70,15 @@ export default function App({ Component, pageProps }: CustomAppProps) {
         }
       `}</style>
 
-      <PreviousRouteContext.Provider value={previousPath}>
-        <SnackbarContext.Provider value={{ snackbar, setSnackbar }}>
-          <MotionConfig reducedMotion="user">
-            <ThemeProvider>
-              <Layout {...{ fab, pageHeader, childURLs }}>
-                <Component {...pageProps} />
-              </Layout>
-            </ThemeProvider>
-          </MotionConfig>
-        </SnackbarContext.Provider>
-      </PreviousRouteContext.Provider>
+      <Contexts>
+        <MotionConfig reducedMotion="user">
+          <ThemeProvider>
+            <Layout {...{ fab, parentURL, childURLs }}>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
+        </MotionConfig>
+      </Contexts>
     </>
   );
 }

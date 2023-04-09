@@ -2,9 +2,6 @@
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 
-// SK Components
-import { PageHeaderProps } from "@suankularb-components/react";
-
 /**
  * The {@link NextPage} type extended with properties for SKCom.
  */
@@ -17,15 +14,9 @@ export type CustomPage = NextPage & {
   fab?: JSX.Element;
 
   /**
-   * Additional props for the Page Header component, applied specifically to
-   * this page only.
-   *
-   * `title` is required.
-   *
-   * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation on Page Header}
+   * The parent URL of the current page.
    */
-  pageHeader?: Pick<PageHeaderProps, "title"> &
-    Partial<Omit<PageHeaderProps, "title">>;
+  parentURL?: string;
 
   /**
    * A list of child URLs of the current page.

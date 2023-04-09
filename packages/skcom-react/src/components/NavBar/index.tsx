@@ -121,7 +121,12 @@ export function NavBar({
   });
 
   return (
-    <nav style={style} className={cn(["skc-nav-bar", className])}>
+    <motion.nav
+      layout="position"
+      layoutRoot
+      style={style}
+      className={cn(["skc-nav-bar", className])}
+    >
       <div className="skc-nav-bar__main">
         <LayoutGroup>
           <section className="skc-nav-bar__toggle-and-fab">
@@ -144,7 +149,7 @@ export function NavBar({
         </LayoutGroup>
       </div>
       <section className="skc-nav-bar__end">{end}</section>
-    </nav>
+    </motion.nav>
   );
 }
 

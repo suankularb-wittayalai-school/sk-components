@@ -17,6 +17,9 @@ import {
   Section,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Utilities
 import { CustomPage } from "@/utils/types";
 
@@ -186,6 +189,7 @@ const AboutPage: CustomPage = () => (
     <Head>
       <title>About - SK Components</title>
     </Head>
+    <PageHeader title="About" icon={<MaterialIcon icon="info" />} />
     <ContentLayout key="about-page">
       <AboutSection />
       <ResourcesSection />
@@ -193,11 +197,6 @@ const AboutPage: CustomPage = () => (
     </ContentLayout>
   </>
 );
-
-AboutPage.pageHeader = {
-  title: "About",
-  icon: <MaterialIcon icon="info" />,
-};
 
 AboutPage.childURLs = [
   "/components/actions",

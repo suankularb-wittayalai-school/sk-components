@@ -21,35 +21,26 @@ import {
   NavDrawer,
   NavDrawerItem,
   NavDrawerSection,
-  PageHeader,
-  Progress,
   RootLayout,
   Snackbar,
   SnackbarProps,
 } from "@suankularb-components/react";
 
-// Internal components
-import Favicon from "@/components/Favicon";
-
 // Contexts
+import NavDrawerContext from "@/contexts/NavDrawerContext";
 import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
-import { usePageIsLoading, useTransitionEvent } from "@/utils/routing";
 import { CustomPage } from "@/utils/types";
 
 const Layout: FC<
-  { children: ReactNode } & Pick<CustomPage, "fab" | "pageHeader" | "childURLs">
-> = ({ children, fab, pageHeader, childURLs }) => {
+  { children: ReactNode } & Pick<CustomPage, "fab" | "parentURL" | "childURLs">
+> = ({ children, fab, parentURL, childURLs }) => {
   // Navigation Bar and Drawer
   const router = useRouter();
-  const [navOpen, setNavOpen] = useState<boolean>(false);
+  const { navOpen, setNavOpen } = useContext(NavDrawerContext);
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
-
-  // Root Layout
-  const pageIsLoading = usePageIsLoading();
-  const transitionEvent = useTransitionEvent(pageHeader?.parentURL, childURLs);
 
   // Snackbar
   const { snackbar } = useContext(SnackbarContext);
@@ -59,16 +50,16 @@ const Layout: FC<
   const showSnackbarAndWait = () => {
     setSnackbarProps(snackbar!.props);
     setSnackbarOpen(true);
-    visabilityTimer = setTimeout(() => setSnackbarOpen(false), 6000);
+    visibilityTimer = setTimeout(() => setSnackbarOpen(false), 6000);
   };
 
   let exitWait: NodeJS.Timeout;
-  let visabilityTimer: NodeJS.Timeout;
+  let visibilityTimer: NodeJS.Timeout;
   useEffect(() => {
     if (!snackbar) return;
 
     clearTimeout(exitWait);
-    clearTimeout(visabilityTimer);
+    clearTimeout(visibilityTimer);
 
     if (snackbarOpen) {
       setSnackbarOpen(false);
@@ -77,12 +68,12 @@ const Layout: FC<
 
     return () => {
       clearTimeout(exitWait);
-      clearTimeout(visabilityTimer);
+      clearTimeout(visibilityTimer);
     };
   }, [snackbar]);
 
   return (
-    <RootLayout transitionEvent={transitionEvent}>
+    <RootLayout>
       {/* Navigation Drawer */}
       <NavDrawer open={navOpen} onClose={() => setNavOpen(false)}>
         {/* Top-level pages */}
@@ -231,24 +222,6 @@ const Layout: FC<
           ))}
         />
       </NavBar>
-
-      {/* Page Header */}
-      {pageHeader && (
-        <PageHeader
-          brand={<Favicon />}
-          homeURL="/"
-          element={Link}
-          onNavToggle={() => setNavOpen(true)}
-          {...pageHeader}
-        />
-      )}
-
-      {/* Page loading indicator */}
-      <Progress
-        appearance="linear"
-        alt="Loading page…"
-        visible={pageIsLoading}
-      />
 
       {/* Snackbar */}
       <Snackbar
