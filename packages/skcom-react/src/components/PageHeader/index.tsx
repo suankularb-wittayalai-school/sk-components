@@ -281,8 +281,6 @@ export function PageHeader({
       <motion.header
         ref={headerRef}
         layoutId="page-header"
-        layout
-        layoutRoot
         transition={transition(duration.short4, easing.standard)}
         style={style}
         className={cn(["skc-page-header", className])}
