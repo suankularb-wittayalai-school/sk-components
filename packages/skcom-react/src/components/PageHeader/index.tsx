@@ -1,11 +1,5 @@
 // External libraries
-import {
-  AnimatePresence,
-  HTMLMotionProps,
-  LayoutGroup,
-  motion,
-  useAnimationControls,
-} from "framer-motion";
+import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import * as React from "react";
 
 // Internal components

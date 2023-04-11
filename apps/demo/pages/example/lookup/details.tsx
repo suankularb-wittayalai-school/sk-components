@@ -15,6 +15,7 @@ import StudentDetails from "@/components/example/lookup/StudentDetails";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
+import PageHeader from "@/components/PageHeader";
 
 const StudentQuickActions: FC = () => {
   const [showShare, setShowShare] = useState<boolean>(false);
@@ -42,14 +43,17 @@ const LookupDetailsPage: CustomPage = () => (
     <Head>
       <title>About - SK Components</title>
     </Head>
+    <PageHeader
+      title="Siravit Phokeed"
+      icon={<MaterialIcon icon="search" />}
+      parentURL="/example/lookup"
+    >
+      <StudentQuickActions />
+    </PageHeader>
     <StudentDetails />
   </>
 );
 
-LookupDetailsPage.pageHeader = {
-  title: "Siravit Phokeed",
-  parentURL: "/example/lookup",
-  children: <StudentQuickActions />,
-};
+LookupDetailsPage.parentURL = "/example/lookup";
 
 export default LookupDetailsPage;

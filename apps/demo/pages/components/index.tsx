@@ -15,6 +15,9 @@ import {
   Section,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Utilities
 import { CustomPage } from "@/utils/types";
 
@@ -23,6 +26,7 @@ const ComponentsPage: CustomPage = () => (
     <Head>
       <title>Components - SK Components</title>
     </Head>
+    <PageHeader title="Components" icon={<MaterialIcon icon="widgets" />} />
     <ContentLayout key="components-page">
       <Section>
         <Columns columns={4}>
@@ -119,11 +123,6 @@ const ComponentsPage: CustomPage = () => (
     </ContentLayout>
   </>
 );
-
-ComponentsPage.pageHeader = {
-  title: "Components",
-  icon: <MaterialIcon icon="widgets" />,
-};
 
 ComponentsPage.childURLs = [
   "/components/actions",

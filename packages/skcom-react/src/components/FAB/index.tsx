@@ -178,7 +178,7 @@ export function FAB({
         !(stateOnScroll === "disappear" && scrollDir === "down") && (
           <motion.div
             ref={fabRef}
-            layout="position"
+            layout
             initial={{ scale: 0.4, x: 20, y: 20, opacity: 0 }}
             animate={{ scale: 1, x: 0, y: 0, opacity: 1 }}
             exit={{
@@ -223,6 +223,7 @@ export function FAB({
                 !(stateOnScroll === "minimize" && scrollDir === "down") &&
                   children && (
                     <motion.span
+                      layout="position"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{

@@ -24,6 +24,9 @@ import {
   ToggleButton,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Contexts
 import SnackbarContext from "@/contexts/SnackbarContext";
 
@@ -408,6 +411,11 @@ const ActionsPage: CustomPage = () => (
     <Head>
       <title>Actions - SK Components</title>
     </Head>
+    <PageHeader
+      title="Actions"
+      icon={<MaterialIcon icon="touch_app" />}
+      parentURL="/components"
+    />
     <ContentLayout key="actions-page">
       <Section>
         <Header>Button</Header>
@@ -428,10 +436,6 @@ const ActionsPage: CustomPage = () => (
   </>
 );
 
-ActionsPage.pageHeader = {
-  title: "Actions",
-  icon: <MaterialIcon icon="touch_app" />,
-  parentURL: "/components",
-};
+ActionsPage.parentURL = "/components";
 
 export default ActionsPage;

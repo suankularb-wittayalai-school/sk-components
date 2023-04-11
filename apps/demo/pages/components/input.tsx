@@ -27,6 +27,9 @@ import {
   TextField,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Utilities
 import { CustomPage } from "@/utils/types";
 
@@ -173,7 +176,7 @@ const TextFieldSection: FC = () => {
             behavior="single-line"
             leading={<MaterialIcon icon="cake" />}
             value={birthdate}
-            onChange={(value) => setBirthdate(value as string)}
+            onChange={setBirthdate}
             inputAttr={{ type: "date" }}
           />
           <TextField<File>
@@ -190,22 +193,22 @@ const TextFieldSection: FC = () => {
             }}
           />
         </Columns>
-        <TextField
+        <TextField<string>
           appearance="outlined"
           label="Party list"
           behavior="multi-line"
           leading={<MaterialIcon icon="groups" />}
           helperMsg="Full name and surname of Kornor candidates"
           value={partyList}
-          onChange={(value) => setPartyList(value as string)}
+          onChange={setPartyList}
         />
-        <TextField
+        <TextField<string>
           appearance="outlined"
           label="Policies"
           behavior="textarea"
           helperMsg="A full list of this party’s policies"
           value={policies}
-          onChange={(value) => setPolicies(value as string)}
+          onChange={setPolicies}
         />
       </div>
     </Section>
@@ -330,6 +333,11 @@ const InputPage: CustomPage = () => (
     <Head>
       <title>Input - SK Components</title>
     </Head>
+    <PageHeader
+      title="Input"
+      icon={<MaterialIcon icon="input" />}
+      parentURL="/components"
+    />
     <ContentLayout key="input-page">
       <CheckboxSection />
       <ChipFieldSection />
@@ -342,10 +350,6 @@ const InputPage: CustomPage = () => (
   </>
 );
 
-InputPage.pageHeader = {
-  title: "Input",
-  icon: <MaterialIcon icon="input" />,
-  parentURL: "/components",
-};
+InputPage.parentURL = "/components";
 
 export default InputPage;
