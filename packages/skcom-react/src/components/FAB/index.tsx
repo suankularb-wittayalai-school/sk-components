@@ -170,17 +170,20 @@ export function FAB({
     title: tooltip,
     className: "skc-fab__wrapper",
     ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["a" | "button"];
+  } satisfies React.ComponentProps<"a" | "button">;
 
   const content = (
     <AnimatePresence initial={false}>
       {
         // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
-        !(stateOnScroll === "disappear" && scrollDir === "down") && (
+        !(
+          atBreakpoint === "base" &&
+          stateOnScroll === "disappear" &&
+          scrollDir === "down"
+        ) && (
           <motion.div
             ref={fabRef}
             layout
-            layoutRoot
             initial={{ scale: 0.4, x: 20, y: 20, opacity: 0 }}
             animate={{ scale: 1, x: 0, y: 0, opacity: 1 }}
             exit={{
@@ -203,13 +206,13 @@ export function FAB({
                 ? "skc-fab--primary"
                 : color === "secondary"
                 ? "skc-fab--secondary"
-                : color === "tertiary"
-                ? "skc-fab--tertiary"
-                : undefined,
-              size === "small"
-                ? "skc-fab--small"
-                : size === "large"
-                ? "skc-fab--large"
+                : color === "tertiary" && "skc-fab--tertiary",
+              // Only apply size on mobile (the other sizes don’t fit in the
+              // Navigation Rail)
+              atBreakpoint === "base"
+                ? size === "small"
+                  ? "skc-fab--small"
+                  : size === "large" && "skc-fab--large"
                 : "skc-fab--standard",
               className,
             ])}
@@ -220,31 +223,32 @@ export function FAB({
               </motion.div>
             )}
             <AnimatePresence initial={false}>
-              {
+              {children &&
+                // Only show the label on mobile (the label doesn’t fit in the
+                // Navigation Rail)
+                atBreakpoint === "base" &&
                 // Hide the label on scroll if `stateOnScroll` set to `minimize`
-                !(stateOnScroll === "minimize" && scrollDir === "down") &&
-                  children && (
-                    <motion.span
-                      layout="position"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{
-                        opacity: 0,
-                        transition: transition(
-                          duration.short2,
-                          easing.standardAccelerate
-                        ),
-                      }}
-                      transition={transition(
-                        duration.medium1,
-                        easing.standardDecelerate
-                      )}
-                      className="skc-fab__label"
-                    >
-                      {children}
-                    </motion.span>
-                  )
-              }
+                !(stateOnScroll === "minimize" && scrollDir === "down") && (
+                  <motion.span
+                    layout="position"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{
+                      opacity: 0,
+                      transition: transition(
+                        duration.short2,
+                        easing.standardAccelerate
+                      ),
+                    }}
+                    transition={transition(
+                      duration.medium1,
+                      easing.standardDecelerate
+                    )}
+                    className="skc-fab__label"
+                  >
+                    {children}
+                  </motion.span>
+                )}
             </AnimatePresence>
             <motion.span
               aria-hidden
