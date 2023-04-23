@@ -71,7 +71,6 @@
 }
 
 .skc-fullscreen-dialog ~ .skc-scrim {
-  z-index: 90;
   margin: 0 !important;
 }
 
@@ -90,20 +89,6 @@
     transform: translate(-50%, -50%);
     border-radius: var(--rounded-xl);
     background-color: var(--surface-3);
-
-    &,
-    .skc-text-field--outlined .skc-text-field__label,
-    .skc-chip-field__label {
-      background-color: var(--surface-3);
-    }
-
-    .skc-text-field--filled {
-      background-color: var(--surface-1);
-
-      &::before {
-        background-color: var(--outline);
-      }
-    }
   }
 
   .skc-fullscreen-dialog__top-app-bar {
