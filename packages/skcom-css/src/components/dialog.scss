@@ -39,5 +39,6 @@
 }
 
 .skc-dialog ~ .skc-scrim {
+  z-index: 90;
   margin: 0 !important;
 }
