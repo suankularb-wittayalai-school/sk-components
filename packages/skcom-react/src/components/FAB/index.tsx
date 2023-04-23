@@ -15,7 +15,7 @@ import {
   useRipple,
 } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { useScrollDirection } from "../../utils/window";
+import { useBreakpoint, useScrollDirection } from "../../utils/window";
 
 /**
  * Props for {@link FAB}.
@@ -162,7 +162,8 @@ export function FAB({
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(fabRef);
 
   // Scroll direction
-  const scrollDir = useScrollDirection();
+  const { atBreakpoint } = useBreakpoint();
+  const scrollDir = useScrollDirection({ disabled: atBreakpoint !== "base" });
 
   const props = {
     "aria-label": alt,
@@ -179,6 +180,7 @@ export function FAB({
           <motion.div
             ref={fabRef}
             layout
+            layoutRoot
             initial={{ scale: 0.4, x: 20, y: 20, opacity: 0 }}
             animate={{ scale: 1, x: 0, y: 0, opacity: 1 }}
             exit={{

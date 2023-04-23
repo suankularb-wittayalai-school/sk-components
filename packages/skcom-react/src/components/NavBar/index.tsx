@@ -121,34 +121,28 @@ export function NavBar({
   });
 
   return (
-    <motion.nav
-      layoutRoot
-      style={style}
-      className={cn(["skc-nav-bar", className])}
-    >
-      <div className="skc-nav-bar__main">
-        <LayoutGroup>
-          <section className="skc-nav-bar__toggle-and-fab">
-            <Button
-              appearance="text"
-              icon={<MaterialIcon icon="menu" />}
-              alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
-              onClick={onNavToggle}
-            />
-            <div className="skc-nav-bar__brand">{brand}</div>
-            {responsiveFab}
-          </section>
-          <motion.section
-            layout="position"
-            transition={transition(duration.medium2, easing.standard)}
-            className="skc-nav-bar__destinations"
-          >
-            {children}
-          </motion.section>
-        </LayoutGroup>
-      </div>
+    <nav style={style} className={cn(["skc-nav-bar", className])}>
+      <motion.div layout layoutRoot className="skc-nav-bar__main">
+        <section className="skc-nav-bar__toggle-and-fab">
+          <Button
+            appearance="text"
+            icon={<MaterialIcon icon="menu" />}
+            alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
+            onClick={onNavToggle}
+          />
+          <div className="skc-nav-bar__brand">{brand}</div>
+          {responsiveFab}
+        </section>
+        <motion.section
+          layout="position"
+          transition={transition(duration.medium2, easing.standard)}
+          className="skc-nav-bar__destinations"
+        >
+          {children}
+        </motion.section>
+      </motion.div>
       <section className="skc-nav-bar__end">{end}</section>
-    </motion.nav>
+    </nav>
   );
 }
 
