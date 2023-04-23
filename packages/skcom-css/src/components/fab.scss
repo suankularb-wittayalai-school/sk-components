@@ -45,7 +45,7 @@
 }
 
 // Hover effect on state layer
-.skc-fab__wrapper:hover .skc-fab,
+.skc-fab__wrapper:hover > .skc-fab,
 .skc-fab:hover {
   &::before {
     opacity: 0.08;
@@ -53,8 +53,8 @@
 }
 
 // Focus and active effect on state layer
-.skc-fab__wrapper:focus .skc-fab,
-.skc-fab__wrapper:active .skc-fab,
+.skc-fab__wrapper:focus > .skc-fab,
+.skc-fab__wrapper:active > .skc-fab,
 .skc-fab:focus,
 .skc-fab:active {
   &::before {
