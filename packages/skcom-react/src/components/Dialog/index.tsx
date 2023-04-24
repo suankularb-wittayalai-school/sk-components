@@ -161,7 +161,7 @@ export function Dialog({
               ),
             }}
             transition={transition(duration.medium2, easing.standardDecelerate)}
-            style={{ ...style, width }}
+            style={{ ...style, width, borderRadius: 28 }}
             className={cn(["skc-dialog", className])}
           >
             {children}

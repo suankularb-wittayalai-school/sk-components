@@ -3,12 +3,22 @@ import React from "react";
 
 /**
  * Watches user scrolls for a change in direction.
+ *
+ * @param options Options for this hook.
+ * @param options.disabled Disable the check, always return up.
+ *
  * @returns The direction the user is scrolling.
  */
-export function useScrollDirection() {
+export function useScrollDirection(options?: Partial<{ disabled: boolean }>) {
   const [direction, setDirection] = React.useState<"up" | "down">("up");
 
   React.useEffect(() => {
+    // Don’t perform the check if the hook is disabled
+    if (options?.disabled) {
+      setDirection("up");
+      return;
+    }
+
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
@@ -24,7 +34,7 @@ export function useScrollDirection() {
     // Set/clear event listeners
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [options?.disabled]);
 
   return direction;
 }

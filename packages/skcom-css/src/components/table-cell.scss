@@ -17,16 +17,20 @@
 
   // Cell borders
 
+  // Horizontal borders:
+  // All cells that is not the rightmost gets a right border
   &:not(:last-child) {
     border-right: 1px solid var(--outline-variant);
   }
 
+  // Vertical borders:
+  // All rows that is not the last gets a bottom border
   .skc-table-row:not(:last-child) &,
+  // The last row in the head area succeeded by a body area gets a bottom border
   .skc-table:has(.skc-table-body) .skc-table-head .skc-table-row:last-child &,
-  .skc-data-table__content:has(.skc-table-body)
-    .skc-table-head
-    .skc-table-row:last-child
-    &,
+  .skc-data-table-content:has(.skc-table-body) .skc-table-head .skc-table-row:last-child
+  &,
+  // The last row in the body area succeeded by a foot area gets a bottom border
   .skc-table:has(.skc-table-foot) .skc-table-body .skc-table-row:last-child & {
     border-bottom: 1px solid var(--outline-variant);
   }
@@ -179,7 +183,7 @@
 }
 
 // Options Menu
-.skc-table-cell .skc-menu {
+.skc-table-cell > .skc-menu {
   inset: 0 0 auto 0;
   width: 100%;
 }
