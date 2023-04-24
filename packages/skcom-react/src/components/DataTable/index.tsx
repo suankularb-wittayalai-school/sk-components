@@ -46,7 +46,7 @@ export function DataTable({ children, style, className }: DataTableProps) {
     <motion.figure
       layout
       transition={transition(duration.medium4, easing.standard)}
-      style={style}
+      style={{ ...style, borderRadius: 20 }}
       className={cn(["skc-data-table", className])}
     >
       {children}
