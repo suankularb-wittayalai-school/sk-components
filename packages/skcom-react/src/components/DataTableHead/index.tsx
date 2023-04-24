@@ -10,9 +10,6 @@ import { TableRow } from "../TableRow";
 // Types
 import { DataTableColumnDef, SKComponent } from "../../types";
 
-// Styles
-import "@suankularb-components/css/dist/css/components/table-head.css";
-
 // Utilities
 import {
   transition,
