@@ -197,7 +197,12 @@ export function FAB({
               ),
             }}
             transition={transition(duration.medium1, easing.standardDecelerate)}
-            style={style}
+            style={{
+              ...style,
+              borderRadius: { small: 12, standard: 16, large: 28 }[
+                (atBreakpoint === "base" && size) || "standard"
+              ],
+            }}
             className={cn([
               "skc-fab",
               color === "surface"
