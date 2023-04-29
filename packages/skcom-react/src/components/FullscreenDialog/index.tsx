@@ -132,7 +132,7 @@ export function FullscreenDialog({
 
   const fullscreenDialogAnimation: Variants = {
     initial: { opacity: 0, scale: 0.75 },
-    animate: { opacity: 1, scale: 1 },
+    animate: { opacity: 1, scale: 1, x: 0, y: 0 },
     exit: {
       opacity: 0,
       scale: 0.9,
@@ -212,18 +212,13 @@ export function FullscreenDialog({
             aria-labelledby={`${dialogID}-title`}
             aria-describedby={`${dialogID}-desc`}
             aria-modal="true"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={
-              atBreakpoint === "base"
-                ? fullscreenDialogAnimation
-                : dialogAnimation
-            }
+            {...(atBreakpoint === "base"
+              ? fullscreenDialogAnimation
+              : dialogAnimation)}
             transition={transition(duration.medium2, easing.standardDecelerate)}
             style={{
               ...style,
-              width: atBreakpoint === "base" ? undefined : width,
+              ...(atBreakpoint !== "base" ? { width, borderRadius: 28 } : {}),
             }}
             className={cn(["skc-fullscreen-dialog", className])}
           >
@@ -240,9 +235,9 @@ export function FullscreenDialog({
             </div>
 
             {/* Content */}
-            <motion.div className="skc-fullscreen-dialog__content">
+            <div className="skc-fullscreen-dialog__content">
               {injectedChildren}
-            </motion.div>
+            </div>
           </motion.div>
         </>
       )}

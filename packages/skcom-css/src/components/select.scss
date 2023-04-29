@@ -95,6 +95,34 @@
   }
 }
 
+// Contextual adaptations
+.skc-dialog,
+.skc-fullscreen-dialog,
+.skc-page-header,
+.skc-card--filled {
+  .skc-select--filled {
+    background-color: var(--surface-1);
+
+    &::before {
+      background-color: var(--outline);
+    }
+  }
+}
+
+.skc-select--outlined .skc-select__label {
+  .skc-dialog & {
+    background-color: var(--surface-3);
+  }
+
+  .skc-page-header & {
+    background-color: var(--surface-5);
+  }
+
+  .skc-card--filled & {
+    background-color: var(--surface-variant);
+  }
+}
+
 // Options Menu
 .skc-select ~ .skc-menu {
   inset: 3.5rem 0 auto 0;

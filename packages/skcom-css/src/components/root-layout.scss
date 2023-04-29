@@ -37,7 +37,7 @@ body {
 
 .skc-root-layout > .skc-nav-drawer {
   position: fixed;
-  z-index: 80;
+  z-index: 90;
   top: 0;
   left: 0;
 }
@@ -48,7 +48,7 @@ body {
 
 .skc-scrim {
   position: fixed;
-  z-index: 80;
+  z-index: 90;
   top: 0;
   right: 0;
   bottom: 0;

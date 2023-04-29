@@ -39,7 +39,13 @@ const ContactCard: FC<{
   };
 
   return (
-    <Card appearance="outlined" direction="row" stateLayerEffect href={href}>
+    <Card
+      appearance="outlined"
+      direction="row"
+      stateLayerEffect
+      href={href}
+      aAttr={{ target: "_blank", rel: "noreferrer" }}
+    >
       <CardHeader
         avatar={<Avatar>{avatarMap[type]}</Avatar>}
         title={label}

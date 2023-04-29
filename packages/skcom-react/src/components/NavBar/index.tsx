@@ -98,51 +98,27 @@ export function NavBar({
 }: NavBarProps) {
   const { duration, easing } = useAnimationConfig();
 
-  const { atBreakpoint } = useBreakpoint();
-  const responsiveFab = React.Children.map(fab, (child) => {
-    if (matchDisplayName(child, "FAB"))
-      // (@SiravitPhokeed)
-      // We’re not conditionally cloning the FAB (but instead just changing the
-      // props on the same cloned component) because apparently having the
-      // Navigation Rail version be technically a different component from the
-      // Navigation Bar one confuses Framer Motion and creates a weird layout
-      // shift effect.
-      return React.cloneElement(
-        child as JSX.Element,
-        atBreakpoint !== "base"
-          ? {
-              children: undefined,
-              size: "standard",
-              stateOnScroll: undefined,
-            }
-          : undefined
-      );
-    return child;
-  });
-
   return (
     <nav style={style} className={cn(["skc-nav-bar", className])}>
-      <div className="skc-nav-bar__main">
-        <LayoutGroup>
-          <section className="skc-nav-bar__toggle-and-fab">
-            <Button
-              appearance="text"
-              icon={<MaterialIcon icon="menu" />}
-              alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
-              onClick={onNavToggle}
-            />
-            <div className="skc-nav-bar__brand">{brand}</div>
-            {responsiveFab}
-          </section>
-          <motion.section
-            layout="position"
-            transition={transition(duration.medium2, easing.standard)}
-            className="skc-nav-bar__destinations"
-          >
-            {children}
-          </motion.section>
-        </LayoutGroup>
-      </div>
+      <motion.div layout layoutRoot className="skc-nav-bar__main">
+        <section className="skc-nav-bar__toggle-and-fab">
+          <Button
+            appearance="text"
+            icon={<MaterialIcon icon="menu" />}
+            alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
+            onClick={onNavToggle}
+          />
+          <div className="skc-nav-bar__brand">{brand}</div>
+          {fab}
+        </section>
+        <motion.section
+          layout="position"
+          transition={transition(duration.medium2, easing.standard)}
+          className="skc-nav-bar__destinations"
+        >
+          {children}
+        </motion.section>
+      </motion.div>
       <section className="skc-nav-bar__end">{end}</section>
     </nav>
   );

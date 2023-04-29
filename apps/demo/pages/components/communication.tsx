@@ -27,6 +27,9 @@ import {
   TextField,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Utilities
 import { CustomPage } from "@/utils/types";
 
@@ -146,30 +149,30 @@ const DialogSection: FC = () => {
           </div>
           <div>
             <div className="flex flex-col gap-12 pb-12">
-              <TextField
+              <TextField<string>
                 appearance="outlined"
                 label="Title"
                 behavior="single-line"
                 helperMsg="What is your issue?"
                 value={issueTitle}
-                onChange={(value) => setIssueTitle(value as string)}
+                onChange={setIssueTitle}
               />
-              <TextField
+              <TextField<string>
                 appearance="outlined"
                 label="Description"
                 behavior="textarea"
                 helperMsg="A clear and concise description."
                 value={issueDesc}
-                onChange={(value) => setIssueDesc(value as string)}
+                onChange={setIssueDesc}
               />
-              <TextField
+              <TextField<string>
                 appearance="outlined"
                 label="Expectation"
                 behavior="textarea"
                 helperMsg="What you expected to have happened/think should be
                   implemented."
                 value={issueExpect}
-                onChange={(value) => setIssueExpect(value as string)}
+                onChange={setIssueExpect}
               />
             </div>
           </div>
@@ -257,6 +260,11 @@ const CommunicationPage: CustomPage = () => (
     <Head>
       <title>Communication - SK Components</title>
     </Head>
+    <PageHeader
+      title="Communication"
+      icon={<MaterialIcon icon="swap_horiz" />}
+      parentURL="/components"
+    />
     <ContentLayout key="communication-page">
       <DialogSection />
       <ProgressSection />
@@ -265,10 +273,6 @@ const CommunicationPage: CustomPage = () => (
   </>
 );
 
-CommunicationPage.pageHeader = {
-  title: "Communication",
-  icon: <MaterialIcon icon="swap_horiz" />,
-  parentURL: "/components",
-};
+CommunicationPage.parentURL = "/components";
 
 export default CommunicationPage;

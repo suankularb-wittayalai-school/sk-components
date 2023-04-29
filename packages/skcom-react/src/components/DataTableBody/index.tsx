@@ -16,14 +16,25 @@ import "@suankularb-components/css/dist/css/components/table-body.css";
 /**
  * Props for {@link DataTableBody Data Table Body}.
  */
-export interface DataTableBodyProps extends SKComponent {
+export interface DataTableBodyProps<RowShape extends {} = any>
+  extends SKComponent {
   /**
    * The return of `getRowModel`, one of the functions of the Tanstack Table
    * instance.
    *
    * - Always required.
    */
-  rowModel: RowModel<any>;
+  rowModel: RowModel<RowShape>;
+
+  /**
+   * Actions related to a row, shown on hover.
+   *
+   * - Must be a Segmented Button or a Button.
+   * - Optional.
+   *
+   * @param row The data for the row this is place in.
+   */
+  rowActions?: JSX.Element | ((row: RowShape) => JSX.Element);
 }
 
 /**
@@ -32,17 +43,26 @@ export interface DataTableBodyProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kfe16c5emou5 SKCom documentation}
  *
  * @param children The return of `getRowModel`, one of the functions of the Tanstack Table instance.
+ * @param rowActions Actions related to a row, shown on hover.
  */
-export function DataTableBody({
+export function DataTableBody<RowShape extends {}>({
   rowModel,
+  rowActions,
   style,
   className,
-}: DataTableBodyProps) {
+}: DataTableBodyProps<RowShape>) {
   return (
     <TableBody {...{ style, className }}>
       {rowModel.rows.map((row) => {
         return (
-          <TableRow key={row.id}>
+          <TableRow
+            key={row.id}
+            actions={
+              typeof rowActions === "function"
+                ? rowActions(row.original)
+                : rowActions
+            }
+          >
             {row.getVisibleCells().map((cell) => {
               const columnDef = cell.column.columnDef as DataTableColumnDef;
               return (

@@ -10,6 +10,7 @@ import {
 } from "@suankularb-components/react";
 
 // Internal components
+import PageHeader from "@/components/PageHeader";
 import ShareDialog from "@/components/example/lookup/ShareDialog";
 import StudentDetails from "@/components/example/lookup/StudentDetails";
 
@@ -42,14 +43,17 @@ const LookupDetailsPage: CustomPage = () => (
     <Head>
       <title>About - SK Components</title>
     </Head>
+    <PageHeader
+      title="Siravit Phokeed"
+      icon={<MaterialIcon icon="search" />}
+      parentURL="/example/lookup"
+    >
+      <StudentQuickActions />
+    </PageHeader>
     <StudentDetails />
   </>
 );
 
-LookupDetailsPage.pageHeader = {
-  title: "Siravit Phokeed",
-  parentURL: "/example/lookup",
-  children: <StudentQuickActions />,
-};
+LookupDetailsPage.parentURL = "/example/lookup";
 
 export default LookupDetailsPage;

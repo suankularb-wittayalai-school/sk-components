@@ -18,14 +18,14 @@ import {
 } from "@suankularb-components/react";
 
 // Internal components
+import PageHeader from "@/components/PageHeader";
 import StudentDetails from "@/components/example/lookup/StudentDetails";
+import ShareDialog from "@/components/example/lookup/ShareDialog";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import ShareDialog from "@/components/example/lookup/ShareDialog";
 
 // List side
-
 const ListSide: FC = () => {
   const { atBreakpoint } = useBreakpoint();
 
@@ -82,7 +82,6 @@ const ListSide: FC = () => {
 };
 
 // Details side
-
 const StudentDetailsHeader: FC = () => {
   const [showShare, setShowShare] = useState<boolean>(false);
 
@@ -119,7 +118,11 @@ const LookupPage: CustomPage = () => (
     <Head>
       <title>Split Layout demo - SK Components</title>
     </Head>
-
+    <PageHeader
+      title="Lookup students"
+      icon={<MaterialIcon icon="search" />}
+      parentURL="/example"
+    />
     <SplitLayout ratio="list-detail">
       <ListSide />
       <main>
@@ -132,12 +135,7 @@ const LookupPage: CustomPage = () => (
   </>
 );
 
-LookupPage.pageHeader = {
-  title: "Lookup students",
-  icon: <MaterialIcon icon="search" />,
-  parentURL: "/example",
-};
-
+LookupPage.parentURL = "/example";
 LookupPage.childURLs = ["/example/lookup/details"];
 
 export default LookupPage;

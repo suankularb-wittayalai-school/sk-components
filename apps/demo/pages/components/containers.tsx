@@ -1,19 +1,19 @@
 // External libraries
 import {
-  useReactTable,
+  PaginationState,
+  SortingState,
   getCoreRowModel,
   getFilteredRowModel,
-  getSortedRowModel,
-  SortingState,
   getPaginationRowModel,
-  PaginationState,
+  getSortedRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
 
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { FC, useMemo, useState } from "react";
+import { FC, useContext, useMemo, useState } from "react";
 
 // SK Components
 import {
@@ -42,6 +42,8 @@ import {
   Menu,
   MenuItem,
   Section,
+  SegmentedButton,
+  Snackbar,
   SplitLayout,
   Tab,
   Table,
@@ -51,6 +53,12 @@ import {
   TableRow,
   TabsContainer,
 } from "@suankularb-components/react";
+
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
+// Contexts
+import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
@@ -152,6 +160,8 @@ const progressMap = {
 };
 
 const DataTableSection: FC = () => {
+  const { setSnackbar } = useContext(SnackbarContext);
+
   const [globalFilter, setGlobalFilter] = useState<string>("");
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -264,7 +274,7 @@ const DataTableSection: FC = () => {
   return (
     <Section>
       <Header>Data Table</Header>
-      <DataTable>
+      <DataTable layout>
         <DataTableSearch
           value={globalFilter}
           onChange={setGlobalFilter}
@@ -282,7 +292,30 @@ const DataTableSection: FC = () => {
         />
         <DataTableContent contentWidth={720}>
           <DataTableHead headerGroups={getHeaderGroups()} />
-          <DataTableBody rowModel={getRowModel()} />
+          <DataTableBody<Task>
+            rowModel={getRowModel()}
+            rowActions={(row) => (
+              <SegmentedButton alt="Row actions">
+                <Button
+                  appearance="outlined"
+                  icon={<MaterialIcon icon="edit" />}
+                  tooltip="Edit this entry"
+                  onClick={() =>
+                    setSnackbar(<Snackbar>You’re editing {row.task}</Snackbar>)
+                  }
+                />
+                <Button
+                  appearance="outlined"
+                  icon={<MaterialIcon icon="delete" />}
+                  tooltip="Delete this entry"
+                  dangerous
+                  onClick={() =>
+                    setSnackbar(<Snackbar>{row.task} deleted</Snackbar>)
+                  }
+                />
+              </SegmentedButton>
+            )}
+          />
         </DataTableContent>
         <DataTablePagination
           rowsPerPage={5}
@@ -509,6 +542,11 @@ const ContainersPage: CustomPage = () => (
     <Head>
       <title>Containers - SK Components</title>
     </Head>
+    <PageHeader
+      title="Containers"
+      icon={<MaterialIcon icon="dashboard" />}
+      parentURL="/components"
+    />
     <ContentLayout key="containers-page">
       <AvatarSection />
       <CardSection />
@@ -523,10 +561,6 @@ const ContainersPage: CustomPage = () => (
   </>
 );
 
-ContainersPage.pageHeader = {
-  title: "Containers",
-  icon: <MaterialIcon icon="dashboard" />,
-  parentURL: "/components",
-};
+ContainersPage.parentURL = "/components";
 
 export default ContainersPage;
