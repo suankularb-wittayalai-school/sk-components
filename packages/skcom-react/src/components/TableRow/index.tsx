@@ -21,6 +21,14 @@ export interface TableRowProps extends SKComponent {
    * - Always required.
    */
   children: React.ReactNode;
+
+  /**
+   * Actions related to a row, shown on hover.
+   *
+   * - Must be a Segmented Button or a Button.
+   * - Optional.
+   */
+  actions?: JSX.Element;
 }
 
 /**
@@ -30,11 +38,25 @@ export interface TableRowProps extends SKComponent {
  * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation}
  *
  * @param children Table Row has the same behaviour as `<tr>`.
+ * @param actions Actions related to a row, shown on hover.
  */
-export function TableRow({ children, style, className }: TableRowProps) {
+export function TableRow({
+  children,
+  actions,
+  style,
+  className,
+}: TableRowProps) {
   return (
-    <tr style={style} className={cn(["skc-table-row", className])}>
+    <tr
+      tabIndex={actions ? 0 : undefined}
+      style={style}
+      className={cn(["skc-table-row", className])}
+    >
+      {/* Table Cells */}
       {children}
+
+      {/* Row ations */}
+      {actions && <td className="skc-table-row__actions">{actions}</td>}
     </tr>
   );
 }

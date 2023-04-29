@@ -6,6 +6,44 @@
 /// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation
 ////
 
+@use "../abstracts/mixins.scss" as mix;
+
 .skc-table-row {
+  position: relative;
   display: table-row;
+
+  &:has(.skc-table-row__actions)::after {
+    @include mix.state-layer();
+    margin-left: -1px;
+    background-color: var(--on-surface);
+  }
+
+  &:hover::after {
+    opacity: 0.08;
+  }
+
+  &:focus-within::after {
+    opacity: 0.12;
+  }
+
+  &:hover,
+  &:focus-within {
+    .skc-table-row__actions {
+      opacity: 1;
+    }
+  }
+}
+
+.skc-table-row__actions {
+  @include mix.transition(
+    opacity,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+  position: absolute;
+  z-index: 10;
+  inset: calc((1.25rem + 2px) * -1) auto auto 0.75rem;
+  opacity: 0;
+  border-radius: var(--rounded-full);
+  background-color: var(--surface);
 }

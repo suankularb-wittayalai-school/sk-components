@@ -19,7 +19,7 @@
 
   // Horizontal borders:
   // All cells that is not the rightmost gets a right border
-  &:not(:last-child) {
+  &:not(:last-child):not(:has(+ .skc-table-row__actions)) {
     border-right: 1px solid var(--outline-variant);
   }
 
