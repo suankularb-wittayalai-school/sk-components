@@ -42,6 +42,7 @@ import {
   Menu,
   MenuItem,
   Section,
+  SegmentedButton,
   SplitLayout,
   Tab,
   Table,
@@ -285,7 +286,22 @@ const DataTableSection: FC = () => {
         />
         <DataTableContent contentWidth={720}>
           <DataTableHead headerGroups={getHeaderGroups()} />
-          <DataTableBody rowModel={getRowModel()} />
+          <DataTableBody<Task>
+            rowModel={getRowModel()}
+            rowActions={
+              <SegmentedButton alt="Row actions">
+                <Button
+                  appearance="outlined"
+                  icon={<MaterialIcon icon="edit" />}
+                />
+                <Button
+                  appearance="outlined"
+                  icon={<MaterialIcon icon="delete" />}
+                  dangerous
+                />
+              </SegmentedButton>
+            }
+          />
         </DataTableContent>
         <DataTablePagination
           rowsPerPage={5}
