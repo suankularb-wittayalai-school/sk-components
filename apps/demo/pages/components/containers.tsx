@@ -268,7 +268,7 @@ const DataTableSection: FC = () => {
   return (
     <Section>
       <Header>Data Table</Header>
-      <DataTable>
+      <DataTable layout>
         <DataTableSearch
           value={globalFilter}
           onChange={setGlobalFilter}
