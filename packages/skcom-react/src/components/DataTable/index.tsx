@@ -1,5 +1,5 @@
 // External libraries
-import { motion } from "framer-motion";
+import { LayoutProps, motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -29,6 +29,15 @@ export interface DataTableProps extends SKComponent {
    * - Always required.
    */
   children: React.ReactNode;
+
+  /**
+   * Configuration for
+   * {@link https://www.framer.com/motion/layout-animations/ layout animation with Framer Motion}.
+   * 
+   * - Must be `true`, `position`, `size`, or `preserve-aspect`.
+   * - Optional.
+   */
+  layout: LayoutProps["layout"],
 }
 
 /**
@@ -39,12 +48,12 @@ export interface DataTableProps extends SKComponent {
  *
  * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
  */
-export function DataTable({ children, style, className }: DataTableProps) {
+export function DataTable({ children, layout, style, className }: DataTableProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
     <motion.figure
-      layout
+      layout={layout}
       transition={transition(duration.medium4, easing.standard)}
       style={{ ...style, borderRadius: 20 }}
       className={cn(["skc-data-table", className])}
