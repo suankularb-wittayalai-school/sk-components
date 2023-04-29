@@ -45,12 +45,12 @@ export interface DataTableBodyProps<RowShape extends {} = any>
  * @param children The return of `getRowModel`, one of the functions of the Tanstack Table instance.
  * @param rowActions Actions related to a row, shown on hover.
  */
-export function DataTableBody<RowShape extends {} = any>({
+export function DataTableBody<RowShape extends {}>({
   rowModel,
   rowActions,
   style,
   className,
-}: DataTableBodyProps) {
+}: DataTableBodyProps<RowShape>) {
   return (
     <TableBody {...{ style, className }}>
       {rowModel.rows.map((row) => {
@@ -58,7 +58,9 @@ export function DataTableBody<RowShape extends {} = any>({
           <TableRow
             key={row.id}
             actions={
-              typeof rowActions === "function" ? rowActions(row) : rowActions
+              typeof rowActions === "function"
+                ? rowActions(row.original)
+                : rowActions
             }
           >
             {row.getVisibleCells().map((cell) => {
