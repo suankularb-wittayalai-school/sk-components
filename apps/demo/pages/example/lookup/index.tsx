@@ -18,15 +18,14 @@ import {
 } from "@suankularb-components/react";
 
 // Internal components
+import PageHeader from "@/components/PageHeader";
 import StudentDetails from "@/components/example/lookup/StudentDetails";
+import ShareDialog from "@/components/example/lookup/ShareDialog";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import ShareDialog from "@/components/example/lookup/ShareDialog";
-import PageHeader from "@/components/PageHeader";
 
 // List side
-
 const ListSide: FC = () => {
   const { atBreakpoint } = useBreakpoint();
 
@@ -83,7 +82,6 @@ const ListSide: FC = () => {
 };
 
 // Details side
-
 const StudentDetailsHeader: FC = () => {
   const [showShare, setShowShare] = useState<boolean>(false);
 

@@ -27,9 +27,11 @@ import {
   TextField,
 } from "@suankularb-components/react";
 
+// Internal components
+import PageHeader from "@/components/PageHeader";
+
 // Utilities
 import { CustomPage } from "@/utils/types";
-import PageHeader from "@/components/PageHeader";
 
 const DialogSection: FC = () => {
   const [showRemStudents, setShowRemStudents] = useState<boolean>(false);

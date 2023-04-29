@@ -10,12 +10,12 @@ import {
 } from "@suankularb-components/react";
 
 // Internal components
+import PageHeader from "@/components/PageHeader";
 import ShareDialog from "@/components/example/lookup/ShareDialog";
 import StudentDetails from "@/components/example/lookup/StudentDetails";
 
 // Utilities
 import { CustomPage } from "@/utils/types";
-import PageHeader from "@/components/PageHeader";
 
 const StudentQuickActions: FC = () => {
   const [showShare, setShowShare] = useState<boolean>(false);
