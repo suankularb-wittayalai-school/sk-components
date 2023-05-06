@@ -1,6 +1,9 @@
 // External libraries
 import * as React from "react";
 
+// Internal components
+import { TableCell, TableCellProps } from "../TableCell";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -9,6 +12,7 @@ import "@suankularb-components/css/dist/css/components/table-row.css";
 
 // Utilities
 import { cn } from "../../utils/className";
+import { matchDisplayName } from "../../utils/displayName";
 
 /**
  * Props for {@link TableRow Table Row}.
@@ -53,10 +57,19 @@ export function TableRow({
       className={cn(["skc-table-row", className])}
     >
       {/* Table Cells */}
-      {children}
-
-      {/* Row ations */}
-      {actions && <td className="skc-table-row__actions">{actions}</td>}
+      {actions
+        ? // Inject row actions into the first Table Cell
+          React.Children.map(children, (child, idx) =>
+            idx === 0 && matchDisplayName(child, "TableCell") ? (
+              <TableCell {...(child as JSX.Element).props}>
+                {((child as JSX.Element).props as TableCellProps).children}
+                <div className="skc-table-row__actions">{actions}</div>
+              </TableCell>
+            ) : (
+              child
+            )
+          )
+        : children}
     </tr>
   );
 }
