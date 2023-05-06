@@ -44,9 +44,16 @@
   padding: 1rem 1.5rem;
   text-align: center;
 
-  &:has(.skc-icon:first-child) {
-    padding-block: 0.875rem;
-    padding-left: 0.75rem;
+  &,
+  > .skc-table-cell__menu-toggle {
+    &:has(> .skc-icon:first-child) {
+      padding-block: 0.875rem;
+      padding-left: 0.75rem;
+
+      > .skc-icon:first-child {
+        margin-right: 0.25rem;
+      }
+    }
   }
 
   &:has(
@@ -56,11 +63,6 @@
       .skc-suggestion-chip
     ) {
     padding-block: 0.625rem;
-  }
-
-  .skc-icon {
-    margin-right: 0.25rem;
-    color: var(--outline);
   }
 }
 
@@ -75,6 +77,7 @@
       var(--easing-standard)
     );
     margin-right: 0;
+    color: var(--outline);
 
     .skc-table-cell--sortable:focus & {
       color: var(--primary);
