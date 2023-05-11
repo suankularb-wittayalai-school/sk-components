@@ -35,6 +35,7 @@ import {
   DataTableSearch,
   Header,
   InputChip,
+  Interactive,
   List,
   ListItem,
   ListItemContent,
@@ -362,6 +363,26 @@ const HeaderSection: FC = () => (
   </Section>
 );
 
+const InteractiveSection: FC = () => (
+  <Section>
+    <Header>Interactive</Header>
+    <Interactive
+      shadowEffect
+      onClick={() => console.log("Interacted!")}
+      className="bg-secondary-container text-on-secondary-container
+        state-layer:bg-on-secondary-container flex h-14 w-24 flex-col
+        rounded-sm px-4 py-2 text-left
+        transition-[border,background-color,color] [&_*]:w-full [&_*]:truncate
+        [&_*]:break-all"
+    >
+      <span className="skc-title-medium !bg-transparent" title="Web D.">
+        English
+      </span>
+      <span className="skc-body-small !bg-transparent">Atipol</span>
+    </Interactive>
+  </Section>
+);
+
 const SplitLayoutSection: FC = () => (
   <Section>
     <Header>Split Layout</Header>
@@ -553,6 +574,7 @@ const ContainersPage: CustomPage = () => (
       <ColumnsSection />
       <DataTableSection />
       <HeaderSection />
+      <InteractiveSection />
       <SplitLayoutSection />
       <ListSection />
       <TableSection />

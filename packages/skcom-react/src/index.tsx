@@ -77,6 +77,8 @@ export { FormItem, type FormItemProps } from "./components/FormItem";
 
 export { Header, type HeaderProps } from "./components/Header";
 
+export { Interactive, type InteractiveProps } from "./components/Interactive";
+
 export { List, type ListProps } from "./components/List";
 export { ListItem, type ListItemProps } from "./components/ListItem";
 export {
