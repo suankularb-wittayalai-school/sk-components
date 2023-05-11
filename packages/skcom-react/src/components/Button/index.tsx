@@ -164,7 +164,7 @@ export interface ButtonProps extends SKComponent {
 /**
  * Button helps users take action, whether it’s logging in, liking a post, or going to a page.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.48e8htvs5p0g SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.48e8htvs5p0g SKCom documentation}
  *
  * @param children The text displayed inside the Button.
  * @param appearance The appearance of the Button.

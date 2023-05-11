@@ -26,7 +26,7 @@ export interface TableFootProps extends SKComponent {
 /**
  * The foot area of a Table.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5lm5awdc1t9l SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5lm5awdc1t9l SKCom documentation}
  *
  * @param children Table Foot has the same behaviour as `<tfoot>`.
  */

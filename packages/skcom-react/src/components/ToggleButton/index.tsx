@@ -98,7 +98,7 @@ export interface ToggleButtonProps extends SKComponent {
 /**
  * A Button with just an icon that can be toggled on and off.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3rmzxf2aqo3r SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3rmzxf2aqo3r SKCom documentation}
  *
  * @param appearance The appearance of the Toggle Button.
  * @param icon A Toggle Button’s action is only communicated via its icon, so keep the icon clear.

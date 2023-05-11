@@ -127,7 +127,7 @@ export interface FABProps extends SKComponent {
 /**
  * The Floating Action Button or FAB is the main action of a page.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation}
  *
  * @param children The text displayed inside the FAB.
  * @param color The color of the FAB.

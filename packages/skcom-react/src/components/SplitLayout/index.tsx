@@ -55,7 +55,7 @@ export interface SplitLayoutProps extends SKComponent {
  * detail. In a supporting panel layout, the main content takes focus with a
  * small column set aside for supporting content.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.iv2gnmudjnme SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.iv2gnmudjnme SKCom documentation}
  *
  * @param children The content should have 2 sides; each element entered corresponds to a side.
  * @param ratio Choose from 2 presets or create your own. This uses the same grid system as Columns, so ensure each side of the ratio adds up to 12.

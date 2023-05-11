@@ -54,7 +54,7 @@ export interface InputChipProps extends SKComponent {
    * this is `true`.
    *
    * - Material Guidelines and the
-   *   {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
+   *   {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
    *   recommend selecting the Input Chip set to be deleted via backspace,
    *   requiring another backspace to confirm.
    * - Optional.
@@ -134,7 +134,7 @@ export interface InputChipProps extends SKComponent {
  * Like all Chips, an Input Chip appears alongside other Input Chips, but these
  * can also appear inside a text field like in Chip Field.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
  *
  * @param children The text displayed inside the chip.
  * @param avatar An avatar is placed before all content in an Input Chip.

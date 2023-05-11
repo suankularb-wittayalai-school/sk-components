@@ -52,7 +52,7 @@ export interface HeaderProps extends SKComponent {
 /**
  * A row of Buttons. Header handles spacing and overflow.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation}
  *
  * @param children The text of the Header.
  * @param level The level of the Header. The number corresponds to an HTML header element.

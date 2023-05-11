@@ -35,7 +35,7 @@ export interface ActionsProps extends SKComponent {
 /**
  * A row of Buttons. Actions handles spacing and overflow.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children Actions contains Buttons; the recommended limit is 3.
  * @param align How the Buttons should be positioned.

@@ -39,7 +39,7 @@ export interface TableRowProps extends SKComponent {
  * A row of a Table, must be within a table area (Table Head, Table Body, or
  * Table Foot).
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation}
  *
  * @param children Table Row has the same behaviour as `<tr>`.
  * @param actions Actions related to a row, shown on hover.

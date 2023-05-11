@@ -99,7 +99,7 @@ export interface SearchProps extends SKComponent {
  * Search allows the user to quickly find something using a query. It can also
  * immediately show some useful results as the user is typing, utilizing List.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
  *
  * @param children Some useful search results that appear underneath the field.
  * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.

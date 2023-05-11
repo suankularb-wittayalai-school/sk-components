@@ -100,7 +100,7 @@ export interface FilterChipProps extends SKComponent {
  * content. A Filter Chip should never appear alone and should be a child of
  * Chip Set.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation}
  *
  * @param children The text displayed inside the chip.
  * @param icon An icon can appear before all content in an Filter Chip.

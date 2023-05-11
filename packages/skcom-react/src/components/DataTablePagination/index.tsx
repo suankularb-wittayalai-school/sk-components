@@ -65,7 +65,7 @@ export interface DataTablePaginationProps extends SKComponent {
  * paginating the Data Table data, including the current rows and navigating to
  * forward and backward on pages.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation}
  *
  * @param rowsPerPage The maximum number of rows shown on the Data Table at a time.
  * @param totalRows The total number of rows of data, including both those currently shown and not shown on the Data Table.

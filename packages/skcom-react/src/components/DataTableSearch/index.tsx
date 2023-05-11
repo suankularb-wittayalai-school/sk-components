@@ -84,7 +84,7 @@ export interface DataTableSearchProps extends SKComponent {
 /**
  * Allows the user to filter the Data Table’s content using a text query.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation}
  *
  * @param value The value inside the search field. This is useful if you want a controlled input.
  * @param locale Allows for translation of the default placeholder message.

@@ -66,7 +66,7 @@ export interface MaterialIconProps extends SKComponent {
  * Icons are essential to any web design. They orient the users, help user navigate, save space.
  * Material Icon uses the “Material Symbol” icon font from Google.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
  *
  * @param icon Material Icon uses the “Material Symbol” font, where each icon has its own corresponding text string. You can find the list of all icons at {@link https://fonts.google.com/icons Google Fonts}.
  * @param fill If the icon is filled or not.

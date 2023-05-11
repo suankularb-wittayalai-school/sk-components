@@ -55,7 +55,7 @@ export interface RadioProps extends SKComponent {
  * A choice from a single-select set of choices. Unlike Checkbox and Switch,
  * Radio always appear in a group.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ilewd6wmow42 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ilewd6wmow42 SKCom documentation}
  *
  * @param value The state of the Radio. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user toggles the Radio.

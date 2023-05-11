@@ -115,7 +115,7 @@ export interface TabProps extends SKComponent {
  * Tabs allow the user to switch between pages on the same level of a page
  * hierarchy. For example, an Overview, Students, and Teachers page of a class.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.g56fs6ts5kqq SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.g56fs6ts5kqq SKCom documentation}
  *
  * @param icon An icon appears before or above the label. Icons help users identify pages more quickly.
  * @param label An additional text label next to or underneath the icon.

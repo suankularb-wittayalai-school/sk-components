@@ -66,7 +66,7 @@ export interface CardHeaderProps extends SKComponent {
 /**
  * The header of a Card. Sometimes all a Card needs is a Card Header.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation}
  *
  * @param avatar An avatar is placed before all content in a Card Header.
  * @param icon An icon can appear before all content in a Card Header.

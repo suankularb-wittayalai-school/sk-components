@@ -58,7 +58,7 @@ export interface MenuProps extends SKComponent {
 /**
  * A list of actions/options on a temporary surface.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
  *
  * @param children Actions/options inside a Menu.
  * @param open If the Menu is open and shown.

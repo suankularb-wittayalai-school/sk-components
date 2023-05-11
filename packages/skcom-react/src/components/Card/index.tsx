@@ -140,7 +140,7 @@ export interface CardProps extends SKComponent {
  * To quote Material Design 3, there is no right way to make a Card. However,
  * we have provided some useful props and components to get you started.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation}
  *
  * @param children Card must contain at least 1 JSX element.
  * @param appearance The appearance of the Card. Each appearance puts different amounts of emphasis on the subject.

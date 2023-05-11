@@ -52,7 +52,7 @@ type PageRelation = "parent" | "child" | "sibling" | "unrelated";
  * Get how the destination page relate to the current page. This is useful for
  * creating a spatially coherent system of page transitions.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.ix1wxffbs2kc Documention on transitionEvent with Root Layout}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ix1wxffbs2kc Documention on transitionEvent with Root Layout}
  *
  * @param parentURL The URL of the parent page of the current.
  * @param childURLs A list of child URLs of the current page.

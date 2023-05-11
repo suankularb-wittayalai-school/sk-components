@@ -137,7 +137,7 @@ export interface PageHeaderProps extends SKComponent {
  * the only `<h1>` in the page), the back Button for navigating up, and
  * additional components very closely related to the title.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
  *
  * @param children Some additional components inside the Page Header area.
  * @param title The title text: the biggest text in a page and the only within a `<h1>` tag.

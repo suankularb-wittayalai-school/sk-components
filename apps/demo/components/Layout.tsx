@@ -110,7 +110,7 @@ const Layout: FC<
           <NavDrawerItem
             icon={<MaterialIcon icon="description" />}
             label="Docs"
-            href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+            href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
             element={forwardRef((props, ref) => (
               <a
                 {...props}
@@ -209,7 +209,7 @@ const Layout: FC<
         <NavBarItem
           icon={<MaterialIcon icon="description" />}
           label="Docs"
-          href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+          href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
           element={forwardRef((props, ref) => (
             <a
               {...props}

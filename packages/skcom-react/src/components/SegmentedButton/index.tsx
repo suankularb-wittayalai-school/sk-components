@@ -48,7 +48,7 @@ export interface SegmentedButtonProps extends SKComponent {
 /**
  * Segmented Button combines multiple related Buttons together. Each Button in a Segmented Button can be toggled on and off.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.c0vieg8cftmq SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.c0vieg8cftmq SKCom documentation}
  *
  * @param children 2-5 Buttons.
  * @param alt A description of the Segmented Button for screen readers, similar to `alt` on `<img>`.
