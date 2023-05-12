@@ -1,6 +1,8 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { Interactive } from "../Interactive";
 
 // Types
 import { AdaptToMotionProps, SKComponent } from "../../types";
@@ -9,7 +11,6 @@ import { AdaptToMotionProps, SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/card.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -64,13 +65,7 @@ export interface CardProps extends SKComponent {
   shadowEffect?: boolean;
 
   /**
-   * An ID for transitioning to and from this Card. See Framer Motion’s
-   * documentation on
-   * {@link https://www.framer.com/docs/layout-group/ LayoutGroup}
-   * for more details.
-   *
-   * - Must be unique within the page.
-   * - Optional.
+   * @deprecated Use the `element` prop instead.
    */
   layoutID?: any;
 
@@ -90,47 +85,19 @@ export interface CardProps extends SKComponent {
   href?: string;
 
   /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing. An
-   * example is `next/link` from Next.js.
-   *
-   * - Incompatible with `onClick`.
-   */
-  element?: ({
-    children,
-    ref,
-    style,
-    className,
-    href,
-    onClick,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    ref?: React.MutableRefObject<any>;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onClick?: (event: React.MouseEvent) => void;
-    onTouchStart?: (event: React.TouchEvent) => void;
-    onMouseDown?: (event: React.MouseEvent) => void;
-    onKeyDown?: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
-
-  /**
-   * Attributes for the underlying `<button>` element.
-   *
-   * - Optional.
+   * @deprecated Use the `element` prop instead.
    */
   buttonAttr?: AdaptToMotionProps<React.ComponentProps<"button">>;
 
   /**
-   * Attributes for the underlying `<a>` element.
-   *
-   * - Optional.
+   * @deprecated Use the `element` prop instead.
    */
   aAttr?: AdaptToMotionProps<React.ComponentProps<"a">>;
+
+  /**
+   * @todo Replace this with `element` from the `SKComponent` interface.
+   */
+  element?: keyof React.ReactHTML | React.FunctionComponent;
 }
 
 /**
@@ -147,12 +114,8 @@ export interface CardProps extends SKComponent {
  * @param direction The flow of the Card’s content, like the CSS property `flex-direction`.
  * @param stateLayerEffect The state layer reacts to changes to the state to signify its interactivity. This effect can be enabled on Card as well.
  * @param shadowEffect Elevates Card on hover and focus to signify its interactivity.
- * @param layoutID An ID for transitioning to and from this Card.
  * @param onClick The function called when the user interacts with the Card, similar to `onClick` on `<button>`.
  * @param href The URL of the page this Card leads to, similar to `href` on `<a>`.
- * @param element Change the underlying element from `<a>` to a custom element.
- * @param buttonAttr Attributes for the underlying `<button>` element.
- * @param aAttr Attributes for the underlying `<a>` element.
  */
 export function Card({
   children,
@@ -161,94 +124,41 @@ export function Card({
   direction,
   stateLayerEffect,
   shadowEffect,
-  layoutID,
   onClick,
   href,
-  element: Element,
-  buttonAttr,
-  aAttr,
+  element,
   className,
 }: CardProps) {
-  // Ripple setup
-  const cardRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(cardRef);
-
-  const props = {
-    ref: cardRef,
-    style,
-    className: cn([
-      "skc-card",
-      appearance === "outlined"
-        ? "skc-card--outlined"
-        : appearance === "elevated"
-        ? "skc-card--elevated"
-        : appearance === "filled"
-        ? "skc-card--filled"
-        : undefined,
-      direction === "row" ? "skc-card--row" : "skc-card--column",
-      stateLayerEffect && "skc-card--state-layer",
-      shadowEffect && "skc-card--shadow",
-      className,
-    ]),
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["div"];
-
-  const content = (
-    <>
-      {children}
-      {stateLayerEffect && (
-        <motion.span
-          aria-hidden
-          initial={{ scale: 0, opacity: 0.36 }}
-          animate={rippleControls}
-          className="skc-card__ripple"
-          style={rippleStyle}
-        />
-      )}
-    </>
-  );
-
   return (
-    // Render with `element` if defined
-    href && Element ? (
-      <Element {...props} href={href}>
-        {content}
-      </Element>
-    ) : // Render an `<a>` if link passed in
-    href ? (
-      layoutID ? (
-        <motion.a {...props} layoutId={layoutID} {...aAttr}>
-          {content}
-        </motion.a>
-      ) : (
-        <a {...props} href={href} {...aAttr}>
-          {content}
-        </a>
-      )
-    ) : // Render a `<button>` if `onClick` passed in
-    onClick ? (
-      layoutID ? (
-        <motion.button
-          {...{ ...props, onClick }}
-          layoutId={layoutID}
-          type="button"
-          {...buttonAttr}
-        >
-          {content}
-        </motion.button>
-      ) : (
-        <button {...{ ...props, onClick }} type="button" {...buttonAttr}>
-          {content}
-        </button>
-      )
-    ) : // Otherwise, render a `<div>`
-    layoutID ? (
-      <motion.div {...props} layoutId={layoutID}>
-        {content}
-      </motion.div>
-    ) : (
-      <div {...props}>{content}</div>
-    )
+    <Interactive
+      element={element}
+      // `stateLayerEffect` and `rippleEffect` are enabled by default in
+      // Interactive, but not in Card
+      stateLayerEffect={
+        stateLayerEffect === undefined ? false : stateLayerEffect
+      }
+      rippleEffect={
+        stateLayerEffect === undefined ? false : stateLayerEffect
+      }
+      shadowEffect={shadowEffect}
+      onClick={onClick}
+      href={href}
+      style={style}
+      className={cn([
+        "skc-card",
+        appearance === "outlined"
+          ? "skc-card--outlined"
+          : appearance === "elevated"
+          ? "skc-card--elevated"
+          : appearance === "filled"
+          ? "skc-card--filled"
+          : undefined,
+        direction === "row" ? "skc-card--row" : "skc-card--column",
+        className,
+      ])}
+    >
+      {children}
+    </Interactive>
   );
 }
 
