@@ -26,6 +26,16 @@ export interface InteractiveProps<
   children: React.ReactNode;
 
   /**
+   * @todo Prop documentation.
+   */
+  stateLayerEffect?: boolean;
+
+  /**
+   * @todo Prop documentation.
+   */
+  rippleEffect?: boolean;
+
+  /**
    * Elevates the content on hover and focus to signify its interactivity.
    *
    * - Optional.
@@ -69,6 +79,8 @@ export interface InteractiveProps<
  * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children The content to make interactive.
+ * @param stateLayerEffect TODO
+ * @param rippleEffect TODO
  * @param shadowEffect Elevates the content on hover and focus to signify its interactivity.
  * @param onClick The function called when the user interacts with the content, similar to `onClick` on `<button>`.
  * @param href The URL of the page the content leads to, similar to `href` on `<a>`.
@@ -79,6 +91,8 @@ export function Interactive<
   ElementProps extends {} = React.ComponentPropsWithRef<"div">
 >({
   children,
+  stateLayerEffect,
+  rippleEffect,
   shadowEffect,
   onClick,
   href,
@@ -109,6 +123,7 @@ export function Interactive<
       style,
       className: cn([
         "skc-interactive",
+        stateLayerEffect === false && "skc-interactive--no-state-layer",
         shadowEffect && "skc-interactive--shadow",
         className,
       ]),
@@ -119,13 +134,15 @@ export function Interactive<
     children,
 
     // Ripple
-    <motion.span
-      aria-hidden
-      initial={{ scale: 0, opacity: 0.36 }}
-      animate={rippleControls}
-      className="skc-interactive__ripple"
-      style={rippleStyle}
-    />
+    rippleEffect !== false ? (
+      <motion.span
+        aria-hidden
+        initial={{ scale: 0, opacity: 0.36 }}
+        animate={rippleControls}
+        className="skc-interactive__ripple"
+        style={rippleStyle}
+      />
+    ) : null
   );
 }
 

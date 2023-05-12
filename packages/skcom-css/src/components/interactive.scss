@@ -12,7 +12,7 @@
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
 
-  &::before {
+  &:not(.skc-interactive--no-state-layer)::before {
     @include mix.state-layer();
     background-color: var(--on-surface);
   }
