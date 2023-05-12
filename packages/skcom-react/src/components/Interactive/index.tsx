@@ -76,7 +76,7 @@ export interface InteractiveProps<
  * @param attr Attributes for the container.
  */
 export function Interactive<
-  ElementProps extends {} = React.ComponentProps<"div">
+  ElementProps extends {} = React.ComponentPropsWithRef<"div">
 >({
   children,
   shadowEffect,
@@ -89,7 +89,10 @@ export function Interactive<
 }: InteractiveProps<ElementProps>) {
   // Ripple setup
   const buttonRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
+  const { rippleListeners, rippleControls, rippleStyle } = useRipple(
+    ((attr as React.ComponentPropsWithRef<any> | undefined)
+      ?.ref as React.RefObject<HTMLElement>) || buttonRef
+  );
 
   return React.createElement(
     // Container
@@ -101,6 +104,7 @@ export function Interactive<
       ref: buttonRef,
       onClick,
       ...rippleListeners,
+      type: onClick || element === "button" ? "button" : undefined,
       href,
       style,
       className: cn([
