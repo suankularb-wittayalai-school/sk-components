@@ -1,8 +1,8 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
+import { Interactive } from "../Interactive";
 import { MaterialIcon } from "../MaterialIcon";
 import { Progress } from "../Progress";
 
@@ -13,7 +13,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/button.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -130,41 +129,16 @@ export interface ButtonProps extends SKComponent {
   href?: string;
 
   /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing.
-   * An example is `next/link` from Next.js.
-   *
-   * - Incompatible with `onClick`.
+   * @todo Replace this with `element` from the `SKComponent` interface.
    */
-  element?: ({
-    children,
-    ref,
-    title,
-    style,
-    className,
-    href,
-    onClick,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    ref: React.MutableRefObject<any>;
-    title?: string;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onClick: (event: React.MouseEvent) => void;
-    onTouchStart: (event: React.TouchEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
+  element?: keyof React.ReactHTML | React.FunctionComponent;
 }
 
 /**
- * Button helps users take action, whether it’s logging in, liking a post, or going to a page.
+ * Button helps users take action, whether it’s logging in, liking a post, or
+ * going to a page.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.48e8htvs5p0g SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.lqzfs37p9m1b SKCom documentation}
  *
  * @param children The text displayed inside the Button.
  * @param appearance The appearance of the Button.
@@ -178,7 +152,6 @@ export interface ButtonProps extends SKComponent {
  * @param locale Allows for translation of the accessibility labels.
  * @param onClick The function called when the user interacts with the Button.
  * @param href The URL of the page this Button leads to.
- * @param element Change the underlying element from `<a>` to a custom element.
  */
 export function Button({
   children,
@@ -193,14 +166,11 @@ export function Button({
   locale,
   onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: ButtonProps) {
-  // Ripple setup
   const buttonRef: React.LegacyRef<any> = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-
   const [buttonWidth, setButtonWidth] = React.useState<number>();
   React.useEffect(() => {
     const button = buttonRef.current;
@@ -213,51 +183,42 @@ export function Button({
     setButtonWidth(width - (appearance === "outlined" ? 2 : 0));
   }, []);
 
-  /**
-   * Props on `<a>` or `<button>`.
-   *
-   * We had to extract the props into a constant because they are used twice,
-   * on `<a>` and on `<button>`.
-   */
-  const props = {
-    ref: buttonRef,
-    // We’re using `aria-disabled` instead of `disabled` because it does not
-    // disable tabbing in, which is better for accessibility.
-    "aria-disabled":
-      disabled || loading === true || typeof loading === "number",
-    "aria-selected": selected,
-    "aria-label": alt,
-    title: tooltip,
-    style: { ...style, width: loading !== undefined ? buttonWidth : undefined },
-    className: cn([
-      "skc-button",
-      appearance === "filled"
-        ? "skc-button--filled"
-        : appearance === "tonal"
-        ? "skc-button--tonal"
-        : appearance === "outlined"
-        ? "skc-button--outlined"
-        : appearance === "text"
-        ? "skc-button--text"
-        : undefined,
-      selected && "skc-button--selected",
-      dangerous && "skc-button--dangerous",
-      loading !== undefined && "skc-button--loading",
-      className,
-    ]),
-    onClick: () => {
-      if (!(disabled || loading) && onClick && !href) onClick();
-    },
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["a" | "button"];
-
-  /**
-   * The inner content of `<a>` and `<button>`.
-   *
-   * Same reason as {@link props}.
-   */
-  const content = (
-    <>
+  return (
+    <Interactive
+      element={element}
+      href={href}
+      onClick={!(disabled || loading) && onClick && !href ? onClick : undefined}
+      attr={{
+        ref: buttonRef,
+        // We’re using `aria-disabled` instead of `disabled` because it does
+        // not disable tabbing in, which is better for accessibility.
+        "aria-disabled":
+          disabled || loading === true || typeof loading === "number",
+        "aria-selected": selected,
+        "aria-label": alt,
+        title: tooltip,
+      }}
+      style={{
+        ...style,
+        width: loading !== undefined ? buttonWidth : undefined,
+      }}
+      className={cn([
+        "skc-button",
+        appearance === "filled"
+          ? "skc-button--filled"
+          : appearance === "tonal"
+          ? "skc-button--tonal"
+          : appearance === "outlined"
+          ? "skc-button--outlined"
+          : appearance === "text"
+          ? "skc-button--text"
+          : undefined,
+        selected && "skc-button--selected",
+        dangerous && "skc-button--dangerous",
+        loading !== undefined && "skc-button--loading",
+        className,
+      ])}
+    >
       {loading ? (
         <Progress
           appearance="circular"
@@ -275,33 +236,7 @@ export function Button({
           {children && <span className="skc-button__label">{children}</span>}
         </>
       )}
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-button__ripple"
-        style={rippleStyle}
-      />
-    </>
-  );
-
-  return (
-    // Render with `element` if defined
-    href && Element ? (
-      <Element {...props} href={href}>
-        {content}
-      </Element>
-    ) : // Render an `<a>` if link passed in
-    href ? (
-      <a {...props} href={href}>
-        {content}
-      </a>
-    ) : (
-      // Otherwise, render a `<button>`
-      <button {...props} type="button">
-        {content}
-      </button>
-    )
+    </Interactive>
   );
 }
 

@@ -26,11 +26,6 @@
   border-radius: var(--rounded-full);
   -webkit-tap-highlight-color: transparent;
 
-  // State layer
-  &::before {
-    @include mix.state-layer();
-  }
-
   &[aria-disabled="true"] {
     &:not(:has(.skc-button__label)) {
       &:hover,
@@ -57,7 +52,7 @@
         }
 
         // Block ripple
-        > .skc-button__ripple {
+        > .skc-interactive__ripple {
           background-color: transparent;
         }
       }
@@ -76,7 +71,7 @@
 }
 
 // Ripple
-.skc-button__ripple {
+.skc-interactive__ripple {
   @include mix.ripple();
 }
 
@@ -161,19 +156,8 @@
 
   // States
   &::before,
-  .skc-button__ripple {
+  .skc-interactive__ripple {
     background-color: var(--on-primary);
-  }
-
-  &:hover::before {
-    opacity: 0.08;
-  }
-
-  &:focus,
-  &:active {
-    &::before {
-      opacity: 0.12;
-    }
   }
 
   &:hover {
@@ -190,7 +174,7 @@
     background-color: var(--error);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--on-error);
     }
   }
@@ -220,7 +204,7 @@
 
   // States
   &::before,
-  .skc-button__ripple {
+  .skc-interactive__ripple {
     background-color: var(--on-secondary-container);
   }
 
@@ -249,7 +233,7 @@
     background-color: var(--error-container);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--on-error-container);
     }
   }
@@ -279,19 +263,8 @@
 
   // States
   &::before,
-  .skc-button__ripple {
+  .skc-interactive__ripple {
     background-color: var(--primary);
-  }
-
-  &:hover::before {
-    opacity: 0.08;
-  }
-
-  &:focus,
-  &:active {
-    &::before {
-      opacity: 0.12;
-    }
   }
 
   &:focus {
@@ -305,7 +278,7 @@
     background-color: var(--secondary-container);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--on-secondary-container);
     }
 
@@ -319,7 +292,7 @@
     color: var(--error);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--error);
     }
 
@@ -348,7 +321,7 @@
 
   // States
   &::before,
-  .skc-button__ripple {
+  .skc-interactive__ripple {
     background-color: var(--primary);
   }
 
@@ -372,7 +345,7 @@
     color: var(--error);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--error);
     }
 
