@@ -185,9 +185,9 @@ export function Button({
 
   return (
     <Interactive
-      element={disabled || loading ? "button" : element}
       href={!(disabled || loading) ? href : undefined}
       onClick={!(disabled || loading) ? onClick : undefined}
+      element={disabled || loading || !element ? "button" : element}
       attr={{
         ref: buttonRef,
         // We’re using `aria-disabled` instead of `disabled` because it does
