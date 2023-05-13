@@ -1,5 +1,5 @@
 // External libraries
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -203,31 +203,6 @@ export function PageHeader({
 
   // Animation
   const { duration, easing } = useAnimationConfig();
-
-  // Animate header text on page change
-  const headerTextControls = useAnimationControls();
-  React.useEffect(() => {
-    headerTextControls.set({ opacity: 0, scale: 0.8, y: 10 });
-    headerTextControls.start({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: transition(duration.medium2, easing.standard),
-    });
-  }, [title]);
-
-  // Animate icon on page change
-  const iconControls = useAnimationControls();
-  React.useEffect(() => {
-    if (icon || !minimized) {
-      iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
-      iconControls.start({
-        opacity: 0.08,
-        scale: 1,
-        transition: transition(duration.long4, easing.standard),
-      });
-    }
-  }, [icon, minimized]);
 
   // Components
 
