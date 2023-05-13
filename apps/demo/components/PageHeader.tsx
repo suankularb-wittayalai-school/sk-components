@@ -32,7 +32,7 @@ const PageHeader: FC<
       <SKCPageHeader
         brand={<Favicon />}
         homeURL="/"
-        element={Link}
+        buttonElement={Link}
         onNavToggle={() => setNavOpen(true)}
         {...props}
       />
