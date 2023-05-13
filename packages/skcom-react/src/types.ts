@@ -10,12 +10,23 @@ import { TableCell, TableCellProps } from "./components/TableCell";
  */
 export interface SKComponent {
   /**
+   * The element of the most relevant underlying element.
+   *
+   * - Optional.
+   */
+  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
+
+  /**
    * `className` on the most relevant underlying attribute.
+   *
+   * - Optional.
    */
   className?: string;
 
   /**
    * `style` on the most relevant underlying attribute.
+   *
+   * - Optional.
    */
   style?: React.CSSProperties;
 }
