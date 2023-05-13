@@ -60,13 +60,17 @@ export function SegmentedButton({
   alt,
   density,
   full,
+  element,
   style,
   className,
 }: SegmentedButtonProps) {
-  return (
-    <div
-      style={style}
-      className={cn([
+  return React.createElement(
+    element || "div",
+    {
+      "aria-label": alt,
+      role: "group",
+      style,
+      className: cn([
         "skc-segmented-button",
         density == 0
           ? "skc-segmented-button--density-0"
@@ -75,12 +79,9 @@ export function SegmentedButton({
           : undefined,
         full && "skc-segmented-button--full",
         className,
-      ])}
-      role="group"
-      aria-label={alt}
-    >
-      {children}
-    </div>
+      ]),
+    },
+    children
   );
 }
 

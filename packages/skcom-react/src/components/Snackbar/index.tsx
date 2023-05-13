@@ -61,6 +61,11 @@ export interface SnackbarProps extends SKComponent {
    * - Optional.
    */
   onExitComplete?: () => any;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

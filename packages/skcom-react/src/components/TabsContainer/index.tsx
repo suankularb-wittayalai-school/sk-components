@@ -57,32 +57,32 @@ export function TabsContainer({
   children,
   appearance,
   alt,
+  element,
   style,
   className,
 }: TabsContainerProps) {
-  const injectedChildren = React.Children.map(children, (child) =>
-    React.cloneElement(child as JSX.Element, {
-      containerID: `tabs-contaner-${kebabify(alt)}`,
-    } satisfies TabProps)
-  );
-
-  return (
-    <div
-      className={cn([
+  return React.createElement(
+    element || "div",
+    {
+      style,
+      className: cn([
         "skc-tabs-container",
         appearance === "primary"
           ? "skc-tabs-container--primary"
           : appearance === "secondary" && "skc-tabs-container--secondary",
-      ])}
+      ]),
+    },
+    <div
+      role="tablist"
+      aria-label={alt}
+      style={style}
+      className={cn(["skc-tabs-container__content", className])}
     >
-      <div
-        role="tablist"
-        aria-label={alt}
-        style={style}
-        className={cn(["skc-tabs-container__content", className])}
-      >
-        {injectedChildren}
-      </div>
+      {React.Children.map(children, (child) =>
+        React.cloneElement(child as JSX.Element, {
+          containerID: `tabs-contaner-${kebabify(alt)}`,
+        } satisfies TabProps)
+      )}
     </div>
   );
 }

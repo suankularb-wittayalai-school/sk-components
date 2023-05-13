@@ -68,6 +68,7 @@ export function DialogHeader({
   title,
   desc,
   alt,
+  element,
   style,
   className,
 }: DialogHeaderProps) {
@@ -86,22 +87,28 @@ export function DialogHeader({
         alt)!
   )}`;
 
-  return (
-    <div style={style} className={cn(["skc-dialog-header", className])}>
-      {icon && <div className="skc-dialog-header__icon">{icon}</div>}
-      {title && (
-        <h2 aria-label={alt} id={`${dialogID}-title`}>
-          {title}
-        </h2>
-      )}
-      <p
-        // Only use `alt` as label here if `title` is undefined
-        aria-label={!title ? alt : undefined}
-        id={`${dialogID}-desc`}
-      >
-        {desc}
-      </p>
-    </div>
+  return React.createElement(
+    element || "div",
+    { style, className: cn(["skc-dialog-header", className]) },
+
+    // Icon
+    icon && <div className="skc-dialog-header__icon">{icon}</div>,
+
+    // Title
+    title && (
+      <h2 aria-label={alt} id={`${dialogID}-title`}>
+        {title}
+      </h2>
+    ),
+
+    // Description
+    <p
+      // Only use `alt` as label here if `title` is undefined
+      aria-label={!title ? alt : undefined}
+      id={`${dialogID}-desc`}
+    >
+      {desc}
+    </p>
   );
 }
 

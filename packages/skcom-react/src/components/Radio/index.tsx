@@ -48,7 +48,12 @@ export interface RadioProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: JSX.IntrinsicElements["input"];
+  inputAttr?: React.ComponentProps<"input">;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
@@ -86,8 +91,7 @@ export function Radio({
       {...rippleListeners}
     >
       {/* Native input (for logic and accessibility only and is hidden to
-          sighted users)
-        */}
+          sighted users) */}
       <input
         aria-checked={value}
         aria-disabled={disabled}

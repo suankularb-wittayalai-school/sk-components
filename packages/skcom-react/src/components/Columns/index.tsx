@@ -45,11 +45,18 @@ export interface ColumnsProps extends SKComponent {
  * @param children The content to be divided.
  * @param columns Number of columns.
  */
-export function Columns({ children, columns, style, className }: ColumnsProps) {
-  return (
-    <div
-      style={style}
-      className={cn([
+export function Columns({
+  children,
+  columns,
+  element,
+  style,
+  className,
+}: ColumnsProps) {
+  return React.createElement(
+    element || "div",
+    {
+      style,
+      className: cn([
         "skc-columns",
         columns === 2
           ? "skc-columns--2"
@@ -63,10 +70,9 @@ export function Columns({ children, columns, style, className }: ColumnsProps) {
           ? "skc-columns--12"
           : undefined,
         className,
-      ])}
-    >
-      {children}
-    </div>
+      ]),
+    },
+    children
   );
 }
 

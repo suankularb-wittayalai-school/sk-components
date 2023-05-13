@@ -54,6 +54,7 @@ export function NavDrawerSection({
   children,
   header,
   alt,
+  element,
   style,
   className,
 }: NavDrawerSectionProps) {
@@ -61,21 +62,17 @@ export function NavDrawerSection({
     (typeof header === "string" ? header : alt)!
   )}`;
 
-  return (
-    <section
-      aria-labelledby={sectionID}
-      style={style}
-      className={cn(["skc-nav-drawer-section", className])}
+  return React.createElement(
+    element || "section",
+    { style, className: cn(["skc-nav-drawer-section", className]) },
+    <h2
+      id={sectionID}
+      aria-label={alt}
+      className="skc-nav-drawer-section__header"
     >
-      <h2
-        id={sectionID}
-        aria-label={alt}
-        className="skc-nav-drawer-section__header"
-      >
-        {header}
-      </h2>
-      <ul role="list">{children}</ul>
-    </section>
+      {header}
+    </h2>,
+    <ul role="list">{children}</ul>
   );
 }
 

@@ -47,30 +47,27 @@ export interface TableRowProps extends SKComponent {
 export function TableRow({
   children,
   actions,
+  element,
   style,
   className,
 }: TableRowProps) {
-  return (
-    <tr
-      tabIndex={actions ? 0 : undefined}
-      style={style}
-      className={cn(["skc-table-row", className])}
-    >
-      {/* Table Cells */}
-      {actions
-        ? // Inject row actions into the first Table Cell
-          React.Children.map(children, (child, idx) =>
-            idx === 0 && matchDisplayName(child, "TableCell") ? (
-              <TableCell {...(child as JSX.Element).props}>
-                {((child as JSX.Element).props as TableCellProps).children}
-                <div className="skc-table-row__actions">{actions}</div>
-              </TableCell>
-            ) : (
-              child
-            )
+  return React.createElement(
+    element || "tr",
+    { style, className: cn(["skc-table-row", className]) },
+
+    actions
+      ? // Inject row actions into the first Table Cell
+        React.Children.map(children, (child, idx) =>
+          idx === 0 && matchDisplayName(child, "TableCell") ? (
+            <TableCell {...(child as JSX.Element).props}>
+              {((child as JSX.Element).props as TableCellProps).children}
+              <div className="skc-table-row__actions">{actions}</div>
+            </TableCell>
+          ) : (
+            child
           )
-        : children}
-    </tr>
+        )
+      : children
   );
 }
 

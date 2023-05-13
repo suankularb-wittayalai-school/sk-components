@@ -38,6 +38,11 @@ export interface DataTableProps extends SKComponent {
    * - Optional.
    */
   layout?: LayoutProps["layout"];
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

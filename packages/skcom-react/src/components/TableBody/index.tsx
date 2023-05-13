@@ -30,11 +30,16 @@ export interface TableBodyProps extends SKComponent {
  *
  * @param children Table Body has the same behaviour as `<tbody>`.
  */
-export function TableBody({ children, style, className }: TableBodyProps) {
-  return (
-    <tbody style={style} className={cn(["skc-table-body", className])}>
-      {children}
-    </tbody>
+export function TableBody({
+  children,
+  element,
+  style,
+  className,
+}: TableBodyProps) {
+  return React.createElement(
+    element || "tbody",
+    { style, className: cn(["skc-table-body", className]) },
+    children
   );
 }
 

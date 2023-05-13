@@ -93,11 +93,6 @@ export interface ToggleButtonProps extends SKComponent {
    * @param state Whether the Toggle Button is toggled on or off.
    */
   onChange?: (state: boolean) => void;
-
-  /**
-   * @todo Replace this with `element` from the `SKComponent` interface.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**

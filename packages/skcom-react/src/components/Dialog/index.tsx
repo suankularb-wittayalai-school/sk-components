@@ -50,6 +50,11 @@ export interface DialogProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

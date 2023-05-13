@@ -60,6 +60,11 @@ export interface MaterialIconProps extends SKComponent {
    * - Optional.
    */
   size?: 20 | 24 | 40 | 48;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

@@ -52,7 +52,12 @@ export interface MenuProps extends SKComponent {
    *
    * - Optional.
    */
-  ulAttr?: JSX.IntrinsicElements["ul"];
+  ulAttr?: React.ComponentProps<typeof motion.ul>;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
@@ -102,10 +107,7 @@ export function Menu({
                 : density === -4 && "skc-menu--density-[-4]",
               className,
             ])}
-            // (@SiravitPhokeed)
-            // `motion.ul` is refusing to accept `JSX.IntrinsicElements["ul"]`
-            // for some reason…
-            {...{ ...(ulAttr as any), style }}
+            {...{ ...ulAttr, style }}
           >
             {children}
           </motion.ul>

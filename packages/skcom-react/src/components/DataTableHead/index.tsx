@@ -36,6 +36,11 @@ export interface DataTableHeadProps extends SKComponent {
    * - Optional.
    */
   locale?: "en-US" | "th";
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

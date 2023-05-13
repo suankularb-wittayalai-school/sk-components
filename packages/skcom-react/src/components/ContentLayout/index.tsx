@@ -33,13 +33,14 @@ export interface ContentLayoutProps extends SKComponent {
  */
 export function ContentLayout({
   children,
+  element,
   style,
   className,
 }: ContentLayoutProps) {
-  return (
-    <main style={style} className={cn(["skc-content-layout", className])}>
-      <div className="skc-content-layout__content">{children}</div>
-    </main>
+  return React.createElement(
+    element || "main",
+    { style, className: cn(["skc-content-layout", className]) },
+    <div className="skc-content-layout__content">{children}</div>
   );
 }
 

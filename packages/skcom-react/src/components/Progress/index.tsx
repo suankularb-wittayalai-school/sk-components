@@ -49,6 +49,11 @@ export interface ProgressProps extends SKComponent {
    * - Optional.
    */
   visible?: boolean;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

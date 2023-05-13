@@ -35,11 +35,16 @@ export interface RootLayoutProps extends SKComponent {
  *
  * @param children Root Layout positions Navigation Drawer, Navigation Bar, and FAB. It can contain Navigation Drawer, Navigation Bar, FAB, Page Header, Content Layout, and Vertical Split Layout only.
  */
-export function RootLayout({ children, className, style }: RootLayoutProps) {
-  return (
-    <div style={style} className={cn(["skc-root-layout", className])}>
-      {children}
-    </div>
+export function RootLayout({
+  children,
+  element,
+  className,
+  style,
+}: RootLayoutProps) {
+  return React.createElement(
+    element || "div",
+    { style, className: cn(["skc-root-layout", className]) },
+    children
   );
 }
 

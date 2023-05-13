@@ -112,6 +112,11 @@ export interface SelectProps extends SKComponent {
    * - Optional.
    */
   menuAttr?: Partial<MenuProps>;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

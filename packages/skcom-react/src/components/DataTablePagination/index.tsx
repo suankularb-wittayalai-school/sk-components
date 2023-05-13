@@ -58,6 +58,11 @@ export interface DataTablePaginationProps extends SKComponent {
    * @param end The end index of the range of data to pull from for this page.
    */
   onChange?: (page: number, start: number, end: number) => any;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
@@ -97,6 +102,12 @@ export function DataTablePagination({
     end: Math.min(rowsPerPage * page, totalRows),
   };
 
+  const strings = {
+    start: range.start.toLocaleString(locale),
+    end: range.end.toLocaleString(locale),
+    total: totalRows.toLocaleString(locale),
+  };
+
   React.useEffect(
     () => onChange && onChange(page, range.start - 1, range.end - 1),
     [page]
@@ -112,14 +123,14 @@ export function DataTablePagination({
       <span
         aria-label={
           locale === "th"
-            ? `แถวที่ ${range.start} ถึง ${range.end} จากทั้งหมด ${totalRows} แถว`
-            : `Rows ${range.start} to ${range.end}, from a total of ${totalRows} rows`
+            ? `แถวที่ ${strings.start} ถึง ${strings.end} จากทั้งหมด ${strings.total} แถว`
+            : `Rows ${strings.start} to ${strings.end}, from a total of ${strings.total} rows`
         }
         className="skc-data-table-pagination__label"
       >
-        {`${range.start}-${range.end} ${
-          locale === "th" ? "จาก" : "of"
-        } ${totalRows}`}
+        {locale === "th"
+          ? `${strings.start}-${strings.end} จาก ${strings.total}`
+          : `${strings.start}-${strings.end} of ${strings.total}`}
       </span>
       <div className="skc-data-table-pagination__controls">
         {/* Skip to first */}

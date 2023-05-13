@@ -12,8 +12,8 @@ import "@suankularb-components/css/dist/css/components/section.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 import { matchDisplayName } from "../../utils/displayName";
+import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link Section}.
@@ -28,11 +28,9 @@ export interface SectionProps extends SKComponent {
   children: React.ReactNode;
 
   /**
-   * Attributes for the underlying `<section>` element.
-   *
-   * - Optional.
+   * @deprecated Use `element` instead.
    */
-  sectionAttr?: React.HTMLAttributes<HTMLElement>;
+  sectionAttr?: React.ComponentProps<"section">;
 }
 
 /**
@@ -43,12 +41,7 @@ export interface SectionProps extends SKComponent {
  * @param children Section must have exactly 1 Header as the first direct descendent. After that, it can include anything.
  * @param sectionAttr Attributes for the underlying `<section>` element.
  */
-export function Section({
-  children,
-  sectionAttr,
-  style,
-  className,
-}: SectionProps) {
+export function Section({ children, element, style, className }: SectionProps) {
   // Find the Header in `children` and modify it to include `id`
   // This ID is generated from the text inside Header
 
@@ -57,7 +50,11 @@ export function Section({
   // with Header as its name.
 
   let headerID: string | undefined;
-  const modifiedChildren: React.ReactNode =
+
+  return React.createElement(
+    element || "section",
+    { style, className: cn(["skc-section", className]) },
+
     // For each child in `children`
     React.Children.map(children, (child) => {
       // If Header is found, grab the text and generate the ID, then modify the
@@ -75,16 +72,7 @@ export function Section({
       }
       // If not, return the child unchanged
       else return child;
-    });
-
-  return (
-    <section
-      {...{ ...sectionAttr, style }}
-      aria-labelledby={headerID}
-      className={cn(["skc-section", className])}
-    >
-      {modifiedChildren}
-    </section>
+    })
   );
 }
 

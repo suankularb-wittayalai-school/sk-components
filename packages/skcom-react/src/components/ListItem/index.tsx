@@ -132,7 +132,7 @@ export function ListItem({
         onClick={onClick}
         element={
           element ||
-          (href ? "a" : onClick || stateLayerEffect ? "button" : React.Fragment)
+          (href ? "a" : onClick || stateLayerEffect ? "button" : "div")
         }
         style={style}
         className={cn([

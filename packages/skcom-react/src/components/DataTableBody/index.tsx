@@ -48,11 +48,12 @@ export interface DataTableBodyProps<RowShape extends {} = any>
 export function DataTableBody<RowShape extends {}>({
   rowModel,
   rowActions,
+  element,
   style,
   className,
 }: DataTableBodyProps<RowShape>) {
   return (
-    <TableBody {...{ style, className }}>
+    <TableBody {...{ element, style, className }}>
       {rowModel.rows.map((row) => {
         return (
           <TableRow

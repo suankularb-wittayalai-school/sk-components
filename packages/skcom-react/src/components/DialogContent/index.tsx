@@ -44,20 +44,21 @@ export interface DialogContentProps extends SKComponent {
 export function DialogContent({
   children,
   height,
+  element,
   style,
   className,
 }: DialogContentProps) {
-  return (
-    <div
-      style={{ ...style, height }}
-      className={cn([
+  return React.createElement(
+    element || "div",
+    {
+      style: { ...style, height },
+      className: cn([
         "skc-dialog-content",
         height !== undefined && "skc-dialog-content--scrollable",
         className,
-      ])}
-    >
-      {children}
-    </div>
+      ]),
+    },
+    children
   );
 }
 

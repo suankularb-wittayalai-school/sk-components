@@ -45,7 +45,7 @@ export interface FormGroupProps extends SKComponent {
    *
    * - Optional.
    */
-  legendAttr?: JSX.IntrinsicElements["legend"];
+  legendAttr?: React.ComponentProps<"legend">;
 }
 
 /**
@@ -63,20 +63,21 @@ export function FormGroup({
   label,
   alt,
   legendAttr,
+  element,
   style,
   className,
 }: FormGroupProps) {
-  return (
-    <fieldset
-      aria-label={alt}
-      style={style}
-      className={cn(["skc-form-group", className])}
-    >
-      <legend className="skc-form-group__label" {...legendAttr}>
-        {label}
-      </legend>
-      {children}
-    </fieldset>
+  return React.createElement(
+    element || "fieldset",
+    { "aria-label": alt, style, className: cn(["skc-form-group", className]) },
+
+    // Label
+    <legend className="skc-form-group__label" {...legendAttr}>
+      {label}
+    </legend>,
+
+    // Input
+    children
   );
 }
 

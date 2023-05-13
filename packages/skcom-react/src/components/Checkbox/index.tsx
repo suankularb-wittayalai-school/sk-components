@@ -58,7 +58,7 @@ export interface CheckboxProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: JSX.IntrinsicElements["input"];
+  inputAttr?: React.ComponentProps<"input">;
 }
 
 /**

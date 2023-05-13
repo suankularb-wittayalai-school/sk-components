@@ -50,7 +50,7 @@ export interface FormItemProps extends SKComponent {
    *
    * - Optional.
    */
-  labelAttr?: JSX.IntrinsicElements["label"];
+  labelAttr?: React.ComponentProps<"label">;
 }
 
 /**
@@ -74,6 +74,7 @@ export function FormItem({
   label,
   alt,
   labelAttr,
+  element,
   style,
   className,
 }: FormItemProps) {
@@ -81,9 +82,12 @@ export function FormItem({
     (typeof label === "string" ? label : alt)!
   )}`;
 
-  const injectedChildren = React.cloneElement(
-    React.Children.only(children) as JSX.Element,
-    {
+  return React.createElement(
+    element || "div",
+    { "aria-label": alt, style, className: cn(["skc-form-item", className]) },
+
+    // Input
+    React.cloneElement(React.Children.only(children) as JSX.Element, {
       inputAttr: {
         id:
           // Attempt to use existing ID
@@ -94,24 +98,12 @@ export function FormItem({
           // Otherwise, use the default
           formItemID,
       },
-    } satisfies InputProps
-  );
+    } satisfies InputProps),
 
-  return (
-    <div
-      aria-label={alt}
-      style={style}
-      className={cn(["skc-form-item", className])}
-    >
-      {injectedChildren}
-      <label
-        htmlFor={formItemID}
-        className="skc-form-item__label"
-        {...labelAttr}
-      >
-        {label}
-      </label>
-    </div>
+    // Label
+    <label htmlFor={formItemID} className="skc-form-item__label" {...labelAttr}>
+      {label}
+    </label>
   );
 }
 

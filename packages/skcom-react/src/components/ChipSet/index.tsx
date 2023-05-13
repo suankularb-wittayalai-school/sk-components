@@ -36,7 +36,7 @@ export interface ChipSetProps extends SKComponent {
    *
    * - Optional.
    */
-  divAttr?: JSX.IntrinsicElements["div"];
+  divAttr?: React.ComponentProps<"div">;
 }
 
 /**

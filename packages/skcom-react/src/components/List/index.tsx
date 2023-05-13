@@ -54,17 +54,21 @@ export function List({
   children,
   columns,
   divided,
+  element,
   style,
   className,
 }: ListProps) {
-  return (
-    <ul
-      role="list"
-      style={style}
-      className={cn(["skc-list", divided && "skc-list--divided", className])}
-    >
-      {columns ? <Columns columns={columns}>{children}</Columns> : children}
-    </ul>
+  const props = {
+    style,
+    className: cn(["skc-list", divided && "skc-list--divided", className]),
+  };
+
+  return columns ? (
+    <Columns columns={columns} element={element || "ul"} {...props}>
+      {children}
+    </Columns>
+  ) : (
+    React.createElement(element || "ul", { ...props, role: "list" }, children)
   );
 }
 

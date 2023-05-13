@@ -53,6 +53,11 @@ export interface DataTableFiltersProps extends SKComponent {
    * - Optional.
    */
   overflow?: JSX.Element;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

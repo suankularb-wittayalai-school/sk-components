@@ -60,7 +60,12 @@ export interface SwitchProps extends SKComponent {
    *
    * - Optional.
    */
-  buttonAttr?: JSX.IntrinsicElements["button"];
+  buttonAttr?: React.ComponentProps<"button">;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

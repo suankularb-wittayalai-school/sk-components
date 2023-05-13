@@ -4,6 +4,7 @@ import * as React from "react";
 // Internal components
 import { Button } from "../Button";
 import { MaterialIcon } from "../MaterialIcon";
+import { Menu } from "../Menu";
 
 // Types
 import { SKComponent } from "../../types";
@@ -13,7 +14,6 @@ import "@suankularb-components/css/dist/css/components/card-header.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { Menu } from "../Menu";
 
 /**
  * Props for {@link CardHeader Card Header}.
@@ -80,55 +80,55 @@ export function CardHeader({
   title,
   subtitle,
   overflow,
+  element,
   style,
   className,
 }: CardHeaderProps) {
   const [showOverflow, setShowOverflow] = React.useState<boolean>(false);
 
-  return (
-    <div style={style} className={cn(["skc-card-header", className])}>
-      {/* Avatar */}
-      {avatar && <div className="skc-card-header__avatar">{avatar}</div>}
+  return React.createElement(
+    element || "div",
+    { style, className: cn(["skc-card-header", className]) },
 
-      {/* Icon */}
-      {icon && <div className="skc-card-header__icon">{icon}</div>}
+    // Avatar
+    avatar && <div className="skc-card-header__avatar">{avatar}</div>,
 
-      {/* Content */}
-      <div className="skc-card-header__content">
-        <h3 className="skc-card-header__title">{title}</h3>
-        {subtitle && (
-          <span className="skc-card-header__subtitle">{subtitle}</span>
-        )}
-      </div>
+    // Icon
+    icon && <div className="skc-card-header__icon">{icon}</div>,
 
-      {/* Overflow */}
-      {overflow && (
-        <div className="skc-card-header__overflow">
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="more_vert" />}
-            onClick={() => setShowOverflow(!showOverflow)}
-          />
-          {
-            <Menu
-              open={showOverflow}
-              onBlur={() => setShowOverflow(false)}
-              {...overflow.props}
-            >
-              {React.Children.map(overflow.props.children, (child) =>
-                React.cloneElement(child, {
-                  onClick: () => {
-                    const { onClick } = child.props;
-                    if (onClick) onClick();
-                    setShowOverflow(false);
-                  },
-                })
-              )}
-            </Menu>
-          }
-        </div>
+    // Content
+    <div className="skc-card-header__content">
+      <h3 className="skc-card-header__title">{title}</h3>
+      {subtitle && (
+        <span className="skc-card-header__subtitle">{subtitle}</span>
       )}
-    </div>
+    </div>,
+
+    // Overflow
+    overflow && (
+      <div className="skc-card-header__overflow">
+        <Button
+          appearance="text"
+          icon={<MaterialIcon icon="more_vert" />}
+          onClick={() => setShowOverflow(!showOverflow)}
+        />
+        <Menu
+          open={showOverflow}
+          onBlur={() => setShowOverflow(false)}
+          {...overflow.props}
+        >
+          {React.Children.map(overflow.props.children, (child) =>
+            React.cloneElement(child, {
+              onClick: () => {
+                const { onClick } = child.props;
+                if (onClick) onClick();
+                setShowOverflow(false);
+              },
+            })
+          )}
+        </Menu>
+      </div>
+    )
   );
 }
 

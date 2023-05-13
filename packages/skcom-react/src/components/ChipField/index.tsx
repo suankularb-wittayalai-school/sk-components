@@ -127,7 +127,7 @@ export interface ChipFieldProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: JSX.IntrinsicElements["input"];
+  inputAttr?: React.ComponentProps<"input">;
 }
 
 /**

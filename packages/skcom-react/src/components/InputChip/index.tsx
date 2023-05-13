@@ -66,7 +66,8 @@ export interface InputChipProps extends SKComponent {
   layoutID?: any;
 
   /**
-   * Triggers when the user click anywhere in the Input Chip except the delete button.
+   * Triggers when the user click anywhere in the Input Chip except the delete
+   * button.
    *
    * - This is useful if there’s more information on the chip that can be
    *   displayed on click,
@@ -76,7 +77,9 @@ export interface InputChipProps extends SKComponent {
   onClick?: () => any;
 
   /**
-   * @todo Prop documentation.
+   * The URL of the page this Input Chip leads to, similar to `href` on `<a>`.
+   * 
+   * - Optional.
    */
   href?: string;
 

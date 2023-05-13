@@ -78,7 +78,12 @@ export interface DataTableSearchProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: JSX.IntrinsicElements["input"];
+  inputAttr?: React.ComponentProps<"input">;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**

@@ -42,9 +42,7 @@ export interface HeaderProps extends SKComponent {
   icon?: JSX.Element;
 
   /**
-   * Attributes for the underlying `<h2>`-`<h6>` element.
-   *
-   * - Optional.
+   * @deprecated Use `element` instead.
    */
   hAttr?: React.HTMLAttributes<HTMLHeadingElement>;
 }
@@ -57,39 +55,21 @@ export interface HeaderProps extends SKComponent {
  * @param children The text of the Header.
  * @param level The level of the Header. The number corresponds to an HTML header element.
  * @param icon An icon can appear before the text (`children`) in a Header.
- * @param hAttr Attributes for the underlying `<h2>`-`<h6>` element.
  */
 export function Header({
   children,
   level,
   icon,
-  hAttr,
+  element,
   style,
   className,
 }: HeaderProps) {
-  const props = {
-    style,
-    className: cn(["skc-header", className]),
-    ...hAttr,
-  } satisfies React.HTMLAttributes<HTMLHeadingElement>;
+  return React.createElement(
+    element || (level ? "h" + level : "h2"),
+    { style, className: cn(["skc-header", className]) },
 
-  const content = (
-    <>
-      {icon && <span className="skc-header__icon">{icon}</span>}
-      <span className="skc-header__text">{children}</span>
-    </>
-  );
-
-  return level === 6 ? (
-    <h6 {...props}>{content}</h6>
-  ) : level === 5 ? (
-    <h5 {...props}>{content}</h5>
-  ) : level === 4 ? (
-    <h4 {...props}>{content}</h4>
-  ) : level === 3 ? (
-    <h3 {...props}>{content}</h3>
-  ) : (
-    <h2 {...props}>{content}</h2>
+    icon && <span className="skc-header__icon">{icon}</span>,
+    <span className="skc-header__text">{children}</span>
   );
 }
 
