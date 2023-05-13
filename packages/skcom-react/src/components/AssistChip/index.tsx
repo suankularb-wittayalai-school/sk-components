@@ -91,11 +91,6 @@ export interface AssistChipProps extends SKComponent {
    * - Incompatible with `onClick`.
    */
   href?: string;
-
-  /**
-   * @todo Replace this with `element` from the `SKComponent` interface.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent;
 }
 
 /**

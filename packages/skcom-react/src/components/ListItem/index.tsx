@@ -1,8 +1,8 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
+import { Interactive } from "../Interactive";
 import { ListItemContentProps } from "../ListItemContent";
 
 // Types
@@ -12,7 +12,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/list-item.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
 import { kebabify } from "../../utils/format";
@@ -82,32 +81,6 @@ export interface ListItemProps extends SKComponent {
    * - Optional.
    */
   href?: string;
-
-  /**
-   * Change the underlying element from `<a>` to a custom element. This is useful when a framework you’re using has a Link component for routing. An example is `next/link` from Next.js.
-   *
-   * - Incompatible with `onClick`.
-   * - Optional.
-   */
-  element?: ({
-    children,
-    ref,
-    style,
-    className,
-    href,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    ref?: React.MutableRefObject<any>;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onTouchStart?: (event: React.TouchEvent) => void;
-    onMouseDown?: (event: React.MouseEvent) => void;
-    onKeyDown?: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
 }
 
 /**
@@ -130,14 +103,10 @@ export function ListItem({
   stateLayerEffect,
   onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: ListItemProps) {
-  // Ripple setup
-  const itemRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(itemRef);
-
   // Accessibility
   let itemID: string | undefined;
   React.Children.forEach(children, (child) => {
@@ -154,76 +123,41 @@ export function ListItem({
     }
   });
 
-  // Props
-  const props = {
-    ref: itemRef,
-    "aria-labelledby": itemID,
-    style,
-    className: cn([
-      "skc-list-item",
-      align === "top"
-        ? "skc-list-item--top"
-        : align === "center"
-        ? "skc-list-item--center"
-        : align === "bottom"
-        ? "skc-list-item--bottom"
-        : undefined,
-      lines === 1
-        ? "skc-list-item--1-line"
-        : lines === 2
-        ? "skc-list-item--2-lines"
-        : lines === 3
-        ? "skc-list-item--3-lines"
-        : undefined,
-      stateLayerEffect && "skc-list-item--state-layer",
-      className,
-    ]),
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["button" | "a" | "div"];
-
-  // Content
-  const content = (
-    <>
-      {children}
-      {stateLayerEffect && (
-        <motion.span
-          aria-hidden
-          initial={{ scale: 0, opacity: 0.36 }}
-          animate={rippleControls}
-          className="skc-list-item__ripple"
-          style={rippleStyle}
-        />
-      )}
-    </>
-  );
-
   return (
-    // Render with `element`, `<a>`, or `<button>` if functionality passed in
-    href || onClick || stateLayerEffect ? (
-      <li aria-labelledby={itemID}>
-        {
-          // Render with `element` if defined
-          href && Element ? (
-            <Element {...props} href={href}>
-              {content}
-            </Element>
-          ) : // Render an `<a>` if link passed in
-          href ? (
-            <a {...props} href={href}>
-              {content}
-            </a>
-          ) : (
-            // Otherwise, render a `<button>`
-            <button {...{ ...props, onClick }} type="button">
-              {content}
-            </button>
-          )
+    <li aria-labelledby={itemID}>
+      <Interactive
+        stateLayerEffect={Boolean(href || onClick || stateLayerEffect)}
+        rippleEffect={Boolean(href || onClick || stateLayerEffect)}
+        href={href}
+        onClick={onClick}
+        element={
+          element ||
+          (href ? "a" : onClick || stateLayerEffect ? "button" : React.Fragment)
         }
-      </li>
-    ) : (
-      // If this Item has no functionality, just render a `<li>`
-      <li {...props}>{content}</li>
-    )
+        style={style}
+        className={cn([
+          "skc-list-item",
+          align === "top"
+            ? "skc-list-item--top"
+            : align === "center"
+            ? "skc-list-item--center"
+            : align === "bottom"
+            ? "skc-list-item--bottom"
+            : undefined,
+          lines === 1
+            ? "skc-list-item--1-line"
+            : lines === 2
+            ? "skc-list-item--2-lines"
+            : lines === 3
+            ? "skc-list-item--3-lines"
+            : undefined,
+          stateLayerEffect && "skc-list-item--state-layer",
+          className,
+        ])}
+      >
+        {children}
+      </Interactive>
+    </li>
   );
 }
 

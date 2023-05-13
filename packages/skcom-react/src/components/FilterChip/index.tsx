@@ -92,11 +92,6 @@ export interface FilterChipProps extends SKComponent {
    * - Optional.
    */
   menu?: JSX.Element;
-
-  /**
-   * @todo Replace this with `element` from the `SKComponent` interface.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**

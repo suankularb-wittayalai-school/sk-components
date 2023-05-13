@@ -66,14 +66,6 @@ export interface InteractiveProps<
   href?: string;
 
   /**
-   * The element of the container.
-   *
-   * - Defaults to `<div>`.
-   * - Optional.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent<ElementProps>;
-
-  /**
    * Attributes for the container.
    *
    * - Optional.

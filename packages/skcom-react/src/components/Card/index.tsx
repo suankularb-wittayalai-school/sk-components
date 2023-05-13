@@ -93,11 +93,6 @@ export interface CardProps extends SKComponent {
    * @deprecated Use the `element` prop instead.
    */
   aAttr?: AdaptToMotionProps<React.ComponentProps<"a">>;
-
-  /**
-   * @todo Replace this with `element` from the `SKComponent` interface.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent;
 }
 
 /**

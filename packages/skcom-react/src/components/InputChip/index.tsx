@@ -125,11 +125,6 @@ export interface InputChipProps extends SKComponent {
    * - Optional.
    */
   onEditExit?: () => any;
-
-  /**
-   * @todo Replace this with `element` from the `SKComponent` interface.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**
