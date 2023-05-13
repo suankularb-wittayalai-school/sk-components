@@ -40,16 +40,23 @@ export interface ColumnsProps extends SKComponent {
  * ({@link https://m3.material.io/foundations/adaptive-design/large-screens/overview#55fc0118-1fa3-48a3-b805-169bb58e6e78 M3 reference};
  * {@link https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins M2 reference}).
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.j3ziatuuxd12 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.j3ziatuuxd12 SKCom documentation}
  *
  * @param children The content to be divided.
  * @param columns Number of columns.
  */
-export function Columns({ children, columns, style, className }: ColumnsProps) {
-  return (
-    <div
-      style={style}
-      className={cn([
+export function Columns({
+  children,
+  columns,
+  element,
+  style,
+  className,
+}: ColumnsProps) {
+  return React.createElement(
+    element || "div",
+    {
+      style,
+      className: cn([
         "skc-columns",
         columns === 2
           ? "skc-columns--2"
@@ -63,10 +70,9 @@ export function Columns({ children, columns, style, className }: ColumnsProps) {
           ? "skc-columns--12"
           : undefined,
         className,
-      ])}
-    >
-      {children}
-    </div>
+      ]),
+    },
+    children
   );
 }
 

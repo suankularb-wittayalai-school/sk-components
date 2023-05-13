@@ -1,10 +1,10 @@
 ////
 /// **Page Header**
 /// There’s exactly one Page Header on every page. It displays the title (in
-/// the only `<h1>` in the page), the back Button for navigating up, and
+/// the only `<h1>` on the page), the back Button for navigating up, and
 /// additional components very closely related to the title.
 ///
-/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation
+/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -124,7 +124,7 @@
     color: var(--on-surface);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--on-surface);
     }
   }

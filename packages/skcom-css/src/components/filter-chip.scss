@@ -5,7 +5,7 @@
 /// content. A Filter Chip should never appear alone and should be a child of
 /// Chip Set.
 ///
-/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation
+/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation
 ////
 
 @use "./chip.scss";
@@ -36,7 +36,7 @@
 }
 
 // Elevated Filter Chip
-.skc-filter-chip.skc-filter-chip--elevated {
+.skc-filter-chip--elevated {
   @extend .skc-chip--elevated;
 }
 
@@ -62,9 +62,4 @@
 // Icon
 .skc-filter-chip__icon {
   @extend .skc-chip__icon;
-}
-
-// Ripple
-.skc-filter-chip__ripple {
-  @extend .skc-chip__ripple;
 }

@@ -44,7 +44,7 @@ export interface NavDrawerSectionProps extends SKComponent {
 /**
  * A row of Buttons. NavDrawerSection handles spacing and overflow.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children Destinations grouped into this section.
  * @param header The header of the section.
@@ -54,6 +54,7 @@ export function NavDrawerSection({
   children,
   header,
   alt,
+  element,
   style,
   className,
 }: NavDrawerSectionProps) {
@@ -61,21 +62,17 @@ export function NavDrawerSection({
     (typeof header === "string" ? header : alt)!
   )}`;
 
-  return (
-    <section
-      aria-labelledby={sectionID}
-      style={style}
-      className={cn(["skc-nav-drawer-section", className])}
+  return React.createElement(
+    element || "section",
+    { style, className: cn(["skc-nav-drawer-section", className]) },
+    <h2
+      id={sectionID}
+      aria-label={alt}
+      className="skc-nav-drawer-section__header"
     >
-      <h2
-        id={sectionID}
-        aria-label={alt}
-        className="skc-nav-drawer-section__header"
-      >
-        {header}
-      </h2>
-      <ul role="list">{children}</ul>
-    </section>
+      {header}
+    </h2>,
+    <ul role="list">{children}</ul>
   );
 }
 

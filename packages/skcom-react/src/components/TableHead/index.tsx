@@ -36,7 +36,7 @@ export interface TableHeadProps extends SKComponent {
 /**
  * The head area of a Table.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
  *
  * @param children Table Head has the same behaviour as `<thead>`.
  * @param fixed If the Table Head stays put on scroll.
@@ -44,20 +44,21 @@ export interface TableHeadProps extends SKComponent {
 export function TableHead({
   children,
   fixed,
+  element,
   style,
   className,
 }: TableHeadProps) {
-  return (
-    <thead
-      style={style}
-      className={cn([
+  return React.createElement(
+    element || "thead",
+    {
+      style,
+      className: cn([
         "skc-table-head",
         fixed && "skc-table-head--fixed",
         className,
-      ])}
-    >
-      {children}
-    </thead>
+      ]),
+    },
+    children
   );
 }
 

@@ -3,7 +3,7 @@
 /// A wrapper for form control components like Checkbox, Radio, and Switch with
 /// a label.
 ///
-/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation
+/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation
 ////
 
 @use "../abstracts/typography.scss" as type;
@@ -14,13 +14,17 @@
   flex-direction: row;
   gap: 1rem;
 
-  &:has(.skc-chip-set) {
+  &:has(> .skc-chip-set) {
     flex-direction: column-reverse;
     gap: 0.5rem;
   }
 
-  .skc-checkbox,
-  .skc-radio {
+  &:has(> .skc-switch) {
+    flex-direction: row-reverse;
+  }
+
+  > .skc-checkbox,
+  > .skc-radio {
     padding-block: 0.0625rem;
   }
 }

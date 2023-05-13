@@ -10,12 +10,23 @@ import { TableCell, TableCellProps } from "./components/TableCell";
  */
 export interface SKComponent {
   /**
+   * The element of the most relevant underlying element.
+   *
+   * - Optional.
+   */
+  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
+
+  /**
    * `className` on the most relevant underlying attribute.
+   *
+   * - Optional.
    */
   className?: string;
 
   /**
    * `style` on the most relevant underlying attribute.
+   *
+   * - Optional.
    */
   style?: React.CSSProperties;
 }
@@ -47,26 +58,6 @@ export type DataTableColumnDef<T = any> = ColumnDef<T> &
      * @returns The Table Cell content, replaces the default.
      */
     render: (row: T) => string | JSX.Element | null;
-
-    /**
-     * The render function used when a cell in this column is being edited.
-     * Enables editing if defined.
-     *
-     * @param row The data passed in for each row.
-     * @returns A JSX Element, usually a Text Field or a Chip Field.
-     *
-     * @todo
-     */
-    editingField?: (row: T) => JSX.Element;
-
-    /**
-     * Triggers when the user is don editing a cell in this column.
-     *
-     * @param value
-     *
-     * @todo
-     */
-    onSubmitEdit?: (value: any) => any;
 
     /**
      * The message shown when there is no data for a Table Cell.

@@ -1,5 +1,5 @@
 // External libraries
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -15,8 +15,6 @@ import "@suankularb-components/css/dist/css/components/nav-bar.css";
 // Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { matchDisplayName } from "../../utils/displayName";
-import { useBreakpoint } from "../../utils/window";
 
 /**
  * Props for {@link NavBar Navigation Bar}.
@@ -77,7 +75,7 @@ export interface NavBarProps extends SKComponent {
 
 /**
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
  *
  * @param children A Navigation Bar contains Navigation Bar Items, each leading to a different top-level page.
  * @param brand A small image of your brand can be put on the Navigation Rail.
@@ -93,34 +91,37 @@ export function NavBar({
   end,
   onNavToggle,
   locale,
+  element,
   style,
   className,
 }: NavBarProps) {
   const { duration, easing } = useAnimationConfig();
 
-  return (
-    <nav style={style} className={cn(["skc-nav-bar", className])}>
-      <motion.div layout layoutRoot className="skc-nav-bar__main">
-        <section className="skc-nav-bar__toggle-and-fab">
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="menu" />}
-            alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
-            onClick={onNavToggle}
-          />
-          <div className="skc-nav-bar__brand">{brand}</div>
-          {fab}
-        </section>
-        <motion.section
-          layout="position"
-          transition={transition(duration.medium2, easing.standard)}
-          className="skc-nav-bar__destinations"
-        >
-          {children}
-        </motion.section>
-      </motion.div>
-      <section className="skc-nav-bar__end">{end}</section>
-    </nav>
+  return React.createElement(
+    element || "nav",
+    { style, className: cn(["skc-nav-bar", className]) },
+
+    <motion.div layout layoutRoot className="skc-nav-bar__main">
+      <section className="skc-nav-bar__toggle-and-fab">
+        <Button
+          appearance="text"
+          icon={<MaterialIcon icon="menu" />}
+          alt={locale === "th" ? "เปิดเมนู" : "Toggle Navigation Drawer"}
+          onClick={onNavToggle}
+        />
+        <div className="skc-nav-bar__brand">{brand}</div>
+        {fab}
+      </section>
+      <motion.section
+        layout="position"
+        transition={transition(duration.medium2, easing.standard)}
+        className="skc-nav-bar__destinations"
+      >
+        {children}
+      </motion.section>
+    </motion.div>,
+
+    <section className="skc-nav-bar__end">{end}</section>
   );
 }
 

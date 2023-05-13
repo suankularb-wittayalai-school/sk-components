@@ -45,13 +45,13 @@ export interface FormGroupProps extends SKComponent {
    *
    * - Optional.
    */
-  legendAttr?: JSX.IntrinsicElements["legend"];
+  legendAttr?: React.ComponentProps<"legend">;
 }
 
 /**
  * A group of related form items, like options in a radio group.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children Form Items within this group, be it a set of options to choose from or related settings in a preferences page.
  * @param label The legend for the entire field.
@@ -63,20 +63,21 @@ export function FormGroup({
   label,
   alt,
   legendAttr,
+  element,
   style,
   className,
 }: FormGroupProps) {
-  return (
-    <fieldset
-      aria-label={alt}
-      style={style}
-      className={cn(["skc-form-group", className])}
-    >
-      <legend className="skc-form-group__label" {...legendAttr}>
-        {label}
-      </legend>
-      {children}
-    </fieldset>
+  return React.createElement(
+    element || "fieldset",
+    { "aria-label": alt, style, className: cn(["skc-form-group", className]) },
+
+    // Label
+    <legend className="skc-form-group__label" {...legendAttr}>
+      {label}
+    </legend>,
+
+    // Input
+    children
   );
 }
 

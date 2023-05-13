@@ -1,6 +1,8 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { Interactive } from "../Interactive";
 
 // Types
 import { SKComponent } from "../../types";
@@ -9,7 +11,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/assist-chip.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -90,35 +91,6 @@ export interface AssistChipProps extends SKComponent {
    * - Incompatible with `onClick`.
    */
   href?: string;
-
-  /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing.
-   * An example is `next/link` from Next.js.
-   *
-   * - Incompatible with `onClick`.
-   */
-  element?: ({
-    children,
-    ref,
-    style,
-    className,
-    href,
-    onClick,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    ref: React.MutableRefObject<any>;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onClick: (event: React.MouseEvent) => void;
-    onTouchStart: (event: React.TouchEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
 }
 
 /**
@@ -129,7 +101,7 @@ export interface AssistChipProps extends SKComponent {
  * The label of an Assist Chip should start with a verb, i.e. “**Turn on**
  * lights” or “**Save** to favorites”.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.6b3bv92d22u9 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.6b3bv92d22u9 SKCom documentation}
  *
  * @param children The text shown inside the Assist Chip.
  * @param icon An icon can appear before the text (`children`) in an Assist Chip.
@@ -140,7 +112,6 @@ export interface AssistChipProps extends SKComponent {
  * @param disabled Turns the Assist Chip gray and block any action associated with it.
  * @param onClick The function called when the user interacts with the Assist Chip, similar to `onClick` on `<button>`.
  * @param href The URL of the page this Assist Chip leads to, similar to `href` on `<a>`.
- * @param element Change the underlying element from `<a>` to a custom element.
  */
 export function AssistChip({
   children,
@@ -152,62 +123,29 @@ export function AssistChip({
   disabled,
   onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: AssistChipProps) {
-  // Ripple setup
-  const buttonRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-
-  const props = {
-    ref: buttonRef,
-    "aria-disabled": disabled,
-    title: tooltip,
-    onClick: () => {
-      if (!(disabled || loading) && onClick && !href) onClick();
-    },
-    style: style,
-    className: cn([
-      "skc-assist-chip",
-      elevated && "skc-assist-chip--elevated",
-      dangerous && "skc-assist-chip--dangerous",
-      className,
-    ]),
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["a" | "button"];
-
-  const content = (
-    <>
+  return (
+    <Interactive
+      onClick={!(disabled || loading) && onClick && !href ? onClick : undefined}
+      element={element || "button"}
+      attr={{
+        "aria-disabled": disabled,
+        title: tooltip,
+      }}
+      style={style}
+      className={cn([
+        "skc-assist-chip",
+        elevated && "skc-assist-chip--elevated",
+        dangerous && "skc-assist-chip--dangerous",
+        className,
+      ])}
+    >
       {icon && <div className="skc-assist-chip__icon">{icon}</div>}
       <span className="skc-assist-chip__label">{children}</span>
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-assist-chip__ripple"
-        style={rippleStyle}
-      />
-    </>
-  );
-
-  return (
-    // Render with `element` if defined
-    href && Element ? (
-      <Element {...props} href={href}>
-        {content}
-      </Element>
-    ) : // Render an `<a>` if link passed in
-    href ? (
-      <a {...props} href={href}>
-        {content}
-      </a>
-    ) : (
-      // Otherwise, render a `<button>`
-      <button {...props} type="button">
-        {content}
-      </button>
-    )
+    </Interactive>
   );
 }
 

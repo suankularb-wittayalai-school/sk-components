@@ -1,0 +1,51 @@
+////
+/// **Interactive**
+/// Make any child element interactive, complete with state layer effect.
+///
+/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.2x19lmmb8mra SKCom documentation
+////
+
+@use "../abstracts/mixins.scss" as mix;
+
+.skc-interactive {
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+
+  &:not(.skc-interactive--no-state-layer)::before {
+    @include mix.state-layer();
+    background-color: var(--on-surface);
+  }
+
+  &:hover::before {
+    opacity: 0.08;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      opacity: 0.12;
+    }
+  }
+}
+
+.skc-interactive--shadow {
+  @include mix.transition(
+    box-shadow,
+    var(--motion-short-4),
+    var(--easing-standard)
+  );
+
+  &:hover {
+    box-shadow: var(--shadow-1);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.skc-interactive__ripple {
+  @include mix.ripple();
+  background-color: var(--on-surface);
+}

@@ -52,13 +52,18 @@ export interface MenuProps extends SKComponent {
    *
    * - Optional.
    */
-  ulAttr?: JSX.IntrinsicElements["ul"];
+  ulAttr?: React.ComponentProps<typeof motion.ul>;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
  * A list of actions/options on a temporary surface.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
  *
  * @param children Actions/options inside a Menu.
  * @param open If the Menu is open and shown.
@@ -102,10 +107,7 @@ export function Menu({
                 : density === -4 && "skc-menu--density-[-4]",
               className,
             ])}
-            // (@SiravitPhokeed)
-            // `motion.ul` is refusing to accept `JSX.IntrinsicElements["ul"]`
-            // for some reason…
-            {...{ ...(ulAttr as any), style }}
+            {...{ ...ulAttr, style }}
           >
             {children}
           </motion.ul>

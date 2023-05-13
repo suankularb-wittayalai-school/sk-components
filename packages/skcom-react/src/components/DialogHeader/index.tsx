@@ -56,7 +56,7 @@ export interface DialogHeaderProps extends SKComponent {
 /**
  * A row of Buttons. DialogHeader handles spacing and overflow.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param icon The hero icon shown above the title text (`title`).
  * @param title The title text.
@@ -68,6 +68,7 @@ export function DialogHeader({
   title,
   desc,
   alt,
+  element,
   style,
   className,
 }: DialogHeaderProps) {
@@ -86,22 +87,28 @@ export function DialogHeader({
         alt)!
   )}`;
 
-  return (
-    <div style={style} className={cn(["skc-dialog-header", className])}>
-      {icon && <div className="skc-dialog-header__icon">{icon}</div>}
-      {title && (
-        <h2 aria-label={alt} id={`${dialogID}-title`}>
-          {title}
-        </h2>
-      )}
-      <p
-        // Only use `alt` as label here if `title` is undefined
-        aria-label={!title ? alt : undefined}
-        id={`${dialogID}-desc`}
-      >
-        {desc}
-      </p>
-    </div>
+  return React.createElement(
+    element || "div",
+    { style, className: cn(["skc-dialog-header", className]) },
+
+    // Icon
+    icon && <div className="skc-dialog-header__icon">{icon}</div>,
+
+    // Title
+    title && (
+      <h2 aria-label={alt} id={`${dialogID}-title`}>
+        {title}
+      </h2>
+    ),
+
+    // Description
+    <p
+      // Only use `alt` as label here if `title` is undefined
+      aria-label={!title ? alt : undefined}
+      id={`${dialogID}-desc`}
+    >
+      {desc}
+    </p>
   );
 }
 

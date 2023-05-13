@@ -50,7 +50,7 @@ export interface FormItemProps extends SKComponent {
    *
    * - Optional.
    */
-  labelAttr?: JSX.IntrinsicElements["label"];
+  labelAttr?: React.ComponentProps<"label">;
 }
 
 /**
@@ -62,7 +62,7 @@ type InputProps = CheckboxProps | RadioProps;
  * A wrapper for form control components like Checkbox, Radio, and Switch with
  * a label.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation}
  *
  * @param children The input.
  * @param label The label for the input.
@@ -74,6 +74,7 @@ export function FormItem({
   label,
   alt,
   labelAttr,
+  element,
   style,
   className,
 }: FormItemProps) {
@@ -81,9 +82,12 @@ export function FormItem({
     (typeof label === "string" ? label : alt)!
   )}`;
 
-  const injectedChildren = React.cloneElement(
-    React.Children.only(children) as JSX.Element,
-    {
+  return React.createElement(
+    element || "div",
+    { "aria-label": alt, style, className: cn(["skc-form-item", className]) },
+
+    // Input
+    React.cloneElement(React.Children.only(children) as JSX.Element, {
       inputAttr: {
         id:
           // Attempt to use existing ID
@@ -94,24 +98,12 @@ export function FormItem({
           // Otherwise, use the default
           formItemID,
       },
-    } satisfies InputProps
-  );
+    } satisfies InputProps),
 
-  return (
-    <div
-      aria-label={alt}
-      style={style}
-      className={cn(["skc-form-item", className])}
-    >
-      {injectedChildren}
-      <label
-        htmlFor={formItemID}
-        className="skc-form-item__label"
-        {...labelAttr}
-      >
-        {label}
-      </label>
-    </div>
+    // Label
+    <label htmlFor={formItemID} className="skc-form-item__label" {...labelAttr}>
+      {label}
+    </label>
   );
 }
 
