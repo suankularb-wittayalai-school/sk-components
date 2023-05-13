@@ -110,17 +110,13 @@ const Layout: FC<
           <NavDrawerItem
             icon={<MaterialIcon icon="description" />}
             label="Docs"
-            href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
-            element={forwardRef((props, ref) => (
-              <a
-                {...props}
-                ref={ref as LegacyRef<HTMLAnchorElement>}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {props.children}
-              </a>
-            ))}
+            onClick={() =>
+              window.open(
+                "https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing",
+                undefined,
+                "popup"
+              )
+            }
           />
         </NavDrawerSection>
 
@@ -209,17 +205,13 @@ const Layout: FC<
         <NavBarItem
           icon={<MaterialIcon icon="description" />}
           label="Docs"
-          href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
-          element={forwardRef((props, ref) => (
-            <a
-              {...props}
-              ref={ref as LegacyRef<HTMLAnchorElement>}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {props.children}
-            </a>
-          ))}
+          onClick={() =>
+            window.open(
+              "https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing",
+              undefined,
+              "popup"
+            )
+          }
         />
       </NavBar>
 

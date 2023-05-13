@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
+import { NavDrawerItemProps } from "../NavDrawerItem";
 import { NavDrawerSectionProps } from "../NavDrawerSection";
 
 // Types
@@ -99,7 +100,12 @@ export function NavDrawer({
                 (item) =>
                   matchDisplayName(item, "NavDrawerItem")
                     ? React.cloneElement(item as JSX.Element, {
-                        onClick: onClose,
+                        onClick: () => {
+                          const { onClick } = (item as JSX.Element)
+                            .props as NavDrawerItemProps;
+                          onClose();
+                          if (onClick) onClick();
+                        },
                       })
                     : item
               ),

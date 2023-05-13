@@ -1,5 +1,4 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -9,8 +8,8 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/nav-drawer-item.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { Interactive } from "../Interactive";
 
 /**
  * Props for {@link NavDrawerItem Navigation Drawer Item}.
@@ -55,7 +54,11 @@ export interface NavDrawerItemProps extends SKComponent {
   selected?: boolean;
 
   /**
-   * @private
+   * The function called when the user interacts with the Navigation Drawer
+   * Item, similar to `onClick` on `<button>`.
+   *
+   * - Required if `href` is not defined.
+   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
@@ -63,42 +66,20 @@ export interface NavDrawerItemProps extends SKComponent {
    * The URL of the page this Navigation Drawer Item leads to, similar to
    * `href` on `<a>`.
    *
-   * - Always required.
+   * - Required if `onClick` is not defined.
+   * - Incompatible with `onClick`.
    */
-  href: string;
+  href?: string;
 
   /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing. An
-   * example is `next/link` from Next.js.
-   *
-   * - Optional.
+   * @todo Replace this with `element` from the `SKComponent` interface.
    */
-  element?: ({
-    children,
-    ref,
-    title,
-    style,
-    className,
-    href,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    ref: React.MutableRefObject<any>;
-    title?: string;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onTouchStart: (event: React.TouchEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
+  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**
- * A row of Buttons. NavDrawerItem handles spacing and overflow.
+ * A destination in a Navigation Drawer. Should be a child of a Navigation
+ * Drawer Section.
  *
  * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation}
  *
@@ -107,8 +88,8 @@ export interface NavDrawerItemProps extends SKComponent {
  * @param metadata Some text aligned to the right of a Navigation Drawer Item.
  * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Drawer Item.
  * @param selected Highlights the Navigation Drawer Item.
+ * @param onClick The function called when the user interacts with the Navigation Drawer Item.
  * @param href The URL of the page this Navigation Drawer Item leads to, similar to `href` on `<a>`.
- * @param element Change the underlying element from `<a>` to a custom element.
  */
 export function NavDrawerItem({
   icon,
@@ -118,53 +99,30 @@ export function NavDrawerItem({
   selected,
   onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: NavDrawerItemProps) {
-  // Ripple setup
-  const linkRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(linkRef);
-
-  const props = {
-    ref: linkRef,
-    "aria-current": selected,
-    title: tooltip,
-    style,
-    className: cn([
-      "skc-nav-drawer-item",
-      selected && "skc-nav-drawer-item--selected",
-      className,
-    ]),
-    href,
-    onClick,
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["a"];
-
-  const content = (
-    <>
-      <div className="skc-nav-drawer-item__icon">{icon}</div>
-      <span className="skc-nav-drawer-item__label">{label}</span>
-      {metadata && (
-        <span className="skc-nav-drawer-item__metadata">{metadata}</span>
-      )}
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-nav-drawer-item__ripple"
-        style={rippleStyle}
-      />
-    </>
-  );
-
   return (
     <li>
-      {Element ? (
-        <Element {...props}>{content}</Element>
-      ) : (
-        <a {...props}>{content}</a>
-      )}
+      <Interactive
+        href={href}
+        onClick={onClick}
+        element={element}
+        attr={{ "aria-current": selected, title: tooltip }}
+        style={style}
+        className={cn([
+          "skc-nav-drawer-item",
+          selected && "skc-nav-drawer-item--selected",
+          className,
+        ])}
+      >
+        <div className="skc-nav-drawer-item__icon">{icon}</div>
+        <span className="skc-nav-drawer-item__label">{label}</span>
+        {metadata && (
+          <span className="skc-nav-drawer-item__metadata">{metadata}</span>
+        )}
+      </Interactive>
     </li>
   );
 }
