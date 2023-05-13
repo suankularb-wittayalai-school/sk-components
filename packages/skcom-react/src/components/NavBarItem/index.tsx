@@ -2,6 +2,9 @@
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import * as React from "react";
 
+// Internal components
+import { Interactive } from "../Interactive";
+
 // Types
 import { SKComponent } from "../../types";
 
@@ -83,39 +86,27 @@ export interface NavBarItemProps extends SKComponent {
   railOnly?: boolean;
 
   /**
+   * The function called when the user interacts with the Navigation Bar Item,
+   * similar to `onClick` on `<button>`.
+   * 
+   * - Required if `href` is not defined.
+   * - Incompatible with `href`.
+   */
+  onClick?: () => any;
+
+  /**
    * The URL of the page this Navigation Bar Item leads to, similar to `href`
    * on `<a>`.
    *
-   * - Always required.
+   * - Required if `onClick` is not defined.
+   * - Incompatible with `onClick`.
    */
-  href: string;
+  href?: string;
 
   /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing. An
-   * example is `next/link` from Next.js.
-   *
-   * - Optional.
+   * @todo Replace this with `element` from the `SKComponent` interface.
    */
-  element?: ({
-    children,
-    title,
-    style,
-    className,
-    href,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    title?: string;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onTouchStart: (event: React.TouchEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
+  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**
@@ -129,8 +120,8 @@ export interface NavBarItemProps extends SKComponent {
  * @param badge The number in the notification badge of this Navigation Bar Item.
  * @param selected Highlights the Navigation Bar Item. If the user is currently on this page, the Navigation Bar Item should be highlighted.
  * @param railOnly This Navigation Bar Item will only show on the Navigation Rail visible on larger screens and disappears on smaller screens.
+ * @param onClick The function called when the user interacts with the Navigation Bar Item.
  * @param href The URL of the page this Navigation Bar Item leads to, similar to `href` on `<a>`.
- * @param element Change the underlying element from `<a>` to a custom element.
  */
 export function NavBarItem({
   icon,
@@ -140,8 +131,9 @@ export function NavBarItem({
   badge,
   selected,
   railOnly,
+  onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: NavBarItemProps) {
@@ -150,13 +142,6 @@ export function NavBarItem({
 
   // Ripple setup
   const iconRef = React.useRef(null);
-
-  const [clientHeight, setClientHeight] = React.useState(1080);
-  React.useEffect(() => {
-    if (window.innerWidth <= 600) setClientHeight(window.innerHeight);
-    else setClientHeight(80);
-  }, []);
-
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
 
   // Label ID for `aria-labelledby`
@@ -164,25 +149,32 @@ export function NavBarItem({
     (typeof label === "string" ? label : alt)!
   )}`;
 
-  const props = {
-    "aria-current": selected,
-    "aria-labelledby": label ? navID : undefined,
-    href: href,
-    title: tooltip,
-    style: style,
-    className: cn([
-      "skc-nav-bar-item",
-      selected && "skc-nav-bar-item--selected",
-      railOnly && "skc-nav-bar-item--rail-only",
-      className,
-    ]),
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["a"];
-
-  const content = (
-    <>
+  return (
+    <Interactive
+      stateLayerEffect={false}
+      rippleEffect={false}
+      onClick={onClick}
+      href={href}
+      element={element}
+      attr={{
+        "aria-current": selected,
+        "aria-labelledby": label ? navID : undefined,
+        title: tooltip,
+        ...rippleListeners,
+      }}
+      style={style}
+      className={cn([
+        "skc-nav-bar-item",
+        selected && "skc-nav-bar-item--selected",
+        railOnly && "skc-nav-bar-item--rail-only",
+        className,
+      ])}
+    >
+      {/* Icon */}
       <div ref={iconRef} className="skc-nav-bar-item__icon">
         {icon}
+
+        {/* Notification badge */}
         <LayoutGroup>
           <AnimatePresence>
             {badge !== undefined && (
@@ -199,6 +191,8 @@ export function NavBarItem({
             )}
           </AnimatePresence>
         </LayoutGroup>
+
+        {/* Ripple */}
         <motion.span
           aria-hidden
           initial={{ scale: 0, opacity: 0.36 }}
@@ -207,22 +201,14 @@ export function NavBarItem({
           style={rippleStyle}
         />
       </div>
+
+      {/* Label */}
       {label && (
         <span id={navID} className="skc-nav-bar-item__label">
           {label}
         </span>
       )}
-    </>
-  );
-
-  return (
-    // Render with `element` if defined
-    Element ? (
-      <Element {...props}>{content}</Element>
-    ) : (
-      // Otherwise, render an `<a>`
-      <a {...props}>{content}</a>
-    )
+    </Interactive>
   );
 }
 
