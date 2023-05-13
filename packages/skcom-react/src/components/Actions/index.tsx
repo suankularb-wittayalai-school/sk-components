@@ -40,11 +40,18 @@ export interface ActionsProps extends SKComponent {
  * @param children Actions contains Buttons; the recommended limit is 3.
  * @param align How the Buttons should be positioned.
  */
-export function Actions({ children, align, style, className }: ActionsProps) {
-  return (
-    <div
-      style={style}
-      className={cn([
+export function Actions({
+  children,
+  align,
+  element,
+  style,
+  className,
+}: ActionsProps) {
+  return React.createElement(
+    element || "div",
+    {
+      style,
+      className: cn([
         "skc-actions",
         align === "left"
           ? "skc-actions--left"
@@ -56,10 +63,9 @@ export function Actions({ children, align, style, className }: ActionsProps) {
           ? "skc-actions--full"
           : undefined,
         className,
-      ])}
-    >
-      {children}
-    </div>
+      ]),
+    },
+    children
   );
 }
 
