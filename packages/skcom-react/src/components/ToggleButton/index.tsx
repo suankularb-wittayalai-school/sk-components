@@ -1,9 +1,9 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
 import { MaterialIcon } from "../MaterialIcon";
+import { Interactive } from "../Interactive";
 
 // Types
 import { SKComponent } from "../../types";
@@ -12,7 +12,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/toggle-button.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -37,7 +36,8 @@ export interface ToggleButtonProps extends SKComponent {
    * A Toggle Button’s action is only communicated via its icon, so keep the
    * icon clear.
    *
-   * - You are encouraged to use {@link MaterialIcon Material Icons} as the value for `icon`.
+   * - You are encouraged to use {@link MaterialIcon Material Icons} as the
+   *   value for `icon`.
    * - Always required, as a Toggle Button cannot be empty.
    */
   icon: JSX.Element;
@@ -93,6 +93,11 @@ export interface ToggleButtonProps extends SKComponent {
    * @param state Whether the Toggle Button is toggled on or off.
    */
   onChange?: (state: boolean) => void;
+
+  /**
+   * @todo Replace this with `element` from the `SKComponent` interface.
+   */
+  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**
@@ -118,22 +123,22 @@ export function ToggleButton({
   disabled,
   value,
   onChange,
+  element,
   style,
   className,
 }: ToggleButtonProps) {
-  // Ripple setup
-  const buttonRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-
   return (
-    <button
-      ref={buttonRef}
-      // We’re using `aria-disabled` instead of `disabled` because it does not
-      // disable tabbing in, which is better for accessibility.
-      aria-disabled={disabled}
-      aria-pressed={value}
-      aria-label={alt}
-      title={tooltip}
+    <Interactive
+      element={element}
+      onClick={onChange && !disabled ? () => onChange(!value) : undefined}
+      attr={{
+        // We’re using `aria-disabled` instead of `disabled` because it does
+        // not disable tabbing in, which is better for accessibility.
+        "aria-disabled": disabled,
+        "aria-pressed": value,
+        "aria-label": alt,
+        title: tooltip,
+      }}
       style={style}
       className={cn([
         "skc-toggle-button",
@@ -150,18 +155,9 @@ export function ToggleButton({
         dangerous && "skc-toggle-button--dangerous",
         className,
       ])}
-      onClick={() => onChange && !disabled && onChange(!value)}
-      {...rippleListeners}
     >
       {icon}
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-toggle-button__ripple"
-        style={rippleStyle}
-      />
-    </button>
+    </Interactive>
   );
 }
 

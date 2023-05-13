@@ -55,7 +55,7 @@
       }
 
       // Block ripple
-      > .skc-button__ripple {
+      > .skc-interactive__ripple {
         background-color: transparent !important;
       }
     }
@@ -106,7 +106,7 @@
 }
 
 // Ripple
-.skc-toggle-button__ripple {
+.skc-interactive__ripple {
   @include mix.ripple();
 }
 
@@ -116,7 +116,7 @@
   background-color: var(--surface-variant);
 
   &::before,
-  .skc-toggle-button__ripple {
+  > .skc-interactive__ripple {
     background-color: var(--primary);
   }
 
@@ -126,7 +126,7 @@
     background-color: var(--primary);
 
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--on-primary);
     }
   }
@@ -137,7 +137,7 @@
     background-color: var(--error-container);
 
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--error);
     }
 
@@ -146,7 +146,7 @@
       background-color: var(--error);
 
       &::before,
-      .skc-toggle-button__ripple {
+      > .skc-interactive__ripple {
         background-color: var(--on-error);
       }
     }
@@ -171,7 +171,7 @@
   background-color: var(--surface-variant);
 
   &::before,
-  .skc-toggle-button__ripple {
+  > .skc-interactive__ripple {
     background-color: var(--on-surface-variant);
   }
 
@@ -181,7 +181,7 @@
     background-color: var(--secondary-container);
 
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--on-secondary-container);
     }
   }
@@ -192,7 +192,7 @@
     background-color: var(--error-container);
 
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--error);
     }
 
@@ -201,7 +201,7 @@
       background-color: var(--error);
 
       &::before,
-      .skc-toggle-button__ripple {
+      > .skc-interactive__ripple {
         background-color: var(--on-error);
       }
     }
@@ -226,7 +226,7 @@
   border: 1px solid var(--outline);
 
   &::before,
-  .skc-toggle-button__ripple {
+  > .skc-interactive__ripple {
     background-color: var(--on-surface);
   }
 
@@ -237,7 +237,7 @@
     background-color: var(--inverse-surface);
 
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--inverse-on-surface);
     }
   }
@@ -247,7 +247,7 @@
     color: var(--error);
 
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--error);
     }
 
@@ -285,7 +285,7 @@
   color: var(--on-surface);
 
   &::before,
-  .skc-toggle-button__ripple {
+  > .skc-interactive__ripple {
     background-color: var(--on-surface);
   }
 
@@ -295,7 +295,7 @@
 
     // Dangerous
     &::before,
-    .skc-toggle-button__ripple {
+    > .skc-interactive__ripple {
       background-color: var(--primary);
     }
   }
