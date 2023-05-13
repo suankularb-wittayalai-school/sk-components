@@ -36,20 +36,8 @@
 
   // State layer
   &::before {
-    @include mix.state-layer();
     inset: -1px;
     background-color: var(--on-surface-variant);
-  }
-
-  &:hover::before {
-    opacity: 0.08;
-  }
-
-  &:focus,
-  &:active {
-    &::before {
-      opacity: 0.12;
-    }
   }
 
   &:has(.skc-chip__icon:first-child) {
@@ -177,15 +165,9 @@
   }
 
   &::before,
-  .skc-button__ripple {
+  .skc-interactive__ripple {
     background-color: var(--on-surface);
   }
-}
-
-// Ripple
-.skc-chip__ripple {
-  @include mix.ripple();
-  background-color: var(--on-surface-variant);
 }
 
 @include mix.breakpoint("sm") {

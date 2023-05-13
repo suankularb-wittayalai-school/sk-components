@@ -1,9 +1,9 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
 import { Button } from "../Button";
+import { Interactive } from "../Interactive";
 import { MaterialIcon } from "../MaterialIcon";
 
 // Types
@@ -13,7 +13,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/filter-chip.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -93,6 +92,11 @@ export interface FilterChipProps extends SKComponent {
    * - Optional.
    */
   menu?: JSX.Element;
+
+  /**
+   * @todo Replace this with `element` from the `SKComponent` interface.
+   */
+  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
 }
 
 /**
@@ -122,41 +126,35 @@ export function FilterChip({
   onClick,
   onMenuToggle,
   menu,
+  element,
   style,
   className,
 }: FilterChipProps) {
-  // Ripple setup
-  const buttonRef = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(buttonRef);
-
-  // Props
-  const props = {
-    ref: buttonRef,
-    "aria-disabled": disabled,
-    title: tooltip,
-    style,
-    className: cn([
-      "skc-filter-chip",
-      elevated && "skc-filter-chip--elevated",
-      selected && "skc-filter-chip--selected",
-      className,
-    ]),
-  } satisfies JSX.IntrinsicElements["button" | "div"];
-
-  // Content
-  const content = (
-    <>
+  const FilterChip: React.FC = () => (
+    <Interactive
+      element={element}
+      onClick={onClick && !onMenuToggle ? () => onClick(!selected) : undefined}
+      style={style}
+      className={cn([
+        "skc-filter-chip",
+        elevated && "skc-filter-chip--elevated",
+        selected && "skc-filter-chip--selected",
+        className,
+      ])}
+      attr={{ "aria-disabled": disabled, title: tooltip }}
+    >
+      {/* Icon */}
       {(icon || selected) && (
         <div className="skc-filter-chip__icon">
           {selected ? <MaterialIcon icon="done" /> : icon}
         </div>
       )}
 
+      {/* Label */}
       {onMenuToggle ? (
         <button
           className="skc-filter-chip__label"
           onClick={() => onClick && onClick(!selected)}
-          {...rippleListeners}
         >
           {children}
         </button>
@@ -164,6 +162,7 @@ export function FilterChip({
         <span className="skc-filter-chip__label">{children}</span>
       )}
 
+      {/* Menu toggle */}
       {onMenuToggle && (
         <Button
           appearance="text"
@@ -171,30 +170,16 @@ export function FilterChip({
           onClick={onMenuToggle}
         />
       )}
-
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-filter-chip__ripple"
-        style={rippleStyle}
-      />
-    </>
+    </Interactive>
   );
 
   return onMenuToggle ? (
     <div className="skc-filter-chip__anchor">
-      <div {...props}>{content}</div>
+      <FilterChip />
       {menu}
     </div>
   ) : (
-    <button
-      {...props}
-      onClick={() => onClick && onClick(!selected)}
-      {...rippleListeners}
-    >
-      {content}
-    </button>
+    <FilterChip />
   );
 }
 

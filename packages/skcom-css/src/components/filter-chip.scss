@@ -36,7 +36,7 @@
 }
 
 // Elevated Filter Chip
-.skc-filter-chip.skc-filter-chip--elevated {
+.skc-filter-chip--elevated {
   @extend .skc-chip--elevated;
 }
 
@@ -62,9 +62,4 @@
 // Icon
 .skc-filter-chip__icon {
   @extend .skc-chip__icon;
-}
-
-// Ripple
-.skc-filter-chip__ripple {
-  @extend .skc-chip__ripple;
 }

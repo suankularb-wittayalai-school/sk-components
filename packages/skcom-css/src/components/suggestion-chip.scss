@@ -17,7 +17,7 @@
   }
 }
 
-.skc-suggestion-chip.skc-suggestion-chip--elevated {
+.skc-suggestion-chip--elevated {
   @extend .skc-chip--elevated;
 }
 
@@ -27,8 +27,4 @@
 
 .skc-suggestion-chip__icon {
   @extend .skc-chip__icon;
-}
-
-.skc-suggestion-chip__ripple {
-  @extend .skc-chip__ripple;
 }

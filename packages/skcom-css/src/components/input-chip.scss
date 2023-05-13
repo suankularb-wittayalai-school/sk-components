@@ -90,14 +90,10 @@
     color: var(--on-secondary-container);
 
     &::before,
-    .skc-button__ripple {
+    .skc-interactive__ripple {
       background-color: var(--on-secondary-container);
     }
   }
-}
-
-.skc-input-chip__icon {
-  @extend .skc-chip__icon;
 }
 
 // Clickable Input Chip
@@ -106,9 +102,5 @@ button.skc-input-chip {
 
   &::before {
     background-color: var(--on-surface);
-  }
-
-  .skc-input-chip__ripple {
-    @extend .skc-chip__ripple;
   }
 }
