@@ -88,7 +88,7 @@ export interface NavBarItemProps extends SKComponent {
   /**
    * The function called when the user interacts with the Navigation Bar Item,
    * similar to `onClick` on `<button>`.
-   * 
+   *
    * - Required if `href` is not defined.
    * - Incompatible with `href`.
    */

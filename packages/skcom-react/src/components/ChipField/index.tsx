@@ -84,7 +84,7 @@ export interface ChipFieldProps extends SKComponent {
 
   /**
    * An array of characters that trigger the creation of a new Input Chip.
-   * 
+   *
    * - Optional.
    */
   entrySeparators?: string[];

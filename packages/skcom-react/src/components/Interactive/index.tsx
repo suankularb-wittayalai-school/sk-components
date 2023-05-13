@@ -28,7 +28,7 @@ export interface InteractiveProps<
   /**
    * Show a state layer on top of the content that reacts in color to hover and
    * focus to signify its interactivity.
-   * 
+   *
    * - Enabled by default.
    * - Optional.
    */
@@ -37,7 +37,7 @@ export interface InteractiveProps<
   /**
    * Show an ink ripple effect, a soft-edge translucent circle, radiating out
    * of the click/tap position every click/tap to signify interactivity.
-   * 
+   *
    * - Enabled by default.
    * - Optional.
    */
@@ -71,7 +71,7 @@ export interface InteractiveProps<
    * - Defaults to `<div>`.
    * - Optional.
    */
-  element?: keyof React.ReactHTML | React.FunctionComponent;
+  element?: keyof React.ReactHTML | React.FunctionComponent<ElementProps>;
 
   /**
    * Attributes for the container.

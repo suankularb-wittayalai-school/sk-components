@@ -137,9 +137,7 @@ export function Card({
       stateLayerEffect={
         stateLayerEffect === undefined ? false : stateLayerEffect
       }
-      rippleEffect={
-        stateLayerEffect === undefined ? false : stateLayerEffect
-      }
+      rippleEffect={stateLayerEffect === undefined ? false : stateLayerEffect}
       shadowEffect={shadowEffect}
       onClick={onClick}
       href={href}
