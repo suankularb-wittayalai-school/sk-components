@@ -1,4 +1,5 @@
 // External libraries
+import { motion } from "framer-motion";
 import * as React from "react";
 
 // Types
@@ -8,15 +9,14 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/interactive.css";
 
 // Utilities
-import { cn } from "../../utils/className";
 import { useRipple } from "../../utils/animation";
-import { motion } from "framer-motion";
+import { cn } from "../../utils/className";
 
 /**
  * Props for {@link Interactive}.
  */
 export interface InteractiveProps<
-  ElementProps extends {} = React.ComponentProps<"div">
+  ElementProps extends {} = React.ComponentPropsWithRef<"div">
 > extends SKComponent {
   /**
    * The content to make interactive.
@@ -26,12 +26,20 @@ export interface InteractiveProps<
   children: React.ReactNode;
 
   /**
-   * @todo Prop documentation.
+   * Show a state layer on top of the content that reacts in color to hover and
+   * focus to signify its interactivity.
+   * 
+   * - Enabled by default.
+   * - Optional.
    */
   stateLayerEffect?: boolean;
 
   /**
-   * @todo Prop documentation.
+   * Show an ink ripple effect, a soft-edge translucent circle, radiating out
+   * of the click/tap position every click/tap to signify interactivity.
+   * 
+   * - Enabled by default.
+   * - Optional.
    */
   rippleEffect?: boolean;
 
@@ -79,8 +87,8 @@ export interface InteractiveProps<
  * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children The content to make interactive.
- * @param stateLayerEffect TODO
- * @param rippleEffect TODO
+ * @param stateLayerEffect Show a state layer on top of the content that reacts in color to hover and focus to signify its interactivity.
+ * @param rippleEffect Show an ink ripple effect, a soft-edge translucent circle, radiating out of the click/tap position every click/tap to signify interactivity.
  * @param shadowEffect Elevates the content on hover and focus to signify its interactivity.
  * @param onClick The function called when the user interacts with the content, similar to `onClick` on `<button>`.
  * @param href The URL of the page the content leads to, similar to `href` on `<a>`.
