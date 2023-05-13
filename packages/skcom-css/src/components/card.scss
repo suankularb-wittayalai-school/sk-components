@@ -50,7 +50,7 @@
 }
 
 // State layer effect
-.skc-interactive--state-layer {
+.skc-card.skc-interactive {
   &.skc-card--outlined {
     @include mix.transition(
       border-color,
@@ -64,7 +64,7 @@
   }
 
   &::before,
-  .skc-interactive__ripple {
+  > .skc-interactive__ripple {
     background-color: var(--primary);
   }
 }
