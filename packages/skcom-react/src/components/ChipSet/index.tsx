@@ -36,14 +36,14 @@ export interface ChipSetProps extends SKComponent {
    *
    * - Optional.
    */
-  divAttr?: JSX.IntrinsicElements["div"];
+  divAttr?: React.ComponentProps<"div">;
 }
 
 /**
  * Chips are normally alongside each other. A Chip Set is a container for
  * Chips, handling gaps, wrap, etc.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.vu5fu2ylc51e SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.vu5fu2ylc51e SKCom documentation}
  *
  * @param children Chips.
  * @param scrollable If the parent element is not wide enough for all Chips to be visible, the Chip Set can be scrolled horizontally.

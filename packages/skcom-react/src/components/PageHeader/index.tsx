@@ -1,5 +1,5 @@
 // External libraries
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
@@ -35,7 +35,7 @@ export interface PageHeaderProps extends SKComponent {
   children?: React.ReactNode;
 
   /**
-   * The title text: the biggest text in a page and the only within a `<h1>`
+   * The title text: the biggest text on a page and the only within a `<h1>`
    * tag.
    *
    * - Always required.
@@ -106,7 +106,7 @@ export interface PageHeaderProps extends SKComponent {
    * - Optional.
    * - Incompatible with `onBack`.
    */
-  element?: ButtonProps["element"];
+  buttonElement?: ButtonProps["element"];
 
   /**
    * The function triggered when the back Button is clicked.
@@ -130,24 +130,29 @@ export interface PageHeaderProps extends SKComponent {
    * - Optional.
    */
   backAttr?: ButtonProps;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
  * There’s exactly one Page Header on every page. It displays the title (in
- * the only `<h1>` in the page), the back Button for navigating up, and
+ * the only `<h1>` on the page), the back Button for navigating up, and
  * additional components very closely related to the title.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
  *
  * @param children Some additional components inside the Page Header area.
- * @param title The title text: the biggest text in a page and the only within a `<h1>` tag.
+ * @param title The title text: the biggest text on a page and the only within a `<h1>` tag.
  * @param icon The icon representative of this page.
  * @param alt A description of the Page Header for screen readers, similar to `alt` on `<img>`.
  * @param brand A small image of your brand can be put on the Page Header.
  * @param parentURL The link the back Button navigates to.
  * @param homeURL The link to the home page of this application.
  * @param locale Allows for translation of the accessibility labels.
- * @param element Change the underlying element from `<a>` to a custom element.
+ * @param buttonElement Change the underlying element from `<a>` to a custom element.
  * @param onBack The function triggered when the back Button is clicked.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
  * @param backAttr Props for the underlying Button component the back Button uses.
@@ -161,7 +166,7 @@ export function PageHeader({
   parentURL,
   homeURL,
   locale,
-  element,
+  buttonElement,
   onBack,
   onNavToggle,
   backAttr,
@@ -204,31 +209,6 @@ export function PageHeader({
   // Animation
   const { duration, easing } = useAnimationConfig();
 
-  // Animate header text on page change
-  const headerTextControls = useAnimationControls();
-  React.useEffect(() => {
-    headerTextControls.set({ opacity: 0, scale: 0.8, y: 10 });
-    headerTextControls.start({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: transition(duration.medium2, easing.standard),
-    });
-  }, [title]);
-
-  // Animate icon on page change
-  const iconControls = useAnimationControls();
-  React.useEffect(() => {
-    if (icon || !minimized) {
-      iconControls.set({ opacity: 0, scale: 1.2, translateY: "-50%" });
-      iconControls.start({
-        opacity: 0.08,
-        scale: 1,
-        transition: transition(duration.long4, easing.standard),
-      });
-    }
-  }, [icon, minimized]);
-
   // Components
 
   /**
@@ -241,7 +221,7 @@ export function PageHeader({
       alt={locale === "th" ? "กลับ" : "Back"}
       onClick={onBack}
       href={parentURL}
-      element={element}
+      element={buttonElement}
       disabled={!(onBack || parentURL)}
     />
   );
@@ -257,7 +237,7 @@ export function PageHeader({
           appearance="text"
           icon={brand || <MaterialIcon icon="home" />}
           href={homeURL}
-          element={element}
+          element={buttonElement}
           {...backAttr}
         />
       )}

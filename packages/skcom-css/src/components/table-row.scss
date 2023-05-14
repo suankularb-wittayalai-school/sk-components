@@ -3,7 +3,7 @@
 /// A row of a Table, must be within a table area (Table Head, Table Body, or
 /// Table Foot).
 ///
-/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation
+/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -12,23 +12,30 @@
   position: relative;
   display: table-row;
 
-  &:has(.skc-table-row__actions)::after {
-    @include mix.state-layer();
-    margin-left: -1px;
-    background-color: var(--on-surface);
-  }
+  &:has(
+      > .skc-table-cell > .skc-table-cell__content > .skc-table-row__actions
+    ) {
+    > .skc-table-cell {
+      position: relative;
 
-  &:hover::after {
-    opacity: 0.08;
-  }
+      &::before {
+        @include mix.state-layer();
+        background-color: var(--on-surface);
+      }
+    }
 
-  &:focus-within::after {
-    opacity: 0.12;
+    &:hover > .skc-table-cell::before {
+      opacity: 0.08;
+    }
+
+    &:focus-within > .skc-table-cell::before {
+      opacity: 0.12;
+    }
   }
 
   &:hover,
   &:focus-within {
-    .skc-table-row__actions {
+    > .skc-table-cell > .skc-table-cell__content > .skc-table-row__actions {
       opacity: 1;
     }
   }

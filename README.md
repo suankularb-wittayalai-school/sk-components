@@ -30,8 +30,8 @@ This repository is a monorepo consisting of the SKCom libraries and a demo appli
 
 > ภาษาไทย (Thai): ในตอนนี้ยังไม่มีเอกสารในภาษาไทย แต่เราวางแผนที่จะจัดทำในอนาคต
 
-- [The full documentation on design and implementation for SKCom](https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing).
-- [The full API reference for ReSKCom](https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.hkwxehfhlxn0).
+- [The full documentation on design and implementation for SKCom](https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing).
+- [The full API reference for ReSKCom](https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.hkwxehfhlxn0).
 - Interact with the examples from the documentation with the [demo app](#the-demo-application).
 
 ## Using SKCom
@@ -80,7 +80,7 @@ Run the following at the project root to start the development server.
 npm run dev
 ```
 
-[Learn more](https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.2vpcu3kzzncl).
+[Learn more](https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.2vpcu3kzzncl).
 
 ### The Demo Application
 

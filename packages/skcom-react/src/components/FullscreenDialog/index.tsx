@@ -81,6 +81,11 @@ export interface FullscreenDialogProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
@@ -90,7 +95,7 @@ export interface FullscreenDialogProps extends SKComponent {
  * A Full-screen Dialog only fills the screen on mobile and turns into a Dialog
  * on larger screens. A Dialog can appear above a Full-screen Dialog.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation}
  *
  * @param children The content.
  * @param open If the Full-screen Dialog is open and shown.

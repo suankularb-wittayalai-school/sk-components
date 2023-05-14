@@ -17,9 +17,9 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "react": "^18.1.0",
-    "@tanstack/react-table": "^8.7.9",
-    "framer-motion": "^9.0.3"
+    "react": "^18.2.0",
+    "@tanstack/react-table": "^8.9.1",
+    "framer-motion": "^10.12.8"
   },
   "scripts": {
     "build": "tsup",

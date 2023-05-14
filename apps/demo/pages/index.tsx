@@ -78,7 +78,7 @@ const ResourcesSection: FC = () => (
           have a{" "}
           <a
             className="text-primary font-bold underline"
-            href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+            href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
             target="_blank"
             rel="noreferrer"
           >
@@ -104,7 +104,7 @@ const ResourcesSection: FC = () => (
     <Card
       appearance="filled"
       stateLayerEffect
-      href="https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing"
+      href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
       aAttr={{ target: "_blank", rel: "noreferrer" }}
       className="mx-4 justify-end self-stretch sm:mx-0"
     >

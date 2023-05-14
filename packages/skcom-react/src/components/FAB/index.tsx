@@ -99,35 +99,12 @@ export interface FABProps extends SKComponent {
    * - Incompatible with `onClick`.
    */
   href?: string;
-
-  /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing.
-   * An example is `next/link` from Next.js.
-   *
-   * - Incompatible with `onClick`.
-   */
-  element?: ({
-    children,
-    className,
-    href,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    className: string;
-    href: string;
-    onTouchStart: (event: React.TouchEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
 }
 
 /**
  * The Floating Action Button or FAB is the main action of a page.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation}
  *
  * @param children The text displayed inside the FAB.
  * @param color The color of the FAB.
@@ -138,7 +115,6 @@ export interface FABProps extends SKComponent {
  * @param stateOnScroll The FAB can disappear or minimize when the user starts scrolling down.
  * @param onClick The function called when the user interacts with the FAB.
  * @param href The URL of the page this FAB leads to.
- * @param element Change the underlying element from `<a>` to a custom element.
  */
 export function FAB({
   children,
@@ -150,7 +126,7 @@ export function FAB({
   stateOnScroll,
   onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: FABProps) {
@@ -165,14 +141,16 @@ export function FAB({
   const { atBreakpoint } = useBreakpoint();
   const scrollDir = useScrollDirection({ disabled: atBreakpoint !== "base" });
 
-  const props = {
-    "aria-label": alt,
-    title: tooltip,
-    className: "skc-fab__wrapper",
-    ...rippleListeners,
-  } satisfies React.ComponentProps<"a" | "button">;
-
-  const content = (
+  return React.createElement(
+    element || href ? "a" : "button",
+    {
+      "aria-label": alt,
+      title: tooltip,
+      href,
+      onClick,
+      className: "skc-fab__wrapper",
+      ...rippleListeners,
+    },
     <AnimatePresence initial={false}>
       {
         // Hide the FAB on scroll if `stateOnScroll` set to `disappear`
@@ -222,11 +200,14 @@ export function FAB({
               className,
             ])}
           >
+            {/* Icon */}
             {icon && (
               <motion.div layout="position" className="skc-fab__icon">
                 {icon}
               </motion.div>
             )}
+
+            {/* Label */}
             <AnimatePresence initial={false}>
               {children &&
                 // Only show the label on mobile (the label doesn’t fit in the
@@ -255,6 +236,8 @@ export function FAB({
                   </motion.span>
                 )}
             </AnimatePresence>
+
+            {/* Ripple */}
             <motion.span
               aria-hidden
               initial={{ scale: 0, opacity: 0.36 }}
@@ -266,25 +249,6 @@ export function FAB({
         )
       }
     </AnimatePresence>
-  );
-
-  return (
-    // Render with `element` if defined
-    href && Element ? (
-      <Element {...props} href={href}>
-        {content}
-      </Element>
-    ) : // Render an `<a>` if link passed in
-    href ? (
-      <a href={href} {...props}>
-        {content}
-      </a>
-    ) : (
-      // Otherwise, render a `<button>`
-      <button type="button" onClick={onClick} {...props}>
-        {content}
-      </button>
-    )
   );
 }
 

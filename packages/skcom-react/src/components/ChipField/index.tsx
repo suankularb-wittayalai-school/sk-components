@@ -55,7 +55,8 @@ export interface ChipFieldProps extends SKComponent {
   value?: string;
 
   /**
-   * This function triggers when the user make changes to the field value. The value is passed in via the function.
+   * This function triggers when the user makes changes to the field value. The
+   * value is passed in via the function.
    *
    * - Optional.
    */
@@ -72,7 +73,8 @@ export interface ChipFieldProps extends SKComponent {
   onNewEntry?: (value: string) => any;
 
   /**
-   * This function triggers when the user hits backspace twice while in the field.
+   * This function triggers when the user hits backspace twice while in the
+   * field.
    *
    * - The behavior expected to be implemented by the developer is that the
    *   last Chip in the preceding Chip Set should be removed.
@@ -81,7 +83,16 @@ export interface ChipFieldProps extends SKComponent {
   onDeleteLast?: () => any;
 
   /**
-   * The field can have some faint text guiding the user about what to write to create an Input Chip. For example, a Chip Field for entering students into a class by student code could have a placeholder say “Enter student code.”
+   * An array of characters that trigger the creation of a new Input Chip.
+   *
+   * - Optional.
+   */
+  entrySeparators?: string[];
+
+  /**
+   * The field can have some faint text guiding the user about what to write to
+   * create an Input Chip. For example, a Chip Field for entering students into
+   * a class by student code could have a placeholder say “Enter student code.”
    *
    * - Optional.
    */
@@ -116,7 +127,7 @@ export interface ChipFieldProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: JSX.IntrinsicElements["input"];
+  inputAttr?: React.ComponentProps<"input">;
 }
 
 /**
@@ -124,15 +135,16 @@ export interface ChipFieldProps extends SKComponent {
  * into the Chip Field; their input is converted into an Input Chip on spacebar
  * press.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
  *
  * @param children The Input Chips that the user have already entered.
  * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
  * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
  * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user make changes to the field value. The value is passed in via the function.
+ * @param onChange This function triggers when the user makes changes to the field value. The value is passed in via the function.
  * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
  * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
+ * @param entrySeparators An array of characters that trigger the creation of a new Input Chip.
  * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
  * @param loading Disable the Chip Field and add a Progress linear beneath the component to signify loading status.
  * @param disabled The field cannot be edited.
@@ -147,6 +159,7 @@ export function ChipField({
   onChange,
   onNewEntry,
   onDeleteLast,
+  entrySeparators,
   placeholder,
   loading,
   disabled,
@@ -246,10 +259,13 @@ export function ChipField({
     if (!onChange) return;
 
     // If the last character of the field value is a seperator, the user has
-    // entered a new entry. This entry is passed to `onNewEntry`/
+    // entered a new entry. This entry is passed to `onNewEntry`
     const { value } = event.target as HTMLInputElement;
 
-    if (onNewEntry && [" ", ",", ";"].includes(value?.at(-1) || "")) {
+    if (
+      onNewEntry &&
+      (entrySeparators || [" ", ",", ";"]).includes(value?.at(-1) || "")
+    ) {
       onNewEntry(value.slice(0, -1));
       onChange("");
       return;

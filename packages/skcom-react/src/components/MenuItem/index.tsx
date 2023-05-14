@@ -1,6 +1,8 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
+
+// Internal components
+import { Interactive } from "../Interactive";
 
 // Types
 import { SKComponent } from "../../types";
@@ -9,7 +11,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/menu-item.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -79,41 +80,12 @@ export interface MenuItemProps extends SKComponent {
    * - Incompatible with `onClick`.
    */
   href?: string;
-
-  /**
-   * Change the underlying element from `<a>` to a custom element. This is
-   * useful when a framework you’re using has a Link component for routing. An
-   * example is `next/link` from Next.js.
-   *
-   * - Incompatible with `onClick`.
-   */
-  element?: ({
-    children,
-    ref,
-    title,
-    style,
-    className,
-    href,
-    onTouchStart,
-    onMouseDown,
-    onKeyDown,
-  }: {
-    children: React.ReactNode;
-    ref: React.MutableRefObject<any>;
-    title?: string;
-    style?: React.CSSProperties;
-    className: any;
-    href: string;
-    onTouchStart: (event: React.TouchEvent) => void;
-    onMouseDown: (event: React.MouseEvent) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
-  }) => JSX.Element | null;
 }
 
 /**
  * An action/option inside a temporary list.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
  *
  * @param children The text displayed inside the Menu Item.
  * @param icon An icon can appear before the text (`children`) in a Menu Item.
@@ -123,7 +95,6 @@ export interface MenuItemProps extends SKComponent {
  * @param value The value of a Select item, similar to `value` on `<option>`.
  * @param onClick The function called when the user interacts with the Menu Item, similar to `onClick` on `<button>`.
  * @param href The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
- * @param element Change the underlying element from `<a>` to a custom element.
  */
 export function MenuItem({
   children,
@@ -133,61 +104,34 @@ export function MenuItem({
   disabled,
   onClick,
   href,
-  element: Element,
+  element,
   style,
   className,
 }: MenuItemProps) {
-  // Ripple setup
-  const itemRef: React.LegacyRef<any> = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(itemRef);
-
-  // Props
-  const props = {
-    ref: itemRef,
-    role: "menuitem",
-    "aria-selected": selected,
-    "aria-disabled": disabled,
-    style,
-    className: cn([
-      "skc-menu-item",
-      selected && "skc-menu-item--selected",
-      className,
-    ]),
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["button" | "a"];
-
-  // Content
-  const content = (
-    <>
-      {icon && <div className="skc-menu-item__icon">{icon}</div>}
-      <span className="skc-menu-item__label">{children}</span>
-      {metadata && <span className="skc-menu-item__metadata">{metadata}</span>}
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-menu-item__ripple"
-        style={rippleStyle}
-      />
-    </>
-  );
-
   return (
     <li role="presentation">
-      {
-        // Render with `element` if defined
-        href && Element ? (
-          <Element {...{ ...props, href }}>{content}</Element>
-        ) : // Render an `<a>` if link passed in
-        href ? (
-          <a {...{ ...props, href }}>{content}</a>
-        ) : (
-          // Otherwise, render a `<button>`
-          <button {...{ ...props, onClick }} type="button">
-            {content}
-          </button>
-        )
-      }
+      <Interactive
+        href={href}
+        onClick={onClick}
+        element={element || (href ? "a" : "button")}
+        attr={{
+          role: "menuitem",
+          "aria-selected": selected,
+          "aria-disabled": disabled,
+        }}
+        style={style}
+        className={cn([
+          "skc-menu-item",
+          selected && "skc-menu-item--selected",
+          className,
+        ])}
+      >
+        {icon && <div className="skc-menu-item__icon">{icon}</div>}
+        <span className="skc-menu-item__label">{children}</span>
+        {metadata && (
+          <span className="skc-menu-item__metadata">{metadata}</span>
+        )}
+      </Interactive>
     </li>
   );
 }

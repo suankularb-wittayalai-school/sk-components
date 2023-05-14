@@ -1,9 +1,9 @@
 // External libraries
-import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
 import { Button } from "../Button";
+import { Interactive } from "../Interactive";
 import { MaterialIcon } from "../MaterialIcon";
 
 // Types
@@ -13,7 +13,6 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/input-chip.css";
 
 // Utilities
-import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -54,7 +53,7 @@ export interface InputChipProps extends SKComponent {
    * this is `true`.
    *
    * - Material Guidelines and the
-   *   {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
+   *   {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
    *   recommend selecting the Input Chip set to be deleted via backspace,
    *   requiring another backspace to confirm.
    * - Optional.
@@ -62,16 +61,13 @@ export interface InputChipProps extends SKComponent {
   selected?: boolean;
 
   /**
-   * An ID for transitioning to and from this Input Chip. See Framer Motion’s
-   * documentation on LayoutGroup for more details.
-   *
-   * - Must be unique within the page.
-   * - Optional.
+   * @deprecated Use the `element` prop instead.
    */
   layoutID?: any;
 
   /**
-   * Triggers when the user click anywhere in the Input Chip except the delete button.
+   * Triggers when the user click anywhere in the Input Chip except the delete
+   * button.
    *
    * - This is useful if there’s more information on the chip that can be
    *   displayed on click,
@@ -79,6 +75,13 @@ export interface InputChipProps extends SKComponent {
    * - Optional.
    */
   onClick?: () => any;
+
+  /**
+   * The URL of the page this Input Chip leads to, similar to `href` on `<a>`.
+   *
+   * - Optional.
+   */
+  href?: string;
 
   /**
    * Triggers when the user click the delete button.
@@ -134,14 +137,14 @@ export interface InputChipProps extends SKComponent {
  * Like all Chips, an Input Chip appears alongside other Input Chips, but these
  * can also appear inside a text field like in Chip Field.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
  *
  * @param children The text displayed inside the chip.
  * @param avatar An avatar is placed before all content in an Input Chip.
  * @param icon An icon can appear before all content in an Input Chip. In a page with many chips, icons can quickly orient users.
  * @param selected If the Input Chip is selected. `avatar` is replaced with a checkmark if this is `true`.
- * @param layoutID An ID for transitioning to and from this Input Chip.
  * @param onClick Triggers when the user click anywhere in the Input Chip except the delete button.
+ * @param href TODO
  * @param onDelete Triggers when the user click the delete button.
  * @param editable If the Input Chip can be edited, clicking on it revert it back to the original text, which can be edited normally.
  * @param value The value inside the field that appears after entering edit mode. This is useful if you want a controlled input.
@@ -153,27 +156,33 @@ export function InputChip({
   avatar,
   icon,
   selected,
-  layoutID,
   onClick,
+  href,
   onDelete,
   editable,
   value,
   onChange,
   onEditExit,
+  element,
   style,
   className,
 }: InputChipProps) {
-  // Ripple setup
-  const chipRef: React.LegacyRef<HTMLButtonElement> = React.useRef(null);
-  const { rippleListeners, rippleControls, rippleStyle } = useRipple(chipRef);
-
   // Editable Chip logic
   const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
   const [editing, setEditing] = React.useState<boolean>(false);
+
+  /**
+   * Expand an `<input>` to just a little longer then required to fit the
+   * value.
+   *
+   * @param input The `<input>` to expand.
+   */
   function expandInput(input: HTMLInputElement) {
     input.style.width = "0";
     input.style.width = `${input.scrollWidth + 2}px`;
   }
+
+  // Entering and exiting edit mode
   React.useEffect(() => {
     if (editing) {
       const input = inputRef.current;
@@ -183,84 +192,68 @@ export function InputChip({
     } else if (onEditExit) onEditExit();
   }, [editing]);
 
-  const divProps = {
-    style,
-    className: cn([
-      "skc-input-chip",
-      selected && "skc-input-chip--selected",
-      className,
-    ]),
-  } satisfies JSX.IntrinsicElements["div"];
-  const buttonProps = {
-    ...divProps,
-    ref: chipRef,
-    onClick: () => {
-      if (onClick) onClick();
-      if (editable) setEditing(true);
-    },
-    ...rippleListeners,
-  } satisfies JSX.IntrinsicElements["button"];
-
-  const divContent = (
-    <>
-      {avatar && (
-        <div className="skc-input-chip__avatar">
-          {selected ? <MaterialIcon icon="done" /> : avatar}
-        </div>
-      )}
-      {icon && <div className="skc-input-chip__icon">{icon}</div>}
-      <span className="skc-input-chip__label">{children}</span>
-      {onDelete && (
-        <Button
-          appearance="text"
-          icon={<MaterialIcon icon="close" />}
-          onClick={onDelete}
-        />
-      )}
-    </>
-  );
-  const buttonContent = (
-    <>
-      {divContent}
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-input-chip__ripple"
-        style={rippleStyle}
+  return (
+    // Edit mode
+    editing ? (
+      <input
+        ref={inputRef}
+        className="skc-input-chip__input"
+        value={value}
+        onChange={(event) => {
+          if (onChange) onChange(event.target.value);
+          const input = event.target;
+          expandInput(input);
+        }}
+        onBlur={() => setEditing(false)}
+        onKeyUp={(event) => {
+          if (["Enter", "Escape"].includes(event.key)) setEditing(false);
+        }}
       />
-    </>
-  );
-
-  return editing ? (
-    <input
-      ref={inputRef}
-      className="skc-input-chip__input"
-      value={value}
-      onChange={(event) => {
-        if (onChange) onChange(event.target.value);
-        const input = event.target;
-        expandInput(input);
-      }}
-      onBlur={() => setEditing(false)}
-      onKeyUp={(event) => {
-        if (["Enter", "Escape"].includes(event.key)) setEditing(false);
-      }}
-    />
-  ) : editable || onClick ? (
-    layoutID ? (
-      <motion.button layoutId={layoutID} {...buttonProps}>
-        {buttonContent}
-      </motion.button>
     ) : (
-      <button {...buttonProps}>{buttonContent}</button>
+      // Default mode
+      <Interactive
+        element={element}
+        stateLayerEffect={Boolean(editable || onClick)}
+        rippleEffect={Boolean(editable || onClick)}
+        onClick={
+          editable || onClick
+            ? () => {
+                if (onClick) onClick();
+                if (editable) setEditing(true);
+              }
+            : undefined
+        }
+        href={href}
+        style={style}
+        className={cn([
+          "skc-input-chip",
+          selected && "skc-input-chip--selected",
+          className,
+        ])}
+      >
+        {/* Avatar */}
+        {avatar && (
+          <div className="skc-input-chip__avatar">
+            {selected ? <MaterialIcon icon="done" /> : avatar}
+          </div>
+        )}
+
+        {/* Icon */}
+        {icon && <div className="skc-input-chip__icon">{icon}</div>}
+
+        {/* Label */}
+        <span className="skc-input-chip__label">{children}</span>
+
+        {/* Delete Button */}
+        {onDelete && (
+          <Button
+            appearance="text"
+            icon={<MaterialIcon icon="close" />}
+            onClick={onDelete}
+          />
+        )}
+      </Interactive>
     )
-  ) : layoutID ? (
-    <motion.div layoutId={layoutID} {...divProps}>
-      {divContent}
-    </motion.div>
-  ) : (
-    <div {...divProps}>{divContent}</div>
   );
 }
 

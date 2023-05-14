@@ -61,6 +61,11 @@ export interface SnackbarProps extends SKComponent {
    * - Optional.
    */
   onExitComplete?: () => any;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
 }
 
 /**
@@ -72,7 +77,7 @@ export interface SnackbarProps extends SKComponent {
  * on its own. Use the `children`, `open`, `onClose`, and `onExitComplete`
  * props with your own state management solution.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation}
  *
  * @param children The message inside the Snackbar.
  * @param action A Snackbar can contain 1 action. Pressing this action closes the Snackbar.

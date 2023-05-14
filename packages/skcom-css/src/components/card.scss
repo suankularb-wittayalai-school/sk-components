@@ -7,7 +7,7 @@
 /// To quote Material Design 3, there is no right way to make a Card. However,
 /// we have provided some useful props and components to get you started.
 ///
-/// @link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation
+/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -15,23 +15,24 @@
 // Base Card
 .skc-card {
   display: flex;
+  text-align: start;
   color: var(--on-surface);
   border-radius: var(--rounded-md);
   -webkit-tap-highlight-color: transparent;
 }
 
 // Appearance
-.skc-card.skc-card--outlined {
+.skc-card--outlined {
   border: 1px solid var(--outline-variant);
   background-color: var(--surface);
 }
 
-.skc-card.skc-card--elevated {
+.skc-card--elevated {
   background-color: var(--surface-1);
   box-shadow: var(--shadow-2);
 }
 
-.skc-card.skc-card--filled {
+.skc-card--filled {
   background-color: var(--surface-variant);
 
   &.skc-card--row {
@@ -41,35 +42,16 @@
 
 // Direction
 .skc-card,
-.skc-card.skc-card--column {
+.skc-card--column {
   flex-direction: column;
 }
 
-.skc-card.skc-card--row {
+.skc-card--row {
   flex-direction: row;
 }
 
 // State layer effect
-.skc-card.skc-card--state-layer {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-
-  &::before {
-    @include mix.state-layer();
-  }
-
-  &:hover::before {
-    opacity: 0.08;
-  }
-
-  &:focus,
-  &:active {
-    &::before {
-      opacity: 0.12;
-    }
-  }
-
+.skc-card.skc-interactive {
   &.skc-card--outlined {
     @include mix.transition(
       border-color,
@@ -82,18 +64,14 @@
     }
   }
 
-  .skc-card__ripple {
-    @include mix.ripple();
-  }
-
   &::before,
-  .skc-card__ripple {
+  > .skc-interactive__ripple {
     background-color: var(--primary);
   }
 }
 
 // Shadow effect
-.skc-card.skc-card--shadow {
+.skc-interactive--shadow {
   @include mix.transition(
     box-shadow,
     var(--motion-short-4),
@@ -131,13 +109,13 @@
 .skc-dialog,
 .skc-page-header,
 .skc-card--filled {
-  .skc-card.skc-card--filled {
+  .skc-card--filled {
     background-color: var(--surface);
   }
 }
 
 @include mix.breakpoint("sm") {
-  .skc-fullscreen-dialog .skc-card.skc-card--filled {
+  .skc-fullscreen-dialog .skc-card--filled {
     background-color: var(--surface);
   }
 }

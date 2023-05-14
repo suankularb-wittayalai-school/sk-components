@@ -169,15 +169,18 @@ export interface TextFieldProps<FieldValue extends string | File>
    *
    * - Optional.
    */
-  inputAttr?: JSX.IntrinsicElements["input"];
-}
+  inputAttr?: React.ComponentProps<"input">;
 
-type ThisIsATest = string | File;
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
+}
 
 /**
  * A place for users to enter text.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation}
  *
  * @param appearance How the Text Field looks.
  * @param label The placeholder text and the label text.
@@ -333,38 +336,6 @@ export function TextField<Value extends string | File>({
     (typeof label === "string" ? label : alt)!
   )}`;
 
-  // Props for the `<input>` or `<textarea>`
-  const inputProps = {
-    id: fieldID,
-    "aria-labelledby": `${fieldID}-label`,
-    "aria-describedby": `${fieldID}-helper`,
-    "aria-disabled": disabled,
-    "aria-invalid": incError,
-    value: typeof value === "string" ? value : undefined,
-    required,
-    readOnly: disabled,
-    onFocus: !disabled ? () => setMinifyLabel(true) : undefined,
-    onBlur: () => {
-      if (value === undefined) return;
-      setMinifyLabel(Boolean(value));
-      setError(Boolean(incError || (required && !value)));
-    },
-    onChange: (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-      if (inputAttr?.type === "file")
-        setFile(
-          (e.target as HTMLInputElement).files?.length
-            ? (e.target as HTMLInputElement).files![0]
-            : null
-        );
-      if (onChange) onChange((file || e.target.value) as Value);
-
-      if (value === undefined) expandTextarea();
-    },
-    className: "skc-text-field__input",
-  } satisfies JSX.IntrinsicElements["input" | "textarea"];
-
   return (
     <label
       style={style}
@@ -400,11 +371,40 @@ export function TextField<Value extends string | File>({
         <motion.div className="skc-text-field__leading">{leading}</motion.div>
       )}
 
-      {/* Input */}
-      {!behavior || behavior === "single-line" ? (
-        <input {...inputProps} {...inputAttr} />
-      ) : (
-        <textarea ref={textareaRef} {...inputProps} />
+      {React.createElement(
+        !behavior || behavior === "single-line" ? "input" : "textarea",
+        {
+          id: fieldID,
+          ref: textareaRef,
+          "aria-labelledby": `${fieldID}-label`,
+          "aria-describedby": `${fieldID}-helper`,
+          "aria-disabled": disabled,
+          "aria-invalid": incError,
+          value: typeof value === "string" ? value : undefined,
+          required,
+          readOnly: disabled,
+          onFocus: !disabled ? () => setMinifyLabel(true) : undefined,
+          onBlur: () => {
+            if (value === undefined) return;
+            setMinifyLabel(Boolean(value));
+            setError(Boolean(incError || (required && !value)));
+          },
+          onChange: (
+            e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+          ) => {
+            if (inputAttr?.type === "file")
+              setFile(
+                (e.target as HTMLInputElement).files?.length
+                  ? (e.target as HTMLInputElement).files![0]
+                  : null
+              );
+            if (onChange) onChange((file || e.target.value) as Value);
+
+            if (value === undefined) expandTextarea();
+          },
+          className: "skc-text-field__input",
+          ...inputAttr,
+        }
       )}
 
       {/* File name */}

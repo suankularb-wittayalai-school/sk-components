@@ -44,7 +44,7 @@ export interface TableProps extends SKComponent {
 /**
  * A row of Buttons. Table handles spacing and overflow.
  *
- * @see {@link https://docs.google.com/document/d/1UJeTpXcB2MBL9Df4GUUeZ78xb-RshNIC_-LCIKmCo-8/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children The content of the Table.
  * @param contentWidth The minimum width of the content.
@@ -54,18 +54,19 @@ export function Table({
   children,
   contentWidth,
   height,
+  element,
   style,
   className,
 }: TableProps) {
-  return (
-    <div
-      style={{ ...style, maxHeight: height }}
-      className={cn(["skc-table", className])}
-    >
-      <table style={{ minWidth: contentWidth }} className="skc-table__content">
-        {children}
-      </table>
-    </div>
+  return React.createElement(
+    element || "div",
+    {
+      style: { ...style, maxHeight: height },
+      className: cn(["skc-table", className]),
+    },
+    <table style={{ minWidth: contentWidth }} className="skc-table__content">
+      {children}
+    </table>
   );
 }
 
