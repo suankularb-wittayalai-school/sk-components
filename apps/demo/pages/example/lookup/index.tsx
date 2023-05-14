@@ -40,6 +40,7 @@ const ListSide: FC = () => {
           appearance="filled"
           direction="row"
           stateLayerEffect
+          element="button"
           className="!border-0 !bg-transparent"
         >
           <CardHeader
@@ -52,9 +53,9 @@ const ListSide: FC = () => {
           appearance="filled"
           direction="row"
           stateLayerEffect
-          className="!bg-primary-container"
           href={atBreakpoint === "base" ? "/example/lookup/details" : undefined}
-          element={Link}
+          element={atBreakpoint === "base" ? Link : "button"}
+          className="!bg-primary-container"
         >
           <CardHeader
             avatar={
@@ -68,6 +69,7 @@ const ListSide: FC = () => {
           appearance="filled"
           direction="row"
           stateLayerEffect
+          element="button"
           className="!border-0 !bg-transparent"
         >
           <CardHeader
