@@ -101,6 +101,8 @@ export function Interactive<
   style,
   className,
 }: InteractiveProps<ElementProps>) {
+  const Element = element || (href ? "a" : onClick ? "button" : "div");
+
   // Ripple setup
   const buttonRef = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(
@@ -108,41 +110,35 @@ export function Interactive<
       ?.ref as React.RefObject<HTMLElement>) || buttonRef
   );
 
-  return React.createElement(
-    // Container
-    (element as keyof React.ReactHTML) ||
-      (href ? "a" : onClick ? "button" : "div"),
-
-    // Props
-    {
-      ref: buttonRef,
-      onClick,
-      ...rippleListeners,
-      type: onClick || element === "button" ? "button" : undefined,
-      href,
-      style,
-      className: cn([
+  return (
+    <Element
+      ref={buttonRef}
+      onClick={onClick}
+      {...rippleListeners}
+      type={onClick || element === "button" ? "button" : undefined}
+      href={href}
+      style={style}
+      className={cn([
         "skc-interactive",
         stateLayerEffect === false && "skc-interactive--no-state-layer",
         shadowEffect && "skc-interactive--shadow",
         className,
-      ]),
-      ...attr,
-    },
+      ])}
+    >
+      {/* Content */}
+      {children}
 
-    // Content
-    children,
-
-    // Ripple
-    rippleEffect !== false ? (
-      <motion.span
-        aria-hidden
-        initial={{ scale: 0, opacity: 0.36 }}
-        animate={rippleControls}
-        className="skc-interactive__ripple"
-        style={rippleStyle}
-      />
-    ) : null
+      {/* Ripple */}
+      {rippleEffect !== false && (
+        <motion.span
+          aria-hidden
+          initial={{ scale: 0, opacity: 0.36 }}
+          animate={rippleControls}
+          className="skc-interactive__ripple"
+          style={rippleStyle}
+        />
+      )}
+    </Element>
   );
 }
 
