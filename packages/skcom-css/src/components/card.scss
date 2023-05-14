@@ -15,6 +15,7 @@
 // Base Card
 .skc-card {
   display: flex;
+  text-align: start;
   color: var(--on-surface);
   border-radius: var(--rounded-md);
   -webkit-tap-highlight-color: transparent;
