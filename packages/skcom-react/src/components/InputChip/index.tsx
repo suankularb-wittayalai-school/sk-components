@@ -78,7 +78,7 @@ export interface InputChipProps extends SKComponent {
 
   /**
    * The URL of the page this Input Chip leads to, similar to `href` on `<a>`.
-   * 
+   *
    * - Optional.
    */
   href?: string;

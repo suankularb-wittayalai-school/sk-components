@@ -30,7 +30,12 @@ export interface TableFootProps extends SKComponent {
  *
  * @param children Table Foot has the same behaviour as `<tfoot>`.
  */
-export function TableFoot({ children, element, style, className }: TableFootProps) {
+export function TableFoot({
+  children,
+  element,
+  style,
+  className,
+}: TableFootProps) {
   return React.createElement(
     element || "tfoot",
     { style, className: cn(["skc-table-foot", className]) },
