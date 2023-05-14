@@ -124,6 +124,7 @@ export function Interactive<
         shadowEffect && "skc-interactive--shadow",
         className,
       ])}
+      {...attr}
     >
       {/* Content */}
       {children}
