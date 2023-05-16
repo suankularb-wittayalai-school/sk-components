@@ -47,9 +47,9 @@ export interface FullscreenDialogProps extends SKComponent {
    * The submission Button.
    *
    * - Should be a Button.
-   * - Always required.
+   * - Optional.
    */
-  action: JSX.Element;
+  action?: JSX.Element;
 
   /**
    * Full-screen Dialog transforms into a basic Dialog on larger screens. The
@@ -164,9 +164,7 @@ export function FullscreenDialog({
       if (event.key === "Escape") onClose();
     };
     window.addEventListener("keyup", handleKeyUp);
-    return () => {
-      window.removeEventListener("keyup", handleKeyUp);
-    };
+    return () => window.removeEventListener("keyup", handleKeyUp);
   }, []);
 
   // Generate the base ID for `aria-labelledby` and `aria-describedby`

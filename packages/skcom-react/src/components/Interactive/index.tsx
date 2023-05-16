@@ -121,6 +121,7 @@ export function Interactive<
       className={cn([
         "skc-interactive",
         stateLayerEffect === false && "skc-interactive--no-state-layer",
+        rippleEffect === false && "skc-interactive--no-ripple",
         shadowEffect && "skc-interactive--shadow",
         className,
       ])}

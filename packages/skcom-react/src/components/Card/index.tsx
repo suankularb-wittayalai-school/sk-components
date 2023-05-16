@@ -126,7 +126,6 @@ export function Card({
 }: CardProps) {
   return (
     <Interactive
-      element={element}
       // `stateLayerEffect` and `rippleEffect` are enabled by default in
       // Interactive, but not in Card
       stateLayerEffect={
@@ -134,8 +133,9 @@ export function Card({
       }
       rippleEffect={stateLayerEffect === undefined ? false : stateLayerEffect}
       shadowEffect={shadowEffect}
-      onClick={onClick}
       href={href}
+      onClick={onClick}
+      element={element}
       style={style}
       className={cn([
         "skc-card",

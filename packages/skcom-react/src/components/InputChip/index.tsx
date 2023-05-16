@@ -212,7 +212,6 @@ export function InputChip({
     ) : (
       // Default mode
       <Interactive
-        element={element}
         stateLayerEffect={Boolean(editable || onClick)}
         rippleEffect={Boolean(editable || onClick)}
         onClick={
@@ -224,6 +223,7 @@ export function InputChip({
             : undefined
         }
         href={href}
+        element={element}
         style={style}
         className={cn([
           "skc-input-chip",
