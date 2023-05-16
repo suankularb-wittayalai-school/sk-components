@@ -129,8 +129,9 @@ export function AssistChip({
 }: AssistChipProps) {
   return (
     <Interactive
-      onClick={!(disabled || loading) && onClick && !href ? onClick : undefined}
-      element={element || "button"}
+      href={!(disabled || loading) ? href : undefined}
+      onClick={!(disabled || loading) ? onClick : undefined}
+      element={disabled || loading ? "button" : element}
       attr={{
         "aria-disabled": disabled,
         title: tooltip,
@@ -150,3 +151,4 @@ export function AssistChip({
 }
 
 AssistChip.displayName = "AssistChip";
+

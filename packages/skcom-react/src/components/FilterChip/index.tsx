@@ -127,8 +127,8 @@ export function FilterChip({
 }: FilterChipProps) {
   const FilterChip: React.FC = () => (
     <Interactive
-      element={element}
       onClick={onClick && !onMenuToggle ? () => onClick(!selected) : undefined}
+      element={element}
       style={style}
       className={cn([
         "skc-filter-chip",
@@ -179,3 +179,4 @@ export function FilterChip({
 }
 
 FilterChip.displayName = "FilterChip";
+
