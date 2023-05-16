@@ -258,4 +258,3 @@ export function InputChip({
 }
 
 InputChip.displayName = "InputChip";
-

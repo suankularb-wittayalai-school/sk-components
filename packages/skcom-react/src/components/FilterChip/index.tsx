@@ -179,4 +179,3 @@ export function FilterChip({
 }
 
 FilterChip.displayName = "FilterChip";
-
