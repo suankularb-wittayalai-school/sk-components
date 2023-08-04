@@ -1,3 +1,27 @@
+.skc-text--button {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25rem;
+  letter-spacing: 0.1px;
+}
+
+.skc-text--caption {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: 1rem;
+  letter-spacing: 0.4px;
+}
+
+.skc-text--overline {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: 1rem;
+  letter-spacing: 0.4px;
+}
+
 .skc-text--display-large {
   font-family: var(--font-display);
   font-size: var(--text-8xl);

@@ -23,6 +23,9 @@ export interface TextProps extends SKComponent {
    * The typographic style to apply.
    */
   type:
+    | "button"
+    | "caption"
+    | "overline"
     | "display-large"
     | "display-medium"
     | "display-small"
