@@ -1,0 +1,118 @@
+.skc-text--display-large {
+  font-family: var(--font-display);
+  font-size: var(--text-8xl);
+  line-height: 4rem;
+  letter-spacing: -0.25px;
+}
+
+.skc-text--display-medium {
+  font-family: var(--font-display);
+  font-size: var(--text-7xl);
+  font-weight: var(--font-regular);
+  line-height: 3.25rem;
+  letter-spacing: 0;
+}
+
+.skc-text--display-small {
+  font-family: var(--font-display);
+  font-size: var(--text-6xl);
+  font-weight: var(--font-regular);
+  line-height: 2.75rem;
+  letter-spacing: 0;
+}
+
+.skc-text--headline-large {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-regular);
+  line-height: 2.5rem;
+  letter-spacing: 0;
+}
+
+.skc-text--headline-medium {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-regular);
+  line-height: 2.25rem;
+  letter-spacing: 0;
+}
+
+.skc-text--headline-small {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-regular);
+  line-height: 2rem;
+  letter-spacing: 0;
+}
+
+.skc-text--title-large {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-regular);
+  line-height: 1.75rem;
+  letter-spacing: 0;
+}
+
+.skc-text--title-medium {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  line-height: 1.5rem;
+  letter-spacing: 0.1px;
+}
+
+.skc-text--title-small {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25rem;
+  letter-spacing: 0.1px;
+}
+
+.skc-text--label-large {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25rem;
+  letter-spacing: 0.1px;
+}
+
+.skc-text--label-medium {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.skc-text--label-small {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  line-height: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.skc-text--body-large {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-regular);
+  line-height: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.skc-text--body-medium {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  line-height: 1.25rem;
+  letter-spacing: 0.25px;
+}
+
+.skc-text--body-small {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--font-regular);
+  line-height: 1rem;
+  letter-spacing: 0.4px;
+}
