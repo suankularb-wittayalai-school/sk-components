@@ -8,7 +8,6 @@
 
 @use "sass:math";
 @use "../abstracts/mixins.scss" as mix;
-@use "../abstracts/typography.scss" as type;
 
 // Base Button
 .skc-button {
@@ -110,13 +109,8 @@
 }
 
 // Label
-.skc-button__label {
-  @include type.font("label-large");
-  font-family: var(--font-display);
-
-  .skc-button:not(:has(.skc-button__icon)) & {
-    text-align: center;
-  }
+.skc-button:not(:has(.skc-button__icon)) .skc-button__label {
+  text-align: center;
 }
 
 // Loading

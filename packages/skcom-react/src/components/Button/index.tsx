@@ -5,6 +5,7 @@ import * as React from "react";
 import { Interactive } from "../Interactive";
 import { MaterialIcon } from "../MaterialIcon";
 import { Progress } from "../Progress";
+import { Text } from "../Text";
 
 // Types
 import { SKComponent } from "../../types";
@@ -228,7 +229,11 @@ export function Button({
               {selected ? <MaterialIcon icon="done" /> : icon}
             </div>
           )}
-          {children && <span className="skc-button__label">{children}</span>}
+          {children && (
+            <Text type="button" className="skc-button__label">
+              {children}
+            </Text>
+          )}
         </>
       )}
     </Interactive>
