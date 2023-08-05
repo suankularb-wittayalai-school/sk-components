@@ -44,7 +44,7 @@ export interface TextProps extends SKComponent {
 }
 
 /**
- * A body of text with a typographic style applied.
+ * A piece of text with a typographic style applied.
  *
  * @param children The text to apply the typographic styling to.
  * @param type The token of the typescale to apply.
