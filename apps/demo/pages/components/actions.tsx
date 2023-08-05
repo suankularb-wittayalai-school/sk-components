@@ -411,11 +411,7 @@ const ActionsPage: CustomPage = () => (
     <Head>
       <title>Actions - SK Components</title>
     </Head>
-    <PageHeader
-      title="Actions"
-      icon={<MaterialIcon icon="touch_app" />}
-      parentURL="/components"
-    />
+    <PageHeader parentURL="/components">Actions</PageHeader>
     <ContentLayout key="actions-page">
       <Section>
         <Header>Button</Header>

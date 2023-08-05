@@ -333,11 +333,7 @@ const InputPage: CustomPage = () => (
     <Head>
       <title>Input - SK Components</title>
     </Head>
-    <PageHeader
-      title="Input"
-      icon={<MaterialIcon icon="input" />}
-      parentURL="/components"
-    />
+    <PageHeader parentURL="/components">Input</PageHeader>
     <ContentLayout key="input-page">
       <CheckboxSection />
       <ChipFieldSection />

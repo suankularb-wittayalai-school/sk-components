@@ -260,11 +260,7 @@ const CommunicationPage: CustomPage = () => (
     <Head>
       <title>Communication - SK Components</title>
     </Head>
-    <PageHeader
-      title="Communication"
-      icon={<MaterialIcon icon="swap_horiz" />}
-      parentURL="/components"
-    />
+    <PageHeader parentURL="/components">Communication</PageHeader>
     <ContentLayout key="communication-page">
       <DialogSection />
       <ProgressSection />

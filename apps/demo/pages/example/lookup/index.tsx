@@ -121,11 +121,7 @@ const LookupPage: CustomPage = () => (
     <Head>
       <title>Split Layout demo - SK Components</title>
     </Head>
-    <PageHeader
-      title="Lookup students"
-      icon={<MaterialIcon icon="search" />}
-      parentURL="/example"
-    />
+    <PageHeader parentURL="/example">Lookup students</PageHeader>
     <SplitLayout ratio="list-detail">
       <ListSide />
       <main>
