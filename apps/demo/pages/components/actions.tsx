@@ -282,8 +282,8 @@ const AssistChipSection: FC = () => (
     </ChipSet>
     <div
       className="from-primary-60 to-primary-30 flex flex-row flex-wrap
-        place-content-center gap-2 rounded-md bg-gradient-to-r py-8
-        px-4"
+        place-content-center gap-2 rounded-md bg-gradient-to-r px-4
+        py-8"
     >
       <AssistChip icon={<MaterialIcon icon="lightbulb" />} elevated>
         Turn on lights
