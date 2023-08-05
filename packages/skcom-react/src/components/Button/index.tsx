@@ -168,6 +168,7 @@ export function Button({
   const buttonRef: React.Ref<HTMLButtonElement> = React.useRef(null);
   const [buttonWidth, setButtonWidth] = React.useState<number>();
   React.useEffect(() => {
+    if (!loading) return;
     const button = buttonRef.current;
     if (!button) return;
     // (@SiravitPhokeed)
@@ -176,7 +177,7 @@ export function Button({
     // loading state. `getBoundingClientRect` produces the exact width value.
     const { width } = button.getBoundingClientRect();
     setButtonWidth(width - (appearance === "outlined" ? 2 : 0));
-  }, []);
+  }, [loading]);
 
   return (
     <Interactive
@@ -195,7 +196,7 @@ export function Button({
       }}
       style={{
         ...style,
-        width: loading !== undefined ? buttonWidth : undefined,
+        width: loading ? buttonWidth : undefined,
       }}
       className={cn([
         "skc-button",
@@ -210,7 +211,7 @@ export function Button({
           : undefined,
         selected && "skc-button--selected",
         dangerous && "skc-button--dangerous",
-        loading !== undefined && "skc-button--loading",
+        loading === true && "skc-button--loading",
         className,
       ])}
     >
