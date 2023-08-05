@@ -29,8 +29,7 @@
 .skc-actions.skc-actions--full {
   flex-wrap: nowrap;
 
-  > .skc-button,
-  > .skc-toggle-button {
-    width: 100% !important;
+  > * {
+    flex-grow: 1;
   }
 }
