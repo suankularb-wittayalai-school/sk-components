@@ -30,7 +30,7 @@ export interface PageHeaderProps extends SKComponent {
   /**
    * @deprecated Use `children` instead.
    */
-  title?: never;
+  title?: string | JSX.Element;
 
   /**
    * @deprecated

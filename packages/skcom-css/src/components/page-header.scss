@@ -59,7 +59,6 @@
 
 .skc-page-header__text {
   flex-grow: 1;
-  margin-inline: 1rem;
 }
 
 @include mix.breakpoint("sm") {
@@ -81,10 +80,6 @@
     > .skc-button:first-child {
       margin-left: -0.5rem;
     }
-  }
-
-  .skc-page-header__text {
-    margin-inline: 0;
   }
 }
 
