@@ -18,24 +18,24 @@
 
 $header-levels: (
   2: (
-    font: "display-small",
-    icon-size: 2.5rem,
-  ),
-  3: (
-    font: "headline-large",
-    icon-size: 2.375rem,
-  ),
-  4: (
     font: "headline-medium",
     icon-size: 2.25rem,
   ),
-  5: (
+  3: (
     font: "headline-small",
     icon-size: 2rem,
   ),
-  6: (
+  4: (
     font: "title-large",
     icon-size: 1.75rem,
+  ),
+  5: (
+    font: "title-medium",
+    icon-size: 1.5rem,
+  ),
+  6: (
+    font: "title-small",
+    icon-size: 1.25rem,
   ),
 );
 
