@@ -14,6 +14,7 @@ import {
   MaterialIcon,
   Search,
   SplitLayout,
+  Text,
   useBreakpoint,
 } from "@suankularb-components/react";
 
@@ -93,7 +94,7 @@ const StudentDetailsHeader: FC = () => {
         <Avatar className="!h-14 !w-14" />
       </div>
       <div className="flex grow flex-col gap-2">
-        <h2 className="skc-display-small">Siravit Phokeed</h2>
+        <Text type="display-small">Siravit Phokeed</Text>
         <ChipSet>
           <AssistChip icon={<MaterialIcon icon="chat" />}>Chat with</AssistChip>
           <AssistChip icon={<MaterialIcon icon="groups" />}>

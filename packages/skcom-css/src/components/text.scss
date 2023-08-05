@@ -3,7 +3,7 @@
 /// A body of text with a typographic style applied.
 ////
 
-@use "./typography.scss" as type;
+@use "../abstracts/typography.scss" as type;
 
 .skc-text {
   &.skc-text--button {

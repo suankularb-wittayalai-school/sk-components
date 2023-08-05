@@ -6,6 +6,7 @@ import {
   Button,
   ContentLayout,
   MaterialIcon,
+  Text,
   transition,
   useAnimationConfig,
 } from "@suankularb-components/react";
@@ -54,17 +55,22 @@ const NotFoundPage: CustomPage = () => {
           </motion.h1>
 
           {/* Description */}
-          <motion.p
-            className="skc-display-small"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              ...transition(duration.long4, easing.standardDecelerate),
-              delay: duration.medium2,
-            }}
+          <Text
+            type="display-small"
+            element={(props) => (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  ...transition(duration.long4, easing.standardDecelerate),
+                  delay: duration.medium2,
+                }}
+                {...props}
+              />
+            )}
           >
             Page not found
-          </motion.p>
+          </Text>
         </AnimatePresence>
       </div>
     </>
