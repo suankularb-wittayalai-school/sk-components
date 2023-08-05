@@ -131,7 +131,7 @@ export function AssistChip({
     <Interactive
       href={!(disabled || loading) ? href : undefined}
       onClick={!(disabled || loading) ? onClick : undefined}
-      element={disabled || loading ? "button" : element}
+      element={disabled || loading ? "button" : element || "button"}
       attr={{
         "aria-disabled": disabled,
         title: tooltip,

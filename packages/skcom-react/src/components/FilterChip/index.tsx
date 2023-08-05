@@ -128,7 +128,7 @@ export function FilterChip({
   const FilterChip: React.FC = () => (
     <Interactive
       onClick={onClick && !onMenuToggle ? () => onClick(!selected) : undefined}
-      element={element}
+      element={element || (onMenuToggle ? "div" : "button")}
       style={style}
       className={cn([
         "skc-filter-chip",
