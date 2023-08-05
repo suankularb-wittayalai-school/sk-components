@@ -206,7 +206,7 @@ export function InputChip({
         }}
         onBlur={() => setEditing(false)}
         onKeyUp={(event) => {
-          if (["Enter", "Escape"].includes(event.key)) setEditing(false);
+          if (["Enter", "Escape"].indexOf(event.key) !== -1) setEditing(false);
         }}
       />
     ) : (

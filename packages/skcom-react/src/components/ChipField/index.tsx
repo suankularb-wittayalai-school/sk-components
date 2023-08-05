@@ -264,9 +264,14 @@ export function ChipField({
 
     if (
       onNewEntry &&
-      (entrySeparators || [" ", ",", ";"]).includes(value?.at(-1) || "")
+      // If the last character is an entry separator
+      (entrySeparators || [" ", ",", ";"]).indexOf(
+        value.split("").slice(-1)[0] || ""
+      )
     ) {
+      // Call `onNewEntry` on the field value with the entry separator removed
       onNewEntry(value.slice(0, -1));
+      // Clear the field value
       onChange("");
       return;
     }
@@ -301,7 +306,7 @@ export function ChipField({
 
     // Handles cancellation of deletion
     else if (
-      ["Escape", "ArrowRight", "Right", "End"].includes(event.key) &&
+      ["Escape", "ArrowRight", "Right", "End"].indexOf(event.key) !== -1 &&
       lastSelected
     )
       setLastSelected(false);

@@ -269,8 +269,8 @@ export function TextField<Value extends string | File>({
           "month",
           "time",
           "week",
-        ] as React.InputHTMLAttributes<HTMLInputElement>["type"][]
-      ).includes(inputAttr?.type)
+        ] as React.ComponentProps<"input">["type"][]
+      ).indexOf(inputAttr?.type) !== -1
     ) {
       labelControls.set(minifedLabelAnimState);
       setNeverMinifyLabel(true);

@@ -103,7 +103,7 @@ export function DataTableHead({
                 // Sort the column on click
                 onClick={header.column.getToggleSortingHandler()}
                 onKeyUp={(event) => {
-                  if (!["Enter", " "].includes(event.key)) return;
+                  if (["Enter", " "].indexOf(event.key) === -1) return;
                   event.preventDefault();
                   const sortingHandler =
                     header.column.getToggleSortingHandler();

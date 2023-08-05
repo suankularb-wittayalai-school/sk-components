@@ -4,12 +4,13 @@ import { FC, useState } from "react";
 // SK Components
 import {
   Actions,
-  ContentLayout,
-  Section,
-  Header,
-  Columns,
-  MaterialIcon,
   Button,
+  Columns,
+  ContentLayout,
+  Header,
+  MaterialIcon,
+  Section,
+  Text,
 } from "@suankularb-components/react";
 
 // Components
@@ -30,9 +31,12 @@ const StudentDetails: FC = () => {
         <Columns columns={4}>
           {/* Full name */}
           <section aria-labelledby="info-full-name" className="sm:col-span-2">
-            <h4 id="info-full-name" className="skc-title-medium">
+            <Text
+              type="title-medium"
+              element={(props) => <h4 id="info-full-name" {...props} />}
+            >
               Full name
-            </h4>
+            </Text>
             <MultilingualText
               text={{
                 th: "นายศิรวิทย์ โพธิ์ขีด",
@@ -43,35 +47,47 @@ const StudentDetails: FC = () => {
 
           {/* Nickname */}
           <section aria-labelledby="info-nickname">
-            <h4 id="info-nickname" className="skc-title-medium">
+            <Text
+              type="title-medium"
+              element={(props) => <h4 id="info-nickname" {...props} />}
+            >
               Nickname
-            </h4>
+            </Text>
             <MultilingualText text={{ th: "โมเดล", "en-US": "Model" }} />
           </section>
 
           {/* Class */}
           <section aria-labelledby="info-class">
-            <h4 id="info-class" className="skc-title-medium">
+            <Text
+              type="title-medium"
+              element={(props) => <h4 id="info-class" {...props} />}
+            >
               Class
-            </h4>
-            <p>M.504</p>
-            <p>No.12</p>
+            </Text>
+            <Text type="body-medium">M.504</Text>
+            <Text type="body-medium">No.12</Text>
           </section>
 
           {/* Gender */}
           <section aria-labelledby="info-gender">
-            <h4 id="info-gender" className="skc-title-medium">
+            <Text
+              type="title-medium"
+              element={(props) => <h4 id="info-gender" {...props} />}
+            >
               Gender
-            </h4>
-            <p>Chose not to respond</p>
+            </Text>
+            <Text type="body-medium">Chose not to respond</Text>
           </section>
 
           {/* Birthdate */}
           <section aria-labelledby="info-birthdate">
-            <h4 id="info-birthdate" className="skc-title-medium">
+            <Text
+              type="title-medium"
+              element={(props) => <h4 id="info-birthdate" {...props} />}
+            >
               Birthdate
-            </h4>
-            <p>Feb 1</p>
+            </Text>
+            <Text type="body-medium">Feb 1</Text>
           </section>
         </Columns>
       </Section>
@@ -86,7 +102,9 @@ const StudentDetails: FC = () => {
           font-medium"
         >
           <MaterialIcon icon="info" />
-          <p>According to their schedule, Siravit is not free right now.</p>
+          <Text type="body-medium" className="!font-medium">
+            According to their schedule, Siravit is not free right now.
+          </Text>
         </div>
 
         <Columns columns={2}>
@@ -117,10 +135,10 @@ const StudentDetails: FC = () => {
       </Section>
 
       <Section sectionAttr={{ "aria-label": "Request private info" }}>
-        <p>
+        <Text type="body-medium">
           As a teacher, you can request access to various private information of
           a student, from their citizen ID to their vaccination history.
-        </p>
+        </Text>
         <Actions>
           <Button
             appearance="outlined"

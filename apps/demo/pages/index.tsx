@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { FC } from "react";
+import { FC, forwardRef } from "react";
 
 // SK Components
 import {
@@ -15,6 +15,7 @@ import {
   Header,
   MaterialIcon,
   Section,
+  Text,
 } from "@suankularb-components/react";
 
 // Internal components
@@ -105,24 +106,34 @@ const ResourcesSection: FC = () => (
       appearance="filled"
       stateLayerEffect
       href="https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing"
-      aAttr={{ target: "_blank", rel: "noreferrer" }}
+      // eslint-disable-next-line react/display-name
+      element={forwardRef((props, ref) => (
+        <a ref={ref} {...props} target="_blank" rel="noreferrer" />
+      ))}
       className="mx-4 justify-end self-stretch sm:mx-0"
     >
       <CardContent>
         <MaterialIcon icon="description" size={48} className="text-primary" />
-        <h3 className="skc-headline-small !leading-none">API reference</h3>
+        <Text type="headline-small" element="h3" className="!leading-none">
+          API reference
+        </Text>
       </CardContent>
     </Card>
     <Card
       appearance="filled"
       stateLayerEffect
       href="https://github.com/suankularb-wittayalai-school/sk-components"
-      aAttr={{ target: "_blank", rel: "noreferrer" }}
+      // eslint-disable-next-line react/display-name
+      element={forwardRef((props, ref) => (
+        <a ref={ref} {...props} target="_blank" />
+      ))}
       className="mx-4 justify-end self-stretch sm:mx-0"
     >
       <CardContent>
         <MaterialIcon icon="code" size={48} className="text-primary" />
-        <h3 className="skc-headline-small !leading-none">Demo repository</h3>
+        <Text type="headline-small" element="h3" className="!leading-none">
+          Demo repository
+        </Text>
       </CardContent>
     </Card>
   </Columns>

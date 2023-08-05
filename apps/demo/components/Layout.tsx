@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import {
   FC,
   forwardRef,
-  LegacyRef,
   ReactNode,
   useContext,
   useEffect,
@@ -24,6 +23,7 @@ import {
   RootLayout,
   Snackbar,
   SnackbarProps,
+  Text,
 } from "@suankularb-components/react";
 
 // Contexts
@@ -79,10 +79,10 @@ const Layout: FC<
         {/* Top-level pages */}
         <NavDrawerSection
           header={
-            <div className="skc-title-large">
+            <Text type="title-large" element="div">
               <span>SK</span>
               <span className="text-primary font-bold">Components</span>
-            </div>
+            </Text>
           }
           alt="SK Components"
         >

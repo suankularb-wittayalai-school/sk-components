@@ -12,6 +12,7 @@ import {
   Header,
   MaterialIcon,
   Section,
+  Text,
 } from "@suankularb-components/react";
 
 // Internal components
@@ -31,9 +32,9 @@ const ExamplePage: CustomPage = () => (
         <Card appearance="outlined">
           <CardContent>
             <Header>Lookup</Header>
-            <span className="skc-headline-small">
+            <Text type="headline-small">
               A list-detail view for finding students
-            </span>
+            </Text>
           </CardContent>
           <CardContent>
             <p>Lookup showcases the following components:</p>

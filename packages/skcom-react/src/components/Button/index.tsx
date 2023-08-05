@@ -165,7 +165,7 @@ export function Button({
   style,
   className,
 }: ButtonProps) {
-  const buttonRef: React.LegacyRef<any> = React.useRef(null);
+  const buttonRef: React.Ref<HTMLButtonElement> = React.useRef(null);
   const [buttonWidth, setButtonWidth] = React.useState<number>();
   React.useEffect(() => {
     const button = buttonRef.current;
@@ -182,7 +182,7 @@ export function Button({
     <Interactive
       href={!(disabled || loading) ? href : undefined}
       onClick={!(disabled || loading) ? onClick : undefined}
-      element={disabled || loading ? "button" : element}
+      element={disabled || loading ? "button" : element || "button"}
       attr={{
         ref: buttonRef,
         // We’re using `aria-disabled` instead of `disabled` because it does

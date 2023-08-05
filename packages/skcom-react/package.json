@@ -8,18 +8,18 @@
   "sideEffects": false,
   "devDependencies": {
     "@suankularb-components/css": "*",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.4",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
     "configs": "*",
-    "eslint": "^8.15.0",
-    "react": "^18.1.0",
+    "eslint": "^8.46.0",
+    "react": "^18.2.0",
     "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "@tanstack/react-table": "^8.9.1",
-    "framer-motion": "^10.12.8"
+    "@tanstack/react-table": "^8.9.3",
+    "framer-motion": "^10.15.0",
+    "react": "^18.2.0"
   },
   "scripts": {
     "build": "tsup",
