@@ -13,7 +13,7 @@
 
 .skc-page-header {
   @extend .skc-content-layout;
-  padding-block: 1.5rem 0.5rem;
+  padding-block: 1rem 0.5rem;
 }
 
 .skc-page-header__blobs {
@@ -45,11 +45,26 @@
   }
 }
 
+.skc-page-header__minimized {
+  position: fixed;
+  isolation: isolate;
+  z-index: 80;
+  inset: 0;
+  bottom: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.skc-page-header__minimized {
+  padding: 1rem 0 0 0.5rem;
+}
+
 .skc-page-header__content {
   @extend .skc-content-layout__content;
   display: flex;
   flex-direction: row;
-  gap: 0 0.5rem;
+  gap: 0 0.25rem;
   padding-inline: 0.5rem 1rem;
 }
 
@@ -62,6 +77,10 @@
 }
 
 @include mix.breakpoint("sm") {
+  .skc-page-header {
+    padding-top: 1.25rem;
+  }
+
   .skc-page-header__blobs--mobile {
     display: none;
   }
@@ -70,11 +89,16 @@
     display: block;
   }
 
+  .skc-page-header__minimized {
+    display: none;
+  }
+
   .skc-page-header__nav-toggle {
     display: none;
   }
 
   .skc-page-header__content {
+    column-gap: 0.5rem;
     padding-inline: 0;
 
     > .skc-button:first-child {
@@ -85,6 +109,6 @@
 
 @include mix.breakpoint("lg") {
   .skc-page-header__blobs {
-    top: -2rem;
+    top: -5rem;
   }
 }
