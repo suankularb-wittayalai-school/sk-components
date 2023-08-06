@@ -166,12 +166,24 @@ export function Button({
   className,
 }: ButtonProps) {
   const buttonRef: React.Ref<HTMLButtonElement> = React.useRef(null);
+
+  // Maintain the width of the Button while loading
   const [buttonWidth, setButtonWidth] = React.useState<number>();
   React.useEffect(() => {
+    // Only set the Button width while loading
     if (!loading) return;
+
+    // Get the Button element
     const button = buttonRef.current;
     if (!button) return;
-    // (@SiravitPhokeed)
+
+    // If the Button is contained by an Actions, don’t apply the width
+    let containedByActions = false;
+    document.querySelectorAll(".skc-actions").forEach((item) => {
+      if (item.contains(button)) containedByActions = true;
+    });
+    if (containedByActions) return;
+
     // We’re not using `clientWidth` here because that property is rounded,
     // which can cause layout shifts as the Button transition to and from the
     // loading state. `getBoundingClientRect` produces the exact width value.
