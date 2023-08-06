@@ -41,6 +41,8 @@
 
 @include mix.breakpoint("sm") {
   .skc-nav-bar {
+    position: relative;
+    isolation: isolate;
     display: flex;
     overflow: hidden auto;
     align-items: center;
@@ -50,7 +52,17 @@
     width: 5rem;
     height: 100vh;
     padding: 2.75rem 0 3.5rem;
-    background-color: var(--surface);
+    backdrop-filter: blur(16px);
+    background-color: transparent;
+
+    &::before {
+      position: absolute;
+      z-index: -10;
+      inset: 0;
+      content: "";
+      opacity: 50%;
+      background-color: var(--surface);
+    }
   }
 
   @supports (height: 100dvh) {
