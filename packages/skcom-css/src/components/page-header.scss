@@ -63,6 +63,7 @@
 .skc-page-header__content {
   @extend .skc-content-layout__content;
   display: flex;
+  align-items: flex-start;
   flex-direction: row;
   gap: 0 0.25rem;
   padding-inline: 0.5rem 1rem;
