@@ -19,17 +19,17 @@ export interface AppDrawerItemProps extends SKComponent {
    * The logo image of the app.
    */
   logo: JSX.Element;
-  
+
   /**
    * The name of the app.
    */
   name: string;
-  
+
   /**
    * Triggers when the App Drawer Item is pressed.
    */
   onClick?: () => any;
-  
+
   /**
    * The link to the app or the app’s install page.
    */
@@ -59,12 +59,7 @@ export function AppDrawerItem({
         element={
           href
             ? React.forwardRef((props, ref) => (
-                <a
-                  id={`app-${dash(name)}`}
-                  ref={ref}
-                  {...props}
-                  target="_blank"
-                />
+                <a ref={ref} {...props} target="_blank" />
               ))
             : "button"
         }
@@ -72,12 +67,7 @@ export function AppDrawerItem({
       >
         {logo}
       </Interactive>
-      <label
-        htmlFor={`app-${dash(name)}`}
-        className="skc-app-drawer-item__name"
-      >
-        {name}
-      </label>
+      <span className="skc-app-drawer-item__name">{name}</span>
     </li>
   );
 }
