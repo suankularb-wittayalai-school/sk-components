@@ -15,9 +15,9 @@
 .skc-app-drawer-item__logo {
   display: grid;
   place-content: center;
-  background-color: var(--surface-5);
   aspect-ratio: 1;
   border-radius: var(--rounded-lg);
+  background-color: var(--surface-5);
 
   > img {
     max-width: 100%;
