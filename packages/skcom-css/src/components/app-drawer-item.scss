@@ -1,0 +1,31 @@
+////
+/// **App Drawer Item**
+/// An app inside the App Drawer. A child of App Drawer Segment.
+////
+
+@use "../abstracts/typography" as type;
+
+.skc-app-drawer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  width: 4rem;
+}
+
+.skc-app-drawer-item__logo {
+  display: grid;
+  place-content: center;
+  background-color: var(--surface-5);
+  aspect-ratio: 1;
+  border-radius: var(--rounded-lg);
+
+  > img {
+    max-width: 100%;
+  }
+}
+
+.skc-app-drawer-item__name {
+  @include type.font("body-small");
+  text-align: center;
+  color: var(--on-surface);
+}

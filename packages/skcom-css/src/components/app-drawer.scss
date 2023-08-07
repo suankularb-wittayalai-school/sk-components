@@ -1,0 +1,28 @@
+////
+/// **App Drawer**
+/// A drawer of related apps.
+////
+
+.skc-app-drawer {
+  position: absolute;
+  z-index: 85;
+  top: 2rem;
+  right: 0;
+  width: 20.25rem;
+  color: var(--on-surface);
+  border-radius: var(--rounded-lg);
+  background-color: var(--surface-1);
+  box-shadow: var(--shadow-1);
+
+  > * + * {
+    border-top: 1px solid var(--outline);
+  }
+}
+
+.skc-app-drawer ~ .skc-scrim {
+  z-index: 80;
+}
+
+.skc-app-drawer__toggle {
+  z-index: 85;
+}
