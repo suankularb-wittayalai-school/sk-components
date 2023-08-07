@@ -39,7 +39,7 @@ export interface AppDrawerProps extends SKComponent {
 
 /**
  * A drawer of related apps.
- * 
+ *
  * @param children App Drawer Segments.
  * @param locale Allows for translation of the accessibility labels.
  * @param onOpen Triggers when the toggle Button opens the drawer.

@@ -25,7 +25,7 @@ export interface AppDrawerSegmentProps extends SKComponent {
 
 /**
  * A group of apps in the App Drawer.
- * 
+ *
  * @param children The apps in this segment.
  * @param title The title of the group.
  */
