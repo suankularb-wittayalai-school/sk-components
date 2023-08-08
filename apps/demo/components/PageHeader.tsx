@@ -1,47 +1,44 @@
 // External libraries
 import Link from "next/link";
+import Image from "next/image";
 import { FC, useContext } from "react";
 
 // SK Components
 import {
+  AppDrawer,
+  AppDrawerItem,
+  AppDrawerSegment,
   PageHeaderProps,
-  Progress,
   PageHeader as SKCPageHeader,
 } from "@suankularb-components/react";
 
-// Internal components
-import Favicon from "@/components/Favicon";
+// Images
+import SKComLogo from "@/public/images/logo.svg";
 
 // Contexts
 import NavDrawerContext from "@/contexts/NavDrawerContext";
 
-// Utilities
-import { usePageIsLoading } from "@/utils/routing";
-
 const PageHeader: FC<
-  Pick<PageHeaderProps, "title"> & Partial<PageHeaderProps>
+  Pick<PageHeaderProps, "children"> & Partial<PageHeaderProps>
 > = (props) => {
-  // Navigation Drawer toggle
   const { setNavOpen } = useContext(NavDrawerContext);
 
-  // Page load
-  const pageIsLoading = usePageIsLoading();
-
   return (
-    <>
-      <SKCPageHeader
-        brand={<Favicon />}
-        homeURL="/"
-        buttonElement={Link}
-        onNavToggle={() => setNavOpen(true)}
-        {...props}
-      />
-      <Progress
-        appearance="linear"
-        alt="Loading page…"
-        visible={pageIsLoading}
-      />
-    </>
+    <SKCPageHeader
+      buttonElement={Link}
+      onNavToggle={() => setNavOpen(true)}
+      appDrawer={
+        <AppDrawer>
+          <AppDrawerSegment title="Demo apps">
+            <AppDrawerItem
+              logo={<Image src={SKComLogo} alt="" />}
+              name="SKCom"
+            />
+          </AppDrawerSegment>
+        </AppDrawer>
+      }
+      {...props}
+    />
   );
 };
 

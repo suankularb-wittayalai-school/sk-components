@@ -26,7 +26,7 @@ const ComponentsPage: CustomPage = () => (
     <Head>
       <title>Components - SK Components</title>
     </Head>
-    <PageHeader title="Components" icon={<MaterialIcon icon="widgets" />} />
+    <PageHeader>Components</PageHeader>
     <ContentLayout key="components-page">
       <Section>
         <Columns columns={4}>

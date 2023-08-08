@@ -26,7 +26,7 @@ const ExamplePage: CustomPage = () => (
     <Head>
       <title>Examples - SK Components</title>
     </Head>
-    <PageHeader title="Examples" icon={<MaterialIcon icon="capture" />} />
+    <PageHeader>Examples</PageHeader>
     <ContentLayout key="example-page">
       <Section>
         <Card appearance="outlined">

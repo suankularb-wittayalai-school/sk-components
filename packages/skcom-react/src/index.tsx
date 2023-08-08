@@ -1,5 +1,15 @@
 export { Actions, type ActionsProps } from "./components/Actions";
 
+export { AppDrawer, type AppDrawerProps } from "./components/AppDrawer";
+export {
+  AppDrawerItem,
+  type AppDrawerItemProps,
+} from "./components/AppDrawerItem";
+export {
+  AppDrawerSegment,
+  type AppDrawerSegmentProps,
+} from "./components/AppDrawerSegment";
+
 export { Avatar, type AvatarProps } from "./components/Avatar";
 
 export { Button, type ButtonProps } from "./components/Button";

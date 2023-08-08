@@ -200,7 +200,7 @@ const AboutPage: CustomPage = () => (
     <Head>
       <title>About - SK Components</title>
     </Head>
-    <PageHeader title="About" icon={<MaterialIcon icon="info" />} />
+    <PageHeader>About</PageHeader>
     <ContentLayout key="about-page">
       <AboutSection />
       <ResourcesSection />

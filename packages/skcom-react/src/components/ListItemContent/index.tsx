@@ -1,4 +1,5 @@
 // External libraries
+import { dash } from "radash";
 import * as React from "react";
 
 // Types
@@ -9,7 +10,6 @@ import "@suankularb-components/css/dist/css/components/list-item-content.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link ListItemContent List Item Content}.
@@ -65,26 +65,27 @@ export function ListItemContent({
   style,
   className,
 }: ListItemContentProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-table-foot", className]) },
+  const Element = element || "div";
 
-    // Overline
-    overline && (
-      <span className="skc-list-item-content__overline">{overline}</span>
-    ),
+  return (
+    <Element style={style} className={cn(["skc-list-item", className])}>
+      {/* Overline */}
+      {overline && (
+        <span className="skc-list-item-content__overline">{overline}</span>
+      )}
 
-    // Title
-    <span
-      id={`list-item-${kebabify((typeof title === "string" ? title : alt)!)}`}
-      aria-label={alt}
-      className="skc-list-item-content__title"
-    >
-      {title}
-    </span>,
+      {/* Title */}
+      <span
+        id={`list-item-${dash((typeof title === "string" ? title : alt)!)}`}
+        aria-label={alt}
+        className="skc-list-item-content__title"
+      >
+        {title}
+      </span>
 
-    // Desc
-    desc && <span className="skc-list-item-content__desc">{desc}</span>
+      {/* Description */}
+      {desc && <span className="skc-list-item-content__desc">{desc}</span>}
+    </Element>
   );
 }
 

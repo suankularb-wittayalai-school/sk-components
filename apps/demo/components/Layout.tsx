@@ -20,6 +20,7 @@ import {
   NavDrawer,
   NavDrawerItem,
   NavDrawerSection,
+  Progress,
   RootLayout,
   Snackbar,
   SnackbarProps,
@@ -31,6 +32,7 @@ import NavDrawerContext from "@/contexts/NavDrawerContext";
 import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
+import { usePageIsLoading } from "@/utils/routing";
 import { CustomPage } from "@/utils/types";
 
 const Layout: FC<
@@ -38,6 +40,7 @@ const Layout: FC<
 > = ({ children, fab, parentURL, childURLs }) => {
   // Navigation Bar and Drawer
   const router = useRouter();
+  const pageIsLoading = usePageIsLoading();
   const { navOpen, setNavOpen } = useContext(NavDrawerContext);
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
@@ -220,6 +223,12 @@ const Layout: FC<
         open={snackbarOpen}
         onClose={() => setSnackbarOpen(false)}
         {...snackbarProps!}
+      />
+
+      <Progress
+        appearance="linear"
+        alt="Loading page…"
+        visible={pageIsLoading}
       />
 
       {/* Content */}

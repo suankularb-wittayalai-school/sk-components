@@ -43,13 +43,10 @@ const LookupDetailsPage: CustomPage = () => (
     <Head>
       <title>About - SK Components</title>
     </Head>
-    <PageHeader
-      title="Siravit Phokeed"
-      icon={<MaterialIcon icon="search" />}
-      parentURL="/example/lookup"
-    >
+    <PageHeader parentURL="/example/lookup">Siravit Phokeed</PageHeader>
+    <div className="mx-4 mt-1">
       <StudentQuickActions />
-    </PageHeader>
+    </div>
     <StudentDetails />
   </>
 );

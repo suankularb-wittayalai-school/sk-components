@@ -563,11 +563,7 @@ const ContainersPage: CustomPage = () => (
     <Head>
       <title>Containers - SK Components</title>
     </Head>
-    <PageHeader
-      title="Containers"
-      icon={<MaterialIcon icon="dashboard" />}
-      parentURL="/components"
-    />
+    <PageHeader parentURL="/components">Containers</PageHeader>
     <ContentLayout key="containers-page">
       <AvatarSection />
       <CardSection />
