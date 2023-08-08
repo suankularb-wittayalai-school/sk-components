@@ -9,7 +9,7 @@
 @use "../abstracts/typography.scss" as type;
 
 .skc-content-layout {
-  padding: 2rem 0 1rem;
+  padding: 1rem 0;
 }
 
 .skc-content-layout__content {
@@ -29,7 +29,7 @@
 
 @include mix.breakpoint("sm") {
   .skc-content-layout {
-    padding: 2rem;
+    padding: 1.5rem 2rem 2.25rem;
   }
 
   .skc-content-layout__content {

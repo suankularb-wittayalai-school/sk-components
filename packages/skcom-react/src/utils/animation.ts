@@ -188,7 +188,7 @@ export function useRipple(parentRef: React.MutableRefObject<any>): {
       // On key down, put the ripple in the middle of the Button and animate it
       onKeyDown: (event: React.KeyboardEvent) => {
         // Only allow Enter and Space keys as only those can trigger `onClick`
-        if (!["Enter", " "].includes(event.key)) return;
+        if (["Enter", " "].indexOf(event.key) === -1) return;
 
         // Set the ripple position to the middle of the Button
         const button = parentRef.current as any;

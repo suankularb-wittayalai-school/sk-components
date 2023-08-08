@@ -1,10 +1,10 @@
 // External libraries
-import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
-import { Button, ButtonProps } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
+import { ButtonProps } from "../Button";
+import { Text } from "../Text";
+import BackgroundBlobs from "./BackgroundBlobs";
 
 // Types
 import { SKComponent } from "../../types";
@@ -13,58 +13,41 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/page-header.css";
 
 // Utilities
+import { AnimatePresence, motion } from "framer-motion";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import FixedBackgroundBlobs from "./FixedBackgroundBlobs";
+import PageHeaderAction from "./PageHeaderAction";
 
 /**
  * Props for {@link PageHeader Page Header}.
  */
 export interface PageHeaderProps extends SKComponent {
   /**
-   * Some additional components inside the Page Header area.
-   *
-   * - Ensure that these components are highly related to the title itself.
-   * - Examples are:
-   *   - A Search field in a lookup page (Search is highly related to “School
-   *     lookup”).
-   *   - A TL;DR section and tags in a news article (a summary of an article
-   *     is highly related to the headline).
-   *   - etc.
-   * - Optional.
-   */
-  children?: React.ReactNode;
-
-  /**
    * The title text: the biggest text on a page and the only within a `<h1>`
    * tag.
    *
    * - Always required.
    */
-  title: string | JSX.Element;
+  children: React.ReactNode;
 
   /**
-   * An icon representative of this page of the application.
-   *
-   * - Incompatible with `children`.
+   * @deprecated Use `children` instead.
+   */
+  title?: string | JSX.Element;
+
+  /**
+   * @deprecated
    */
   icon?: JSX.Element;
 
   /**
-   * A description of the Page Header for screen readers, similar to `alt` on
-   * `<img>`.
-   *
-   * - Required if `title` is a JSX Element.
+   * @deprecated
    */
   alt?: string;
 
   /**
-   * A small image of your brand can be put on the Page Header to constantly
-   * remind your users that they are, in fact, in your app.
-   *
-   * - Replaces the home Button icon.
-   * - Not displayed on desktop.
-   * - Ensure the image is simple and undistracting.
-   * - Optional but recommended.
+   * @deprecated
    */
   brand?: JSX.Element;
 
@@ -83,11 +66,17 @@ export interface PageHeaderProps extends SKComponent {
   parentURL?: string;
 
   /**
-   * The link to the home page of this application.
-   *
-   * - Optional.
+   * @deprecated
    */
   homeURL?: string;
+
+  /**
+   * An App Drawer placed on the right edge of the Page Header.
+   *
+   * - Recommended if this app is part of a family of apps.
+   * - Optional.
+   */
+  appDrawer?: JSX.Element;
 
   /**
    * Allows for translation of the accessibility labels.
@@ -125,9 +114,7 @@ export interface PageHeaderProps extends SKComponent {
   onNavToggle: () => any;
 
   /**
-   * Props for the underlying Button component the back Button uses.
-   *
-   * - Optional.
+   * @deprecated
    */
   backAttr?: ButtonProps;
 
@@ -140,200 +127,111 @@ export interface PageHeaderProps extends SKComponent {
 /**
  * There’s exactly one Page Header on every page. It displays the title (in
  * the only `<h1>` on the page), the back Button for navigating up, and
- * additional components very closely related to the title.
+ * the App Drawer.
  *
  * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
  *
- * @param children Some additional components inside the Page Header area.
- * @param title The title text: the biggest text on a page and the only within a `<h1>` tag.
- * @param icon The icon representative of this page.
- * @param alt A description of the Page Header for screen readers, similar to `alt` on `<img>`.
- * @param brand A small image of your brand can be put on the Page Header.
+ * @param children The title text: the biggest text on a page and the only within a `<h1>` tag.
  * @param parentURL The link the back Button navigates to.
- * @param homeURL The link to the home page of this application.
  * @param locale Allows for translation of the accessibility labels.
  * @param buttonElement Change the underlying element from `<a>` to a custom element.
  * @param onBack The function triggered when the back Button is clicked.
  * @param onNavToggle The function called when the user clicks on the navigation Button.
- * @param backAttr Props for the underlying Button component the back Button uses.
  */
 export function PageHeader({
   children,
-  title,
-  icon,
-  alt,
-  brand,
   parentURL,
-  homeURL,
+  appDrawer,
   locale,
   buttonElement,
   onBack,
   onNavToggle,
-  backAttr,
   style,
   className,
 }: PageHeaderProps) {
+  const { duration, easing } = useAnimationConfig();
+
   // Page Header minimizes on scroll, this section does the calculation
   const headerRef: React.RefObject<HTMLElement> = React.useRef(null);
-  const [minimized, setMinimized] = React.useState<boolean>(false);
-
-  /**
-   * Check if the minimized Page Header should be shown based on scroll
-   * distance from top.
-   *
-   * @returns If the minimized Page Header should be shown.
-   */
-  function isMinimized(scrollY: number, clientHeight: number) {
-    // Height of desktop Page Header: 192px
-    // Height of minimized Page Header: 64px
-    return scrollY > clientHeight - 64 || scrollY > 192;
-  }
+  const [minimized, setMinimized] = React.useState(false);
 
   React.useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
 
     // Minimize on load if page already scrolled
-    setMinimized(isMinimized(window.scrollY, header.clientHeight));
+    setMinimized(scrollY > header.clientHeight);
 
     // Decide whether to minimize depending on the scroll position when the
     // user scrolls
-    const handleScroll = () =>
-      setMinimized(isMinimized(window.scrollY, header.clientHeight));
+    const handleScroll = () => setMinimized(scrollY > header.clientHeight);
     document.addEventListener("scroll", handleScroll);
 
     // Cleanup
     return () => document.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Animation
-  const { duration, easing } = useAnimationConfig();
-
-  // Components
-
-  /**
-   * A Button that navigates up.
-   */
-  const BackButton: React.FC = () => (
-    <Button
-      appearance="text"
-      icon={<MaterialIcon icon="arrow_backward" />}
-      alt={locale === "th" ? "กลับ" : "Back"}
-      onClick={onBack}
-      href={parentURL}
-      element={buttonElement}
-      disabled={!(onBack || parentURL)}
-    />
-  );
-
-  /**
-   * Icons at the end of a Page Header: Home Button and Navigation Toggle.
-   */
-  const TrailingIcons: React.FC = () => (
-    <div className="skc-page-header__trailing">
-      {homeURL && (
-        // Home Button
-        <Button
-          appearance="text"
-          icon={brand || <MaterialIcon icon="home" />}
-          href={homeURL}
-          element={buttonElement}
-          {...backAttr}
-        />
-      )}
-      {/* Menu toggle */}
-      <Button
-        appearance="text"
-        icon={<MaterialIcon icon="menu" />}
-        onClick={onNavToggle}
-      />
-    </div>
-  );
-
   return (
     <>
-      <motion.header
-        ref={headerRef}
-        layoutId="page-header"
-        transition={transition(duration.short4, easing.standard)}
-        style={style}
-        className={cn(["skc-page-header", className])}
-      >
-        <div className="skc-page-header__content">
-          {/* Background icon */}
-          <AnimatePresence mode="popLayout" initial={false}>
-            {icon && !children && (
-              <motion.div
-                key={typeof title === "string" ? title : alt}
-                initial={{ opacity: 0, scale: 1.4, y: "-50%" }}
-                animate={{ opacity: 0.08, scale: 1, y: "-50%" }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={transition(
-                  duration.medium4,
-                  easing.standardDecelerate
-                )}
-                className="skc-page-header__icon"
-              >
-                {icon}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="skc-page-header__actions">
-            <BackButton />
-            <TrailingIcons />
-          </div>
-
-          {/* Page title */}
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.h1
-              key={typeof title === "string" ? title : alt}
-              aria-label={alt}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{
-                opacity: 0,
-                scale: 0.8,
-                transition: transition(
-                  duration.short1,
-                  easing.standardAccelerate
-                ),
-              }}
-              transition={transition(
-                duration.medium2,
-                easing.standardDecelerate
-              )}
-            >
-              {title}
-            </motion.h1>
-          </AnimatePresence>
-
-          {/* Related content */}
-          {children && (
-            <div className="skc-page-header__related">{children}</div>
-          )}
-        </div>
-      </motion.header>
+      <BackgroundBlobs />
 
       {/* Minimized */}
       <AnimatePresence>
         {minimized && (
           <motion.div
-            aria-hidden
-            initial={{ opacity: 0, scaleY: 0.5, y: "-50%" }}
-            animate={{ opacity: 1, scaleY: 1, y: "0%" }}
-            exit={{ opacity: 0 }}
-            transition={transition(duration.short4, easing.standard)}
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{
+              opacity: 0,
+              x: -100,
+              transition: transition(
+                duration.short4,
+                easing.standardAccelerate
+              ),
+            }}
+            transition={transition(duration.medium2, easing.standardDecelerate)}
             className="skc-page-header__minimized"
           >
-            <div className="skc-page-header__minimized-content">
-              <BackButton />
-              <h1>{title}</h1>
-              <TrailingIcons />
-            </div>
+            <FixedBackgroundBlobs />
+            <PageHeaderAction
+              parentURL={parentURL}
+              locale={locale}
+              buttonElement={buttonElement}
+              onBack={onBack}
+              onNavToggle={onNavToggle}
+            />
           </motion.div>
         )}
       </AnimatePresence>
+
+      <header
+        ref={headerRef}
+        style={style}
+        className={cn([`skc-page-header`, className])}
+      >
+        <div className="skc-page-header__content">
+          {/* Action */}
+          <PageHeaderAction
+            parentURL={parentURL}
+            locale={locale}
+            buttonElement={buttonElement}
+            onBack={onBack}
+            onNavToggle={onNavToggle}
+          />
+
+          {/* Header text */}
+          <Text
+            type="headline-large"
+            element="h1"
+            className="skc-page-header__text"
+          >
+            {children}
+          </Text>
+
+          {/* App Drawer */}
+          {appDrawer}
+        </div>
+      </header>
     </>
   );
 }

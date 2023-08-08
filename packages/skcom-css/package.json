@@ -6,7 +6,7 @@
   "style": "dist\\css\\index.css",
   "devDependencies": {
     "configs": "*",
-    "sass": "1.57.1"
+    "sass": "^1.64.2"
   },
   "scripts": {
     "build": "sass src:dist/css --style compressed",

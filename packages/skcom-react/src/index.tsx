@@ -1,5 +1,15 @@
 export { Actions, type ActionsProps } from "./components/Actions";
 
+export { AppDrawer, type AppDrawerProps } from "./components/AppDrawer";
+export {
+  AppDrawerItem,
+  type AppDrawerItemProps,
+} from "./components/AppDrawerItem";
+export {
+  AppDrawerSegment,
+  type AppDrawerSegmentProps,
+} from "./components/AppDrawerSegment";
+
 export { Avatar, type AvatarProps } from "./components/Avatar";
 
 export { Button, type ButtonProps } from "./components/Button";
@@ -13,58 +23,58 @@ export {
 } from "./components/ToggleButton";
 
 export { Card, type CardProps } from "./components/Card";
-export { CardHeader, type CardHeaderProps } from "./components/CardHeader";
 export { CardContent, type CardContentProps } from "./components/CardContent";
+export { CardHeader, type CardHeaderProps } from "./components/CardHeader";
 
 export { Columns, type ColumnsProps } from "./components/Columns";
 
 export { Checkbox, type CheckboxProps } from "./components/Checkbox";
 
-export { InputChip, type InputChipProps } from "./components/InputChip";
 export { AssistChip, type AssistChipProps } from "./components/AssistChip";
+export { ChipField, type ChipFieldProps } from "./components/ChipField";
+export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 export { FilterChip, type FilterChipProps } from "./components/FilterChip";
+export { InputChip, type InputChipProps } from "./components/InputChip";
 export {
   SuggestionChip,
   type SuggestionChipProps,
 } from "./components/SuggestionChip";
-export { ChipField, type ChipFieldProps } from "./components/ChipField";
-export { ChipSet, type ChipSetProps } from "./components/ChipSet";
 
 export { DataTable, type DataTableProps } from "./components/DataTable";
-export {
-  DataTableSearch,
-  type DataTableSearchProps,
-} from "./components/DataTableSearch";
-export {
-  DataTableFilters,
-  type DataTableFiltersProps,
-} from "./components/DataTableFilters";
-export {
-  DataTableContent,
-  type DataTableContentProps,
-} from "./components/DataTableContent";
-export {
-  DataTableHead,
-  type DataTableHeadProps,
-} from "./components/DataTableHead";
 export {
   DataTableBody,
   type DataTableBodyProps,
 } from "./components/DataTableBody";
 export {
+  DataTableContent,
+  type DataTableContentProps,
+} from "./components/DataTableContent";
+export {
+  DataTableFilters,
+  type DataTableFiltersProps,
+} from "./components/DataTableFilters";
+export {
+  DataTableHead,
+  type DataTableHeadProps,
+} from "./components/DataTableHead";
+export {
   DataTablePagination,
   type DataTablePaginationProps,
 } from "./components/DataTablePagination";
+export {
+  DataTableSearch,
+  type DataTableSearchProps,
+} from "./components/DataTableSearch";
 
 export { Dialog, type DialogProps } from "./components/Dialog";
-export {
-  DialogHeader,
-  type DialogHeaderProps,
-} from "./components/DialogHeader";
 export {
   DialogContent,
   type DialogContentProps,
 } from "./components/DialogContent";
+export {
+  DialogHeader,
+  type DialogHeaderProps,
+} from "./components/DialogHeader";
 export {
   FullscreenDialog,
   type FullscreenDialogProps,
@@ -95,13 +105,13 @@ export { NavBar, type NavBarProps } from "./components/NavBar";
 export { NavBarItem, type NavBarItemProps } from "./components/NavBarItem";
 export { NavDrawer, type NavDrawerProps } from "./components/NavDrawer";
 export {
-  NavDrawerSection,
-  type NavDrawerSectionProps,
-} from "./components/NavDrawerSection";
-export {
   NavDrawerItem,
   type NavDrawerItemProps,
 } from "./components/NavDrawerItem";
+export {
+  NavDrawerSection,
+  type NavDrawerSectionProps,
+} from "./components/NavDrawerSection";
 
 export { FAB, type FABProps } from "./components/FAB";
 
@@ -109,8 +119,8 @@ export {
   ContentLayout,
   type ContentLayoutProps,
 } from "./components/ContentLayout";
-export { SplitLayout, type SplitLayoutProps } from "./components/SplitLayout";
 export { RootLayout, type RootLayoutProps } from "./components/RootLayout";
+export { SplitLayout, type SplitLayoutProps } from "./components/SplitLayout";
 
 export { Menu, type MenuProps } from "./components/Menu";
 export { MenuItem, type MenuItemProps } from "./components/MenuItem";
@@ -132,17 +142,19 @@ export { Snackbar, type SnackbarProps } from "./components/Snackbar";
 export { Switch, type SwitchProps } from "./components/Switch";
 
 export { Table, type TableProps } from "./components/Table";
-export { TableHead, type TableHeadProps } from "./components/TableHead";
 export { TableBody, type TableBodyProps } from "./components/TableBody";
-export { TableFoot, type TableFootProps } from "./components/TableFoot";
-export { TableRow, type TableRowProps } from "./components/TableRow";
 export { TableCell, type TableCellProps } from "./components/TableCell";
+export { TableFoot, type TableFootProps } from "./components/TableFoot";
+export { TableHead, type TableHeadProps } from "./components/TableHead";
+export { TableRow, type TableRowProps } from "./components/TableRow";
 
 export { Tab, type TabProps } from "./components/Tab";
 export {
   TabsContainer,
   type TabsContainerProps,
 } from "./components/TabsContainer";
+
+export { Text, type TextProps } from "./components/Text";
 
 export { TextField, type TextFieldProps } from "./components/TextField";
 
@@ -151,7 +163,7 @@ export {
   type ThemeProviderProps,
 } from "./components/ThemeProvider";
 
-export { useAnimationConfig, transition, useRipple } from "./utils/animation";
+export { transition, useAnimationConfig, useRipple } from "./utils/animation";
 export { useBreakpoint } from "./utils/window";
 
 export type { DataTableColumnDef } from "./types";

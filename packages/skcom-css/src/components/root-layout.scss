@@ -43,7 +43,9 @@ body {
 }
 
 .skc-root-layout > .skc-progress {
-  margin-bottom: -0.25rem;
+  position: fixed;
+  inset: 0;
+  bottom: auto;
 }
 
 .skc-scrim {
@@ -67,7 +69,7 @@ body {
     bottom: initial;
 
     ~ .skc-progress {
-      margin-left: 5rem;
+      left: 5rem;
     }
 
     .skc-fab {

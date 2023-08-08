@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogProps,
   MaterialIcon,
+  Text,
 } from "@suankularb-components/react";
 
 const ShareDialog: FC<Pick<DialogProps, "open" | "onClose">> = ({
@@ -30,9 +31,13 @@ const ShareDialog: FC<Pick<DialogProps, "open" | "onClose">> = ({
             Save to contacts
           </Button>
         </Actions>
-        <p className="skc-label-small text-on-surface-variant">
+        <Text
+          type="label-small"
+          element="p"
+          className="text-on-surface-variant"
+        >
           Save a .vcf file to see this person as a contact on your device.
-        </p>
+        </Text>
       </div>
 
       {/* Copy link */}
@@ -55,9 +60,13 @@ const ShareDialog: FC<Pick<DialogProps, "open" | "onClose">> = ({
             Copy link
           </Button>
         </Actions>
-        <p className="skc-label-small text-on-surface-variant">
+        <Text
+          type="label-small"
+          element="p"
+          className="text-on-surface-variant"
+        >
           Get a link to this page.
-        </p>
+        </Text>
       </div>
 
       {/* Print */}
@@ -71,10 +80,14 @@ const ShareDialog: FC<Pick<DialogProps, "open" | "onClose">> = ({
             Print
           </Button>
         </Actions>
-        <p className="skc-label-small text-on-surface-variant">
+        <Text
+          type="label-small"
+          element="p"
+          className="text-on-surface-variant"
+        >
           Print out the details of this person. Private info you have access to
           is also included.
-        </p>
+        </Text>
       </div>
     </DialogContent>
     <Actions>

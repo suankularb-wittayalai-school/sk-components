@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import {
   FC,
   forwardRef,
-  LegacyRef,
   ReactNode,
   useContext,
   useEffect,
@@ -21,9 +20,11 @@ import {
   NavDrawer,
   NavDrawerItem,
   NavDrawerSection,
+  Progress,
   RootLayout,
   Snackbar,
   SnackbarProps,
+  Text,
 } from "@suankularb-components/react";
 
 // Contexts
@@ -31,6 +32,7 @@ import NavDrawerContext from "@/contexts/NavDrawerContext";
 import SnackbarContext from "@/contexts/SnackbarContext";
 
 // Utilities
+import { usePageIsLoading } from "@/utils/routing";
 import { CustomPage } from "@/utils/types";
 
 const Layout: FC<
@@ -38,6 +40,7 @@ const Layout: FC<
 > = ({ children, fab, parentURL, childURLs }) => {
   // Navigation Bar and Drawer
   const router = useRouter();
+  const pageIsLoading = usePageIsLoading();
   const { navOpen, setNavOpen } = useContext(NavDrawerContext);
 
   const getIsSelected = (pattern: RegExp) => pattern.test(router.pathname);
@@ -79,10 +82,10 @@ const Layout: FC<
         {/* Top-level pages */}
         <NavDrawerSection
           header={
-            <div className="skc-title-large">
+            <Text type="title-large" element="div">
               <span>SK</span>
               <span className="text-primary font-bold">Components</span>
-            </div>
+            </Text>
           }
           alt="SK Components"
         >
@@ -220,6 +223,12 @@ const Layout: FC<
         open={snackbarOpen}
         onClose={() => setSnackbarOpen(false)}
         {...snackbarProps!}
+      />
+
+      <Progress
+        appearance="linear"
+        alt="Loading page…"
+        visible={pageIsLoading}
       />
 
       {/* Content */}

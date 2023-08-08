@@ -1,0 +1,28 @@
+////
+/// **Text**
+/// A body of text with a typographic style applied.
+////
+
+@use "../abstracts/typography.scss" as type;
+
+.skc-text {
+  &.skc-text--button {
+    @include type.font("label-large");
+    font-family: var(--font-display);
+  }
+
+  &.skc-text--caption {
+    @include type.font("body-small");
+  }
+
+  &.skc-text--overline {
+    @include type.font("body-small");
+    font-family: var(--font-display);
+  }
+
+  @each $name, $properties in type.$font-styles {
+    &.skc-text--#{$name} {
+      @include type.font($name);
+    }
+  }
+}

@@ -53,6 +53,7 @@ import {
   TableHead,
   TableRow,
   TabsContainer,
+  Text,
 } from "@suankularb-components/react";
 
 // Internal components
@@ -125,9 +126,9 @@ const ColumnsSection: FC = () => (
         <Card
           key={i}
           appearance="outlined"
-          className="skc-headline-large !grid h-20 place-content-center"
+          className="!grid h-20 place-content-center"
         >
-          {i + 1}
+          <Text type="headline-large">{i + 1}</Text>
         </Card>
       ))}
     </Columns>
@@ -375,10 +376,12 @@ const InteractiveSection: FC = () => (
         transition-[border,background-color,color] [&_*]:w-full [&_*]:truncate
         [&_*]:break-all"
     >
-      <span className="skc-title-medium !bg-transparent" title="Web D.">
+      <Text type="title-medium" className="!bg-transparent">
         English
-      </span>
-      <span className="skc-body-small !bg-transparent">Atipol</span>
+      </Text>
+      <Text type="body-small" className="!bg-transparent">
+        Atipol
+      </Text>
     </Interactive>
   </Section>
 );
@@ -388,19 +391,16 @@ const SplitLayoutSection: FC = () => (
     <Header>Split Layout</Header>
     <SplitLayout ratio={[4, 8]}>
       <div>
-        <Card
-          appearance="outlined"
-          className="skc-headline-large !grid h-20 place-content-center"
-        >
-          Left
+        <Card appearance="outlined" className="!grid h-20 place-content-center">
+          <Text type="headline-large">Left</Text>
         </Card>
       </div>
       <div>
         <Card
           appearance="outlined"
-          className="skc-headline-large h-20 place-content-center sm:!grid"
+          className="h-20 place-content-center sm:!grid"
         >
-          Right
+          <Text type="headline-large">Right</Text>
         </Card>
       </div>
     </SplitLayout>
@@ -563,11 +563,7 @@ const ContainersPage: CustomPage = () => (
     <Head>
       <title>Containers - SK Components</title>
     </Head>
-    <PageHeader
-      title="Containers"
-      icon={<MaterialIcon icon="dashboard" />}
-      parentURL="/components"
-    />
+    <PageHeader parentURL="/components">Containers</PageHeader>
     <ContentLayout key="containers-page">
       <AvatarSection />
       <CardSection />

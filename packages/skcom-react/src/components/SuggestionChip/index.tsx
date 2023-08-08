@@ -116,7 +116,7 @@ export function SuggestionChip({
     <Interactive
       onClick={onClick}
       href={href}
-      element={element}
+      element={element || "button"}
       attr={{ "aria-disabled": disabled, title: tooltip }}
       style={style}
       className={cn([
