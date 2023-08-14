@@ -55,7 +55,7 @@ export function AppDrawer({
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <div className="relative">
+    <div className="skc-app-drawer__anchor">
       {/* Toggle */}
       <Button
         appearance="text"
