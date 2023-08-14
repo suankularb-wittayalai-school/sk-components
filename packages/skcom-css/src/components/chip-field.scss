@@ -136,6 +136,15 @@
   }
 }
 
+// Helper message
+.skc-chip-field__helper-msg {
+  @include type.font("body-small");
+  position: absolute;
+  inset: auto 0 -2.25rem 1rem;
+  height: 2rem;
+  color: var(--on-surface-variant);
+}
+
 @include mix.breakpoint("sm") {
   .skc-section > .skc-chip-field:focus-within {
     margin-inline: -1px;
