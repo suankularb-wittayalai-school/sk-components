@@ -14,6 +14,10 @@
 .skc-page-header {
   @extend .skc-content-layout;
   padding-block: 1rem 0.5rem;
+
+  .skc-app-drawer__toggle {
+    white-space: nowrap;
+  }
 }
 
 .skc-page-header__blobs {
@@ -74,7 +78,10 @@
 }
 
 .skc-page-header__text {
+  overflow: hidden;
   flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @include mix.breakpoint("sm") {
