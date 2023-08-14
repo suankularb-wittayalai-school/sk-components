@@ -47,6 +47,13 @@ export interface ChipFieldProps extends SKComponent {
   alt?: string;
 
   /**
+   * A short description of the Chip Field.
+   *
+   * - Optional.
+   */
+  helperMsg?: string | JSX.Element;
+
+  /**
    * The value inside the field that is used to create Input Chips. This is
    * useful if you want a controlled input.
    *
@@ -140,6 +147,7 @@ export interface ChipFieldProps extends SKComponent {
  * @param children The Input Chips that the user have already entered.
  * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
  * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
+ * @param helperMsg A short description of the Chip Field.
  * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user makes changes to the field value. The value is passed in via the function.
  * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
@@ -155,6 +163,7 @@ export function ChipField({
   children,
   label,
   alt,
+  helperMsg,
   value,
   onChange,
   onNewEntry,
@@ -371,6 +380,13 @@ export function ChipField({
         value={typeof loading === "number" ? loading : undefined}
         visible={typeof loading === "number" || loading}
       />
+
+      {/* Helper/error message */}
+      {helperMsg && (
+        <span id={`${fieldID}-helper`} className="skc-chip-field__helper-msg">
+          {helperMsg}
+        </span>
+      )}
     </div>
   );
 }

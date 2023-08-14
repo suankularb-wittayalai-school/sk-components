@@ -68,7 +68,7 @@ export function ListItemContent({
   const Element = element || "div";
 
   return (
-    <Element style={style} className={cn(["skc-list-item", className])}>
+    <Element style={style} className={cn(["skc-list-item-content", className])}>
       {/* Overline */}
       {overline && (
         <span className="skc-list-item-content__overline">{overline}</span>

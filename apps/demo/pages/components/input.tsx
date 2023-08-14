@@ -70,6 +70,7 @@ const ChipFieldSection: FC = () => {
       <Header>Chip Field</Header>
       <ChipField
         label="Classes learning this subject"
+        helperMsg="Comma-separated list"
         value={value}
         onChange={setValue}
         onNewEntry={(value) => {
