@@ -1,6 +1,6 @@
 {
   "name": "@suankularb-components/css",
-  "version": "3.2.0",
+  "version": "3.2.2",
   "description": "Styling for Suankularb Components, the base of all Suankularb Components implementations",
   "main": "dist/js/index.js",
   "style": "dist\\css\\index.css",
