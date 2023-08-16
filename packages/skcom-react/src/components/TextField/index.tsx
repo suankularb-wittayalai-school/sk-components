@@ -390,15 +390,21 @@ export function TextField<Value extends string | File>({
             setError(Boolean(incError || (required && !value)));
           },
           onChange: (
-            e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+            event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
           ) => {
-            if (inputAttr?.type === "file")
-              setFile(
-                (e.target as HTMLInputElement).files?.length
-                  ? (e.target as HTMLInputElement).files![0]
-                  : null
-              );
-            if (onChange) onChange((file || e.target.value) as Value);
+            const { files, value } = event.target as HTMLInputElement;
+
+            // Handle file input if type is `file`
+            if (inputAttr?.type === "file") {
+              if (files?.length) {
+                setFile(files[0]);
+                onChange?.(files[0] as Value);
+              } else setFile(null);
+              return;
+            }
+
+            // Otherwise, treat value as text
+            onChange?.(value as Value);
 
             if (value === undefined) expandTextarea();
           },
