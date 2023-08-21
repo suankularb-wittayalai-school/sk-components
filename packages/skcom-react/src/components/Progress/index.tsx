@@ -99,14 +99,14 @@ export function Progress({
     <svg className="skc-progress__track" viewBox="24 24 48 48">
       <motion.circle
         initial={{ strokeWidth: 0 }}
-        animate={{ strokeWidth: 4 }}
-        exit={{ strokeWidth: 0 }}
-        transition={progressTransition}
-        className="skc-progress__indicator"
-        style={{
+        animate={{
+          strokeWidth: 4,
           strokeDashoffset:
             value !== undefined ? 200 - value * 1.25 : undefined,
         }}
+        exit={{ strokeWidth: 0 }}
+        transition={progressTransition}
+        className="skc-progress__indicator"
         cx="48"
         cy="48"
         r="20"
@@ -144,3 +144,4 @@ export function Progress({
 }
 
 Progress.displayName = "Progress";
+
