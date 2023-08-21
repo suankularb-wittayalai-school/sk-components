@@ -1,6 +1,6 @@
 {
   "name": "sk-components",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -26,3 +26,4 @@
   },
   "packageManager": "npm@8.19.3"
 }
+
