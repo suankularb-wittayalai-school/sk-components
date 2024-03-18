@@ -5,8 +5,8 @@
   "main": "dist/js/index.js",
   "style": "dist\\css\\index.css",
   "devDependencies": {
-    "configs": "*",
-    "sass": "^1.64.2"
+    "configs": "^1.0.0",
+    "sass": "^1.72.0"
   },
   "scripts": {
     "build": "sass src:dist/css --style compressed",
@@ -34,4 +34,3 @@
   },
   "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme"
 }
-
