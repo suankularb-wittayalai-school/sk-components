@@ -22,8 +22,8 @@
     "react": "^18.2.0"
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "node --max_old_space_size=8048 ../../node_modules/tsup/dist/cli-default.js",
+    "dev": "node --max_old_space_size=8048 ../../node_modules/tsup/dist/cli-default.js --watch",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\""
   },
   "files": [
