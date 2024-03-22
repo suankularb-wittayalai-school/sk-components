@@ -46,8 +46,8 @@ export function useAnimationConfig() {
       standardAccelerate: [0.3, 0, 1, 1] as BezierDefinition,
       standardDecelerate: [0, 0, 0, 1] as BezierDefinition,
       emphasized: [0.2, 0, 0, 1] as BezierDefinition,
-      emphasizedAccelerate: [0.05, 0.7, 0.1, 1] as BezierDefinition,
-      emphasizedDecelerate: [0.3, 0, 0.8, 0.15] as BezierDefinition,
+      emphasizedAccelerate: [0.3, 0, 0.8, 0.15] as BezierDefinition,
+      emphasizedDecelerate: [0.05, 0.7, 0.1, 1] as BezierDefinition,
     },
   };
 }

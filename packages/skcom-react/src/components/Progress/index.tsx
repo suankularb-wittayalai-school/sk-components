@@ -91,12 +91,27 @@ export function Progress({
         className="skc-progress__indicator"
         style={{ width: value !== undefined ? `${value}%` : undefined }}
       />
+      {(value === undefined || value < 100) && (
+        <div className="skc-progress__remainder" />
+      )}
+      <div className="skc-progress__stop" />
     </motion.div>
   );
 
   // Circular variant
   const circularProgress = (
-    <svg className="skc-progress__track" viewBox="24 24 48 48">
+    <svg className="skc-progress__track" viewBox="0 0 48 48">
+      <motion.circle
+        initial={{ strokeWidth: 0 }}
+        animate={{ strokeWidth: 4 }}
+        exit={{ strokeWidth: 0 }}
+        transition={progressTransition}
+        cx={24}
+        cy={24}
+        r={22}
+        fill="none"
+        className="skc-progress__remainder"
+      />
       <motion.circle
         initial={{ strokeWidth: 0 }}
         animate={{
@@ -106,13 +121,11 @@ export function Progress({
         }}
         exit={{ strokeWidth: 0 }}
         transition={progressTransition}
-        className="skc-progress__indicator"
-        cx="48"
-        cy="48"
-        r="20"
+        cx={24}
+        cy={24}
+        r={22}
         fill="none"
-        strokeWidth="4"
-        strokeMiterlimit="10"
+        className="skc-progress__indicator"
       />
     </svg>
   );
@@ -127,16 +140,15 @@ export function Progress({
           style={style}
           className={cn([
             "skc-progress",
-            appearance === "linear"
-              ? "skc-progress--linear"
-              : appearance === "circular" && "skc-progress--circular",
+            {
+              linear: "skc-progress--linear",
+              circular: "skc-progress--circular",
+            }[appearance],
             value === undefined && "skc-progress--indeterminate",
             className,
           ])}
         >
-          {appearance === "linear"
-            ? linearProgress
-            : appearance === "circular" && circularProgress}
+          {{ linear: linearProgress, circular: circularProgress }[appearance]}
         </div>
       )}
     </AnimatePresence>
