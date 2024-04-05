@@ -89,7 +89,10 @@ const StudentDetailsHeader: FC = () => {
   const [showShare, setShowShare] = useState<boolean>(false);
 
   return (
-    <div className="bg-surface-2 flex flex-col gap-6 px-5 py-4 md:flex-row">
+    <div
+      className="bg-surface-container flex flex-col gap-6 px-5 py-4
+        md:flex-row"
+    >
       <div>
         <Avatar className="!h-14 !w-14" />
       </div>
