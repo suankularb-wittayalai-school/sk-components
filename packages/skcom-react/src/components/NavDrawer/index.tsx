@@ -79,11 +79,11 @@ export function NavDrawer({
     };
   }, []);
 
-  // Focus on first link
+  // Focus on the selected link
   React.useEffect(() => {
     if (open) {
       const navDrawerItem = document.querySelector<HTMLAnchorElement>(
-        ".skc-nav-drawer-item"
+        ".skc-nav-drawer-item--selected"
       );
       navDrawerItem?.focus();
     }
