@@ -16,9 +16,9 @@
     var(--easing-standard)
   );
   position: relative;
-  display: flex;
+  display: grid;
   align-items: center;
-  flex-direction: row;
+  grid-template-columns: 2.5rem 1fr;
   gap: 0.25rem;
   padding-inline: 0.5rem;
   border-radius: var(--rounded-xl);
