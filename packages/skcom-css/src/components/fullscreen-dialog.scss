@@ -88,13 +88,13 @@
     height: initial;
     transform: translate(-50%, -50%);
     border-radius: var(--rounded-xl);
-    background-color: var(--surface-3);
+    background-color: var(--surface-container-high);
   }
 
   .skc-fullscreen-dialog__top-app-bar {
     position: static;
     padding-inline: 0.75rem;
-    background-color: var(--surface-3);
+    background-color: var(--surface-container-high);
   }
 
   .skc-fullscreen-dialog__content {

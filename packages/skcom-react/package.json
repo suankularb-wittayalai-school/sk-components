@@ -13,7 +13,7 @@
     "configs": "^1.0.0",
     "eslint": "^8.57.0",
     "react": "^18.2.0",
-    "tsup": "^6.7.0",
+    "tsup": "^6.6.0",
     "typescript": "^5.4.2"
   },
   "peerDependencies": {

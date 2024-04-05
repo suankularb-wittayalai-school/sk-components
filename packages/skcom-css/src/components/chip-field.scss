@@ -37,22 +37,10 @@
 }
 
 // Contextual adaptations
-.skc-dialog,
-.skc-full-screen-dialog,
-.skc-page-header,
-.skc-card--filled {
-  .skc-chip-field__label {
-    background-color: var(--surface-5);
-  }
-}
-
 .skc-chip-field__label {
-  .skc-dialog & {
-    background-color: var(--surface-3);
-  }
-
-  .skc-page-header & {
-    background-color: var(--surface-5);
+  .skc-dialog &,
+  .skc-full-screen-dialog & {
+    background-color: var(--surface-container-high);
   }
 
   .skc-card--filled & {
@@ -151,6 +139,6 @@
   }
 
   .skc-fullscreen-dialog .skc-chip-field__label {
-    background-color: var(--surface-3);
+    background-color: var(--surface-container-high);
   }
 }

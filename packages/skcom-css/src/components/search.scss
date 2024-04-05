@@ -16,13 +16,13 @@
     var(--easing-standard)
   );
   position: relative;
-  display: flex;
+  display: grid;
   align-items: center;
-  flex-direction: row;
+  grid-template-columns: 2.5rem 1fr;
   gap: 0.25rem;
   padding-inline: 0.5rem;
   border-radius: var(--rounded-xl);
-  background-color: var(--surface-3);
+  background-color: var(--surface-container-high);
 
   &::before {
     @include mix.state-layer();
@@ -93,7 +93,7 @@
   min-height: 4.5rem;
   padding-block: 0.5rem;
   border-radius: 0 0 var(--rounded-xl) var(--rounded-xl);
-  background-color: var(--surface-3);
+  background-color: var(--surface-container-high);
 
   .skc-list {
     gap: 0.25rem;

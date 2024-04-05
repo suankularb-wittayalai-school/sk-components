@@ -24,7 +24,11 @@ const StudentDetails: FC = () => {
   return (
     <ContentLayout>
       {/* General information section */}
-      <Section sectionAttr={{ "aria-label": "General information" }}>
+      <Section
+        element={(props) => (
+          <section aria-label="General information" {...props} />
+        )}
+      >
         <Header level={3} className="sr-only">
           General information
         </Header>
@@ -134,7 +138,11 @@ const StudentDetails: FC = () => {
         </Columns>
       </Section>
 
-      <Section sectionAttr={{ "aria-label": "Request private info" }}>
+      <Section
+        element={(props) => (
+          <section aria-label="Request private info" {...props} />
+        )}
+      >
         <Text type="body-medium">
           As a teacher, you can request access to various private information of
           a student, from their citizen ID to their vaccination history.
