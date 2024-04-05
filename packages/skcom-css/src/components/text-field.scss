@@ -219,7 +219,7 @@
 .skc-page-header,
 .skc-card--filled {
   .skc-text-field--filled {
-    background-color: var(--surface-1);
+    background-color: var(--surface-container-highest);
 
     &::before {
       background-color: var(--outline);
@@ -229,11 +229,7 @@
 
 .skc-text-field--outlined .skc-text-field__label {
   .skc-dialog & {
-    background-color: var(--surface-3);
-  }
-
-  .skc-page-header & {
-    background-color: var(--surface-5);
+    background-color: var(--surface-container-high);
   }
 
   .skc-card--filled & {
@@ -328,6 +324,6 @@
 
 @include mix.breakpoint("sm") {
   .skc-fullscreen-dialog .skc-text-field--outlined .skc-text-field__label {
-    background-color: var(--surface-3);
+    background-color: var(--surface-container-high);
   }
 }
