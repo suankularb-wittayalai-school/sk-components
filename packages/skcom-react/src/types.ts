@@ -1,35 +1,42 @@
-// External libraries
 import { ColumnDef } from "@tanstack/react-table";
-import React from "react";
+import {
+  CSSProperties,
+  ComponentProps,
+  FC,
+  FunctionComponent,
+  ReactHTML,
+} from "react";
+import TableCell from "./components/TableCell";
 
-// Internal components
-import { TableCell, TableCellProps } from "./components/TableCell";
+export type StylableFC<T extends object = {}> = FC<
+  T & {
+    /**
+     * The element of the most relevant underlying element.
+     *
+     * - Optional.
+     */
+    element?: keyof ReactHTML | FunctionComponent<any>;
+
+    /**
+     * `className` on the most relevant underlying attribute.
+     *
+     * - Optional.
+     */
+    className?: string;
+
+    /**
+     * `style` on the most relevant underlying attribute.
+     *
+     * - Optional.
+     */
+    style?: CSSProperties;
+  }
+>;
 
 /**
- * Global attributes for all SK Components.
+ * A language code supported by SK Components.
  */
-export interface SKComponent {
-  /**
-   * The element of the most relevant underlying element.
-   *
-   * - Optional.
-   */
-  element?: keyof React.ReactHTML | React.FunctionComponent<any>;
-
-  /**
-   * `className` on the most relevant underlying attribute.
-   *
-   * - Optional.
-   */
-  className?: string;
-
-  /**
-   * `style` on the most relevant underlying attribute.
-   *
-   * - Optional.
-   */
-  style?: React.CSSProperties;
-}
+export type LangCode = "en-US" | "th";
 
 /**
  * An extended version of Tanstack Table’s `ColumnDef`, used to define a
@@ -42,14 +49,16 @@ export type DataTableColumnDef<T = any> = ColumnDef<T> &
      *
      * @see {@link TableCell}
      */
-    thAttr: Partial<TableCellProps>;
+    thAttr: Partial<ComponentProps<typeof TableCell>>;
 
     /**
      * Props for the content Table Cell.
      *
      * @see {@link TableCell}
      */
-    tdAttr: Partial<TableCellProps> | ((row: T) => Partial<TableCellProps>);
+    tdAttr:
+      | Partial<ComponentProps<typeof TableCell>>
+      | ((row: T) => Partial<ComponentProps<typeof TableCell>>);
 
     /**
      * A custom render function.

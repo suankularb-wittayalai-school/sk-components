@@ -44,7 +44,7 @@ const ContactCard: FC<{
       direction="row"
       stateLayerEffect
       href={href}
-      aAttr={{ target: "_blank", rel: "noreferrer" }}
+      element={(props) => <a {...props} target="_blank" rel="noreferrer" />}
     >
       <CardHeader
         avatar={<Avatar>{avatarMap[type]}</Avatar>}

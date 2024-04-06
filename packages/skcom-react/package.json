@@ -6,6 +6,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
+  "dependencies": {
+    "radash": "^11.0.0"
+  },
   "devDependencies": {
     "@suankularb-components/css": "^3.2.3",
     "@types/react": "^18.2.67",
@@ -46,8 +49,5 @@
   "bugs": {
     "url": "https://github.com/suankularb-wittayalai-school/sk-components/issues"
   },
-  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme",
-  "dependencies": {
-    "radash": "^11.0.0"
-  }
+  "homepage": "https://github.com/suankularb-wittayalai-school/sk-components#readme"
 }

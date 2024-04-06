@@ -1,84 +1,31 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/data-table-filters.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-
-/**
- * Props for {@link DataTableFilters Table Body}.
- */
-export interface DataTableFiltersProps extends SKComponent {
-  /**
-   * A set of Filter Chips responsible for filterring the Data Table.
-   *
-   * - Must be a Chip Set, which must consist of Filter Chips.
-   * - Always required.
-   */
-  children: React.ReactNode;
-
-  /**
-   * Allows for translation of the accessibility labels.
-   *
-   * - Must be `th` or `en-US`, as SKCom currently only support those 2
-   *   languages.
-   * - Optional.
-   */
-  locale?: "en-US" | "th";
-
-  /**
-   * Triggers when the overflow icon is clicked. If defined, an overflow icon
-   * appears on the right.
-   *
-   * - Optional.
-   */
-  onOverflowToggle?: () => any;
-
-  /**
-   * The overflow Menu of the parent Data Table. The value of `overflow` is
-   * shown on click.
-   *
-   * - Must be a Menu.
-   * - Optional.
-   */
-  overflow?: JSX.Element;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
-}
+import MaterialIcon from "../MaterialIcon";
 
 /**
  * Allows the user to filter the Data Table’s content by selecting from a list
  * of filters.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ujyeoxol3cjz SKCom documentation}
- *
- * @param children A set of Filter Chips responsible for filterring the Data Table.
- * @param locale Allows for translation of the accessibility labels.
- * @param onOverflowToggle Triggers when the overflow icon is clicked.
- * @param overflow The overflow Menu of the parent Data Table.
+ * @param children A set of Filter Chips responsible for filtering the Data Table.
  */
-export function DataTableFilters({
-  children,
-  locale,
-  onOverflowToggle,
-  overflow,
-  style,
-  className,
-}: DataTableFiltersProps) {
+const DataTableFilters: StylableFC<{
+  /**
+   * A set of Filter Chips responsible for filtering the Data Table.
+   *
+   * - Must be a Chip Set, which must consist of Filter Chips.
+   * - Always required.
+   */
+  children: ReactNode;
+
+  /**
+   * This prop is not supported by this component.
+   */
+  element?: never;
+}> = ({ children, style, className }) => {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -86,7 +33,7 @@ export function DataTableFilters({
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
-      className={cn(["skc-data-table-filters", className])}
+      className={cn("skc-data-table-filters", className)}
     >
       {/* Icon */}
       <div className="skc-data-table-filters__icon">
@@ -95,21 +42,10 @@ export function DataTableFilters({
 
       {/* Chip Set */}
       {children}
-
-      {/* Overflow */}
-      {onOverflowToggle && (
-        <div className="skc-data-table-filters__overflow">
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="more_vert" />}
-            alt={locale === "th" ? "เปิดเมนูเพิ่มเติม" : "Toggle overflow menu"}
-            onClick={onOverflowToggle}
-          />
-          {overflow}
-        </div>
-      )}
     </motion.div>
   );
-}
+};
 
 DataTableFilters.displayName = "DataTableFilters";
+
+export default DataTableFilters;

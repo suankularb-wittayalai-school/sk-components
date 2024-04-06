@@ -1,31 +1,37 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { MaterialIcon } from "../MaterialIcon";
-import { Menu } from "../Menu";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/table-cell.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import {
+  Children,
+  ComponentProps,
+  ReactNode,
+  cloneElement,
+  createElement,
+  useRef,
+  useState,
+} from "react";
+import { StylableFC } from "../../types";
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import MaterialIcon from "../MaterialIcon";
+import Menu from "../Menu";
 
 /**
- * Props for {@link TableCell Table Body}.
+ * A cell of a Table.
+ *
+ * @param children The content of the cell.
+ * @param header If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
+ * @param align How the Buttons should be positioned. It can be aligned to the left, the center (default), or the right.
+ * @param menu An inline menu. This is useful for editable tables.
+ * @param onMenuToggle Triggers on click if defined.
+ * @param tdAttr Attributes for the underlying `<td>` element.
  */
-export interface TableCellProps extends SKComponent {
+const TableCell: StylableFC<{
   /**
    * The content of the cell.
    *
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
@@ -52,6 +58,7 @@ export interface TableCellProps extends SKComponent {
 
   /**
    * Triggers on click if defined.
+   *
    * - If this is defined, a dropdown button appears.
    * - Optional.
    */
@@ -62,53 +69,39 @@ export interface TableCellProps extends SKComponent {
    *
    * - Optional.
    */
-  tdAttr?: React.ComponentProps<"td" | "th">;
-}
-
-/**
- * A cell of a Table.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.l8x24yc18c9b SKCom documentation}
- *
- * @param children The content of the cell.
- * @param header If the cell is a header cell, Table Cell will use `<th>` instead of `<td>`.
- * @param align How the Buttons should be positioned. It can be aligned to the left, the center (default), or the right.
- * @param menu An inline menu. This is useful for editable tables.
- * @param onMenuToggle Triggers on click if defined.
- * @param tdAttr Attributes for the underlying `<td>` element.
- */
-export function TableCell({
+  tdAttr?: ComponentProps<"td" | "th">;
+}> = ({
   children,
   header,
-  align,
+  align = "center",
   menu,
   onMenuToggle,
   tdAttr,
   element,
   style,
   className,
-}: TableCellProps) {
+}) => {
   // Ripple setup
-  const toggleRef = React.useRef(null);
+  const toggleRef = useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(toggleRef);
 
   // Menu
-  const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  return React.createElement(
+  return createElement(
     element || header ? "th" : "td",
     {
       style,
-      className: cn([
+      className: cn(
         "skc-table-cell",
         header && "skc-table-cell--header",
-        align === "left"
-          ? "skc-table-cell--left"
-          : align === "right"
-          ? "skc-table-cell--right"
-          : "skc-table-cell--center",
+        {
+          left: "skc-table-cell--left",
+          center: "skc-table-cell--center",
+          right: "skc-table-cell--right",
+        }[align],
         className,
-      ]),
+      ),
       ...rippleListeners,
       ...tdAttr,
     },
@@ -119,7 +112,7 @@ export function TableCell({
           ref={toggleRef}
           className="skc-table-cell__menu-toggle"
           onClick={() => {
-            if (onMenuToggle) onMenuToggle();
+            onMenuToggle?.();
             setMenuOpen(!menuOpen);
           }}
         >
@@ -138,29 +131,28 @@ export function TableCell({
         </div>
 
         {/* Menu */}
-        {React.cloneElement(
+        {cloneElement(
           <Menu>
-            {React.Children.map(menu.props.children, (menuItem) =>
+            {Children.map(menu.props.children, (menuItem) =>
               // Menu Item
-              React.cloneElement(menuItem, {
+              cloneElement(menuItem, {
                 onClick: () => {
                   const { onClick } = menuItem.props;
-                  if (onClick) onClick();
+                  onClick?.();
                   setMenuOpen(false);
                 },
-              })
+              }),
             )}
           </Menu>,
-          {
-            open: menuOpen,
-            onBlur: () => setMenuOpen(false),
-          }
+          { pen: menuOpen, onBlur: () => setMenuOpen(false) },
         )}
       </>
     ) : (
       <div className="skc-table-cell__content">{children}</div>
-    )
+    ),
   );
-}
+};
 
 TableCell.displayName = "TableCell";
+
+export default TableCell;

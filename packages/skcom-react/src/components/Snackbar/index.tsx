@@ -1,27 +1,33 @@
-// External libraries
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/snackbar.css";
-
-// Utilities
+import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, cloneElement } from "react";
+import { StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Snackbar}.
+ * Snackbar briefly shows low priority information that does not require
+ * action, as opposed to Dialog. It can inform the user about ongoing processes
+ * or an event that has just been completed.
+ *
+ * Note that Snackbar, as per SKCom’s principles, does not do state management
+ * on its own. Use the `children`, `open`, `onClose`, and `onExitComplete`
+ * props with your own state management solution.
+ *
+ * @param children The message inside the Snackbar.
+ * @param action A Snackbar can contain 1 action. Pressing this action closes the Snackbar.
+ * @param stacked Put the message (`children`) above the action (`action`).
+ * @param open If the Snackbar is open and visible.
+ * @param onClose Triggers when the close Button is pressed.
+ * @param onExitComplete Triggers after the Snackbar has completely exited the screen.
  */
-export interface SnackbarProps extends SKComponent {
+const Snackbar: StylableFC<{
   /**
    * The message inside the Snackbar.
    *
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * A Snackbar can contain 1 action. Pressing this action closes the Snackbar.
@@ -66,27 +72,7 @@ export interface SnackbarProps extends SKComponent {
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * Snackbar briefly shows low priority information that does not require
- * action, as opposed to Dialog. It can inform the user about ongoing processes
- * or an event that has just been completed.
- *
- * Note that Snackbar, as per SKCom’s principles, does not do state management
- * on its own. Use the `children`, `open`, `onClose`, and `onExitComplete`
- * props with your own state management solution.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation}
- *
- * @param children The message inside the Snackbar.
- * @param action A Snackbar can contain 1 action. Pressing this action closes the Snackbar.
- * @param stacked Put the message (`children`) above the action (`action`).
- * @param open If the Snackbar is open and visible.
- * @param onClose Triggers when the close Button is pressed.
- * @param onExitComplete Triggers after the Snackbar has completely exited the screen.
- */
-export function Snackbar({
+}> = ({
   children,
   action,
   stacked,
@@ -95,7 +81,7 @@ export function Snackbar({
   onExitComplete,
   style,
   className,
-}: SnackbarProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -112,25 +98,25 @@ export function Snackbar({
               y: 20,
               transition: transition(
                 duration.short2,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium2, easing.standardDecelerate)}
             style={style}
-            className={cn([
+            className={cn(
               "skc-snackbar",
               stacked && "skc-snackbar--stacked",
               className,
-            ])}
+            )}
           >
             <span className="skc-snackbar__label">{children}</span>
             {action && (
               <div className="skc-snackbar__action">
-                {React.cloneElement(action as JSX.Element, {
+                {cloneElement(action as JSX.Element, {
                   onClick: () => {
-                    if (onClose) onClose();
+                    onClose?.();
                     const { onClick } = action.props;
-                    if (onClick) onClick();
+                    onClick?.();
                   },
                 })}
               </div>
@@ -140,6 +126,8 @@ export function Snackbar({
       </AnimatePresence>
     </aside>
   );
-}
+};
 
 Snackbar.displayName = "Snackbar";
+
+export default Snackbar;

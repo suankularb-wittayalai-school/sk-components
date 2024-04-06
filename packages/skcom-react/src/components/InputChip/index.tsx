@@ -1,24 +1,31 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { Interactive } from "../Interactive";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/input-chip.css";
-
-// Utilities
+import { Ref, useEffect, useRef, useState } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
+import Button from "../Button";
+import Interactive from "../Interactive";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link InputChip Input Chip}.
+ * A Chip displaying a piece of information entered by the user is an Input
+ * Chip. This type of Chip can be added, edited, and deleted by the user.
+ *
+ * Like all Chips, an Input Chip appears alongside other Input Chips, but these
+ * can also appear inside a text field like in Chip Field.
+ *
+ * @param children The text displayed inside the chip.
+ * @param avatar An avatar is placed before all content in an Input Chip.
+ * @param icon An icon can appear before all content in an Input Chip. In a page with many chips, icons can quickly orient users.
+ * @param selected If the Input Chip is selected. `avatar` is replaced with a checkmark if this is `true`.
+ * @param onClick Triggers when the user click anywhere in the Input Chip except the delete button.
+ * @param href The URL of the page this Input Chip leads to, similar to `href` on `<a>`.
+ * @param onDelete Triggers when the user click the delete button.
+ * @param editable If the Input Chip can be edited, clicking on it revert it back to the original text, which can be edited normally.
+ * @param value The value inside the field that appears after entering edit mode. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param onEditExit Triggers when the user exit edit mode.
  */
-export interface InputChipProps extends SKComponent {
+const InputChip: StylableFC<{
   /**
    * The text displayed inside the chip.
    *
@@ -52,18 +59,12 @@ export interface InputChipProps extends SKComponent {
    * If the Input Chip is selected. `avatar` is replaced with a checkmark if
    * this is `true`.
    *
-   * - Material Guidelines and the
-   *   {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?pli=1#heading=h.szjgl74eta6e guidelines on Chip Field}
-   *   recommend selecting the Input Chip set to be deleted via backspace,
-   *   requiring another backspace to confirm.
+   * - Material Guidelines and the guidelines on Chip Field recommend selecting
+   *   the Input Chip set to be deleted via backspace, requiring another
+   *   backspace to confirm.
    * - Optional.
    */
   selected?: boolean;
-
-  /**
-   * @deprecated Use the `element` prop instead.
-   */
-  layoutID?: any;
 
   /**
    * Triggers when the user click anywhere in the Input Chip except the delete
@@ -128,30 +129,7 @@ export interface InputChipProps extends SKComponent {
    * - Optional.
    */
   onEditExit?: () => any;
-}
-
-/**
- * A Chip displaying a piece of information entered by the user is an Input
- * Chip. This type of Chip can be added, edited, and deleted by the user.
- *
- * Like all Chips, an Input Chip appears alongside other Input Chips, but these
- * can also appear inside a text field like in Chip Field.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
- *
- * @param children The text displayed inside the chip.
- * @param avatar An avatar is placed before all content in an Input Chip.
- * @param icon An icon can appear before all content in an Input Chip. In a page with many chips, icons can quickly orient users.
- * @param selected If the Input Chip is selected. `avatar` is replaced with a checkmark if this is `true`.
- * @param onClick Triggers when the user click anywhere in the Input Chip except the delete button.
- * @param href TODO
- * @param onDelete Triggers when the user click the delete button.
- * @param editable If the Input Chip can be edited, clicking on it revert it back to the original text, which can be edited normally.
- * @param value The value inside the field that appears after entering edit mode. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user make changes to the field value.
- * @param onEditExit Triggers when the user exit edit mode.
- */
-export function InputChip({
+}> = ({
   children,
   avatar,
   icon,
@@ -166,10 +144,10 @@ export function InputChip({
   element,
   style,
   className,
-}: InputChipProps) {
+}) => {
   // Editable Chip logic
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
-  const [editing, setEditing] = React.useState<boolean>(false);
+  const inputRef: Ref<HTMLInputElement> = useRef(null);
+  const [editing, setEditing] = useState<boolean>(false);
 
   /**
    * Expand an `<input>` to just a little longer then required to fit the
@@ -183,7 +161,7 @@ export function InputChip({
   }
 
   // Entering and exiting edit mode
-  React.useEffect(() => {
+  useEffect(() => {
     if (editing) {
       const input = inputRef.current;
       if (!input) return;
@@ -192,9 +170,9 @@ export function InputChip({
     } else if (onEditExit) onEditExit();
   }, [editing]);
 
-  return (
-    // Edit mode
-    editing ? (
+  // Edit mode
+  if (editing)
+    return (
       <input
         ref={inputRef}
         className="skc-input-chip__input"
@@ -209,52 +187,55 @@ export function InputChip({
           if (["Enter", "Escape"].indexOf(event.key) !== -1) setEditing(false);
         }}
       />
-    ) : (
-      // Default mode
-      <Interactive
-        stateLayerEffect={Boolean(editable || onClick)}
-        rippleEffect={Boolean(editable || onClick)}
-        onClick={
-          editable || onClick
-            ? () => {
-                if (onClick) onClick();
-                if (editable) setEditing(true);
-              }
-            : undefined
-        }
-        href={href}
-        element={element}
-        style={style}
-        className={cn([
-          "skc-input-chip",
-          selected && "skc-input-chip--selected",
-          className,
-        ])}
-      >
-        {/* Avatar */}
-        {avatar && (
-          <div className="skc-input-chip__avatar">
-            {selected ? <MaterialIcon icon="done" /> : avatar}
-          </div>
-        )}
+    );
 
-        {/* Icon */}
-        {icon && <div className="skc-input-chip__icon">{icon}</div>}
+  // Default mode
+  return (
+    <Interactive
+      stateLayerEffect={Boolean(editable || onClick)}
+      rippleEffect={Boolean(editable || onClick)}
+      onClick={
+        editable || onClick
+          ? () => {
+              onClick?.();
+              if (editable) setEditing(true);
+            }
+          : undefined
+      }
+      href={href}
+      element={element}
+      style={style}
+      className={cn(
+        "skc-input-chip",
+        selected && "skc-input-chip--selected",
+        className,
+      )}
+    >
+      {/* Avatar */}
+      {avatar && (
+        <div className="skc-input-chip__avatar">
+          {selected ? <MaterialIcon icon="done" /> : avatar}
+        </div>
+      )}
 
-        {/* Label */}
-        <span className="skc-input-chip__label">{children}</span>
+      {/* Icon */}
+      {icon && <div className="skc-input-chip__icon">{icon}</div>}
 
-        {/* Delete Button */}
-        {onDelete && (
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="close" />}
-            onClick={onDelete}
-          />
-        )}
-      </Interactive>
-    )
+      {/* Label */}
+      <span className="skc-input-chip__label">{children}</span>
+
+      {/* Delete Button */}
+      {onDelete && (
+        <Button
+          appearance="text"
+          icon={<MaterialIcon icon="close" />}
+          onClick={onDelete}
+        />
+      )}
+    </Interactive>
   );
-}
+};
 
 InputChip.displayName = "InputChip";
+
+export default InputChip;

@@ -1,19 +1,17 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/form-group.css";
-
-// Utilities
+import { ComponentProps, ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link FormGroup Form Group}.
+ * A group of related form items, like options in a radio group.
+ *
+ * @param children Form Items within this group, be it a set of options to choose from or related settings in a preferences page.
+ * @param label The legend for the entire field.
+ * @param alt A description of the Form Group for screen readers, similar to `alt` on `<img>`.
+ * @param legendAttr Attributes for the underlying `<legend>` element used as the field.
  */
-export interface FormGroupProps extends SKComponent {
+const FormGroup: StylableFC<{
   /**
    * Form Items within this group, be it a set of options to choose from or
    * related settings in a preferences page.
@@ -21,7 +19,7 @@ export interface FormGroupProps extends SKComponent {
    * - Must only be Form Items.
    * - Always required.
    */
-  children?: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The legend for the entire group.
@@ -45,40 +43,31 @@ export interface FormGroupProps extends SKComponent {
    *
    * - Optional.
    */
-  legendAttr?: React.ComponentProps<"legend">;
-}
-
-/**
- * A group of related form items, like options in a radio group.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children Form Items within this group, be it a set of options to choose from or related settings in a preferences page.
- * @param label The legend for the entire field.
- * @param alt A description of the Form Group for screen readers, similar to `alt` on `<img>`.
- * @param legendAttr Attributes for the underlying `<legend>` element used as the field.
- */
-export function FormGroup({
+  legendAttr?: ComponentProps<"legend">;
+}> = ({
   children,
   label,
   alt,
   legendAttr,
-  element,
+  element: Element = "fieldset",
   style,
   className,
-}: FormGroupProps) {
-  return React.createElement(
-    element || "fieldset",
-    { "aria-label": alt, style, className: cn(["skc-form-group", className]) },
-
-    // Label
+}) => (
+  <Element
+    aria-label={alt}
+    style={style}
+    className={cn(`skc-form-group`, className)}
+  >
+    {/* Label */}
     <legend className="skc-form-group__label" {...legendAttr}>
       {label}
-    </legend>,
+    </legend>
 
-    // Input
-    children
-  );
-}
+    {/* Input */}
+    {children}
+  </Element>
+);
 
 FormGroup.displayName = "FormGroup";
+
+export default FormGroup;

@@ -1,20 +1,18 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/dialog-header.css";
-
-// Utilities
+import { dash } from "radash";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
- * Props for {@link DialogHeader Dialog Header}.
+ * The top part of a Dialog. It contains a hero icon, a title, and a
+ * description.
+ *
+ * @param icon The hero icon shown above the title text (`title`).
+ * @param title The title text.
+ * @param desc Complements the title text or succinctly presents the purpose of the Dialog.
+ * @param alt A description of the Dialog Header for screen readers, similar to `alt` on `<img>`.
  */
-export interface DialogHeaderProps extends SKComponent {
+const DialogHeader: StylableFC<{
   /**
    * The hero icon shown above the title text (`title`).
    *
@@ -40,7 +38,7 @@ export interface DialogHeaderProps extends SKComponent {
    *
    * - Always required.
    */
-  desc: string | JSX.Element;
+  desc?: string | JSX.Element;
 
   /**
    * A description of the Dialog Header for screen readers, similar to
@@ -51,28 +49,16 @@ export interface DialogHeaderProps extends SKComponent {
    *   - `desc` is a JSX Element and title is undefined.
    */
   alt?: string;
-}
-
-/**
- * A row of Buttons. DialogHeader handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param icon The hero icon shown above the title text (`title`).
- * @param title The title text.
- * @param desc Complements the title text or succinctly presents the purpose of the Dialog.
- * @param alt A description of the Dialog Header for screen readers, similar to `alt` on `<img>`.
- */
-export function DialogHeader({
+}> = ({
   icon,
   title,
   desc,
   alt,
-  element,
+  element: Element = "div",
   style,
   className,
-}: DialogHeaderProps) {
-  const dialogID = `dialog-${kebabify(
+}) => {
+  const dialogID = `dialog-${dash(
     // Use `title` if defined
     (title
       ? // Use `title` if is not JSX Element
@@ -81,35 +67,36 @@ export function DialogHeader({
         : // Otherwise, use `alt`
           alt
       : // If `title` is not defined, use `desc`
-      typeof desc === "string"
-      ? desc
-      : // Otherwise, use `alt`
-        alt)!
+        typeof desc === "string"
+        ? desc
+        : // Otherwise, use `alt`
+          alt)!,
   )}`;
 
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-dialog-header", className]) },
+  return (
+    <Element style={style} className={cn("skc-dialog-header", className)}>
+      {/* Icon */}
+      {icon && <div className="skc-dialog-header__icon">{icon}</div>}
 
-    // Icon
-    icon && <div className="skc-dialog-header__icon">{icon}</div>,
+      {/* Title */}
+      {title && (
+        <h2 aria-label={alt} id={`${dialogID}-title`}>
+          {title}
+        </h2>
+      )}
 
-    // Title
-    title && (
-      <h2 aria-label={alt} id={`${dialogID}-title`}>
-        {title}
-      </h2>
-    ),
-
-    // Description
-    <p
-      // Only use `alt` as label here if `title` is undefined
-      aria-label={!title ? alt : undefined}
-      id={`${dialogID}-desc`}
-    >
-      {desc}
-    </p>
+      {/* Description */}
+      <p
+        // Only use `alt` as label here if `title` is undefined
+        aria-label={!title ? alt : undefined}
+        id={`${dialogID}-desc`}
+      >
+        {desc}
+      </p>
+    </Element>
   );
-}
+};
 
 DialogHeader.displayName = "DialogHeader";
+
+export default DialogHeader;

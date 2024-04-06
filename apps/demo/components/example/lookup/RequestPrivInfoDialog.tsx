@@ -1,5 +1,5 @@
 // External libraries
-import { FC, useContext, useState } from "react";
+import { ComponentProps, FC, useContext, useState } from "react";
 
 // SK Components
 import {
@@ -11,7 +11,6 @@ import {
   FilterChip,
   FormItem,
   FullscreenDialog,
-  FullscreenDialogProps,
   InputChip,
   Snackbar,
   TextField,
@@ -33,7 +32,7 @@ type PrivateDetail =
   | "blood-group";
 
 const RequestPrivInfoDialog: FC<
-  Pick<FullscreenDialogProps, "open" | "onClose">
+  Pick<ComponentProps<typeof FullscreenDialog>, "open" | "onClose">
 > = ({ open, onClose }) => {
   const [form, setForm] = useState({
     purpose: "",
@@ -125,7 +124,7 @@ const RequestPrivInfoDialog: FC<
                 <FilterChip
                   key={detail.value}
                   selected={form.details.includes(
-                    detail.value as PrivateDetail
+                    detail.value as PrivateDetail,
                   )}
                   onClick={() =>
                     setForm({

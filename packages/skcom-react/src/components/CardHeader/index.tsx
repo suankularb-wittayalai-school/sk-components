@@ -1,24 +1,26 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-import { Menu } from "../Menu";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/card-header.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link CardHeader Card Header}.
+ * The header of a Card. Sometimes all a Card needs is a Card Header.
+ *
+ * @param children Trailing content placed after all content in a Card Header.
+ * @param avatar An avatar is placed before all content in a Card Header.
+ * @param icon An icon can appear before all content in a Card Header.
+ * @param title The most predominant text inside a Card.
+ * @param subtitle A short text complementing the title text.
  */
-export interface CardHeaderProps extends SKComponent {
+const CardHeader: StylableFC<{
+  /**
+   * Trailing content placed after all content in a Card Header. A use case
+   * would be an overflow Menu or a set of Buttons.
+   *
+   * - Optional.
+   */
+  children?: ReactNode;
+
   /**
    * An avatar is placed before all content in a Card Header. A use case would
    * be the profile picture of a user.
@@ -52,84 +54,36 @@ export interface CardHeaderProps extends SKComponent {
    * - Optional.
    */
   subtitle?: string | JSX.Element;
-
-  /**
-   * The overflow Menu of this Card. If defined, an overflow icon appears on
-   * the right. The value of `overflow` is shown on click.
-   *
-   * - Must be a Menu.
-   * - Optional.
-   */
-  overflow?: JSX.Element;
-}
-
-/**
- * The header of a Card. Sometimes all a Card needs is a Card Header.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation}
- *
- * @param avatar An avatar is placed before all content in a Card Header.
- * @param icon An icon can appear before all content in a Card Header.
- * @param title The most predominant text inside a Card.
- * @param subtitle A short text complementing the title text.
- * @param overflow The overflow Menu of this Card. If defined, an overflow icon appears on the right.
- */
-export function CardHeader({
+}> = ({
+  children,
   avatar,
   icon,
   title,
   subtitle,
-  overflow,
-  element,
+  element: Element = "div",
   style,
   className,
-}: CardHeaderProps) {
-  const [showOverflow, setShowOverflow] = React.useState<boolean>(false);
+}) => (
+  <Element style={style} className={cn("skc-card-header", className)}>
+    {/* Avatar */}
+    {avatar && <div className="skc-card-header__avatar">{avatar}</div>}
 
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-card-header", className]) },
+    {/* Icon */}
+    {icon && <div className="skc-card-header__icon">{icon}</div>}
 
-    // Avatar
-    avatar && <div className="skc-card-header__avatar">{avatar}</div>,
-
-    // Icon
-    icon && <div className="skc-card-header__icon">{icon}</div>,
-
-    // Content
+    {/* Text content */}
     <div className="skc-card-header__content">
       <h3 className="skc-card-header__title">{title}</h3>
       {subtitle && (
         <span className="skc-card-header__subtitle">{subtitle}</span>
       )}
-    </div>,
+    </div>
 
-    // Overflow
-    overflow && (
-      <div className="skc-card-header__overflow">
-        <Button
-          appearance="text"
-          icon={<MaterialIcon icon="more_vert" />}
-          onClick={() => setShowOverflow(!showOverflow)}
-        />
-        <Menu
-          open={showOverflow}
-          onBlur={() => setShowOverflow(false)}
-          {...overflow.props}
-        >
-          {React.Children.map(overflow.props.children, (child) =>
-            React.cloneElement(child, {
-              onClick: () => {
-                const { onClick } = child.props;
-                if (onClick) onClick();
-                setShowOverflow(false);
-              },
-            })
-          )}
-        </Menu>
-      </div>
-    )
-  );
-}
+    {/* Trailing */}
+    {children}
+  </Element>
+);
 
 CardHeader.displayName = "CardHeader";
+
+export default CardHeader;

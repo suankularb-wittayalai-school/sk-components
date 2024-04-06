@@ -1,21 +1,17 @@
-// External libraries
-import { LayoutProps, motion } from "framer-motion";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/data-table.css";
-
-// Utilities
+import { LayoutProps, motion } from "framer-motion";
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link DataTable Data Table}.
+ * A more rich Table with support for filtering, search, and pagination; and
+ * integrates directly with Tanstack Table.
+ *
+ * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
  */
-export interface DataTableProps extends SKComponent {
+const DataTable: StylableFC<{
   /**
    * There is a set of components especially designed to be used here: Data
    * Table Search, Data Table Filters, Data Table Content, and Data Table
@@ -28,7 +24,7 @@ export interface DataTableProps extends SKComponent {
    * - If present, Data Table Pagination must be the last component.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * Configuration for
@@ -43,22 +39,7 @@ export interface DataTableProps extends SKComponent {
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * A more rich Table with support for filtering, search, and pagination; and
- * integrates directly with Tanstack Table.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.cfjy3gpzsh75 SKCom documentation}
- *
- * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
- */
-export function DataTable({
-  children,
-  layout,
-  style,
-  className,
-}: DataTableProps) {
+}> = ({ children, layout, style, className }) => {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -66,11 +47,13 @@ export function DataTable({
       layout={layout}
       transition={transition(duration.medium4, easing.standard)}
       style={{ ...style, borderRadius: 20 }}
-      className={cn(["skc-data-table", className])}
+      className={cn(`skc-data-table`, className)}
     >
       {children}
     </motion.figure>
   );
-}
+};
 
 DataTable.displayName = "DataTable";
+
+export default DataTable;

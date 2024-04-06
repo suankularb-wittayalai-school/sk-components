@@ -1,31 +1,33 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { CheckboxProps } from "../Checkbox";
-import { RadioProps } from "../Radio";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/form-item.css";
-
-// Utilities
+import { dash } from "radash";
+import { Children, ComponentProps, ReactNode, cloneElement } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
+import Checkbox from "../Checkbox";
+import Radio from "../Radio";
 
 /**
- * Props for {@link FormItem Form Item}.
+ * Props of components allowed to be the child of {@link FormItem Form Item}.
  */
-export interface FormItemProps extends SKComponent {
+type InputProps = ComponentProps<typeof Checkbox | typeof Radio>;
+
+/**
+ * A wrapper for form control components like Checkbox, Radio, and Switch with
+ * a label.
+ *
+ * @param children The input.
+ * @param label The label for the input.
+ * @param alt A description of the Form Item for screen readers, similar to `alt` on `<img>`.
+ * @param labelAttr Attributes for the underlying `<label>` element used as the field.
+ */
+const FormItem: StylableFC<{
   /**
    * The input.
    *
    * - Must be a Checkbox, Radio, or Switch.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The label for the input.
@@ -50,61 +52,55 @@ export interface FormItemProps extends SKComponent {
    *
    * - Optional.
    */
-  labelAttr?: React.ComponentProps<"label">;
-}
-
-/**
- * Props of components allowed to be the child of {@link FormItem Form Item}.
- */
-type InputProps = CheckboxProps | RadioProps;
-
-/**
- * A wrapper for form control components like Checkbox, Radio, and Switch with
- * a label.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation}
- *
- * @param children The input.
- * @param label The label for the input.
- * @param alt A description of the Form Item for screen readers, similar to `alt` on `<img>`.
- * @param labelAttr Attributes for the underlying `<label>` element used as the field.
- */
-export function FormItem({
+  labelAttr?: ComponentProps<"label">;
+}> = ({
   children,
   label,
   alt,
   labelAttr,
-  element,
+  element: Element = "div",
   style,
   className,
-}: FormItemProps) {
-  const formItemID = `form-item-${kebabify(
-    (typeof label === "string" ? label : alt)!
+}) => {
+  const formItemID = `form-item-${dash(
+    (typeof label === "string" ? label : alt)!,
   )}`;
 
-  return React.createElement(
-    element || "div",
-    { "aria-label": alt, style, className: cn(["skc-form-item", className]) },
+  return (
+    <Element
+      aria-label={alt}
+      style={style}
+      className={cn(`skc-form-item`, className)}
+    >
+      {/* Input */}
+      {cloneElement(
+        Children.only(children) as JSX.Element,
+        {
+          inputAttr: {
+            id:
+              // Attempt to use existing ID
+              ((children as JSX.Element).props as InputProps).inputAttr?.id ||
+              // Use label’s `htmlFor` if specified so label still points to the
+              // right element (see #104)
+              labelAttr?.htmlFor ||
+              // Otherwise, use the default
+              formItemID,
+          },
+        } as InputProps,
+      )}
 
-    // Input
-    React.cloneElement(React.Children.only(children) as JSX.Element, {
-      inputAttr: {
-        id:
-          // Attempt to use existing ID
-          ((children as JSX.Element).props as InputProps).inputAttr?.id ||
-          // Use label’s `htmlFor` if specified so label still points to the
-          // right element (see #104)
-          labelAttr?.htmlFor ||
-          // Otherwise, use the default
-          formItemID,
-      },
-    } satisfies InputProps),
-
-    // Label
-    <label htmlFor={formItemID} className="skc-form-item__label" {...labelAttr}>
-      {label}
-    </label>
+      {/* Label */}
+      <label
+        htmlFor={formItemID}
+        className="skc-form-item__label"
+        {...labelAttr}
+      >
+        {label}
+      </label>
+    </Element>
   );
-}
+};
 
 FormItem.displayName = "FormItem";
+
+export default FormItem;

@@ -1,26 +1,23 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/header.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Header}.
+ * The title of a Section.
+ *
+ * @param children The text of the Header.
+ * @param level The level of the Header. The number corresponds to an HTML header element.
+ * @param icon An icon can appear before the text (`children`) in a Header.
  */
-export interface HeaderProps extends SKComponent {
+const Header: StylableFC<{
   /**
    * Header contains Buttons. You can put as many Buttons inside Header as
    * needed, but the recommended limit is 3.
    *
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The level of the Header. The number corresponds to an HTML header element,
@@ -40,37 +37,17 @@ export interface HeaderProps extends SKComponent {
    * - Optional.
    */
   icon?: JSX.Element;
+}> = ({ children, level, icon, element, style, className }) => {
+  const Element = element || (level ? "h" + level : "h2");
 
-  /**
-   * @deprecated Use `element` instead.
-   */
-  hAttr?: React.HTMLAttributes<HTMLHeadingElement>;
-}
-
-/**
- * A row of Buttons. Header handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation}
- *
- * @param children The text of the Header.
- * @param level The level of the Header. The number corresponds to an HTML header element.
- * @param icon An icon can appear before the text (`children`) in a Header.
- */
-export function Header({
-  children,
-  level,
-  icon,
-  element,
-  style,
-  className,
-}: HeaderProps) {
-  return React.createElement(
-    element || (level ? "h" + level : "h2"),
-    { style, className: cn(["skc-header", className]) },
-
-    icon && <span className="skc-header__icon">{icon}</span>,
-    <span className="skc-header__text">{children}</span>
+  return (
+    <Element className={cn(`skc-header`, className)} style={style}>
+      {icon && <span className="skc-header__icon">{icon}</span>}
+      <span className="skc-header__text">{children}</span>
+    </Element>
   );
-}
+};
 
 Header.displayName = "Header";
+
+export default Header;

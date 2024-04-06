@@ -1,24 +1,23 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/checkbox.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import { ComponentProps, Ref, useRef } from "react";
+import { StylableFC } from "../../types";
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link Checkbox}.
+ * A choice from a multi-select set of choices. When alone, a Checkbox is
+ * usually used for acknowledgement of or agreement to something, like a terms
+ * and conditions.
+ *
+ * @param value The state of the Checkbox. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the Checkbox.
+ * @param disabled Turns the Checkbox gray and block any action associated with it.
+ * @param tristate Allows the Checkbox to have 3 states: off, on, and indeterminate.
+ * @param inputAttr Attributes for the underlying `<input>` element.
  */
-export interface CheckboxProps extends SKComponent {
+const Checkbox: StylableFC<{
   /**
    * The state of the Checkbox. This is useful if you want a controlled input.
    *
@@ -58,46 +57,32 @@ export interface CheckboxProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: React.ComponentProps<"input">;
-}
-
-/**
- * A choice from a multi-select set of choices. When alone, a Checkbox is
- * usually used for acknowledgement of or agreement to something, like a terms
- * and conditions.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.cy04od1b0wro SKCom documentation}
- *
- * @param value The state of the Checkbox. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user toggles the Checkbox.
- * @param disabled Turns the Checkbox gray and block any action associated with it.
- * @param tristate Allows the Checkbox to have 3 states: off, on, and indeterminate.
- * @param inputAttr Attributes for the underlying `<input>` element.
- */
-export function Checkbox({
+  inputAttr?: ComponentProps<"input">;
+}> = ({
   value,
   onChange,
   tristate,
   disabled,
   inputAttr,
+  element: Element = "label",
   style,
   className,
-}: CheckboxProps) {
+}) => {
   // Ripple setup
-  const rippleParentRef: React.LegacyRef<HTMLDivElement> = React.useRef(null);
+  const rippleParentRef: Ref<HTMLDivElement> = useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } =
     useRipple(rippleParentRef);
 
   return (
-    <label
+    <Element
       style={style}
-      className={cn([
+      className={cn(
         "skc-checkbox",
         value === true && "skc-checkbox--selected",
         value === null && tristate && "skc-checkbox--indeterminate",
         disabled && "skc-checkbox--disabled",
         className,
-      ])}
+      )}
       {...rippleListeners}
     >
       {/* Native input (for logic and accessibility only and is hidden to
@@ -141,8 +126,10 @@ export function Checkbox({
           style={rippleStyle}
         />
       </div>
-    </label>
+    </Element>
   );
-}
+};
 
 Checkbox.displayName = "Checkbox";
+
+export default Checkbox;

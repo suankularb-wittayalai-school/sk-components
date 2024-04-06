@@ -1,28 +1,27 @@
-// External libraries
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/menu.css";
-
-// Utilities
+import { AnimatePresence, motion } from "framer-motion";
+import { ComponentProps, ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Menu}.
+ * A list of actions/options on a temporary surface.
+ *
+ * @param children Actions/options inside a Menu.
+ * @param open If the Menu is open and shown.
+ * @param density A lower number means a more dense interface. In this case, less height.
+ * @param onBlur Triggers when the Menu loses focus.
+ * @param ulAttr Attributes for the underlying `<ul>` element.
  */
-export interface MenuProps extends SKComponent {
+const Menu: StylableFC<{
   /**
    * Actions/options inside a Menu.
    *
    * - Must consist of Menu Item(s).
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * If the Menu is open and shown.
@@ -52,34 +51,13 @@ export interface MenuProps extends SKComponent {
    *
    * - Optional.
    */
-  ulAttr?: React.ComponentProps<typeof motion.ul>;
+  ulAttr?: ComponentProps<typeof motion.ul>;
 
   /**
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * A list of actions/options on a temporary surface.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
- *
- * @param children Actions/options inside a Menu.
- * @param open If the Menu is open and shown.
- * @param density A lower number means a more dense interface. In this case, less height.
- * @param onBlur Triggers when the Menu loses focus.
- * @param ulAttr Attributes for the underlying `<ul>` element.
- */
-export function Menu({
-  children,
-  open,
-  density,
-  onBlur,
-  ulAttr,
-  style,
-  className,
-}: MenuProps) {
+}> = ({ children, open, density = 0, onBlur, ulAttr, style, className }) => {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -89,24 +67,23 @@ export function Menu({
           <motion.ul
             role="menu"
             aria-orientation="vertical"
-            initial={{ opacity: 0, y: "-10%", scale: 0.8 }}
-            animate={{ opacity: 1, y: "0%", scale: 1 }}
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: 1, scaleY: 1 }}
             exit={{
               opacity: 0,
-              y: "-10%",
-              scale: 0.8,
+              scaleY: 0,
               transition: transition(duration.short2, easing.standard),
             }}
             transition={transition(duration.short4, easing.standard)}
-            className={cn([
+            className={cn(
               "skc-menu",
-              density === 0
-                ? "skc-menu--density-0"
-                : density === -2
-                ? "skc-menu--density-[-2]"
-                : density === -4 && "skc-menu--density-[-4]",
+              {
+                [0]: "skc-menu--density-0",
+                [-2]: "skc-menu--density-[-2]",
+                [-4]: "skc-menu--density-[-4]",
+              }[density],
               className,
-            ])}
+            )}
             {...{ ...ulAttr, style }}
           >
             {children}
@@ -118,6 +95,8 @@ export function Menu({
       )}
     </AnimatePresence>
   );
-}
+};
 
 Menu.displayName = "Menu";
+
+export default Menu;

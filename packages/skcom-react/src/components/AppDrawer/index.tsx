@@ -1,41 +1,11 @@
-// External libraries
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/app-drawer.css";
-
-// Utilities
+import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, useState } from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-
-export interface AppDrawerProps extends SKComponent {
-  /**
-   * App Drawer Segments.
-   */
-  children: React.ReactNode;
-
-  /**
-   * Allows for translation of the accessibility labels.
-   *
-   * - Must be `th` or `en-US`, as SKCom currently only support those 2
-   *   languages.
-   * - Optional.
-   */
-  locale?: "en-US" | "th";
-
-  /**
-   * Triggers when the toggle Button opens the drawer.
-   */
-  onOpen?: () => any;
-}
+import Button from "../Button";
+import MaterialIcon from "../MaterialIcon";
 
 /**
  * A drawer of related apps.
@@ -44,18 +14,38 @@ export interface AppDrawerProps extends SKComponent {
  * @param locale Allows for translation of the accessibility labels.
  * @param onOpen Triggers when the toggle Button opens the drawer.
  */
-export function AppDrawer({
+const AppDrawer: StylableFC<{
+  /**
+   * App Drawer Segments.
+   */
+  children: ReactNode;
+
+  /**
+   * Allows for translation of the accessibility labels.
+   *
+   * - Must be `th` or `en-US`, as SKCom currently only support those 2
+   *   languages.
+   * - Optional.
+   */
+  locale?: LangCode;
+
+  /**
+   * Triggers when the toggle Button opens the drawer.
+   */
+  onOpen?: () => any;
+}> = ({
   children,
-  locale,
+  locale = "en-US",
   onOpen,
+  element: Element = "div",
   style,
   className,
-}: AppDrawerProps) {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+}) => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <div className="skc-app-drawer__anchor">
+    <Element className="skc-app-drawer__anchor">
       {/* Toggle */}
       <Button
         appearance="text"
@@ -66,7 +56,7 @@ export function AppDrawer({
         }}
         className="skc-app-drawer__toggle"
       >
-        {locale === "th" ? "ตัวเลือกแอพ" : "Apps"}
+        {{ "en-US": "Apps", th: "ตัวเลือกแอพ" }[locale]}
       </Button>
 
       <AnimatePresence>
@@ -74,22 +64,23 @@ export function AppDrawer({
           <>
             {/* Drawer */}
             <motion.div
-              initial={{ y: "-50%", scaleY: 0 }}
-              animate={{ y: 20, scaleY: 1 }}
+              initial={{ y: "-50%", scaleY: 0, opacity: 0 }}
+              animate={{ y: 20, scaleY: 1, opacity: 1 }}
               exit={{
                 y: "-50%",
                 scaleY: 0,
+                opacity: 0,
                 transition: transition(
                   duration.short2,
-                  easing.standardAccelerate
+                  easing.standardAccelerate,
                 ),
               }}
               transition={transition(
                 duration.medium4,
-                easing.standardDecelerate
+                easing.standardDecelerate,
               )}
               style={{ borderRadius: 16, ...style }}
-              className={cn([`skc-app-drawer`, className])}
+              className={cn(`skc-app-drawer`, className)}
             >
               {children}
             </motion.div>
@@ -106,6 +97,10 @@ export function AppDrawer({
           </>
         )}
       </AnimatePresence>
-    </div>
+    </Element>
   );
-}
+};
+
+AppDrawer.displayName = "AppDrawer";
+
+export default AppDrawer;

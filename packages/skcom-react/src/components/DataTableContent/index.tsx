@@ -1,19 +1,15 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/data-table-content.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link DataTableContent Data Table Content}.
+ * The main part of a Data Table.
+ *
+ * @param children A Data Table Content’s content depends on if you decide to use Tanstack Table or not.
+ * @param contentWidth The minimum width of the content.
  */
-export interface DataTableContentProps extends SKComponent {
+const DataTableContent: StylableFC<{
   /**
    * A Data Table Content’s content depends on if you decide to use Tanstack
    * Table or not.
@@ -24,7 +20,7 @@ export interface DataTableContentProps extends SKComponent {
    *   and Table Body.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The minimum width of the content. When the table’s width is lower than
@@ -34,33 +30,23 @@ export interface DataTableContentProps extends SKComponent {
    * - Optional.
    */
   contentWidth?: number;
-}
-
-/**
- * The main part of a Data Table.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7mq6ecmhpn8b SKCom documentation}
- *
- * @param children A Data Table Content’s content depends on if you decide to use Tanstack Table or not.
- * @param contentWidth The minimum width of the content.
- */
-export function DataTableContent({
+}> = ({
   children,
   contentWidth,
-  element,
+  element: Element = "div",
   style,
   className,
-}: DataTableContentProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: "skc-data-table-content" },
+}) => (
+  <Element style={style} className={cn(`skc-data-table-content`, className)}>
     <table
       style={{ ...style, minWidth: contentWidth }}
-      className={cn(["skc-data-table-content__content", className])}
+      className="skc-data-table-content__content"
     >
       {children}
     </table>
-  );
-}
+  </Element>
+);
 
 DataTableContent.displayName = "DataTableContent";
+
+export default DataTableContent;

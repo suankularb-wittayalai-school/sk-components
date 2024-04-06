@@ -1,30 +1,25 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { TableCell, TableCellProps } from "../TableCell";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/table-row.css";
-
-// Utilities
+import { Children, ComponentProps, ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
+import TableCell from "../TableCell";
 
 /**
- * Props for {@link TableRow Table Row}.
+ * A row of a Table, must be within a table area (Table Head, Table Body, or
+ * Table Foot).
+ *
+ * @param children Table Row has the same behaviour as `<tr>`.
+ * @param actions Actions related to a row, shown on hover.
  */
-export interface TableRowProps extends SKComponent {
+const TableRow: StylableFC<{
   /**
    * Table Row has the same behaviour as `<tr>`.
    *
    * - Must consist of Table Cells.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * Actions related to a row, shown on hover.
@@ -33,42 +28,30 @@ export interface TableRowProps extends SKComponent {
    * - Optional.
    */
   actions?: JSX.Element;
-}
-
-/**
- * A row of a Table, must be within a table area (Table Head, Table Body, or
- * Table Foot).
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.lxbokeuz0g5q SKCom documentation}
- *
- * @param children Table Row has the same behaviour as `<tr>`.
- * @param actions Actions related to a row, shown on hover.
- */
-export function TableRow({
-  children,
-  actions,
-  element,
-  style,
-  className,
-}: TableRowProps) {
-  return React.createElement(
-    element || "tr",
-    { style, className: cn(["skc-table-row", className]) },
-
-    actions
+}> = ({ children, actions, element: Element = "tr", style, className }) => (
+  <Element style={style} className={cn("skc-table-row", className)}>
+    {actions
       ? // Inject row actions into the first Table Cell
-        React.Children.map(children, (child, idx) =>
+        Children.map(children, (child, idx) =>
           idx === 0 && matchDisplayName(child, "TableCell") ? (
             <TableCell {...(child as JSX.Element).props}>
-              {((child as JSX.Element).props as TableCellProps).children}
+              {
+                (
+                  (child as JSX.Element).props as ComponentProps<
+                    typeof TableCell
+                  >
+                ).children
+              }
               <div className="skc-table-row__actions">{actions}</div>
             </TableCell>
           ) : (
             child
-          )
+          ),
         )
-      : children
-  );
-}
+      : children}
+  </Element>
+);
 
 TableRow.displayName = "TableRow";
+
+export default TableRow;

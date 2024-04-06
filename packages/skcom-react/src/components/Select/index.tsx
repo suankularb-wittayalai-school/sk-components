@@ -1,34 +1,47 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { MaterialIcon } from "../MaterialIcon";
-import { Menu, MenuProps } from "../Menu";
-import { MenuItemProps } from "../MenuItem";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/select.css";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Utilities
+import { motion } from "framer-motion";
+import { dash } from "radash";
+import {
+  Children,
+  ComponentProps,
+  ReactNode,
+  Ref,
+  cloneElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
+import MaterialIcon from "../MaterialIcon";
+import Menu from "../Menu";
+import MenuItem from "../MenuItem";
 
 /**
- * Props for {@link Select}.
+ * Sometimes it’s impractical to show all options at a time with a radio group.
+ * Select allows the user to choose from options shown on a temporary surface.
+ *
+ * @param children The options to select from.
+ * @param appearance How the Select looks.
+ * @param label The label text.
+ * @param alt A description of the Select for screen readers, similar to `alt` on `<img>`.
+ * @param leading The leading text or icon, aligned to the left.
+ * @param helperMsg A short description of the Select, or an error message during an error state.
+ * @param locale Allows for translation of the message shown when there are no options.
+ * @param error Tells Select that it contains an invalid value and activates the error state.
+ * @param value The value of the selected option. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user chooses an option.
+ * @param menuAttr Attributes for the underlying Menu component.
  */
-export interface SelectProps extends SKComponent {
+const Select: StylableFC<{
   /**
    * The options to select from.
    *
    * - Must be Menu Items, each with `value` defined.
    * - Always required.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * How the Select looks. An outlined Select has a lower emphasis than filled,
@@ -79,7 +92,7 @@ export interface SelectProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * Tells Select that it contains an invalid value and activates the error
@@ -111,82 +124,62 @@ export interface SelectProps extends SKComponent {
    *
    * - Optional.
    */
-  menuAttr?: Partial<MenuProps>;
+  menuAttr?: Partial<ComponentProps<typeof Menu>>;
 
   /**
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * Sometimes it’s impractical to show all options at a time with a radio group.
- * Select allows the user to choose from options shown on a temporary surface.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.hh9ts22t8gjy SKCom documentation}
- *
- * @param children The options to select from.
- * @param appearance How the Select looks.
- * @param label The label text.
- * @param alt A description of the Select for screen readers, similar to `alt` on `<img>`.
- * @param leading The leading text or icon, aligned to the left.
- * @param helperMsg A short description of the Select, or an error message during an error state.
- * @param locale Allows for translation of the message shown when there are no options.
- * @param error Tells Select that it contains an invalid value and activates the error state.
- * @param value The value of the selected option. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user chooses an option.
- * @param menuAttr Attributes for the underlying Menu component.
- */
-export function Select({
+}> = ({
   children,
   appearance,
   label,
   alt,
   leading,
   helperMsg,
-  locale,
+  locale = "en-US",
   error,
   value,
   onChange,
   menuAttr,
   style,
   className,
-}: SelectProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
 
   // Handles toggling options
-  const [menuOpen, setMenuOpen] = React.useState<boolean>();
-  const [options, setOptions] = React.useState<
-    { value: any; label: React.ReactNode }[]
-  >([]);
+  const [menuOpen, setMenuOpen] = useState<boolean>();
+  const [options, setOptions] = useState<{ value: any; label: ReactNode }[]>(
+    [],
+  );
 
   // Parse Menu passsed in via `children` into an array
-  React.useEffect(() => {
+  useEffect(() => {
     setOptions(
-      React.Children.map(children, (child) => ({
-        value: ((child as JSX.Element).props as MenuItemProps).value,
-        label: ((child as JSX.Element).props as MenuItemProps).children,
-      })) || []
+      Children.map(children, (child) => ({
+        value: ((child as JSX.Element).props as ComponentProps<typeof MenuItem>)
+          .value,
+        label: ((child as JSX.Element).props as ComponentProps<typeof MenuItem>)
+          .children,
+      })) || [],
     );
   }, [children]);
 
   // Set the selected option to the first automatically
-  React.useEffect(() => {
+  useEffect(() => {
     if (onChange && options?.length && !value) onChange(options[0].value);
   }, [options]);
 
   // Accessibility
-  const toggleRef: React.LegacyRef<HTMLButtonElement> = React.useRef(null);
-  React.useEffect(() => {
+  const toggleRef: Ref<HTMLButtonElement> = useRef(null);
+  useEffect(() => {
     // `undefined` means the user has not touched this Select yet
     // `false` means the user has just collapsed this Select
     if (menuOpen === false) toggleRef.current?.focus();
   }, [menuOpen]);
 
   // Generate the base ID for `<label>` and `aria-describedby`
-  const selectID = `select-${kebabify(
-    (typeof label === "string" ? label : alt)!
-  )}`;
+  const selectID = `select-${dash((typeof label === "string" ? label : alt)!)}`;
 
   return (
     <div className="skc-select__anchor">
@@ -199,14 +192,15 @@ export function Select({
         aria-haspopup="listbox"
         aria-labelledby={selectID}
         style={style}
-        className={cn([
+        className={cn(
           "skc-select",
-          appearance === "outlined"
-            ? "skc-select--outlined"
-            : appearance === "filled" && "skc-select--filled",
+          {
+            outlined: "skc-select--outlined",
+            filled: "skc-select--filled",
+          }[appearance],
           error && "skc-select--error",
           className,
-        ])}
+        )}
         onClick={() => options.length && setMenuOpen(!menuOpen)}
       >
         {/* Leading section */}
@@ -225,9 +219,7 @@ export function Select({
               // Show the first option as a fallback
               options[0]?.label
             : // No options
-            locale === "th"
-            ? "ไม่มีตัวเลือก"
-            : "No options"}
+              { "en-US": "No options", th: "ไม่มีตัวเลือก" }[locale]}
         </span>
 
         {/* Dropdown icon */}
@@ -257,20 +249,22 @@ export function Select({
         }}
         {...menuAttr}
       >
-        {React.Children.map(children, (child) =>
-          React.cloneElement(child as JSX.Element, {
+        {Children.map(children, (child) =>
+          cloneElement(child as JSX.Element, {
             selected: value === (child as JSX.Element).props.value,
             onClick: () => {
-              if (onChange) onChange((child as JSX.Element).props.value);
+              onChange?.((child as JSX.Element).props.value);
               const { onClick } = (child as JSX.Element).props;
-              if (onClick) onClick();
+              onClick?.();
               setMenuOpen(false);
             },
-          })
+          }),
         )}
       </Menu>
     </div>
   );
-}
+};
 
 Select.displayName = "Select";
+
+export default Select;

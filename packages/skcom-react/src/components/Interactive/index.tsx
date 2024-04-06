@@ -1,29 +1,46 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/interactive.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import {
+  ComponentProps,
+  ComponentPropsWithRef,
+  ReactNode,
+  RefObject,
+  useRef,
+} from "react";
+import { StylableFC } from "../../types";
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Interactive}.
+ * An interactive represents the user, whether by their initials or their picture.
+ *
+ * @param children The content to make interactive.
+ * @param stateLayerEffect Show a state layer on top of the content that reacts in color to hover and focus to signify its interactivity.
+ * @param rippleEffect Show an ink ripple effect, a soft-edge translucent circle, radiating out of the click/tap position every click/tap to signify interactivity.
+ * @param shadowEffect Elevates the content on hover and focus to signify its interactivity.
+ * @param onClick The function called when the user interacts with the content, similar to `onClick` on `<button>`.
+ * @param href The URL of the page the content leads to, similar to `href` on `<a>`.
+ * @param element The element of the container.
+ * @param attr Attributes for the container.
  */
-export interface InteractiveProps<
-  ElementProps extends {} = React.ComponentPropsWithRef<"div">
-> extends SKComponent {
+const Interactive = <ElementProps extends {} = ComponentPropsWithRef<"div">>({
+  children,
+  stateLayerEffect,
+  rippleEffect,
+  shadowEffect,
+  onClick,
+  href,
+  element,
+  attr,
+  style,
+  className,
+}: {
   /**
    * The content to make interactive.
    *
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * Show a state layer on top of the content that reacts in color to hover and
@@ -60,8 +77,6 @@ export interface InteractiveProps<
 
   /**
    * The URL of the page the content leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 
@@ -71,43 +86,14 @@ export interface InteractiveProps<
    * - Optional.
    */
   attr?: ElementProps;
-}
-
-/**
- * An interactive represents the user, whether by their initials or their picture.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children The content to make interactive.
- * @param stateLayerEffect Show a state layer on top of the content that reacts in color to hover and focus to signify its interactivity.
- * @param rippleEffect Show an ink ripple effect, a soft-edge translucent circle, radiating out of the click/tap position every click/tap to signify interactivity.
- * @param shadowEffect Elevates the content on hover and focus to signify its interactivity.
- * @param onClick The function called when the user interacts with the content, similar to `onClick` on `<button>`.
- * @param href The URL of the page the content leads to, similar to `href` on `<a>`.
- * @param element The element of the container.
- * @param attr Attributes for the container.
- */
-export function Interactive<
-  ElementProps extends {} = React.ComponentPropsWithRef<"div">
->({
-  children,
-  stateLayerEffect,
-  rippleEffect,
-  shadowEffect,
-  onClick,
-  href,
-  element,
-  attr,
-  style,
-  className,
-}: InteractiveProps<ElementProps>) {
+} & ComponentProps<StylableFC>) => {
   const Element = element || (href ? "a" : onClick ? "button" : "div");
 
   // Ripple setup
-  const buttonRef = React.useRef(null);
+  const buttonRef = useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(
-    ((attr as React.ComponentPropsWithRef<any> | undefined)
-      ?.ref as React.RefObject<HTMLElement>) || buttonRef
+    ((attr as ComponentPropsWithRef<any> | undefined)
+      ?.ref as RefObject<HTMLElement>) || buttonRef,
   );
 
   return (
@@ -118,13 +104,13 @@ export function Interactive<
       type={onClick || element === "button" ? "button" : undefined}
       href={href}
       style={style}
-      className={cn([
+      className={cn(
         "skc-interactive",
         stateLayerEffect === false && "skc-interactive--no-state-layer",
         rippleEffect === false && "skc-interactive--no-ripple",
         shadowEffect && "skc-interactive--shadow",
-        className,
-      ])}
+        className
+      )}
       {...attr}
     >
       {/* Content */}
@@ -142,6 +128,8 @@ export function Interactive<
       )}
     </Element>
   );
-}
+};
 
 Interactive.displayName = "Interactive";
+
+export default Interactive;

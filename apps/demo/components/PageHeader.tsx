@@ -1,14 +1,13 @@
 // External libraries
-import Link from "next/link";
 import Image from "next/image";
-import { FC, useContext } from "react";
+import Link from "next/link";
+import { ComponentProps, FC, useContext } from "react";
 
 // SK Components
 import {
   AppDrawer,
   AppDrawerItem,
   AppDrawerSegment,
-  PageHeaderProps,
   PageHeader as SKCPageHeader,
 } from "@suankularb-components/react";
 
@@ -19,7 +18,8 @@ import SKComLogo from "@/public/images/logo.svg";
 import NavDrawerContext from "@/contexts/NavDrawerContext";
 
 const PageHeader: FC<
-  Pick<PageHeaderProps, "children"> & Partial<PageHeaderProps>
+  Pick<ComponentProps<typeof SKCPageHeader>, "children"> &
+    Partial<ComponentProps<typeof SKCPageHeader>>
 > = (props) => {
   const { setNavOpen } = useContext(NavDrawerContext);
 

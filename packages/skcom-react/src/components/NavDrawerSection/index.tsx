@@ -1,27 +1,24 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/nav-drawer-section.css";
-
-// Utilities
+import { dash } from "radash";
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
- * Props for {@link NavDrawerSection Navigation Drawer Section}.
+ * A group of destinations in a Navigation Drawer.
+ *
+ * @param children Destinations grouped into this section.
+ * @param header The header of the section.
+ * @param alt A description of the Navigation Drawer Section for screen readers, similar to `alt` on `<img>`.
  */
-export interface NavDrawerSectionProps extends SKComponent {
+const NavDrawerSection: StylableFC<{
   /**
    * Destinations grouped into this section.
    *
    * - Must consist of Navigation Drawer Item(s).
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The header of the section.
@@ -39,41 +36,32 @@ export interface NavDrawerSectionProps extends SKComponent {
    *   crucial for accessibility.
    */
   alt?: string;
-}
-
-/**
- * A row of Buttons. NavDrawerSection handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children Destinations grouped into this section.
- * @param header The header of the section.
- * @param alt A description of the Navigation Drawer Section for screen readers, similar to `alt` on `<img>`.
- */
-export function NavDrawerSection({
+}> = ({
   children,
   header,
   alt,
-  element,
+  element: Element = "section",
   style,
   className,
-}: NavDrawerSectionProps) {
-  const sectionID = `nav-section-${kebabify(
-    (typeof header === "string" ? header : alt)!
+}) => {
+  const sectionID = `nav-section-${dash(
+    (typeof header === "string" ? header : alt)!,
   )}`;
 
-  return React.createElement(
-    element || "section",
-    { style, className: cn(["skc-nav-drawer-section", className]) },
-    <h2
-      id={sectionID}
-      aria-label={alt}
-      className="skc-nav-drawer-section__header"
-    >
-      {header}
-    </h2>,
-    <ul role="list">{children}</ul>
+  return (
+    <Element style={style} className={cn("skc-nav-drawer-section", className)}>
+      <h2
+        id={sectionID}
+        aria-label={alt}
+        className="skc-nav-drawer-section__header"
+      >
+        {header}
+      </h2>
+      ,<ul role="list">{children}</ul>
+    </Element>
   );
-}
+};
 
 NavDrawerSection.displayName = "NavDrawerSection";
+
+export default NavDrawerSection;

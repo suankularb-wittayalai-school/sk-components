@@ -1,27 +1,23 @@
-// External libraries
 import { flexRender, HeaderGroup } from "@tanstack/react-table";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { MaterialIcon } from "../MaterialIcon";
-import { TableRow } from "../TableRow";
-
-// Types
-import { DataTableColumnDef, SKComponent } from "../../types";
-
-// Utilities
+import { useRef } from "react";
+import { DataTableColumnDef, LangCode, StylableFC } from "../../types";
 import {
   transition,
   useAnimationConfig,
   useRipple,
 } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import MaterialIcon from "../MaterialIcon";
+import TableRow from "../TableRow";
 
 /**
- * Props for {@link DataTableHead Table Head}.
+ * The head area of a Table.
+ *
+ * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
+ * @param locale Allows for translation of the accessibility labels.
  */
-export interface DataTableHeadProps extends SKComponent {
+const DataTableHead: StylableFC<{
   /**
    * The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
    *
@@ -35,28 +31,13 @@ export interface DataTableHeadProps extends SKComponent {
    * - Must be `th` or `en-US`, as SKCom currently only support those 2 languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * The head area of a Table.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
- *
- * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
- * @param locale Allows for translation of the accessibility labels.
- */
-export function DataTableHead({
-  headerGroups,
-  locale,
-  style,
-  className,
-}: DataTableHeadProps) {
+}> = ({ headerGroups, locale = "en-US", style, className }) => {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -64,7 +45,7 @@ export function DataTableHead({
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
-      className={cn(["skc-table-head", className])}
+      className={cn("skc-table-head", className)}
     >
       {/* For each Header Group, render a Table Row */}
       {headerGroups.map((headerGroup) => (
@@ -74,7 +55,7 @@ export function DataTableHead({
             const columnDef = header.column.columnDef as DataTableColumnDef;
 
             // Ripple setup
-            const toggleRef = React.useRef(null);
+            const toggleRef = useRef(null);
             const { rippleListeners, rippleControls, rippleStyle } =
               useRipple(toggleRef);
 
@@ -87,12 +68,12 @@ export function DataTableHead({
                 ref={toggleRef}
                 // Additional attributes passed in via column
                 {...columnDef.thAttr}
-                className={cn([
+                className={cn(
                   "skc-table-cell",
                   "skc-table-cell--header",
                   header.column.getCanSort() && "skc-table-cell--sortable",
                   columnDef.thAttr?.className,
-                ])}
+                )}
                 title={
                   header.column.getCanSort()
                     ? locale === "th"
@@ -131,7 +112,7 @@ export function DataTableHead({
                           exit={{ scale: 0.4, opacity: 0 }}
                           transition={transition(
                             duration.short4,
-                            easing.standard
+                            easing.standard,
                           )}
                           aria-label={
                             locale === "th"
@@ -179,6 +160,8 @@ export function DataTableHead({
       ))}
     </motion.thead>
   );
-}
+};
 
-DataTableHead.displayName = "TableHead";
+DataTableHead.displayName = "DataTableHead";
+
+export default DataTableHead;

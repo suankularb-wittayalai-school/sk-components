@@ -1,26 +1,22 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/actions.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Actions}.
+ * A row of Buttons. Actions handles spacing and overflow.
+ *
+ * @param children Actions contains Buttons; the recommended limit is 3.
+ * @param align How the Buttons should be positioned.
  */
-export interface ActionsProps extends SKComponent {
+const Actions: StylableFC<{
   /**
    * Actions contains Buttons. You can put as many Buttons inside Actions as
    * needed, but the recommended limit is 3.
    *
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * How the Buttons should be positioned. It can be aligned to the left, the
@@ -30,43 +26,30 @@ export interface ActionsProps extends SKComponent {
    * - Optional.
    */
   align?: "left" | "center" | "right" | "full";
-}
-
-/**
- * A row of Buttons. Actions handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children Actions contains Buttons; the recommended limit is 3.
- * @param align How the Buttons should be positioned.
- */
-export function Actions({
+}> = ({
   children,
-  align,
-  element,
+  align = "right",
+  element: Element = "div",
   style,
   className,
-}: ActionsProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style,
-      className: cn([
-        "skc-actions",
-        align === "left"
-          ? "skc-actions--left"
-          : align === "center"
-          ? "skc-actions--center"
-          : align === "right"
-          ? "skc-actions--right"
-          : align === "full"
-          ? "skc-actions--full"
-          : undefined,
-        className,
-      ]),
-    },
-    children
-  );
-}
+}) => (
+  <Element
+    style={style}
+    className={cn(
+      "skc-actions",
+      {
+        left: "skc-actions--left",
+        center: "skc-actions--center",
+        right: "skc-actions--right",
+        full: "skc-actions--full",
+      }[align],
+      className,
+    )}
+  >
+    {children}
+  </Element>
+);
 
 Actions.displayName = "Actions";
+
+export default Actions;

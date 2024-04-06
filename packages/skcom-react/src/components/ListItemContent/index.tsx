@@ -1,20 +1,17 @@
-// External libraries
-import { dash } from "radash";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/list-item-content.css";
-
-// Utilities
+import { dash } from "radash";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link ListItemContent List Item Content}.
+ * The text content of a List Item.
+ *
+ * @param overline Small text on top of the title text.
+ * @param title The main text of the List Item Content.
+ * @param desc A description supplementing the title text.
+ * @param alt A description of the List Item Content for screen readers, similar to `alt` on `<img>`.
  */
-export interface ListItemContentProps extends SKComponent {
+const ListItemContent: StylableFC<{
   /**
    * Small text on top of the title text.
    *
@@ -44,49 +41,35 @@ export interface ListItemContentProps extends SKComponent {
    *   crucial for accessibility.
    */
   alt?: string;
-}
-
-/**
- * A row of Buttons. ListItemContent handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param overline Small text on top of the title text.
- * @param title The main text of the List Item Content.
- * @param desc A description supplementing the title text.
- * @param alt A description of the List Item Content for screen readers, similar to `alt` on `<img>`.
- */
-export function ListItemContent({
+}> = ({
   overline,
   title,
   desc,
   alt,
-  element,
+  element: Element = "div",
   style,
   className,
-}: ListItemContentProps) {
-  const Element = element || "div";
+}) => (
+  <Element style={style} className={cn("skc-list-item-content", className)}>
+    {/* Overline */}
+    {overline && (
+      <span className="skc-list-item-content__overline">{overline}</span>
+    )}
 
-  return (
-    <Element style={style} className={cn(["skc-list-item-content", className])}>
-      {/* Overline */}
-      {overline && (
-        <span className="skc-list-item-content__overline">{overline}</span>
-      )}
+    {/* Title */}
+    <span
+      id={`list-item-${dash((typeof title === "string" ? title : alt)!)}`}
+      aria-label={alt}
+      className="skc-list-item-content__title"
+    >
+      {title}
+    </span>
 
-      {/* Title */}
-      <span
-        id={`list-item-${dash((typeof title === "string" ? title : alt)!)}`}
-        aria-label={alt}
-        className="skc-list-item-content__title"
-      >
-        {title}
-      </span>
-
-      {/* Description */}
-      {desc && <span className="skc-list-item-content__desc">{desc}</span>}
-    </Element>
-  );
-}
+    {/* Description */}
+    {desc && <span className="skc-list-item-content__desc">{desc}</span>}
+  </Element>
+);
 
 ListItemContent.displayName = "ListItemContent";
+
+export default ListItemContent;

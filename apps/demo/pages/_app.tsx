@@ -72,11 +72,10 @@ export default function App({ Component, pageProps }: CustomAppProps) {
 
       <Contexts>
         <MotionConfig reducedMotion="user">
-          <ThemeProvider>
-            <Layout {...{ fab, parentURL, childURLs }}>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
+          <ThemeProvider />
+          <Layout {...{ fab, parentURL, childURLs }}>
+            <Component {...pageProps} />
+          </Layout>
         </MotionConfig>
       </Contexts>
     </>

@@ -1,26 +1,27 @@
-// External libraries
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { NavDrawerItemProps } from "../NavDrawerItem";
-import { NavDrawerSectionProps } from "../NavDrawerSection";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/nav-drawer.css";
-
-// Utilities
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Children,
+  ComponentProps,
+  ReactNode,
+  cloneElement,
+  useEffect,
+} from "react";
+import { StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
+import NavDrawerItem from "../NavDrawerItem";
+import NavDrawerSection from "../NavDrawerSection";
 
 /**
- * Props for {@link NavDrawer}.
+ * A list of all destinations within an app.
+ *
+ * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
+ * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
+ * @param onClose The function triggered when the scrim is clicked.
  */
-export interface NavDrawerProps extends SKComponent {
+const NavDrawer: StylableFC<{
   /**
    * All destinations within an app. Destinations can be grouped with the help
    * of Navigation Drawer Sections.
@@ -29,7 +30,7 @@ export interface NavDrawerProps extends SKComponent {
    * - The first should consist of top-level pages.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * If true, the Navigation Drawer will slide in to the screen, otherwise it
@@ -48,28 +49,11 @@ export interface NavDrawerProps extends SKComponent {
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * A list of all destinations within an app.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.2czacyab5zgs SKCom documentation}
- *
- * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
- * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
- * @param onClose The function triggered when the scrim is clicked.
- */
-export function NavDrawer({
-  children,
-  open,
-  onClose,
-  style,
-  className,
-}: NavDrawerProps) {
+}> = ({ children, open, onClose, style, className }) => {
   const { duration, easing } = useAnimationConfig();
 
   // Close the Drawer with the escape key
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
@@ -80,10 +64,10 @@ export function NavDrawer({
   }, []);
 
   // Focus on the selected link
-  React.useEffect(() => {
+  useEffect(() => {
     if (open) {
       const navDrawerItem = document.querySelector<HTMLAnchorElement>(
-        ".skc-nav-drawer-item--selected"
+        ".skc-nav-drawer-item--selected",
       );
       navDrawerItem?.focus();
     }
@@ -92,30 +76,33 @@ export function NavDrawer({
   // Make the Navigation Drawer close when a Navigation Drawer Item is clicked
   const injectedChildren =
     // For each Navigation Drawer Section
-    React.Children.map(children, (section) =>
+    Children.map(children, (section) =>
       matchDisplayName(section, "NavDrawerSection")
-        ? React.cloneElement(section as JSX.Element, {
+        ? cloneElement(section as JSX.Element, {
             children:
               // For each Navigation Drawer Item
-              React.Children.map(
-                ((section as JSX.Element).props as NavDrawerSectionProps)
-                  .children,
+              Children.map(
+                (
+                  (section as JSX.Element).props as ComponentProps<
+                    typeof NavDrawerSection
+                  >
+                ).children,
                 // Inject `onClick`, where the Navigation Drawer will close when a
                 // Navigation Drawer Item is clicked
                 (item) =>
                   matchDisplayName(item, "NavDrawerItem")
-                    ? React.cloneElement(item as JSX.Element, {
+                    ? cloneElement(item as JSX.Element, {
                         onClick: () => {
                           const { onClick } = (item as JSX.Element)
-                            .props as NavDrawerItemProps;
+                            .props as ComponentProps<typeof NavDrawerItem>;
                           onClose();
                           if (onClick) onClick();
                         },
                       })
-                    : item
+                    : item,
               ),
           })
-        : section
+        : section,
     );
 
   return (
@@ -144,13 +131,13 @@ export function NavDrawer({
               x: "-100%",
               transition: transition(
                 duration.short4,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium4, easing.standardDecelerate)}
             aria-modal={true}
             style={style}
-            className={cn(["skc-nav-drawer", className])}
+            className={cn("skc-nav-drawer", className)}
           >
             <nav>{injectedChildren}</nav>
           </motion.aside>
@@ -158,6 +145,8 @@ export function NavDrawer({
       )}
     </AnimatePresence>
   );
-}
+};
 
 NavDrawer.displayName = "NavDrawer";
+
+export default NavDrawer;

@@ -1,25 +1,23 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/data-table-pagination.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import Button from "../Button";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link DataTablePagination Data Table Pagination}.
+ * At the footer of a Data Table, Data Table Pagination provides controls for
+ * paginating the Data Table data, including the current rows and navigating to
+ * forward and backward on pages.
+ *
+ * @param rowsPerPage The maximum number of rows shown on the Data Table at a time.
+ * @param totalRows The total number of rows of data, including both those currently shown and not shown on the Data Table.
+ * @param locale Allows for translation of the page indicator and accessibility labels.
+ * @param onChange Triggers when the user changes the page.
  */
-export interface DataTablePaginationProps extends SKComponent {
+const DataTablePagination: StylableFC<{
   /**
    * The maximum number of rows shown on the Data Table at a time.
    *
@@ -44,7 +42,7 @@ export interface DataTablePaginationProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * Triggers when the user changes the page.
@@ -63,35 +61,19 @@ export interface DataTablePaginationProps extends SKComponent {
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * At the footer of a Data Table, Data Table Pagination provides controls for
- * paginating the Data Table data, including the current rows and navigating to
- * forward and backward on pages.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation}
- *
- * @param rowsPerPage The maximum number of rows shown on the Data Table at a time.
- * @param totalRows The total number of rows of data, including both those currently shown and not shown on the Data Table.
- * @param locale Allows for translation of the page indicator and accessibility labels.
- * @param onChange Triggers when the user changes the page.
- */
-export function DataTablePagination({
+}> = ({
   rowsPerPage,
   totalRows,
-  locale,
+  locale = "en-US",
   onChange,
   style,
   className,
-}: DataTablePaginationProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
 
-  const [page, setPage] = React.useState<number>(1);
-  const [maxPage, setMaxPage] = React.useState<number>(
-    Math.ceil(totalRows / rowsPerPage)
-  );
-  React.useEffect(() => {
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(Math.ceil(totalRows / rowsPerPage));
+  useEffect(() => {
     const newMaxPage = Math.ceil(totalRows / rowsPerPage);
     setMaxPage(newMaxPage);
     if (newMaxPage < page) setPage(Math.max(newMaxPage, 1));
@@ -108,9 +90,9 @@ export function DataTablePagination({
     total: totalRows.toLocaleString(locale),
   };
 
-  React.useEffect(
+  useEffect(
     () => onChange && onChange(page, range.start - 1, range.end - 1),
-    [page]
+    [page],
   );
 
   return (
@@ -118,7 +100,7 @@ export function DataTablePagination({
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
-      className={cn(["skc-data-table-pagination", className])}
+      className={cn(`skc-data-table-pagination`, className)}
     >
       <span
         aria-label={
@@ -137,7 +119,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="first_page" />}
-          alt={locale === "th" ? "ไปหน้าแรก" : "Go to last page"}
+          alt={{ "en-US": "Go to first page", th: "ไปหน้าแรก" }[locale]}
           disabled={page === 1}
           onClick={() => setPage(1)}
         />
@@ -145,7 +127,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="chevron_left" />}
-          alt={locale === "th" ? "หน้าที่แล้ว" : "Previous page"}
+          alt={{ "en-US": "Previous page", th: "หน้าที่แล้ว" }[locale]}
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
         />
@@ -153,7 +135,7 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="chevron_right" />}
-          alt={locale === "th" ? "หน้าต่อไป" : "Next page"}
+          alt={{ "en-US": "Next page", th: "หน้าต่อไป" }[locale]}
           disabled={page === maxPage}
           onClick={() => setPage(page + 1)}
         />
@@ -161,13 +143,15 @@ export function DataTablePagination({
         <Button
           appearance="text"
           icon={<MaterialIcon icon="last_page" />}
-          alt={locale === "th" ? "ไปหน้าสุดท้าย" : "Go to last page"}
+          alt={{ "en-US": "Go to last page", th: "ไปหน้าสุดท้าย" }[locale]}
           disabled={page === maxPage}
           onClick={() => setPage(maxPage)}
         />
       </div>
     </motion.div>
   );
-}
+};
 
 DataTablePagination.displayName = "DataTablePagination";
+
+export default DataTablePagination;

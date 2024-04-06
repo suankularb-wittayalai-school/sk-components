@@ -1,25 +1,24 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/data-table-search.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import { ComponentProps } from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import Button from "../Button";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link DataTableSearch Data Table Search}.
+ * Allows the user to filter the Data Table’s content using a text query.
+ *
+ * @param value The value inside the search field. This is useful if you want a controlled input.
+ * @param locale Allows for translation of the default placeholder message.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param placeholder A faint text displayed inside the field guiding the user.
+ * @param onOverflowToggle Triggers when the overflow icon is clicked. If defined, an overflow icon appears on the right.
+ * @param overflow The overflow Menu of the parent Data Table.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-export interface DataTableSearchProps extends SKComponent {
+const DataTableSearch: StylableFC<{
   /**
    * The value inside the search field. This is useful if you want a
    * controlled input.
@@ -37,7 +36,7 @@ export interface DataTableSearchProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * This function triggers when the user make changes to the field value. The
@@ -78,30 +77,15 @@ export interface DataTableSearchProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: React.ComponentProps<"input">;
+  inputAttr?: ComponentProps<"input">;
 
   /**
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * Allows the user to filter the Data Table’s content using a text query.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation}
- *
- * @param value The value inside the search field. This is useful if you want a controlled input.
- * @param locale Allows for translation of the default placeholder message.
- * @param onChange This function triggers when the user make changes to the field value.
- * @param placeholder A faint text displayed inside the field guiding the user.
- * @param onOverflowToggle Triggers when the overflow icon is clicked. If defined, an overflow icon appears on the right.
- * @param overflow The overflow Menu of the parent Data Table.
- * @param inputAttr Attributes for the underlying `<input>` element used as the field.
- */
-export function DataTableSearch({
+}> = ({
   value,
-  locale,
+  locale = "en-US",
   onChange,
   placeholder,
   onOverflowToggle,
@@ -109,7 +93,7 @@ export function DataTableSearch({
   inputAttr,
   style,
   className,
-}: DataTableSearchProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
 
   return (
@@ -117,7 +101,7 @@ export function DataTableSearch({
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
-      className={cn(["skc-data-table-search", className])}
+      className={cn("skc-data-table-search", className)}
     >
       {/* Icon */}
       <div className="skc-data-table-search__icon">
@@ -149,6 +133,8 @@ export function DataTableSearch({
       )}
     </motion.div>
   );
-}
+};
 
 DataTableSearch.displayName = "DataTableSearch";
+
+export default DataTableSearch;

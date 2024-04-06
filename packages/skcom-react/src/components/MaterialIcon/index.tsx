@@ -1,19 +1,18 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/material-icon.css";
-
-// Utilities
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link MaterialIcon Material Icon}.
+ * Icons are essential to any web design. They orient the users, help user navigate, save space.
+ * Material Icon uses the “Material Symbol” icon font from Google.
+ *
+ * @param icon Material Icon uses the “Material Symbol” font, where each icon has its own corresponding text string. You can find the list of all icons at {@link https://fonts.google.com/icons Google Fonts}.
+ * @param fill If the icon is filled or not.
+ * @param weight How thick the strokes are.
+ * @param grade `grade` also adjusts the icon’s thickness, but more subtly.
+ * @param size How large/small the icon is.
  */
-export interface MaterialIconProps extends SKComponent {
+const MaterialIcon: StylableFC<{
   /**
    * Material Icon uses the “Material Symbol” font, where each icon has its own
    * corresponding text string. You can find the list of all icons at
@@ -60,53 +59,33 @@ export interface MaterialIconProps extends SKComponent {
    * - Optional.
    */
   size?: 20 | 24 | 40 | 48;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
-}
-
-/**
- * Icons are essential to any web design. They orient the users, help user navigate, save space.
- * Material Icon uses the “Material Symbol” icon font from Google.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
- *
- * @param icon Material Icon uses the “Material Symbol” font, where each icon has its own corresponding text string. You can find the list of all icons at {@link https://fonts.google.com/icons Google Fonts}.
- * @param fill If the icon is filled or not.
- * @param weight How thick the strokes are.
- * @param grade `grade` also adjusts the icon’s thickness, but more subtly.
- * @param size How large/small the icon is.
- */
-export function MaterialIcon({
+}> = ({
   icon,
   fill,
   weight,
   grade,
   size,
+  element: Element = "i",
   style,
   className,
-}: MaterialIconProps) {
-  return (
-    <i
-      aria-hidden="true"
-      style={{
-        ...style,
-        fontSize: size ? `${size / 16}rem` : undefined,
-        fontVariationSettings:
-          fill || weight || grade || size
-            ? `"FILL" ${fill ? 1 : 0}, "wght" ${weight || 400}, "GRAD" ${
-                grade || 0
-              }, "opsz" ${size || 24}`
-            : undefined,
-      }}
-      className={cn(["skc-icon", className])}
-      translate="no"
-    >
-      {icon}
-    </i>
-  );
-}
+}) => (
+  <Element
+    aria-hidden="true"
+    style={{
+      ...style,
+      fontSize: size ? `${size / 16}rem` : undefined,
+      fontVariationSettings:
+        fill || weight || grade || size
+          ? `"FILL" ${fill ? 1 : 0}, "wght" ${weight || 400}, "GRAD" ${grade || 0}, "opsz" ${size || 24}`
+          : undefined,
+    }}
+    className={cn(`skc-icon`, className)}
+    translate="no"
+  >
+    {icon}
+  </Element>
+);
 
 MaterialIcon.displayName = "MaterialIcon";
+
+export default MaterialIcon;

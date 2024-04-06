@@ -1,26 +1,29 @@
-// External libraries
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { DialogHeaderProps } from "../DialogHeader";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/dialog.css";
-
-// Utilities
+import { AnimatePresence, motion } from "framer-motion";
+import { dash } from "radash";
+import {
+  CSSProperties,
+  Children,
+  ComponentProps,
+  ReactNode,
+  useEffect,
+} from "react";
+import { StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
-import { kebabify } from "../../utils/format";
+import DialogHeader from "../DialogHeader";
 
 /**
- * Props for {@link Dialog}.
+ * A Dialog interrupts the user to have them make an immediately significant
+ * decision or prompts a user to enter important information.
+ *
+ * @param children Parts of a Dialog.
+ * @param open If the Dialog is open and shown.
+ * @param width The width of the Dialog.
+ * @param onClose The function triggered when the scrim is clicked.
  */
-export interface DialogProps extends SKComponent {
+const Dialog: StylableFC<{
   /**
    * Parts of a Dialog.
    *
@@ -29,7 +32,7 @@ export interface DialogProps extends SKComponent {
    * - If present, Dialog Content must appear between Dialog Header and
    *   Actions.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * If the Dialog is open and shown.
@@ -44,7 +47,7 @@ export interface DialogProps extends SKComponent {
    *
    * - Optional.
    */
-  width?: React.CSSProperties["width"];
+  width?: CSSProperties["width"];
 
   /**
    * The function triggered when the scrim is clicked.
@@ -55,34 +58,14 @@ export interface DialogProps extends SKComponent {
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * A Dialog interrupts the user to have them make an immediately significant
- * decision or prompts a user to enter important information.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children Parts of a Dialog.
- * @param open If the Dialog is open and shown.
- * @param width The width of the Dialog.
- * @param onClose The function triggered when the scrim is clicked.
- */
-export function Dialog({
-  children,
-  open,
-  width,
-  onClose,
-  style,
-  className,
-}: DialogProps) {
+}> = ({ children, open, width, onClose, style, className }) => {
   const { duration, easing } = useAnimationConfig();
 
   // Focus on the main Button
-  React.useEffect(() => {
+  useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-dialog > .skc-actions"
+        ".skc-dialog > .skc-actions",
       );
 
       const buttons =
@@ -92,7 +75,7 @@ export function Dialog({
   }, [open]);
 
   // Close the Dialog with the escape key
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
@@ -104,15 +87,15 @@ export function Dialog({
 
   // Accessibility labels
   let dialogID: string | undefined;
-  React.Children.forEach(children, (child) => {
+  Children.forEach(children, (child) => {
     // Find the Dialog Header
     if (matchDisplayName(child, "DialogHeader")) {
       // Grab `title`, `desc`, and `alt`
       const { title, desc, alt } = (child as JSX.Element)
-        .props as DialogHeaderProps;
+        .props as ComponentProps<typeof DialogHeader>;
 
       // Only use `title` if it is a string, otherwise use `alt`
-      dialogID = `dialog-${kebabify(
+      dialogID = `dialog-${dash(
         // Use `title` if defined
         (title
           ? // Use `title` if is not JSX Element
@@ -121,10 +104,10 @@ export function Dialog({
             : // Otherwise, use `alt`
               alt
           : // If `title` is not defined, use `desc`
-          typeof desc === "string"
-          ? desc
-          : // Otherwise, use `alt`
-            alt)!
+            typeof desc === "string"
+            ? desc
+            : // Otherwise, use `alt`
+              alt)!,
       )}`;
     }
   });
@@ -162,12 +145,12 @@ export function Dialog({
               y: "-90%",
               transition: transition(
                 duration.short2,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium2, easing.standardDecelerate)}
             style={{ ...style, width, borderRadius: 28 }}
-            className={cn(["skc-dialog", className])}
+            className={cn("skc-dialog", className)}
           >
             {children}
           </motion.div>
@@ -175,6 +158,8 @@ export function Dialog({
       )}
     </AnimatePresence>
   );
-}
+};
 
 Dialog.displayName = "Dialog";
+
+export default Dialog;

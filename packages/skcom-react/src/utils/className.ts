@@ -1,3 +1,5 @@
-export function cn(classNames: (string | boolean | undefined)[]) {
-  return classNames.filter((className) => className).join(" ");
+import { sift } from "radash";
+
+export function cn(...segments: unknown[]) {
+  return sift(segments).join(" ");
 }

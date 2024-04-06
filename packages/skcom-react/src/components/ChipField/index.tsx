@@ -1,33 +1,50 @@
-// External libraries
-import { motion, useAnimationControls } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { ChipSet } from "../ChipSet";
-import { Progress } from "../Progress";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/chip-field.css";
-
-// Utilities
+import { motion, useAnimationControls } from "framer-motion";
+import { dash } from "radash";
+import {
+  ChangeEvent,
+  Children,
+  ComponentProps,
+  KeyboardEvent,
+  ReactNode,
+  cloneElement,
+  useEffect,
+  useState,
+} from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
+import ChipSet from "../ChipSet";
+import Progress from "../Progress";
 
 /**
- * Props for {@link ChipField Chip Field}.
+ * A combination of Input Chips and a Text Field. Users can simply start typing
+ * into the Chip Field; their input is converted into an Input Chip on spacebar
+ * press.
+ *
+ * @param children The Input Chips that the user have already entered.
+ * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
+ * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
+ * @param helperMsg A short description of the Chip Field.
+ * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user makes changes to the field value. The value is passed in via the function.
+ * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
+ * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
+ * @param entrySeparators An array of characters that trigger the creation of a new Input Chip.
+ * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
+ * @param loading Disable the Chip Field and add a Progress linear beneath the component to signify loading status.
+ * @param disabled The field cannot be edited.
+ * @param locale Allows for translation of the accessibility labels.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-export interface ChipFieldProps extends SKComponent {
+const ChipField: StylableFC<{
   /**
    * The Input Chips that the user have already entered.
    *
    * - Must be a Chip Set with only Input Chips.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The placeholder text (if no placeholder specified or when not focused and
@@ -127,39 +144,15 @@ export interface ChipFieldProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * Attributes for the underlying `<input>` element used as the field.
    *
    * - Optional.
    */
-  inputAttr?: React.ComponentProps<"input">;
-}
-
-/**
- * A combination of Input Chips and a Text Field. Users can simply start typing
- * into the Chip Field; their input is converted into an Input Chip on spacebar
- * press.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
- *
- * @param children The Input Chips that the user have already entered.
- * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
- * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
- * @param helperMsg A short description of the Chip Field.
- * @param value The value inside the field that is used to create Input Chips. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user makes changes to the field value. The value is passed in via the function.
- * @param onNewEntry This function triggers when the user hits the spacebar while in the field.
- * @param onDeleteLast This function triggers when the user hits backspace twice while in the field.
- * @param entrySeparators An array of characters that trigger the creation of a new Input Chip.
- * @param placeholder The field can have some faint text guiding the user about what to write to create an Input Chip.
- * @param loading Disable the Chip Field and add a Progress linear beneath the component to signify loading status.
- * @param disabled The field cannot be edited.
- * @param locale Allows for translation of the accessibility labels.
- * @param inputAttr Attributes for the underlying `<input>` element used as the field.
- */
-export function ChipField({
+  inputAttr?: ComponentProps<"input">;
+}> = ({
   children,
   label,
   alt,
@@ -168,36 +161,35 @@ export function ChipField({
   onChange,
   onNewEntry,
   onDeleteLast,
-  entrySeparators,
+  entrySeparators = [" ", ",", ";"],
   placeholder,
   loading,
   disabled,
-  locale,
+  locale = "en-US",
   inputAttr,
+  element: Element = "div",
   style,
   className,
-}: ChipFieldProps) {
+}) => {
   // Chip deletion preparation
-  const [lastSelected, setLastSelected] = React.useState<boolean>(false);
-  const [noOfChips, setNoOfChips] = React.useState<number>(0);
+  const [lastSelected, setLastSelected] = useState(false);
+  const [noOfChips, setNoOfChips] = useState(0);
 
   // Count the number of Input Chips as so to know which Chip to select for the
   // “last Chip”
-  React.useEffect(
+  useEffect(
     () =>
       setNoOfChips(
-        React.Children.count(
-          (React.Children.only(children) as JSX.Element).props.children
-        )
+        Children.count((Children.only(children) as JSX.Element).props.children),
       ),
-    [children]
+    [children],
   );
 
   // Animation
   const { duration, easing } = useAnimationConfig();
   const labelControls = useAnimationControls();
-  const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
-  const [neverResetLabel, setNeverResetLabel] = React.useState<boolean>(false);
+  const [minifyLabel, setMinifyLabel] = useState<boolean | undefined>();
+  const [neverResetLabel, setNeverResetLabel] = useState<boolean>(false);
 
   // Transition
   const labelTransition = transition(duration.short4, easing.standard);
@@ -217,7 +209,7 @@ export function ChipField({
   };
 
   // Animate as specified by `minifyLabel`
-  React.useEffect(() => {
+  useEffect(() => {
     // Disable initial animation
     if (neverResetLabel || minifyLabel === undefined) return;
 
@@ -239,7 +231,7 @@ export function ChipField({
   }, [minifyLabel]);
 
   // Never minify the label if placeholder specified
-  React.useEffect(() => {
+  useEffect(() => {
     if (placeholder) {
       setNeverResetLabel(true);
       labelControls.set(minifedLabelAnimState);
@@ -253,13 +245,13 @@ export function ChipField({
   };
 
   // Always minify the label if Chips are present
-  React.useEffect(() => {
+  useEffect(() => {
     if (noOfChips) setMinifyLabel(true);
   }, [noOfChips]);
 
   // Chip creation and deletion
 
-  const handleChange = (event: React.ChangeEvent) => {
+  const handleChange = (event: ChangeEvent) => {
     // If the user continues typing after they selected a Chip, that Chip is
     // unselected
     if (lastSelected) setLastSelected(false);
@@ -274,12 +266,10 @@ export function ChipField({
     if (
       onNewEntry &&
       // If the last character is an entry separator
-      (entrySeparators || [" ", ",", ";"]).indexOf(
-        value.split("").slice(-1)[0] || ""
-      )
+      entrySeparators.includes(value.substring(-1))
     ) {
       // Call `onNewEntry` on the field value with the entry separator removed
-      onNewEntry(value.slice(0, -1));
+      onNewEntry(value.substring(0, -1));
       // Clear the field value
       onChange("");
       return;
@@ -290,7 +280,7 @@ export function ChipField({
     onChange(value);
   };
 
-  const handleKeyUp = (event: React.KeyboardEvent) => {
+  const handleKeyUp = (event: KeyboardEvent) => {
     const { value } = event.target as HTMLInputElement;
 
     // Handles creation
@@ -323,12 +313,12 @@ export function ChipField({
 
   // Accessibility
   // Generate the base ID for `<label>`
-  const fieldID = `chip-field-${kebabify(
-    (typeof label === "string" ? label : alt)!
+  const fieldID = `chip-field-${dash(
+    (typeof label === "string" ? label : alt)!,
   )}`;
 
   return (
-    <div style={style} className={cn(["skc-chip-field", className])}>
+    <Element style={style} className={cn(`skc-chip-field`, className)}>
       <motion.label
         htmlFor={fieldID}
         animate={labelControls}
@@ -340,18 +330,20 @@ export function ChipField({
       <div className="skc-chip-field__scrollable">
         <div className="skc-chip-field__content">
           {/* Chip Set */}
-          <ChipSet divAttr={{ "aria-live": "polite", "aria-relevant": "all" }}>
-            {React.Children.map(
-              (React.Children.only(children) as JSX.Element).props.children,
+          <ChipSet
+            element={(props) => (
+              <div aria-live="polite" aria-relevant="all" {...props} />
+            )}
+          >
+            {Children.map(
+              (Children.only(children) as JSX.Element).props.children,
               (child, idx) => {
+                // If the last Chip is selected, select it.
                 if (!lastSelected) return child;
-
                 if (idx === noOfChips - 1)
-                  return React.cloneElement(child as JSX.Element, {
-                    selected: true,
-                  });
+                  return cloneElement(child as JSX.Element, { selected: true });
                 return child;
-              }
+              },
             )}
           </ChipSet>
 
@@ -376,7 +368,7 @@ export function ChipField({
       {/* Linear progress for i.e. fetching a Chip from user data */}
       <Progress
         appearance="linear"
-        alt={locale === "th" ? "กำลังโหลด" : "Loading…"}
+        alt={{ "en-US": "Loading…", th: "กำลังโหลด" }[locale]}
         value={typeof loading === "number" ? loading : undefined}
         visible={typeof loading === "number" || loading}
       />
@@ -387,8 +379,10 @@ export function ChipField({
           {helperMsg}
         </span>
       )}
-    </div>
+    </Element>
   );
-}
+};
 
 ChipField.displayName = "ChipField";
+
+export default ChipField;

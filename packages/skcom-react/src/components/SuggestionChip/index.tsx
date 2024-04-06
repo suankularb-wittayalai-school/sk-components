@@ -1,28 +1,28 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { Interactive } from "../Interactive";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/suggestion-chip.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
+import Interactive from "../Interactive";
 
 /**
- * Props for {@link SuggestionChip Suggestion Chip}.
+ * Dynamically generated suggestions, like quick-reply options, for instance.
+ *
+ * @param children The text shown inside the Suggestion Chip.
+ * @param icon An icon can appear before the text (`children`) in an Suggestion Chip.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Suggestion Chip.
+ * @param elevated Use elevation instead of an outline to signify the Suggestion Chip’s boundary.
+ * @param selected If the Suggestion Chip is selected.
+ * @param disabled Turns the Suggestion Chip gray and block any action associated with it.
+ * @param onClick The function called when the user interacts with the Suggestion Chip, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Suggestion Chip leads to, similar to `href` on `<a>`.
  */
-export interface SuggestionChipProps extends SKComponent {
+const SuggestionChip: StylableFC<{
   /**
    * The text shown inside the Suggestion Chip.
    *
    * - Always required.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * An icon can appear before the text (`children`) in an Suggestion Chip. In
@@ -71,35 +71,15 @@ export interface SuggestionChipProps extends SKComponent {
   /**
    * The function called when the user interacts with the Suggestion Chip,
    * similar to `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Suggestion Chip leads to, similar to `href` on
    * `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
-}
-
-/**
- * Dynamically generated suggestions, like quick-reply options, for instance.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.oxbjowubritq SKCom documentation}
- *
- * @param children The text shown inside the Suggestion Chip.
- * @param icon An icon can appear before the text (`children`) in an Suggestion Chip.
- * @param tooltip A message shown in a tooltip when the user hovers over the Suggestion Chip.
- * @param elevated Use elevation instead of an outline to signify the Suggestion Chip’s boundary.
- * @param selected If the Suggestion Chip is selected.
- * @param disabled Turns the Suggestion Chip gray and block any action associated with it.
- * @param onClick The function called when the user interacts with the Suggestion Chip, similar to `onClick` on `<button>`.
- * @param href The URL of the page this Suggestion Chip leads to, similar to `href` on `<a>`.
- */
-export function SuggestionChip({
+}> = ({
   children,
   icon,
   tooltip,
@@ -111,25 +91,25 @@ export function SuggestionChip({
   element,
   style,
   className,
-}: SuggestionChipProps) {
-  return (
-    <Interactive
-      onClick={onClick}
-      href={href}
-      element={element || "button"}
-      attr={{ "aria-disabled": disabled, title: tooltip }}
-      style={style}
-      className={cn([
-        "skc-suggestion-chip",
-        elevated && "skc-suggestion-chip--elevated",
-        selected && "skc-suggestion-chip--selected",
-        className,
-      ])}
-    >
-      {icon && <div className="skc-suggestion-chip__icon">{icon}</div>}
-      <span className="skc-suggestion-chip__label">{children}</span>
-    </Interactive>
-  );
-}
+}) => (
+  <Interactive
+    onClick={onClick}
+    href={href}
+    element={element}
+    attr={{ "aria-disabled": disabled, title: tooltip }}
+    style={style}
+    className={cn(
+      "skc-suggestion-chip",
+      elevated && "skc-suggestion-chip--elevated",
+      selected && "skc-suggestion-chip--selected",
+      className,
+    )}
+  >
+    {icon && <div className="skc-suggestion-chip__icon">{icon}</div>}
+    <span className="skc-suggestion-chip__label">{children}</span>
+  </Interactive>
+);
 
 SuggestionChip.displayName = "SuggestionChip";
+
+export default SuggestionChip;

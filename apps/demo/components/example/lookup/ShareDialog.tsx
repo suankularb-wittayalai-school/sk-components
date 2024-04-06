@@ -1,5 +1,5 @@
 // External libraries
-import { FC } from "react";
+import { ComponentProps, FC } from "react";
 
 // SK Components
 import {
@@ -8,15 +8,13 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogProps,
   MaterialIcon,
   Text,
 } from "@suankularb-components/react";
 
-const ShareDialog: FC<Pick<DialogProps, "open" | "onClose">> = ({
-  open,
-  onClose,
-}) => (
+const ShareDialog: FC<
+  Pick<ComponentProps<typeof Dialog>, "open" | "onClose">
+> = ({ open, onClose }) => (
   <Dialog open={open} onClose={onClose} width={312}>
     <DialogHeader desc="Share Siravit Phokeed…" />
     <DialogContent className="mx-6 flex flex-col gap-4">

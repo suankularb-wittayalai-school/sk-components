@@ -1,31 +1,34 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { Interactive } from "../Interactive";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/filter-chip.css";
-
-// Utilities
+import { FC, ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
+import Button from "../Button";
+import Interactive from "../Interactive";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link FilterChip Filter Chip}.
+ * A set of Filter Chips provide product-authored options to narrow down
+ * content. A Filter Chip should never appear alone and should be a child of
+ * Chip Set.
+ *
+ * @param children The text displayed inside the chip.
+ * @param icon An icon can appear before all content in an Filter Chip.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Filter Chip.
+ * @param elevated Use elevation instead of an outline to signify the Filter Chip’s boundary.
+ * @param selected If the Filter Chip is selected.
+ * @param disabled Turns the Filter Chip gray and block any action associated with it.
+ * @param onToggle Triggers when the user toggles the Filter Chip on or off.
+ * @param onMenuToggle Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
+ * @param menu Turns the Filter Chip into a dropdown, displaying a Menu underneath the chip.
  */
-export interface FilterChipProps extends SKComponent {
+const FilterChip: StylableFC<{
   /**
    * The text displayed inside the chip.
    *
    * - Must be a string or a JSX Element.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * An icon can appear before all content in an Filter Chip. In a page with
@@ -92,26 +95,7 @@ export interface FilterChipProps extends SKComponent {
    * - Optional.
    */
   menu?: JSX.Element;
-}
-
-/**
- * A set of Filter Chips provide product-authored options to narrow down
- * content. A Filter Chip should never appear alone and should be a child of
- * Chip Set.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.vps8muzdcylu SKCom documentation}
- *
- * @param children The text displayed inside the chip.
- * @param icon An icon can appear before all content in an Filter Chip.
- * @param tooltip A message shown in a tooltip when the user hovers over the Filter Chip.
- * @param elevated Use elevation instead of an outline to signify the Filter Chip’s boundary.
- * @param selected If the Filter Chip is selected.
- * @param disabled Turns the Filter Chip gray and block any action associated with it.
- * @param onToggle Triggers when the user toggles the Filter Chip on or off.
- * @param onMenuToggle Triggers when the user toggles the Menu by clicking the trailing dropdown icon on the Filter Chip.
- * @param menu Turns the Filter Chip into a dropdown, displaying a Menu underneath the chip.
- */
-export function FilterChip({
+}> = ({
   children,
   icon,
   tooltip,
@@ -124,18 +108,18 @@ export function FilterChip({
   element,
   style,
   className,
-}: FilterChipProps) {
-  const FilterChip: React.FC = () => (
+}) => {
+  const FilterChip: FC = () => (
     <Interactive
       onClick={onClick && !onMenuToggle ? () => onClick(!selected) : undefined}
       element={element || (onMenuToggle ? "div" : "button")}
       style={style}
-      className={cn([
+      className={cn(
         "skc-filter-chip",
         elevated && "skc-filter-chip--elevated",
         selected && "skc-filter-chip--selected",
         className,
-      ])}
+      )}
       attr={{ "aria-disabled": disabled, title: tooltip }}
     >
       {/* Icon */}
@@ -176,6 +160,8 @@ export function FilterChip({
   ) : (
     <FilterChip />
   );
-}
+};
 
 FilterChip.displayName = "FilterChip";
+
+export default FilterChip;

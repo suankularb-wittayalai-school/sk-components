@@ -1,28 +1,28 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { Interactive } from "../Interactive";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/menu-item.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
+import Interactive from "../Interactive";
 
 /**
- * Props for {@link MenuItem Menu Item}.
+ * An action/option inside a temporary list.
+ *
+ * @param children The text displayed inside the Menu Item.
+ * @param icon An icon can appear before the text (`children`) in a Menu Item.
+ * @param metadata A message shown in a tooltip when the user hovers over the Menu Item.
+ * @param selected If this Menu Item is selected in a dropdown Menu.
+ * @param disabled Turns the Menu Item text gray and block any action associated with it.
+ * @param value The value of a Select item, similar to `value` on `<option>`.
+ * @param onClick The function called when the user interacts with the Menu Item, similar to `onClick` on `<button>`.
+ * @param href The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
  */
-export interface MenuItemProps extends SKComponent {
+const MenuItem: StylableFC<{
   /**
    * The text displayed inside the Menu Item.
    *
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * An icon can appear before the text (`children`) in a Menu Item. In a long
@@ -69,34 +69,14 @@ export interface MenuItemProps extends SKComponent {
   /**
    * The function called when the user interacts with the Menu Item, similar
    * to `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
-}
-
-/**
- * An action/option inside a temporary list.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
- *
- * @param children The text displayed inside the Menu Item.
- * @param icon An icon can appear before the text (`children`) in a Menu Item.
- * @param metadata A message shown in a tooltip when the user hovers over the Menu Item.
- * @param selected If this Menu Item is selected in a dropdown Menu.
- * @param disabled Turns the Menu Item text gray and block any action associated with it.
- * @param value The value of a Select item, similar to `value` on `<option>`.
- * @param onClick The function called when the user interacts with the Menu Item, similar to `onClick` on `<button>`.
- * @param href The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
- */
-export function MenuItem({
+}> = ({
   children,
   icon,
   metadata,
@@ -107,33 +87,31 @@ export function MenuItem({
   element,
   style,
   className,
-}: MenuItemProps) {
-  return (
-    <li role="presentation">
-      <Interactive
-        href={href}
-        onClick={onClick}
-        element={element || (href ? "a" : "button")}
-        attr={{
-          role: "menuitem",
-          "aria-selected": selected,
-          "aria-disabled": disabled,
-        }}
-        style={style}
-        className={cn([
-          "skc-menu-item",
-          selected && "skc-menu-item--selected",
-          className,
-        ])}
-      >
-        {icon && <div className="skc-menu-item__icon">{icon}</div>}
-        <span className="skc-menu-item__label">{children}</span>
-        {metadata && (
-          <span className="skc-menu-item__metadata">{metadata}</span>
-        )}
-      </Interactive>
-    </li>
-  );
-}
+}) => (
+  <li role="presentation">
+    <Interactive
+      href={href}
+      onClick={onClick}
+      element={element}
+      attr={{
+        role: "menuitem",
+        "aria-selected": selected,
+        "aria-disabled": disabled,
+      }}
+      style={style}
+      className={cn(
+        "skc-menu-item",
+        selected && "skc-menu-item--selected",
+        className,
+      )}
+    >
+      {icon && <div className="skc-menu-item__icon">{icon}</div>}
+      <span className="skc-menu-item__label">{children}</span>
+      {metadata && <span className="skc-menu-item__metadata">{metadata}</span>}
+    </Interactive>
+  </li>
+);
 
 MenuItem.displayName = "MenuItem";
+
+export default MenuItem;

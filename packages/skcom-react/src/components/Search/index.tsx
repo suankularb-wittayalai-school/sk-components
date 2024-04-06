@@ -1,35 +1,46 @@
-// External libraries
-import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { List } from "../List";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/search.css";
-
-// Utilities
+import { AnimatePresence, motion } from "framer-motion";
+import { dash } from "radash";
+import {
+  Children,
+  ComponentProps,
+  ReactNode,
+  Ref,
+  cloneElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
-import { kebabify } from "../../utils/format";
+import Button from "../Button";
+import List from "../List";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link Search}.
+ * Search allows the user to quickly find something using a query. It can also
+ * immediately show some useful results as the user is typing, utilizing List.
+ *
+ * @param children Some useful search results that appear underneath the field.
+ * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.
+ * @param value The value inside the field. This is useful if you want a controlled input.
+ * @param locale Allows for translation of the default placeholder message.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param onSearch This function triggers when the search button is clicked.
+ * @param placeholder A faint text displayed inside the field guiding the user.
+ * @param disabled Turns the Search gray and block any action associated with it.
+ * @param inputAttr Attributes for the underlying `<input>` element.
  */
-export interface SearchProps extends SKComponent {
+const Search: StylableFC<{
   /**
    * Some useful search results that appear underneath the field.
    *
    * - You are encouraged to use {@link List} here.
    * - Optional.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * A description of the Search for screen readers, similar to `alt` on
@@ -55,7 +66,7 @@ export interface SearchProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * This function triggers when the user make changes to the field value. The
@@ -92,57 +103,35 @@ export interface SearchProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: React.ComponentProps<"input">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
-}
-
-/**
- * Search allows the user to quickly find something using a query. It can also
- * immediately show some useful results as the user is typing, utilizing List.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
- *
- * @param children Some useful search results that appear underneath the field.
- * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.
- * @param value The value inside the field. This is useful if you want a controlled input.
- * @param locale Allows for translation of the default placeholder message.
- * @param onChange This function triggers when the user make changes to the field value.
- * @param onSearch This function triggers when the search button is clicked.
- * @param placeholder A faint text displayed inside the field guiding the user.
- * @param disabled Turns the Search gray and block any action associated with it.
- * @param inputAttr Attributes for the underlying `<input>` element.
- */
-export function Search({
+  inputAttr?: ComponentProps<"input">;
+}> = ({
   children,
   alt,
   value,
-  locale,
+  locale = "en-US",
   onChange,
   onSearch,
   placeholder,
   disabled,
   inputAttr,
+  element: Element = "div",
   style,
   className,
-}: SearchProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
 
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
+  const inputRef: Ref<HTMLInputElement> = useRef(null);
 
-  const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
-  const [exitComplete, setExitComplete] = React.useState<boolean>(true);
-  React.useEffect(() => {
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [exitComplete, setExitComplete] = useState(true);
+  useEffect(() => {
     if (showSuggestions) setExitComplete(false);
   }, [showSuggestions]);
 
-  const searchID = `search-${kebabify(alt)}`;
+  const searchID = `search-${dash(alt)}`;
 
   return (
-    <div
+    <Element
       style={{
         ...style,
         ...(showSuggestions
@@ -150,20 +139,17 @@ export function Search({
               borderBottom: "1px solid var(--outline)",
               marginBottom: "-0.75px",
             }
-          : {
-              borderBottom: "none",
-              marginBottom: 0,
-            }),
+          : { borderBottom: "none", marginBottom: 0 }),
         ...(exitComplete
           ? { borderRadius: "var(--rounded-xl)" }
           : { borderRadius: "var(--rounded-xl) var(--rounded-xl) 0 0" }),
       }}
-      className={cn(["skc-search", className])}
+      className={cn("skc-search", className)}
     >
       {/* Search button */}
       <Button
         appearance="text"
-        alt={locale === "th" ? "ค้นหา" : "Search"}
+        alt={{ "en-US": "Search", th: "ค้นหา" }[locale]}
         icon={<MaterialIcon icon="search" />}
         onClick={() => {
           if (!showSuggestions && exitComplete) inputRef.current?.focus();
@@ -184,7 +170,7 @@ export function Search({
         id={searchID}
         name={searchID}
         enterKeyHint="search"
-        placeholder={placeholder || (locale === "th" ? "ค้นหา" : "Search")}
+        placeholder={placeholder || { "en-US": "Search", th: "ค้นหา" }[locale]}
         className="skc-search__input"
         value={value}
         onChange={(event) => onChange && onChange(event.target.value)}
@@ -212,12 +198,12 @@ export function Search({
                 opacity: 0,
                 transition: transition(
                   duration.short3,
-                  easing.standardAccelerate
+                  easing.standardAccelerate,
                 ),
               }}
               transition={transition(
                 duration.medium2,
-                easing.standardDecelerate
+                easing.standardDecelerate,
               )}
               className="skc-search__list"
               onClick={() => setShowSuggestions(false)}
@@ -225,19 +211,19 @@ export function Search({
               {/* If `children` is a List, inject List Items to close
                   suggestions on click */}
               {children &&
-              React.Children.count(children) === 1 &&
-              matchDisplayName(React.Children.only(children), "List") ? (
+              Children.count(children) === 1 &&
+              matchDisplayName(Children.only(children), "List") ? (
                 <List {...(children as JSX.Element).props}>
-                  {React.Children.map(
+                  {Children.map(
                     (children as JSX.Element).props.children,
                     (child) =>
-                      React.cloneElement(child, {
+                      cloneElement(child, {
                         onClick: () => {
                           const { onClick } = (child as JSX.Element).props;
                           if (onClick) onClick();
                           setShowSuggestions(false);
                         },
-                      })
+                      }),
                   )}
                 </List>
               ) : (
@@ -253,8 +239,10 @@ export function Search({
           </>
         )}
       </AnimatePresence>
-    </div>
+    </Element>
   );
-}
+};
 
 Search.displayName = "Search";
+
+export default Search;

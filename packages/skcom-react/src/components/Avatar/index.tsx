@@ -1,23 +1,18 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/avatar.css";
-
-// Utilities
 import { cn } from "../../utils/className";
+import { StylableFC } from "../../types";
+import { ReactNode } from "react";
 
 /**
- * Props for {@link Avatar}.
+ * An avatar represents the user, whether by their initials or their picture.
+ *
+ * @param children A user’s initials or their profile image.
  */
-export interface AvatarProps extends SKComponent {
+const Avatar: StylableFC<{
   /**
    * A user’s initials or their profile image.
    *
-   * - The value has 3 meanings:
+   * - Depending on the value, the avatar is displayed differently:
    *   - If the value is a string, it is displayed as the user’s initials. The
    *     string should be no more that 2 characters long.
    *   - If the value is a JSX Element, it is displayed as the user’s profile
@@ -25,21 +20,10 @@ export interface AvatarProps extends SKComponent {
    *   - If not defined, a placeholder avatar is displayed.
    * - Optional.
    */
-  children?: React.ReactNode;
-}
-
-/**
- * An avatar represents the user, whether by their initials or their picture.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children A user’s initials or their profile image.
- */
-export function Avatar({ children, element, style, className }: AvatarProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-avatar", className]) },
-    typeof children === "string" ? (
+  children?: ReactNode;
+}> = ({ children, element: Element = "div", style, className }) => (
+  <Element style={style} className={cn(`skc-avatar`, className)}>
+    {typeof children === "string" ? (
       // Initials
       <span className="skc-avatar__initials">{children}</span>
     ) : children ? (
@@ -60,8 +44,10 @@ export function Avatar({ children, element, style, className }: AvatarProps) {
           fill="currentColor"
         />
       </svg>
-    )
-  );
-}
+    )}
+  </Element>
+);
 
 Avatar.displayName = "Avatar";
+
+export default Avatar;

@@ -1,20 +1,21 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/nav-drawer-item.css";
-
-// Utilities
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
-import { Interactive } from "../Interactive";
+import Interactive from "../Interactive";
 
 /**
- * Props for {@link NavDrawerItem Navigation Drawer Item}.
+ * A destination in a Navigation Drawer. Should be a child of a Navigation
+ * Drawer Section.
+ *
+ * @param icon Icons help users identify pages more quickly.
+ * @param label The title of the destination page.
+ * @param metadata Some text aligned to the right of a Navigation Drawer Item.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Drawer Item.
+ * @param selected Highlights the Navigation Drawer Item.
+ * @param onClick The function called when the user interacts with the Navigation Drawer Item.
+ * @param href The URL of the page this Navigation Drawer Item leads to, similar to `href` on `<a>`.
  */
-export interface NavDrawerItemProps extends SKComponent {
+const NavDrawerItem: StylableFC<{
   /**
    * Icons help users identify pages more quickly.
    *
@@ -70,23 +71,7 @@ export interface NavDrawerItemProps extends SKComponent {
    * - Incompatible with `onClick`.
    */
   href?: string;
-}
-
-/**
- * A destination in a Navigation Drawer. Should be a child of a Navigation
- * Drawer Section.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation}
- *
- * @param icon Icons help users identify pages more quickly.
- * @param label The title of the destination page.
- * @param metadata Some text aligned to the right of a Navigation Drawer Item.
- * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Drawer Item.
- * @param selected Highlights the Navigation Drawer Item.
- * @param onClick The function called when the user interacts with the Navigation Drawer Item.
- * @param href The URL of the page this Navigation Drawer Item leads to, similar to `href` on `<a>`.
- */
-export function NavDrawerItem({
+}> = ({
   icon,
   label,
   metadata,
@@ -97,29 +82,29 @@ export function NavDrawerItem({
   element,
   style,
   className,
-}: NavDrawerItemProps) {
-  return (
-    <li>
-      <Interactive
-        href={href}
-        onClick={onClick}
-        element={element}
-        attr={{ "aria-current": selected, title: tooltip }}
-        style={style}
-        className={cn([
-          "skc-nav-drawer-item",
-          selected && "skc-nav-drawer-item--selected",
-          className,
-        ])}
-      >
-        <div className="skc-nav-drawer-item__icon">{icon}</div>
-        <span className="skc-nav-drawer-item__label">{label}</span>
-        {metadata && (
-          <span className="skc-nav-drawer-item__metadata">{metadata}</span>
-        )}
-      </Interactive>
-    </li>
-  );
-}
+}) => (
+  <li>
+    <Interactive
+      href={href}
+      onClick={onClick}
+      element={element}
+      attr={{ "aria-current": selected, title: tooltip }}
+      style={style}
+      className={cn(
+        "skc-nav-drawer-item",
+        selected && "skc-nav-drawer-item--selected",
+        className,
+      )}
+    >
+      <div className="skc-nav-drawer-item__icon">{icon}</div>
+      <span className="skc-nav-drawer-item__label">{label}</span>
+      {metadata && (
+        <span className="skc-nav-drawer-item__metadata">{metadata}</span>
+      )}
+    </Interactive>
+  </li>
+);
 
 NavDrawerItem.displayName = "NavDrawerItem";
+
+export default NavDrawerItem;

@@ -1,33 +1,42 @@
-// External libraries
-import { AnimatePresence, motion, Variants } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/fullscreen-dialog.css";
-
-// Utilities
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import { dash } from "radash";
+import {
+  Children,
+  cloneElement,
+  CSSProperties,
+  ReactNode,
+  useEffect,
+} from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 import { useBreakpoint } from "../../utils/window";
+import Button from "../Button";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link FullscreenDialog Full-screen Dialog}.
+ * A Full-screen Dialog fills the entire screen containing a series of tasks
+ * required to complete.
+ *
+ * A Full-screen Dialog only fills the screen on mobile and turns into a Dialog
+ * on larger screens. A Dialog can appear above a Full-screen Dialog.
+ *
+ * @param children The content.
+ * @param open If the Full-screen Dialog is open and shown.
+ * @param title The title text.
+ * @param action The submission Button.
+ * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
+ * @param locale Allows for translation of the accessibility labels.
+ * @param onClose The function triggered when the scrim is clicked.
  */
-export interface FullscreenDialogProps extends SKComponent {
+const FullscreenDialog: StylableFC<{
   /**
    * The content.
    *
    * - Always required.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * If the Full-screen Dialog is open and shown.
@@ -57,7 +66,7 @@ export interface FullscreenDialogProps extends SKComponent {
    *
    * - Optional.
    */
-  width?: React.CSSProperties["width"];
+  width?: CSSProperties["width"];
 
   /**
    * A description of the Full-screen Dialog for screen readers, similar to
@@ -75,7 +84,7 @@ export interface FullscreenDialogProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * The function triggered when the scrim is clicked.
@@ -86,37 +95,18 @@ export interface FullscreenDialogProps extends SKComponent {
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * A Full-screen Dialog fills the entire screen containing a series of tasks
- * required to complete.
- *
- * A Full-screen Dialog only fills the screen on mobile and turns into a Dialog
- * on larger screens. A Dialog can appear above a Full-screen Dialog.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation}
- *
- * @param children The content.
- * @param open If the Full-screen Dialog is open and shown.
- * @param title The title text.
- * @param action The submission Button.
- * @param width The width of the Dialog this Full-screen Dialog transforms into can be set here.
- * @param locale Allows for translation of the accessibility labels.
- * @param onClose The function triggered when the scrim is clicked.
- */
-export function FullscreenDialog({
+}> = ({
   children,
   open,
   title,
   action,
   width,
   alt,
-  locale,
+  locale = "en-US",
   onClose,
   style,
   className,
-}: FullscreenDialogProps) {
+}) => {
   // Animations
   // Dialog and Full-screen Dialog have different animations. The animation is
   // determined with the current breakpoint.
@@ -146,10 +136,10 @@ export function FullscreenDialog({
   };
 
   // Focus on the main Button
-  React.useEffect(() => {
+  useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-fullscreen-dialog__top-app-bar"
+        ".skc-fullscreen-dialog__top-app-bar",
       );
 
       const buttons =
@@ -159,7 +149,7 @@ export function FullscreenDialog({
   }, [open]);
 
   // Close the Dialog with the escape key
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKeyUp = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
@@ -168,20 +158,18 @@ export function FullscreenDialog({
   }, []);
 
   // Generate the base ID for `aria-labelledby` and `aria-describedby`
-  const dialogID = `dialog-${kebabify(
-    (typeof title === "string" ? title : alt)!
-  )}`;
+  const dialogID = `dialog-${dash((typeof title === "string" ? title : alt)!)}`;
 
   // Inject first `<p>` element with an ID that `aria-describedby` can point to
   let pIsInjected = false;
-  const injectedChildren = React.Children.map(children, (child) => {
+  const injectedChildren = Children.map(children, (child) => {
     if ((child as JSX.Element).type === "p") {
       // If a `<p>` was already injected, don’t inject this `<p>`
       if (pIsInjected) return child;
 
       // Inject the first `<p>` with an ID
       pIsInjected = true;
-      return React.cloneElement(child as JSX.Element, {
+      return cloneElement(child as JSX.Element, {
         id: `${dialogID}-desc`,
       });
     }
@@ -223,7 +211,7 @@ export function FullscreenDialog({
               ...style,
               ...(atBreakpoint !== "base" ? { width, borderRadius: 28 } : {}),
             }}
-            className={cn(["skc-fullscreen-dialog", className])}
+            className={cn("skc-fullscreen-dialog", className)}
           >
             {/* Top app bar */}
             <div className="skc-fullscreen-dialog__top-app-bar">
@@ -246,6 +234,8 @@ export function FullscreenDialog({
       )}
     </AnimatePresence>
   );
-}
+};
 
 FullscreenDialog.displayName = "FullscreenDialog";
+
+export default FullscreenDialog;

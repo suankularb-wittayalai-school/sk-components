@@ -1,21 +1,20 @@
-// External libraries
-import { motion } from "framer-motion";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/radio.css";
-
-// Utilities
+import { motion } from "framer-motion";
+import { ComponentProps, Ref, useRef } from "react";
+import { StylableFC } from "../../types";
 import { useRipple } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Radio}.
+ * A choice from a single-select set of choices. Unlike Checkbox and Switch,
+ * Radio always appear in a group.
+ *
+ * @param value The state of the Radio. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user toggles the Radio.
+ * @param disabled Turns the Radio gray and block any action associated with it.
+ * @param inputAttr Attributes for the underlying `<input>` element.
  */
-export interface RadioProps extends SKComponent {
+const Radio: StylableFC<{
   /**
    * The state of the Radio. This is useful if you want a controlled input.
    *
@@ -48,46 +47,29 @@ export interface RadioProps extends SKComponent {
    *
    * - Optional.
    */
-  inputAttr?: React.ComponentProps<"input">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
-}
-
-/**
- * A choice from a single-select set of choices. Unlike Checkbox and Switch,
- * Radio always appear in a group.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ilewd6wmow42 SKCom documentation}
- *
- * @param value The state of the Radio. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user toggles the Radio.
- * @param disabled Turns the Radio gray and block any action associated with it.
- * @param inputAttr Attributes for the underlying `<input>` element.
- */
-export function Radio({
+  inputAttr?: ComponentProps<"input">;
+}> = ({
   value,
   onChange,
   disabled,
   inputAttr,
+  element: Element = "label",
   style,
   className,
-}: RadioProps) {
+}) => {
   // Ripple setup
-  const rippleParentRef: React.LegacyRef<HTMLDivElement> = React.useRef(null);
+  const rippleParentRef: Ref<HTMLDivElement> = useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } =
     useRipple(rippleParentRef);
 
   return (
-    <label
+    <Element
       style={style}
-      className={cn([
+      className={cn(
         "skc-radio",
         disabled && "skc-radio--disabled",
-        className,
-      ])}
+        className
+      )}
       {...rippleListeners}
     >
       {/* Native input (for logic and accessibility only and is hidden to
@@ -123,8 +105,10 @@ export function Radio({
           style={rippleStyle}
         />
       </div>
-    </label>
+    </Element>
   );
-}
+};
 
 Radio.displayName = "Radio";
+
+export default Radio;

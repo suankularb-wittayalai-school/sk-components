@@ -1,29 +1,30 @@
-// External libraries
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Interactive } from "../Interactive";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/nav-bar-item.css";
-
-// Utilities
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { dash } from "radash";
+import { useRef } from "react";
+import { StylableFC } from "../../types";
 import {
   transition,
   useAnimationConfig,
   useRipple,
 } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
+import Interactive from "../Interactive";
 
 /**
- * Props for {@link NavBarItem Navigation Bar Item}.
+ * A destination in the Navigation Bar.
+ *
+ * @param icon Icons help users identify pages more quickly, which is crucial for frequent destinations like those from the Navigation Bar/Rail.
+ * @param label An additional text label underneath the icon.
+ * @param alt A description of the Navigation Bar Item for screen readers, similar to `alt` on `<img>`.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Bar Item.
+ * @param badge The number in the notification badge of this Navigation Bar Item.
+ * @param selected Highlights the Navigation Bar Item. If the user is currently on this page, the Navigation Bar Item should be highlighted.
+ * @param railOnly This Navigation Bar Item will only show on the Navigation Rail visible on larger screens and disappears on smaller screens.
+ * @param onClick The function called when the user interacts with the Navigation Bar Item.
+ * @param href The URL of the page this Navigation Bar Item leads to, similar to `href` on `<a>`.
  */
-export interface NavBarItemProps extends SKComponent {
+const NavBarItem: StylableFC<{
   /**
    * Icons help users identify pages more quickly, which is crucial for
    * frequent destinations like those from the Navigation Bar/Rail.
@@ -102,23 +103,7 @@ export interface NavBarItemProps extends SKComponent {
    * - Incompatible with `onClick`.
    */
   href?: string;
-}
-
-/**
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s8z7t3ulnwdb SKCom documentation}
- *
- * @param icon Icons help users identify pages more quickly, which is crucial for frequent destinations like those from the Navigation Bar/Rail.
- * @param label An additional text label underneath the icon.
- * @param alt A description of the Navigation Bar Item for screen readers, similar to `alt` on `<img>`.
- * @param tooltip A message shown in a tooltip when the user hovers over the Navigation Bar Item.
- * @param badge The number in the notification badge of this Navigation Bar Item.
- * @param selected Highlights the Navigation Bar Item. If the user is currently on this page, the Navigation Bar Item should be highlighted.
- * @param railOnly This Navigation Bar Item will only show on the Navigation Rail visible on larger screens and disappears on smaller screens.
- * @param onClick The function called when the user interacts with the Navigation Bar Item.
- * @param href The URL of the page this Navigation Bar Item leads to, similar to `href` on `<a>`.
- */
-export function NavBarItem({
+}> = ({
   icon,
   label,
   alt,
@@ -131,17 +116,17 @@ export function NavBarItem({
   element,
   style,
   className,
-}: NavBarItemProps) {
+}) => {
   // Animation config
   const { duration, easing } = useAnimationConfig();
 
   // Ripple setup
-  const iconRef = React.useRef(null);
+  const iconRef = useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(iconRef);
 
   // Label ID for `aria-labelledby`
-  const navID = `nav-section-${kebabify(
-    (typeof label === "string" ? label : alt)!
+  const navID = `nav-section-${dash(
+    (typeof label === "string" ? label : alt)!,
   )}`;
 
   return (
@@ -158,12 +143,12 @@ export function NavBarItem({
         ...rippleListeners,
       }}
       style={style}
-      className={cn([
+      className={cn(
         "skc-nav-bar-item",
         selected && "skc-nav-bar-item--selected",
         railOnly && "skc-nav-bar-item--rail-only",
         className,
-      ])}
+      )}
     >
       {/* Icon */}
       <div ref={iconRef} className="skc-nav-bar-item__icon">
@@ -205,6 +190,8 @@ export function NavBarItem({
       )}
     </Interactive>
   );
-}
+};
 
 NavBarItem.displayName = "NavBarItem";
+
+export default NavBarItem;

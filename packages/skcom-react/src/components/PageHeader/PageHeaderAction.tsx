@@ -1,24 +1,20 @@
-// Internal components
-import { PageHeaderProps } from ".";
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
+import { ComponentProps, FC } from "react";
+import PageHeader from ".";
+import Button from "../Button";
+import MaterialIcon from "../MaterialIcon";
 
-export default function PageHeaderAction({
-  parentURL,
-  locale,
-  buttonElement,
-  onBack,
-  onNavToggle,
-}: Pick<
-  PageHeaderProps,
-  "parentURL" | "locale" | "buttonElement" | "onBack" | "onNavToggle"
->) {
-  return parentURL || onBack ? (
+const PageHeaderAction: FC<
+  Pick<
+    ComponentProps<typeof PageHeader>,
+    "parentURL" | "locale" | "buttonElement" | "onBack" | "onNavToggle"
+  >
+> = ({ parentURL, locale = "en-US", buttonElement, onBack, onNavToggle }) =>
+  parentURL || onBack ? (
     // Back Button
     <Button
       appearance="text"
       icon={<MaterialIcon icon="arrow_backward" />}
-      alt={locale === "th" ? "กลับ" : "Navigate up"}
+      alt={{ "en-US": "Navigate up", th: "กลับ" }[locale]}
       onClick={onBack}
       href={parentURL}
       element={buttonElement}
@@ -28,9 +24,10 @@ export default function PageHeaderAction({
     <Button
       appearance="text"
       icon={<MaterialIcon icon="menu" />}
-      alt={locale === "th" ? "เปิดเมนู" : "Open navigation"}
+      alt={{ "en-US": "Open navigation", th: "เปิดเมนู" }[locale]}
       onClick={onNavToggle}
       className="skc-page-header__nav-toggle"
     />
   );
-}
+
+export default PageHeaderAction;

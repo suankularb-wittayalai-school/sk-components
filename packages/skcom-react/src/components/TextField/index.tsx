@@ -1,32 +1,66 @@
-// External libraries
+import "@suankularb-components/css/dist/css/components/text-field.css";
 import {
   AnimatePresence,
   LayoutGroup,
   motion,
   useAnimationControls,
 } from "framer-motion";
-import * as React from "react";
-
-// Internal components
-import { Button } from "../Button";
-import { MaterialIcon } from "../MaterialIcon";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
-import "@suankularb-components/css/dist/css/components/text-field.css";
-
-// Utilities
+import { dash } from "radash";
+import {
+  ChangeEvent,
+  ComponentProps,
+  LegacyRef,
+  createElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
+import Button from "../Button";
+import MaterialIcon from "../MaterialIcon";
 
 /**
- * Props for {@link TextField Text Field}.
+ * A place for users to enter text.
+ *
+ * @param appearance How the Text Field looks.
+ * @param label The placeholder text and the label text.
+ * @param behavior How the Text Field behaves if the field value exceeds the visual space.
+ * @param align The alignment of the input field.
+ * @param leading The leading text or icon, aligned to the left.
+ * @param trailing The trailing text or icon, aligned to the right.
+ * @param alt A description of the Text Field for screen readers, similar to `alt` on `<img>`.
+ * @param helperMsg A short description of the Text Field, or an error message during an error state.
+ * @param required If the user has to enter text in this field for the form to be valid.
+ * @param disabled Turns the Text Field gray and block user input.
+ * @param canClear Allows the user to clear the field value with the clear button.
+ * @param error Tells Text Field that it contains an invalid value and activates the error state.
+ * @param value The value inside the field. This is useful if you want a controlled input.
+ * @param onChange This function triggers when the user make changes to the field value.
+ * @param locale Allows for translation of the “No files attached” text.
+ * @param inputAttr Attributes for the underlying `<input>` element used as the field.
  */
-export interface TextFieldProps<FieldValue extends string | File>
-  extends SKComponent {
+const TextField = <Value extends string | File>({
+  appearance,
+  label,
+  behavior,
+  align,
+  leading,
+  trailing,
+  alt,
+  helperMsg,
+  required,
+  disabled,
+  canClear,
+  error: incError,
+  value,
+  onChange,
+  locale = "en-US",
+  inputAttr,
+  style,
+  className,
+}: {
   /**
    * How the Text Field looks. An outlined Text Field has a lower emphasis than
    * filled, so it is great for a form with many fields.
@@ -151,7 +185,7 @@ export interface TextFieldProps<FieldValue extends string | File>
    *
    * @param value The value of the field.
    */
-  onChange?: (value: FieldValue) => any;
+  onChange?: (value: Value) => any;
 
   /**
    * Allows for translation of the “No files attached” text, which is put in
@@ -162,79 +196,36 @@ export interface TextFieldProps<FieldValue extends string | File>
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * Attributes for the underlying `<input>` element used as the field.
    *
    * - Optional.
    */
-  inputAttr?: React.ComponentProps<"input">;
+  inputAttr?: ComponentProps<"input">;
 
   /**
    * This prop is not supported by this component.
    */
   element?: never;
-}
-
-/**
- * A place for users to enter text.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.9oc937dbw2xq SKCom documentation}
- *
- * @param appearance How the Text Field looks.
- * @param label The placeholder text and the label text.
- * @param behavior How the Text Field behaves if the field value exceeds the visual space.
- * @param align The alignment of the input field.
- * @param leading The leading text or icon, aligned to the left.
- * @param trailing The trailing text or icon, aligned to the right.
- * @param alt A description of the Text Field for screen readers, similar to `alt` on `<img>`.
- * @param helperMsg A short description of the Text Field, or an error message during an error state.
- * @param required If the user has to enter text in this field for the form to be valid.
- * @param disabled Turns the Text Field gray and block user input.
- * @param canClear Allows the user to clear the field value with the clear button.
- * @param error Tells Text Field that it contains an invalid value and activates the error state.
- * @param value The value inside the field. This is useful if you want a controlled input.
- * @param onChange This function triggers when the user make changes to the field value.
- * @param locale Allows for translation of the “No files attached” text.
- * @param inputAttr Attributes for the underlying `<input>` element used as the field.
- */
-export function TextField<Value extends string | File>({
-  appearance,
-  label,
-  behavior,
-  align,
-  leading,
-  trailing,
-  alt,
-  helperMsg,
-  required,
-  disabled,
-  canClear,
-  error: incError,
-  value,
-  onChange,
-  locale,
-  inputAttr,
-  style,
-  className,
-}: TextFieldProps<Value>) {
+} & ComponentProps<StylableFC>) => {
   // Support for file input
-  const [file, setFile] = React.useState<File | null>(null);
+  const [file, setFile] = useState<File | null>(null);
 
   // Animation
   const { duration, easing } = useAnimationConfig();
   const labelControls = useAnimationControls();
   const trailingControls = useAnimationControls();
-  const [minifyLabel, setMinifyLabel] = React.useState<boolean | undefined>();
-  const [neverResetLabel, setNeverMinifyLabel] = React.useState<boolean>(false);
+  const [minifyLabel, setMinifyLabel] = useState<boolean | undefined>();
+  const [neverResetLabel, setNeverMinifyLabel] = useState<boolean>(false);
 
   // Transition
   const fieldTransition = transition(duration.short4, easing.standard);
 
   // Account for when the value is set from a different source that doesn’t
   // involve focusing on the Text Field
-  React.useEffect(() => {
+  useEffect(() => {
     if (value) setMinifyLabel(true);
   }, [value]);
 
@@ -258,7 +249,7 @@ export function TextField<Value extends string | File>({
 
   // Always minify label for specific input types as to not block the browser
   // input controls
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       (
         [
@@ -269,7 +260,7 @@ export function TextField<Value extends string | File>({
           "month",
           "time",
           "week",
-        ] as React.ComponentProps<"input">["type"][]
+        ] as ComponentProps<"input">["type"][]
       ).indexOf(inputAttr?.type) !== -1
     ) {
       labelControls.set(minifedLabelAnimState);
@@ -278,7 +269,7 @@ export function TextField<Value extends string | File>({
   }, [appearance, inputAttr?.type]);
 
   // Watches `minifyLabel` and sets and starts transition accordingly
-  React.useEffect(() => {
+  useEffect(() => {
     // Disable animation for some input types
     // Disable initial animation
     if (neverResetLabel || minifyLabel === undefined) return;
@@ -314,7 +305,7 @@ export function TextField<Value extends string | File>({
   }, [minifyLabel]);
 
   // Auto-expand the `<textarea>` if behavior set to `multi-line`
-  const textareaRef: React.LegacyRef<HTMLTextAreaElement> = React.useRef(null);
+  const textareaRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
   const expandTextarea = () => {
     if (behavior !== "multi-line") return;
 
@@ -324,38 +315,36 @@ export function TextField<Value extends string | File>({
     textarea.style.height = "0";
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
-  React.useEffect(() => expandTextarea, [value]);
+  useEffect(() => expandTextarea, [value]);
 
   // Error state
-  const [error, setError] = React.useState<boolean>(false);
-  React.useEffect(() => setError(Boolean(incError)), [incError]);
+  const [error, setError] = useState<boolean>(false);
+  useEffect(() => setError(Boolean(incError)), [incError]);
 
   // Accessibility
   // Generate the base ID for `aria-labelledby` and `aria-describedby`
-  const fieldID = `field-${kebabify(
-    (typeof label === "string" ? label : alt)!
-  )}`;
+  const fieldID = `field-${dash((typeof label === "string" ? label : alt)!)}`;
 
   return (
     <label
       style={style}
-      className={cn([
+      className={cn(
         "skc-text-field",
         appearance === "outlined"
           ? "skc-text-field--outlined"
           : appearance === "filled"
-          ? "skc-text-field--filled"
-          : undefined,
+            ? "skc-text-field--filled"
+            : undefined,
         behavior === "multi-line"
           ? "skc-text-field--multi-line"
           : behavior === "textarea"
-          ? "skc-text-field--textarea"
-          : "skc-text-field--single-line",
+            ? "skc-text-field--textarea"
+            : "skc-text-field--single-line",
         align === "right" ? "skc-text-field--right" : "skc-text-field--left",
         disabled && "skc-text-field--disabled",
         error && "skc-text-field--error",
         className,
-      ])}
+      )}
     >
       {/* Label */}
       <motion.span
@@ -371,7 +360,7 @@ export function TextField<Value extends string | File>({
         <motion.div className="skc-text-field__leading">{leading}</motion.div>
       )}
 
-      {React.createElement(
+      {createElement(
         !behavior || behavior === "single-line" ? "input" : "textarea",
         {
           id: fieldID,
@@ -390,7 +379,7 @@ export function TextField<Value extends string | File>({
             setError(Boolean(incError || (required && !value)));
           },
           onChange: (
-            event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+            event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
           ) => {
             const { files, value } = event.target as HTMLInputElement;
 
@@ -410,7 +399,7 @@ export function TextField<Value extends string | File>({
           },
           className: "skc-text-field__input",
           ...inputAttr,
-        }
+        },
       )}
 
       {/* File name */}
@@ -419,8 +408,8 @@ export function TextField<Value extends string | File>({
           {file
             ? file.name
             : locale === "th"
-            ? "ยังไม่ได้แนบไฟล์"
-            : "No files attached"}
+              ? "ยังไม่ได้แนบไฟล์"
+              : "No files attached"}
         </div>
       )}
 
@@ -475,6 +464,8 @@ export function TextField<Value extends string | File>({
       )}
     </label>
   );
-}
+};
 
 TextField.displayName = "TextField";
+
+export default TextField;

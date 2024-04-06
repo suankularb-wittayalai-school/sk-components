@@ -1,55 +1,42 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { ButtonProps } from "../Button";
-import { Text } from "../Text";
-import BackgroundBlobs from "./BackgroundBlobs";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/page-header.css";
-
-// Utilities
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  ComponentProps,
+  ReactNode,
+  Ref,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { LangCode, StylableFC } from "../../types";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import Button from "../Button";
+import Text from "../Text";
+import BackgroundBlobs from "./BackgroundBlobs";
 import FixedBackgroundBlobs from "./FixedBackgroundBlobs";
 import PageHeaderAction from "./PageHeaderAction";
 
 /**
- * Props for {@link PageHeader Page Header}.
+ * There’s exactly one Page Header on every page. It displays the title (in
+ * the only `<h1>` on the page), the back Button for navigating up, and
+ * the App Drawer.
+ *
+ * @param children The title text: the biggest text on a page and the only within a `<h1>` tag.
+ * @param parentURL The link the back Button navigates to.
+ * @param locale Allows for translation of the accessibility labels.
+ * @param buttonElement Change the underlying element from `<a>` to a custom element.
+ * @param onBack The function triggered when the back Button is clicked.
+ * @param onNavToggle The function called when the user clicks on the navigation Button.
  */
-export interface PageHeaderProps extends SKComponent {
+const PageHeader: StylableFC<{
   /**
    * The title text: the biggest text on a page and the only within a `<h1>`
    * tag.
    *
    * - Always required.
    */
-  children: React.ReactNode;
-
-  /**
-   * @deprecated Use `children` instead.
-   */
-  title?: string | JSX.Element;
-
-  /**
-   * @deprecated
-   */
-  icon?: JSX.Element;
-
-  /**
-   * @deprecated
-   */
-  alt?: string;
-
-  /**
-   * @deprecated
-   */
-  brand?: JSX.Element;
+  children: ReactNode;
 
   /**
    * The link the back Button navigates to.
@@ -66,11 +53,6 @@ export interface PageHeaderProps extends SKComponent {
   parentURL?: string;
 
   /**
-   * @deprecated
-   */
-  homeURL?: string;
-
-  /**
    * An App Drawer placed on the right edge of the Page Header.
    *
    * - Recommended if this app is part of a family of apps.
@@ -85,7 +67,7 @@ export interface PageHeaderProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * Change the underlying element from `<a>` to a custom element. This is
@@ -95,7 +77,7 @@ export interface PageHeaderProps extends SKComponent {
    * - Optional.
    * - Incompatible with `onBack`.
    */
-  buttonElement?: ButtonProps["element"];
+  buttonElement?: ComponentProps<typeof Button>["element"];
 
   /**
    * The function triggered when the back Button is clicked.
@@ -112,50 +94,24 @@ export interface PageHeaderProps extends SKComponent {
    * - Always required.
    */
   onNavToggle: () => any;
-
-  /**
-   * @deprecated
-   */
-  backAttr?: ButtonProps;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
-}
-
-/**
- * There’s exactly one Page Header on every page. It displays the title (in
- * the only `<h1>` on the page), the back Button for navigating up, and
- * the App Drawer.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
- *
- * @param children The title text: the biggest text on a page and the only within a `<h1>` tag.
- * @param parentURL The link the back Button navigates to.
- * @param locale Allows for translation of the accessibility labels.
- * @param buttonElement Change the underlying element from `<a>` to a custom element.
- * @param onBack The function triggered when the back Button is clicked.
- * @param onNavToggle The function called when the user clicks on the navigation Button.
- */
-export function PageHeader({
+}> = ({
   children,
   parentURL,
   appDrawer,
-  locale,
+  locale = "en-US",
   buttonElement,
   onBack,
   onNavToggle,
   style,
   className,
-}: PageHeaderProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
 
   // Page Header minimizes on scroll, this section does the calculation
-  const headerRef: React.RefObject<HTMLElement> = React.useRef(null);
-  const [minimized, setMinimized] = React.useState(false);
+  const headerRef: Ref<HTMLElement> = useRef(null);
+  const [minimized, setMinimized] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
 
@@ -186,7 +142,7 @@ export function PageHeader({
               x: -100,
               transition: transition(
                 duration.short4,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium2, easing.standardDecelerate)}
@@ -207,7 +163,7 @@ export function PageHeader({
       <header
         ref={headerRef}
         style={style}
-        className={cn([`skc-page-header`, className])}
+        className={cn(`skc-page-header`, className)}
       >
         <div className="skc-page-header__content">
           {/* Action */}
@@ -234,6 +190,8 @@ export function PageHeader({
       </header>
     </>
   );
-}
+};
 
 PageHeader.displayName = "PageHeader";
+
+export default PageHeader;

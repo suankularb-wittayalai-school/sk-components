@@ -1,19 +1,17 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/table.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link Table}.
+ * A Table is used to display data in a tabular format. It should be made up of
+ * Table Head, Table Body, and Table Foot.
+ *
+ * @param children The content of the Table.
+ * @param contentWidth The minimum width of the content.
+ * @param height The maximum height of the Table.
  */
-export interface TableProps extends SKComponent {
+const Table: StylableFC<{
   /**
    * The content of the Table.
    *
@@ -21,7 +19,7 @@ export interface TableProps extends SKComponent {
    * - Can include Table Foot in addition to the 2 required components.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * The minimum width of the content. When the Table’s width is lower than
@@ -39,35 +37,24 @@ export interface TableProps extends SKComponent {
    * - Optional.
    */
   height?: number;
-}
-
-/**
- * A row of Buttons. Table handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
- * @param children The content of the Table.
- * @param contentWidth The minimum width of the content.
- * @param height The maximum height of the Table.
- */
-export function Table({
+}> = ({
   children,
   contentWidth,
   height,
-  element,
+  element: Element = "div",
   style,
   className,
-}: TableProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style: { ...style, maxHeight: height },
-      className: cn(["skc-table", className]),
-    },
+}) => (
+  <Element
+    style={{ ...style, maxHeight: height }}
+    className={cn("skc-table", className)}
+  >
     <table style={{ minWidth: contentWidth }} className="skc-table__content">
       {children}
     </table>
-  );
-}
+  </Element>
+);
 
 Table.displayName = "Table";
+
+export default Table;

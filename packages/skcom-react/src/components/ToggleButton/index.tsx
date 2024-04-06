@@ -1,23 +1,21 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { MaterialIcon } from "../MaterialIcon";
-import { Interactive } from "../Interactive";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/toggle-button.css";
-
-// Utilities
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
+import Interactive from "../Interactive";
 
 /**
- * Props for {@link ToggleButton Toggle Button}.
+ * A Button with just an icon that can be toggled on and off.
+ *
+ * @param appearance The appearance of the Toggle Button.
+ * @param icon A Toggle Button’s action is only communicated via its icon, so keep the icon clear.
+ * @param alt A description of the Toggle Button for screen readers, similar to `alt` on `<img>`.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Toggle Button.
+ * @param dangerous If the action the Toggle Button accomplishes is dangerous, like unmuting.
+ * @param disabled Turns the Toggle Button gray and block any action associated with it.
+ * @param value Whether the Toggle Button is toggled on or off.
+ * @param onChange This function triggers when the user toggles the Toggle Button.
  */
-export interface ToggleButtonProps extends SKComponent {
+const ToggleButton: StylableFC<{
   /**
    * The appearance of the Toggle Button.
    *
@@ -93,23 +91,7 @@ export interface ToggleButtonProps extends SKComponent {
    * @param state Whether the Toggle Button is toggled on or off.
    */
   onChange?: (state: boolean) => void;
-}
-
-/**
- * A Button with just an icon that can be toggled on and off.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3rmzxf2aqo3r SKCom documentation}
- *
- * @param appearance The appearance of the Toggle Button.
- * @param icon A Toggle Button’s action is only communicated via its icon, so keep the icon clear.
- * @param alt A description of the Toggle Button for screen readers, similar to `alt` on `<img>`.
- * @param tooltip A message shown in a tooltip when the user hovers over the Toggle Button.
- * @param dangerous If the action the Toggle Button accomplishes is dangerous, like unmuting.
- * @param disabled Turns the Toggle Button gray and block any action associated with it.
- * @param value Whether the Toggle Button is toggled on or off.
- * @param onChange This function triggers when the user toggles the Toggle Button.
- */
-export function ToggleButton({
+}> = ({
   appearance,
   icon,
   alt,
@@ -121,39 +103,36 @@ export function ToggleButton({
   element,
   style,
   className,
-}: ToggleButtonProps) {
-  return (
-    <Interactive
-      element={element}
-      onClick={onChange && !disabled ? () => onChange(!value) : undefined}
-      attr={{
-        // We’re using `aria-disabled` instead of `disabled` because it does
-        // not disable tabbing in, which is better for accessibility.
-        "aria-disabled": disabled,
-        "aria-pressed": value,
-        "aria-label": alt,
-        title: tooltip,
-      }}
-      style={style}
-      className={cn([
-        "skc-toggle-button",
-        appearance === "filled"
-          ? "skc-toggle-button--filled"
-          : appearance === "tonal"
-          ? "skc-toggle-button--tonal"
-          : appearance === "outlined"
-          ? "skc-toggle-button--outlined"
-          : appearance === "standard"
-          ? "skc-toggle-button--standard"
-          : undefined,
-        value && "skc-toggle-button--selected",
-        dangerous && "skc-toggle-button--dangerous",
-        className,
-      ])}
-    >
-      {icon}
-    </Interactive>
-  );
-}
+}) => (
+  <Interactive
+    element={element}
+    onClick={onChange && !disabled ? () => onChange(!value) : undefined}
+    attr={{
+      // We’re using `aria-disabled` instead of `disabled` because it does
+      // not disable tabbing in, which is better for accessibility.
+      "aria-disabled": disabled,
+      "aria-pressed": value,
+      "aria-label": alt,
+      title: tooltip,
+    }}
+    style={style}
+    className={cn(
+      "skc-toggle-button",
+      {
+        filled: "skc-toggle-button--filled",
+        tonal: "skc-toggle-button--tonal",
+        outlined: "skc-toggle-button--outlined",
+        standard: "skc-toggle-button--standard",
+      }[appearance],
+      value && "skc-toggle-button--selected",
+      dangerous && "skc-toggle-button--dangerous",
+      className,
+    )}
+  >
+    {icon}
+  </Interactive>
+);
 
 ToggleButton.displayName = "ToggleButton";
+
+export default ToggleButton;

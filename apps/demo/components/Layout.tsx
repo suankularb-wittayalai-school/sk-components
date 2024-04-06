@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import {
+  ComponentProps,
   FC,
   forwardRef,
   ReactNode,
@@ -23,7 +24,6 @@ import {
   Progress,
   RootLayout,
   Snackbar,
-  SnackbarProps,
   Text,
 } from "@suankularb-components/react";
 
@@ -48,7 +48,8 @@ const Layout: FC<
   // Snackbar
   const { snackbar } = useContext(SnackbarContext);
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
-  const [snackbarProps, setSnackbarProps] = useState<SnackbarProps>();
+  const [snackbarProps, setSnackbarProps] =
+    useState<ComponentProps<typeof Snackbar>>();
 
   const showSnackbarAndWait = () => {
     setSnackbarProps(snackbar!.props);
@@ -117,7 +118,7 @@ const Layout: FC<
               window.open(
                 "https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing",
                 undefined,
-                "popup"
+                "popup",
               )
             }
           />
@@ -212,7 +213,7 @@ const Layout: FC<
             window.open(
               "https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing",
               undefined,
-              "popup"
+              "popup",
             )
           }
         />

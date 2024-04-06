@@ -1,21 +1,19 @@
-// External libraries
 import { AnimatePresence, motion } from "framer-motion";
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/progress.css";
-
-// Utilities
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
+import { StylableFC } from "../../types";
 
 /**
- * Props for {@link Progress}.
+ * A Progress indicates that something is ongoing. It can also indicate how
+ * much of that something has been done.
+ *
+ * @param appearance Progress can be either a loading spinner or a linear loading bar.
+ * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
+ * @param value The progress percentage (out of 100) of an activity.
+ * @param visible If this Progress is visible.
  */
-export interface ProgressProps extends SKComponent {
+const Progress: StylableFC<{
   /**
    * Progress can be either a loading spinner or a linear loading bar.
    *
@@ -49,32 +47,15 @@ export interface ProgressProps extends SKComponent {
    * - Optional.
    */
   visible?: boolean;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
-}
-
-/**
- * A Progress indicates that something is ongoing. It can also indicate how
- * much of that something has been done.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.12x5jav7hhzm SKCom documentation}
- *
- * @param appearance Progress can be either a loading spinner or a linear loading bar.
- * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
- * @param value The progress percentage (out of 100) of an activity.
- * @param visible If this Progress is visible.
- */
-export function Progress({
+}> = ({
   appearance,
   alt,
   value,
   visible,
+  element: Element = "div",
   style,
   className,
-}: ProgressProps) {
+}) => {
   const { duration, easing } = useAnimationConfig();
   const progressTransition = transition(duration.short2, easing.standard);
 
@@ -131,14 +112,14 @@ export function Progress({
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {visible && (
-        <div
+        <Element
           role="progressbar"
           aria-label={alt}
           aria-valuenow={value}
           style={style}
-          className={cn([
+          className={cn(
             "skc-progress",
             {
               linear: "skc-progress--linear",
@@ -146,14 +127,15 @@ export function Progress({
             }[appearance],
             value === undefined && "skc-progress--indeterminate",
             className,
-          ])}
+          )}
         >
           {{ linear: linearProgress, circular: circularProgress }[appearance]}
-        </div>
+        </Element>
       )}
     </AnimatePresence>
   );
-}
+};
 
 Progress.displayName = "Progress";
 
+export default Progress;

@@ -1,31 +1,36 @@
-// External libraries
-import * as React from "react";
-
-// Internal components
-import { Interactive } from "../Interactive";
-import { MaterialIcon } from "../MaterialIcon";
-import { Progress } from "../Progress";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/button.css";
-
-// Utilities
+import { ReactNode, Ref, useEffect, useRef, useState } from "react";
+import { LangCode, StylableFC } from "../../types";
 import { cn } from "../../utils/className";
+import Interactive from "../Interactive";
+import MaterialIcon from "../MaterialIcon";
+import Progress from "../Progress";
 
 /**
- * Props for {@link Button}.
+ * Button helps users take action, whether it’s logging in, liking a post, or
+ * going to a page.
+ *
+ * @param children The text displayed inside the Button.
+ * @param appearance The appearance of the Button.
+ * @param icon An icon can appear before the text (`children`) in a Button.
+ * @param alt A description of the Button for screen readers, similar to `alt`on `<img>`.
+ * @param tooltip A message shown in a tooltip when the user hovers over the Button.
+ * @param selected If the Button is selected. `icon` is replaced with a checkmark if this is true.
+ * @param dangerous If the action the Button accomplishes is dangerous, like deleting your account.
+ * @param loading Disable the Button and add a Progress spinner in front of the text to signify loading status.
+ * @param disabled Turns the Button gray and block any action associated with it.
+ * @param locale Allows for translation of the accessibility labels.
+ * @param onClick The function called when the user interacts with the Button.
+ * @param href The URL of the page this Button leads to.
  */
-export interface ButtonProps extends SKComponent {
+const Button: StylableFC<{
   /**
    * The text displayed inside the Button.
    *
    * - Must be a string or a JSX Element.
    * - Required if `icon` is undefined, as a Button cannot be empty.
    */
-  children?: React.ReactNode;
+  children?: ReactNode;
 
   /**
    * The appearance of the Button.
@@ -111,44 +116,19 @@ export interface ButtonProps extends SKComponent {
    *   languages.
    * - Optional.
    */
-  locale?: "en-US" | "th";
+  locale?: LangCode;
 
   /**
    * The function called when the user interacts with the Button, similar to
    * `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Button leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
-}
-
-/**
- * Button helps users take action, whether it’s logging in, liking a post, or
- * going to a page.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.lqzfs37p9m1b SKCom documentation}
- *
- * @param children The text displayed inside the Button.
- * @param appearance The appearance of the Button.
- * @param icon An icon can appear before the text (`children`) in a Button.
- * @param alt A description of the Button for screen readers, similar to `alt`on `<img>`.
- * @param tooltip A message shown in a tooltip when the user hovers over the Button.
- * @param selected If the Button is selected. `icon` is replaced with a checkmark if this is true.
- * @param dangerous If the action the Button accomplishes is dangerous, like deleting your account.
- * @param loading Disable the Button and add a Progress spinner in front of the text to signify loading status.
- * @param disabled Turns the Button gray and block any action associated with it.
- * @param locale Allows for translation of the accessibility labels.
- * @param onClick The function called when the user interacts with the Button.
- * @param href The URL of the page this Button leads to.
- */
-export function Button({
+}> = ({
   children,
   appearance,
   icon,
@@ -158,18 +138,18 @@ export function Button({
   dangerous,
   loading,
   disabled,
-  locale,
+  locale = "en-US",
   onClick,
   href,
   element,
   style,
   className,
-}: ButtonProps) {
-  const buttonRef: React.Ref<HTMLButtonElement> = React.useRef(null);
+}) => {
+  const buttonRef: Ref<HTMLButtonElement> = useRef(null);
 
   // Maintain the width of the Button while loading
-  const [buttonWidth, setButtonWidth] = React.useState<number>();
-  React.useEffect(() => {
+  const [buttonWidth, setButtonWidth] = useState<number>();
+  useEffect(() => {
     // Only set the Button width while loading
     if (!loading) return;
 
@@ -193,9 +173,8 @@ export function Button({
 
   return (
     <Interactive
-      href={!(disabled || loading) ? href : undefined}
-      onClick={!(disabled || loading) ? onClick : undefined}
-      element={disabled || loading ? "button" : element || "button"}
+      {...(!(disabled || loading) && { onClick, href })}
+      element={element}
       attr={{
         ref: buttonRef,
         // We’re using `aria-disabled` instead of `disabled` because it does
@@ -210,27 +189,24 @@ export function Button({
         ...style,
         width: loading ? buttonWidth : undefined,
       }}
-      className={cn([
+      className={cn(
         "skc-button",
-        appearance === "filled"
-          ? "skc-button--filled"
-          : appearance === "tonal"
-          ? "skc-button--tonal"
-          : appearance === "outlined"
-          ? "skc-button--outlined"
-          : appearance === "text"
-          ? "skc-button--text"
-          : undefined,
+        {
+          filled: "skc-button--filled",
+          tonal: "skc-button--tonal",
+          outlined: "skc-button--outlined",
+          text: "skc-button--text",
+        }[appearance],
         selected && "skc-button--selected",
         dangerous && "skc-button--dangerous",
         loading === true && "skc-button--loading",
         className,
-      ])}
+      )}
     >
       {loading ? (
         <Progress
           appearance="circular"
-          alt={locale === "th" ? "กำลังโหลด" : "Loading…"}
+          alt={{ "en-US": "Loading…", th: "กำลังโหลด" }[locale]}
           value={typeof loading === "number" ? loading : undefined}
           visible
         />
@@ -246,6 +222,8 @@ export function Button({
       )}
     </Interactive>
   );
-}
+};
 
 Button.displayName = "Button";
+
+export default Button;

@@ -1,19 +1,15 @@
-// External libraries
-import * as React from "react";
-
-// Types
-import { SKComponent } from "../../types";
-
-// Styles
 import "@suankularb-components/css/dist/css/components/table-head.css";
-
-// Utilities
+import { ReactNode } from "react";
+import { StylableFC } from "../../types";
 import { cn } from "../../utils/className";
 
 /**
- * Props for {@link TableHead Table Head}.
+ * The head area of a Table.
+ *
+ * @param children Table Head has the same behaviour as `<thead>`.
+ * @param fixed If the Table Head stays put on scroll.
  */
-export interface TableHeadProps extends SKComponent {
+const TableHead: StylableFC<{
   /**
    * Table Head has the same behaviour as `<thead>`.
    *
@@ -21,7 +17,7 @@ export interface TableHeadProps extends SKComponent {
    *   `header` enabled.
    * - Always required.
    */
-  children: React.ReactNode;
+  children: ReactNode;
 
   /**
    * If the Table Head stays put on scroll.
@@ -31,35 +27,19 @@ export interface TableHeadProps extends SKComponent {
    * - Optional.
    */
   fixed?: boolean;
-}
-
-/**
- * The head area of a Table.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
- *
- * @param children Table Head has the same behaviour as `<thead>`.
- * @param fixed If the Table Head stays put on scroll.
- */
-export function TableHead({
-  children,
-  fixed,
-  element,
-  style,
-  className,
-}: TableHeadProps) {
-  return React.createElement(
-    element || "thead",
-    {
-      style,
-      className: cn([
-        "skc-table-head",
-        fixed && "skc-table-head--fixed",
-        className,
-      ]),
-    },
-    children
-  );
-}
+}> = ({ children, fixed, element: Element = "thead", style, className }) => (
+  <Element
+    style={style}
+    className={cn(
+      "skc-table-head",
+      fixed && "skc-table-head--fixed",
+      className,
+    )}
+  >
+    {children}
+  </Element>
+);
 
 TableHead.displayName = "TableHead";
+
+export default TableHead;
