@@ -35,14 +35,14 @@ export interface RootLayoutProps extends SKComponent {
  */
 export function RootLayout({
   children,
-  element,
+  element: Element = "div",
   className,
   style,
 }: RootLayoutProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-root-layout", className]) },
-    children
+  return (
+    <Element style={style} className={cn(["skc-root-layout", className])}>
+      {children}
+    </Element>
   );
 }
 

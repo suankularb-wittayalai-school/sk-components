@@ -48,6 +48,7 @@ export function AppDrawer({
   children,
   locale,
   onOpen,
+  element: Element = motion.div,
   style,
   className,
 }: AppDrawerProps) {
@@ -73,7 +74,7 @@ export function AppDrawer({
         {drawerOpen && (
           <>
             {/* Drawer */}
-            <motion.div
+            <Element
               initial={{ y: "-50%", scaleY: 0 }}
               animate={{ y: 20, scaleY: 1 }}
               exit={{
@@ -81,18 +82,18 @@ export function AppDrawer({
                 scaleY: 0,
                 transition: transition(
                   duration.short2,
-                  easing.standardAccelerate
+                  easing.standardAccelerate,
                 ),
               }}
               transition={transition(
                 duration.medium4,
-                easing.standardDecelerate
+                easing.standardDecelerate,
               )}
               style={{ borderRadius: 16, ...style }}
               className={cn([`skc-app-drawer`, className])}
             >
               {children}
-            </motion.div>
+            </Element>
 
             {/* Scrim */}
             <motion.div

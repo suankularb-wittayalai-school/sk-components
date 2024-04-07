@@ -166,7 +166,7 @@ export function InputChip({
   className,
 }: InputChipProps) {
   // Editable Chip logic
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
+  const inputRef: React.Ref<HTMLInputElement> = React.useRef(null);
   const [editing, setEditing] = React.useState<boolean>(false);
 
   /**

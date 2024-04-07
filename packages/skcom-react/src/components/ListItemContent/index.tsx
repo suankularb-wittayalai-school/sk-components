@@ -59,12 +59,10 @@ export function ListItemContent({
   title,
   desc,
   alt,
-  element,
+  element: Element = "div",
   style,
   className,
 }: ListItemContentProps) {
-  const Element = element || "div";
-
   return (
     <Element style={style} className={cn(["skc-list-item-content", className])}>
       {/* Overline */}

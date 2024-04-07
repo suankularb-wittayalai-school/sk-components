@@ -1,4 +1,5 @@
 // External libraries
+import { dash } from "radash";
 import * as React from "react";
 
 // Types
@@ -9,7 +10,6 @@ import "@suankularb-components/css/dist/css/components/nav-drawer-section.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link NavDrawerSection Navigation Drawer Section}.
@@ -52,25 +52,28 @@ export function NavDrawerSection({
   children,
   header,
   alt,
-  element,
+  element: Element = "section",
   style,
   className,
 }: NavDrawerSectionProps) {
-  const sectionID = `nav-section-${kebabify(
-    (typeof header === "string" ? header : alt)!
+  const sectionID = `nav-section-${dash(
+    (typeof header === "string" ? header : alt)!,
   )}`;
 
-  return React.createElement(
-    element || "section",
-    { style, className: cn(["skc-nav-drawer-section", className]) },
-    <h2
-      id={sectionID}
-      aria-label={alt}
-      className="skc-nav-drawer-section__header"
+  return (
+    <Element
+      style={style}
+      className={cn(["skc-nav-drawer-section", className])}
     >
-      {header}
-    </h2>,
-    <ul role="list">{children}</ul>
+      <h2
+        id={sectionID}
+        aria-label={alt}
+        className="skc-nav-drawer-section__header"
+      >
+        {header}
+      </h2>
+      <ul role="list">{children}</ul>
+    </Element>
   );
 }
 

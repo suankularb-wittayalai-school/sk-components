@@ -43,11 +43,6 @@ export interface NavDrawerProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -61,6 +56,7 @@ export function NavDrawer({
   children,
   open,
   onClose,
+  element: Element = motion.aside,
   style,
   className,
 }: NavDrawerProps) {
@@ -81,7 +77,7 @@ export function NavDrawer({
   React.useEffect(() => {
     if (open) {
       const navDrawerItem = document.querySelector<HTMLAnchorElement>(
-        ".skc-nav-drawer-item--selected"
+        ".skc-nav-drawer-item--selected",
       );
       navDrawerItem?.focus();
     }
@@ -110,10 +106,10 @@ export function NavDrawer({
                           if (onClick) onClick();
                         },
                       })
-                    : item
+                    : item,
               ),
           })
-        : section
+        : section,
     );
 
   return (
@@ -134,7 +130,7 @@ export function NavDrawer({
           />
 
           {/* Navigation Drawer */}
-          <motion.aside
+          <Element
             initial={{ scaleX: 0.2, x: "-100%" }}
             animate={{ scaleX: 1, x: "0%" }}
             exit={{
@@ -142,7 +138,7 @@ export function NavDrawer({
               x: "-100%",
               transition: transition(
                 duration.short4,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium4, easing.standardDecelerate)}
@@ -151,7 +147,7 @@ export function NavDrawer({
             className={cn(["skc-nav-drawer", className])}
           >
             <nav>{injectedChildren}</nav>
-          </motion.aside>
+          </Element>
         </>
       )}
     </AnimatePresence>

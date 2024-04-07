@@ -164,7 +164,7 @@ export function Select({
       React.Children.map(children, (child) => ({
         value: ((child as JSX.Element).props as MenuItemProps).value,
         label: ((child as JSX.Element).props as MenuItemProps).children,
-      })) || []
+      })) || [],
     );
   }, [children]);
 
@@ -174,7 +174,7 @@ export function Select({
   }, [options]);
 
   // Accessibility
-  const toggleRef: React.LegacyRef<HTMLButtonElement> = React.useRef(null);
+  const toggleRef: React.Ref<HTMLButtonElement> = React.useRef(null);
   React.useEffect(() => {
     // `undefined` means the user has not touched this Select yet
     // `false` means the user has just collapsed this Select
@@ -183,7 +183,7 @@ export function Select({
 
   // Generate the base ID for `<label>` and `aria-describedby`
   const selectID = `select-${kebabify(
-    (typeof label === "string" ? label : alt)!
+    (typeof label === "string" ? label : alt)!,
   )}`;
 
   return (
@@ -223,9 +223,9 @@ export function Select({
               // Show the first option as a fallback
               options[0]?.label
             : // No options
-            locale === "th"
-            ? "ไม่มีตัวเลือก"
-            : "No options"}
+              locale === "th"
+              ? "ไม่มีตัวเลือก"
+              : "No options"}
         </span>
 
         {/* Dropdown icon */}
@@ -248,11 +248,14 @@ export function Select({
         open={menuOpen}
         density={-4}
         onBlur={() => setMenuOpen(false)}
-        ulAttr={{
-          id: `${selectID}-options`,
-          role: "listbox",
-          "aria-labelledby": selectID,
-        }}
+        element={(props) => (
+          <motion.ul
+            {...props}
+            id={`${selectID}-options`}
+            role={"listbox"}
+            aria-labelledby={selectID}
+          />
+        )}
         {...menuAttr}
       >
         {React.Children.map(children, (child) =>
@@ -264,7 +267,7 @@ export function Select({
               if (onClick) onClick();
               setMenuOpen(false);
             },
-          })
+          }),
         )}
       </Menu>
     </div>

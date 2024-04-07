@@ -52,7 +52,7 @@ export function List({
   children,
   columns,
   divided,
-  element,
+  element = "ul",
   style,
   className,
 }: ListProps) {
@@ -62,11 +62,11 @@ export function List({
   };
 
   return columns ? (
-    <Columns columns={columns} element={element || "ul"} {...props}>
+    <Columns columns={columns} element={element} {...props}>
       {children}
     </Columns>
   ) : (
-    React.createElement(element || "ul", { ...props, role: "list" }, children)
+    React.createElement(element, { ...props, role: "list" }, children)
   );
 }
 

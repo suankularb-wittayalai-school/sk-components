@@ -312,7 +312,7 @@ export function TextField<Value extends string | File>({
   }, [minifyLabel]);
 
   // Auto-expand the `<textarea>` if behavior set to `multi-line`
-  const textareaRef: React.LegacyRef<HTMLTextAreaElement> = React.useRef(null);
+  const textareaRef: React.Ref<HTMLTextAreaElement> = React.useRef(null);
   const expandTextarea = () => {
     if (behavior !== "multi-line") return;
 
@@ -455,7 +455,7 @@ export function TextField<Value extends string | File>({
                   appearance="text"
                   icon={<MaterialIcon icon="cancel" />}
                   disabled={disabled}
-                  onClick={() => onChange && onChange("" as Value)}
+                  onClick={() => onChange?.("" as Value)}
                 />
               ) : error ? (
                 <MaterialIcon icon="error" fill />

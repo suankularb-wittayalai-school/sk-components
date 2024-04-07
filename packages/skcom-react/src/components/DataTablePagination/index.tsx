@@ -58,11 +58,6 @@ export interface DataTablePaginationProps extends SKComponent {
    * @param end The end index of the range of data to pull from for this page.
    */
   onChange?: (page: number, start: number, end: number) => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -80,6 +75,7 @@ export function DataTablePagination({
   totalRows,
   locale,
   onChange,
+  element: Element = motion.div,
   style,
   className,
 }: DataTablePaginationProps) {
@@ -87,7 +83,7 @@ export function DataTablePagination({
 
   const [page, setPage] = React.useState<number>(1);
   const [maxPage, setMaxPage] = React.useState<number>(
-    Math.ceil(totalRows / rowsPerPage)
+    Math.ceil(totalRows / rowsPerPage),
   );
   React.useEffect(() => {
     const newMaxPage = Math.ceil(totalRows / rowsPerPage);
@@ -107,12 +103,12 @@ export function DataTablePagination({
   };
 
   React.useEffect(
-    () => onChange && onChange(page, range.start - 1, range.end - 1),
-    [page]
+    () => onChange?.(page, range.start - 1, range.end - 1),
+    [page],
   );
 
   return (
-    <motion.div
+    <Element
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
@@ -164,7 +160,7 @@ export function DataTablePagination({
           onClick={() => setPage(maxPage)}
         />
       </div>
-    </motion.div>
+    </Element>
   );
 }
 

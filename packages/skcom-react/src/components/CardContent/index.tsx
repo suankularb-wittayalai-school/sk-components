@@ -29,14 +29,14 @@ export interface CardContentProps extends SKComponent {
  */
 export function CardContent({
   children,
-  element,
+  element: Element = "div",
   style,
   className,
 }: CardContentProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-card-content", className]) },
-    children
+  return (
+    <Element style={style} className={cn(["skc-card-content", className])}>
+      {children}
+    </Element>
   );
 }
 

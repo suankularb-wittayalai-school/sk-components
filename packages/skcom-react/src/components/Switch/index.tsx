@@ -56,16 +56,9 @@ export interface SwitchProps extends SKComponent {
   disabled?: boolean;
 
   /**
-   * Attributes for the underlying `<button>` element.
-   *
-   * - Optional.
+   * @deprecated Use the `element` prop instead.
    */
   buttonAttr?: React.ComponentProps<"button">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -86,21 +79,20 @@ export function Switch({
   offIcon,
   onIcon,
   disabled,
-  buttonAttr,
+  element: Element = "button",
   style,
   className,
 }: SwitchProps) {
   return (
-    <button
+    <Element
       aria-disabled={disabled}
       aria-pressed={value}
       style={style}
       className={cn(["skc-switch", value && "skc-switch--selected", className])}
-      onClick={() => onChange && onChange(!value)}
-      {...buttonAttr}
+      onClick={() => onChange?.(!value)}
     >
       <div className="skc-switch__handle">{value ? onIcon : offIcon}</div>
-    </button>
+    </Element>
   );
 }
 

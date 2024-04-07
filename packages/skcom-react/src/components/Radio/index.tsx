@@ -49,11 +49,6 @@ export interface RadioProps extends SKComponent {
    * - Optional.
    */
   inputAttr?: React.ComponentProps<"input">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -70,16 +65,17 @@ export function Radio({
   onChange,
   disabled,
   inputAttr,
+  element: Element = "label",
   style,
   className,
 }: RadioProps) {
   // Ripple setup
-  const rippleParentRef: React.LegacyRef<HTMLDivElement> = React.useRef(null);
+  const rippleParentRef: React.Ref<HTMLDivElement> = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } =
     useRipple(rippleParentRef);
 
   return (
-    <label
+    <Element
       style={style}
       className={cn([
         "skc-radio",
@@ -121,7 +117,7 @@ export function Radio({
           style={rippleStyle}
         />
       </div>
-    </label>
+    </Element>
   );
 }
 

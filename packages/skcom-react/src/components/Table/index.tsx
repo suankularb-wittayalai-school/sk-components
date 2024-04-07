@@ -53,19 +53,19 @@ export function Table({
   children,
   contentWidth,
   height,
-  element,
+  element: Element = "div",
   style,
   className,
 }: TableProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style: { ...style, maxHeight: height },
-      className: cn(["skc-table", className]),
-    },
-    <table style={{ minWidth: contentWidth }} className="skc-table__content">
-      {children}
-    </table>,
+  return (
+    <Element
+      style={{ ...style, maxHeight: height }}
+      className={cn(["skc-table", className])}
+    >
+      <table style={{ minWidth: contentWidth }} className="skc-table__content">
+        {children}
+      </table>
+    </Element>
   );
 }
 

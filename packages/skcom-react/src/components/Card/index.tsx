@@ -72,15 +72,11 @@ export interface CardProps extends SKComponent {
   /**
    * The function called when the user interacts with the Card, similar to
    * `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Card leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 
@@ -112,24 +108,20 @@ export interface CardProps extends SKComponent {
  */
 export function Card({
   children,
-  style,
   appearance,
-  direction,
-  stateLayerEffect,
+  direction = "column",
+  stateLayerEffect = false,
   shadowEffect,
   onClick,
   href,
   element,
+  style,
   className,
 }: CardProps) {
   return (
     <Interactive
-      // `stateLayerEffect` and `rippleEffect` are enabled by default in
-      // Interactive, but not in Card
-      stateLayerEffect={
-        stateLayerEffect === undefined ? false : stateLayerEffect
-      }
-      rippleEffect={stateLayerEffect === undefined ? false : stateLayerEffect}
+      stateLayerEffect={stateLayerEffect}
+      rippleEffect={stateLayerEffect}
       shadowEffect={shadowEffect}
       href={href}
       onClick={onClick}

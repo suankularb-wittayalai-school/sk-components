@@ -61,11 +61,6 @@ export interface SnackbarProps extends SKComponent {
    * - Optional.
    */
   onExitComplete?: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -91,6 +86,7 @@ export function Snackbar({
   open,
   onClose,
   onExitComplete,
+  element: Element = motion.div,
   style,
   className,
 }: SnackbarProps) {
@@ -100,7 +96,7 @@ export function Snackbar({
     <aside>
       <AnimatePresence {...{ onExitComplete }}>
         {open && (
-          <motion.div
+          <Element
             role="status"
             aria-relevant="additions"
             initial={{ opacity: 0, y: 40 }}
@@ -133,7 +129,7 @@ export function Snackbar({
                 })}
               </div>
             )}
-          </motion.div>
+          </Element>
         )}
       </AnimatePresence>
     </aside>

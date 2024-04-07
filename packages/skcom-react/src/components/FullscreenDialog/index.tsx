@@ -81,11 +81,6 @@ export interface FullscreenDialogProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -112,6 +107,7 @@ export function FullscreenDialog({
   alt,
   locale,
   onClose,
+  element: Element = motion.div,
   style,
   className,
 }: FullscreenDialogProps) {
@@ -206,7 +202,7 @@ export function FullscreenDialog({
           />
 
           {/* Full-screen Dialog */}
-          <motion.div
+          <Element
             // `alertdialog` is a type of `dialog` for interrupting the user
             // flow.
             role="alertdialog"
@@ -239,7 +235,7 @@ export function FullscreenDialog({
             <div className="skc-fullscreen-dialog__content">
               {injectedChildren}
             </div>
-          </motion.div>
+          </Element>
         </>
       )}
     </AnimatePresence>

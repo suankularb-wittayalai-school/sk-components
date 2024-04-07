@@ -38,11 +38,6 @@ export interface DataTableProps extends SKComponent {
    * - Optional.
    */
   layout?: LayoutProps["layout"];
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -54,20 +49,21 @@ export interface DataTableProps extends SKComponent {
 export function DataTable({
   children,
   layout,
+  element: Element = motion.figure,
   style,
   className,
 }: DataTableProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <motion.figure
+    <Element
       layout={layout}
       transition={transition(duration.medium4, easing.standard)}
       style={{ ...style, borderRadius: 20 }}
       className={cn(["skc-data-table", className])}
     >
       {children}
-    </motion.figure>
+    </Element>
   );
 }
 

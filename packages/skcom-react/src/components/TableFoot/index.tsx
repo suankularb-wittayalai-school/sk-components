@@ -30,14 +30,14 @@ export interface TableFootProps extends SKComponent {
  */
 export function TableFoot({
   children,
-  element,
+  element: Element = "tfoot",
   style,
   className,
 }: TableFootProps) {
-  return React.createElement(
-    element || "tfoot",
-    { style, className: cn(["skc-table-foot", className]) },
-    children
+  return (
+    <Element style={style} className={cn(["skc-table-foot", className])}>
+      {children}
+    </Element>
   );
 }
 

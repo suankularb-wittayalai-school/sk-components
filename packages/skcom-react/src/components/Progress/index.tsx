@@ -49,11 +49,6 @@ export interface ProgressProps extends SKComponent {
    * - Optional.
    */
   visible?: boolean;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -70,6 +65,7 @@ export function Progress({
   alt,
   value,
   visible,
+  element: Element = "div",
   style,
   className,
 }: ProgressProps) {
@@ -131,7 +127,7 @@ export function Progress({
   return (
     <AnimatePresence>
       {visible && (
-        <div
+        <Element
           role="progressbar"
           aria-label={alt}
           aria-valuenow={value}
@@ -147,11 +143,10 @@ export function Progress({
           ])}
         >
           {{ linear: linearProgress, circular: circularProgress }[appearance]}
-        </div>
+        </Element>
       )}
     </AnimatePresence>
   );
 }
 
 Progress.displayName = "Progress";
-

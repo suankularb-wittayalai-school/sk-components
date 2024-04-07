@@ -56,30 +56,28 @@ export interface SegmentedButtonProps extends SKComponent {
 export function SegmentedButton({
   children,
   alt,
-  density,
+  density = 0,
   full,
-  element,
+  element: Element = "div",
   style,
   className,
 }: SegmentedButtonProps) {
-  return React.createElement(
-    element || "div",
-    {
-      "aria-label": alt,
-      role: "group",
-      style,
-      className: cn([
+  return (
+    <Element
+      aria-label={alt}
+      role="group"
+      style={style}
+      className={cn([
         "skc-segmented-button",
-        density == 0
+        density === 0
           ? "skc-segmented-button--density-0"
-          : density !== undefined
-          ? `skc-segmented-button--density-[${density}]`
-          : undefined,
+          : `skc-segmented-button--density-[${density}]`,
         full && "skc-segmented-button--full",
         className,
-      ]),
-    },
-    children
+      ])}
+    >
+      {children}
+    </Element>
   );
 }
 

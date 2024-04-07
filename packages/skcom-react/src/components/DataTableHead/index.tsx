@@ -36,11 +36,6 @@ export interface DataTableHeadProps extends SKComponent {
    * - Optional.
    */
   locale?: "en-US" | "th";
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -52,13 +47,14 @@ export interface DataTableHeadProps extends SKComponent {
 export function DataTableHead({
   headerGroups,
   locale,
+  element: Element = motion.thead,
   style,
   className,
 }: DataTableHeadProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <motion.thead
+    <Element
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
@@ -129,7 +125,7 @@ export function DataTableHead({
                           exit={{ scale: 0.4, opacity: 0 }}
                           transition={transition(
                             duration.short4,
-                            easing.standard
+                            easing.standard,
                           )}
                           aria-label={
                             locale === "th"
@@ -175,7 +171,7 @@ export function DataTableHead({
           })}
         </TableRow>
       ))}
-    </motion.thead>
+    </Element>
   );
 }
 

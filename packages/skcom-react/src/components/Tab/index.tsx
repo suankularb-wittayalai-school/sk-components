@@ -70,15 +70,11 @@ export interface TabProps extends SKComponent {
   /**
    * The function called when the user interacts with the Tab, similar to
    * `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Tab leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
@@ -112,7 +108,7 @@ export function Tab({
   const { duration, easing } = useAnimationConfig();
 
   // Ripple setup
-  const tabRef: React.LegacyRef<any> = React.useRef(null);
+  const tabRef: React.Ref<any> = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } = useRipple(tabRef);
 
   const tabID = `tab-${kebabify((typeof label === "string" ? label : alt)!)}`;

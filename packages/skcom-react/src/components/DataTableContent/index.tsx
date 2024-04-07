@@ -45,19 +45,19 @@ export interface DataTableContentProps extends SKComponent {
 export function DataTableContent({
   children,
   contentWidth,
-  element,
+  element: Element = "div",
   style,
   className,
 }: DataTableContentProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: "skc-data-table-content" },
-    <table
-      style={{ ...style, minWidth: contentWidth }}
-      className={cn(["skc-data-table-content__content", className])}
-    >
-      {children}
-    </table>
+  return (
+    <Element style={style} className="skc-data-table-content">
+      <table
+        style={{ ...style, minWidth: contentWidth }}
+        className={cn(["skc-data-table-content__content", className])}
+      >
+        {children}
+      </table>
+    </Element>
   );
 }
 

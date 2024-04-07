@@ -63,7 +63,7 @@ export function SplitLayout({
   children,
   ratio,
   showRightOnMobile,
-  element,
+  element: Element = "section",
   style,
   className,
 }: SplitLayoutProps) {
@@ -74,34 +74,34 @@ export function SplitLayout({
     sm: [2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6], // 8 columns
   };
 
-  return React.createElement(
-    element || "section",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-split-layout",
-        ratio === "list-detail"
-          ? "skc-split-layout--list-detail"
-          : ratio === "supporting-panel"
-          ? "skc-split-layout--supporting-panel"
-          : undefined,
+        typeof ratio === "string" &&
+          {
+            "list-detail": "skc-split-layout--list-detail",
+            "supporting-panel": "skc-split-layout--supporting-panel",
+          }[ratio],
         showRightOnMobile && "skc-split-layout--persist-right",
         className,
-      ]),
-    },
-    <div
-      className="skc-split-layout__content"
-      style={{
-        gridTemplateColumns:
-          typeof ratio !== "string" && atBreakpoint !== "base"
-            ? ratio
-                .map((size) => `${colSpans[atBreakpoint][size - 1]}fr`)
-                .join(" ")
-            : undefined,
-      }}
+      ])}
     >
-      {children}
-    </div>
+      <div
+        className="skc-split-layout__content"
+        style={{
+          gridTemplateColumns:
+            typeof ratio !== "string" && atBreakpoint !== "base"
+              ? ratio
+                  .map((size) => `${colSpans[atBreakpoint][size - 1]}fr`)
+                  .join(" ")
+              : undefined,
+        }}
+      >
+        {children}
+      </div>
+    </Element>
   );
 }
 

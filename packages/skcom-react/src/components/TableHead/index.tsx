@@ -42,21 +42,21 @@ export interface TableHeadProps extends SKComponent {
 export function TableHead({
   children,
   fixed,
-  element,
+  element: Element = "thead",
   style,
   className,
 }: TableHeadProps) {
-  return React.createElement(
-    element || "thead",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-table-head",
         fixed && "skc-table-head--fixed",
         className,
-      ]),
-    },
-    children
+      ])}
+    >
+      {children}
+    </Element>
   );
 }
 

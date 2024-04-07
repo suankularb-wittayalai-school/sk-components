@@ -50,11 +50,6 @@ export interface DialogProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -71,6 +66,7 @@ export function Dialog({
   open,
   width,
   onClose,
+  element: Element = motion.div,
   style,
   className,
 }: DialogProps) {
@@ -80,7 +76,7 @@ export function Dialog({
   React.useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-dialog > .skc-actions"
+        ".skc-dialog > .skc-actions",
       );
 
       const buttons =
@@ -119,10 +115,10 @@ export function Dialog({
             : // Otherwise, use `alt`
               alt
           : // If `title` is not defined, use `desc`
-          typeof desc === "string"
-          ? desc
-          : // Otherwise, use `alt`
-            alt)!
+            typeof desc === "string"
+            ? desc
+            : // Otherwise, use `alt`
+              alt)!,
       )}`;
     }
   });
@@ -146,7 +142,7 @@ export function Dialog({
           />
 
           {/* Dialog */}
-          <motion.div
+          <Element
             // `alertdialog` is a type of `dialog` for interrupting the user flow.
             role="alertdialog"
             aria-modal="true"
@@ -160,7 +156,7 @@ export function Dialog({
               y: "-90%",
               transition: transition(
                 duration.short2,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium2, easing.standardDecelerate)}
@@ -168,7 +164,7 @@ export function Dialog({
             className={cn(["skc-dialog", className])}
           >
             {children}
-          </motion.div>
+          </Element>
         </>
       )}
     </AnimatePresence>

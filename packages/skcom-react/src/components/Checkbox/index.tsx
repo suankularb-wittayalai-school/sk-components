@@ -78,16 +78,17 @@ export function Checkbox({
   tristate,
   disabled,
   inputAttr,
+  element: Element = "label",
   style,
   className,
 }: CheckboxProps) {
   // Ripple setup
-  const rippleParentRef: React.LegacyRef<HTMLDivElement> = React.useRef(null);
+  const rippleParentRef: React.Ref<HTMLDivElement> = React.useRef(null);
   const { rippleListeners, rippleControls, rippleStyle } =
     useRipple(rippleParentRef);
 
   return (
-    <label
+    <Element
       style={style}
       className={cn([
         "skc-checkbox",
@@ -139,7 +140,7 @@ export function Checkbox({
           style={rippleStyle}
         />
       </div>
-    </label>
+    </Element>
   );
 }
 

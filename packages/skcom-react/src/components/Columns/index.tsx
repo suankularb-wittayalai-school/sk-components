@@ -46,31 +46,27 @@ export interface ColumnsProps extends SKComponent {
 export function Columns({
   children,
   columns,
-  element,
+  element: Element = "div",
   style,
   className,
 }: ColumnsProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-columns",
-        columns === 2
-          ? "skc-columns--2"
-          : columns === 3
-          ? "skc-columns--3"
-          : columns === 4
-          ? "skc-columns--4"
-          : columns === 6
-          ? "skc-columns--6"
-          : columns === 12
-          ? "skc-columns--12"
-          : undefined,
+        {
+          2: "skc-columns--2",
+          3: "skc-columns--3",
+          4: "skc-columns--4",
+          6: "skc-columns--6",
+          12: "skc-columns--12",
+        }[columns],
         className,
-      ]),
-    },
-    children
+      ])}
+    >
+      {children}
+    </Element>
   );
 }
 

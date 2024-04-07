@@ -46,18 +46,6 @@ export interface MenuProps extends SKComponent {
    * - Optional.
    */
   onBlur?: () => any;
-
-  /**
-   * Attributes for the underlying `<ul>` element.
-   *
-   * - Optional.
-   */
-  ulAttr?: React.ComponentProps<typeof motion.ul>;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -67,14 +55,13 @@ export interface MenuProps extends SKComponent {
  * @param open If the Menu is open and shown.
  * @param density A lower number means a more dense interface. In this case, less height.
  * @param onBlur Triggers when the Menu loses focus.
- * @param ulAttr Attributes for the underlying `<ul>` element.
  */
 export function Menu({
   children,
   open,
   density,
   onBlur,
-  ulAttr,
+  element: Element = motion.ul,
   style,
   className,
 }: MenuProps) {
@@ -84,7 +71,7 @@ export function Menu({
     <AnimatePresence>
       {open && (
         <>
-          <motion.ul
+          <Element
             role="menu"
             aria-orientation="vertical"
             initial={{ opacity: 0, y: "-10%", scale: 0.8 }}
@@ -96,6 +83,7 @@ export function Menu({
               transition: transition(duration.short2, easing.standard),
             }}
             transition={transition(duration.short4, easing.standard)}
+            style={style}
             className={cn([
               "skc-menu",
               density === 0
@@ -105,10 +93,9 @@ export function Menu({
                 : density === -4 && "skc-menu--density-[-4]",
               className,
             ])}
-            {...{ ...ulAttr, style }}
           >
             {children}
-          </motion.ul>
+          </Element>
           {onBlur && (
             <div className="skc-menu__blur-capture" onClick={onBlur} />
           )}

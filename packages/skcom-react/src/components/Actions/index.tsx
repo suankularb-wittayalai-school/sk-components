@@ -40,30 +40,27 @@ export interface ActionsProps extends SKComponent {
  */
 export function Actions({
   children,
-  align,
-  element,
+  align = "right",
+  element: Element = "div",
   style,
   className,
 }: ActionsProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-actions",
-        align === "left"
-          ? "skc-actions--left"
-          : align === "center"
-          ? "skc-actions--center"
-          : align === "right"
-          ? "skc-actions--right"
-          : align === "full"
-          ? "skc-actions--full"
-          : undefined,
+        {
+          left: "skc-actions--left",
+          center: "skc-actions--center",
+          right: "skc-actions--right",
+          full: "skc-actions--full",
+        }[align],
         className,
-      ]),
-    },
-    children
+      ])}
+    >
+      {children}
+    </Element>
   );
 }
 

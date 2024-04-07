@@ -1,6 +1,5 @@
 // External libraries
 import * as React from "react";
-import { dash } from "radash";
 
 // Internal components
 import { Interactive } from "../Interactive";
@@ -49,11 +48,12 @@ export function AppDrawerItem({
   name,
   onClick,
   href,
+  element: Element = "li",
   style,
   className,
 }: AppDrawerItemProps) {
   return (
-    <li style={style} className={cn([`skc-app-drawer-item`, className])}>
+    <Element style={style} className={cn([`skc-app-drawer-item`, className])}>
       <Interactive
         onClick={onClick}
         href={href}
@@ -69,6 +69,6 @@ export function AppDrawerItem({
         {logo}
       </Interactive>
       <span className="skc-app-drawer-item__name">{name}</span>
-    </li>
+    </Element>
   );
 }

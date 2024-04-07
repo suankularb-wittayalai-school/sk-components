@@ -12,7 +12,7 @@ import "@suankularb-components/css/dist/css/components/tabs-container.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
+import { dash } from "radash";
 
 /**
  * Props for {@link TabsContainer Tabs Container}.
@@ -55,33 +55,33 @@ export function TabsContainer({
   children,
   appearance,
   alt,
-  element,
+  element: Element = "div",
   style,
   className,
 }: TabsContainerProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-tabs-container",
         appearance === "primary"
           ? "skc-tabs-container--primary"
           : appearance === "secondary" && "skc-tabs-container--secondary",
-      ]),
-    },
-    <div
-      role="tablist"
-      aria-label={alt}
-      style={style}
-      className={cn(["skc-tabs-container__content", className])}
+      ])}
     >
-      {React.Children.map(children, (child) =>
-        React.cloneElement(child as JSX.Element, {
-          containerID: `tabs-contaner-${kebabify(alt)}`,
-        } satisfies TabProps)
-      )}
-    </div>
+      <div
+        role="tablist"
+        aria-label={alt}
+        style={style}
+        className={cn(["skc-tabs-container__content", className])}
+      >
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child as JSX.Element, {
+            containerID: `tabs-contaner-${dash(alt)}`,
+          } satisfies TabProps),
+        )}
+      </div>
+    </Element>
   );
 }
 
