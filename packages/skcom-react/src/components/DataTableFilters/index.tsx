@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import * as React from "react";
 
 // Internal components
-import { Button } from "../Button";
 import { MaterialIcon } from "../MaterialIcon";
 
 // Types
@@ -27,37 +26,6 @@ export interface DataTableFiltersProps extends SKComponent {
    * - Always required.
    */
   children: React.ReactNode;
-
-  /**
-   * Allows for translation of the accessibility labels.
-   *
-   * - Must be `th` or `en-US`, as SKCom currently only support those 2
-   *   languages.
-   * - Optional.
-   */
-  locale?: "en-US" | "th";
-
-  /**
-   * Triggers when the overflow icon is clicked. If defined, an overflow icon
-   * appears on the right.
-   *
-   * - Optional.
-   */
-  onOverflowToggle?: () => any;
-
-  /**
-   * The overflow Menu of the parent Data Table. The value of `overflow` is
-   * shown on click.
-   *
-   * - Must be a Menu.
-   * - Optional.
-   */
-  overflow?: JSX.Element;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -65,22 +33,17 @@ export interface DataTableFiltersProps extends SKComponent {
  * of filters.
  *
  * @param children A set of Filter Chips responsible for filterring the Data Table.
- * @param locale Allows for translation of the accessibility labels.
- * @param onOverflowToggle Triggers when the overflow icon is clicked.
- * @param overflow The overflow Menu of the parent Data Table.
  */
 export function DataTableFilters({
   children,
-  locale,
-  onOverflowToggle,
-  overflow,
+  element: Element = motion.div,
   style,
   className,
 }: DataTableFiltersProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <motion.div
+    <Element
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
@@ -93,20 +56,7 @@ export function DataTableFilters({
 
       {/* Chip Set */}
       {children}
-
-      {/* Overflow */}
-      {onOverflowToggle && (
-        <div className="skc-data-table-filters__overflow">
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="more_vert" />}
-            alt={locale === "th" ? "เปิดเมนูเพิ่มเติม" : "Toggle overflow menu"}
-            onClick={onOverflowToggle}
-          />
-          {overflow}
-        </div>
-      )}
-    </motion.div>
+    </Element>
   );
 }
 

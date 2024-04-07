@@ -31,21 +31,3 @@
   font-family: var(--font-display);
   margin-block: 0;
 }
-
-.skc-card-header__overflow {
-  position: relative;
-  padding: 0.25rem;
-
-  .skc-button {
-    color: var(--outline);
-
-    &::before,
-    .skc-interactive__ripple {
-      background-color: var(--on-surface-variant);
-    }
-  }
-
-  .skc-menu {
-    right: 0.25rem;
-  }
-}

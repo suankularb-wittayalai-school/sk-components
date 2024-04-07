@@ -87,14 +87,6 @@ const CardSection: FC = () => (
           icon={<MaterialIcon icon="person" />}
           title="Atipol Sukrisadanon"
           subtitle="Foreign Languages teacher"
-          overflow={
-            <Menu>
-              <MenuItem icon={<MaterialIcon icon="share" />}>Share</MenuItem>
-              <MenuItem icon={<MaterialIcon icon="visibility_off" />}>
-                Hide
-              </MenuItem>
-            </Menu>
-          }
         />
         <Image
           src="/images/atipol.jpg"
@@ -198,7 +190,7 @@ const DataTableSection: FC = () => {
       { task: "Suscipit itaque necessitati", progress: "completed" },
       { task: "Veniam voluptatem ipsam", progress: "completed" },
     ],
-    []
+    [],
   );
 
   const columns = useMemo<DataTableColumnDef<Task>[]>(
@@ -250,7 +242,7 @@ const DataTableSection: FC = () => {
           }),
       },
     ],
-    []
+    [],
   );
 
   const {
@@ -271,27 +263,11 @@ const DataTableSection: FC = () => {
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-  const [showSearchOverflow, setShowSearchOverflow] = useState<boolean>(false);
-
   return (
     <Section>
       <Header>Data Table</Header>
       <DataTable layout>
-        <DataTableSearch
-          value={globalFilter}
-          onChange={setGlobalFilter}
-          onOverflowToggle={() => setShowSearchOverflow(!showSearchOverflow)}
-          overflow={
-            <Menu open={showSearchOverflow}>
-              <MenuItem
-                icon={<MaterialIcon icon="help" />}
-                onClick={() => setShowSearchOverflow(false)}
-              >
-                Help
-              </MenuItem>
-            </Menu>
-          }
-        />
+        <DataTableSearch value={globalFilter} onChange={setGlobalFilter} />
         <DataTableContent contentWidth={720}>
           <DataTableHead headerGroups={getHeaderGroups()} />
           <DataTableBody<Task>
@@ -433,7 +409,7 @@ const ListSection: FC = () => {
             tristate
             onChange={(value) =>
               setCart(
-                value ? ["fish-burger", "pork-burger", "beef-burger"] : []
+                value ? ["fish-burger", "pork-burger", "beef-burger"] : [],
               )
             }
             inputAttr={{ "aria-labelledby": "list-item-select-all" }}
@@ -514,7 +490,7 @@ const TabSection: FC = () => {
     "overview" | "students" | "teachers"
   >("overview");
   const [secondaryView, setSecondaryView] = useState<"list" | "gallery">(
-    "list"
+    "list",
   );
 
   return (

@@ -57,17 +57,3 @@
     color: var(--on-surface-variant);
   }
 }
-
-.skc-data-table-search__overflow {
-  position: relative;
-
-  .skc-button {
-    margin-right: 1rem;
-    color: var(--on-surface);
-
-    &::before,
-    .skc-interactive__ripple {
-      background-color: var(--on-surface);
-    }
-  }
-}
