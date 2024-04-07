@@ -13,7 +13,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/fullscreen-dialog.css";
 
 // Utilities
-import { transition, useAnimationConfig } from "../../utils/animation";
+import { DURATION, EASING, transition } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
 import { useBreakpoint } from "../../utils/window";
@@ -115,7 +115,6 @@ export function FullscreenDialog({
   // Dialog and Full-screen Dialog have different animations. The animation is
   // determined with the current breakpoint.
 
-  const { duration, easing } = useAnimationConfig();
   const { atBreakpoint } = useBreakpoint();
 
   const dialogAnimation: Variants = {
@@ -125,7 +124,7 @@ export function FullscreenDialog({
       opacity: 0,
       scaleY: 0.5,
       y: "-90%",
-      transition: transition(duration.short2, easing.standardAccelerate),
+      transition: transition(DURATION.short2, EASING.emphasizedAccelerate),
     },
   };
 
@@ -135,7 +134,7 @@ export function FullscreenDialog({
     exit: {
       opacity: 0,
       scale: 0.9,
-      transition: transition(duration.short2, easing.standardAccelerate),
+      transition: transition(DURATION.short2, EASING.emphasizedAccelerate),
     },
   };
 
@@ -143,7 +142,7 @@ export function FullscreenDialog({
   React.useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-fullscreen-dialog__top-app-bar"
+        ".skc-fullscreen-dialog__top-app-bar",
       );
 
       const buttons =
@@ -163,7 +162,7 @@ export function FullscreenDialog({
 
   // Generate the base ID for `aria-labelledby` and `aria-describedby`
   const dialogID = `dialog-${kebabify(
-    (typeof title === "string" ? title : alt)!
+    (typeof title === "string" ? title : alt)!,
   )}`;
 
   // Inject first `<p>` element with an ID that `aria-describedby` can point to
@@ -194,9 +193,9 @@ export function FullscreenDialog({
             animate={{ opacity: 0.5 }}
             exit={{
               opacity: 0,
-              transition: transition(duration.short4, easing.standard),
+              transition: transition(DURATION.short4, EASING.emphasized),
             }}
-            transition={transition(duration.medium4, easing.standard)}
+            transition={transition(DURATION.medium4, EASING.emphasized)}
             className="skc-scrim"
             onClick={onClose}
           />
@@ -212,7 +211,10 @@ export function FullscreenDialog({
             {...(atBreakpoint === "base"
               ? fullscreenDialogAnimation
               : dialogAnimation)}
-            transition={transition(duration.medium2, easing.standardDecelerate)}
+            transition={transition(
+              DURATION.medium4,
+              EASING.emphasizedDecelerate,
+            )}
             style={{
               ...style,
               ...(atBreakpoint !== "base" ? { width, borderRadius: 28 } : {}),

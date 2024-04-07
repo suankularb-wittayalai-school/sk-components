@@ -9,7 +9,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/menu.css";
 
 // Utilities
-import { transition, useAnimationConfig } from "../../utils/animation";
+import { DURATION, EASING, transition } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 /**
@@ -65,8 +65,6 @@ export function Menu({
   style,
   className,
 }: MenuProps) {
-  const { duration, easing } = useAnimationConfig();
-
   return (
     <AnimatePresence>
       {open && (
@@ -74,23 +72,29 @@ export function Menu({
           <Element
             role="menu"
             aria-orientation="vertical"
-            initial={{ opacity: 0, y: "-10%", scale: 0.8 }}
-            animate={{ opacity: 1, y: "0%", scale: 1 }}
+            initial={{ y: "-50%", scaleY: 0, opacity: 0 }}
+            animate={{ y: 0, scaleY: 1, opacity: 1 }}
             exit={{
+              y: "-50%",
+              scaleY: 0,
               opacity: 0,
-              y: "-10%",
-              scale: 0.8,
-              transition: transition(duration.short2, easing.standard),
+              transition: transition(
+                DURATION.short2,
+                EASING.emphasizedAccelerate,
+              ),
             }}
-            transition={transition(duration.short4, easing.standard)}
+            transition={transition(
+              DURATION.medium4,
+              EASING.emphasizedDecelerate,
+            )}
             style={style}
             className={cn([
               "skc-menu",
               density === 0
                 ? "skc-menu--density-0"
                 : density === -2
-                ? "skc-menu--density-[-2]"
-                : density === -4 && "skc-menu--density-[-4]",
+                  ? "skc-menu--density-[-2]"
+                  : density === -4 && "skc-menu--density-[-4]",
               className,
             ])}
           >
