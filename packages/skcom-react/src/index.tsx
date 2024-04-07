@@ -163,7 +163,13 @@ export {
   type ThemeProviderProps,
 } from "./components/ThemeProvider";
 
-export { transition, useAnimationConfig, useRipple } from "./utils/animation";
+export {
+  DURATION,
+  EASING,
+  transition,
+  useAnimationConfig,
+  useRipple,
+} from "./utils/animation";
 export { useBreakpoint } from "./utils/window";
 
 export type { DataTableColumnDef } from "./types";
