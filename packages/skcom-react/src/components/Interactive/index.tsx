@@ -60,8 +60,6 @@ export interface InteractiveProps<
 
   /**
    * The URL of the page the content leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 

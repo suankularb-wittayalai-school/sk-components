@@ -39,8 +39,9 @@ export interface AppDrawerItemProps extends SKComponent {
 /**
  * An app inside the App Drawer. A child of App Drawer Segment.
  *
- * @param src The logo image of the app.
+ * @param logo The logo image of the app.
  * @param name The name of the app.
+ * @param onClick Triggers when the App Drawer Item is pressed.
  * @param href The link to the app or the app’s install page.
  */
 export function AppDrawerItem({

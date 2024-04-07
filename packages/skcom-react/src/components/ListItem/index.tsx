@@ -68,7 +68,6 @@ export interface ListItemProps extends SKComponent {
    * The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
    *
    * - If this is defined, a state layer is added.
-   * - Incompatible with `href`.
    * - Optional.
    */
   onClick?: () => any;
@@ -77,7 +76,6 @@ export interface ListItemProps extends SKComponent {
    * The URL of the page this List Item leads to, similar to `href` on `<a>`.
    *
    * - If this is defined, a state layer is added.
-   * - Incompatible with `onClick`.
    * - Optional.
    */
   href?: string;

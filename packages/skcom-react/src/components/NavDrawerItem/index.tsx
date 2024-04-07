@@ -58,7 +58,6 @@ export interface NavDrawerItemProps extends SKComponent {
    * Item, similar to `onClick` on `<button>`.
    *
    * - Required if `href` is not defined.
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
@@ -67,7 +66,6 @@ export interface NavDrawerItemProps extends SKComponent {
    * `href` on `<a>`.
    *
    * - Required if `onClick` is not defined.
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }

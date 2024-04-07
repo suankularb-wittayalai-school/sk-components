@@ -90,7 +90,6 @@ export interface NavBarItemProps extends SKComponent {
    * similar to `onClick` on `<button>`.
    *
    * - Required if `href` is not defined.
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
@@ -99,7 +98,6 @@ export interface NavBarItemProps extends SKComponent {
    * on `<a>`.
    *
    * - Required if `onClick` is not defined.
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }

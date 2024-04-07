@@ -48,7 +48,7 @@ export interface TabsContainerProps extends SKComponent {
  * page of a class.
  *
  * @param children Tabs to select from.
- * @param type Where Tabs Container is placed affects its appearance. A Tabs Container responsible for the entire content pane (`primary`) has a different appearance as that for only a section (`secondary`).
+ * @param appearance Where Tabs Container is placed affects its appearance. A Tabs Container responsible for the entire content pane (`primary`) has a different appearance as that for only a section (`secondary`).
  * @param alt A description of the Tabs Container for screen readers, similar to `alt` on `<img>`.
  */
 export function TabsContainer({

@@ -80,15 +80,11 @@ export interface AssistChipProps extends SKComponent {
   /**
    * The function called when the user interacts with the Assist Chip, similar
    * to `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this FAB leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
