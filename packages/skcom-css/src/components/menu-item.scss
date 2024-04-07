@@ -37,7 +37,7 @@
 
   &.skc-menu-item--selected::before {
     opacity: 0.12;
-    background-color: var(--primary);
+    background-color: var(--surface-container-high);
   }
 }
 
@@ -51,10 +51,6 @@
   margin-block: 0.5rem;
   text-align: left;
   color: var(--on-surface);
-
-  &.skc-menu-item--selected {
-    color: var(--on-primary);
-  }
 }
 
 .skc-menu-item__metadata {
@@ -66,8 +62,4 @@
 .skc-menu-item__ripple {
   @include mix.ripple();
   background-color: var(--on-surface);
-
-  .skc-menu-item--selected & {
-    background-color: var(--primary);
-  }
 }
