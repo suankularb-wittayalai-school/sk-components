@@ -27,8 +27,6 @@ export interface ContentLayoutProps extends SKComponent {
 /**
  * A simple width-clamped vertical flow of content with minimal default styling.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.gxd7ps11kchv SKCom documentation}
- *
  * @param children The main content of a page is grouped into Sections inside of a Content Layout.
  */
 export function ContentLayout({

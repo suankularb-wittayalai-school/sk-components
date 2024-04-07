@@ -64,8 +64,6 @@ export interface DataTableFiltersProps extends SKComponent {
  * Allows the user to filter the Data Table’s content by selecting from a list
  * of filters.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ujyeoxol3cjz SKCom documentation}
- *
  * @param children A set of Filter Chips responsible for filterring the Data Table.
  * @param locale Allows for translation of the accessibility labels.
  * @param onOverflowToggle Triggers when the overflow icon is clicked.

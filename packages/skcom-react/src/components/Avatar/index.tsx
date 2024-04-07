@@ -31,8 +31,6 @@ export interface AvatarProps extends SKComponent {
 /**
  * An avatar represents the user, whether by their initials or their picture.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
  * @param children A user’s initials or their profile image.
  */
 export function Avatar({ children, element, style, className }: AvatarProps) {

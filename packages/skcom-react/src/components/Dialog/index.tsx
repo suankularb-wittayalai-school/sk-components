@@ -61,8 +61,6 @@ export interface DialogProps extends SKComponent {
  * A Dialog interrupts the user to have them make an immediately significant
  * decision or prompts a user to enter important information.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
  * @param children Parts of a Dialog.
  * @param open If the Dialog is open and shown.
  * @param width The width of the Dialog.

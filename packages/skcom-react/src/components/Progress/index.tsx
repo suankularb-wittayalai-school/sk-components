@@ -60,8 +60,6 @@ export interface ProgressProps extends SKComponent {
  * A Progress indicates that something is ongoing. It can also indicate how
  * much of that something has been done.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.12x5jav7hhzm SKCom documentation}
- *
  * @param appearance Progress can be either a loading spinner or a linear loading bar.
  * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
  * @param value The progress percentage (out of 100) of an activity.

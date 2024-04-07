@@ -129,8 +129,6 @@ export interface PageHeaderProps extends SKComponent {
  * the only `<h1>` on the page), the back Button for navigating up, and
  * the App Drawer.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
- *
  * @param children The title text: the biggest text on a page and the only within a `<h1>` tag.
  * @param parentURL The link the back Button navigates to.
  * @param locale Allows for translation of the accessibility labels.

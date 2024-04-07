@@ -66,8 +66,6 @@ export interface CheckboxProps extends SKComponent {
  * usually used for acknowledgement of or agreement to something, like a terms
  * and conditions.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.cy04od1b0wro SKCom documentation}
- *
  * @param value The state of the Checkbox. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user toggles the Checkbox.
  * @param disabled Turns the Checkbox gray and block any action associated with it.

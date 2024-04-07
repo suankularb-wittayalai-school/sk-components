@@ -88,8 +88,6 @@ export interface SuggestionChipProps extends SKComponent {
 /**
  * Dynamically generated suggestions, like quick-reply options, for instance.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.oxbjowubritq SKCom documentation}
- *
  * @param children The text shown inside the Suggestion Chip.
  * @param icon An icon can appear before the text (`children`) in an Suggestion Chip.
  * @param tooltip A message shown in a tooltip when the user hovers over the Suggestion Chip.

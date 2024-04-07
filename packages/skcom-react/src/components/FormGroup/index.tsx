@@ -51,8 +51,6 @@ export interface FormGroupProps extends SKComponent {
 /**
  * A group of related form items, like options in a radio group.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
  * @param children Form Items within this group, be it a set of options to choose from or related settings in a preferences page.
  * @param label The legend for the entire field.
  * @param alt A description of the Form Group for screen readers, similar to `alt` on `<img>`.

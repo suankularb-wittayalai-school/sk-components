@@ -63,8 +63,6 @@ export interface MenuProps extends SKComponent {
 /**
  * A list of actions/options on a temporary surface.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s1l0jijrvyiu SKCom documentation}
- *
  * @param children Actions/options inside a Menu.
  * @param open If the Menu is open and shown.
  * @param density A lower number means a more dense interface. In this case, less height.

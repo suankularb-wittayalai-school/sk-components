@@ -73,8 +73,6 @@ export interface SwitchProps extends SKComponent {
  * Checkbox and Radio, a Switch is independent.
  * {@link https://m3.material.io/components/switch/guidelines#4f51b236-583e-4caa-9ae6-c8079325ef6b Learn the differences.}
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ab4q1pg880wv SKCom documentation}
- *
  * @param value The state of the Switch. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user toggles the switch. The state is passed in via the function as a boolean.
  * @param offIcon An icon inside the Thumb when the switch is off.

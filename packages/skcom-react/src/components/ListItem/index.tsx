@@ -86,8 +86,6 @@ export interface ListItemProps extends SKComponent {
 /**
  * An item inside a List.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.33dks77m5ey9 SKCom documentation}
- *
  * @param children The content of a List Item consists of the leading section, the content section, and the trailing section.
  * @param align The vertical alignment of the List Item’s content.
  * @param lines The number of lines contained by the List Item.

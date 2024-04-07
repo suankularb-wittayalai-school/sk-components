@@ -85,8 +85,6 @@ export interface MenuItemProps extends SKComponent {
 /**
  * An action/option inside a temporary list.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
- *
  * @param children The text displayed inside the Menu Item.
  * @param icon An icon can appear before the text (`children`) in a Menu Item.
  * @param metadata A message shown in a tooltip when the user hovers over the Menu Item.

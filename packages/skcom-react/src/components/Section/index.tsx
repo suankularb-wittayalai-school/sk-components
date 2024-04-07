@@ -36,8 +36,6 @@ export interface SectionProps extends SKComponent {
 /**
  * Section is a way to group content under one Header.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.cpfnymlipawc SKCom documentation}
- *
  * @param children Section must have exactly 1 Header as the first direct descendent. After that, it can include anything.
  * @param sectionAttr Attributes for the underlying `<section>` element.
  */

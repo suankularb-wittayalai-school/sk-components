@@ -53,8 +53,6 @@ export interface NavDrawerProps extends SKComponent {
 /**
  * A list of all destinations within an app.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.2czacyab5zgs SKCom documentation}
- *
  * @param children All destinations within an app. Destinations can be grouped with the help of Navigation Drawer Sections.
  * @param open If true, the Navigation Drawer will slide in to the screen, otherwise it would slide out of view.
  * @param onClose The function triggered when the scrim is clicked.

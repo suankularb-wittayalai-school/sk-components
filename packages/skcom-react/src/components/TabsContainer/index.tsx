@@ -47,8 +47,6 @@ export interface TabsContainerProps extends SKComponent {
  * level of a page hierarchy. For example, an Overview, Students, and Teachers
  * page of a class.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.pfftt8s0sg20 SKCom documentation}
- *
  * @param children Tabs to select from.
  * @param type Where Tabs Container is placed affects its appearance. A Tabs Container responsible for the entire content pane (`primary`) has a different appearance as that for only a section (`secondary`).
  * @param alt A description of the Tabs Container for screen readers, similar to `alt` on `<img>`.

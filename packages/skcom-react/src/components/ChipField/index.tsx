@@ -142,8 +142,6 @@ export interface ChipFieldProps extends SKComponent {
  * into the Chip Field; their input is converted into an Input Chip on spacebar
  * press.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
- *
  * @param children The Input Chips that the user have already entered.
  * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
  * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.

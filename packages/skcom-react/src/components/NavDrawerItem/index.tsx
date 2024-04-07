@@ -76,8 +76,6 @@ export interface NavDrawerItemProps extends SKComponent {
  * A destination in a Navigation Drawer. Should be a child of a Navigation
  * Drawer Section.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation}
- *
  * @param icon Icons help users identify pages more quickly.
  * @param label The title of the destination page.
  * @param metadata Some text aligned to the right of a Navigation Drawer Item.

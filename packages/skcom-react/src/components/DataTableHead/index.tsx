@@ -46,8 +46,6 @@ export interface DataTableHeadProps extends SKComponent {
 /**
  * The head area of a Table.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
- *
  * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
  * @param locale Allows for translation of the accessibility labels.
  */

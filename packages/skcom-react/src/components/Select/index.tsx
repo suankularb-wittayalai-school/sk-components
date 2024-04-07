@@ -123,8 +123,6 @@ export interface SelectProps extends SKComponent {
  * Sometimes it’s impractical to show all options at a time with a radio group.
  * Select allows the user to choose from options shown on a temporary surface.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.hh9ts22t8gjy SKCom documentation}
- *
  * @param children The options to select from.
  * @param appearance How the Select looks.
  * @param label The label text.
