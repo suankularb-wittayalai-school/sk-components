@@ -137,8 +137,6 @@ export interface InputChipProps extends SKComponent {
  * Like all Chips, an Input Chip appears alongside other Input Chips, but these
  * can also appear inside a text field like in Chip Field.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.qr7x5m70pqd SKCom documentation}
- *
  * @param children The text displayed inside the chip.
  * @param avatar An avatar is placed before all content in an Input Chip.
  * @param icon An icon can appear before all content in an Input Chip. In a page with many chips, icons can quickly orient users.
@@ -168,7 +166,7 @@ export function InputChip({
   className,
 }: InputChipProps) {
   // Editable Chip logic
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
+  const inputRef: React.Ref<HTMLInputElement> = React.useRef(null);
   const [editing, setEditing] = React.useState<boolean>(false);
 
   /**

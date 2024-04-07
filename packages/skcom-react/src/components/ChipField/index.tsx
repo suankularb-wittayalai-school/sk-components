@@ -142,8 +142,6 @@ export interface ChipFieldProps extends SKComponent {
  * into the Chip Field; their input is converted into an Input Chip on spacebar
  * press.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation}
- *
  * @param children The Input Chips that the user have already entered.
  * @param label The placeholder text (if no placeholder specified or when not focused and no value) and the label text (when focused or has value).
  * @param alt A description of the Chip Field for screen readers, similar to `alt` on `<img>`.
@@ -168,7 +166,7 @@ export function ChipField({
   onChange,
   onNewEntry,
   onDeleteLast,
-  entrySeparators,
+  entrySeparators = [" ", ",", ";"],
   placeholder,
   loading,
   disabled,
@@ -187,10 +185,10 @@ export function ChipField({
     () =>
       setNoOfChips(
         React.Children.count(
-          (React.Children.only(children) as JSX.Element).props.children
-        )
+          (React.Children.only(children) as JSX.Element).props.children,
+        ),
       ),
-    [children]
+    [children],
   );
 
   // Animation
@@ -274,9 +272,7 @@ export function ChipField({
     if (
       onNewEntry &&
       // If the last character is an entry separator
-      (entrySeparators || [" ", ",", ";"]).indexOf(
-        value.split("").slice(-1)[0] || ""
-      )
+      entrySeparators.includes(value.slice(-1))
     ) {
       // Call `onNewEntry` on the field value with the entry separator removed
       onNewEntry(value.slice(0, -1));
@@ -324,7 +320,7 @@ export function ChipField({
   // Accessibility
   // Generate the base ID for `<label>`
   const fieldID = `chip-field-${kebabify(
-    (typeof label === "string" ? label : alt)!
+    (typeof label === "string" ? label : alt)!,
   )}`;
 
   return (
@@ -340,7 +336,11 @@ export function ChipField({
       <div className="skc-chip-field__scrollable">
         <div className="skc-chip-field__content">
           {/* Chip Set */}
-          <ChipSet divAttr={{ "aria-live": "polite", "aria-relevant": "all" }}>
+          <ChipSet
+            element={(props) => (
+              <div aria-live="polite" aria-relevant="all" {...props} />
+            )}
+          >
             {React.Children.map(
               (React.Children.only(children) as JSX.Element).props.children,
               (child, idx) => {
@@ -351,7 +351,7 @@ export function ChipField({
                     selected: true,
                   });
                 return child;
-              }
+              },
             )}
           </ChipSet>
 

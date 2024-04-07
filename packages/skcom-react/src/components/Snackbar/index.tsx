@@ -61,11 +61,6 @@ export interface SnackbarProps extends SKComponent {
    * - Optional.
    */
   onExitComplete?: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -76,8 +71,6 @@ export interface SnackbarProps extends SKComponent {
  * Note that Snackbar, as per SKCom’s principles, does not do state management
  * on its own. Use the `children`, `open`, `onClose`, and `onExitComplete`
  * props with your own state management solution.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.56t1qg46v0rl SKCom documentation}
  *
  * @param children The message inside the Snackbar.
  * @param action A Snackbar can contain 1 action. Pressing this action closes the Snackbar.
@@ -93,6 +86,7 @@ export function Snackbar({
   open,
   onClose,
   onExitComplete,
+  element: Element = motion.div,
   style,
   className,
 }: SnackbarProps) {
@@ -102,7 +96,7 @@ export function Snackbar({
     <aside>
       <AnimatePresence {...{ onExitComplete }}>
         {open && (
-          <motion.div
+          <Element
             role="status"
             aria-relevant="additions"
             initial={{ opacity: 0, y: 40 }}
@@ -135,7 +129,7 @@ export function Snackbar({
                 })}
               </div>
             )}
-          </motion.div>
+          </Element>
         )}
       </AnimatePresence>
     </aside>

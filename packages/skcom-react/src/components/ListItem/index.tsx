@@ -68,7 +68,6 @@ export interface ListItemProps extends SKComponent {
    * The function called when the user interacts with the List Item, similar to `onClick` on `<button>`.
    *
    * - If this is defined, a state layer is added.
-   * - Incompatible with `href`.
    * - Optional.
    */
   onClick?: () => any;
@@ -77,7 +76,6 @@ export interface ListItemProps extends SKComponent {
    * The URL of the page this List Item leads to, similar to `href` on `<a>`.
    *
    * - If this is defined, a state layer is added.
-   * - Incompatible with `onClick`.
    * - Optional.
    */
   href?: string;
@@ -85,8 +83,6 @@ export interface ListItemProps extends SKComponent {
 
 /**
  * An item inside a List.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.33dks77m5ey9 SKCom documentation}
  *
  * @param children The content of a List Item consists of the leading section, the content section, and the trailing section.
  * @param align The vertical alignment of the List Item’s content.

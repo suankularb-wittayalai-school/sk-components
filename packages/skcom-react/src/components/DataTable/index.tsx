@@ -38,38 +38,32 @@ export interface DataTableProps extends SKComponent {
    * - Optional.
    */
   layout?: LayoutProps["layout"];
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * A more rich Table with support for filtering, search, and pagination; and
  * integrates directly with Tanstack Table.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.cfjy3gpzsh75 SKCom documentation}
- *
  * @param children There is a set of components especially designed to be used here: Data Table Search, Data Table Filters, Data Table Content, and Data Table Pagination.
  */
 export function DataTable({
   children,
   layout,
+  element: Element = motion.figure,
   style,
   className,
 }: DataTableProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <motion.figure
+    <Element
       layout={layout}
       transition={transition(duration.medium4, easing.standard)}
       style={{ ...style, borderRadius: 20 }}
       className={cn(["skc-data-table", className])}
     >
       {children}
-    </motion.figure>
+    </Element>
   );
 }
 

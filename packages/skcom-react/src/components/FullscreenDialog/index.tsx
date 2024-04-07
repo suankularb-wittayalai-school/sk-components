@@ -13,7 +13,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/fullscreen-dialog.css";
 
 // Utilities
-import { transition, useAnimationConfig } from "../../utils/animation";
+import { DURATION, EASING, transition } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { kebabify } from "../../utils/format";
 import { useBreakpoint } from "../../utils/window";
@@ -81,11 +81,6 @@ export interface FullscreenDialogProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
@@ -94,8 +89,6 @@ export interface FullscreenDialogProps extends SKComponent {
  *
  * A Full-screen Dialog only fills the screen on mobile and turns into a Dialog
  * on larger screens. A Dialog can appear above a Full-screen Dialog.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.n92froio6418 SKCom documentation}
  *
  * @param children The content.
  * @param open If the Full-screen Dialog is open and shown.
@@ -114,6 +107,7 @@ export function FullscreenDialog({
   alt,
   locale,
   onClose,
+  element: Element = motion.div,
   style,
   className,
 }: FullscreenDialogProps) {
@@ -121,7 +115,6 @@ export function FullscreenDialog({
   // Dialog and Full-screen Dialog have different animations. The animation is
   // determined with the current breakpoint.
 
-  const { duration, easing } = useAnimationConfig();
   const { atBreakpoint } = useBreakpoint();
 
   const dialogAnimation: Variants = {
@@ -131,7 +124,7 @@ export function FullscreenDialog({
       opacity: 0,
       scaleY: 0.5,
       y: "-90%",
-      transition: transition(duration.short2, easing.standardAccelerate),
+      transition: transition(DURATION.short2, EASING.emphasizedAccelerate),
     },
   };
 
@@ -141,7 +134,7 @@ export function FullscreenDialog({
     exit: {
       opacity: 0,
       scale: 0.9,
-      transition: transition(duration.short2, easing.standardAccelerate),
+      transition: transition(DURATION.short2, EASING.emphasizedAccelerate),
     },
   };
 
@@ -149,7 +142,7 @@ export function FullscreenDialog({
   React.useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-fullscreen-dialog__top-app-bar"
+        ".skc-fullscreen-dialog__top-app-bar",
       );
 
       const buttons =
@@ -169,7 +162,7 @@ export function FullscreenDialog({
 
   // Generate the base ID for `aria-labelledby` and `aria-describedby`
   const dialogID = `dialog-${kebabify(
-    (typeof title === "string" ? title : alt)!
+    (typeof title === "string" ? title : alt)!,
   )}`;
 
   // Inject first `<p>` element with an ID that `aria-describedby` can point to
@@ -200,15 +193,15 @@ export function FullscreenDialog({
             animate={{ opacity: 0.5 }}
             exit={{
               opacity: 0,
-              transition: transition(duration.short4, easing.standard),
+              transition: transition(DURATION.short4, EASING.emphasized),
             }}
-            transition={transition(duration.medium4, easing.standard)}
+            transition={transition(DURATION.medium4, EASING.emphasized)}
             className="skc-scrim"
             onClick={onClose}
           />
 
           {/* Full-screen Dialog */}
-          <motion.div
+          <Element
             // `alertdialog` is a type of `dialog` for interrupting the user
             // flow.
             role="alertdialog"
@@ -218,7 +211,10 @@ export function FullscreenDialog({
             {...(atBreakpoint === "base"
               ? fullscreenDialogAnimation
               : dialogAnimation)}
-            transition={transition(duration.medium2, easing.standardDecelerate)}
+            transition={transition(
+              DURATION.medium4,
+              EASING.emphasizedDecelerate,
+            )}
             style={{
               ...style,
               ...(atBreakpoint !== "base" ? { width, borderRadius: 28 } : {}),
@@ -241,7 +237,7 @@ export function FullscreenDialog({
             <div className="skc-fullscreen-dialog__content">
               {injectedChildren}
             </div>
-          </motion.div>
+          </Element>
         </>
       )}
     </AnimatePresence>

@@ -88,23 +88,17 @@ export interface FABProps extends SKComponent {
   /**
    * The function called when the user interacts with the FAB, similar to
    * `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this FAB leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
 
 /**
  * The Floating Action Button or FAB is the main action of a page.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation}
  *
  * @param children The text displayed inside the FAB.
  * @param color The color of the FAB.

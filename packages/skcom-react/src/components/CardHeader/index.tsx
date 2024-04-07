@@ -52,40 +52,25 @@ export interface CardHeaderProps extends SKComponent {
    * - Optional.
    */
   subtitle?: string | JSX.Element;
-
-  /**
-   * The overflow Menu of this Card. If defined, an overflow icon appears on
-   * the right. The value of `overflow` is shown on click.
-   *
-   * - Must be a Menu.
-   * - Optional.
-   */
-  overflow?: JSX.Element;
 }
 
 /**
  * The header of a Card. Sometimes all a Card needs is a Card Header.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5y6ktiqu5rba SKCom documentation}
- *
  * @param avatar An avatar is placed before all content in a Card Header.
  * @param icon An icon can appear before all content in a Card Header.
  * @param title The most predominant text inside a Card.
  * @param subtitle A short text complementing the title text.
- * @param overflow The overflow Menu of this Card. If defined, an overflow icon appears on the right.
  */
 export function CardHeader({
   avatar,
   icon,
   title,
   subtitle,
-  overflow,
   element,
   style,
   className,
 }: CardHeaderProps) {
-  const [showOverflow, setShowOverflow] = React.useState<boolean>(false);
-
   return React.createElement(
     element || "div",
     { style, className: cn(["skc-card-header", className]) },
@@ -103,32 +88,6 @@ export function CardHeader({
         <span className="skc-card-header__subtitle">{subtitle}</span>
       )}
     </div>,
-
-    // Overflow
-    overflow && (
-      <div className="skc-card-header__overflow">
-        <Button
-          appearance="text"
-          icon={<MaterialIcon icon="more_vert" />}
-          onClick={() => setShowOverflow(!showOverflow)}
-        />
-        <Menu
-          open={showOverflow}
-          onBlur={() => setShowOverflow(false)}
-          {...overflow.props}
-        >
-          {React.Children.map(overflow.props.children, (child) =>
-            React.cloneElement(child, {
-              onClick: () => {
-                const { onClick } = child.props;
-                if (onClick) onClick();
-                setShowOverflow(false);
-              },
-            })
-          )}
-        </Menu>
-      </div>
-    )
   );
 }
 

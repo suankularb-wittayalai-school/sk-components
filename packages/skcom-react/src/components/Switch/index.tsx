@@ -56,24 +56,15 @@ export interface SwitchProps extends SKComponent {
   disabled?: boolean;
 
   /**
-   * Attributes for the underlying `<button>` element.
-   *
-   * - Optional.
+   * @deprecated Use the `element` prop instead.
    */
   buttonAttr?: React.ComponentProps<"button">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * A Switch toggles something on and off. It is usually in a Form Item. Unlike
  * Checkbox and Radio, a Switch is independent.
  * {@link https://m3.material.io/components/switch/guidelines#4f51b236-583e-4caa-9ae6-c8079325ef6b Learn the differences.}
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.ab4q1pg880wv SKCom documentation}
  *
  * @param value The state of the Switch. This is useful if you want a controlled input.
  * @param onChange This function triggers when the user toggles the switch. The state is passed in via the function as a boolean.
@@ -88,21 +79,20 @@ export function Switch({
   offIcon,
   onIcon,
   disabled,
-  buttonAttr,
+  element: Element = "button",
   style,
   className,
 }: SwitchProps) {
   return (
-    <button
+    <Element
       aria-disabled={disabled}
       aria-pressed={value}
       style={style}
       className={cn(["skc-switch", value && "skc-switch--selected", className])}
-      onClick={() => onChange && onChange(!value)}
-      {...buttonAttr}
+      onClick={() => onChange?.(!value)}
     >
       <div className="skc-switch__handle">{value ? onIcon : offIcon}</div>
-    </button>
+    </Element>
   );
 }
 

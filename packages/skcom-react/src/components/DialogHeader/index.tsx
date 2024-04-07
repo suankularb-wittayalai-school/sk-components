@@ -54,9 +54,9 @@ export interface DialogHeaderProps extends SKComponent {
 }
 
 /**
- * A row of Buttons. DialogHeader handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * The header section houses the main content of a Dialog. It should clearly and
+ * succinctly communicate a Dialog’s purpose, and allow the user to quickly make
+ * a decision or enter information.
  *
  * @param icon The hero icon shown above the title text (`title`).
  * @param title The title text.
@@ -68,7 +68,7 @@ export function DialogHeader({
   title,
   desc,
   alt,
-  element,
+  element: Element = "div",
   style,
   className,
 }: DialogHeaderProps) {
@@ -81,34 +81,33 @@ export function DialogHeader({
         : // Otherwise, use `alt`
           alt
       : // If `title` is not defined, use `desc`
-      typeof desc === "string"
-      ? desc
-      : // Otherwise, use `alt`
-        alt)!
+        typeof desc === "string"
+        ? desc
+        : // Otherwise, use `alt`
+          alt)!,
   )}`;
 
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-dialog-header", className]) },
+  return (
+    <Element style={style} className={cn(["skc-dialog-header", className])}>
+      {/* Icon */}
+      {icon && <div className="skc-dialog-header__icon">{icon}</div>}
 
-    // Icon
-    icon && <div className="skc-dialog-header__icon">{icon}</div>,
+      {/* Title */}
+      {title && (
+        <h2 aria-label={alt} id={`${dialogID}-title`}>
+          {title}
+        </h2>
+      )}
 
-    // Title
-    title && (
-      <h2 aria-label={alt} id={`${dialogID}-title`}>
-        {title}
-      </h2>
-    ),
-
-    // Description
-    <p
-      // Only use `alt` as label here if `title` is undefined
-      aria-label={!title ? alt : undefined}
-      id={`${dialogID}-desc`}
-    >
-      {desc}
-    </p>
+      {/* Description */}
+      <p
+        // Only use `alt` as label here if `title` is undefined
+        aria-label={!title ? alt : undefined}
+        id={`${dialogID}-desc`}
+      >
+        {desc}
+      </p>
+    </Element>
   );
 }
 

@@ -71,24 +71,18 @@ export interface SuggestionChipProps extends SKComponent {
   /**
    * The function called when the user interacts with the Suggestion Chip,
    * similar to `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Suggestion Chip leads to, similar to `href` on
    * `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
 
 /**
  * Dynamically generated suggestions, like quick-reply options, for instance.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.oxbjowubritq SKCom documentation}
  *
  * @param children The text shown inside the Suggestion Chip.
  * @param icon An icon can appear before the text (`children`) in an Suggestion Chip.

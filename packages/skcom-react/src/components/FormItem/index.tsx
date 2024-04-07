@@ -62,8 +62,6 @@ type InputProps = CheckboxProps | RadioProps;
  * A wrapper for form control components like Checkbox, Radio, and Switch with
  * a label.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.pbls6bx1frn0 SKCom documentation}
- *
  * @param children The input.
  * @param label The label for the input.
  * @param alt A description of the Form Item for screen readers, similar to `alt` on `<img>`.

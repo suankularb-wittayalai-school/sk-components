@@ -12,7 +12,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/dialog.css";
 
 // Utilities
-import { transition, useAnimationConfig } from "../../utils/animation";
+import { DURATION, EASING, transition } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
 import { kebabify } from "../../utils/format";
@@ -50,18 +50,11 @@ export interface DialogProps extends SKComponent {
    * The function triggered when the scrim is clicked.
    */
   onClose: () => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * A Dialog interrupts the user to have them make an immediately significant
  * decision or prompts a user to enter important information.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children Parts of a Dialog.
  * @param open If the Dialog is open and shown.
@@ -73,16 +66,15 @@ export function Dialog({
   open,
   width,
   onClose,
+  element: Element = motion.div,
   style,
   className,
 }: DialogProps) {
-  const { duration, easing } = useAnimationConfig();
-
   // Focus on the main Button
   React.useEffect(() => {
     if (open) {
       const actions = document.querySelector<HTMLDivElement>(
-        ".skc-dialog > .skc-actions"
+        ".skc-dialog > .skc-actions",
       );
 
       const buttons =
@@ -121,10 +113,10 @@ export function Dialog({
             : // Otherwise, use `alt`
               alt
           : // If `title` is not defined, use `desc`
-          typeof desc === "string"
-          ? desc
-          : // Otherwise, use `alt`
-            alt)!
+            typeof desc === "string"
+            ? desc
+            : // Otherwise, use `alt`
+              alt)!,
       )}`;
     }
   });
@@ -140,15 +132,15 @@ export function Dialog({
             animate={{ opacity: 0.5 }}
             exit={{
               opacity: 0,
-              transition: transition(duration.short4, easing.standard),
+              transition: transition(DURATION.short4, EASING.standard),
             }}
-            transition={transition(duration.medium4, easing.standard)}
+            transition={transition(DURATION.medium4, EASING.standard)}
             className="skc-scrim"
             onClick={onClose}
           />
 
           {/* Dialog */}
-          <motion.div
+          <Element
             // `alertdialog` is a type of `dialog` for interrupting the user flow.
             role="alertdialog"
             aria-modal="true"
@@ -161,16 +153,19 @@ export function Dialog({
               scaleY: 0.5,
               y: "-90%",
               transition: transition(
-                duration.short2,
-                easing.standardAccelerate
+                DURATION.short2,
+                EASING.emphasizedAccelerate,
               ),
             }}
-            transition={transition(duration.medium2, easing.standardDecelerate)}
+            transition={transition(
+              DURATION.medium4,
+              EASING.emphasizedDecelerate,
+            )}
             style={{ ...style, width, borderRadius: 28 }}
             className={cn(["skc-dialog", className])}
           >
             {children}
-          </motion.div>
+          </Element>
         </>
       )}
     </AnimatePresence>

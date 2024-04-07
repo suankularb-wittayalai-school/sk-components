@@ -72,15 +72,11 @@ export interface CardProps extends SKComponent {
   /**
    * The function called when the user interacts with the Card, similar to
    * `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Card leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 
@@ -102,8 +98,6 @@ export interface CardProps extends SKComponent {
  * To quote Material Design 3, there is no right way to make a Card. However,
  * we have provided some useful props and components to get you started.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.699tcnx6hbn3 SKCom documentation}
- *
  * @param children Card must contain at least 1 JSX element.
  * @param appearance The appearance of the Card. Each appearance puts different amounts of emphasis on the subject.
  * @param direction The flow of the Card’s content, like the CSS property `flex-direction`.
@@ -114,24 +108,20 @@ export interface CardProps extends SKComponent {
  */
 export function Card({
   children,
-  style,
   appearance,
-  direction,
-  stateLayerEffect,
+  direction = "column",
+  stateLayerEffect = false,
   shadowEffect,
   onClick,
   href,
   element,
+  style,
   className,
 }: CardProps) {
   return (
     <Interactive
-      // `stateLayerEffect` and `rippleEffect` are enabled by default in
-      // Interactive, but not in Card
-      stateLayerEffect={
-        stateLayerEffect === undefined ? false : stateLayerEffect
-      }
-      rippleEffect={stateLayerEffect === undefined ? false : stateLayerEffect}
+      stateLayerEffect={stateLayerEffect}
+      rippleEffect={stateLayerEffect}
       shadowEffect={shadowEffect}
       href={href}
       onClick={onClick}

@@ -69,23 +69,17 @@ export interface MenuItemProps extends SKComponent {
   /**
    * The function called when the user interacts with the Menu Item, similar
    * to `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Menu Item leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
 
 /**
  * An action/option inside a temporary list.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.kvecy6esdzke SKCom documentation}
  *
  * @param children The text displayed inside the Menu Item.
  * @param icon An icon can appear before the text (`children`) in a Menu Item.

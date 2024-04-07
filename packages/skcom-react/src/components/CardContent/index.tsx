@@ -25,20 +25,18 @@ export interface CardContentProps extends SKComponent {
 /**
  * A section of content inside Card.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.anun9n3ld6tj SKCom documentation}
- *
  * @param children Card Content can contain anything, from supporting text to Actions.
  */
 export function CardContent({
   children,
-  element,
+  element: Element = "div",
   style,
   className,
 }: CardContentProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: cn(["skc-card-content", className]) },
-    children
+  return (
+    <Element style={style} className={cn(["skc-card-content", className])}>
+      {children}
+    </Element>
   );
 }
 
