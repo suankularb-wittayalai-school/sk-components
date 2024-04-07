@@ -74,8 +74,8 @@ export interface NavBarProps extends SKComponent {
 }
 
 /**
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.17kwuu4el5al SKCom documentation}
+ * A Navigation Bar/Rail provides persistent access to all top-level pages. On
+ * larger screens, a Navigation Bar transforms into a Navigation Rail.
  *
  * @param children A Navigation Bar contains Navigation Bar Items, each leading to a different top-level page.
  * @param brand A small image of your brand can be put on the Navigation Rail.
@@ -121,7 +121,7 @@ export function NavBar({
       </motion.section>
     </motion.div>,
 
-    <section className="skc-nav-bar__end">{end}</section>
+    <section className="skc-nav-bar__end">{end}</section>,
   );
 }
 

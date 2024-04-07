@@ -42,9 +42,7 @@ export interface NavDrawerSectionProps extends SKComponent {
 }
 
 /**
- * A row of Buttons. NavDrawerSection handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * A group of destinations within a Navigation Drawer.
  *
  * @param children Destinations grouped into this section.
  * @param header The header of the section.

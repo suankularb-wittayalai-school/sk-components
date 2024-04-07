@@ -48,9 +48,10 @@ export interface HeaderProps extends SKComponent {
 }
 
 /**
- * A row of Buttons. Header handles spacing and overflow.
+ * A Header helps users quickly identifies sections and their purpose.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.eq5d681m3fpe SKCom documentation}
+ * When used in conjunction with Section, the Section can be labeled with the
+ * Header for screen readers.
  *
  * @param children The text of the Header.
  * @param level The level of the Header. The number corresponds to an HTML header element.
@@ -69,7 +70,7 @@ export function Header({
     { style, className: cn(["skc-header", className]) },
 
     icon && <span className="skc-header__icon">{icon}</span>,
-    <span className="skc-header__text">{children}</span>
+    <span className="skc-header__text">{children}</span>,
   );
 }
 

@@ -42,9 +42,8 @@ export interface TableProps extends SKComponent {
 }
 
 /**
- * A row of Buttons. Table handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * A Table displays information in columns and rows, each row representing a set
+ * of data in each aspect, represented by columns.
  *
  * @param children The content of the Table.
  * @param contentWidth The minimum width of the content.
@@ -66,7 +65,7 @@ export function Table({
     },
     <table style={{ minWidth: contentWidth }} className="skc-table__content">
       {children}
-    </table>
+    </table>,
   );
 }
 

@@ -47,9 +47,7 @@ export interface ListItemContentProps extends SKComponent {
 }
 
 /**
- * A row of Buttons. ListItemContent handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * The text content of a List Item.
  *
  * @param overline Small text on top of the title text.
  * @param title The main text of the List Item Content.
