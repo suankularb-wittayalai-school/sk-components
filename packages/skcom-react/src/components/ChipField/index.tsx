@@ -166,7 +166,7 @@ export function ChipField({
   onChange,
   onNewEntry,
   onDeleteLast,
-  entrySeparators,
+  entrySeparators = [" ", ",", ";"],
   placeholder,
   loading,
   disabled,
@@ -185,10 +185,10 @@ export function ChipField({
     () =>
       setNoOfChips(
         React.Children.count(
-          (React.Children.only(children) as JSX.Element).props.children
-        )
+          (React.Children.only(children) as JSX.Element).props.children,
+        ),
       ),
-    [children]
+    [children],
   );
 
   // Animation
@@ -272,9 +272,7 @@ export function ChipField({
     if (
       onNewEntry &&
       // If the last character is an entry separator
-      (entrySeparators || [" ", ",", ";"]).indexOf(
-        value.split("").slice(-1)[0] || ""
-      )
+      entrySeparators.includes(value.slice(-1))
     ) {
       // Call `onNewEntry` on the field value with the entry separator removed
       onNewEntry(value.slice(0, -1));
@@ -322,7 +320,7 @@ export function ChipField({
   // Accessibility
   // Generate the base ID for `<label>`
   const fieldID = `chip-field-${kebabify(
-    (typeof label === "string" ? label : alt)!
+    (typeof label === "string" ? label : alt)!,
   )}`;
 
   return (
@@ -349,7 +347,7 @@ export function ChipField({
                     selected: true,
                   });
                 return child;
-              }
+              },
             )}
           </ChipSet>
 
