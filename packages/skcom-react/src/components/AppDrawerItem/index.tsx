@@ -1,6 +1,5 @@
 // External libraries
 import * as React from "react";
-import { dash } from "radash";
 
 // Internal components
 import { Interactive } from "../Interactive";
@@ -39,8 +38,9 @@ export interface AppDrawerItemProps extends SKComponent {
 /**
  * An app inside the App Drawer. A child of App Drawer Segment.
  *
- * @param src The logo image of the app.
+ * @param logo The logo image of the app.
  * @param name The name of the app.
+ * @param onClick Triggers when the App Drawer Item is pressed.
  * @param href The link to the app or the app’s install page.
  */
 export function AppDrawerItem({
@@ -48,11 +48,12 @@ export function AppDrawerItem({
   name,
   onClick,
   href,
+  element: Element = "li",
   style,
   className,
 }: AppDrawerItemProps) {
   return (
-    <li style={style} className={cn([`skc-app-drawer-item`, className])}>
+    <Element style={style} className={cn([`skc-app-drawer-item`, className])}>
       <Interactive
         onClick={onClick}
         href={href}
@@ -68,6 +69,6 @@ export function AppDrawerItem({
         {logo}
       </Interactive>
       <span className="skc-app-drawer-item__name">{name}</span>
-    </li>
+    </Element>
   );
 }

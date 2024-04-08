@@ -3,8 +3,6 @@
 /// Sometimes it’s impractical to show all options at a time with a radio
 /// group. Select allows the user to choose from options shown on a temporary
 /// surface.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.hh9ts22t8gjy SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -101,7 +99,7 @@
 .skc-page-header,
 .skc-card--filled {
   .skc-select--filled {
-    background-color: var(--surface-1);
+    background-color: var(--surface);
 
     &::before {
       background-color: var(--outline);
@@ -111,11 +109,7 @@
 
 .skc-select--outlined .skc-select__label {
   .skc-dialog & {
-    background-color: var(--surface-3);
-  }
-
-  .skc-page-header & {
-    background-color: var(--surface-5);
+    background-color: var(--surface-container-high);
   }
 
   .skc-card--filled & {

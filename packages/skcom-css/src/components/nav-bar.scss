@@ -2,8 +2,6 @@
 /// **Navigation Bar**
 /// A Navigation Bar/Rail provides persistent access to all top-level pages. On
 /// larger screens, a Navigation Bar transforms into a Navigation Rail.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.x32yas2zvfe SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -11,7 +9,7 @@
 .skc-nav-bar {
   overflow-x: auto;
   width: 100vw;
-  background-color: var(--surface-2);
+  background-color: var(--surface-container);
 }
 
 .skc-nav-bar__toggle-and-fab {

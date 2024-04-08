@@ -35,37 +35,32 @@ export interface ActionsProps extends SKComponent {
 /**
  * A row of Buttons. Actions handles spacing and overflow.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
- *
  * @param children Actions contains Buttons; the recommended limit is 3.
  * @param align How the Buttons should be positioned.
  */
 export function Actions({
   children,
-  align,
-  element,
+  align = "right",
+  element: Element = "div",
   style,
   className,
 }: ActionsProps) {
-  return React.createElement(
-    element || "div",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-actions",
-        align === "left"
-          ? "skc-actions--left"
-          : align === "center"
-          ? "skc-actions--center"
-          : align === "right"
-          ? "skc-actions--right"
-          : align === "full"
-          ? "skc-actions--full"
-          : undefined,
+        {
+          left: "skc-actions--left",
+          center: "skc-actions--center",
+          right: "skc-actions--right",
+          full: "skc-actions--full",
+        }[align],
         className,
-      ]),
-    },
-    children
+      ])}
+    >
+      {children}
+    </Element>
   );
 }
 

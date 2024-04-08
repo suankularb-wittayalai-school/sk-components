@@ -59,37 +59,15 @@ export interface DataTableSearchProps extends SKComponent {
   placeholder?: string;
 
   /**
-   * Triggers when the overflow icon is clicked. If defined, an overflow icon appears on the right.
-   *
-   * - Optional.
-   */
-  onOverflowToggle?: () => any;
-
-  /**
-   * The overflow Menu of the parent Data Table. The value of `overflow` is shown on click.
-   *
-   * - Must be a Menu.
-   * - Optional.
-   */
-  overflow?: JSX.Element;
-
-  /**
    * Attributes for the underlying `<input>` element used as the field.
    *
    * - Optional.
    */
   inputAttr?: React.ComponentProps<"input">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * Allows the user to filter the Data Table’s content using a text query.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.rlv2aa34ifbx SKCom documentation}
  *
  * @param value The value inside the search field. This is useful if you want a controlled input.
  * @param locale Allows for translation of the default placeholder message.
@@ -104,16 +82,15 @@ export function DataTableSearch({
   locale,
   onChange,
   placeholder,
-  onOverflowToggle,
-  overflow,
   inputAttr,
+  element: Element = motion.div,
   style,
   className,
 }: DataTableSearchProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <motion.div
+    <Element
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
@@ -130,24 +107,11 @@ export function DataTableSearch({
         aria-label={locale === "th" ? "ค้นหา" : "Search"}
         className="skc-data-table-search__input"
         value={value}
-        onChange={(event) => onChange && onChange(event.target.value)}
+        onChange={(event) => onChange?.(event.target.value)}
         placeholder={placeholder || (locale === "th" ? "ค้นหา" : "Search")}
         {...inputAttr}
       />
-
-      {/* Overflow */}
-      {onOverflowToggle && (
-        <div className="skc-data-table-search__overflow">
-          <Button
-            appearance="text"
-            icon={<MaterialIcon icon="more_vert" />}
-            alt={locale === "th" ? "เปิดเมนูเพิ่มเติม" : "Toggle overflow menu"}
-            onClick={onOverflowToggle}
-          />
-          {overflow}
-        </div>
-      )}
-    </motion.div>
+    </Element>
   );
 }
 

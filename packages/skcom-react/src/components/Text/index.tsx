@@ -26,21 +26,10 @@ export interface TextProps extends SKComponent {
     | "button"
     | "caption"
     | "overline"
-    | "display-large"
-    | "display-medium"
-    | "display-small"
-    | "headline-large"
-    | "headline-medium"
-    | "headline-small"
-    | "title-large"
-    | "title-medium"
-    | "title-small"
-    | "label-large"
-    | "label-medium"
-    | "label-small"
-    | "body-large"
-    | "body-medium"
-    | "body-small";
+    | `${"display" | "headline" | "title" | "label" | "body"}-${
+        | "large"
+        | "medium"
+        | "small"}`;
 }
 
 /**
@@ -49,9 +38,13 @@ export interface TextProps extends SKComponent {
  * @param children The text to apply the typographic styling to.
  * @param type The token of the typescale to apply.
  */
-export function Text({ type, children, element, className, style }: TextProps) {
-  const Element = element || "span";
-
+export function Text({
+  children,
+  type,
+  element: Element = "span",
+  className,
+  style,
+}: TextProps) {
   return (
     <Element
       className={cn([`skc-text skc-text--${type}`, className])}

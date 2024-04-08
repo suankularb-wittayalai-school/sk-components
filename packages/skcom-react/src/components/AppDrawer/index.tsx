@@ -13,7 +13,7 @@ import { SKComponent } from "../../types";
 import "@suankularb-components/css/dist/css/components/app-drawer.css";
 
 // Utilities
-import { transition, useAnimationConfig } from "../../utils/animation";
+import { DURATION, EASING, transition } from "../../utils/animation";
 import { cn } from "../../utils/className";
 
 export interface AppDrawerProps extends SKComponent {
@@ -48,11 +48,11 @@ export function AppDrawer({
   children,
   locale,
   onOpen,
+  element: Element = motion.div,
   style,
   className,
 }: AppDrawerProps) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const { duration, easing } = useAnimationConfig();
 
   return (
     <div className="skc-app-drawer__anchor">
@@ -73,26 +73,27 @@ export function AppDrawer({
         {drawerOpen && (
           <>
             {/* Drawer */}
-            <motion.div
-              initial={{ y: "-50%", scaleY: 0 }}
-              animate={{ y: 20, scaleY: 1 }}
+            <Element
+              initial={{ y: "-50%", scaleY: 0, opacity: 0 }}
+              animate={{ y: 20, scaleY: 1, opacity: 1 }}
               exit={{
                 y: "-50%",
                 scaleY: 0,
+                opacity: 0,
                 transition: transition(
-                  duration.short2,
-                  easing.standardAccelerate
+                  DURATION.short2,
+                  EASING.emphasizedAccelerate,
                 ),
               }}
               transition={transition(
-                duration.medium4,
-                easing.standardDecelerate
+                DURATION.medium4,
+                EASING.emphasizedDecelerate,
               )}
               style={{ borderRadius: 16, ...style }}
               className={cn([`skc-app-drawer`, className])}
             >
               {children}
-            </motion.div>
+            </Element>
 
             {/* Scrim */}
             <motion.div
@@ -100,7 +101,7 @@ export function AppDrawer({
               animate={{ opacity: 0.5 }}
               exit={{ opacity: 0 }}
               className="skc-scrim"
-              transition={transition(duration.medium2, easing.standard)}
+              transition={transition(DURATION.medium2, EASING.standard)}
               onClick={() => setDrawerOpen(false)}
             />
           </>

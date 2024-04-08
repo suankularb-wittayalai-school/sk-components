@@ -117,19 +117,12 @@ export interface PageHeaderProps extends SKComponent {
    * @deprecated
    */
   backAttr?: ButtonProps;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * There’s exactly one Page Header on every page. It displays the title (in
  * the only `<h1>` on the page), the back Button for navigating up, and
  * the App Drawer.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5w06ou3fwzsd SKCom documentation}
  *
  * @param children The title text: the biggest text on a page and the only within a `<h1>` tag.
  * @param parentURL The link the back Button navigates to.
@@ -146,6 +139,7 @@ export function PageHeader({
   buttonElement,
   onBack,
   onNavToggle,
+  element: Element = "header",
   style,
   className,
 }: PageHeaderProps) {
@@ -186,7 +180,7 @@ export function PageHeader({
               x: -100,
               transition: transition(
                 duration.short4,
-                easing.standardAccelerate
+                easing.standardAccelerate,
               ),
             }}
             transition={transition(duration.medium2, easing.standardDecelerate)}
@@ -204,7 +198,7 @@ export function PageHeader({
         )}
       </AnimatePresence>
 
-      <header
+      <Element
         ref={headerRef}
         style={style}
         className={cn([`skc-page-header`, className])}
@@ -231,7 +225,7 @@ export function PageHeader({
           {/* App Drawer */}
           {appDrawer}
         </div>
-      </header>
+      </Element>
     </>
   );
 }

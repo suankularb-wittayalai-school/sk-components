@@ -55,8 +55,6 @@ export interface SplitLayoutProps extends SKComponent {
  * detail. In a supporting panel layout, the main content takes focus with a
  * small column set aside for supporting content.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.iv2gnmudjnme SKCom documentation}
- *
  * @param children The content should have 2 sides; each element entered corresponds to a side.
  * @param ratio Choose from 2 presets or create your own. This uses the same grid system as Columns, so ensure each side of the ratio adds up to 12.
  * @param showRightOnMobile Show the right side below the left side instead of hiding it on mobile.
@@ -65,7 +63,7 @@ export function SplitLayout({
   children,
   ratio,
   showRightOnMobile,
-  element,
+  element: Element = "section",
   style,
   className,
 }: SplitLayoutProps) {
@@ -76,34 +74,34 @@ export function SplitLayout({
     sm: [2, 2, 3, 3, 4, 4, 4, 5, 5, 6, 6], // 8 columns
   };
 
-  return React.createElement(
-    element || "section",
-    {
-      style,
-      className: cn([
+  return (
+    <Element
+      style={style}
+      className={cn([
         "skc-split-layout",
-        ratio === "list-detail"
-          ? "skc-split-layout--list-detail"
-          : ratio === "supporting-panel"
-          ? "skc-split-layout--supporting-panel"
-          : undefined,
+        typeof ratio === "string" &&
+          {
+            "list-detail": "skc-split-layout--list-detail",
+            "supporting-panel": "skc-split-layout--supporting-panel",
+          }[ratio],
         showRightOnMobile && "skc-split-layout--persist-right",
         className,
-      ]),
-    },
-    <div
-      className="skc-split-layout__content"
-      style={{
-        gridTemplateColumns:
-          typeof ratio !== "string" && atBreakpoint !== "base"
-            ? ratio
-                .map((size) => `${colSpans[atBreakpoint][size - 1]}fr`)
-                .join(" ")
-            : undefined,
-      }}
+      ])}
     >
-      {children}
-    </div>
+      <div
+        className="skc-split-layout__content"
+        style={{
+          gridTemplateColumns:
+            typeof ratio !== "string" && atBreakpoint !== "base"
+              ? ratio
+                  .map((size) => `${colSpans[atBreakpoint][size - 1]}fr`)
+                  .join(" ")
+              : undefined,
+        }}
+      >
+        {children}
+      </div>
+    </Element>
   );
 }
 

@@ -58,7 +58,6 @@ export interface NavDrawerItemProps extends SKComponent {
    * Item, similar to `onClick` on `<button>`.
    *
    * - Required if `href` is not defined.
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
@@ -67,7 +66,6 @@ export interface NavDrawerItemProps extends SKComponent {
    * `href` on `<a>`.
    *
    * - Required if `onClick` is not defined.
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
@@ -75,8 +73,6 @@ export interface NavDrawerItemProps extends SKComponent {
 /**
  * A destination in a Navigation Drawer. Should be a child of a Navigation
  * Drawer Section.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.sacv3at35zp6 SKCom documentation}
  *
  * @param icon Icons help users identify pages more quickly.
  * @param label The title of the destination page.

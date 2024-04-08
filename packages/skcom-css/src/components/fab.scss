@@ -1,8 +1,6 @@
 ////
 /// **FAB**
 /// The Floating Action Button or FAB is the main action of a page.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.v2ft1p7l7f8a SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -143,7 +141,7 @@
 // Surface FAB
 .skc-fab.skc-fab--surface {
   color: var(--primary);
-  background-color: var(--surface-3);
+  background-color: var(--surface-container-high);
 
   &::before,
   .skc-fab__ripple {

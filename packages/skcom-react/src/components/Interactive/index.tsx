@@ -60,8 +60,6 @@ export interface InteractiveProps<
 
   /**
    * The URL of the page the content leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 
@@ -75,8 +73,6 @@ export interface InteractiveProps<
 
 /**
  * An interactive represents the user, whether by their initials or their picture.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children The content to make interactive.
  * @param stateLayerEffect Show a state layer on top of the content that reacts in color to hover and focus to signify its interactivity.

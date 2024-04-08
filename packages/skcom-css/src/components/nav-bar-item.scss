@@ -1,8 +1,6 @@
 ////
 /// **Navigation Bar Item**
 /// One of the destinations in a Navigation Bar/Rail.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s8z7t3ulnwdb SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -24,8 +22,8 @@
 // Selected
 .skc-nav-bar-item.skc-nav-bar-item--selected {
   .skc-nav-bar-item__icon {
-    color: var(--on-primary-container);
-    background-color: var(--primary-container);
+    color: var(--on-secondary-container);
+    background-color: var(--secondary-container);
   }
 
   &::before,
@@ -126,7 +124,7 @@
 
   .skc-nav-bar-item.skc-nav-bar-item--selected & {
     font-weight: var(--font-bold);
-    color: var(--on-primary-container);
+    color: var(--on-secondary-container);
   }
 }
 

@@ -36,17 +36,10 @@ export interface DataTableHeadProps extends SKComponent {
    * - Optional.
    */
   locale?: "en-US" | "th";
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * The head area of a Table.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7y7xcyou1za9 SKCom documentation}
  *
  * @param headerGroups The return of `getHeaderGroups`, one of the functions of the Tanstack Table instance.
  * @param locale Allows for translation of the accessibility labels.
@@ -54,13 +47,14 @@ export interface DataTableHeadProps extends SKComponent {
 export function DataTableHead({
   headerGroups,
   locale,
+  element: Element = motion.thead,
   style,
   className,
 }: DataTableHeadProps) {
   const { duration, easing } = useAnimationConfig();
 
   return (
-    <motion.thead
+    <Element
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
@@ -131,7 +125,7 @@ export function DataTableHead({
                           exit={{ scale: 0.4, opacity: 0 }}
                           transition={transition(
                             duration.short4,
-                            easing.standard
+                            easing.standard,
                           )}
                           aria-label={
                             locale === "th"
@@ -177,7 +171,7 @@ export function DataTableHead({
           })}
         </TableRow>
       ))}
-    </motion.thead>
+    </Element>
   );
 }
 

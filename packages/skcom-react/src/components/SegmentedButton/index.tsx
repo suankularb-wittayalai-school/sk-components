@@ -48,8 +48,6 @@ export interface SegmentedButtonProps extends SKComponent {
 /**
  * Segmented Button combines multiple related Buttons together. Each Button in a Segmented Button can be toggled on and off.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.c0vieg8cftmq SKCom documentation}
- *
  * @param children 2-5 Buttons.
  * @param alt A description of the Segmented Button for screen readers, similar to `alt` on `<img>`.
  * @param density A lower number means a more dense interface. In this case, less height.
@@ -58,30 +56,28 @@ export interface SegmentedButtonProps extends SKComponent {
 export function SegmentedButton({
   children,
   alt,
-  density,
+  density = 0,
   full,
-  element,
+  element: Element = "div",
   style,
   className,
 }: SegmentedButtonProps) {
-  return React.createElement(
-    element || "div",
-    {
-      "aria-label": alt,
-      role: "group",
-      style,
-      className: cn([
+  return (
+    <Element
+      aria-label={alt}
+      role="group"
+      style={style}
+      className={cn([
         "skc-segmented-button",
-        density == 0
+        density === 0
           ? "skc-segmented-button--density-0"
-          : density !== undefined
-          ? `skc-segmented-button--density-[${density}]`
-          : undefined,
+          : `skc-segmented-button--density-[${density}]`,
         full && "skc-segmented-button--full",
         className,
-      ]),
-    },
-    children
+      ])}
+    >
+      {children}
+    </Element>
   );
 }
 

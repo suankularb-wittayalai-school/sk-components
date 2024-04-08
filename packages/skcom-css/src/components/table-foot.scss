@@ -1,11 +1,9 @@
 ////
 /// **Table Foot**
 /// The foot area of a Table.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.5lm5awdc1t9l SKCom documentation
 ////
 
 .skc-table-foot {
   display: table-footer-group;
-  background-color: var(--surface-1);
+  background-color: var(--surface-container-low);
 }

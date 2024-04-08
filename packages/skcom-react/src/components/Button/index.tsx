@@ -116,15 +116,11 @@ export interface ButtonProps extends SKComponent {
   /**
    * The function called when the user interacts with the Button, similar to
    * `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this Button leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
@@ -132,8 +128,6 @@ export interface ButtonProps extends SKComponent {
 /**
  * Button helps users take action, whether it’s logging in, liking a post, or
  * going to a page.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.lqzfs37p9m1b SKCom documentation}
  *
  * @param children The text displayed inside the Button.
  * @param appearance The appearance of the Button.
@@ -193,9 +187,8 @@ export function Button({
 
   return (
     <Interactive
-      href={!(disabled || loading) ? href : undefined}
-      onClick={!(disabled || loading) ? onClick : undefined}
-      element={disabled || loading ? "button" : element || "button"}
+      {...(!(disabled || loading) && { onClick, href })}
+      element={element}
       attr={{
         ref: buttonRef,
         // We’re using `aria-disabled` instead of `disabled` because it does

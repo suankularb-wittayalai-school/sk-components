@@ -17,7 +17,7 @@ export interface AvatarProps extends SKComponent {
   /**
    * A user’s initials or their profile image.
    *
-   * - The value has 3 meanings:
+   * - Depending on the type of value, the Avatar will display differently:
    *   - If the value is a string, it is displayed as the user’s initials. The
    *     string should be no more that 2 characters long.
    *   - If the value is a JSX Element, it is displayed as the user’s profile
@@ -30,8 +30,6 @@ export interface AvatarProps extends SKComponent {
 
 /**
  * An avatar represents the user, whether by their initials or their picture.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
  *
  * @param children A user’s initials or their profile image.
  */
@@ -60,7 +58,7 @@ export function Avatar({ children, element, style, className }: AvatarProps) {
           fill="currentColor"
         />
       </svg>
-    )
+    ),
   );
 }
 

@@ -58,19 +58,12 @@ export interface DataTablePaginationProps extends SKComponent {
    * @param end The end index of the range of data to pull from for this page.
    */
   onChange?: (page: number, start: number, end: number) => any;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * At the footer of a Data Table, Data Table Pagination provides controls for
  * paginating the Data Table data, including the current rows and navigating to
  * forward and backward on pages.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation}
  *
  * @param rowsPerPage The maximum number of rows shown on the Data Table at a time.
  * @param totalRows The total number of rows of data, including both those currently shown and not shown on the Data Table.
@@ -82,6 +75,7 @@ export function DataTablePagination({
   totalRows,
   locale,
   onChange,
+  element: Element = motion.div,
   style,
   className,
 }: DataTablePaginationProps) {
@@ -89,7 +83,7 @@ export function DataTablePagination({
 
   const [page, setPage] = React.useState<number>(1);
   const [maxPage, setMaxPage] = React.useState<number>(
-    Math.ceil(totalRows / rowsPerPage)
+    Math.ceil(totalRows / rowsPerPage),
   );
   React.useEffect(() => {
     const newMaxPage = Math.ceil(totalRows / rowsPerPage);
@@ -109,12 +103,12 @@ export function DataTablePagination({
   };
 
   React.useEffect(
-    () => onChange && onChange(page, range.start - 1, range.end - 1),
-    [page]
+    () => onChange?.(page, range.start - 1, range.end - 1),
+    [page],
   );
 
   return (
-    <motion.div
+    <Element
       layout
       transition={transition(duration.medium4, easing.standard)}
       style={style}
@@ -166,7 +160,7 @@ export function DataTablePagination({
           onClick={() => setPage(maxPage)}
         />
       </div>
-    </motion.div>
+    </Element>
   );
 }
 

@@ -1,8 +1,6 @@
 ////
 /// **Navigation Drawer**
 /// A list of all destinations within an app.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.2czacyab5zgs SKCom documentation
 ////
 
 .skc-nav-drawer {
@@ -15,7 +13,7 @@
   height: 100vh;
   padding: 0.75rem;
   border-radius: var(--rounded-lg-end);
-  background-color: var(--surface-1);
+  background-color: var(--surface-container-low);
 
   // Divider
   .skc-nav-drawer-section:not(:last-child)::after {

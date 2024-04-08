@@ -44,8 +44,6 @@ export interface ListProps extends SKComponent {
 /**
  * A vertical index of texts or images.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.iyg4spbf5pwr SKCom documentation}
- *
  * @param children Items inside the List.
  * @param columns Uses Columns under the hood. Number of columns.
  * @param divided Puts a Divider between List Items.
@@ -54,7 +52,7 @@ export function List({
   children,
   columns,
   divided,
-  element,
+  element = "ul",
   style,
   className,
 }: ListProps) {
@@ -64,11 +62,11 @@ export function List({
   };
 
   return columns ? (
-    <Columns columns={columns} element={element || "ul"} {...props}>
+    <Columns columns={columns} element={element} {...props}>
       {children}
     </Columns>
   ) : (
-    React.createElement(element || "ul", { ...props, role: "list" }, children)
+    React.createElement(element, { ...props, role: "list" }, children)
   );
 }
 

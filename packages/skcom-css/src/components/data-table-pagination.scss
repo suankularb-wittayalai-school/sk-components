@@ -3,8 +3,6 @@
 /// At the footer of a Data Table, Data Table Pagination provides controls for
 /// paginating the Data Table data, including the current rows and navigating
 /// to forward and backward on pages.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.1ho4fokc2sqb SKCom documentation
 ////
 
 @use "../abstracts/typography.scss" as type;
@@ -17,7 +15,7 @@
   gap: 2rem;
   padding: 0.375rem 1.5rem;
   border-top: 1px solid var(--outline-variant);
-  background-color: var(--surface-1);
+  background-color: var(--surface-container-low);
 }
 
 .skc-data-table-pagination__label {

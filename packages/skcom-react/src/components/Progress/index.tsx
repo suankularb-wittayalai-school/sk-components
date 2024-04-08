@@ -49,18 +49,11 @@ export interface ProgressProps extends SKComponent {
    * - Optional.
    */
   visible?: boolean;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * A Progress indicates that something is ongoing. It can also indicate how
  * much of that something has been done.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.12x5jav7hhzm SKCom documentation}
  *
  * @param appearance Progress can be either a loading spinner or a linear loading bar.
  * @param alt A description of the Progress for screen readers, similar to `alt` on `<img>`.
@@ -72,6 +65,7 @@ export function Progress({
   alt,
   value,
   visible,
+  element: Element = "div",
   style,
   className,
 }: ProgressProps) {
@@ -91,12 +85,27 @@ export function Progress({
         className="skc-progress__indicator"
         style={{ width: value !== undefined ? `${value}%` : undefined }}
       />
+      {(value === undefined || value < 100) && (
+        <div className="skc-progress__remainder" />
+      )}
+      <div className="skc-progress__stop" />
     </motion.div>
   );
 
   // Circular variant
   const circularProgress = (
-    <svg className="skc-progress__track" viewBox="24 24 48 48">
+    <svg className="skc-progress__track" viewBox="0 0 48 48">
+      <motion.circle
+        initial={{ strokeWidth: 0 }}
+        animate={{ strokeWidth: 4 }}
+        exit={{ strokeWidth: 0 }}
+        transition={progressTransition}
+        cx={24}
+        cy={24}
+        r={22}
+        fill="none"
+        className="skc-progress__remainder"
+      />
       <motion.circle
         initial={{ strokeWidth: 0 }}
         animate={{
@@ -106,13 +115,11 @@ export function Progress({
         }}
         exit={{ strokeWidth: 0 }}
         transition={progressTransition}
-        className="skc-progress__indicator"
-        cx="48"
-        cy="48"
-        r="20"
+        cx={24}
+        cy={24}
+        r={22}
         fill="none"
-        strokeWidth="4"
-        strokeMiterlimit="10"
+        className="skc-progress__indicator"
       />
     </svg>
   );
@@ -120,28 +127,26 @@ export function Progress({
   return (
     <AnimatePresence>
       {visible && (
-        <div
+        <Element
           role="progressbar"
           aria-label={alt}
           aria-valuenow={value}
           style={style}
           className={cn([
             "skc-progress",
-            appearance === "linear"
-              ? "skc-progress--linear"
-              : appearance === "circular" && "skc-progress--circular",
+            {
+              linear: "skc-progress--linear",
+              circular: "skc-progress--circular",
+            }[appearance],
             value === undefined && "skc-progress--indeterminate",
             className,
           ])}
         >
-          {appearance === "linear"
-            ? linearProgress
-            : appearance === "circular" && circularProgress}
-        </div>
+          {{ linear: linearProgress, circular: circularProgress }[appearance]}
+        </Element>
       )}
     </AnimatePresence>
   );
 }
 
 Progress.displayName = "Progress";
-

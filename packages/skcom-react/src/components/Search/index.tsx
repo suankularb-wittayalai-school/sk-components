@@ -1,5 +1,6 @@
 // External libraries
 import { AnimatePresence, motion } from "framer-motion";
+import { dash } from "radash";
 import * as React from "react";
 
 // Internal components
@@ -17,7 +18,6 @@ import "@suankularb-components/css/dist/css/components/search.css";
 import { transition, useAnimationConfig } from "../../utils/animation";
 import { cn } from "../../utils/className";
 import { matchDisplayName } from "../../utils/displayName";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link Search}.
@@ -93,18 +93,11 @@ export interface SearchProps extends SKComponent {
    * - Optional.
    */
   inputAttr?: React.ComponentProps<"input">;
-
-  /**
-   * This prop is not supported by this component.
-   */
-  element?: never;
 }
 
 /**
  * Search allows the user to quickly find something using a query. It can also
  * immediately show some useful results as the user is typing, utilizing List.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.xe5891qaeswr SKCom documentation}
  *
  * @param children Some useful search results that appear underneath the field.
  * @param alt A description of the Search for screen readers, similar to `alt` on `<img>`.
@@ -131,7 +124,7 @@ export function Search({
 }: SearchProps) {
   const { duration, easing } = useAnimationConfig();
 
-  const inputRef: React.LegacyRef<HTMLInputElement> = React.useRef(null);
+  const inputRef: React.Ref<HTMLInputElement> = React.useRef(null);
 
   const [showSuggestions, setShowSuggestions] = React.useState<boolean>(false);
   const [exitComplete, setExitComplete] = React.useState<boolean>(true);
@@ -139,7 +132,7 @@ export function Search({
     if (showSuggestions) setExitComplete(false);
   }, [showSuggestions]);
 
-  const searchID = `search-${kebabify(alt)}`;
+  const searchID = `search-${dash(alt)}`;
 
   return (
     <div
@@ -187,7 +180,7 @@ export function Search({
         placeholder={placeholder || (locale === "th" ? "ค้นหา" : "Search")}
         className="skc-search__input"
         value={value}
-        onChange={(event) => onChange && onChange(event.target.value)}
+        onChange={(event) => onChange?.(event.target.value)}
         onFocus={() => setShowSuggestions(true)}
         onKeyUp={(event) => {
           if (event.key === "Enter") {
@@ -212,12 +205,12 @@ export function Search({
                 opacity: 0,
                 transition: transition(
                   duration.short3,
-                  easing.standardAccelerate
+                  easing.standardAccelerate,
                 ),
               }}
               transition={transition(
                 duration.medium2,
-                easing.standardDecelerate
+                easing.standardDecelerate,
               )}
               className="skc-search__list"
               onClick={() => setShowSuggestions(false)}
@@ -237,7 +230,7 @@ export function Search({
                           if (onClick) onClick();
                           setShowSuggestions(false);
                         },
-                      })
+                      }),
                   )}
                 </List>
               ) : (

@@ -1,4 +1,5 @@
 // External libraries
+import { dash } from "radash";
 import * as React from "react";
 
 // Types
@@ -9,7 +10,6 @@ import "@suankularb-components/css/dist/css/components/nav-drawer-section.css";
 
 // Utilities
 import { cn } from "../../utils/className";
-import { kebabify } from "../../utils/format";
 
 /**
  * Props for {@link NavDrawerSection Navigation Drawer Section}.
@@ -42,9 +42,7 @@ export interface NavDrawerSectionProps extends SKComponent {
 }
 
 /**
- * A row of Buttons. NavDrawerSection handles spacing and overflow.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.3ypdzg62wg53 SKCom documentation}
+ * A group of destinations within a Navigation Drawer.
  *
  * @param children Destinations grouped into this section.
  * @param header The header of the section.
@@ -54,25 +52,28 @@ export function NavDrawerSection({
   children,
   header,
   alt,
-  element,
+  element: Element = "section",
   style,
   className,
 }: NavDrawerSectionProps) {
-  const sectionID = `nav-section-${kebabify(
-    (typeof header === "string" ? header : alt)!
+  const sectionID = `nav-section-${dash(
+    (typeof header === "string" ? header : alt)!,
   )}`;
 
-  return React.createElement(
-    element || "section",
-    { style, className: cn(["skc-nav-drawer-section", className]) },
-    <h2
-      id={sectionID}
-      aria-label={alt}
-      className="skc-nav-drawer-section__header"
+  return (
+    <Element
+      style={style}
+      className={cn(["skc-nav-drawer-section", className])}
     >
-      {header}
-    </h2>,
-    <ul role="list">{children}</ul>
+      <h2
+        id={sectionID}
+        aria-label={alt}
+        className="skc-nav-drawer-section__header"
+      >
+        {header}
+      </h2>
+      <ul role="list">{children}</ul>
+    </Element>
   );
 }
 

@@ -39,27 +39,25 @@ export interface DataTableContentProps extends SKComponent {
 /**
  * The main part of a Data Table.
  *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.7mq6ecmhpn8b SKCom documentation}
- *
  * @param children A Data Table Content’s content depends on if you decide to use Tanstack Table or not.
  * @param contentWidth The minimum width of the content.
  */
 export function DataTableContent({
   children,
   contentWidth,
-  element,
+  element: Element = "div",
   style,
   className,
 }: DataTableContentProps) {
-  return React.createElement(
-    element || "div",
-    { style, className: "skc-data-table-content" },
-    <table
-      style={{ ...style, minWidth: contentWidth }}
-      className={cn(["skc-data-table-content__content", className])}
-    >
-      {children}
-    </table>
+  return (
+    <Element style={style} className="skc-data-table-content">
+      <table
+        style={{ ...style, minWidth: contentWidth }}
+        className={cn(["skc-data-table-content__content", className])}
+      >
+        {children}
+      </table>
+    </Element>
   );
 }
 

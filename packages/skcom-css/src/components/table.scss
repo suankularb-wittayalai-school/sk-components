@@ -2,15 +2,13 @@
 /// **Table**
 /// A Table displays information in columns and rows, each row representing a
 /// set of data in each aspect, represented by columns.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.10em52qqcep7 SKCom documentation
 ////
 
 .skc-table {
   overflow: auto;
   border: 2px solid var(--outline-variant);
   border-radius: 1.25rem;
-  background-color: var(--surface-2);
+  background-color: var(--surface-container-low);
 }
 
 .skc-table__content {

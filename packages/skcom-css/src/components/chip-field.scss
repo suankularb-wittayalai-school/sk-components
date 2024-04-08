@@ -2,8 +2,6 @@
 /// **Chip Field**
 /// A combination of Input Chips and a Text Field. Users can simply start
 /// typing into the Chip Field; their input is converted into an Input Chip on spacebar press.
-///
-/// @link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.szjgl74eta6e SKCom documentation
 ////
 
 @use "../abstracts/mixins.scss" as mix;
@@ -37,22 +35,10 @@
 }
 
 // Contextual adaptations
-.skc-dialog,
-.skc-full-screen-dialog,
-.skc-page-header,
-.skc-card--filled {
-  .skc-chip-field__label {
-    background-color: var(--surface-5);
-  }
-}
-
 .skc-chip-field__label {
-  .skc-dialog & {
-    background-color: var(--surface-3);
-  }
-
-  .skc-page-header & {
-    background-color: var(--surface-5);
+  .skc-dialog &,
+  .skc-full-screen-dialog & {
+    background-color: var(--surface-container-high);
   }
 
   .skc-card--filled & {
@@ -151,6 +137,6 @@
   }
 
   .skc-fullscreen-dialog .skc-chip-field__label {
-    background-color: var(--surface-3);
+    background-color: var(--surface-container-high);
   }
 }

@@ -90,7 +90,6 @@ export interface NavBarItemProps extends SKComponent {
    * similar to `onClick` on `<button>`.
    *
    * - Required if `href` is not defined.
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
@@ -99,15 +98,13 @@ export interface NavBarItemProps extends SKComponent {
    * on `<a>`.
    *
    * - Required if `onClick` is not defined.
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
 
 /**
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.s8z7t3ulnwdb SKCom documentation}
- *
+ * One of the destinations in a Navigation Bar/Rail.
+ * 
  * @param icon Icons help users identify pages more quickly, which is crucial for frequent destinations like those from the Navigation Bar/Rail.
  * @param label An additional text label underneath the icon.
  * @param alt A description of the Navigation Bar Item for screen readers, similar to `alt` on `<img>`.

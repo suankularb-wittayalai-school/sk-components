@@ -80,15 +80,11 @@ export interface AssistChipProps extends SKComponent {
   /**
    * The function called when the user interacts with the Assist Chip, similar
    * to `onClick` on `<button>`.
-   *
-   * - Incompatible with `href`.
    */
   onClick?: () => any;
 
   /**
    * The URL of the page this FAB leads to, similar to `href` on `<a>`.
-   *
-   * - Incompatible with `onClick`.
    */
   href?: string;
 }
@@ -100,8 +96,6 @@ export interface AssistChipProps extends SKComponent {
  *
  * The label of an Assist Chip should start with a verb, i.e. “**Turn on**
  * lights” or “**Save** to favorites”.
- *
- * @see {@link https://docs.google.com/document/d/1ks5DrzfC_xLg48EFtZALoVQpJpxhsK2It3GDhAhZCcE/edit?usp=sharing#heading=h.6b3bv92d22u9 SKCom documentation}
  *
  * @param children The text shown inside the Assist Chip.
  * @param icon An icon can appear before the text (`children`) in an Assist Chip.
