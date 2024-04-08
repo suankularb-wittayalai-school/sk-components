@@ -1,13 +1,13 @@
 {
   "name": "@suankularb-components/react",
-  "version": "3.2.3",
+  "version": "3.3.0",
   "description": "A React implementation of Suankularb Components",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "devDependencies": {
-    "@suankularb-components/css": "^3.2.3",
+    "@suankularb-components/css": "*",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "configs": "^1.0.0",
