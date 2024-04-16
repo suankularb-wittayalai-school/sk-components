@@ -97,6 +97,22 @@
       background-color: var(--on-secondary-container);
     }
   }
+
+  .contrast-medium &,
+  .contrast-high & {
+    .skc-input-chip__avatar {
+      color: var(--secondary-container);
+    }
+
+    .skc-button {
+      color: var(--on-secondary);
+  
+      &::before,
+      .skc-interactive__ripple {
+        background-color: var(--on-secondary);
+      }
+    }
+  }
 }
 
 // Clickable Input Chip

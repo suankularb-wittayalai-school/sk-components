@@ -37,6 +37,13 @@
   .skc-progress__remainder {
     flex-grow: 1;
     background-color: var(--_remainder-color);
+
+    .contrast-medium &,
+    .contrast-high & {
+      box-sizing: border-box;
+      border: 1px solid var(--_remainder-color);
+      background-color: var(--surface);
+    }
   }
 
   .skc-progress__stop {
@@ -97,6 +104,11 @@
 
   .skc-progress__remainder {
     stroke: var(--_remainder-color);
+
+    .contrast-medium &,
+    .contrast-high & {
+      stroke: transparent;
+    }
   }
 }
 

@@ -128,6 +128,12 @@
     --_foreground-color: var(--error);
     --_background-color: var(--error-container);
 
+    .contrast-medium &,
+    .contrast-high & {
+      --_foreground-color: var(--on-error-container);
+      --_background-color: var(--error-container);
+    }
+
     &.skc-toggle-button--selected {
       --_foreground-color: var(--on-error);
       --_background-color: var(--error);
@@ -162,6 +168,12 @@
   &.skc-toggle-button--dangerous {
     --_foreground-color: var(--error);
     --_background-color: var(--error-container);
+
+    .contrast-medium &,
+    .contrast-high & {
+      --_foreground-color: var(--on-error-container);
+      --_background-color: var(--error-container);
+    }
 
     &.skc-toggle-button--selected {
       --_foreground-color: var(--on-error);
