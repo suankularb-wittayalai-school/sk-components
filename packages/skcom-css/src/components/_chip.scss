@@ -110,7 +110,8 @@
   border-color: transparent;
   background-color: var(--secondary-container);
 
-  .skc-chip__icon .skc-icon {
+  .skc-chip__icon .skc-icon,
+  .skc-chip__trailing-button {
     color: var(--on-secondary-container);
   }
 }
