@@ -23,8 +23,8 @@ export default function FixedBackgroundBlobs() {
         />
       </g>
       <defs>
-        <filter id="filter-fixed-blobs" x="-91" y="-81.5" width="368" height="274" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <filter id="filter-fixed-blobs" x="-91" y="-81.5" width="368" height="274" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="25" result="blur" />
         </filter>
