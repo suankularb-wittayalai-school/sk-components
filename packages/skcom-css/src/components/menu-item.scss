@@ -35,9 +35,9 @@
     }
   }
 
-  &.skc-menu-item--selected::before {
-    opacity: 0.12;
-    background-color: var(--surface-container-high);
+  // Selected
+  &.skc-menu-item--selected {
+    background-color: var(--surface-container-highest)
   }
 }
 

@@ -16,6 +16,11 @@
   border-radius: 50%;
   background-color: var(--primary-container);
 
+  .contrast-medium &,
+  .contrast-high & {
+    color: var(--on-primary-container);
+  }
+
   &:has(img) {
     background-color: var(--surface-container);
   }

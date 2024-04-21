@@ -168,7 +168,7 @@
   // Light mode
   @if ($type == "light") {
     // Light normal contrast
-    @if ($contrast: "normal") {
+    @if ($contrast == "normal") {
       // Primary
       --primary: #236488;
       --surface-tint: #236488;
@@ -216,7 +216,7 @@
     }
 
     // Light medium contrast
-    @else if ($contrast: "medium") {
+    @else if ($contrast == "medium") {
       // Primary
       --primary: #004867;
       --surface-tint: #236488;
@@ -264,7 +264,7 @@
     }
 
     // Light high contrast
-    @else if ($contrast: "high") {
+    @else if ($contrast == "high") {
       // Primary
       --primary: #002538;
       --surface-tint: #236488;
@@ -343,7 +343,7 @@
   // Dark mode
   @else if ($type == "dark") {
     // Dark normal contrast
-    @if ($contrast: "normal") {
+    @if ($contrast == "normal") {
       // Primary
       --primary: #93cdf6;
       --surface-tint: #93cdf6;
@@ -391,7 +391,7 @@
     }
 
     // Dark medium contrast
-    @else if ($contrast: "medium") {
+    @else if ($contrast == "medium") {
       // Primary
       --primary: #97d2fb;
       --surface-tint: #93cdf6;
@@ -439,7 +439,7 @@
     }
 
     // Dark high contrast
-    @else if ($contrast: "high") {
+    @else if ($contrast == "high") {
       // Primary
       --primary: #f8fbff;
       --surface-tint: #93cdf6;
