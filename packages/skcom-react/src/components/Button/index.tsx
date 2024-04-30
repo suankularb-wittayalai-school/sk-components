@@ -168,7 +168,7 @@ export function Button({
     const button = buttonRef.current;
     if (!button) return;
 
-    // If the Button is contained by an full-aligned Actions, don’t apply the
+    // If the Button is contained by a full-aligned Actions, don’t apply the
     // width
     let containedByActions = false;
     document
@@ -182,7 +182,7 @@ export function Button({
     // which can cause layout shifts as the Button transition to and from the
     // loading state. `getBoundingClientRect` produces the exact width value.
     const { width } = button.getBoundingClientRect();
-    setButtonWidth(width - (appearance === "outlined" ? 2 : 0) + 1);
+    setButtonWidth(width - (appearance === "outlined" ? 2 : 0));
   }, []);
 
   return (
